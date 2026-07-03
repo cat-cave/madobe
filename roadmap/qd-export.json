@@ -464,11 +464,11 @@
       "validation": null,
       "context": "platform:linux\nowner:linux-orchestrator\nhardware:PipeWire,DMA-BUF",
       "created_at": "2026-07-03T00:59:33.605Z",
-      "updated_at": "2026-07-03T22:35:34.401Z",
+      "updated_at": "2026-07-03T22:37:24.401Z",
       "claimed_at": "2026-07-03T22:06:16.051Z",
       "done_at": null,
       "group_name": null,
-      "status_reason": "[2026-07-03T18:29:17.489Z] Blocked by external-dependency: Named remote output capture through PipeWire/XDPH is not proven by m2-pipewire-probe; no stable noninteractive XDPH named-output selector was found and no PipeWire video stream node appears before a user-consented ScreenCast session.\nNeeded: Prove a user-consented portal stream maps to the madobe-owned Hyprland output, or prove a direct named-output capture path with format, modifier, timestamp, and sync metadata.\n[2026-07-03T20:18:05.519Z] Blocked by external-dependency: Portal ScreenCast selection for the madobe-owned Hyprland output is still not proven: CreateSession returned a request path, SelectSources failed with Access denied from the non-owning bus probe, and PipeWire dumps showed no video/portal/madobe stream node. Direct grim -o can target the named output when launched with the live Wayland socket, but it only yields PNG output and does not provide DMA-BUF format, modifier, timestamp, or sync metadata.\nNeeded: Implement or run a portal client that owns org.freedesktop.portal.Request.Response, receives user consent for the madobe output, opens the returned PipeWire remote, and records stream metadata; or implement an equivalent direct capture path exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T20:48:56.340Z] Blocked by external-dependency: A real portal ScreenCast request client now receives CreateSession and extracts the session_handle, but SelectSources produced no response within the bounded 30-second wait. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video/portal/madobe stream metadata were obtained.\nNeeded: Determine why SelectSources does not complete for the node-scoped Hyprland output. Provide a visible user-consent/chooser flow with parent-window context or equivalent portal client behavior, then capture Start streams and OpenPipeWireRemote metadata; or use a direct capture API exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T21:26:20.111Z] Blocked by external-dependency: Visible portal chooser appears for the ScreenCast SelectSources request and targeted keyboard automation was attempted, but SelectSources still timed out after the bounded 70-second wait. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video/portal/madobe stream metadata were obtained.\nNeeded: Provide reliable portal chooser approval, manual or automated, that returns SelectSources and Start streams for the madobe output; or use a direct capture API exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T21:50:52.480Z] m2-direct-capture-api-spike identified and live-probed a viable non-portal direct Wayland capture implementation path using ext_output_image_capture_source_manager_v1 plus ext_image_copy_capture_manager_v1 against the generated wl_output. This unblocks m2-capture-one-frame for an implicit-sync direct client implementation; it does not claim a frame has already been captured.\n[2026-07-03T22:26:23.879Z] Blocked by external-dependency: Direct ext-image-copy capture reached constraints and timestamp/damage but returned frame.failed reason 0 instead of ready after render-node and card-node DMA-BUF allocation attempts.\nNeeded: Allocate with a driver-native NVIDIA modifier path or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd, then rerun until ext_image_copy_capture_frame_v1.ready is emitted.\n[2026-07-03T22:35:34.401Z] Blocked by external-dependency: Direct ext-image-copy capture reached constraints and timestamp/damage but returned frame.failed reason 0 instead of ready after render-node and card-node DMA-BUF allocation attempts.\nNeeded: Allocate with a driver-native NVIDIA modifier path or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd, then rerun until ext_image_copy_capture_frame_v1.ready is emitted.",
+      "status_reason": "[2026-07-03T18:29:17.489Z] Blocked by external-dependency: Named remote output capture through PipeWire/XDPH is not proven by m2-pipewire-probe; no stable noninteractive XDPH named-output selector was found and no PipeWire video stream node appears before a user-consented ScreenCast session.\nNeeded: Prove a user-consented portal stream maps to the madobe-owned Hyprland output, or prove a direct named-output capture path with format, modifier, timestamp, and sync metadata.\n[2026-07-03T20:18:05.519Z] Blocked by external-dependency: Portal ScreenCast selection for the madobe-owned Hyprland output is still not proven: CreateSession returned a request path, SelectSources failed with Access denied from the non-owning bus probe, and PipeWire dumps showed no video/portal/madobe stream node. Direct grim -o can target the named output when launched with the live Wayland socket, but it only yields PNG output and does not provide DMA-BUF format, modifier, timestamp, or sync metadata.\nNeeded: Implement or run a portal client that owns org.freedesktop.portal.Request.Response, receives user consent for the madobe output, opens the returned PipeWire remote, and records stream metadata; or implement an equivalent direct capture path exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T20:48:56.340Z] Blocked by external-dependency: A real portal ScreenCast request client now receives CreateSession and extracts the session_handle, but SelectSources produced no response within the bounded 30-second wait. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video/portal/madobe stream metadata were obtained.\nNeeded: Determine why SelectSources does not complete for the node-scoped Hyprland output. Provide a visible user-consent/chooser flow with parent-window context or equivalent portal client behavior, then capture Start streams and OpenPipeWireRemote metadata; or use a direct capture API exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T21:26:20.111Z] Blocked by external-dependency: Visible portal chooser appears for the ScreenCast SelectSources request and targeted keyboard automation was attempted, but SelectSources still timed out after the bounded 70-second wait. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video/portal/madobe stream metadata were obtained.\nNeeded: Provide reliable portal chooser approval, manual or automated, that returns SelectSources and Start streams for the madobe output; or use a direct capture API exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T21:50:52.480Z] m2-direct-capture-api-spike identified and live-probed a viable non-portal direct Wayland capture implementation path using ext_output_image_capture_source_manager_v1 plus ext_image_copy_capture_manager_v1 against the generated wl_output. This unblocks m2-capture-one-frame for an implicit-sync direct client implementation; it does not claim a frame has already been captured.\n[2026-07-03T22:37:23.768Z] Blocked by external-dependency: Direct ext-image-copy capture reached constraints and timestamp/damage but returned frame.failed reason 0 instead of ready after render-node and card-node DMA-BUF allocation attempts.\nNeeded: Allocate with a driver-native NVIDIA modifier path or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd, then rerun until ext_image_copy_capture_frame_v1.ready is emitted.\n[2026-07-03T22:37:24.401Z] Blocked by external-dependency: Direct ext-image-copy capture reached constraints and timestamp/damage but returned frame.failed reason 0 instead of ready after render-node and card-node DMA-BUF allocation attempts.\nNeeded: Allocate with a driver-native NVIDIA modifier path or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd, then rerun until ext_image_copy_capture_frame_v1.ready is emitted.",
       "check_command": null,
       "ci_command": null,
       "blocked_by": "external-dependency",
@@ -959,6 +959,36 @@
       "audit_focus": []
     },
     {
+      "id": "m3-videotoolbox-capability-probe",
+      "title": "Probe VideoToolbox AV1 decode capability on macOS",
+      "kind": "feature",
+      "milestone": "M3-mac-video-endpoint",
+      "status": "done",
+      "priority": "P1",
+      "estimate_points": 1,
+      "risk": "medium",
+      "owner": "trevor-mac-orchestrator",
+      "branch": "spec/m3-videotoolbox-capability-probe",
+      "spec": "Probe the local macOS VideoToolbox/CoreMedia runtime for AV1 decode support and preserve evidence that the Mac endpoint can evaluate the codec path before sample decode validation is available.",
+      "acceptance": "A deterministic Swift or XCTest probe records kCMVideoCodecType_AV1 / av01 VideoToolbox hardware decode support, or the exact unsupported condition\nMac environment, Xcode, Swift, and command evidence are saved under evidence/m3-videotoolbox-capability-probe\nThe probe runs under the macOS check path or is directly documented with command evidence\nm3-videotoolbox-decode-sample remains responsible for actual encoded sample decode after M2 provides or checks in a valid frame",
+      "validation": null,
+      "context": "platform:macos\nowner:macos-orchestrator\nframeworks:VideoToolbox,CoreMedia\nvalidation:local-runtime",
+      "created_at": "2026-07-03T22:13:47.469Z",
+      "updated_at": "2026-07-03T22:30:37.564Z",
+      "claimed_at": "2026-07-03T22:15:10.185Z",
+      "done_at": "2026-07-03T22:30:37.564Z",
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
+    },
+    {
       "id": "m2-native-dmabuf-allocation-proof",
       "title": "Prove native DMA-BUF allocation for direct capture",
       "kind": "feature",
@@ -973,8 +1003,8 @@
       "acceptance": "Uses a node-scoped generated Hyprland output with cleanup evidence\nRecords allocator dependencies and whether the Nix dev shell needs pkg-config, libgbm, EGL, or another native allocation dependency\nAllocates a DMA-BUF against the advertised capture device or a justified same-driver device using an advertised format/modifier when possible\nSubmits the buffer through zwp_linux_dmabuf_v1 to ext_image_copy_capture_frame_v1\nEvidence includes advertised device, allocation node/device, selected format, modifier, stride/planes, timestamp/damage, ready/fail result, and cleanup\nIf capture still fails, records the exact compositor, protocol, driver, or allocator condition and proposes the next split\nArtifacts are saved under evidence/m2-native-dmabuf-allocation-proof and reports/qd/m2-native-dmabuf-allocation-proof",
       "validation": null,
       "context": "platform:linux\nowner:linux-orchestrator\nhardware:Hyprland,DMA-BUF,NVIDIA\nvalidation:manual-hardware",
-      "created_at": "2026-07-03T22:30:40.297Z",
-      "updated_at": "2026-07-03T22:30:40.297Z",
+      "created_at": "2026-07-03T22:37:24.200Z",
+      "updated_at": "2026-07-03T22:37:24.200Z",
       "claimed_at": null,
       "done_at": null,
       "group_name": null,
@@ -1189,10 +1219,22 @@
       "created_at": "2026-07-03T21:35:06.106Z"
     },
     {
+      "from_node": "m3-swift-protocol-mirror",
+      "to_node": "m3-videotoolbox-capability-probe",
+      "type": "requires",
+      "created_at": "2026-07-03T22:13:58.546Z"
+    },
+    {
+      "from_node": "m3-videotoolbox-capability-probe",
+      "to_node": "m3-videotoolbox-decode-sample",
+      "type": "requires",
+      "created_at": "2026-07-03T22:14:02.652Z"
+    },
+    {
       "from_node": "m2-native-dmabuf-allocation-proof",
       "to_node": "m2-capture-one-frame",
       "type": "requires",
-      "created_at": "2026-07-03T22:30:40.395Z"
+      "created_at": "2026-07-03T22:37:24.297Z"
     }
   ],
   "findings": [
@@ -1212,7 +1254,7 @@
       "resolved_at": "2026-07-03T02:11:47.393Z"
     },
     {
-      "id": "a5391eee-dbe4-463b-ae1e-07f02c5dde3d",
+      "id": "c0ccba1a-2a9c-413d-9269-d545c42cc847",
       "node_id": "m2-capture-one-frame",
       "run_id": null,
       "severity": "P1",
@@ -1223,8 +1265,8 @@
       "evidence": "evidence/m2-capture-one-frame/direct-capture-frame.json",
       "expected": "The capture frame should emit ext_image_copy_capture_frame_v1.ready so the node can claim a completed frame and protocol-ready implicit synchronization.",
       "suggested_fix": "Use a driver-native allocator that can create an advertised NVIDIA block-linear DMA-BUF modifier, or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd.",
-      "created_at": "2026-07-03T22:27:56.233Z",
-      "resolved_at": "2026-07-03T22:31:01.155Z"
+      "created_at": "2026-07-03T22:37:23.982Z",
+      "resolved_at": "2026-07-03T22:37:24.082Z"
     }
   ],
   "runs": [
@@ -3363,7 +3405,95 @@
       "log_path": null
     },
     {
-      "id": "c273c5b9-f021-455a-a282-aaa50d0b995c",
+      "id": "9304e738-88d7-4e55-b154-ec21ca910223",
+      "node_id": "m3-videotoolbox-capability-probe",
+      "kind": "implement",
+      "status": "completed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": "/Users/trevor/Documents/GitHub/madobe/.qd/worktrees/m3-videotoolbox-capability-probe/reports/qd/m3-videotoolbox-capability-probe/completion.json",
+      "audit_kind": null,
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-03T22:15:14.237Z",
+      "finished_at": "2026-07-03T22:15:14.237Z",
+      "summary": "Added a macOS VideoToolbox capability probe for AV1, exposed a Codable report from MadobeClientCore, verified it with XCTest, and preserved local Mac capability evidence showing av01 hardware decode support on this machine.",
+      "log_path": null
+    },
+    {
+      "id": "aa5bb713-cb78-4d3a-a481-9d3914e535b8",
+      "node_id": "m3-videotoolbox-capability-probe",
+      "kind": "audit",
+      "status": "passed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": "/Users/trevor/Documents/GitHub/madobe/.qd/worktrees/m3-videotoolbox-capability-probe/reports/qd/m3-videotoolbox-capability-probe/audit.json",
+      "audit_kind": "general",
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-03T22:15:17.769Z",
+      "finished_at": "2026-07-03T22:16:50.421Z",
+      "summary": "Audit passed from /Users/trevor/Documents/GitHub/madobe/.qd/worktrees/m3-videotoolbox-capability-probe/reports/qd/m3-videotoolbox-capability-probe/audit.json",
+      "log_path": null
+    },
+    {
+      "id": "1466f62f-4ec8-4065-bdee-756f33f76068",
+      "node_id": "m3-videotoolbox-capability-probe",
+      "kind": "ci",
+      "status": "passed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": null,
+      "audit_kind": null,
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-03T22:30:17.478Z",
+      "finished_at": "2026-07-03T22:30:17.478Z",
+      "summary": "GitHub Actions PR #26 passed linux and macos jobs for run 28685935944 at 5ca6374a4b35e1066519d0fbfd88a68709a9658c\nEvidence: url=https://github.com/cat-cave/madobe/actions/runs/28685935944",
+      "log_path": null
+    },
+    {
+      "id": "cfec819f-d0bf-4519-9af8-a3f937e0e922",
+      "node_id": "m3-videotoolbox-capability-probe",
+      "kind": "merge",
+      "status": "recorded",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": null,
+      "audit_kind": null,
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-03T22:30:37.564Z",
+      "finished_at": "2026-07-03T22:30:37.564Z",
+      "summary": "Merge recorded with squash at commit ae1677782ed2ee07886115319e5fc5ee81ed073c",
+      "log_path": null
+    },
+    {
+      "id": "948eb19c-9bc7-4541-b133-43a8312a9c71",
       "node_id": "m2-capture-one-frame",
       "kind": "audit",
       "status": "failed",
@@ -3379,8 +3509,8 @@
       "audit_kind": "general",
       "worktree_path": null,
       "agent": null,
-      "started_at": "2026-07-03T22:27:02.526Z",
-      "finished_at": "2026-07-03T22:27:56.235Z",
+      "started_at": "2026-07-03T22:37:23.887Z",
+      "finished_at": "2026-07-03T22:37:23.984Z",
       "summary": "Audit failed from /home/trevor/projects/madobe/.qd/worktrees/m2-capture-one-frame/reports/qd/m2-capture-one-frame/audit.json",
       "log_path": null
     }
@@ -3427,18 +3557,18 @@
       "evidence": "reports/qd/m2-direct-capture-api-spike/completion.json"
     },
     {
-      "id": "c5be8aad-edd4-4b79-a3de-fe08e34fc22e",
+      "id": "1f415911-5988-40ef-9b00-c24b2934744b",
       "node_id": "m2-capture-one-frame",
       "text": "Blocked by external-dependency: Direct ext-image-copy capture reached constraints and timestamp/damage but returned frame.failed reason 0 instead of ready after render-node and card-node DMA-BUF allocation attempts.\nNeeded: Allocate with a driver-native NVIDIA modifier path or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd, then rerun until ext_image_copy_capture_frame_v1.ready is emitted.",
-      "created_at": "2026-07-03T22:26:23.879Z",
+      "created_at": "2026-07-03T22:37:23.768Z",
       "kind": "blocker",
       "evidence": "reports/qd/m2-capture-one-frame/blocker.md"
     },
     {
-      "id": "123cfbd3-2e9a-4133-bab5-8ac9ce0507c7",
+      "id": "1d47f416-48d8-4eb1-8017-8304256f86dd",
       "node_id": "m2-capture-one-frame",
       "text": "Blocked by external-dependency: Direct ext-image-copy capture reached constraints and timestamp/damage but returned frame.failed reason 0 instead of ready after render-node and card-node DMA-BUF allocation attempts.\nNeeded: Allocate with a driver-native NVIDIA modifier path or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd, then rerun until ext_image_copy_capture_frame_v1.ready is emitted.",
-      "created_at": "2026-07-03T22:35:34.401Z",
+      "created_at": "2026-07-03T22:37:24.401Z",
       "kind": "blocker",
       "evidence": "reports/qd/m2-capture-one-frame/blocker.md"
     }

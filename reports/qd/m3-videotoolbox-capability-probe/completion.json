@@ -1,0 +1,73 @@
+{
+  "nodeId": "m3-videotoolbox-capability-probe",
+  "summary": "Added a macOS VideoToolbox capability probe for AV1, exposed a Codable report from MadobeClientCore, verified it with XCTest, and preserved local Mac capability evidence showing av01 hardware decode support on this machine.",
+  "changedFiles": [
+    "apple/Sources/MadobeClientCore/VideoToolboxCapabilityProbe.swift",
+    "apple/Tests/MadobeClientCoreTests/VideoToolboxCapabilityProbeTests.swift",
+    "evidence/m3-videotoolbox-capability-probe/capability-report.json",
+    "evidence/m3-videotoolbox-capability-probe/commands.log",
+    "evidence/m3-videotoolbox-capability-probe/mac-env.txt",
+    "evidence/m3-videotoolbox-capability-probe/notes.md",
+    "evidence/m3-videotoolbox-capability-probe/xcodebuild.log",
+    "roadmap/qd-export.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "A deterministic Swift or XCTest probe records kCMVideoCodecType_AV1 / av01 VideoToolbox hardware decode support, or the exact unsupported condition.",
+      "status": "passed",
+      "evidence": "apple/Tests/MadobeClientCoreTests/VideoToolboxCapabilityProbeTests.swift and evidence/m3-videotoolbox-capability-probe/capability-report.json"
+    },
+    {
+      "criterion": "Mac environment, Xcode, Swift, and command evidence are saved under evidence/m3-videotoolbox-capability-probe.",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-capability-probe/mac-env.txt and evidence/m3-videotoolbox-capability-probe/commands.log"
+    },
+    {
+      "criterion": "The probe runs under the macOS check path or is directly documented with command evidence.",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-capability-probe/xcodebuild.log"
+    },
+    {
+      "criterion": "m3-videotoolbox-decode-sample remains responsible for actual encoded sample decode after M2 provides or checks in a valid frame.",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-capability-probe/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd node add --from-json /private/tmp/m3-videotoolbox-capability-probe-node.json",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-capability-probe/commands.log"
+    },
+    {
+      "command": "qd claim m3-videotoolbox-capability-probe --agent trevor-mac-orchestrator --branch spec/m3-videotoolbox-capability-probe",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-capability-probe/commands.log"
+    },
+    {
+      "command": "xcrun swift -e '<VideoToolbox AV1 capability JSON probe>'",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-capability-probe/capability-report.json"
+    },
+    {
+      "command": "just macos-check",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-capability-probe/xcodebuild.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m3-videotoolbox-capability-probe/capability-report.json",
+    "evidence/m3-videotoolbox-capability-probe/commands.log",
+    "evidence/m3-videotoolbox-capability-probe/mac-env.txt",
+    "evidence/m3-videotoolbox-capability-probe/notes.md",
+    "evidence/m3-videotoolbox-capability-probe/xcodebuild.log"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m3-videotoolbox-capability-probe/capability-report.json"
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
