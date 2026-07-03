@@ -1,0 +1,21 @@
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if command -v taplo >/dev/null 2>&1; then taplo fmt --check; fi
+ INFO taplo:format_files:load_config: found configuration file path="<repo>/.qd/worktrees/m2-pipewire-probe/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=20 excluded=1 files=["<repo>/.qd/worktrees/m2-pipewire-probe/.config/nextest.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/.mise.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/Cargo.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/apps/cli/Cargo.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/apps/hostd/Cargo.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/clippy.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/crates/capture/Cargo.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/crates/compositor/Cargo.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/crates/hyprland/Cargo.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/crates/protocol/Cargo.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/crates/telemetry/Cargo.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/crates/transport/Cargo.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/deny.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/lychee.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/rustfmt.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/supply-chain/audits.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/supply-chain/config.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/taplo.toml", "<repo>/.qd/worktrees/m2-pipewire-probe/typos.toml"] cwd="<repo>/.qd/worktrees/m2-pipewire-probe"
+if command -v swiftformat >/dev/null 2>&1 && [ -d apple ]; then swiftformat --lint apple; fi
+if command -v shfmt >/dev/null 2>&1; then find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+cargo check --workspace --all-targets --all-features
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.14s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
+if command -v typos >/dev/null 2>&1; then typos; fi
+if command -v markdownlint-cli2 >/dev/null 2>&1; then markdownlint-cli2 "**/*.md"; fi
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 28 file(s)
+Summary: 0 error(s)
+if command -v actionlint >/dev/null 2>&1; then actionlint .github/workflows/*.yml; fi
+if command -v swiftlint >/dev/null 2>&1 && [ -d apple ]; then swiftlint lint --strict --config apple/.swiftlint.yml; fi
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"

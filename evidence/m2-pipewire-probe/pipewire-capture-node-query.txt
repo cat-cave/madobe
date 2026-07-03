@@ -1,0 +1,5 @@
+# PipeWire capture/video node query before temporary output
+[]
+
+# PipeWire capture/video node query with madobe-qd-m2-pipewire-probe output present
+[]

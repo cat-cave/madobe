@@ -1,0 +1,95 @@
+# Host Environment (sanitized)
+
+date:
+2026-07-03T13:09:48-05:00
+
+kernel:
+Linux <redacted-host> 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
+
+os-release:
+ANSI_COLOR="0;38;2;126;186;228"
+BUG_REPORT_URL="https://github.com/NixOS/nixpkgs/issues"
+BUILD_ID="26.05.20260611.a037402"
+CPE_NAME="cpe:/o:nixos:nixos:26.05"
+DEFAULT_HOSTNAME=nixos
+DOCUMENTATION_URL="https://nixos.org/learn.html"
+HOME_URL="https://nixos.org/"
+ID=nixos
+ID_LIKE=""
+IMAGE_ID=""
+IMAGE_VERSION=""
+LOGO="nix-snowflake"
+NAME=NixOS
+PRETTY_NAME="NixOS 26.05 (Yarara)"
+SUPPORT_END="2026-12-31"
+SUPPORT_URL="https://nixos.org/community.html"
+VARIANT=""
+VARIANT_ID=""
+VENDOR_NAME=NixOS
+VENDOR_URL="https://nixos.org/"
+VERSION="26.05 (Yarara)"
+VERSION_CODENAME=yarara
+VERSION_ID="26.05"
+
+session:
+DBUS_SESSION_BUS_ADDRESS=unix:path=<redacted-runtime>/bus
+XDG_RUNTIME_DIR=<redacted-runtime>
+XDG_SESSION_TYPE=tty
+
+tool paths:
+pipewire=/run/current-system/sw/bin/pipewire
+pw-cli=/run/current-system/sw/bin/pw-cli
+pw-dump=/run/current-system/sw/bin/pw-dump
+pw-top=/run/current-system/sw/bin/pw-top
+wpctl=/run/current-system/sw/bin/wpctl
+wireplumber=/run/current-system/sw/bin/wireplumber
+pactl=<not-on-path>
+xdg-desktop-portal=<not-on-path>
+xdg-desktop-portal-hyprland=<not-on-path>
+dbus-send=/run/current-system/sw/bin/dbus-send
+busctl=/run/current-system/sw/bin/busctl
+hyprctl=/run/current-system/sw/bin/hyprctl
+jq=/run/current-system/sw/bin/jq
+grim=<redacted-user-profile>/bin/grim
+slurp=<redacted-user-profile>/bin/slurp
+wf-recorder=<not-on-path>
+
+versions:
+pipewire
+Compiled with libpipewire 1.6.5
+Linked with libpipewire 1.6.5
+pw-cli
+Compiled with libpipewire 1.6.5
+Linked with libpipewire 1.6.5
+pw-dump
+Compiled with libpipewire 1.6.5
+Linked with libpipewire 1.6.5
+wireplumber
+Compiled with libwireplumber 0.5.14
+Linked with libwireplumber 0.5.14
+xdg-desktop-portal=1.20.4 (from active process path)
+xdg-desktop-portal-hyprland=1.3.12 (from active process path)
+Hyprland 0.55.2 built from branch v0.55.2-b at commit 39d7e209c79d451efab1b21151d5938289da838d clean (version: bump to 0.55.2).
+Date: 2026-05-16
+Tag: v0.55.2, commits: -1
+
+Libraries:
+Hyprgraphics: built against 0.5.1, system has unknown
+Hyprutils: built against 0.13.1, system has unknown
+Hyprcursor: built against 0.1.13, system has unknown
+Hyprlang: built against 0.6.8, system has unknown
+Aquamarine: built against 0.11.0, system has unknown
+
+Version ABI string: 39d7e209c79d451efab1b21151d5938289da838d_aq_0.11_hu_0.13_hg_0.5_hc_0.1_hlg_0.6
+flags set:
+nix
+
+
+service processes:
+ <redacted-pid> .Hyprland-wrap
+ <redacted-pid> .xdg-desktop-po
+ <redacted-pid> .xdg-desktop-po
+ <redacted-pid> pipewire
+ <redacted-pid> wireplumber
+ <redacted-pid> .xdg-desktop-po
+ <redacted-pid> pipewire-pulse

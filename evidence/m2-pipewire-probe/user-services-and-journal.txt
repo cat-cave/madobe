@@ -1,0 +1,97 @@
+# User service status (sanitized)
+● pipewire.service - PipeWire Multimedia Service
+     Loaded: loaded (/etc/systemd/user/pipewire.service; linked-runtime; preset: ignored)
+    Drop-In: /nix/store/<hash>-user-units/pipewire.service.d
+             └─overrides.conf
+     Active: active (running) since Mon 2026-06-22 08:40:16 CDT; 1 week 4 days ago
+ Invocation: 2ff0663f4c5443b98d1dd3fbf4c8c220
+TriggeredBy: ● pipewire.socket
+   Main PID: 839414 (pipewire)
+      Tasks: 4 (limit: 309083)
+     Memory: 32.9M (peak: 47.2M)
+        CPU: 37min 12.504s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/session.slice/pipewire.service
+             └─839414 /nix/store/<hash>-pipewire-1.6.5/bin/pipewire
+
+Jun 22 08:40:16 <redacted-host> systemd[<redacted-pid>]: Started PipeWire Multimedia Service.
+Jun 22 08:40:16 <redacted-host> pipewire[<redacted-pid>]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Jun 22 08:40:16 <redacted-host> pipewire[<redacted-pid>]: mod.rt: RTKit does not give us MaxRealtimePriority, using 1
+Jun 22 08:40:16 <redacted-host> pipewire[<redacted-pid>]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Jun 22 08:40:16 <redacted-host> pipewire[<redacted-pid>]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Jun 22 08:40:16 <redacted-host> pipewire[<redacted-pid>]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Jun 22 08:40:16 <redacted-host> pipewire[<redacted-pid>]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Jun 22 22:59:04 <redacted-host> pipewire[<redacted-pid>]: spa.alsa: front:3p: snd_pcm_drop: No such device
+Jun 22 22:59:04 <redacted-host> pipewire[<redacted-pid>]: spa.alsa: front:3p: close failed: No such device
+
+● wireplumber.service - Multimedia Service Session Manager
+     Loaded: loaded (/etc/systemd/user/wireplumber.service; enabled; preset: ignored)
+    Drop-In: /nix/store/<hash>-user-units/wireplumber.service.d
+             └─overrides.conf
+     Active: active (running) since Mon 2026-06-22 08:40:16 CDT; 1 week 4 days ago
+ Invocation: 6163b4351cbc4f3ba956aaf59a66ba81
+   Main PID: 839417 (wireplumber)
+      Tasks: 9 (limit: 309083)
+     Memory: 10.8M (peak: 17.4M)
+        CPU: 9.509s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/session.slice/wireplumber.service
+             └─839417 /nix/store/<hash>-wireplumber-0.5.14/bin/wireplumber
+
+Jun 22 08:40:16 <redacted-host> wireplumber[<redacted-pid>]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Jun 22 08:40:16 <redacted-host> wireplumber[<redacted-pid>]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Jun 22 08:40:16 <redacted-host> wireplumber[<redacted-pid>]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Jun 22 08:40:16 <redacted-host> wireplumber[<redacted-pid>]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Jun 22 08:40:17 <redacted-host> wireplumber[<redacted-pid>]: wp-device: SPA handle 'api.alsa.acp.device' could not be loaded; is it installed?
+Jun 22 08:40:17 <redacted-host> wireplumber[<redacted-pid>]: s-monitors: Failed to create 'api.alsa.acp.device' device
+Jun 22 08:40:17 <redacted-host> wireplumber[<redacted-pid>]: spa.bluez5: BlueZ system service is not available
+Jun 22 08:40:17 <redacted-host> wireplumber[<redacted-pid>]: [14:01:37.834152225] [<redacted-pid>]  INFO IPAManager ipa_manager.cpp:147 libcamera is not installed. Adding '/nix/store/src/ipa' to the IPA search path
+Jun 22 08:40:17 <redacted-host> wireplumber[<redacted-pid>]: [14:01:37.834401185] [<redacted-pid>]  INFO Camera camera_manager.cpp:340 libcamera v0.7.0
+Jun 22 08:40:17 <redacted-host> wireplumber[<redacted-pid>]: wp-event-dispatcher: <WpAsyncEventHook:<redacted-pointer>> failed: failed to activate item: Object activation aborted: proxy destroyed
+
+● xdg-desktop-portal.service - Portal service
+     Loaded: loaded (/etc/systemd/user/xdg-desktop-portal.service; linked-runtime; preset: ignored)
+     Active: active (running) since Mon 2026-06-22 08:40:16 CDT; 1 week 4 days ago
+ Invocation: 6b0b075052b141769c5df5a59a3db0b4
+   Main PID: 839380 (.xdg-desktop-po)
+      Tasks: 6 (limit: 309083)
+     Memory: 10.2M (peak: 15.1M)
+        CPU: 7min 36.116s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/session.slice/xdg-desktop-portal.service
+             └─839380 /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal
+
+Jun 24 19:31:08 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jun 25 07:27:39 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jun 28 10:16:56 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jun 28 10:16:59 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jun 28 10:41:30 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jun 30 15:01:54 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jul 02 19:48:53 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jul 03 07:04:37 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jul 03 07:04:59 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jul 03 08:31:20 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+
+● xdg-desktop-portal-hyprland.service - Portal service (Hyprland implementation)
+     Loaded: loaded (/etc/systemd/user/xdg-desktop-portal-hyprland.service; linked-runtime; preset: ignored)
+     Active: active (running) since Mon 2026-06-22 08:40:16 CDT; 1 week 4 days ago
+ Invocation: 6d0a0acd4aa8471783666bab088b74e3
+   Main PID: 839425 (.xdg-desktop-po)
+      Tasks: 4 (limit: 309083)
+     Memory: 2.9M (peak: 4.3M)
+        CPU: 7.209s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/session.slice/xdg-desktop-portal-hyprland.service
+             └─839425 /nix/store/<hash>-xdg-desktop-portal-hyprland-1.3.12/libexec/xdg-desktop-portal-hyprland
+
+Jun 22 08:40:16 <redacted-host> xdg-desktop-portal-hyprland[<redacted-pid>]: [LOG]  | Got interface: zwlr_screencopy_manager_v1 (ver 3)
+Jun 22 08:40:16 <redacted-host> xdg-desktop-portal-hyprland[<redacted-pid>]: [LOG] [pipewire] connected
+Jun 22 08:40:16 <redacted-host> xdg-desktop-portal-hyprland[<redacted-pid>]: [LOG] [screencopy] init successful
+Jun 22 08:40:16 <redacted-host> xdg-desktop-portal-hyprland[<redacted-pid>]: [LOG]  | Got interface: hyprland_toplevel_export_manager_v1 (ver 2)
+Jun 22 08:40:16 <redacted-host> xdg-desktop-portal-hyprland[<redacted-pid>]: [LOG]  | Got interface: ext_output_image_capture_source_manager_v1 (ver 1)
+Jun 22 08:40:16 <redacted-host> xdg-desktop-portal-hyprland[<redacted-pid>]: [LOG]  | Got interface: ext_foreign_toplevel_image_capture_source_manager_v1 (ver 1)
+Jun 22 08:40:16 <redacted-host> xdg-desktop-portal-hyprland[<redacted-pid>]: [LOG]  | Got interface: ext_image_copy_capture_manager_v1 (ver 1)
+Jun 22 08:40:16 <redacted-host> xdg-desktop-portal-hyprland[<redacted-pid>]: [LOG]  | Got interface: wp_color_manager_v1 (ver 1)
+Jun 22 08:40:16 <redacted-host> xdg-desktop-portal-hyprland[<redacted-pid>]: [LOG]  | Got interface: wp_drm_lease_device_v1 (ver 1)
+Jun 22 08:40:16 <redacted-host> xdg-desktop-portal-hyprland[<redacted-pid>]: [LOG]  | Got interface: wp_linux_drm_syncobj_manager_v1 (ver 1)
+
+# Recent portal journal (sanitized)
+Jul 03 07:04:37 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jul 03 07:04:59 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory
+Jul 03 08:31:20 <redacted-host> /nix/store/<hash>-xdg-desktop-portal-1.20.4/libexec/xdg-desktop-portal[<redacted-pid>]: Realtime error: Could not get pidns for pid <redacted>: Could not fstatat ns/pid: Not a directory

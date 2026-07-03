@@ -1,0 +1,368 @@
+[
+  {
+    "id": 31,
+    "name": "<redacted-non-capture-node>",
+    "media_class": null,
+    "capture_relevant": false,
+    "enum_formats": [],
+    "active_formats": []
+  },
+  {
+    "id": 32,
+    "name": "<redacted-non-capture-node>",
+    "media_class": null,
+    "capture_relevant": false,
+    "enum_formats": [],
+    "active_formats": []
+  },
+  {
+    "id": 52,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Midi/Bridge",
+    "capture_relevant": false,
+    "enum_formats": [],
+    "active_formats": []
+  },
+  {
+    "id": 55,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Midi/Bridge",
+    "capture_relevant": false,
+    "enum_formats": [],
+    "active_formats": []
+  },
+  {
+    "id": 47,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Audio/Sink",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": {
+          "default": "S24LE",
+          "alt1": "S24LE",
+          "alt2": "S16LE"
+        },
+        "rate": {
+          "default": 48000,
+          "min": 44100,
+          "max": 192000
+        },
+        "channels": 2,
+        "position": [
+          "FL",
+          "FR"
+        ]
+      }
+    ],
+    "active_formats": []
+  },
+  {
+    "id": 61,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Audio/Sink",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": {
+          "default": "S32LE",
+          "alt1": "S32LE",
+          "alt2": "S24LE",
+          "alt3": "S16LE"
+        },
+        "rate": {
+          "default": 48000,
+          "min": 48000,
+          "max": 192000
+        },
+        "channels": 8,
+        "position": [
+          "FL",
+          "FR",
+          "FC",
+          "LFE",
+          "RL",
+          "RR",
+          "FLC",
+          "FRC"
+        ]
+      }
+    ],
+    "active_formats": []
+  },
+  {
+    "id": 60,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Audio/Sink",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": {
+          "default": "S32LE",
+          "alt1": "S32LE",
+          "alt2": "S24LE",
+          "alt3": "S16LE"
+        },
+        "rate": {
+          "default": 48000,
+          "min": 44100,
+          "max": 384000
+        },
+        "channels": 2,
+        "position": [
+          "FL",
+          "FR"
+        ]
+      }
+    ],
+    "active_formats": []
+  },
+  {
+    "id": 59,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Audio/Source",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": {
+          "default": "S32LE",
+          "alt1": "S32LE",
+          "alt2": "S24LE",
+          "alt3": "S16LE"
+        },
+        "rate": {
+          "default": 48000,
+          "min": 48000,
+          "max": 192000
+        },
+        "channels": 2,
+        "position": [
+          "FL",
+          "FR"
+        ]
+      }
+    ],
+    "active_formats": []
+  },
+  {
+    "id": 58,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Audio/Source",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": {
+          "default": "S32LE",
+          "alt1": "S32LE",
+          "alt2": "S24LE",
+          "alt3": "S16LE"
+        },
+        "rate": {
+          "default": 48000,
+          "min": 48000,
+          "max": 192000
+        },
+        "channels": 2,
+        "position": [
+          "FL",
+          "FR"
+        ]
+      }
+    ],
+    "active_formats": []
+  },
+  {
+    "id": 64,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Audio/Source",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": {
+          "default": "S32LE",
+          "alt1": "S32LE",
+          "alt2": "S24LE",
+          "alt3": "S16LE"
+        },
+        "rate": {
+          "default": 48000,
+          "min": 48000,
+          "max": 192000
+        },
+        "channels": 2,
+        "position": [
+          "FL",
+          "FR"
+        ]
+      }
+    ],
+    "active_formats": []
+  },
+  {
+    "id": 65,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Audio/Sink",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": {
+          "default": "S32LE",
+          "alt1": "S32LE",
+          "alt2": "S16LE"
+        },
+        "rate": {
+          "default": 48000,
+          "min": 32000,
+          "max": 48000
+        },
+        "channels": 2,
+        "position": [
+          "FL",
+          "FR"
+        ]
+      },
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "iec958",
+        "iec958Codec": {
+          "default": "PCM",
+          "alt1": "PCM"
+        },
+        "rate": {
+          "default": 48000,
+          "min": 32000,
+          "max": 48000
+        }
+      }
+    ],
+    "active_formats": []
+  },
+  {
+    "id": 135,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Audio/Sink",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": "F32LE",
+        "rate": 48000,
+        "channels": 2,
+        "position": [
+          "FL",
+          "FR"
+        ]
+      }
+    ],
+    "active_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": "F32LE",
+        "rate": 48000,
+        "channels": 2,
+        "position": [
+          "FL",
+          "FR"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 144,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Audio/Sink",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": "F32LE",
+        "rate": 48000,
+        "channels": 6,
+        "position": [
+          "FL",
+          "FR",
+          "FC",
+          "LFE",
+          "RL",
+          "RR"
+        ]
+      }
+    ],
+    "active_formats": []
+  },
+  {
+    "id": 150,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Audio/Sink",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": "F32LE",
+        "rate": 48000,
+        "channels": 8,
+        "position": [
+          "FL",
+          "FR",
+          "FC",
+          "LFE",
+          "RL",
+          "RR",
+          "SL",
+          "SR"
+        ]
+      }
+    ],
+    "active_formats": []
+  },
+  {
+    "id": 120,
+    "name": "<redacted-non-capture-node>",
+    "media_class": "Stream/Input/Audio",
+    "capture_relevant": false,
+    "enum_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": "F32LE",
+        "rate": 48000,
+        "channels": 2,
+        "position": [
+          "FL",
+          "FR"
+        ]
+      }
+    ],
+    "active_formats": [
+      {
+        "mediaType": "audio",
+        "mediaSubtype": "raw",
+        "format": "F32LE",
+        "rate": 48000,
+        "channels": 2,
+        "position": [
+          "FL",
+          "FR"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,87 @@
+# DBus portal services
+:1.43                                                                                         839414 pipewire        <redacted-user> :1.43         user@1000.service -       -
+:1.44                                                                                         839414 pipewire        <redacted-user> :1.44         user@1000.service -       -
+:1.45                                                                                         839417 wireplumber     <redacted-user> :1.45         user@1000.service -       -
+:1.48                                                                                         839453 pipewire-pulse  <redacted-user> :1.48         user@1000.service -       -
+:1.49                                                                                         839453 pipewire-pulse  <redacted-user> :1.49         user@1000.service -       -
+:1.50                                                                                         839417 wireplumber     <redacted-user> :1.50         user@1000.service -       -
+org.freedesktop.ReserveDevice1.Audio0                                                         839417 wireplumber     <redacted-user> :1.45         user@1000.service -       -
+org.freedesktop.ReserveDevice1.Audio2                                                         839417 wireplumber     <redacted-user> :1.45         user@1000.service -       -
+org.freedesktop.ReserveDevice1.Audio4                                                         839417 wireplumber     <redacted-user> :1.45         user@1000.service -       -
+org.freedesktop.impl.portal.PermissionStore                                                   839386 .xdg-permission <redacted-user> :1.34         user@1000.service -       -
+org.freedesktop.impl.portal.desktop.gtk                                                       839403 .xdg-desktop-po <redacted-user> :1.36         user@1000.service -       -
+org.freedesktop.impl.portal.desktop.hyprland                                                  839425 .xdg-desktop-po <redacted-user> :1.46         user@1000.service -       -
+org.freedesktop.impl.portal.desktop.kde                                                            - -               -      (activatable) -                 -       -
+org.freedesktop.impl.portal.desktop.kwallet                                                        - -               -      (activatable) -                 -       -
+org.freedesktop.portal.Desktop                                                                839380 .xdg-desktop-po <redacted-user> :1.33         user@1000.service -       -
+org.freedesktop.portal.Documents                                                              839392 .xdg-document-p <redacted-user> :1.35         user@1000.service -       -
+org.pipewire.Telephony                                                                        839417 wireplumber     <redacted-user> :1.50         user@1000.service -       -
+org.pulseaudio.Server                                                                         839453 pipewire-pulse  <redacted-user> :1.49         user@1000.service -       -
+
+# org.freedesktop.portal.Desktop ScreenCast introspection
+NAME                  TYPE     SIGNATURE RESULT/VALUE FLAGS
+.CreateSession        method   a{sv}     o            -
+.OpenPipeWireRemote   method   oa{sv}    h            -
+.SelectSources        method   oa{sv}    o            -
+.Start                method   osa{sv}   o            -
+.AvailableCursorModes property u         3            emits-change
+.AvailableSourceTypes property u         7            emits-change
+.version              property u         5            emits-change
+
+# org.freedesktop.portal.Desktop RemoteDesktop introspection
+NAME TYPE SIGNATURE RESULT/VALUE FLAGS
+
+# org.freedesktop.portal.Desktop properties
+NAME               TYPE   SIGNATURE RESULT/VALUE FLAGS
+.Get               method ss        v            -
+.GetAll            method s         a{sv}        -
+.Set               method ssv       -            -
+.PropertiesChanged signal sa{sv}as  -            -
+
+# xdg-desktop-portal-hyprland implementation object introspection attempts
+## org.freedesktop.impl.portal.desktop.hyprland /org/freedesktop/portal/desktop
+NAME                                        TYPE      SIGNATURE         RESULT/VALUE FLAGS
+org.freedesktop.DBus.Introspectable         interface -                 -            -
+.Introspect                                 method    -                 s            -
+org.freedesktop.DBus.Peer                   interface -                 -            -
+.GetMachineId                               method    -                 s            -
+.Ping                                       method    -                 -            -
+org.freedesktop.DBus.Properties             interface -                 -            -
+.Get                                        method    ss                v            -
+.GetAll                                     method    s                 a{sv}        -
+.Set                                        method    ssv               -            -
+.PropertiesChanged                          signal    sa{sv}as          -            -
+org.freedesktop.impl.portal.GlobalShortcuts interface -                 -            -
+.BindShortcuts                              method    ooa(sa{sv})sa{sv} ua{sv}       -
+.CreateSession                              method    oosa{sv}          ua{sv}       -
+.ListShortcuts                              method    oo                ua{sv}       -
+.Activated                                  signal    osta{sv}          -            -
+.Deactivated                                signal    osta{sv}          -            -
+.ShortcutsChanged                           signal    oa{sa{sv}}        -            -
+org.freedesktop.impl.portal.ScreenCast      interface -                 -            -
+.CreateSession                              method    oosa{sv}          ua{sv}       -
+.SelectSources                              method    oosa{sv}          ua{sv}       -
+.Start                                      method    oossa{sv}         ua{sv}       -
+.AvailableCursorModes                       property  u                 3            emits-change
+.AvailableSourceTypes                       property  u                 7            emits-change
+.version                                    property  u                 3            emits-change
+org.freedesktop.impl.portal.Screenshot      interface -                 -            -
+.PickColor                                  method    ossa{sv}          ua{sv}       -
+.Screenshot                                 method    ossa{sv}          ua{sv}       -
+.version                                    property  u                 2            emits-change
+
+## org.freedesktop.impl.portal.desktop.hyprland /org/freedesktop/portal/desktop org.freedesktop.impl.portal.ScreenCast
+NAME                  TYPE     SIGNATURE RESULT/VALUE FLAGS
+.CreateSession        method   oosa{sv}  ua{sv}       -
+.SelectSources        method   oosa{sv}  ua{sv}       -
+.Start                method   oossa{sv} ua{sv}       -
+.AvailableCursorModes property u         3            emits-change
+.AvailableSourceTypes property u         7            emits-change
+.version              property u         3            emits-change
+
+## org.freedesktop.impl.portal.desktop.Hyprland /org/freedesktop/portal/desktop
+Failed to introspect object /org/freedesktop/portal/desktop of service org.freedesktop.impl.portal.desktop.Hyprland: The name is not activatable
+
+## org.freedesktop.impl.portal.desktop.Hyprland /org/freedesktop/portal/desktop org.freedesktop.impl.portal.ScreenCast
+Failed to introspect object /org/freedesktop/portal/desktop of service org.freedesktop.impl.portal.desktop.Hyprland: The name is not activatable
+

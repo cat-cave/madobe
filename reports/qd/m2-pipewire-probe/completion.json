@@ -1,0 +1,142 @@
+{
+  "nodeId": "m2-pipewire-probe",
+  "summary": "Probed the reference Linux host PipeWire/XDPH stack, recorded versions, dumped PipeWire node and format metadata before and during a temporary named Hyprland output, and documented that named remote output capture through XDPH is blocked without a user-consented portal stream or direct named-output capture path.",
+  "changedFiles": [
+    "evidence/m2-pipewire-probe/commands.log",
+    "evidence/m2-pipewire-probe/host-env.txt",
+    "evidence/m2-pipewire-probe/hyprland-monitors-after-remove.err",
+    "evidence/m2-pipewire-probe/hyprland-monitors-after-remove.json",
+    "evidence/m2-pipewire-probe/hyprland-monitors-before.err",
+    "evidence/m2-pipewire-probe/hyprland-monitors-before.json",
+    "evidence/m2-pipewire-probe/hyprland-monitors-current.err",
+    "evidence/m2-pipewire-probe/hyprland-monitors-with-output.err",
+    "evidence/m2-pipewire-probe/hyprland-monitors-with-output.json",
+    "evidence/m2-pipewire-probe/hyprland-output-configure.err",
+    "evidence/m2-pipewire-probe/hyprland-output-configure.txt",
+    "evidence/m2-pipewire-probe/hyprland-output-create.err",
+    "evidence/m2-pipewire-probe/hyprland-output-create.txt",
+    "evidence/m2-pipewire-probe/hyprland-output-precleanup.err",
+    "evidence/m2-pipewire-probe/hyprland-output-precleanup.txt",
+    "evidence/m2-pipewire-probe/hyprland-output-remove.err",
+    "evidence/m2-pipewire-probe/hyprland-output-remove.txt",
+    "evidence/m2-pipewire-probe/json-validation.log",
+    "evidence/m2-pipewire-probe/just-check.log",
+    "evidence/m2-pipewire-probe/notes.md",
+    "evidence/m2-pipewire-probe/pipewire-capture-node-query.txt",
+    "evidence/m2-pipewire-probe/pipewire-dump-before.json",
+    "evidence/m2-pipewire-probe/pipewire-dump-with-output.json",
+    "evidence/m2-pipewire-probe/pipewire-node-format-comparison.txt",
+    "evidence/m2-pipewire-probe/pipewire-node-format-summary-before.json",
+    "evidence/m2-pipewire-probe/pipewire-node-format-summary-with-output.json",
+    "evidence/m2-pipewire-probe/pipewire-nodes-before.json",
+    "evidence/m2-pipewire-probe/pipewire-nodes-with-output.json",
+    "evidence/m2-pipewire-probe/portal-introspection.txt",
+    "evidence/m2-pipewire-probe/portal-screencast-properties.txt",
+    "evidence/m2-pipewire-probe/redaction-scan.log",
+    "evidence/m2-pipewire-probe/typos-focused.log",
+    "evidence/m2-pipewire-probe/user-services-and-journal.txt",
+    "evidence/m2-pipewire-probe/wireplumber-status.txt",
+    "reports/qd/m2-pipewire-probe/audit.json",
+    "reports/qd/m2-pipewire-probe/blocker.md",
+    "reports/qd/m2-pipewire-probe/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "PipeWire and portal versions are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/host-env.txt records PipeWire 1.6.5, WirePlumber 0.5.14, xdg-desktop-portal 1.20.4, xdg-desktop-portal-hyprland 1.3.12, and Hyprland 0.55.2."
+    },
+    {
+      "criterion": "Available capture nodes and formats are dumped.",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/pipewire-dump-before.json, pipewire-nodes-before.json, pipewire-node-format-summary-before.json, pipewire-dump-with-output.json, pipewire-nodes-with-output.json, and pipewire-node-format-summary-with-output.json."
+    },
+    {
+      "criterion": "Named remote output capture path is identified or blocked with evidence.",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/portal-introspection.txt shows source-class/session APIs but no named-output selector; pipewire-capture-node-query.txt shows no Video/screencast/portal/Hyprland/madobe PipeWire node before or during the named output; blocker.md records the capability limit."
+    },
+    {
+      "criterion": "Artifacts are saved under evidence/m2-pipewire-probe.",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "pipewire --version; pw-cli --version; pw-dump --version; wireplumber --version",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/host-env.txt"
+    },
+    {
+      "command": "systemctl --user --no-pager --plain status pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-hyprland",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/user-services-and-journal.txt"
+    },
+    {
+      "command": "journalctl --user --no-pager --since '2026-07-03 00:00:00' -u xdg-desktop-portal -u xdg-desktop-portal-hyprland -u pipewire -u wireplumber",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/user-services-and-journal.txt"
+    },
+    {
+      "command": "pw-dump",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/pipewire-dump-before.json and evidence/m2-pipewire-probe/pipewire-dump-with-output.json"
+    },
+    {
+      "command": "wpctl status",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/wireplumber-status.txt"
+    },
+    {
+      "command": "busctl --user introspect/get-property for org.freedesktop.portal.ScreenCast and org.freedesktop.impl.portal.ScreenCast",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/portal-introspection.txt and evidence/m2-pipewire-probe/portal-screencast-properties.txt"
+    },
+    {
+      "command": "hyprctl output create/configure/remove madobe-qd-m2-pipewire-probe",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/hyprland-output-create.txt, hyprland-output-configure.txt, hyprland-output-remove.txt, hyprland-monitors-with-output.json, and hyprland-monitors-after-remove.json"
+    },
+    {
+      "command": "jq validation for evidence/m2-pipewire-probe/*.json and reports/qd/m2-pipewire-probe/*.json",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/json-validation.log"
+    },
+    {
+      "command": "rg redaction scan for local user/runtime identifiers and sensitive strings",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/redaction-scan.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/just-check.log"
+    },
+    {
+      "command": "nix develop -c typos evidence/m2-pipewire-probe reports/qd/m2-pipewire-probe",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/typos-focused.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-pipewire-probe/commands.log",
+    "evidence/m2-pipewire-probe/host-env.txt",
+    "evidence/m2-pipewire-probe/notes.md",
+    "evidence/m2-pipewire-probe/pipewire-capture-node-query.txt",
+    "evidence/m2-pipewire-probe/portal-introspection.txt",
+    "reports/qd/m2-pipewire-probe/blocker.md"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live PipeWire/XDPH/Hyprland probes were collected on the reference Linux host. The host supports XDPH source classes, but named-output capture was blocked with evidence as permitted by this node's acceptance criteria."
+  },
+  "unverifiedItems": [],
+  "residualRisks": [
+    "Downstream one-frame capture must not assume that AvailableSourceTypes=7 is enough to target madobe-owned outputs by name.",
+    "A direct ext-image-copy capture path may be required if portal-mediated source selection cannot be made deterministic and auditable."
+  ],
+  "dagChangesNeeded": []
+}

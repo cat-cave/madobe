@@ -1,0 +1,65 @@
+PipeWire 'pipewire-0' [1.6.5, <redacted-user>@<redacted-host>, cookie:<redacted>]
+ └─ Clients:
+        34. .xdg-desktop-portal-wrapped         [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+        35. WirePlumber                         [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+        43. WirePlumber [export]                [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+        44. .xdg-desktop-portal-hyprland-wrapped [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+        45. pipewire                            [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+        46. waybar                              [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+        48. waybar                              [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+        69. <redacted-app>                            [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       113. <redacted-app>                             [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       115. pipewire                            [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       121. libcanberra                         [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       122. <redacted-app>                             [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       124. <redacted-app>                            [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       125. wpctl                               [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       131.                                     [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       137. pipewire                            [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       153. Steam Voice Settings                [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       154. Steam                               [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       155. Chromium input                      [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+       161. pipewire                            [1.6.5, <redacted-user>@<redacted-host>, pid:<redacted>]
+
+Audio
+ ├─ Devices:
+ │      50. USB Audio                           [alsa]
+ │      51. AD102 High Definition Audio Controller [alsa]
+ │  
+ ├─ Sinks:
+ │      47. USB Audio S/PDIF Out                [vol: 0.40]
+ │      60. USB Audio Front Headphones          [vol: 1.00]
+ │      61. USB Audio Speakers                  [vol: 0.40]
+ │      65. AD102 High Definition Audio Controller Digital Stereo (HDMI) [vol: 0.40]
+ │  *  135. <redacted-audio-sink>                [vol: 1.00]
+ │     144. <redacted-audio-sink>            [vol: 1.00]
+ │     150. <redacted-audio-sink>            [vol: 1.00]
+ │  
+ ├─ Sources:
+ │  *   58. USB Audio Microphone                [vol: 1.00]
+ │      59. USB Audio Line In                   [vol: 1.00]
+ │      64. USB Audio Front Microphone          [vol: 1.00]
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+       120. <redacted-app>                                                    
+            110. monitor_FR     
+            126. monitor_FL     
+            147. input_FR        < <redacted-audio-sink>:monitor_FR	[active]
+            173. input_FL        < <redacted-audio-sink>:monitor_FL	[active]
+
+Video
+ ├─ Devices:
+ │  
+ ├─ Sinks:
+ │  
+ ├─ Sources:
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+
+Settings
+ └─ Default Configured Devices:
+         0. Audio/Sink    <redacted-audio-sink>
