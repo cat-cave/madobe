@@ -1,0 +1,65 @@
+[
+  {
+    "role": "physical-monitor",
+    "name": "<redacted-monitor>",
+    "description": "<redacted-description>",
+    "make": "<redacted-make>",
+    "model": "<redacted-model>",
+    "serial": "<redacted-serial>",
+    "width": 3840,
+    "height": 2160,
+    "refreshRate": 94.98100,
+    "x": 0,
+    "y": 0,
+    "scale": 1.00,
+    "focused": true,
+    "disabled": false,
+    "currentFormat": "XRGB8888",
+    "activeWorkspace": {
+      "id": 11,
+      "name": "<redacted-workspace>"
+    }
+  },
+  {
+    "role": "physical-monitor",
+    "name": "<redacted-monitor>",
+    "description": "<redacted-description>",
+    "make": "<redacted-make>",
+    "model": "<redacted-model>",
+    "serial": "<redacted-serial>",
+    "width": 2560,
+    "height": 1440,
+    "refreshRate": 144.00000,
+    "x": 3840,
+    "y": 0,
+    "scale": 1.00,
+    "focused": false,
+    "disabled": false,
+    "currentFormat": "XRGB8888",
+    "activeWorkspace": {
+      "id": 12,
+      "name": "<redacted-workspace>"
+    }
+  },
+  {
+    "role": "node-output",
+    "name": "madobe-qd-m2-portal-manual-consent-frame-proof",
+    "description": "",
+    "make": "",
+    "model": "",
+    "serial": "",
+    "width": 1280,
+    "height": 720,
+    "refreshRate": 60.00000,
+    "x": 50000,
+    "y": 50000,
+    "scale": 1.00,
+    "focused": false,
+    "disabled": false,
+    "currentFormat": "XRGB8888",
+    "activeWorkspace": {
+      "id": -1337,
+      "name": "madobe-qd-m2-portal-manual-consent-frame-proof-workspace"
+    }
+  }
+]

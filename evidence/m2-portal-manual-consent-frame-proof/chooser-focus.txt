@@ -1,0 +1,1 @@
+chooser_focus=skipped; chooser opened on visible workspace

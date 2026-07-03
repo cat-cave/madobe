@@ -1,0 +1,87 @@
+[
+  {
+    "id": 181,
+    "type": "PipeWire:Interface:Node",
+    "media_class": "Video/Source",
+    "node_name": "<redacted-portal-node>",
+    "app_name": null,
+    "capture_relevant": true,
+    "enum_formats": [
+      {
+        "mediaType": "video",
+        "mediaSubtype": "raw",
+        "format": "BGRA",
+        "modifier": {
+          "default": 216172782120099856,
+          "alt1": 216172782120099856,
+          "alt2": 216172782120099857,
+          "alt3": 216172782120099858,
+          "alt4": 216172782120099859,
+          "alt5": 216172782120099860,
+          "alt6": 216172782120099861,
+          "alt7": 216172782128496656,
+          "alt8": 216172782128496657,
+          "alt9": 216172782128496658,
+          "alt10": 216172782128496659,
+          "alt11": 216172782128496660,
+          "alt12": 216172782128496661,
+          "alt13": 72057594037927935
+        },
+        "size": {
+          "width": 1280,
+          "height": 720
+        },
+        "framerate": {
+          "num": 0,
+          "denom": 1
+        },
+        "maxFramerate": {
+          "default": {
+            "num": 120,
+            "denom": 1
+          },
+          "min": {
+            "num": 1,
+            "denom": 1
+          },
+          "max": {
+            "num": 120,
+            "denom": 1
+          }
+        }
+      },
+      {
+        "mediaType": "video",
+        "mediaSubtype": "raw",
+        "format": {
+          "default": "BGRA",
+          "alt1": "BGRA",
+          "alt2": "BGRx"
+        },
+        "modifier": null,
+        "size": {
+          "width": 1280,
+          "height": 720
+        },
+        "framerate": {
+          "num": 0,
+          "denom": 1
+        },
+        "maxFramerate": {
+          "default": {
+            "num": 120,
+            "denom": 1
+          },
+          "min": {
+            "num": 1,
+            "denom": 1
+          },
+          "max": {
+            "num": 120,
+            "denom": 1
+          }
+        }
+      }
+    ]
+  }
+]
