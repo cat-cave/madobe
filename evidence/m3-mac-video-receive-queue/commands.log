@@ -1,0 +1,65 @@
+2026-07-03T22:41Z gh issue comment 1 --repo cat-cave/madobe --body-file /private/tmp/m3-mac-video-receive-queue-proposal.md
+result: passed
+notes: Posted DAG topology proposal before qd edits.
+
+2026-07-03T22:52:07Z qd node add --from-json /private/tmp/m3-mac-video-receive-queue-node.json
+result: passed
+
+2026-07-03T22:54:03Z qd edge add m3-swift-protocol-mirror m3-mac-video-receive-queue --type requires
+result: passed
+
+2026-07-03T22:54:07Z qd edge add m3-quic-transport-skeleton m3-mac-video-receive-queue --type requires
+result: passed
+
+2026-07-03T22:54:18Z qd edge add m3-mac-video-receive-queue m3-cross-device-video-smoke --type requires
+result: passed
+
+2026-07-03T22:54:26Z qd claim m3-mac-video-receive-queue --agent trevor-mac-orchestrator --branch spec/m3-mac-video-receive-queue
+result: passed
+
+2026-07-03T22:54:41Z qd worktree create m3-mac-video-receive-queue --branch spec/m3-mac-video-receive-queue
+result: passed
+worktree: .qd/worktrees/m3-mac-video-receive-queue
+
+2026-07-03T23:15:03Z just macos-check
+result: passed
+notes: Rust fmt/check/clippy, SwiftFormat, SwiftLint, Tuist generation, and xcodebuild tests passed. Xcode executed 11 tests with 0 failures.
+
+2026-07-03T23:18:30Z just macos-check
+result: passed
+notes: Rust fmt/check/clippy, SwiftFormat, SwiftLint, Tuist generation, and xcodebuild tests passed. Xcode executed 11 tests with 0 failures.
+
+2026-07-03T23:24:37Z qd complete m3-mac-video-receive-queue --from-report reports/qd/m3-mac-video-receive-queue/completion.json
+result: passed
+notes: qd moved node to review.
+
+2026-07-03T23:26:38Z qd audit start m3-mac-video-receive-queue
+result: passed
+
+2026-07-03T23:26:38Z qd audit pass m3-mac-video-receive-queue --from-report reports/qd/m3-mac-video-receive-queue/audit.json
+result: passed
+notes: qd imported 0 findings and reported 0 remaining.
+
+2026-07-03T23:27Z qd export --out roadmap/qd-export.json --deterministic
+result: passed
+notes: Exported 34 nodes, 39 edges, 2 findings, 104 runs, and 7 node notes into the worktree roadmap.
+
+2026-07-03T23:35Z qd sync/replay during rebase onto main 3ee0f74
+result: passed
+notes: Synced local qd cache to main, replayed node add/edges/claim/complete/audit, and exported 34 nodes, 39 edges, 2 findings, 112 runs, and 8 node notes into the rebased worktree roadmap.
+
+2026-07-03T23:42:15Z just macos-check
+result: passed
+notes: Post-rebase validation passed. Rust fmt/check/clippy, SwiftFormat, SwiftLint, Tuist generation, and xcodebuild tests passed. Xcode executed 11 tests with 0 failures.
+
+2026-07-03T23:51Z qd sync/replay during rebase onto main e9c9c2b
+result: passed
+notes: Synced local qd cache to main, replayed node add/edges/claim/complete/audit, and exported 34 nodes, 39 edges, 2 findings, 116 runs, and 8 node notes into the rebased worktree roadmap.
+
+2026-07-04T00:00:35Z just macos-check
+result: passed
+notes: Post-rebase validation against main e9c9c2b passed. Rust fmt/check/clippy, SwiftFormat, SwiftLint, Tuist generation, and xcodebuild tests passed. Xcode executed 11 tests with 0 failures.
+
+2026-07-04T00:09Z qd sync/replay during rebase onto main 182fa35
+result: passed
+notes: Synced local qd cache to main, replayed node add/edges/claim/complete/audit, and exported 39 nodes, 39 edges, 7 findings, 120 runs, and 8 node notes into the rebased worktree roadmap.

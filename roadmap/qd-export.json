@@ -1167,6 +1167,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m3-mac-video-receive-queue",
+      "title": "Add Mac encoded video receive queue validation",
+      "kind": "feature",
+      "milestone": "M3-mac-video-endpoint",
+      "status": "review",
+      "priority": "P1",
+      "estimate_points": 1,
+      "risk": "medium",
+      "owner": "trevor-mac-orchestrator",
+      "branch": "spec/m3-mac-video-receive-queue",
+      "spec": "Add Swift client-side receive queue validation for encoded video frames using synthetic in-memory samples so the Mac endpoint can validate payload size, payload hash, ordering, and drop behavior before live cross-device smoke.",
+      "acceptance": "Swift client core validates incoming encoded frame metadata against payload byte count and SHA-256 payload hash\nQueue depth is bounded to one ready frame and accepting a newer frame drops stale queued frame evidence deterministically\nReceive and dequeue timeline events can be emitted as Codable evidence for later latency reports\nXCTest coverage exercises valid enqueue/dequeue, byte-count mismatch, hash mismatch, stale-frame drop, and stable timeline JSON\nEvidence is saved under evidence/m3-mac-video-receive-queue and reports under reports/qd/m3-mac-video-receive-queue\nNo live network, Linux capture, VideoToolbox decode, Metal render, or cross-device latency claim is made",
+      "validation": null,
+      "context": "platform:macos\nowner:macos-orchestrator\narea:Swift client receive queue\nvalidation:local-xcode",
+      "created_at": "2026-07-04T00:08:34.005Z",
+      "updated_at": "2026-07-04T00:09:05.654Z",
+      "claimed_at": "2026-07-04T00:08:58.396Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -1385,6 +1415,24 @@
       "to_node": "m2-capture-one-frame",
       "type": "requires",
       "created_at": "2026-07-03T22:37:24.297Z"
+    },
+    {
+      "from_node": "m3-swift-protocol-mirror",
+      "to_node": "m3-mac-video-receive-queue",
+      "type": "requires",
+      "created_at": "2026-07-04T00:08:38.173Z"
+    },
+    {
+      "from_node": "m3-quic-transport-skeleton",
+      "to_node": "m3-mac-video-receive-queue",
+      "type": "requires",
+      "created_at": "2026-07-04T00:08:50.932Z"
+    },
+    {
+      "from_node": "m3-mac-video-receive-queue",
+      "to_node": "m3-cross-device-video-smoke",
+      "type": "requires",
+      "created_at": "2026-07-04T00:08:54.466Z"
     }
   ],
   "findings": [
@@ -4089,6 +4137,50 @@
       "started_at": "2026-07-04T00:04:41.525Z",
       "finished_at": "2026-07-04T00:04:41.525Z",
       "summary": "Merge recorded with squash at commit 9e9ab6e77f3574cd3d79becdbbd5b30b33d27e23",
+      "log_path": null
+    },
+    {
+      "id": "41ae4664-6048-4ad3-b4e3-580b3a5d0d12",
+      "node_id": "m3-mac-video-receive-queue",
+      "kind": "implement",
+      "status": "completed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": "/Users/trevor/Documents/GitHub/madobe/.qd/worktrees/m3-mac-video-receive-queue/reports/qd/m3-mac-video-receive-queue/completion.json",
+      "audit_kind": null,
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-04T00:09:02.430Z",
+      "finished_at": "2026-07-04T00:09:02.430Z",
+      "summary": "Added a Swift client-side encoded video receive queue with payload byte-count validation, SHA-256 hash validation, depth-one stale-frame dropping, deterministic timeline events, and XCTest coverage. The node remains synthetic/in-memory and makes no live network, capture, decode, render, or latency claim.",
+      "log_path": null
+    },
+    {
+      "id": "20e9f60d-e366-4155-b612-a27b4b07cb50",
+      "node_id": "m3-mac-video-receive-queue",
+      "kind": "audit",
+      "status": "passed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": "/Users/trevor/Documents/GitHub/madobe/.qd/worktrees/m3-mac-video-receive-queue/reports/qd/m3-mac-video-receive-queue/audit.json",
+      "audit_kind": "general",
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-04T00:09:05.653Z",
+      "finished_at": "2026-07-04T00:09:10.037Z",
+      "summary": "Audit passed from /Users/trevor/Documents/GitHub/madobe/.qd/worktrees/m3-mac-video-receive-queue/reports/qd/m3-mac-video-receive-queue/audit.json",
       "log_path": null
     }
   ],
