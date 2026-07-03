@@ -1,0 +1,106 @@
+{
+  "nodeId": "m2-portal-chooser-interaction-proof",
+  "summary": "Ran live xdg-desktop-portal ScreenCast chooser probes against node-scoped Hyprland outputs. The chooser appeared and a targeted keyboard sequence was sent, but SelectSources still timed out. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video stream metadata were reached. The node completes with a precise blocker and leaves m2-capture-one-frame blocked.",
+  "changedFiles": [
+    "evidence/m2-portal-chooser-interaction-proof/commands.log",
+    "evidence/m2-portal-chooser-interaction-proof/host-env.txt",
+    "evidence/m2-portal-chooser-interaction-proof/notes.md",
+    "evidence/m2-portal-chooser-interaction-proof/portal_screencast_client.c",
+    "evidence/m2-portal-chooser-interaction-proof/portal-client.txt",
+    "evidence/m2-portal-chooser-interaction-proof/portal-client.err",
+    "evidence/m2-portal-chooser-interaction-proof/portal-client-status.txt",
+    "evidence/m2-portal-chooser-interaction-proof/clients-at-chooser-detection.json",
+    "evidence/m2-portal-chooser-interaction-proof/clients-after-cleanup.json",
+    "evidence/m2-portal-chooser-interaction-proof/kbd3-portal-client.txt",
+    "evidence/m2-portal-chooser-interaction-proof/kbd3-portal-client.err",
+    "evidence/m2-portal-chooser-interaction-proof/kbd3-portal-client-status.txt",
+    "evidence/m2-portal-chooser-interaction-proof/kbd3-clients-at-chooser-detection.json",
+    "evidence/m2-portal-chooser-interaction-proof/kbd3-clients-after-cleanup.json",
+    "evidence/m2-portal-chooser-interaction-proof/kbd3-hyprland-monitors-with-output.json",
+    "evidence/m2-portal-chooser-interaction-proof/kbd3-hyprland-monitors-after-remove.json",
+    "evidence/m2-portal-chooser-interaction-proof/pipewire-after-summary.json",
+    "evidence/m2-portal-chooser-interaction-proof/validation-summary.json",
+    "reports/qd/m2-portal-chooser-interaction-proof/blocker.md",
+    "reports/qd/m2-portal-chooser-interaction-proof/completion.json",
+    "reports/qd/m2-portal-chooser-interaction-proof/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Use node-scoped madobe output/workspace setup and cleanup evidence.",
+      "status": "passed",
+      "evidence": "kbd3-hyprland-monitors-with-output.json and kbd3-hyprland-monitors-after-remove.json."
+    },
+    {
+      "criterion": "Run visible portal client flow with parent/window token if supported.",
+      "status": "passed",
+      "evidence": "portal-client.txt and kbd3-portal-client.txt show the portal client lifecycle through CreateSession and SelectSources."
+    },
+    {
+      "criterion": "Capture whether the chooser appears and whether it can be selected or approved autonomously.",
+      "status": "passed",
+      "evidence": "chooser-detection.txt and kbd3-chooser-detection.txt show chooser_seen=true; kbd3-portal-client-status.txt records status 7 after keyboard automation."
+    },
+    {
+      "criterion": "If SelectSources returns, continue Start, stream ids, OpenPipeWireRemote, and PipeWire metadata.",
+      "status": "passed",
+      "evidence": "validation-summary.json records that SelectSources did not return, so Start/OpenPipeWireRemote were not reached."
+    },
+    {
+      "criterion": "If autonomous completion is impossible, record the exact UI/manual action or portal limitation and keep m2-capture-one-frame blocked.",
+      "status": "passed",
+      "evidence": "blocker.md records the visible chooser timeout and unavailable ydotool click automation; validation-summary.json keeps m2-capture-one-frame blocked."
+    },
+    {
+      "criterion": "No third-party Rust deps without separate policy node/finding.",
+      "status": "passed",
+      "evidence": "Only evidence/report files were added; Cargo manifests are unchanged."
+    },
+    {
+      "criterion": "Artifacts are saved under evidence/m2-portal-chooser-interaction-proof and reports/qd/m2-portal-chooser-interaction-proof.",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-chooser-interaction-proof/ and reports/qd/m2-portal-chooser-interaction-proof/."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "hyprctl output create/configure/remove node-scoped generated outputs",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-chooser-interaction-proof/commands.log"
+    },
+    {
+      "command": "portal_screencast_client --response-timeout 60/70 --hold-seconds 10",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-chooser-interaction-proof/portal-client.txt and kbd3-portal-client.txt"
+    },
+    {
+      "command": "wtype targeted keyboard interaction against visible chooser",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-chooser-interaction-proof/kbd3-wtype-sequence.txt and kbd3-portal-client-status.txt"
+    },
+    {
+      "command": "pw-dump focused summary after portal client",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-chooser-interaction-proof/pipewire-after-summary.json"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-portal-chooser-interaction-proof/commands.log",
+    "evidence/m2-portal-chooser-interaction-proof/notes.md",
+    "evidence/m2-portal-chooser-interaction-proof/validation-summary.json",
+    "reports/qd/m2-portal-chooser-interaction-proof/blocker.md"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live Linux Hyprland, xdg-desktop-portal, wtype, and PipeWire probes were collected. The accepted outcome is a documented chooser interaction blocker."
+  },
+  "unverifiedItems": [],
+  "residualRisks": [
+    "Click-based chooser approval was not tested because ydotool could not access its daemon socket from this session.",
+    "No stream ids, PipeWire remote fd, DMA-BUF format, modifier, timestamp, or sync metadata were obtained."
+  ],
+  "dagChangesNeeded": [
+    "Keep m2-capture-one-frame blocked until a consented portal flow or direct capture path provides stream metadata."
+  ]
+}

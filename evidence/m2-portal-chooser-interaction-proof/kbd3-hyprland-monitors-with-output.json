@@ -1,0 +1,59 @@
+[
+  {
+    "name": "<redacted-physical-monitor>",
+    "description": "<redacted-monitor-description>",
+    "make": "<redacted-monitor-make>",
+    "model": "<redacted-monitor-model>",
+    "serial": "<redacted-monitor-serial>",
+    "width": 3840,
+    "height": 2160,
+    "x": 0,
+    "y": 0,
+    "refreshRate": 94.98100,
+    "scale": 1.00,
+    "focused": true,
+    "disabled": false,
+    "activeWorkspace": {
+      "id": 11,
+      "name": "11"
+    }
+  },
+  {
+    "name": "<redacted-physical-monitor>",
+    "description": "<redacted-monitor-description>",
+    "make": "<redacted-monitor-make>",
+    "model": "<redacted-monitor-model>",
+    "serial": "<redacted-monitor-serial>",
+    "width": 2560,
+    "height": 1440,
+    "x": 3840,
+    "y": 0,
+    "refreshRate": 144.00000,
+    "scale": 1.00,
+    "focused": false,
+    "disabled": false,
+    "activeWorkspace": {
+      "id": 12,
+      "name": "12"
+    }
+  },
+  {
+    "name": "madobe-qd-m2-portal-chooser-interaction-proof-kbd3",
+    "description": "",
+    "make": "",
+    "model": "",
+    "serial": "",
+    "width": 1920,
+    "height": 1080,
+    "x": 6400,
+    "y": 0,
+    "refreshRate": 60.00000,
+    "scale": 2.00,
+    "focused": false,
+    "disabled": false,
+    "activeWorkspace": {
+      "id": 13,
+      "name": "13"
+    }
+  }
+]

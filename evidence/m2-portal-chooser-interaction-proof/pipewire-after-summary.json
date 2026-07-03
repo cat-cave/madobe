@@ -1,0 +1,19 @@
+[
+  {
+    "id": 120,
+    "media_class": "Stream/Input/Audio",
+    "node_name": "<redacted-unrelated-node>",
+    "app": "<redacted-unrelated-app>",
+    "params": [
+      "EnumFormat",
+      "EnumPortConfig",
+      "Format",
+      "Latency",
+      "PortConfig",
+      "ProcessLatency",
+      "PropInfo",
+      "Props",
+      "Tag"
+    ]
+  }
+]

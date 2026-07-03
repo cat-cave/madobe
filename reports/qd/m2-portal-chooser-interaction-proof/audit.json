@@ -1,0 +1,43 @@
+{
+  "nodeId": "m2-portal-chooser-interaction-proof",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Node-scoped output setup and cleanup evidence exists.",
+      "status": "passed",
+      "evidence": "kbd3-hyprland-monitors-with-output.json and kbd3-hyprland-monitors-after-remove.json."
+    },
+    {
+      "criterion": "Visible portal chooser behavior was exercised.",
+      "status": "passed",
+      "evidence": "kbd3-clients-at-chooser-detection.json records the visible chooser and kbd3-wtype-sequence.txt records the automation attempt."
+    },
+    {
+      "criterion": "Remaining blocker before Start/OpenPipeWireRemote is precisely recorded.",
+      "status": "passed",
+      "evidence": "kbd3-portal-client.txt records SelectSources timeout; blocker.md records no Start, stream ids, or OpenPipeWireRemote call."
+    },
+    {
+      "criterion": "m2-capture-one-frame disposition is explicit.",
+      "status": "passed",
+      "evidence": "validation-summary.json keeps m2-capture-one-frame blocked."
+    },
+    {
+      "criterion": "Evidence is redacted and bounded.",
+      "status": "passed",
+      "evidence": "Raw Hyprland client/monitor and PipeWire summaries were reduced to node-relevant fields and redacted."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "redactionScanReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live reference-host chooser probe completed with cleanup; the accepted outcome is a documented blocker."
+  },
+  "resolvedFindings": [],
+  "findings": []
+}

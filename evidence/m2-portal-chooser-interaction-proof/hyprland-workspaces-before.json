@@ -1,0 +1,26 @@
+[
+  {
+    "id": 11,
+    "name": "11",
+    "monitor": "<redacted-physical-monitor>",
+    "monitorID": 1,
+    "windows": 2,
+    "hasfullscreen": false,
+    "lastwindow": "<redacted-window-address>",
+    "lastwindowtitle": "<redacted-window-title>",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  },
+  {
+    "id": 12,
+    "name": "12",
+    "monitor": "<redacted-physical-monitor>",
+    "monitorID": 2,
+    "windows": 0,
+    "hasfullscreen": false,
+    "lastwindow": "<redacted-window-address>",
+    "lastwindowtitle": "",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  }
+]

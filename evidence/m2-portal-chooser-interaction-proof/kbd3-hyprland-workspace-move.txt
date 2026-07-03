@@ -1,0 +1,2 @@
+error: Hyprland rejected the legacy workspace move dispatch syntax under the Lua parser.
+The generated output was still created and later removed.

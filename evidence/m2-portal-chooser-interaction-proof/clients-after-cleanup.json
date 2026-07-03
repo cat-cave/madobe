@@ -1,0 +1,54 @@
+[
+  {
+    "role": "other-client",
+    "class": "<redacted-class>",
+    "title": "<redacted-window-title>",
+    "address": "<redacted-address>",
+    "pid": "<redacted-pid>",
+    "mapped": true,
+    "hidden": false,
+    "visible": true,
+    "acceptsInput": true,
+    "at": [
+      1927,
+      42
+    ],
+    "size": [
+      1901,
+      2106
+    ],
+    "workspace": {
+      "id": 11,
+      "name": "11"
+    },
+    "floating": false,
+    "monitor": 1,
+    "focusHistoryID": 2
+  },
+  {
+    "role": "other-client",
+    "class": "<redacted-class>",
+    "title": "<redacted-window-title>",
+    "address": "<redacted-address>",
+    "pid": "<redacted-pid>",
+    "mapped": true,
+    "hidden": false,
+    "visible": true,
+    "acceptsInput": true,
+    "at": [
+      12,
+      42
+    ],
+    "size": [
+      1901,
+      2106
+    ],
+    "workspace": {
+      "id": 11,
+      "name": "11"
+    },
+    "floating": false,
+    "monitor": 1,
+    "focusHistoryID": 1
+  }
+]

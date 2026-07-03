@@ -1,0 +1,106 @@
+[
+  {
+    "role": "other-client",
+    "class": "<redacted-class>",
+    "title": "<redacted-window-title>",
+    "address": "<redacted-address>",
+    "pid": "<redacted-pid>",
+    "mapped": true,
+    "hidden": false,
+    "visible": true,
+    "acceptsInput": true,
+    "at": [
+      1927,
+      42
+    ],
+    "size": [
+      1901,
+      2106
+    ],
+    "workspace": {
+      "id": 11,
+      "name": "11"
+    },
+    "floating": false,
+    "monitor": 1,
+    "focusHistoryID": 3
+  },
+  {
+    "role": "other-client",
+    "class": "<redacted-class>",
+    "title": "<redacted-window-title>",
+    "address": "<redacted-address>",
+    "pid": "<redacted-pid>",
+    "mapped": true,
+    "hidden": false,
+    "visible": true,
+    "acceptsInput": true,
+    "at": [
+      12,
+      42
+    ],
+    "size": [
+      1901,
+      2106
+    ],
+    "workspace": {
+      "id": 11,
+      "name": "11"
+    },
+    "floating": false,
+    "monitor": 1,
+    "focusHistoryID": 2
+  },
+  {
+    "role": "portal-chooser",
+    "class": "",
+    "title": "Select what to share",
+    "address": "<redacted-address>",
+    "pid": "<redacted-pid>",
+    "mapped": true,
+    "hidden": false,
+    "visible": true,
+    "acceptsInput": true,
+    "at": [
+      50012,
+      50042
+    ],
+    "size": [
+      621,
+      666
+    ],
+    "workspace": {
+      "id": -1337,
+      "name": "madobe-qd-m2-portal-chooser-interaction-proof-workspace"
+    },
+    "floating": false,
+    "monitor": 3,
+    "focusHistoryID": 1
+  },
+  {
+    "role": "other-client",
+    "class": "<redacted-class>",
+    "title": "<redacted-window-title>",
+    "address": "<redacted-address>",
+    "pid": "<redacted-pid>",
+    "mapped": true,
+    "hidden": false,
+    "visible": true,
+    "acceptsInput": true,
+    "at": [
+      50645,
+      50040
+    ],
+    "size": [
+      625,
+      670
+    ],
+    "workspace": {
+      "id": -1337,
+      "name": "madobe-qd-m2-portal-chooser-interaction-proof-workspace"
+    },
+    "floating": false,
+    "monitor": 3,
+    "focusHistoryID": 0
+  }
+]

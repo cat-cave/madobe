@@ -1,0 +1,13 @@
+pipewire
+Compiled with libpipewire 1.6.5
+Linked with libpipewire 1.6.5
+pw-dump
+Compiled with libpipewire 1.6.5
+Linked with libpipewire 1.6.5
+wireplumber
+Compiled with libwireplumber 0.5.14
+Linked with libwireplumber 0.5.14
+HYPRLAND_INSTANCE_SIGNATURE not set! (is hyprland running?)
+
+/run/current-system/sw/bin/wtype
+/run/current-system/sw/bin/hyprctl
