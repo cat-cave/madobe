@@ -1,0 +1,23 @@
+Node: m2-portal-chooser-interaction-proof
+Date: 2026-07-03
+Probe: visible xdg-desktop-portal ScreenCast chooser interaction with wtype.
+
+## first visible chooser probe
+output=madobe-qd-m2-portal-chooser-interaction-proof
+workspace=madobe-qd-m2-portal-chooser-interaction-proof-workspace
+sequence=Tab Tab Return Tab Return
+chooser_seen=true
+chooser_address=<redacted-address>
+chooser_pid=<redacted-pid>
+portal_client_status=7
+
+## final keyboard probe
+output=madobe-qd-m2-portal-chooser-interaction-proof-kbd3
+workspace=madobe-qd-m2-portal-chooser-interaction-proof-kbd3-workspace
+sequence=Tab Down Down Space Return Tab Tab Return
+chooser_seen=true
+chooser_address=<redacted-address>
+chooser_pid=<redacted-pid>
+portal_client_status=7
+
+Both probes cleaned up the generated Hyprland output and the leftover portal chooser window.

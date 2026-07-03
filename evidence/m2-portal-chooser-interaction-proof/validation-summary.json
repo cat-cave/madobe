@@ -1,0 +1,44 @@
+{
+  "nodeId": "m2-portal-chooser-interaction-proof",
+  "status": "completed-with-blocker",
+  "hyprlandOutputs": [
+    {
+      "id": "madobe-qd-m2-portal-chooser-interaction-proof",
+      "created": true,
+      "workspaceBound": true,
+      "removed": true
+    },
+    {
+      "id": "madobe-qd-m2-portal-chooser-interaction-proof-kbd3",
+      "created": true,
+      "workspaceBound": true,
+      "removed": true
+    }
+  ],
+  "portalChooser": {
+    "observed": true,
+    "title": "Select what to share",
+    "keyboardAutomationAttempted": true,
+    "keyboardSequence": "Tab Down Down Space Return Tab Tab Return",
+    "clickAutomationAvailable": false,
+    "clickAutomationBlocker": "ydotool could not access its daemon socket from this session"
+  },
+  "portalClient": {
+    "createSessionResponseReceived": true,
+    "sessionHandleExtracted": true,
+    "selectSourcesResponseReceived": false,
+    "selectSourcesTimeoutSeconds": 70,
+    "startCalled": false,
+    "streamIdsReceived": false,
+    "openPipeWireRemoteCalled": false
+  },
+  "pipeWire": {
+    "videoPortalMadobeStreamObserved": false,
+    "metadataSufficientForM2CaptureOneFrame": false
+  },
+  "cleanup": {
+    "chooserAbsent": true,
+    "generatedOutputsAbsent": true
+  },
+  "m2CaptureOneFrameDisposition": "remain-blocked"
+}

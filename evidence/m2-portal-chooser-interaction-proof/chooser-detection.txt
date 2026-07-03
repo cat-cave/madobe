@@ -1,0 +1,3 @@
+chooser_seen=true
+chooser_address=<redacted-address>
+chooser_pid=<redacted-pid>
