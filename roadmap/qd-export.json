@@ -807,6 +807,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m2-capture-stream-proof",
+      "title": "Prove remote-output capture stream selection",
+      "kind": "feature",
+      "milestone": "M2-gpu-video-path",
+      "status": "ready",
+      "priority": "P1",
+      "estimate_points": 1,
+      "risk": "high",
+      "owner": null,
+      "branch": null,
+      "spec": "Prove whether a user-consented XDPH/PipeWire stream can be mapped to a madobe-owned Hyprland remote output, or document the direct named-output capture blocker with enough evidence to unblock or refine one-frame capture.",
+      "acceptance": "A node-scoped madobe remote output is created on Linux hardware\nA user-consented portal ScreenCast session is attempted and its PipeWire stream metadata is captured\nEvidence proves whether the stream maps to the madobe-owned output, including redacted Hyprland, portal, and PipeWire state\nIf portal mapping cannot be proven, direct named-output capture options and exact blockers are documented\nArtifacts are saved under evidence/m2-capture-stream-proof and reports/qd/m2-capture-stream-proof\nm2-capture-one-frame is unblocked only if format, modifier, timestamp, and sync metadata can be obtained or directly derived from the proven stream path",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nhardware:PipeWire,XDPH,Hyprland\nvalidation:hardware",
+      "created_at": "2026-07-03T20:00:25.132Z",
+      "updated_at": "2026-07-03T20:00:25.132Z",
+      "claimed_at": null,
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -959,6 +989,18 @@
       "to_node": "m1-workspace-session-binding-validation",
       "type": "requires",
       "created_at": "2026-07-03T19:14:49.880Z"
+    },
+    {
+      "from_node": "m2-pipewire-probe",
+      "to_node": "m2-capture-stream-proof",
+      "type": "requires",
+      "created_at": "2026-07-03T20:00:34.457Z"
+    },
+    {
+      "from_node": "m2-capture-stream-proof",
+      "to_node": "m2-capture-one-frame",
+      "type": "requires",
+      "created_at": "2026-07-03T20:00:34.540Z"
     }
   ],
   "findings": [
