@@ -1,0 +1,105 @@
+{
+  "nodeId": "m1-hyprland-fixtures",
+  "summary": "Captured real Hyprland JSON snapshots from the Linux reference host, sanitized personal/runtime data, committed focused fixtures under fixtures/hyprland, and documented parser follow-ups for the observed Hyprland 0.55.2 shape.",
+  "changedFiles": [
+    "fixtures/hyprland/activeworkspace.json",
+    "fixtures/hyprland/clients.json",
+    "fixtures/hyprland/monitors.json",
+    "fixtures/hyprland/workspaces.json",
+    "evidence/m1-hyprland-fixtures/commands.log",
+    "evidence/m1-hyprland-fixtures/host-env.txt",
+    "evidence/m1-hyprland-fixtures/notes.md",
+    "reports/qd/m1-hyprland-fixtures/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Fixtures are captured from the reference Linux host.",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-fixtures/host-env.txt and fixtures/hyprland/*.json"
+    },
+    {
+      "criterion": "Commands are recorded in evidence/m1-hyprland-fixtures/commands.log.",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-fixtures/commands.log"
+    },
+    {
+      "criterion": "Fixture files are committed under an appropriate test fixture path.",
+      "status": "passed",
+      "evidence": "fixtures/hyprland/activeworkspace.json, clients.json, monitors.json, and workspaces.json"
+    },
+    {
+      "criterion": "Fixtures do not contain secrets or personal data.",
+      "status": "passed",
+      "evidence": "Sanitization documented in evidence/m1-hyprland-fixtures/notes.md; targeted rg scan found no matches in fixtures/hyprland."
+    },
+    {
+      "criterion": "Parser follow-up needs are documented if fixture shape differs from expectations.",
+      "status": "passed",
+      "evidence": "Parser follow-up needs in evidence/m1-hyprland-fixtures/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd node show m1-hyprland-fixtures --full",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-fixtures/commands.log"
+    },
+    {
+      "command": "hyprctl --instance \"$sig\" -j monitors/workspaces/clients/activeworkspace with jq sanitization",
+      "status": "passed",
+      "evidence": "fixtures/hyprland/*.json"
+    },
+    {
+      "command": "timeout 2s nc -U \"$XDG_RUNTIME_DIR/hypr/$sig/.socket2.sock\"",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-fixtures/notes.md"
+    },
+    {
+      "command": "jq -e . fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json",
+      "status": "passed",
+      "evidence": "/tmp/m1-hyprland-fixtures-jq-validation.txt"
+    },
+    {
+      "command": "rg -n --ignore-case 'trevor|/home|/run/user|secret|token|password|key|https?://|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+' fixtures/hyprland",
+      "status": "passed",
+      "evidence": "no matches"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "local terminal output"
+    },
+    {
+      "command": "rg -n '\"lastwindow\": \"0x[1-9a-fA-F][0-9a-fA-F]*\"' fixtures/hyprland",
+      "status": "passed",
+      "evidence": "no matches after audit finding fix"
+    },
+    {
+      "command": "jq -e 'all(.[]; (.lastwindow | type != \"string\") or (.lastwindow == \"0x0\") or ((.lastwindow | startswith(\"0x\")) | not))' fixtures/hyprland/workspaces.json",
+      "status": "passed",
+      "evidence": "output: true"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "local terminal output after audit finding fix"
+    }
+  ],
+  "evidence": [
+    "fixtures/hyprland/",
+    "evidence/m1-hyprland-fixtures/commands.log",
+    "evidence/m1-hyprland-fixtures/host-env.txt",
+    "evidence/m1-hyprland-fixtures/notes.md"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live hyprctl snapshots captured from the Linux reference host's Hyprland socket."
+  },
+  "unverifiedItems": [],
+  "residualRisks": [
+    "No socket2 event fixture was committed because a bounded non-invasive 2 second socket sample produced no events."
+  ],
+  "dagChangesNeeded": []
+}

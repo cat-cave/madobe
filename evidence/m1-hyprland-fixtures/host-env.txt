@@ -1,0 +1,32 @@
+Kernel:
+Linux workstation 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
+
+Distro:
+PRETTY_NAME="NixOS 26.05 (Yarara)"
+VERSION_ID="26.05"
+BUILD_ID="26.05.20260611.a037402"
+
+Hyprland:
+Hyprland 0.55.2 built from branch v0.55.2-b at commit 39d7e209c79d451efab1b21151d5938289da838d clean (version: bump to 0.55.2).
+Date: 2026-05-16
+Tag: v0.55.2, commits: -1
+Version ABI string: 39d7e209c79d451efab1b21151d5938289da838d_aq_0.11_hu_0.13_hg_0.5_hc_0.1_hlg_0.6
+Flags set: nix
+
+Command availability:
+- hyprctl: available at /run/current-system/sw/bin/hyprctl
+- jq: available at /run/current-system/sw/bin/jq
+- timeout: available at /run/current-system/sw/bin/timeout
+- nc: available at /run/current-system/sw/bin/nc
+- nix: available at /run/current-system/sw/bin/nix
+- just: available at /run/current-system/sw/bin/just
+- socat: not available on host PATH
+- ncat: not available on host PATH
+- rustc: not available on host PATH outside nix
+- cargo: not available on host PATH outside nix
+
+Session notes:
+- XDG_RUNTIME_DIR was set and normalized to `$XDG_RUNTIME_DIR` in committed command evidence.
+- HYPRLAND_INSTANCE_SIGNATURE was not set in the implementor shell.
+- A live Hyprland socket directory existed under XDG_RUNTIME_DIR/hypr.
+- The runtime instance signature was used transiently for capture and was not recorded in committed evidence.

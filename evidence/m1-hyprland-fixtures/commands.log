@@ -1,0 +1,164 @@
+Commands are recorded with the Hyprland runtime path normalized to `$XDG_RUNTIME_DIR` and the runtime instance signature kept in a shell variable.
+
+2026-07-03T15:24Z qd node show m1-hyprland-fixtures --full
+  status: failed before local qd cache migration; output: DB schema is older than this qd binary (no schema_migrations table found). Run qd migrate.
+
+2026-07-03T15:25Z qd migrate
+  status: passed; initialized local qd cache schema 001_initial through 008_evidence_first_blockers.
+
+2026-07-03T15:26Z qd sync --from roadmap/qd-export.json --expect-clean
+  status: failed because local qd cache was empty; output: 25 export-only node(s).
+
+2026-07-03T15:26Z jq -r '.nodes[]? | select(.id=="m1-hyprland-fixtures")' roadmap/qd-export.json
+  status: passed; confirmed node exists in committed export.
+
+2026-07-03T15:27Z qd method show
+  status: passed.
+
+2026-07-03T15:27Z qd method acknowledge --agent codex-m1-hyprland-fixtures
+  status: passed.
+
+2026-07-03T15:27Z qd sync --from roadmap/qd-export.json
+  status: passed; replaced local qd cache from committed export.
+
+2026-07-03T15:28Z qd node show m1-hyprland-fixtures --full
+  status: passed; node inspected directly with qdcli.
+
+2026-07-03T15:28Z uname -a
+  status: passed.
+
+2026-07-03T15:28Z sed -n '1,80p' /etc/os-release
+  status: passed.
+
+2026-07-03T15:28Z command -v hyprctl jq socat timeout nix just rustc cargo
+  status: partial; hyprctl, jq, timeout, nix, and just were available; socat, rustc, and cargo were not on the host PATH outside nix.
+
+2026-07-03T15:29Z hyprctl version
+  status: failed from detached shell; output: HYPRLAND_INSTANCE_SIGNATURE not set! (is hyprland running?)
+
+2026-07-03T15:29Z find "$XDG_RUNTIME_DIR"/hypr -maxdepth 2 -type s -o -type d
+  status: passed; live Hyprland socket directory found.
+
+2026-07-03T15:29Z pgrep -a Hyprland
+  status: no matching process visible from this shell.
+
+2026-07-03T15:29Z hyprctl --help
+  status: passed.
+
+2026-07-03T15:30Z hyprctl -i 0 version
+  status: failed; output: no such instance.
+
+2026-07-03T15:30Z hyprctl -j -i 0 instances
+  status: produced malformed/empty instance output in detached shell.
+
+2026-07-03T15:31Z sig=$(find "$XDG_RUNTIME_DIR"/hypr -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | head -n 1); hyprctl --instance "$sig" version
+  status: failed in sandbox; output: Couldn't set socket timeout (2).
+
+2026-07-03T15:33Z mkdir -p evidence/m1-hyprland-fixtures reports/qd/m1-hyprland-fixtures fixtures/hyprland
+  status: passed.
+
+2026-07-03T15:33Z command -v nc ncat socat
+  status: partial; nc was available; ncat and socat were not.
+
+2026-07-03T15:34Z set -euo pipefail
+raw=/tmp/m1-hyprland-fixtures-raw
+mkdir -p "$raw"
+sig=$(find "$XDG_RUNTIME_DIR"/hypr -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort | head -n 1)
+test -n "$sig"
+hyprctl --instance "$sig" version > "$raw/version.txt"
+hyprctl --instance "$sig" -j monitors > "$raw/monitors.raw.json"
+hyprctl --instance "$sig" -j workspaces > "$raw/workspaces.raw.json"
+hyprctl --instance "$sig" -j clients > "$raw/clients.raw.json"
+hyprctl --instance "$sig" -j activeworkspace > "$raw/activeworkspace.raw.json"
+jq 'map(
+  .description = "<redacted-display-description>" |
+  .serial = "<redacted-display-serial>" |
+  .activeWorkspace.name = ("workspace-" + (.activeWorkspace.id | tostring)) |
+  .specialWorkspace.name = (if (.specialWorkspace.id // 0) == 0 then "" else "special:redacted" end)
+)' "$raw/monitors.raw.json" > fixtures/hyprland/monitors.json
+jq 'map(
+  .name = (if (.name | startswith("special:")) then "special:redacted-" + (.id | tostring) else "workspace-" + (.id | tostring) end) |
+  if has("lastwindowtitle") then .lastwindowtitle = "<redacted-window-title>" else . end
+)' "$raw/workspaces.raw.json" > fixtures/hyprland/workspaces.json
+jq 'map(
+  .address = "<redacted-window-address>" |
+  .workspace.name = (if (.workspace.name | startswith("special:")) then "special:redacted-" + (.workspace.id | tostring) else "workspace-" + (.workspace.id | tostring) end) |
+  .class = "<redacted-app-class>" |
+  .title = "<redacted-window-title>" |
+  .initialClass = "<redacted-app-class>" |
+  .initialTitle = "<redacted-window-title>" |
+  .pid = 0 |
+  .grouped = ((.grouped // []) | map("<redacted-window-address>")) |
+  .swallowing = (if (.swallowing == null or .swallowing == "0x0") then .swallowing else "<redacted-window-address>" end)
+)' "$raw/clients.raw.json" > fixtures/hyprland/clients.json
+jq '.name = (if (.name | startswith("special:")) then "special:redacted-" + (.id | tostring) else "workspace-" + (.id | tostring) end) |
+  .lastwindow = (if (.lastwindow == null or .lastwindow == "0x0") then .lastwindow else "<redacted-window-address>" end) |
+  .lastwindowtitle = "<redacted-window-title>"' "$raw/activeworkspace.raw.json" > fixtures/hyprland/activeworkspace.json
+if timeout 2s nc -U "$XDG_RUNTIME_DIR/hypr/$sig/.socket2.sock" > "$raw/socket2-events.raw.txt" 2> "$raw/socket2-events.err"; then
+  if test -s "$raw/socket2-events.raw.txt"; then
+    sed -E 's/(title>>).*/\1<redacted-window-title>/; s/(activewindowv2>>).*/\1<redacted-window-address>/; s/(openwindow>>)[^,]+,([^,]+),[^,]+,.*/\1<redacted-window-address>,\2,<redacted-app-class>,<redacted-window-title>/' "$raw/socket2-events.raw.txt" > fixtures/hyprland/socket2-events.sample.txt
+  fi
+else
+  true
+fi
+  status: passed with escalation for live compositor socket access; raw unsanitized captures stayed under /tmp/m1-hyprland-fixtures-raw and were not committed.
+
+2026-07-03T15:35Z jq -e . fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json > /tmp/m1-hyprland-fixtures-jq-validation.txt
+  status: passed.
+
+2026-07-03T15:35Z jq 'if type == "array" then {type: type, length: length, first_keys: (.[0] | keys)} else {type: type, keys: keys} end' fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json
+  status: passed.
+
+2026-07-03T15:36Z rg -n --ignore-case 'trevor|/home|/run/user|secret|token|password|key|https?://|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' fixtures/hyprland
+  status: passed; no matches.
+
+2026-07-03T15:36Z wc -c /tmp/m1-hyprland-fixtures-raw/socket2-events.raw.txt /tmp/m1-hyprland-fixtures-raw/socket2-events.err
+  status: passed; both files were empty, so no event fixture was committed.
+
+2026-07-03T15:42Z jq -e . fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json > /tmp/m1-hyprland-fixtures-jq-validation.txt
+  status: passed.
+
+2026-07-03T15:42Z rg -n --ignore-case 'trevor|/home|/run/user|secret|token|password|key|https?://|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' fixtures/hyprland
+  status: passed; no matches.
+
+2026-07-03T15:45Z nix develop -c just check
+  status: passed.
+
+2026-07-03T15:49Z jq -e . fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json reports/qd/m1-hyprland-fixtures/completion.json > /tmp/m1-hyprland-fixtures-final-jq-validation.txt
+  status: passed.
+
+2026-07-03T15:49Z rg -n --ignore-case 'trevor|/home|/run/user|secret|token|password|key|https?://|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' fixtures/hyprland
+  status: passed; no matches.
+
+2026-07-03T15:50Z nix develop -c just check
+  status: passed after completion report was added.
+
+2026-07-03T16:00Z jq '.[] | {id, name, lastwindow, lastwindowtitle}' fixtures/hyprland/workspaces.json
+  status: passed; audit finding confirmed one real non-zero workspace lastwindow address before redaction.
+
+2026-07-03T16:00Z rg -n '0x[0-9a-fA-F]+' fixtures/hyprland
+  status: passed; audit finding confirmed one real non-zero workspace lastwindow address before redaction. Remaining 0x0 values are Hyprland null sentinels.
+
+2026-07-03T16:02Z jq '.[] | {id, name, lastwindow, lastwindowtitle}' fixtures/hyprland/workspaces.json
+  status: passed; workspace id 11 now has lastwindow set to <redacted-window-address>, workspace id 12 keeps Hyprland's 0x0 null sentinel.
+
+2026-07-03T16:02Z rg -n '"lastwindow": "0x[1-9a-fA-F][0-9a-fA-F]*"' fixtures/hyprland
+  status: passed; no matches.
+
+2026-07-03T16:02Z jq -e . fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json reports/qd/m1-hyprland-fixtures/completion.json > /tmp/m1-hyprland-fixtures-post-finding-jq-validation.txt
+  status: passed.
+
+2026-07-03T16:03Z jq -e 'all(.[]; (.lastwindow | type != "string") or (.lastwindow == "0x0") or ((.lastwindow | startswith("0x")) | not))' fixtures/hyprland/workspaces.json
+  status: passed; output: true.
+
+2026-07-03T16:03Z nix develop -c just check
+  status: passed after audit finding fix.
+
+2026-07-03T16:05Z jq -e . fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json reports/qd/m1-hyprland-fixtures/completion.json > /tmp/m1-hyprland-fixtures-final-audit-fix-jq-validation.txt
+  status: passed after completion report update.
+
+2026-07-03T16:05Z rg -n '"lastwindow": "0x[1-9a-fA-F][0-9a-fA-F]*"' fixtures/hyprland
+  status: passed; no matches.
+
+2026-07-03T16:06Z nix develop -c just check
+  status: passed after final audit-fix evidence update.

@@ -1,0 +1,41 @@
+{
+  "nodeId": "m1-hyprland-fixtures",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Fixtures are captured from the reference Linux host.",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-fixtures/host-env.txt and fixtures/hyprland/*.json"
+    },
+    {
+      "criterion": "Commands are recorded in evidence/m1-hyprland-fixtures/commands.log.",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-fixtures/commands.log"
+    },
+    {
+      "criterion": "Fixture files are committed under an appropriate test fixture path.",
+      "status": "passed",
+      "evidence": "fixtures/hyprland/*.json"
+    },
+    {
+      "criterion": "Fixtures do not contain secrets or personal data.",
+      "status": "passed",
+      "evidence": "Non-zero window addresses are redacted; fixture scan has no sensitive matches."
+    },
+    {
+      "criterion": "Parser follow-up needs are documented if fixture shape differs from expectations.",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-fixtures/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live Hyprland 0.55.2 JSON was captured from the Linux reference host."
+  },
+  "findings": []
+}
