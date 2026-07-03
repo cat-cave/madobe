@@ -1,0 +1,89 @@
+{
+  "nodeId": "m1-linux-hardware-validation",
+  "summary": "Validated the M1 remote display lifecycle on the reference Linux Hyprland host using madobectl and preserved sanitized hardware evidence. The named output was created, adopted/configured through a second create call, parked, removed, and verified absent after cleanup.",
+  "changedFiles": [
+    "evidence/m1-linux-hardware-validation/",
+    "reports/qd/m1-linux-hardware-validation/audit.json",
+    "reports/qd/m1-linux-hardware-validation/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Remote output lifecycle succeeds on hardware.",
+      "status": "passed",
+      "evidence": "evidence/m1-linux-hardware-validation/validation-summary.json records status count 0 before, ready after create, parked after park, removed after remove, and status count 0 after cleanup. Hyprland monitor snapshots confirm the named output lifecycle."
+    },
+    {
+      "criterion": "Restart or reconciliation scenario is exercised or blocked with exact condition.",
+      "status": "passed",
+      "evidence": "The second `madobectl display create --id madobe-qd-m1-linux-hardware-validation` ran while the output already existed and returned ready at the expected configuration, exercising the adapter existing-output adoption/configure path. See cli-create-adopt-existing.out and hyprland-monitors-after-adopt.json."
+    },
+    {
+      "criterion": "evidence/m1-linux-hardware-validation contains commands, host logs, Hyprland JSON, and notes.",
+      "status": "passed",
+      "evidence": "commands.log, host.log, host-env.txt, notes.md, validation-summary.json, hyprland-monitors-*.json, and hyprland-workspaces-*.json are present."
+    },
+    {
+      "criterion": "Findings are filed for any flaky or unproven behavior.",
+      "status": "passed",
+      "evidence": "No flaky or unproven behavior was observed. The completion notes explicitly record that no qd findings were needed."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "git pull --rebase --autostash; qd sync --from roadmap/qd-export.json --expect-clean; qd doctor --strict; nix develop -c just verify; qd ready --json",
+      "status": "passed",
+      "evidence": "startup command output in orchestrator log"
+    },
+    {
+      "command": "madobectl display status/create/create/park/remove/status with HYPRLAND_INSTANCE_SIGNATURE from the live session",
+      "status": "passed",
+      "evidence": "evidence/m1-linux-hardware-validation/commands.log and validation-summary.json"
+    },
+    {
+      "command": "hyprctl -j monitors and hyprctl -j workspaces before, during, and after lifecycle",
+      "status": "passed",
+      "evidence": "evidence/m1-linux-hardware-validation/hyprland-*.json"
+    },
+    {
+      "command": "journalctl --user --since 2026-07-03T13:40:00 selected services",
+      "status": "passed",
+      "evidence": "evidence/m1-linux-hardware-validation/host.log"
+    },
+    {
+      "command": "jq validation for evidence/m1-linux-hardware-validation/*.json",
+      "status": "passed",
+      "evidence": "evidence/m1-linux-hardware-validation/json-validation.log"
+    },
+    {
+      "command": "redaction scan for live signatures, runtime paths, home paths, physical monitor identifiers, hostnames, and process ids",
+      "status": "passed",
+      "evidence": "evidence/m1-linux-hardware-validation/redaction-scan.log"
+    },
+    {
+      "command": "nix develop -c just verify",
+      "status": "passed",
+      "evidence": "evidence/m1-linux-hardware-validation/just-verify.log"
+    }
+  ],
+  "residualRisks": [
+    "This node validates local Linux display ownership only. It does not claim PipeWire capture, encoding, transport, latency, or cross-device behavior."
+  ],
+  "evidence": [
+    "evidence/m1-linux-hardware-validation/commands.log",
+    "evidence/m1-linux-hardware-validation/host-env.txt",
+    "evidence/m1-linux-hardware-validation/host.log",
+    "evidence/m1-linux-hardware-validation/notes.md",
+    "evidence/m1-linux-hardware-validation/validation-summary.json",
+    "evidence/m1-linux-hardware-validation/just-verify.log",
+    "evidence/m1-linux-hardware-validation/json-validation.log",
+    "evidence/m1-linux-hardware-validation/redaction-scan.log"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live Hyprland output lifecycle was exercised on the reference Linux host through madobectl and verified with Hyprland monitor snapshots."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

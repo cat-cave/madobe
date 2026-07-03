@@ -1,0 +1,2 @@
+madobe dev shell: use 'just --list' to see commands
+display status count=0

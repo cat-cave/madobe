@@ -1,0 +1,60 @@
+{
+  "nodeId": "m1-linux-hardware-validation",
+  "outputId": "madobe-qd-m1-linux-hardware-validation",
+  "statusBefore": "display status count=0\n"
+,
+  "create": "display create id=madobe-qd-m1-linux-hardware-validation state=ready size=1280x720 refresh_millihertz=60000 scale=1/1 position=50000x50000 color_depth=8 workspace=13\n"
+,
+  "adoptExisting": "display create id=madobe-qd-m1-linux-hardware-validation state=ready size=1280x720 refresh_millihertz=60000 scale=1/1 position=50000x50000 color_depth=8 workspace=13\n"
+,
+  "park": "display park id=madobe-qd-m1-linux-hardware-validation state=parked size=640x480 refresh_millihertz=30000 scale=1/1 position=50000x50000 color_depth=8 workspace=13\n"
+,
+  "remove": "display remove id=madobe-qd-m1-linux-hardware-validation status=removed\n"
+,
+  "statusFinal": "display status count=0\n"
+,
+  "namedOutputAfterCreate": [
+  {
+    "name": "madobe-qd-m1-linux-hardware-validation",
+    "width": 1280,
+    "height": 720,
+    "refreshRate": 60.00000,
+    "x": 50000,
+    "y": 50000,
+    "scale": 1.00,
+    "disabled": false,
+    "dpmsStatus": true
+  }
+]
+,
+  "namedOutputAfterAdopt": [
+  {
+    "name": "madobe-qd-m1-linux-hardware-validation",
+    "width": 1280,
+    "height": 720,
+    "refreshRate": 60.00000,
+    "x": 50000,
+    "y": 50000,
+    "scale": 1.00,
+    "disabled": false,
+    "dpmsStatus": true
+  }
+]
+,
+  "namedOutputAfterPark": [
+  {
+    "name": "madobe-qd-m1-linux-hardware-validation",
+    "width": 640,
+    "height": 480,
+    "refreshRate": 30.00000,
+    "x": 50000,
+    "y": 50000,
+    "scale": 1.00,
+    "disabled": false,
+    "dpmsStatus": true
+  }
+]
+,
+  "namedOutputAfterRemove": []
+
+}
