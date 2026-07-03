@@ -1,0 +1,30 @@
+interface: 'wl_output',                                  version:  4, name: 68
+	name: DP-2
+	description: LG Electronics LG ULTRAGEAR+ 201NTEPEA044 (DP-2)
+	x: 0, y: 0, scale: 1,
+	physical_width: 600 mm, physical_height: 340 mm,
+	make: 'LG Electronics', model: 'LG ULTRAGEAR+',
+	subpixel_orientation: unknown, output_transform: normal,
+	mode:
+		width: 3840 px, height: 2160 px, refresh: 94.981 Hz,
+		flags: current
+interface: 'wl_output',                                  version:  4, name: 69
+	name: DP-3
+	description: Samsung Electric Company Odyssey G50A HCJWC00594 (DP-3)
+	x: 0, y: 0, scale: 1,
+	physical_width: 600 mm, physical_height: 340 mm,
+	make: 'Samsung Electric Company', model: 'Odyssey G50A',
+	subpixel_orientation: unknown, output_transform: normal,
+	mode:
+		width: 2560 px, height: 1440 px, refresh: 144.000 Hz,
+		flags: current
+interface: 'wl_output',                                  version:  4, name: 110
+	name: madobe-qd-m2-capture-one-frame
+	description: 
+	x: 0, y: 0, scale: 2,
+	physical_width: 0 mm, physical_height: 0 mm,
+	make: '', model: '',
+	subpixel_orientation: none, output_transform: normal,
+	mode:
+		width: 1920 px, height: 1080 px, refresh: 60.000 Hz,
+		flags: current

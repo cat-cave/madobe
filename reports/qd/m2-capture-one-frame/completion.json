@@ -1,0 +1,93 @@
+{
+  "nodeId": "m2-capture-one-frame",
+  "summary": "Attempted a live one-frame capture from the node-scoped Hyprland output through ext_output_image_capture_source_manager_v1 and ext_image_copy_capture_manager_v1. The probe reached capture constraints and recorded size, DMA-BUF format, modifier, timestamp, damage, and attempted implicit/protocol-ready sync mode. A fallback from the advertised render node to /dev/dri/card1 succeeded in allocating and exporting a PRIME fd, but the compositor returned frame.failed reason 0 instead of ready. The node is blocked and does not claim a completed frame or CPU readback.",
+  "changedFiles": [
+    "evidence/m2-capture-one-frame/commands.log",
+    "evidence/m2-capture-one-frame/notes.md",
+    "evidence/m2-capture-one-frame/validation-summary.json",
+    "evidence/m2-capture-one-frame/direct-capture-frame.json",
+    "evidence/m2-capture-one-frame/hyprland-monitors-before.json",
+    "evidence/m2-capture-one-frame/hyprland-monitors-with-output.json",
+    "evidence/m2-capture-one-frame/hyprland-monitors-after-remove.json",
+    "evidence/m2-capture-one-frame/hyprland-output-create.txt",
+    "evidence/m2-capture-one-frame/hyprland-output-configure.txt",
+    "evidence/m2-capture-one-frame/hyprland-output-remove.txt",
+    "evidence/m2-capture-one-frame/precleanup-output-remove.txt",
+    "evidence/m2-capture-one-frame/wayland-output-inventory.txt",
+    "evidence/m2-capture-one-frame/wayland-ext-output-source.txt",
+    "evidence/m2-capture-one-frame/wayland-ext-image-copy.txt",
+    "evidence/m2-capture-one-frame/wayland-linux-drm-syncobj.txt",
+    "evidence/m2-capture-one-frame/json-validation.log",
+    "evidence/m2-capture-one-frame/line-limit-check.log",
+    "evidence/m2-capture-one-frame/redaction-scan.log",
+    "evidence/m2-capture-one-frame/just-verify.log",
+    "reports/qd/m2-capture-one-frame/blocker.md",
+    "reports/qd/m2-capture-one-frame/completion.json",
+    "reports/qd/m2-capture-one-frame/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Try to produce a one-frame capture proof from the generated Hyprland output.",
+      "status": "failed",
+      "evidence": "direct-capture-frame.json records frame.ready=false and frame.failed=true after the card-node fallback."
+    },
+    {
+      "criterion": "Persist metadata proving buffer path, size, format, modifier, timestamp, and sync mode.",
+      "status": "partial",
+      "evidence": "direct-capture-frame.json records linux-dmabuf/drm-dumb-prime-fd, 1920x1080, AR24, modifier 72057594037927935, monotonic timestamp, and attempted implicit/protocol-ready sync mode; no ready event was emitted, so sync completion is not proven."
+    },
+    {
+      "criterion": "Record exact protocol path used.",
+      "status": "passed",
+      "evidence": "notes.md and validation-summary.json record the ext-output-source plus ext-image-copy-capture path."
+    },
+    {
+      "criterion": "Remove compiled binaries, sockets, large raw dumps, and unrelated environment noise from committed artifacts.",
+      "status": "passed",
+      "evidence": "The temporary probe binary and generated protocol glue remained under /tmp; the oversized helper source and raw DMA-BUF inventory dump were omitted from evidence."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "hyprctl output create/configure/remove madobe-qd-m2-capture-one-frame",
+      "status": "passed",
+      "evidence": "hyprland-monitors-with-output.json and hyprland-monitors-after-remove.json"
+    },
+    {
+      "command": "wayland-info inventories for wl_output, ext_output_image_capture_source_manager_v1, ext_image_copy_capture_manager_v1, and wp_linux_drm_syncobj_manager_v1",
+      "status": "passed",
+      "evidence": "wayland-output-inventory.txt, wayland-ext-output-source.txt, wayland-ext-image-copy.txt, wayland-linux-drm-syncobj.txt"
+    },
+    {
+      "command": "temporary direct_capture_probe through ext-image-copy-capture with render-node to card-node fallback",
+      "status": "failed",
+      "evidence": "direct-capture-frame.json"
+    },
+    {
+      "command": "jq empty, just lint-lines, artifact redaction/noise scan, and nix develop -c just verify",
+      "status": "passed",
+      "evidence": "json-validation.log, line-limit-check.log, redaction-scan.log, and just-verify.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-capture-one-frame/notes.md",
+    "evidence/m2-capture-one-frame/validation-summary.json",
+    "evidence/m2-capture-one-frame/direct-capture-frame.json",
+    "reports/qd/m2-capture-one-frame/blocker.md"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "blocked",
+    "evidence": "Live Hyprland, Wayland, and DRM probing was performed against the reference Linux session, but the capture frame ended in frame.failed."
+  },
+  "unverifiedItems": [
+    "Successful ext_image_copy_capture_frame_v1.ready for a submitted DMA-BUF.",
+    "Driver-native allocation for advertised NVIDIA block-linear modifiers."
+  ],
+  "residualRisks": [
+    "The compositor may require a modifier-specific NVIDIA allocation path rather than a dumb-buffer PRIME fd with DRM_FORMAT_MOD_INVALID.",
+    "The protocol is staging and Hyprland's failure reason 0 does not identify whether the rejection is import, layout, or compositor-copy related."
+  ],
+  "dagChangesNeeded": []
+}

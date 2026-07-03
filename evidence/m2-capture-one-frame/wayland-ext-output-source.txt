@@ -1,0 +1,1 @@
+interface: 'ext_output_image_capture_source_manager_v1', version:  1, name: 60

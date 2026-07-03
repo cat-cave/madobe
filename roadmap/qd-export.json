@@ -453,7 +453,7 @@
       "title": "Capture one remote-output frame with metadata",
       "kind": "feature",
       "milestone": "M2-gpu-video-path",
-      "status": "claimed",
+      "status": "review",
       "priority": "P1",
       "estimate_points": 1,
       "risk": "medium",
@@ -464,16 +464,16 @@
       "validation": null,
       "context": "platform:linux\nowner:linux-orchestrator\nhardware:PipeWire,DMA-BUF",
       "created_at": "2026-07-03T00:59:33.605Z",
-      "updated_at": "2026-07-03T22:06:16.228Z",
+      "updated_at": "2026-07-03T22:27:02.529Z",
       "claimed_at": "2026-07-03T22:06:16.051Z",
       "done_at": null,
       "group_name": null,
-      "status_reason": "[2026-07-03T18:29:17.489Z] Blocked by external-dependency: Named remote output capture through PipeWire/XDPH is not proven by m2-pipewire-probe; no stable noninteractive XDPH named-output selector was found and no PipeWire video stream node appears before a user-consented ScreenCast session.\nNeeded: Prove a user-consented portal stream maps to the madobe-owned Hyprland output, or prove a direct named-output capture path with format, modifier, timestamp, and sync metadata.\n[2026-07-03T20:18:05.519Z] Blocked by external-dependency: Portal ScreenCast selection for the madobe-owned Hyprland output is still not proven: CreateSession returned a request path, SelectSources failed with Access denied from the non-owning bus probe, and PipeWire dumps showed no video/portal/madobe stream node. Direct grim -o can target the named output when launched with the live Wayland socket, but it only yields PNG output and does not provide DMA-BUF format, modifier, timestamp, or sync metadata.\nNeeded: Implement or run a portal client that owns org.freedesktop.portal.Request.Response, receives user consent for the madobe output, opens the returned PipeWire remote, and records stream metadata; or implement an equivalent direct capture path exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T20:48:56.340Z] Blocked by external-dependency: A real portal ScreenCast request client now receives CreateSession and extracts the session_handle, but SelectSources produced no response within the bounded 30-second wait. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video/portal/madobe stream metadata were obtained.\nNeeded: Determine why SelectSources does not complete for the node-scoped Hyprland output. Provide a visible user-consent/chooser flow with parent-window context or equivalent portal client behavior, then capture Start streams and OpenPipeWireRemote metadata; or use a direct capture API exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T21:26:20.111Z] Blocked by external-dependency: Visible portal chooser appears for the ScreenCast SelectSources request and targeted keyboard automation was attempted, but SelectSources still timed out after the bounded 70-second wait. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video/portal/madobe stream metadata were obtained.\nNeeded: Provide reliable portal chooser approval, manual or automated, that returns SelectSources and Start streams for the madobe output; or use a direct capture API exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T21:50:52.480Z] m2-direct-capture-api-spike identified and live-probed a viable non-portal direct Wayland capture implementation path using ext_output_image_capture_source_manager_v1 plus ext_image_copy_capture_manager_v1 against the generated wl_output. This unblocks m2-capture-one-frame for an implicit-sync direct client implementation; it does not claim a frame has already been captured.",
+      "status_reason": "[2026-07-03T18:29:17.489Z] Blocked by external-dependency: Named remote output capture through PipeWire/XDPH is not proven by m2-pipewire-probe; no stable noninteractive XDPH named-output selector was found and no PipeWire video stream node appears before a user-consented ScreenCast session.\nNeeded: Prove a user-consented portal stream maps to the madobe-owned Hyprland output, or prove a direct named-output capture path with format, modifier, timestamp, and sync metadata.\n[2026-07-03T20:18:05.519Z] Blocked by external-dependency: Portal ScreenCast selection for the madobe-owned Hyprland output is still not proven: CreateSession returned a request path, SelectSources failed with Access denied from the non-owning bus probe, and PipeWire dumps showed no video/portal/madobe stream node. Direct grim -o can target the named output when launched with the live Wayland socket, but it only yields PNG output and does not provide DMA-BUF format, modifier, timestamp, or sync metadata.\nNeeded: Implement or run a portal client that owns org.freedesktop.portal.Request.Response, receives user consent for the madobe output, opens the returned PipeWire remote, and records stream metadata; or implement an equivalent direct capture path exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T20:48:56.340Z] Blocked by external-dependency: A real portal ScreenCast request client now receives CreateSession and extracts the session_handle, but SelectSources produced no response within the bounded 30-second wait. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video/portal/madobe stream metadata were obtained.\nNeeded: Determine why SelectSources does not complete for the node-scoped Hyprland output. Provide a visible user-consent/chooser flow with parent-window context or equivalent portal client behavior, then capture Start streams and OpenPipeWireRemote metadata; or use a direct capture API exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T21:26:20.111Z] Blocked by external-dependency: Visible portal chooser appears for the ScreenCast SelectSources request and targeted keyboard automation was attempted, but SelectSources still timed out after the bounded 70-second wait. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video/portal/madobe stream metadata were obtained.\nNeeded: Provide reliable portal chooser approval, manual or automated, that returns SelectSources and Start streams for the madobe output; or use a direct capture API exposing format, modifier, timestamp, and sync metadata.\n[2026-07-03T21:50:52.480Z] m2-direct-capture-api-spike identified and live-probed a viable non-portal direct Wayland capture implementation path using ext_output_image_capture_source_manager_v1 plus ext_image_copy_capture_manager_v1 against the generated wl_output. This unblocks m2-capture-one-frame for an implicit-sync direct client implementation; it does not claim a frame has already been captured.\n[2026-07-03T22:26:23.879Z] Blocked by external-dependency: Direct ext-image-copy capture reached constraints and timestamp/damage but returned frame.failed reason 0 instead of ready after render-node and card-node DMA-BUF allocation attempts.\nNeeded: Allocate with a driver-native NVIDIA modifier path or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd, then rerun until ext_image_copy_capture_frame_v1.ready is emitted.",
       "check_command": null,
       "ci_command": null,
-      "blocked_by": null,
-      "blocked_reason": null,
-      "blocked_owner": null,
+      "blocked_by": "external-dependency",
+      "blocked_reason": "Direct ext-image-copy capture reached constraints and timestamp/damage but returned frame.failed reason 0 instead of ready after render-node and card-node DMA-BUF allocation attempts.",
+      "blocked_owner": "trevor-linux-orchestrator",
       "projects": [],
       "verification": [],
       "audit_focus": []
@@ -1174,6 +1174,21 @@
       "suggested_fix": null,
       "created_at": "2026-07-03T01:53:57.890Z",
       "resolved_at": "2026-07-03T02:11:47.393Z"
+    },
+    {
+      "id": "a5391eee-dbe4-463b-ae1e-07f02c5dde3d",
+      "node_id": "m2-capture-one-frame",
+      "run_id": null,
+      "severity": "P1",
+      "status": "open",
+      "title": "Direct capture frame never reached ready",
+      "path": null,
+      "line": null,
+      "evidence": "evidence/m2-capture-one-frame/direct-capture-frame.json",
+      "expected": "The capture frame should emit ext_image_copy_capture_frame_v1.ready so the node can claim a completed frame and protocol-ready implicit synchronization.",
+      "suggested_fix": "Use a driver-native allocator that can create an advertised NVIDIA block-linear DMA-BUF modifier, or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd.",
+      "created_at": "2026-07-03T22:27:56.233Z",
+      "resolved_at": null
     }
   ],
   "runs": [
@@ -3310,6 +3325,28 @@
       "finished_at": "2026-07-03T22:04:53.882Z",
       "summary": "Merge recorded with squash at commit bbc849618354dc38ada0da36f19a52d7dd1d37d3",
       "log_path": null
+    },
+    {
+      "id": "c273c5b9-f021-455a-a282-aaa50d0b995c",
+      "node_id": "m2-capture-one-frame",
+      "kind": "audit",
+      "status": "failed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": "/home/trevor/projects/madobe/.qd/worktrees/m2-capture-one-frame/reports/qd/m2-capture-one-frame/audit.json",
+      "audit_kind": "general",
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-03T22:27:02.526Z",
+      "finished_at": "2026-07-03T22:27:56.235Z",
+      "summary": "Audit failed from /home/trevor/projects/madobe/.qd/worktrees/m2-capture-one-frame/reports/qd/m2-capture-one-frame/audit.json",
+      "log_path": null
     }
   ],
   "node_notes": [
@@ -3352,6 +3389,14 @@
       "created_at": "2026-07-03T21:50:52.480Z",
       "kind": "retry",
       "evidence": "reports/qd/m2-direct-capture-api-spike/completion.json"
+    },
+    {
+      "id": "c5be8aad-edd4-4b79-a3de-fe08e34fc22e",
+      "node_id": "m2-capture-one-frame",
+      "text": "Blocked by external-dependency: Direct ext-image-copy capture reached constraints and timestamp/damage but returned frame.failed reason 0 instead of ready after render-node and card-node DMA-BUF allocation attempts.\nNeeded: Allocate with a driver-native NVIDIA modifier path or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd, then rerun until ext_image_copy_capture_frame_v1.ready is emitted.",
+      "created_at": "2026-07-03T22:26:23.879Z",
+      "kind": "blocker",
+      "evidence": "reports/qd/m2-capture-one-frame/blocker.md"
     }
   ],
   "assignments": [],
