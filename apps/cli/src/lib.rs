@@ -2,7 +2,7 @@
 #![forbid(unsafe_code)]
 
 use hostd::{DisplayAction, HostControlError};
-use madobe_compositor::{CompositorAdapter, IdentifierError, OutputId};
+use madobe_compositor::{CompositorAdapter, IdentifierError, OutputId, SessionId, WorkspaceId};
 use madobe_protocol::MadobeHello;
 use madobe_telemetry::bootstrap_event;
 use std::error::Error;
@@ -14,6 +14,7 @@ usage: madobectl hello
        madobectl display create [--id <madobe-output-id>]
        madobectl display park [--id <madobe-output-id>]
        madobectl display remove [--id <madobe-output-id>]
+       madobectl display bind --id <madobe-output-id> --session <session-id> --workspace <workspace-id>
        madobectl display smoke [--id <madobe-output-id>]";
 
 /// Runs an adapter-independent CLI command and returns process output.
@@ -144,6 +145,27 @@ where
         {
             parse_display_action(subcommand, OutputId::new(value)?)
         }
+        [
+            command,
+            subcommand,
+            id_flag,
+            id,
+            session_flag,
+            session,
+            workspace_flag,
+            workspace,
+        ] if command == "display"
+            && subcommand == "bind"
+            && id_flag == "--id"
+            && session_flag == "--session"
+            && workspace_flag == "--workspace" =>
+        {
+            Ok(Command::Display(DisplayAction::Bind {
+                id: OutputId::new(id)?,
+                session: SessionId::new(session)?,
+                workspace: WorkspaceId::new(workspace)?,
+            }))
+        }
         _ => Err(CliError::Usage),
     }
 }
@@ -252,6 +274,33 @@ mod tests {
     }
 
     #[test]
+    fn display_bind_command_accepts_session_and_workspace_ids() {
+        let mut adapter = MockAdapter::with_output("madobe-cli-output");
+        let output = run_with_adapter(
+            [
+                "display",
+                "bind",
+                "--id",
+                "madobe-cli-output",
+                "--session",
+                "madobe-cli-session",
+                "--workspace",
+                "madobe-cli-workspace",
+            ],
+            &mut adapter,
+        );
+
+        assert_eq!(
+            must(output),
+            "display bind id=madobe-cli-output session=madobe-cli-session workspace=madobe-cli-workspace status=bound"
+        );
+        assert_eq!(
+            adapter.calls,
+            vec!["bind:madobe-cli-session:madobe-cli-output:madobe-cli-workspace"]
+        );
+    }
+
+    #[test]
     fn unknown_command_returns_usage() {
         assert!(matches!(run(["status"]), Err(CliError::Usage)));
         let error = match run(["status"]) {
@@ -346,12 +395,28 @@ mod tests {
             ))
         }
 
-        fn bind_session(&mut self, _request: BindSession) -> Result<BindingStatus> {
-            Err(CompositorError::new(
-                Operation::Bind,
-                ErrorKind::InvariantViolation {
-                    reason: "mock bind not used".to_owned(),
-                },
+        fn bind_session(&mut self, request: BindSession) -> Result<BindingStatus> {
+            self.calls.push(format!(
+                "bind:{}:{}:{}",
+                request.session(),
+                request.output(),
+                request.workspace()
+            ));
+            let status = self
+                .outputs
+                .get_mut(request.output())
+                .ok_or_else(|| missing(request.output()))?;
+            *status = OutputStatus::new(
+                request.output().clone(),
+                status.config(),
+                OutputState::Bound,
+                Some(request.workspace().clone()),
+            );
+
+            Ok(BindingStatus::new(
+                request.session().clone(),
+                request.output().clone(),
+                request.workspace().clone(),
             ))
         }
     }

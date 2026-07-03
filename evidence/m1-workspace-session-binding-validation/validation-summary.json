@@ -1,0 +1,10 @@
+{
+  "nodeId": "m1-workspace-session-binding-validation",
+  "outputId": "madobe-qd-m1-workspace-session-binding-validation",
+  "disposableWorkspace": "madobe-qd-m1-workspace-session-binding-validation-workspace",
+  "binding": "passed",
+  "cleanup": {
+    "outputAbsent": true,
+    "disposableWorkspaceAbsent": true
+  }
+}

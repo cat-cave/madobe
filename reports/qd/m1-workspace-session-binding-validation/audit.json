@@ -1,0 +1,53 @@
+{
+  "nodeId": "m1-workspace-session-binding-validation",
+  "acceptanceReviewed": [
+    {
+      "criterion": "A node-scoped madobe remote output is created on Linux hardware",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/cli-create.out"
+    },
+    {
+      "criterion": "A disposable workspace or session is bound or moved to that output with live Hyprland evidence",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/validation-summary.json"
+    },
+    {
+      "criterion": "Redacted Hyprland monitor and workspace JSON is recorded before, during, and after validation",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/hyprland-workspaces-during-bound.json"
+    },
+    {
+      "criterion": "Cleanup removes only the madobe-owned output and restores developer-session state",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/hyprland-monitors-after.json"
+    },
+    {
+      "criterion": "Findings are filed for any flaky or unproven binding behavior",
+      "status": "passed",
+      "evidence": "No flaky or unproven behavior remains after the adapter command-form fix."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m1-workspace-session-binding-validation/validation-summary.json"
+  },
+  "resolvedFindings": [
+    {
+      "severity": "P1",
+      "title": "Hyprland 0.55 rejects legacy moveworkspacetomonitor dispatch syntax",
+      "status": "resolved",
+      "evidence": "crates/hyprland/src/adapter.rs and evidence/m1-workspace-session-binding-validation/cli-bind.out",
+      "observed": "The legacy hyprctl dispatch form failed with a Lua parser error on Hyprland 0.55.2.",
+      "expected": "The adapter must use a Hyprland 0.55-compatible command form and live binding must move the disposable workspace onto the madobe output.",
+      "classification": "implementation",
+      "summary": "Updated bind_session to use hl.dsp.workspace.move through hyprctl eval and validated it through madobectl display bind."
+    }
+  ],
+  "findings": []
+}

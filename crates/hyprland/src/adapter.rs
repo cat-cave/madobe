@@ -199,13 +199,10 @@ where
             Operation::Bind,
         )?;
 
-        let workspace = workspace_ref(request.workspace());
         self.run(
             &HyprctlCommand::new([
-                "dispatch",
-                "moveworkspacetomonitor",
-                workspace.as_str(),
-                request.output().as_str(),
+                "eval",
+                workspace_move_eval(request.workspace(), request.output()).as_str(),
             ])
             .map_err(|error| map_hyprland_error(Operation::Bind, &error))?,
             Operation::Bind,
@@ -376,8 +373,28 @@ fn default_parking_config() -> std::result::Result<OutputConfig, ConfigError> {
     ))
 }
 
-fn workspace_ref(workspace: &WorkspaceId) -> String {
-    format!("name:{workspace}")
+fn workspace_move_eval(workspace: &WorkspaceId, output: &OutputId) -> String {
+    format!(
+        "hl.dispatch(hl.dsp.workspace.move({{ workspace = {}, monitor = {} }}))",
+        lua_string(&format!("name:{workspace}")),
+        lua_string(output.as_str())
+    )
+}
+
+fn lua_string(value: &str) -> String {
+    let mut quoted = String::from("'");
+    for character in value.chars() {
+        match character {
+            '\\' => quoted.push_str("\\\\"),
+            '\'' => quoted.push_str("\\'"),
+            '\n' => quoted.push_str("\\n"),
+            '\r' => quoted.push_str("\\r"),
+            '\t' => quoted.push_str("\\t"),
+            character => quoted.push(character),
+        }
+    }
+    quoted.push('\'');
+    quoted
 }
 
 fn is_missing_output_error(error: &crate::HyprlandError) -> bool {
