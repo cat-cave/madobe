@@ -1,0 +1,14 @@
+Input #0, png_pipe, from 'evidence/m2-nvenc-encode-sample/captured-sample.png':
+  Duration: N/A, bitrate: N/A
+  Stream #0:0: Video: png, rgb24(pc, gbr/unknown/unknown), 1920x1080, 25 fps, 25 tbr, 25 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (png (native) -> rawvideo (native))
+Press [q] to stop, [?] for help
+Output #0, rawvideo, to 'evidence/m2-nvenc-encode-sample/captured-sample.rgb':
+  Metadata:
+    encoder         : Lavf62.12.100
+  Stream #0:0: Video: rawvideo (RGB[24] / 0x18424752), rgb24(pc, gbr/unknown/unknown, progressive), 160x90, q=2-31, 8640 kb/s, 25 fps, 25 tbn
+    Metadata:
+      encoder         : Lavc62.28.100 rawvideo
+[out#0/rawvideo @ 0x5c34f674e5c0] video:42KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000000%
+frame=    1 fps=0.0 q=-0.0 Lsize=      42KiB time=00:00:00.04 bitrate=8640.0kbits/s speed=1.37x elapsed=0:00:00.02    

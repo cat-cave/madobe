@@ -1,0 +1,13 @@
+[package]
+name = "madobe-encode"
+description = "Safe video encode API for madobe"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+madobe-encode-nv-sys.workspace = true
+
+[lints]
+workspace = true

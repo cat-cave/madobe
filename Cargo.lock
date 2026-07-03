@@ -20,6 +20,17 @@ name = "madobe-compositor"
 version = "0.1.0"
 
 [[package]]
+name = "madobe-encode"
+version = "0.1.0"
+dependencies = [
+ "madobe-encode-nv-sys",
+]
+
+[[package]]
+name = "madobe-encode-nv-sys"
+version = "0.1.0"
+
+[[package]]
 name = "madobe-hyprland"
 version = "0.1.0"
 dependencies = [

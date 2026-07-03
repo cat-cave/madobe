@@ -1,0 +1,3 @@
+3dd0fbb20704f4bda059edd4dfb38f64dc1585942f4dd2a5d7ea5f7a3351c10e  evidence/m2-nvenc-encode-sample/captured-sample.png
+4d20790907721ed392eedaa45e1762043a32f7dbe5da742bc785983745088456  evidence/m2-nvenc-encode-sample/captured-sample.rgb
+51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875  evidence/m2-nvenc-encode-sample/sample-av1.ivf

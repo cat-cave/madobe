@@ -1,0 +1,10 @@
+[package]
+name = "madobe-encode-nv-sys"
+description = "Isolated ffmpeg NVENC command boundary for madobe"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true
