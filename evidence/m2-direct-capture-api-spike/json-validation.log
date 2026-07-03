@@ -1,0 +1,2 @@
+Command: jq empty evidence/m2-direct-capture-api-spike/validation-summary.json reports/qd/m2-direct-capture-api-spike/completion.json reports/qd/m2-direct-capture-api-spike/audit.json
+Result: passed

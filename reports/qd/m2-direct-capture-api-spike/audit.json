@@ -1,0 +1,38 @@
+{
+  "nodeId": "m2-direct-capture-api-spike",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Candidate direct capture APIs/tools were identified.",
+      "status": "passed",
+      "evidence": "tools-and-protocols.md lists local tools and active direct-capture globals."
+    },
+    {
+      "criterion": "Bounded live probe used a node-scoped generated Hyprland output and collected cleanup evidence.",
+      "status": "passed",
+      "evidence": "hyprland-monitors-with-output.json, hyprland-monitors-after-remove.json, and hyprland-monitors-after-wayland-output-probe.json."
+    },
+    {
+      "criterion": "Required metadata availability was determined.",
+      "status": "passed",
+      "evidence": "validation-summary.json records size, format, modifier, timestamp, sync mode, and explicit sync-fd availability."
+    },
+    {
+      "criterion": "Implementation path or blocker was documented.",
+      "status": "passed",
+      "evidence": "notes.md documents the direct ext-image-copy-capture implementation path; no blocker.md was needed because an implicit-sync path is viable."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "redactionScanReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live host probes proved generated-output lifecycle, Wayland output discovery, legacy direct targetability, and cleanup."
+  },
+  "resolvedFindings": [],
+  "findings": []
+}

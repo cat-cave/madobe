@@ -1,0 +1,13 @@
+Command: XDG_RUNTIME_DIR=<redacted-runtime> WAYLAND_DISPLAY=<wayland-socket> wayland-info -i wl_output # filtered to node output
+interface: 'wl_output',                                  version:  4, name: 107
+	name: madobe-qd-m2-direct-capture-api-spike
+	description: <redacted>
+	x: 0, y: 0, scale: 1,
+	physical_width: <redacted>, physical_height: <redacted>,
+	make: '<redacted>', model: '<redacted>',
+	subpixel_orientation: none, output_transform: normal,
+	mode:
+		width: 1280 px, height: 720 px, refresh: 60.000 Hz,
+		flags: current
+
+status=0

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "madobe-qd-m2-direct-capture-api-spike",
+    "width": 1280,
+    "height": 720,
+    "refreshRate": 60.00000,
+    "x": 50000,
+    "y": 50000,
+    "scale": 1.00,
+    "transform": 0,
+    "focused": false,
+    "disabled": false,
+    "dpmsStatus": true,
+    "currentFormat": "XRGB8888",
+    "make": "<redacted>",
+    "model": "<redacted>",
+    "serial": "<redacted>",
+    "description": "<redacted>"
+  }
+]

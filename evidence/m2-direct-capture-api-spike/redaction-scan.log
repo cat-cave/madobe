@@ -1,0 +1,3 @@
+Command: rg redaction scan over node evidence and reports
+Result: passed; no matches for host/user/runtime path/monitor serial patterns.
+Patterns: user names, home paths, runtime paths, compositor signatures, physical monitor identities, and raw temporary capture paths.
