@@ -1,0 +1,5 @@
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl output create headless madobe-qd-m2-capture-stream-proof
+ok
+
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl eval hl.monitor(...) for madobe-qd-m2-capture-stream-proof
+ok

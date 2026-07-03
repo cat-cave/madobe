@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "name": "<physical-monitor-1>",
+    "description": "<redacted>",
+    "make": "<redacted>",
+    "model": "<redacted>",
+    "serial": "<redacted>",
+    "width": 3840,
+    "height": 2160,
+    "physicalWidth": 600,
+    "physicalHeight": 340,
+    "refreshRate": 94.98100,
+    "x": 0,
+    "y": 0,
+    "activeWorkspace": {
+      "id": 11,
+      "name": "<developer-workspace>"
+    },
+    "specialWorkspace": {
+      "id": 0,
+      "name": ""
+    },
+    "reserved": [
+      0,
+      30,
+      0,
+      0
+    ],
+    "scale": 1.00,
+    "transform": 0,
+    "focused": true,
+    "dpmsStatus": true,
+    "vrr": false,
+    "solitary": "0",
+    "solitaryBlockedBy": [
+      "WINDOWED",
+      "CANDIDATE"
+    ],
+    "activelyTearing": false,
+    "tearingBlockedBy": [
+      "NOT_TORN",
+      "USER",
+      "CANDIDATE",
+      "HW_CURSOR"
+    ],
+    "directScanoutTo": "0",
+    "directScanoutBlockedBy": [
+      "USER",
+      "CANDIDATE"
+    ],
+    "disabled": false,
+    "currentFormat": "XRGB8888",
+    "mirrorOf": "none",
+    "availableModes": [
+      "<redacted>"
+    ],
+    "colorManagementPreset": "srgb",
+    "sdrBrightness": 1.00,
+    "sdrSaturation": 1.00,
+    "sdrMinLuminance": 0.20,
+    "sdrMaxLuminance": 80,
+    "hardwareCursorsInUse": true
+  },
+  {
+    "id": 2,
+    "name": "<physical-monitor-1>",
+    "description": "<redacted>",
+    "make": "<redacted>",
+    "model": "<redacted>",
+    "serial": "<redacted>",
+    "width": 2560,
+    "height": 1440,
+    "physicalWidth": 600,
+    "physicalHeight": 340,
+    "refreshRate": 144.00000,
+    "x": 3840,
+    "y": 0,
+    "activeWorkspace": {
+      "id": 12,
+      "name": "<developer-workspace>"
+    },
+    "specialWorkspace": {
+      "id": 0,
+      "name": ""
+    },
+    "reserved": [
+      0,
+      30,
+      0,
+      0
+    ],
+    "scale": 1.00,
+    "transform": 0,
+    "focused": false,
+    "dpmsStatus": true,
+    "vrr": false,
+    "solitary": "0",
+    "solitaryBlockedBy": [
+      "WINDOWED",
+      "CANDIDATE"
+    ],
+    "activelyTearing": false,
+    "tearingBlockedBy": [
+      "NOT_TORN",
+      "USER",
+      "CANDIDATE"
+    ],
+    "directScanoutTo": "0",
+    "directScanoutBlockedBy": [
+      "USER",
+      "SW",
+      "CANDIDATE"
+    ],
+    "disabled": false,
+    "currentFormat": "XRGB8888",
+    "mirrorOf": "none",
+    "availableModes": [
+      "<redacted>"
+    ],
+    "colorManagementPreset": "srgb",
+    "sdrBrightness": 1.00,
+    "sdrSaturation": 1.00,
+    "sdrMinLuminance": 0.20,
+    "sdrMaxLuminance": 80,
+    "hardwareCursorsInUse": true
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "nodeId": "m2-capture-stream-proof",
+  "status": "completed-with-blocker",
+  "hyprlandOutput": {
+    "id": "madobe-qd-m2-capture-stream-proof",
+    "created": true,
+    "workspaceBound": true,
+    "removed": true
+  },
+  "portal": {
+    "createSessionReturnedRequest": true,
+    "selectSourcesStatus": "access-denied",
+    "pipeWireVideoStreamObserved": false,
+    "userConsentedStreamProven": false
+  },
+  "directNamedOutput": {
+    "grimWithoutWaylandSocketStatus": "failed",
+    "grimWithWaylandSocketStatus": "passed",
+    "pngCreated": true,
+    "pngSha256": "d0d97388d37b2bf9166b6dcd428e0847f9689f99dd8bba1ebe1e00a40772aa16",
+    "providesDmabufMetadata": false
+  },
+  "m2CaptureOneFrameDisposition": "remain-blocked",
+  "neededToUnblock": "Use a portal client that owns the Request.Response lifecycle and obtains a user-consented stream, or implement an equivalent direct capture API that exposes format, modifier, timestamp, and sync metadata."
+}

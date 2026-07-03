@@ -1,0 +1,38 @@
+[
+  {
+    "id": 11,
+    "name": "<developer-workspace>",
+    "monitor": "<physical-monitor>",
+    "monitorID": 1,
+    "windows": 3,
+    "hasfullscreen": false,
+    "lastwindow": "0x0",
+    "lastwindowtitle": "<redacted-window-title>",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  },
+  {
+    "id": 12,
+    "name": "<developer-workspace>",
+    "monitor": "<physical-monitor>",
+    "monitorID": 2,
+    "windows": 0,
+    "hasfullscreen": false,
+    "lastwindow": "0x0",
+    "lastwindowtitle": "<redacted-window-title>",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  },
+  {
+    "id": -1337,
+    "name": "madobe-qd-m2-capture-stream-proof-workspace",
+    "monitor": "madobe-qd-m2-capture-stream-proof",
+    "monitorID": 3,
+    "windows": 0,
+    "hasfullscreen": false,
+    "lastwindow": "0x0",
+    "lastwindowtitle": "<redacted-window-title>",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  }
+]

@@ -1,0 +1,2 @@
+grim_status=1
+png_created=false

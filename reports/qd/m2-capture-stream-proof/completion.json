@@ -1,0 +1,105 @@
+{
+  "nodeId": "m2-capture-stream-proof",
+  "summary": "Probed remote-output capture stream selection on the reference Linux host. The node-scoped Hyprland output and workspace binding worked, portal ScreenCast session setup reached a request path but `SelectSources` failed with Access denied without an owning request-response client, and a direct `grim -o` named-output capture succeeded when run with the live Wayland socket. The node does not unblock `m2-capture-one-frame` because no PipeWire video stream or DMA-BUF format/modifier/timestamp/sync metadata was obtained.",
+  "changedFiles": [
+    "evidence/m2-capture-stream-proof/commands.log",
+    "evidence/m2-capture-stream-proof/host-env.txt",
+    "evidence/m2-capture-stream-proof/notes.md",
+    "evidence/m2-capture-stream-proof/validation-summary.json",
+    "evidence/m2-capture-stream-proof/hyprland-monitors-before.json",
+    "evidence/m2-capture-stream-proof/hyprland-monitors-with-output.json",
+    "evidence/m2-capture-stream-proof/hyprland-monitors-after-remove.json",
+    "evidence/m2-capture-stream-proof/hyprland-monitors-after-direct-grim-cleanup.json",
+    "evidence/m2-capture-stream-proof/hyprland-workspaces-before.json",
+    "evidence/m2-capture-stream-proof/hyprland-workspaces-with-output.json",
+    "evidence/m2-capture-stream-proof/hyprland-workspaces-after-remove.json",
+    "evidence/m2-capture-stream-proof/portal-introspection.txt",
+    "evidence/m2-capture-stream-proof/portal-screencast-properties.txt",
+    "evidence/m2-capture-stream-proof/portal-create-session.txt",
+    "evidence/m2-capture-stream-proof/portal-select-sources.err",
+    "evidence/m2-capture-stream-proof/pipewire-focused-with-output-summary.json",
+    "evidence/m2-capture-stream-proof/pipewire-focused-after-portal-error-summary.json",
+    "evidence/m2-capture-stream-proof/direct-grim-named-output-metadata.txt",
+    "evidence/m2-capture-stream-proof/direct-grim-named-output-with-wayland-metadata.txt",
+    "reports/qd/m2-capture-stream-proof/blocker.md",
+    "reports/qd/m2-capture-stream-proof/completion.json",
+    "reports/qd/m2-capture-stream-proof/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "A node-scoped madobe remote output is created on Linux hardware.",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-stream-proof/hyprland-output-create.txt and hyprland-monitors-with-output.json."
+    },
+    {
+      "criterion": "A user-consented portal ScreenCast session is attempted and its PipeWire stream metadata is captured.",
+      "status": "failed",
+      "evidence": "portal-create-session.txt shows a request path, portal-select-sources.err records Access denied, and pipewire-focused-after-portal-error-summary.json shows no video/portal/madobe stream node."
+    },
+    {
+      "criterion": "Evidence proves whether the stream maps to the madobe-owned output, including redacted Hyprland, portal, and PipeWire state.",
+      "status": "failed",
+      "evidence": "No PipeWire video stream was produced, so no mapping to the madobe output can be proven. Redacted Hyprland and PipeWire state are present under evidence/m2-capture-stream-proof/."
+    },
+    {
+      "criterion": "If portal mapping cannot be proven, direct named-output capture options and exact blockers are documented.",
+      "status": "passed",
+      "evidence": "direct-grim-named-output-with-wayland-metadata.txt proves direct `grim -o` can target the named output; blocker.md documents why this is insufficient for DMA-BUF frame metadata."
+    },
+    {
+      "criterion": "Artifacts are saved under evidence/m2-capture-stream-proof and reports/qd/m2-capture-stream-proof.",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-stream-proof/ and reports/qd/m2-capture-stream-proof/."
+    },
+    {
+      "criterion": "m2-capture-one-frame is unblocked only if format, modifier, timestamp, and sync metadata can be obtained or directly derived from the proven stream path.",
+      "status": "passed",
+      "evidence": "validation-summary.json and blocker.md state that m2-capture-one-frame remains blocked because the direct PNG path does not provide the required metadata."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "hyprctl output create/configure/remove madobe-qd-m2-capture-stream-proof",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-stream-proof/commands.log"
+    },
+    {
+      "command": "busctl --user call org.freedesktop.portal.ScreenCast CreateSession",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-stream-proof/portal-create-session.txt"
+    },
+    {
+      "command": "busctl --user call org.freedesktop.portal.ScreenCast SelectSources",
+      "status": "failed",
+      "evidence": "evidence/m2-capture-stream-proof/portal-select-sources.err"
+    },
+    {
+      "command": "pw-dump focused summary before and after portal attempt",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-stream-proof/pipewire-focused-with-output-summary.json and pipewire-focused-after-portal-error-summary.json"
+    },
+    {
+      "command": "grim -o madobe-qd-m2-capture-stream-proof with explicit XDG_RUNTIME_DIR and WAYLAND_DISPLAY",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-stream-proof/direct-grim-named-output-with-wayland-metadata.txt"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-capture-stream-proof/commands.log",
+    "evidence/m2-capture-stream-proof/notes.md",
+    "evidence/m2-capture-stream-proof/validation-summary.json",
+    "reports/qd/m2-capture-stream-proof/blocker.md"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live Linux Hyprland/PipeWire/XDPH probing was performed. Direct named-output PNG capture worked, but the portal stream remains blocked until an owning client completes user consent and captures returned stream metadata."
+  },
+  "unverifiedItems": [],
+  "residualRisks": [
+    "A real portal client may still be able to select the madobe-owned output manually, but this was not proven by the non-interactive bus probe.",
+    "The direct `grim` path proves targetability by output name but may not map to the eventual low-latency capture architecture."
+  ],
+  "dagChangesNeeded": []
+}

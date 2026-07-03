@@ -1,0 +1,5 @@
+grim_status=0
+png_created=true
+bytes=4319
+png_signature=89504e470d0a1a0a
+d0d97388d37b2bf9166b6dcd428e0847f9689f99dd8bba1ebe1e00a40772aa16  <tmp-png>
