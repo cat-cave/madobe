@@ -1,0 +1,3 @@
+warning: Git tree '<repo>/.qd/worktrees/m1-audit' is dirty
+madobe dev shell: use 'just --list' to see commands
+display status count=0

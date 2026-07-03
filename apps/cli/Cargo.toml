@@ -9,6 +9,7 @@ version.workspace = true
 [dependencies]
 hostd = { path = "../hostd", version = "0.1.0" }
 madobe-compositor.workspace = true
+madobe-hyprland.workspace = true
 madobe-protocol.workspace = true
 madobe-telemetry.workspace = true
 

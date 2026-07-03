@@ -1,0 +1,80 @@
+2026-07-03T19:00Z git pull --rebase --autostash
+  status: passed before m1-audit claim; main was current before the audit wave.
+
+2026-07-03T19:00Z qd sync --from roadmap/qd-export.json --expect-clean
+  status: passed before m1-audit claim.
+
+2026-07-03T19:00Z qd doctor --strict
+  status: passed before m1-audit claim.
+
+2026-07-03T19:00Z nix develop -c just verify
+  status: passed before m1-audit claim.
+
+2026-07-03T19:00Z qd ready --json
+  status: passed; m1-audit was selected as the next M1 closeout node.
+
+2026-07-03T19:00Z qd claim m1-audit --agent trevor-linux-orchestrator --branch spec/m1-audit
+  status: passed; claim exported and pushed to main before implementation work.
+
+2026-07-03T19:00Z qd worktree create m1-audit
+  status: passed; worktree path .qd/worktrees/m1-audit.
+
+2026-07-03T19:02Z qd status --json > evidence/m1-audit/qd-status.json
+  status: passed from repository root; worktree-local qd status was intentionally not used because qd state lives in the root checkout.
+
+2026-07-03T19:02Z qd ready --json > evidence/m1-audit/qd-ready.json
+  status: passed from repository root.
+
+2026-07-03T19:02Z qd finding list --open --severity P0,P1 > evidence/m1-audit/open-findings.txt
+  status: passed from repository root; no open P0/P1 findings.
+
+2026-07-03T19:03Z subagent audit wave
+  status: passed; code-boundary, evidence/report, and DAG/milestone audits completed.
+
+2026-07-03T19:05Z edit apps/hostd and apps/cli boundary
+  status: passed; hostd no longer depends on madobe-hyprland and the CLI binary now owns real Hyprland adapter construction.
+
+2026-07-03T19:06Z edit public M1 evidence redactions
+  status: passed; workspace window addresses/titles, local hostnames, and local user paths were redacted from prior M1 evidence.
+
+2026-07-03T19:07Z nix develop -c cargo fmt --all
+  status: passed.
+
+2026-07-03T19:07Z nix develop -c cargo check --workspace --all-targets --all-features
+  status: passed.
+
+2026-07-03T19:08Z nix develop -c just verify
+  status: passed; workspace checks, tests, policy checks, and Linux-supported verification gates completed.
+
+2026-07-03T19:10Z nix develop -c cargo run -q -p madobectl -- display status
+  status: passed against the live Linux Hyprland session with a non-mutating status command.
+  evidence: evidence/m1-audit/cli-status-after-boundary-cleanup.out
+
+2026-07-03T19:14Z qd node add --from-json /tmp/m1-workspace-session-binding-validation.node.json
+  status: passed; added P1 Linux hardware validation node for workspace/session binding.
+
+2026-07-03T19:14Z qd edge add m1-audit m1-workspace-session-binding-validation --type requires
+  status: passed; audit unlocks the required follow-up validation node.
+
+2026-07-03T19:15Z qd complete m1-audit --from-report reports/qd/m1-audit/completion.json
+  status: passed after splitting the workspace/session validation gap into a qd node.
+
+2026-07-03T19:15Z qd audit pass m1-audit --from-report reports/qd/m1-audit/audit.json
+  status: passed.
+
+2026-07-03T19:15Z qd gate m1-audit --phase ci
+  status: passed.
+
+2026-07-03T19:18Z nix develop -c just verify
+  status: passed after final CLI composition-root fix; 33 nextest tests passed.
+
+2026-07-03T19:18Z nix develop -c cargo run -q -p madobectl -- hello
+  status: passed without requiring Hyprland adapter initialization.
+  evidence: evidence/m1-audit/cli-hello-after-boundary-cleanup.out
+
+2026-07-03T19:18Z nix develop -c cargo run -q -p madobectl -- display status
+  status: passed against the live Linux Hyprland session with a non-mutating status command.
+  evidence: evidence/m1-audit/cli-status-after-boundary-cleanup.out
+
+2026-07-03T19:19Z rg -n 'lastwindow|lastwindowtitle|workstation|/home/<redacted-user>|<local-hyprland-instance>|<local-user>' evidence/m1-* reports/qd/m1-*
+  status: inspected; remaining hits are redaction placeholders, intentional command search patterns, or public Hyprland version identifiers rather than raw user/session data.

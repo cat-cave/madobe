@@ -1,5 +1,5 @@
 Kernel:
-Linux workstation 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
+Linux <redacted-host> 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
 
 Distro:
 PRETTY_NAME="NixOS 26.05 (Yarara)"

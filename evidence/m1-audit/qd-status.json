@@ -1,0 +1,14 @@
+{
+  "nodes": 25,
+  "ready": 0,
+  "byStatus": {
+    "done": 16,
+    "claimed": 1,
+    "blocked": 1,
+    "ready": 7
+  },
+  "donePoints": 16,
+  "totalPoints": 25,
+  "remainingPoints": 9,
+  "openP0P1Findings": 0
+}
