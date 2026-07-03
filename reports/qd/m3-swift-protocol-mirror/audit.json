@@ -1,0 +1,36 @@
+{
+  "nodeId": "m3-swift-protocol-mirror",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Swift tests read or mirror the golden fixture semantics.",
+      "status": "passed",
+      "evidence": "Decoded Rust fixture in MadobeClientCoreTests; xcodebuild log shows testEncodedVideoFrameFixtureMatchesRustGoldenVector passed."
+    },
+    {
+      "criterion": "Tuist/Xcode tests pass on macOS.",
+      "status": "passed",
+      "evidence": "evidence/m3-swift-protocol-mirror/just-macos-check.log"
+    },
+    {
+      "criterion": "Fixture mismatch behavior is tested.",
+      "status": "passed",
+      "evidence": "Unknown codec and payload hash mismatch tests passed in xcodebuild log."
+    },
+    {
+      "criterion": "Mac evidence includes xcodebuild log.",
+      "status": "passed",
+      "evidence": "evidence/m3-swift-protocol-mirror/xcodebuild.log"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Native macOS xcodebuild test passed with four MadobeClientCoreTests."
+  },
+  "findings": []
+}

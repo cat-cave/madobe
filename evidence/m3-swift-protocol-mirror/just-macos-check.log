@@ -1,0 +1,23 @@
+Command: just macos-check
+Result: passed
+Date: 2026-07-03
+
+Checks:
+- cargo fmt --all -- --check: passed
+- taplo fmt --check: passed
+- swiftformat --lint apple: passed
+- cargo check --workspace --all-targets --all-features: passed
+- cargo clippy --workspace --all-targets --all-features -- -D warnings: passed
+- swiftlint lint --strict --config apple/.swiftlint.yml: passed with 0 violations
+- just lint-lines: passed
+- tuist generate: passed
+- xcodebuild test -scheme MadobeMac -destination 'platform=macOS': passed
+
+Xcode test summary:
+- testEncodedVideoFrameFixtureMatchesRustGoldenVector: passed
+- testEncodedVideoFramePayloadHashMismatchChangesSemantics: passed
+- testEncodedVideoFrameRejectsUnknownCodecFixtureMismatch: passed
+- testIdentityMatchesRustBootstrapProof: passed
+
+Executed 4 tests, with 0 failures.
+Result: TEST SUCCEEDED
