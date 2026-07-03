@@ -1,0 +1,65 @@
+{
+  "nodeId": "m0-qd-orchestration-smoke",
+  "summary": "Proved the two-orchestrator qd workflow through coordinated Linux and macOS claims, GitHub issue handoffs, PR merge authority, qd merge-state exports, and clean tracked qd files.",
+  "changedFiles": [
+    "evidence/m0-qd-orchestration-smoke/notes.md",
+    "reports/qd/m0-qd-orchestration-smoke/completion.json",
+    "roadmap/qd-export.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Linux orchestrator qd ready and status outputs are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m0-qd-orchestration-smoke/notes.md"
+    },
+    {
+      "criterion": "Mac orchestrator qd ready and status outputs are recorded.",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/issues/1#issuecomment-4878040145"
+    },
+    {
+      "criterion": "Both orchestrators post structured status in the coordination issue.",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/issues/1"
+    },
+    {
+      "criterion": "A claimed Mac node and claimed Linux node are visible in exported qd state.",
+      "status": "passed",
+      "evidence": "roadmap/qd-export.json"
+    },
+    {
+      "criterion": "No .qd/qd.db file is committed.",
+      "status": "passed",
+      "evidence": "evidence/m0-qd-orchestration-smoke/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd ready --json",
+      "status": "passed",
+      "evidence": "evidence/m0-qd-orchestration-smoke/notes.md"
+    },
+    {
+      "command": "qd status --json",
+      "status": "passed",
+      "evidence": "evidence/m0-qd-orchestration-smoke/notes.md"
+    },
+    {
+      "command": "git ls-files .qd",
+      "status": "passed",
+      "evidence": "evidence/m0-qd-orchestration-smoke/notes.md"
+    }
+  ],
+  "evidence": [
+    "evidence/m0-qd-orchestration-smoke/notes.md",
+    "https://github.com/cat-cave/madobe/issues/1"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Workflow smoke only; no transport, capture, decode, render, or latency claim is made."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
