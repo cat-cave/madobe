@@ -1,0 +1,36 @@
+{
+  "nodeId": "m0-coordination-issue",
+  "acceptanceReviewed": [
+    {
+      "criterion": "GitHub issue named Orchestrator Coordination Log exists",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/issues/1"
+    },
+    {
+      "criterion": "Issue body links the general, Linux, macOS, and cross-device runbooks",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/issues/1"
+    },
+    {
+      "criterion": "Initial Linux orchestrator status comment is posted",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/issues/1#issuecomment-4871707792"
+    },
+    {
+      "criterion": "Coordination labels exist or missing-label follow-up is recorded",
+      "status": "passed",
+      "evidence": "GitHub coordination labels exist on cat-cave/madobe"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "https://github.com/cat-cave/madobe/issues/1#issuecomment-4871888525"
+  },
+  "findings": []
+}

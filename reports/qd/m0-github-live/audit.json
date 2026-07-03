@@ -1,0 +1,36 @@
+{
+  "nodeId": "m0-github-live",
+  "acceptanceReviewed": [
+    {
+      "criterion": "cat-cave/madobe exists on GitHub",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe"
+    },
+    {
+      "criterion": "main contains the M0 scaffold and runbooks",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/commit/6e1c6c0"
+    },
+    {
+      "criterion": "this machine can pull and push over HTTPS with gh authentication",
+      "status": "passed",
+      "evidence": "origin/main was pushed from this Linux checkout"
+    },
+    {
+      "criterion": "roadmap/qd-export.json is committed",
+      "status": "passed",
+      "evidence": "roadmap/qd-export.json in main"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "https://github.com/cat-cave/madobe"
+  },
+  "findings": []
+}

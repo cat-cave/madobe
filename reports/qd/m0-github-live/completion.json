@@ -1,0 +1,70 @@
+{
+  "nodeId": "m0-github-live",
+  "summary": "Published the bootstrap repository to GitHub and pushed the initial main branch containing the scaffold, runbooks, and qd export.",
+  "changedFiles": [
+    "roadmap/qd-export.json",
+    ".github/workflows/ci.yml",
+    "docs/ORCHESTRATION.md",
+    "docs/LINUX_ORCHESTRATOR.md",
+    "docs/MACOS_ORCHESTRATOR.md",
+    "docs/CROSS_DEVICE_VALIDATION.md"
+  ],
+  "commits": [
+    "6e1c6c0"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "cat-cave/madobe exists on GitHub",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe"
+    },
+    {
+      "criterion": "main contains the M0 scaffold and runbooks",
+      "status": "passed",
+      "evidence": "commit 6e1c6c0 on main"
+    },
+    {
+      "criterion": "this machine can pull and push over HTTPS with gh authentication",
+      "status": "passed",
+      "evidence": "initial push to origin/main succeeded over https"
+    },
+    {
+      "criterion": "roadmap/qd-export.json is committed",
+      "status": "passed",
+      "evidence": "roadmap/qd-export.json in commit 6e1c6c0"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "gh repo create cat-cave/madobe --private --description \"madobe remote desktop monorepo\" --disable-wiki",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe"
+    },
+    {
+      "command": "gh repo edit cat-cave/madobe --visibility public --accept-visibility-change-consequences",
+      "status": "passed",
+      "evidence": "repository visibility is PUBLIC"
+    },
+    {
+      "command": "git push -u origin main",
+      "status": "passed",
+      "evidence": "origin/main at 6e1c6c0"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "local check passed before initial commit"
+    }
+  ],
+  "evidence": [
+    "https://github.com/cat-cave/madobe",
+    "https://github.com/cat-cave/madobe/commit/6e1c6c0"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "repository is public and origin/main is reachable"
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
