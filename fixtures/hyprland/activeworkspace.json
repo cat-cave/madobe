@@ -1,0 +1,12 @@
+{
+  "id": 11,
+  "name": "workspace-11",
+  "monitor": "DP-2",
+  "monitorID": 1,
+  "windows": 2,
+  "hasfullscreen": false,
+  "lastwindow": "<redacted-window-address>",
+  "lastwindowtitle": "<redacted-window-title>",
+  "ispersistent": false,
+  "tiledLayout": "dwindle"
+}
