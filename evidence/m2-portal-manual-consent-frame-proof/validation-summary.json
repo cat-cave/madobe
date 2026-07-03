@@ -1,0 +1,82 @@
+{
+  "nodeId": "m2-portal-manual-consent-frame-proof",
+  "status": "passed",
+  "date": "2026-07-03",
+  "platform": "linux-hyprland",
+  "output": {
+    "name": "madobe-qd-m2-portal-manual-consent-frame-proof",
+    "configuredWidth": 1280,
+    "configuredHeight": 720,
+    "configuredRefreshHz": 60,
+    "workspace": "madobe-qd-m2-portal-manual-consent-frame-proof-workspace",
+    "evidence": [
+      "with-output-hyprland-monitors.json",
+      "with-output-hyprland-workspaces.json"
+    ]
+  },
+  "automation": {
+    "manualApprovalRequired": false,
+    "approvalMechanism": "visible chooser approved with wtype keyboard automation",
+    "sequence": "Tab Down Down Space Return Tab Tab Return",
+    "ydotool": {
+      "available": true,
+      "usable": false,
+      "limitation": "ydotoold socket was absent"
+    },
+    "wtype": {
+      "available": true,
+      "usable": true
+    },
+    "evidence": [
+      "input-automation.txt",
+      "chooser-detection.txt",
+      "wtype-sequence.txt"
+    ]
+  },
+  "portal": {
+    "createSession": "returned response code 0 and session handle",
+    "selectSources": "returned response code 0",
+    "start": "returned response code 0",
+    "streams": [
+      {
+        "nodeId": 181,
+        "sourceType": 1,
+        "width": 1280,
+        "height": 720,
+        "position": [
+          0,
+          0
+        ]
+      }
+    ],
+    "openPipeWireRemote": {
+      "called": true,
+      "fdReceived": true
+    },
+    "evidence": "portal-client.txt"
+  },
+  "pipewire": {
+    "videoNodeObserved": true,
+    "mediaClass": "Video/Source",
+    "format": "BGRA",
+    "width": 1280,
+    "height": 720,
+    "modifierEvidence": true,
+    "timestampEvidence": false,
+    "syncEvidence": false,
+    "evidence": "pipewire-during-open-remote-summary.json"
+  },
+  "cleanup": {
+    "nodeOutputAbsent": true,
+    "portalChooserAbsent": true,
+    "nodeWorkspaceAbsent": true,
+    "evidence": [
+      "after-cleanup-hyprland-monitors.json",
+      "after-cleanup-portal-clients.json",
+      "after-cleanup-hyprland-workspaces.json"
+    ]
+  },
+  "unblocks": {
+    "m2CaptureOneFrame": "unblocks portal consent, stream id, OpenPipeWireRemote, and PipeWire format/modifier prerequisite; frame timestamp and sync proof remain for that node"
+  }
+}

@@ -1,0 +1,5 @@
+/run/current-system/sw/bin/ydotool
+failed to connect socket `<redacted-runtime>/.ydotool_socket': No such file or directory
+Please check if ydotoold is running.
+ydotool_status=2
+wtype_status=0

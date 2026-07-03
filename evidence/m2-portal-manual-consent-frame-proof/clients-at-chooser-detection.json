@@ -1,0 +1,17 @@
+[
+  {
+    "role": "portal-chooser",
+    "mapped": true,
+    "hidden": false,
+    "visible": true,
+    "acceptsInput": true,
+    "floating": true,
+    "monitor": 1,
+    "workspace": {
+      "id": 11,
+      "name": "<redacted-workspace>"
+    },
+    "class": "<redacted-portal-class>",
+    "title": "<redacted-portal-title>"
+  }
+]

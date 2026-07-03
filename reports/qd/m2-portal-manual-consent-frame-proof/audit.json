@@ -1,0 +1,43 @@
+{
+  "nodeId": "m2-portal-manual-consent-frame-proof",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Node-scoped output and workspace lifecycle evidence exists.",
+      "status": "passed",
+      "evidence": "with-output-hyprland-monitors.json, with-output-hyprland-workspaces.json, and after-cleanup snapshots."
+    },
+    {
+      "criterion": "Portal chooser approval mechanism is documented.",
+      "status": "passed",
+      "evidence": "input-automation.txt and notes.md."
+    },
+    {
+      "criterion": "Portal flow continued through Start, stream id, OpenPipeWireRemote, and PipeWire metadata.",
+      "status": "passed",
+      "evidence": "portal-client.txt and pipewire-during-open-remote-summary.json."
+    },
+    {
+      "criterion": "Frame timestamp/sync are not overclaimed.",
+      "status": "passed",
+      "evidence": "validation-summary.json records timestampEvidence=false and syncEvidence=false."
+    },
+    {
+      "criterion": "Cleanup and redaction evidence is present.",
+      "status": "passed",
+      "evidence": "after-cleanup-portal-clients.json is empty and redaction scans are clean after sanitization."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "redactionScanReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live reference-host portal consent probe completed with cleanup."
+  },
+  "resolvedFindings": [],
+  "findings": []
+}

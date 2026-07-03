@@ -1,0 +1,32 @@
+Node: m2-portal-manual-consent-frame-proof
+Date: 2026-07-03T16:52:43-05:00
+Output: madobe-qd-m2-portal-manual-consent-frame-proof
+Workspace: madobe-qd-m2-portal-manual-consent-frame-proof-workspace
+Original workspace: <redacted-workspace>
+Hyprland signature: <redacted>
+Runtime: <redacted-runtime>
+Wayland display: <redacted-wayland-display>
+
+## input automation availability
+Evidence: input-automation.txt/.err
+
+## precleanup
+Command: hyprctl output remove madobe-qd-m2-portal-manual-consent-frame-proof
+
+## create output and disposable workspace
+output_create_status=0
+output_configure_status=0
+workspace_focus_status=0
+workspace_move_status=0
+visible_refocus_status=0
+
+## pipewire before portal
+
+## portal helper
+helper_pid=<redacted-pid>
+portal_client_status=0
+
+## pipewire after portal
+
+## cleanup
+cleanup evidence captured

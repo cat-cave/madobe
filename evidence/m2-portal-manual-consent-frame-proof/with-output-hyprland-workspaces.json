@@ -1,0 +1,29 @@
+[
+  {
+    "id": 11,
+    "name": "<redacted-workspace>",
+    "monitor": "<redacted-monitor>",
+    "windows": 2,
+    "hasfullscreen": false,
+    "lastwindow": "<redacted-window>",
+    "lastwindowtitle": "<redacted-title>"
+  },
+  {
+    "id": 12,
+    "name": "<redacted-workspace>",
+    "monitor": "<redacted-monitor>",
+    "windows": 0,
+    "hasfullscreen": false,
+    "lastwindow": "<redacted-window>",
+    "lastwindowtitle": "<redacted-title>"
+  },
+  {
+    "id": -1337,
+    "name": "madobe-qd-m2-portal-manual-consent-frame-proof-workspace",
+    "monitor": "madobe-qd-m2-portal-manual-consent-frame-proof",
+    "windows": 0,
+    "hasfullscreen": false,
+    "lastwindow": "0x0",
+    "lastwindowtitle": "<redacted-title>"
+  }
+]

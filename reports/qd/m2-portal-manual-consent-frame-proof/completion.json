@@ -1,0 +1,90 @@
+{
+  "nodeId": "m2-portal-manual-consent-frame-proof",
+  "summary": "Proved the visible xdg-desktop-portal ScreenCast consent path against a node-scoped Hyprland output. The chooser was approved with wtype keyboard automation, SelectSources and Start returned response code 0, one stream id was returned, OpenPipeWireRemote returned an fd, and PipeWire video format/modifier metadata was observed. The node does not claim frame timestamp or sync proof.",
+  "changedFiles": [
+    "evidence/m2-portal-manual-consent-frame-proof/commands.log",
+    "evidence/m2-portal-manual-consent-frame-proof/notes.md",
+    "evidence/m2-portal-manual-consent-frame-proof/validation-summary.json",
+    "evidence/m2-portal-manual-consent-frame-proof/portal_screencast_client.c",
+    "evidence/m2-portal-manual-consent-frame-proof/input-automation.txt",
+    "evidence/m2-portal-manual-consent-frame-proof/chooser-detection.txt",
+    "evidence/m2-portal-manual-consent-frame-proof/wtype-sequence.txt",
+    "evidence/m2-portal-manual-consent-frame-proof/portal-client.txt",
+    "evidence/m2-portal-manual-consent-frame-proof/pipewire-during-open-remote-summary.json",
+    "evidence/m2-portal-manual-consent-frame-proof/with-output-hyprland-monitors.json",
+    "evidence/m2-portal-manual-consent-frame-proof/with-output-hyprland-workspaces.json",
+    "evidence/m2-portal-manual-consent-frame-proof/after-cleanup-hyprland-monitors.json",
+    "evidence/m2-portal-manual-consent-frame-proof/after-cleanup-portal-clients.json",
+    "reports/qd/m2-portal-manual-consent-frame-proof/completion.json",
+    "reports/qd/m2-portal-manual-consent-frame-proof/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Uses a node-scoped madobe output and disposable workspace with cleanup evidence.",
+      "status": "passed",
+      "evidence": "with-output-hyprland-monitors.json and with-output-hyprland-workspaces.json show the configured output/workspace; after-cleanup files show both removed."
+    },
+    {
+      "criterion": "Documents the exact manual action or automation used to approve the chooser.",
+      "status": "passed",
+      "evidence": "input-automation.txt records ydotool limitation and wtype availability; notes.md records the wtype approval sequence."
+    },
+    {
+      "criterion": "If SelectSources returns, continues through Start, stream ids, OpenPipeWireRemote, and PipeWire metadata capture.",
+      "status": "passed",
+      "evidence": "portal-client.txt records SelectSources, Start, stream id, and OpenPipeWireRemote success; pipewire-during-open-remote-summary.json records video format/modifier metadata."
+    },
+    {
+      "criterion": "Does not claim capture metadata unless size, format, modifier, timestamp, and sync evidence exists.",
+      "status": "passed",
+      "evidence": "validation-summary.json records timestampEvidence=false and syncEvidence=false."
+    },
+    {
+      "criterion": "Artifacts are saved under evidence/m2-portal-manual-consent-frame-proof and reports/qd/m2-portal-manual-consent-frame-proof.",
+      "status": "passed",
+      "evidence": "Node-scoped evidence and report directories only."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "Compile portal_screencast_client.c with GLib/GIO flags",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-manual-consent-frame-proof/helper-compile.err"
+    },
+    {
+      "command": "Create/configure/remove node-scoped Hyprland output",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-manual-consent-frame-proof/with-output-hyprland-monitors.json and after-cleanup-hyprland-monitors.json"
+    },
+    {
+      "command": "Run visible portal chooser flow and approve with wtype",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-manual-consent-frame-proof/input-automation.txt and portal-client.txt"
+    },
+    {
+      "command": "Capture PipeWire summary while OpenPipeWireRemote fd was held open",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-manual-consent-frame-proof/pipewire-during-open-remote-summary.json"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-portal-manual-consent-frame-proof/notes.md",
+    "evidence/m2-portal-manual-consent-frame-proof/validation-summary.json",
+    "evidence/m2-portal-manual-consent-frame-proof/portal-client.txt",
+    "evidence/m2-portal-manual-consent-frame-proof/pipewire-during-open-remote-summary.json",
+    "reports/qd/m2-portal-manual-consent-frame-proof/completion.json",
+    "reports/qd/m2-portal-manual-consent-frame-proof/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live Linux Hyprland, xdg-desktop-portal, wtype, and PipeWire probes completed with cleanup evidence."
+  },
+  "unverifiedItems": [],
+  "residualRisks": [
+    "The helper opens and holds the PipeWire remote fd but does not consume a frame from it.",
+    "Timestamp and sync metadata still need to be proven by m2-capture-one-frame or a dedicated PipeWire frame consumer."
+  ],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "role": "portal-chooser",
+    "mapped": true,
+    "hidden": false,
+    "visible": true,
+    "acceptsInput": true,
+    "floating": false,
+    "monitor": 3,
+    "workspace": {
+      "id": -1337,
+      "name": "madobe-qd-m2-portal-manual-consent-frame-proof-workspace"
+    },
+    "class": "<redacted-portal-class>",
+    "title": "<redacted-portal-title>"
+  }
+]
