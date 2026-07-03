@@ -1,0 +1,9 @@
+Command: nix-shell -p pkg-config wayland wayland-protocols libgbm libdrm libglvnd wayland-scanner gcc --run dependency probe
+/nix/store/1m05k7xgfnw6jc21xxk5681ni3ar97wf-pkg-config-wrapper-0.29.2/bin/pkg-config
+/nix/store/788mx070y81zjlg5ipcl0cra3afviw9k-gcc-wrapper-15.2.0/bin/cc
+/nix/store/rklfwd61v1scvn1870jv6nkvspqxfigb-wayland-scanner-1.25.0-bin/bin/wayland-scanner
+1.25.0
+1.48
+26.0.3
+1.5
+2.4.133

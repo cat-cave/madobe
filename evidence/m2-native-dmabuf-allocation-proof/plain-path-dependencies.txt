@@ -1,0 +1,3 @@
+Command: plain PATH dependency probe
+/run/current-system/sw/bin/hyprctl
+/run/current-system/sw/bin/wayland-info

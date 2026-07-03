@@ -1,0 +1,5 @@
+Command: ls -l /dev/dri
+total 0
+drwxr-xr-x  2 root root        100 Jun 21 18:38 by-path
+crw-rw----+ 1 root video  226,   1 Jun 22 08:40 card1
+crw-rw-rw-  1 root render 226, 128 Jun 21 18:38 renderD128

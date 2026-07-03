@@ -1,0 +1,2 @@
+Command: hyprctl keyword monitor madobe-qd-m2-native-dmabuf-allocation-proof,1280x720@60,50000x50000,1
+keyword can't work with non-legacy parsers. Use eval.
