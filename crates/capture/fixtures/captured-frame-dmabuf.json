@@ -1,0 +1,54 @@
+{
+  "frameId": 7,
+  "size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "dmaBuf": {
+    "format": {
+      "fourcc": "XR24",
+      "drmFormatCode": 875713112
+    },
+    "modifier": {
+      "kind": "drm",
+      "value": 72057594037927936
+    },
+    "fileDescriptors": [
+      {
+        "value": 11
+      }
+    ],
+    "planes": [
+      {
+        "fdIndex": 0,
+        "offsetBytes": 0,
+        "strideBytes": 7680
+      }
+    ]
+  },
+  "damage": {
+    "kind": "rects",
+    "rects": [
+      {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 72
+      },
+      {
+        "x": 128,
+        "y": 128,
+        "width": 640,
+        "height": 360
+      }
+    ]
+  },
+  "sync": {
+    "kind": "explicit",
+    "fd": 12
+  },
+  "timestamps": {
+    "captureStartedNs": 1720000000000000000,
+    "frameAvailableNs": 1720000000001666667
+  }
+}
