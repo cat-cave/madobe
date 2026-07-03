@@ -957,6 +957,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m2-native-dmabuf-allocation-proof",
+      "title": "Prove native DMA-BUF allocation for direct capture",
+      "kind": "feature",
+      "milestone": "M2-gpu-video-path",
+      "status": "ready",
+      "priority": "P1",
+      "estimate_points": 1,
+      "risk": "high",
+      "owner": null,
+      "branch": null,
+      "spec": "Prove a driver-native DMA-BUF allocation path that can satisfy Hyprland ext-image-copy capture constraints for the generated output after dumb-buffer PRIME submission returned frame.failed.",
+      "acceptance": "Uses a node-scoped generated Hyprland output with cleanup evidence\nRecords allocator dependencies and whether the Nix dev shell needs pkg-config, libgbm, EGL, or another native allocation dependency\nAllocates a DMA-BUF against the advertised capture device or a justified same-driver device using an advertised format/modifier when possible\nSubmits the buffer through zwp_linux_dmabuf_v1 to ext_image_copy_capture_frame_v1\nEvidence includes advertised device, allocation node/device, selected format, modifier, stride/planes, timestamp/damage, ready/fail result, and cleanup\nIf capture still fails, records the exact compositor, protocol, driver, or allocator condition and proposes the next split\nArtifacts are saved under evidence/m2-native-dmabuf-allocation-proof and reports/qd/m2-native-dmabuf-allocation-proof",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nhardware:Hyprland,DMA-BUF,NVIDIA\nvalidation:manual-hardware",
+      "created_at": "2026-07-03T22:30:40.297Z",
+      "updated_at": "2026-07-03T22:30:40.297Z",
+      "claimed_at": null,
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -1157,6 +1187,12 @@
       "to_node": "m2-direct-capture-api-spike",
       "type": "requires",
       "created_at": "2026-07-03T21:35:06.106Z"
+    },
+    {
+      "from_node": "m2-native-dmabuf-allocation-proof",
+      "to_node": "m2-capture-one-frame",
+      "type": "requires",
+      "created_at": "2026-07-03T22:30:40.395Z"
     }
   ],
   "findings": [
@@ -1180,7 +1216,7 @@
       "node_id": "m2-capture-one-frame",
       "run_id": null,
       "severity": "P1",
-      "status": "open",
+      "status": "resolved",
       "title": "Direct capture frame never reached ready",
       "path": null,
       "line": null,
@@ -1188,7 +1224,7 @@
       "expected": "The capture frame should emit ext_image_copy_capture_frame_v1.ready so the node can claim a completed frame and protocol-ready implicit synchronization.",
       "suggested_fix": "Use a driver-native allocator that can create an advertised NVIDIA block-linear DMA-BUF modifier, or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd.",
       "created_at": "2026-07-03T22:27:56.233Z",
-      "resolved_at": null
+      "resolved_at": "2026-07-03T22:31:01.155Z"
     }
   ],
   "runs": [
