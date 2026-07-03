@@ -1,0 +1,36 @@
+{
+  "nodeId": "m3-videotoolbox-capability-probe",
+  "acceptanceReviewed": [
+    {
+      "criterion": "A deterministic Swift or XCTest probe records kCMVideoCodecType_AV1 / av01 VideoToolbox hardware decode support, or the exact unsupported condition.",
+      "status": "passed",
+      "evidence": "apple/Tests/MadobeClientCoreTests/VideoToolboxCapabilityProbeTests.swift and evidence/m3-videotoolbox-capability-probe/capability-report.json"
+    },
+    {
+      "criterion": "Mac environment, Xcode, Swift, and command evidence are saved under evidence/m3-videotoolbox-capability-probe.",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-capability-probe/mac-env.txt and evidence/m3-videotoolbox-capability-probe/commands.log"
+    },
+    {
+      "criterion": "The probe runs under the macOS check path or is directly documented with command evidence.",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-capability-probe/xcodebuild.log"
+    },
+    {
+      "criterion": "m3-videotoolbox-decode-sample remains responsible for actual encoded sample decode after M2 provides or checks in a valid frame.",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-capability-probe/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m3-videotoolbox-capability-probe/capability-report.json"
+  },
+  "findings": []
+}

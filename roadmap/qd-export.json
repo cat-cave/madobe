@@ -957,6 +957,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m3-videotoolbox-capability-probe",
+      "title": "Probe VideoToolbox AV1 decode capability on macOS",
+      "kind": "feature",
+      "milestone": "M3-mac-video-endpoint",
+      "status": "review",
+      "priority": "P1",
+      "estimate_points": 1,
+      "risk": "medium",
+      "owner": "trevor-mac-orchestrator",
+      "branch": "spec/m3-videotoolbox-capability-probe",
+      "spec": "Probe the local macOS VideoToolbox/CoreMedia runtime for AV1 decode support and preserve evidence that the Mac endpoint can evaluate the codec path before sample decode validation is available.",
+      "acceptance": "A deterministic Swift or XCTest probe records kCMVideoCodecType_AV1 / av01 VideoToolbox hardware decode support, or the exact unsupported condition\nMac environment, Xcode, Swift, and command evidence are saved under evidence/m3-videotoolbox-capability-probe\nThe probe runs under the macOS check path or is directly documented with command evidence\nm3-videotoolbox-decode-sample remains responsible for actual encoded sample decode after M2 provides or checks in a valid frame",
+      "validation": null,
+      "context": "platform:macos\nowner:macos-orchestrator\nframeworks:VideoToolbox,CoreMedia\nvalidation:local-runtime",
+      "created_at": "2026-07-03T22:13:47.469Z",
+      "updated_at": "2026-07-03T22:15:17.770Z",
+      "claimed_at": "2026-07-03T22:15:10.185Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -1157,6 +1187,18 @@
       "to_node": "m2-direct-capture-api-spike",
       "type": "requires",
       "created_at": "2026-07-03T21:35:06.106Z"
+    },
+    {
+      "from_node": "m3-swift-protocol-mirror",
+      "to_node": "m3-videotoolbox-capability-probe",
+      "type": "requires",
+      "created_at": "2026-07-03T22:13:58.546Z"
+    },
+    {
+      "from_node": "m3-videotoolbox-capability-probe",
+      "to_node": "m3-videotoolbox-decode-sample",
+      "type": "requires",
+      "created_at": "2026-07-03T22:14:02.652Z"
     }
   ],
   "findings": [
@@ -3309,6 +3351,50 @@
       "started_at": "2026-07-03T22:04:53.882Z",
       "finished_at": "2026-07-03T22:04:53.882Z",
       "summary": "Merge recorded with squash at commit bbc849618354dc38ada0da36f19a52d7dd1d37d3",
+      "log_path": null
+    },
+    {
+      "id": "9304e738-88d7-4e55-b154-ec21ca910223",
+      "node_id": "m3-videotoolbox-capability-probe",
+      "kind": "implement",
+      "status": "completed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": "/Users/trevor/Documents/GitHub/madobe/.qd/worktrees/m3-videotoolbox-capability-probe/reports/qd/m3-videotoolbox-capability-probe/completion.json",
+      "audit_kind": null,
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-03T22:15:14.237Z",
+      "finished_at": "2026-07-03T22:15:14.237Z",
+      "summary": "Added a macOS VideoToolbox capability probe for AV1, exposed a Codable report from MadobeClientCore, verified it with XCTest, and preserved local Mac capability evidence showing av01 hardware decode support on this machine.",
+      "log_path": null
+    },
+    {
+      "id": "aa5bb713-cb78-4d3a-a481-9d3914e535b8",
+      "node_id": "m3-videotoolbox-capability-probe",
+      "kind": "audit",
+      "status": "passed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": "/Users/trevor/Documents/GitHub/madobe/.qd/worktrees/m3-videotoolbox-capability-probe/reports/qd/m3-videotoolbox-capability-probe/audit.json",
+      "audit_kind": "general",
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-03T22:15:17.769Z",
+      "finished_at": "2026-07-03T22:16:50.421Z",
+      "summary": "Audit passed from /Users/trevor/Documents/GitHub/madobe/.qd/worktrees/m3-videotoolbox-capability-probe/reports/qd/m3-videotoolbox-capability-probe/audit.json",
       "log_path": null
     }
   ],
