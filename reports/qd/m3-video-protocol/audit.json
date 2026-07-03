@@ -1,0 +1,36 @@
+{
+  "nodeId": "m3-video-protocol",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Rust protocol types compile under workspace lints.",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/just-check.log"
+    },
+    {
+      "criterion": "Golden fixtures cover frame id, timestamps, codec, dimensions, keyframe flag, and payload hash.",
+      "status": "passed",
+      "evidence": "crates/protocol/fixtures/encoded-video-frame-av1.json"
+    },
+    {
+      "criterion": "Swift mirror requirements are documented.",
+      "status": "passed",
+      "evidence": "docs/protocol/encoded-video-frame.md"
+    },
+    {
+      "criterion": "Round-trip tests or golden-vector tests exist.",
+      "status": "passed",
+      "evidence": "madobe-protocol tests in evidence/m3-video-protocol/protocol-tests.log"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Protocol-only node; no hardware or cross-device behavior claimed."
+  },
+  "findings": []
+}

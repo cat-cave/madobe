@@ -1,0 +1,119 @@
+{
+  "nodeId": "m3-video-protocol",
+  "summary": "Defined encoded video frame metadata types, added an AV1 golden fixture, documented Swift mirror requirements, and covered fixture byte-for-byte plus metadata round-trip tests without adding external Rust dependencies.",
+  "changedFiles": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "crates/protocol/Cargo.toml",
+    "crates/protocol/src/lib.rs",
+    "crates/protocol/fixtures/encoded-video-frame-av1.json",
+    "docs/protocol/encoded-video-frame.md",
+    "evidence/m3-video-protocol/commands.log",
+    "evidence/m3-video-protocol/just-check.log",
+    "evidence/m3-video-protocol/mac-env.txt",
+    "evidence/m3-video-protocol/notes.md",
+    "evidence/m3-video-protocol/protocol-tests.log",
+    "reports/qd/m3-video-protocol/completion.json",
+    "reports/qd/m3-video-protocol/audit.json",
+    "roadmap/qd-export.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Rust protocol types compile under workspace lints.",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/just-check.log"
+    },
+    {
+      "criterion": "Golden fixtures cover frame id, timestamps, codec, dimensions, keyframe flag, and payload hash.",
+      "status": "passed",
+      "evidence": "crates/protocol/fixtures/encoded-video-frame-av1.json"
+    },
+    {
+      "criterion": "Swift mirror requirements are documented.",
+      "status": "passed",
+      "evidence": "docs/protocol/encoded-video-frame.md"
+    },
+    {
+      "criterion": "Round-trip tests or golden-vector tests exist.",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/protocol-tests.log"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "cargo fmt --all",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/commands.log"
+    },
+    {
+      "command": "cargo check -p madobe-protocol --all-targets --all-features",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/commands.log"
+    },
+    {
+      "command": "just check",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/just-check.log"
+    },
+    {
+      "command": "just test",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/commands.log"
+    },
+    {
+      "command": "cargo test -p madobe-protocol --all-features",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/protocol-tests.log"
+    },
+    {
+      "command": "gh run view 28671693232 --log-failed",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/commands.log"
+    },
+    {
+      "command": "gh run view 28671887279 --log-failed",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/commands.log"
+    },
+    {
+      "command": "cargo deny check",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/commands.log"
+    },
+    {
+      "command": "cargo machete --skip-target-dir",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/commands.log"
+    },
+    {
+      "command": "cargo generate-lockfile",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/commands.log"
+    },
+    {
+      "command": "qd ci record-pass m3-video-protocol",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/actions/runs/28672329174"
+    },
+    {
+      "command": "qd gate m3-video-protocol --phase merge",
+      "status": "passed",
+      "evidence": "evidence/m3-video-protocol/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m3-video-protocol/commands.log",
+    "evidence/m3-video-protocol/just-check.log",
+    "evidence/m3-video-protocol/mac-env.txt",
+    "evidence/m3-video-protocol/notes.md",
+    "evidence/m3-video-protocol/protocol-tests.log"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Protocol-only node; no live capture, transport, decode, render, or latency claim is made."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

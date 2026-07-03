@@ -1,0 +1,21 @@
+timestamp_utc: 2026-07-03T15:52:12Z
+repo: https://github.com/cat-cave/madobe.git
+branch: qd/m3-video-protocol
+commit: f91b5cc193d7c51329d0f2fd29fc6bce85593027
+
+[sw_vers]
+ProductName:		macOS
+ProductVersion:		26.5.1
+BuildVersion:		25F80
+
+[rustc]
+rustc 1.95.0 (59807616e 2026-04-14)
+
+[cargo]
+cargo 1.95.0 (f2d3ce0bd 2026-03-21)
+
+[just]
+just 1.49.0
+
+[qd]
+0.2.1
