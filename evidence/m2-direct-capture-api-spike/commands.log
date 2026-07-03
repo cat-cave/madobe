@@ -1,0 +1,44 @@
+# m2-direct-capture-api-spike command log
+
+All live commands were run on the reference Linux host on 2026-07-03. Runtime paths, Hyprland instance signatures,
+host/user-specific paths, and monitor identity fields are redacted in checked evidence.
+
+## Orchestration context
+
+- Read `docs/ORCHESTRATION.md`.
+- Read `docs/LINUX_ORCHESTRATOR.md`.
+- Ran `qd node show m2-direct-capture-api-spike --full` from the main repo.
+
+## Local tool and protocol inventory
+
+- `command -v hyprctl grim wf-recorder wayland-info pipewire pw-cli pw-dump wpctl busctl jq`
+- `nix develop -c sh -lc 'for name in wl-screenrec wayshot slurp wf-recorder grimshot hyprshot hyprpicker wayland-info grim strings wayland-scanner pkg-config cc; do ...; done'`
+- `hyprctl version` with discovered active Hyprland instance signature.
+- `grim -h`
+- `pipewire --version; pw-cli --version; pw-dump --version; wpctl --version; busctl --version; jq --version`
+- `WAYLAND_DISPLAY=<wayland-socket> wayland-info -i zwlr_screencopy`
+- `WAYLAND_DISPLAY=<wayland-socket> wayland-info -i ext_output_image`
+- `WAYLAND_DISPLAY=<wayland-socket> wayland-info -i ext_foreign_toplevel_image`
+- `WAYLAND_DISPLAY=<wayland-socket> wayland-info -i ext_image`
+- `WAYLAND_DISPLAY=<wayland-socket> wayland-info -i wp_linux_dmabuf`
+- `WAYLAND_DISPLAY=<wayland-socket> wayland-info -i wp_linux_drm_syncobj`
+- `WAYLAND_DISPLAY=<wayland-socket> wayland-info -i wp_presentation`
+- `rg`/`sed` over local `wayland-protocols-1.48` XML for `ext-image-copy-capture`, `ext-image-capture-source`, and `linux-drm-syncobj`.
+
+## Generated-output direct probes
+
+- `hyprctl output remove madobe-qd-m2-direct-capture-api-spike # precleanup`
+- `hyprctl output create headless madobe-qd-m2-direct-capture-api-spike`
+- `hyprctl eval hl.monitor output=madobe-qd-m2-direct-capture-api-spike mode=1280x720@60 position=50000x50000 scale=1`
+- `hyprctl -j monitors | jq ...` filtered to the node output.
+- `WAYLAND_DISPLAY=<wayland-socket> grim -o madobe-qd-m2-direct-capture-api-spike -t ppm <tmp-ppm>`
+- `hyprctl output remove madobe-qd-m2-direct-capture-api-spike # cleanup`
+- `hyprctl -j monitors | jq ...` cleanup proof.
+- `WAYLAND_DISPLAY=<wayland-socket> wayland-info -i wl_output` filtered to the node output.
+- `hyprctl output remove madobe-qd-m2-direct-capture-api-spike # cleanup after wayland-output probe`
+
+## Focused checks
+
+- `python -m json.tool` for node JSON artifacts.
+- Redaction scan over node evidence and reports.
+- Line-count check over node evidence and reports.

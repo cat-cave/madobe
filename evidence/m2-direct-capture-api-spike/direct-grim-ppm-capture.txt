@@ -1,0 +1,7 @@
+Command: XDG_RUNTIME_DIR=<redacted-runtime> WAYLAND_DISPLAY=<wayland-socket> grim -o madobe-qd-m2-direct-capture-api-spike -t ppm <tmp-ppm>
+status=0
+tmp_file=<redacted-tmp-ppm>
+bytes=2764816
+sha256=50ebdc88863181cf272065ea58ca6fe65f9dae3fb485a7d7a94496401a4ba6e3
+ppm_header=P6 1280 720 255 
+metadata_available=size via PPM header only; no format/modifier/timestamp/sync metadata emitted by grim

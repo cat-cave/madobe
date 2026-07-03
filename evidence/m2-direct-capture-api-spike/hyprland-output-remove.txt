@@ -1,0 +1,3 @@
+Command: hyprctl output remove madobe-qd-m2-direct-capture-api-spike # cleanup
+ok
+status=0

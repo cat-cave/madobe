@@ -1,0 +1,56 @@
+{
+  "nodeId": "m2-direct-capture-api-spike",
+  "status": "implementation-path-identified",
+  "hyprlandOutput": {
+    "id": "madobe-qd-m2-direct-capture-api-spike",
+    "created": true,
+    "configuredMode": "1280x720@60",
+    "waylandOutputDiscovered": true,
+    "removed": true
+  },
+  "candidatePath": {
+    "api": "ext-image-copy-capture-v1 with ext-image-capture-source-v1 output source",
+    "portalRequired": false,
+    "readyMadeLocalClientFound": false,
+    "requiresCustomClient": true
+  },
+  "legacyDirectTool": {
+    "tool": "grim",
+    "targetedGeneratedOutput": true,
+    "ppmCreated": true,
+    "ppmSha256": "50ebdc88863181cf272065ea58ca6fe65f9dae3fb485a7d7a94496401a4ba6e3",
+    "providesRequiredMetadata": false
+  },
+  "metadataAvailability": {
+    "size": {
+      "available": true,
+      "source": "ext_image_copy_capture_session_v1.buffer_size; live Hyprland/wl_output/grim evidence"
+    },
+    "format": {
+      "available": true,
+      "source": "ext_image_copy_capture_session_v1.dmabuf_format"
+    },
+    "modifier": {
+      "available": true,
+      "source": "ext_image_copy_capture_session_v1.dmabuf_format modifier array"
+    },
+    "timestamp": {
+      "available": true,
+      "source": "ext_image_copy_capture_frame_v1.presentation_time"
+    },
+    "syncMode": {
+      "available": true,
+      "source": "ext_image_copy_capture_frame_v1.ready event as implicit/protocol-ready synchronization"
+    },
+    "explicitSyncFd": {
+      "available": false,
+      "source": "ext-image-copy-capture-v1 has no capture-frame fence request or event"
+    }
+  },
+  "m2CaptureOneFrameDisposition": "unblocked-for-implicit-sync-direct-client",
+  "caveats": [
+    "No ready-made local CLI exposes ext-image-copy-capture metadata; m2-capture-one-frame must implement a Wayland client.",
+    "This node did not allocate a DMA-BUF or capture via ext-image-copy-capture; it proves local protocol availability, generated-output discoverability, and exact implementation path.",
+    "If explicit sync-fd metadata is mandatory, this path remains insufficient without follow-up protocol/compositor work."
+  ]
+}
