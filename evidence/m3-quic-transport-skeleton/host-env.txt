@@ -1,0 +1,10 @@
+madobe dev shell: use 'just --list' to see commands
+timestamp_utc: 2026-07-03T17:25:06Z
+repo: https://github.com/cat-cave/madobe.git
+branch: spec/m3-quic-transport-skeleton
+commit: 3f3715205a086a46f3f89d80f4b08f3036d50921
+rustc: rustc 1.95.0 (59807616e 2026-04-14) (built from a source tarball)
+cargo: cargo 1.95.0 (f2d3ce0bd 2026-03-21)
+just: just 1.54.0
+nix: nix (Nix) 2.34.7
+qd: 0.2.1

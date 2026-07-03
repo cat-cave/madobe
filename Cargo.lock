@@ -31,6 +31,14 @@ name = "madobe-telemetry"
 version = "0.1.0"
 
 [[package]]
+name = "madobe-transport"
+version = "0.1.0"
+dependencies = [
+ "madobe-protocol",
+ "madobe-telemetry",
+]
+
+[[package]]
 name = "madobectl"
 version = "0.1.0"
 dependencies = [

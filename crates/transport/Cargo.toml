@@ -1,0 +1,14 @@
+[package]
+name = "madobe-transport"
+description = "Dependency-free loopback transport skeleton for madobe"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+madobe-protocol.workspace = true
+madobe-telemetry.workspace = true
+
+[lints]
+workspace = true
