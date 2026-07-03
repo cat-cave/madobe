@@ -1,2 +1,4 @@
 [tools]
+rust = "stable"
+just = "latest"
 tuist = "4.200.5"

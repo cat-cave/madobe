@@ -1,0 +1,41 @@
+{
+  "nodeId": "m0-ci-green",
+  "acceptanceReviewed": [
+    {
+      "criterion": "GitHub Actions ci workflow runs on a bootstrap PR.",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/actions/runs/28633801053"
+    },
+    {
+      "criterion": "Linux job passes from clean checkout.",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/actions/runs/28633801053/job/84915937778"
+    },
+    {
+      "criterion": "macOS job passes from clean checkout.",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/actions/runs/28633801053/job/84915937781"
+    },
+    {
+      "criterion": "Nightly workflow is syntactically valid.",
+      "status": "passed",
+      "evidence": "actionlint passed during `nix develop -c just check`"
+    },
+    {
+      "criterion": "CI result URL is recorded in evidence/m0-ci-green/notes.md.",
+      "status": "passed",
+      "evidence": "evidence/m0-ci-green/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Hosted GitHub Actions run passed on linux and macos jobs."
+  },
+  "findings": []
+}

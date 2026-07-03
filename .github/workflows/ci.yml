@@ -29,10 +29,6 @@ jobs:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v7.0.0
-      - uses: cachix/install-nix-action@v31.10.6
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-      - run: nix develop -c just check
-      - run: nix develop -c mise install
-      - run: nix develop -c just apple-generate
-      - run: nix develop -c just apple-test
+      - uses: jdx/mise-action@v4.2.0
+      - run: brew install swiftformat swiftlint
+      - run: just macos-check

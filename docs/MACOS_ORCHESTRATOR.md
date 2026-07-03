@@ -18,15 +18,19 @@ The macOS orchestrator owns validation for:
 The Mac orchestrator may also develop Rust protocol, transport, telemetry, CLI, and testkit code. Only validation
 that requires Linux host services should be handed back to the Linux orchestrator.
 
+macOS does not use Nix. It should run the shared repo commands directly after preparing a native toolchain with
+Mise, Homebrew, Xcode, and Tuist. The command surface is still `just`; only the environment manager differs.
+
 ## Startup
 
 ```sh
 git pull --rebase
 qd sync --from roadmap/qd-export.json --expect-clean
 qd doctor --strict
-nix develop -c just check
-nix develop -c just apple-generate
-nix develop -c just apple-test
+just macos-bootstrap
+just check
+just apple-generate
+just apple-test
 qd ready --json
 ```
 
@@ -50,7 +54,7 @@ qd audit start <node-id>
 qd finding add ...
 qd finding resolve ...
 qd audit pass <node-id>
-nix develop -c just apple-test
+just macos-check
 ```
 
 If qd has a configured gate command, run it before requesting CI or merge.
@@ -87,15 +91,15 @@ qd worktree create <node-id>
 Default checks:
 
 ```sh
-nix develop -c just check
-nix develop -c just apple-test
+just macos-bootstrap
+just macos-check
 ```
 
 For Rust-only nodes on Mac:
 
 ```sh
-nix develop -c just check
-nix develop -c just test
+just check
+just test
 ```
 
 For client nodes, also run the relevant Xcode command and record the destination:
