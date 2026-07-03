@@ -1,44 +1,11 @@
 {
   "nodeId": "m2-capture-one-frame",
-  "success": false,
+  "success": true,
   "targetOutput": "madobe-qd-m2-capture-one-frame",
-  "protocolPath": "ext_output_image_capture_source_manager_v1.create_source(wl_output) -> ext_image_copy_capture_manager_v1.create_session(source, options=0) -> ext_image_copy_capture_frame_v1.capture",
-  "globalsSeen": 70,
-  "targetOutputSeen": true,
-  "constraints": {
-    "done": true,
-    "size": {"width": 1920, "height": 1080},
-    "shmFormatCount": 2,
-    "dmabufDeviceSeen": true,
-    "advertisedDmabufDevice": {
-      "dev": "0xE280",
-      "path": "/dev/dri/renderD128",
-      "source": "ext_image_copy_capture_session_v1.dmabuf_device matched to wayland-info main device"
-    },
-    "dmabufFormatCount": 2,
-    "chosenFormat": {"fourcc": "AR24", "drmFormatCode": 875713089},
-    "chosenModifier": {"value": 72057594037927935, "kind": "implicit-invalid"}
-  },
-  "buffer": {
-    "path": "linux-dmabuf/drm-dumb-prime-fd",
-    "allocationNode": "/dev/dri/card1",
-    "advertisedNode": "/dev/dri/renderD128",
-    "width": 1920,
-    "height": 1080,
-    "stride": 7680,
-    "sizeBytes": 8294400,
-    "format": {"fourcc": "AR24", "drmFormatCode": 875713089},
-    "modifier": {"value": 72057594037927935, "kind": "implicit-invalid"}
-  },
-  "frame": {
-    "ready": false,
-    "failed": true,
-    "failureReason": 0,
-    "timestamp": {"seen": true, "clock": "CLOCK_MONOTONIC", "tvSec": 1031971, "tvNsec": 127485650},
-    "syncMode": "implicit/protocol-ready",
-    "explicitSyncFd": false,
-    "transform": {"seen": true, "value": 0},
-    "damage": {"seen": true, "x": 0, "y": 0, "width": 1920, "height": 1080}
-  },
-  "error": "capture frame failed with reason 0"
+  "protocolPath": "ext_output_image_capture_source_manager_v1.create_source(wl_output) -> ext_image_copy_capture_manager_v1.create_session(source, options=0) -> zwp_linux_dmabuf_v1.create_params/create -> ext_image_copy_capture_frame_v1.capture",
+  "constraints": {"done": true, "size": {"width": 1920, "height": 1080}, "dmabufDeviceSeen": true, "advertisedDmabufDevice": {"dev": "0xE280", "path": "/dev/dri/renderD128"}, "dmabufFormatCount": 2, "chosenFormat": {"fourcc": "AR24", "drmFormatCode": 875713089}, "chosenModifier": {"value": 216172782120099856, "hex": "0x0300000000606010", "kind": "NVIDIA_BLOCK_LINEAR_2D"}},
+  "buffer": {"path": "linux-dmabuf/gbm-render-node", "allocationApi": "GBM", "allocationNode": "/dev/dri/renderD128", "driverBackend": "nvidia", "width": 1920, "height": 1080, "format": {"fourcc": "AR24", "drmFormatCode": 875713089}, "modifier": {"value": 216172782120099856, "hex": "0x0300000000606010", "kind": "NVIDIA_BLOCK_LINEAR_2D"}, "boModifier": 216172782120099856, "submittedModifier": 216172782120099856, "usedExplicitModifierAllocation": true, "planes": 1, "stride": 7680, "offset": 0},
+  "bufferImport": {"created": true, "failed": false},
+  "frame": {"ready": true, "failed": false, "failureReason": 0, "timestamp": {"seen": true, "clock": "CLOCK_MONOTONIC", "tvSec": 1035024, "tvNsec": 423597405}, "syncMode": "implicit/protocol-ready", "explicitSyncFd": false, "transform": {"seen": true, "value": 0}, "damage": {"seen": true, "x": 0, "y": 0, "width": 1920, "height": 1080}},
+  "claims": {"cpuReadback": false, "explicitSyncFd": false}
 }

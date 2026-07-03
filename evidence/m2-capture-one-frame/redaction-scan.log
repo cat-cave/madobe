@@ -1,7 +1,26 @@
-Command: artifact redaction/noise scan
-Runtime path matches:
-evidence/m2-capture-one-frame/commands.log:6:- export XDG_RUNTIME_DIR=<runtime-dir>; WAYLAND_DISPLAY=<wayland-socket>; HYPRLAND_INSTANCE_SIGNATURE=<hyprland-instance>
+stale blocker scan:
+evidence/m2-capture-one-frame/validation-summary.json:3:  "status": "blocked",
+evidence/m2-capture-one-frame/validation-summary.json:22:    "bufferPath": "linux-dmabuf/drm-dumb-prime-fd",
+evidence/m2-capture-one-frame/validation-summary.json:24:    "allocationNode": "/dev/dri/card1",
+evidence/m2-capture-one-frame/validation-summary.json:51:      "source": "direct-capture-frame.json frame.ready=false and frame.failed=true"
+evidence/m2-capture-one-frame/validation-summary.json:58:    "fallbackResult": "dumb allocation on /dev/dri/card1 succeeded, PRIME fd submission reached frame.failed"
+evidence/m2-capture-one-frame/validation-summary.json:62:    "successfulFrameCapture": false,
+reports/qd/m2-capture-one-frame/completion.json:3:  "summary": "Attempted a live one-frame capture from the node-scoped Hyprland output through ext_output_image_capture_source_manager_v1 and ext_image_copy_capture_manager_v1. The probe reached capture constraints and recorded size, DMA-BUF format, modifier, timestamp, damage, and attempted implicit/protocol-ready sync mode. A fallback from the advertised render node to /dev/dri/card1 succeeded in allocating and exporting a PRIME fd, but the compositor returned frame.failed reason 0 instead of ready. The node is blocked and does not claim a completed frame or CPU readback.",
+reports/qd/m2-capture-one-frame/completion.json:24:    "reports/qd/m2-capture-one-frame/blocker.md",
+reports/qd/m2-capture-one-frame/completion.json:33:      "evidence": "direct-capture-frame.json records frame.ready=false and frame.failed=true after the card-node fallback."
+reports/qd/m2-capture-one-frame/completion.json:38:      "evidence": "direct-capture-frame.json records linux-dmabuf/drm-dumb-prime-fd, 1920x1080, AR24, modifier 72057594037927935, monotonic timestamp, and attempted implicit/protocol-ready sync mode; no ready event was emitted, so sync completion is not proven."
+reports/qd/m2-capture-one-frame/completion.json:63:      "command": "temporary direct_capture_probe through ext-image-copy-capture with render-node to card-node fallback",
+reports/qd/m2-capture-one-frame/completion.json:77:    "reports/qd/m2-capture-one-frame/blocker.md"
+reports/qd/m2-capture-one-frame/completion.json:81:    "status": "blocked",
+evidence/m2-capture-one-frame/notes.md:36:fallback then attempted dumb allocation on primary card nodes and succeeded on `/dev/dri/card1`. The resulting DRM dumb
+evidence/m2-capture-one-frame/line-limit-check.log:22:   17 reports/qd/m2-capture-one-frame/blocker.md
+reports/qd/m2-capture-one-frame/blocker.md:11:- The fallback allocation on `/dev/dri/card1` succeeded and exported a PRIME fd.
+reports/qd/m2-capture-one-frame/audit.json:22:      "evidence": "direct-capture-frame.json records advertisedNode=/dev/dri/renderD128 and allocationNode=/dev/dri/card1."
+reports/qd/m2-capture-one-frame/audit.json:27:      "evidence": "blocker.md records missing ext_image_copy_capture_frame_v1.ready and recommends driver-native modifier allocation or compositor/protocol acceptance of the implicit-modifier PRIME fd."
+reports/qd/m2-capture-one-frame/audit.json:38:    "status": "blocked",
+reports/qd/m2-capture-one-frame/audit.json:50:      "reproduction": "Run the temporary direct_capture_probe against madobe-qd-m2-capture-one-frame as documented in evidence/m2-capture-one-frame/commands.log.",
+evidence/m2-capture-one-frame/commands.log:15:- compile evidence/m2-capture-one-frame/direct_capture_probe.c to /tmp/m2-capture-one-frame-build/direct_capture_probe
+evidence/m2-capture-one-frame/commands.log:18:- compile evidence/m2-capture-one-frame/direct_capture_probe.c to /tmp/m2-capture-one-frame-build/direct_capture_probe
+evidence/m2-capture-one-frame/commands.log:23:- XDG_RUNTIME_DIR=<runtime-dir> WAYLAND_DISPLAY=<wayland-socket> /tmp/m2-capture-one-frame-build/direct_capture_probe madobe-qd-m2-capture-one-frame > direct-capture-frame.json
 
-Large files over 100000 bytes:
-
-Compiled/temp artifacts in evidence:
+redaction/noise scan:

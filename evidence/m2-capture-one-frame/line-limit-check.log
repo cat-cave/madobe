@@ -1,2 +1,24 @@
-Command: just lint-lines
-max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+   31 evidence/m2-capture-one-frame/commands.log
+   11 evidence/m2-capture-one-frame/direct-capture-frame.json
+   89 evidence/m2-capture-one-frame/hyprland-monitors-after-remove.json
+   89 evidence/m2-capture-one-frame/hyprland-monitors-before.json
+  133 evidence/m2-capture-one-frame/hyprland-monitors-with-output.json
+    1 evidence/m2-capture-one-frame/hyprland-output-configure.txt
+    1 evidence/m2-capture-one-frame/hyprland-output-create.txt
+    1 evidence/m2-capture-one-frame/hyprland-output-remove.txt
+    7 evidence/m2-capture-one-frame/json-validation.log
+  228 evidence/m2-capture-one-frame/just-verify.log
+   10 evidence/m2-capture-one-frame/line-limit-check.log
+   54 evidence/m2-capture-one-frame/notes.md
+    1 evidence/m2-capture-one-frame/precleanup-output-remove.txt
+    0 evidence/m2-capture-one-frame/probe-compile.txt
+    7 evidence/m2-capture-one-frame/redaction-scan.log
+   75 evidence/m2-capture-one-frame/validation-summary.json
+    1 evidence/m2-capture-one-frame/wayland-ext-image-copy.txt
+    1 evidence/m2-capture-one-frame/wayland-ext-output-source.txt
+    1 evidence/m2-capture-one-frame/wayland-linux-drm-syncobj.txt
+   30 evidence/m2-capture-one-frame/wayland-output-inventory.txt
+   55 reports/qd/m2-capture-one-frame/audit.json
+   17 reports/qd/m2-capture-one-frame/blocker.md
+   93 reports/qd/m2-capture-one-frame/completion.json
+  936 total
