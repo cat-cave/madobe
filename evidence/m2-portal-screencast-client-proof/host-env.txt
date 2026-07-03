@@ -1,0 +1,30 @@
+pipewire
+Compiled with libpipewire 1.6.5
+Linked with libpipewire 1.6.5
+pw-cli
+Compiled with libpipewire 1.6.5
+Linked with libpipewire 1.6.5
+pw-dump
+Compiled with libpipewire 1.6.5
+Linked with libpipewire 1.6.5
+wireplumber
+Compiled with libwireplumber 0.5.14
+Linked with libwireplumber 0.5.14
+Hyprland 0.55.2 built from branch v0.55.2-b at commit 39d7e209c79d451efab1b21151d5938289da838d clean (version: bump to 0.55.2).
+Date: 2026-05-16
+Tag: v0.55.2, commits: -1
+
+Libraries:
+Hyprgraphics: built against 0.5.1, system has unknown
+Hyprutils: built against 0.13.1, system has unknown
+Hyprcursor: built against 0.1.13, system has unknown
+Hyprlang: built against 0.6.8, system has unknown
+Aquamarine: built against 0.11.0, system has unknown
+
+Version ABI string: 39d7e209c79d451efab1b21151d5938289da838d_aq_0.11_hu_0.13_hg_0.5_hc_0.1_hlg_0.6
+flags set:
+nix
+
+systemd 260 (260.1)
+helper_source=evidence/m2-portal-screencast-client-proof/portal_screencast_client.c
+helper_binary=<tmp-helper>

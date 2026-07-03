@@ -1,0 +1,38 @@
+{
+  "nodeId": "m2-portal-screencast-client-proof",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Node-scoped output setup and cleanup evidence exists.",
+      "status": "passed",
+      "evidence": "rerun5-hyprland-monitors-with-output.json and rerun5-hyprland-monitors-after-remove.json."
+    },
+    {
+      "criterion": "Portal request lifecycle client was exercised.",
+      "status": "passed",
+      "evidence": "portal_screencast_client.c and rerun5-portal-client.txt."
+    },
+    {
+      "criterion": "Remaining blocker before OpenPipeWireRemote is precisely recorded.",
+      "status": "passed",
+      "evidence": "rerun5-portal-client.txt records SelectSources timeout; blocker.md records no Start, stream ids, or OpenPipeWireRemote call."
+    },
+    {
+      "criterion": "m2-capture-one-frame disposition is explicit.",
+      "status": "passed",
+      "evidence": "validation-summary.json keeps m2-capture-one-frame blocked."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "redactionScanReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live reference-host probe completed with cleanup; the accepted outcome is a documented blocker."
+  },
+  "resolvedFindings": [],
+  "findings": []
+}

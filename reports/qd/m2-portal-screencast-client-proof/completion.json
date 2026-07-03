@@ -1,0 +1,91 @@
+{
+  "nodeId": "m2-portal-screencast-client-proof",
+  "summary": "Implemented and ran a minimal GLib/GDBus portal ScreenCast helper against a node-scoped Hyprland output. The helper received the CreateSession response and extracted the session_handle, but SelectSources did not respond within the bounded 30-second wait. No stream ids or OpenPipeWireRemote fd were reached, and PipeWire showed no video/portal/madobe stream. The node completes with a sharper blocker and leaves m2-capture-one-frame blocked.",
+  "changedFiles": [
+    "evidence/m2-portal-screencast-client-proof/commands.log",
+    "evidence/m2-portal-screencast-client-proof/host-env.txt",
+    "evidence/m2-portal-screencast-client-proof/notes.md",
+    "evidence/m2-portal-screencast-client-proof/portal_screencast_client.c",
+    "evidence/m2-portal-screencast-client-proof/rerun5-portal-client.txt",
+    "evidence/m2-portal-screencast-client-proof/rerun5-portal-client.err",
+    "evidence/m2-portal-screencast-client-proof/rerun5-pipewire-after-summary.json",
+    "evidence/m2-portal-screencast-client-proof/rerun5-hyprland-monitors-with-output.json",
+    "evidence/m2-portal-screencast-client-proof/rerun5-hyprland-monitors-after-remove.json",
+    "evidence/m2-portal-screencast-client-proof/validation-summary.json",
+    "reports/qd/m2-portal-screencast-client-proof/blocker.md",
+    "reports/qd/m2-portal-screencast-client-proof/completion.json",
+    "reports/qd/m2-portal-screencast-client-proof/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Uses the node-scoped madobe output and disposable workspace setup with cleanup evidence.",
+      "status": "passed",
+      "evidence": "rerun5-hyprland-monitors-with-output.json and rerun5-hyprland-monitors-after-remove.json."
+    },
+    {
+      "criterion": "Captures the portal response and returned stream ids from a consented ScreenCast session, or documents the exact manual UI or environment blocker.",
+      "status": "passed",
+      "evidence": "rerun5-portal-client.txt captures CreateSession response and SelectSources timeout; blocker.md records that no consented stream ids were returned."
+    },
+    {
+      "criterion": "Calls OpenPipeWireRemote or records the exact blocker before that call.",
+      "status": "passed",
+      "evidence": "validation-summary.json records OpenPipeWireRemote was not reached because SelectSources timed out."
+    },
+    {
+      "criterion": "Captures PipeWire stream or node metadata sufficient to decide whether m2-capture-one-frame can proceed.",
+      "status": "passed",
+      "evidence": "rerun5-pipewire-after-summary.json shows no video/portal/madobe stream; validation-summary.json keeps m2-capture-one-frame blocked."
+    },
+    {
+      "criterion": "Does not add third-party Rust dependencies without a separate dependency-policy finding or node.",
+      "status": "passed",
+      "evidence": "Only evidence/report files and a local C helper artifact were added; Cargo manifests are unchanged."
+    },
+    {
+      "criterion": "Artifacts are saved under evidence/m2-portal-screencast-client-proof and reports/qd/m2-portal-screencast-client-proof.",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-screencast-client-proof/ and reports/qd/m2-portal-screencast-client-proof/."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "hyprctl output create/configure/remove madobe-qd-m2-portal-screencast-client-proof",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-screencast-client-proof/commands.log"
+    },
+    {
+      "command": "gcc portal_screencast_client.c with GLib/GIO flags from Nix store pkg-config",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-screencast-client-proof/rerun5-helper-compile.err"
+    },
+    {
+      "command": "portal_screencast_client --response-timeout 30 --hold-seconds 10",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-screencast-client-proof/rerun5-portal-client.txt"
+    },
+    {
+      "command": "pw-dump focused summary after portal client",
+      "status": "passed",
+      "evidence": "evidence/m2-portal-screencast-client-proof/rerun5-pipewire-after-summary.json"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-portal-screencast-client-proof/commands.log",
+    "evidence/m2-portal-screencast-client-proof/notes.md",
+    "evidence/m2-portal-screencast-client-proof/validation-summary.json",
+    "reports/qd/m2-portal-screencast-client-proof/blocker.md"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live Linux Hyprland, portal, and PipeWire probes were collected. The result is a documented SelectSources timeout blocker rather than a successful stream capture."
+  },
+  "unverifiedItems": [],
+  "residualRisks": [
+    "The portal chooser may require visible user interaction or a parent window context that this helper did not provide.",
+    "No stream ids, PipeWire remote fd, DMA-BUF format, modifier, timestamp, or sync metadata were obtained."
+  ],
+  "dagChangesNeeded": []
+}
