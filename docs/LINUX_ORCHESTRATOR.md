@@ -121,6 +121,41 @@ screenshots/
 
 Never claim "no CPU readback", "zero copy", HDR preservation, or latency targets without evidence.
 
+## Remote Display Control Smoke
+
+Use a node-specific `madobe-*` output id so cleanup is exact and does not touch developer-session monitors:
+
+```sh
+NODE_OUTPUT=madobe-qd-m1-hostd-control-cli
+nix develop -c cargo run -q -p madobectl -- display status
+nix develop -c cargo run -q -p madobectl -- display create --id "$NODE_OUTPUT"
+hyprctl -j monitors
+nix develop -c cargo run -q -p madobectl -- display park --id "$NODE_OUTPUT"
+hyprctl -j monitors
+nix develop -c cargo run -q -p madobectl -- display remove --id "$NODE_OUTPUT"
+hyprctl -j monitors
+```
+
+The expected evidence is:
+
+- `display status` lists only madobe-owned remote outputs with stable field order.
+- `display create` reports the named output as `state=ready`.
+- monitor JSON after create includes the named output at the requested smoke mode.
+- `display park` reports the named output as `state=parked`.
+- monitor JSON after park keeps physical developer monitors present and moves only the named madobe output to its parking configuration.
+- `display remove` reports `status=removed`.
+- final monitor JSON does not include the named output.
+
+For a single cleanup-safe lifecycle probe, run:
+
+```sh
+NODE_OUTPUT=madobe-qd-m1-hostd-control-cli-smoke
+nix develop -c cargo run -q -p madobectl -- display smoke --id "$NODE_OUTPUT"
+hyprctl -j monitors
+```
+
+The smoke command creates, parks, and removes the named output. If it fails midway, run `nix develop -c cargo run -q -p madobectl -- display remove --id "$NODE_OUTPUT"` and capture both the command output and final `hyprctl -j monitors` state.
+
 ## Cross-Device Duties
 
 For cross-device nodes, Linux provides:

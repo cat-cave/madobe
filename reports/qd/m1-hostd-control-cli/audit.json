@@ -1,0 +1,56 @@
+{
+  "nodeId": "m1-hostd-control-cli",
+  "acceptanceReviewed": [
+    {
+      "criterion": "madobectl exposes display status and lifecycle commands.",
+      "status": "passed",
+      "evidence": "apps/cli/src/lib.rs and madobectl unit tests cover status, create, park, remove, and smoke parsing/output."
+    },
+    {
+      "criterion": "hostd uses the adapter contract rather than Hyprland internals.",
+      "status": "passed",
+      "evidence": "hostd::run_display_action is generic over CompositorAdapter; hostd tests use a mock adapter. The real Hyprland function is only the adapter construction boundary."
+    },
+    {
+      "criterion": "CLI output is deterministic enough for tests.",
+      "status": "passed",
+      "evidence": "Status rendering sorts outputs and all renderers use fixed field ordering; covered by focused tests."
+    },
+    {
+      "criterion": "Linux hardware validation commands are documented.",
+      "status": "passed",
+      "evidence": "docs/LINUX_ORCHESTRATOR.md includes Remote Display Control Smoke commands, expected monitor evidence, and cleanup instructions."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "The node documents hardware validation commands. Non-mutating live status probes from both implementor and Linux orchestrator shells failed because Hyprland state was unavailable."
+  },
+  "resolvedFindings": [
+    {
+      "title": "Clippy ownership findings in hostd smoke helper",
+      "severity": "P2",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log",
+      "observed": "Initial just check failed on needless_pass_by_value and redundant_clone.",
+      "expected": "Workspace clippy gate passes with -D warnings.",
+      "classification": "lint",
+      "summary": "run_smoke now borrows OutputId and the redundant test clone was removed."
+    },
+    {
+      "title": "Forbidden expect_err in CLI test",
+      "severity": "P2",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log",
+      "observed": "Second just check failed on clippy::expect_used.",
+      "expected": "Tests avoid expect/unwrap under workspace lint policy.",
+      "classification": "lint",
+      "summary": "The test now uses an explicit match for the expected usage error."
+    }
+  ],
+  "findings": []
+}
