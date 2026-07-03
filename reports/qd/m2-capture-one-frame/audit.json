@@ -4,27 +4,27 @@
     {
       "criterion": "Generated Hyprland output is node-scoped and cleaned up.",
       "status": "passed",
-      "evidence": "hyprland-monitors-with-output.json contains madobe-qd-m2-capture-one-frame; hyprland-monitors-after-remove.json contains zero entries with that name."
+      "evidence": "hyprland-monitors-with-output.json contains madobe-qd-m2-capture-one-frame; hyprland-monitors-after-remove.json contains no monitor with that name."
     },
     {
-      "criterion": "Direct Wayland protocol path is evidenced.",
+      "criterion": "One frame reaches ready.",
       "status": "passed",
-      "evidence": "wayland-output-inventory.txt plus wayland-ext-output-source.txt and wayland-ext-image-copy.txt show the target output and required globals."
+      "evidence": "direct-capture-frame.json records frame.ready=true and frame.failed=false."
     },
     {
-      "criterion": "Buffer path, size, format, modifier, timestamp, and sync mode are not overclaimed.",
+      "criterion": "Required metadata is present.",
       "status": "passed",
-      "evidence": "validation-summary.json records metadata observed before failure and explicitly marks readyEventSeen=false and successfulFrameCapture=false."
+      "evidence": "validation-summary.json records size, format, modifier, timestamp, damage, buffer path, and sync mode."
     },
     {
-      "criterion": "Fallback allocator result is recorded.",
+      "criterion": "No CPU readback is overclaimed.",
       "status": "passed",
-      "evidence": "direct-capture-frame.json records advertisedNode=/dev/dri/renderD128 and allocationNode=/dev/dri/card1."
+      "evidence": "direct-capture-frame.json records claims.cpuReadback=false."
     },
     {
-      "criterion": "Blocked status includes exact missing condition and next unblocker.",
+      "criterion": "Verification artifacts are present.",
       "status": "passed",
-      "evidence": "blocker.md records missing ext_image_copy_capture_frame_v1.ready and recommends driver-native modifier allocation or compositor/protocol acceptance of the implicit-modifier PRIME fd."
+      "evidence": "json-validation.log, redaction-scan.log, line-limit-check.log, and just-verify.log."
     }
   ],
   "verificationEvidence": {
@@ -35,21 +35,9 @@
   },
   "realWorldValidation": {
     "required": true,
-    "status": "blocked",
-    "evidence": "Live output creation, protocol inventory, DMA-BUF frame attempt, fallback allocation, and cleanup evidence were collected on the Linux host."
+    "status": "passed",
+    "evidence": "evidence/m2-capture-one-frame/direct-capture-frame.json"
   },
   "resolvedFindings": [],
-  "findings": [
-    {
-      "severity": "P1",
-      "title": "Direct capture frame never reached ready",
-      "evidence": "evidence/m2-capture-one-frame/direct-capture-frame.json",
-      "observed": "The direct ext-image-copy probe emitted timestamp, damage, and transform events, then returned frame.failed reason 0 after render-node and card-node DMA-BUF allocation attempts.",
-      "expected": "The capture frame should emit ext_image_copy_capture_frame_v1.ready so the node can claim a completed frame and protocol-ready implicit synchronization.",
-      "acceptanceCriterion": "One frame can be captured from the remote output; metadata includes sync mode.",
-      "reproduction": "Run the temporary direct_capture_probe against madobe-qd-m2-capture-one-frame as documented in evidence/m2-capture-one-frame/commands.log.",
-      "classification": "environment",
-      "suggestedFix": "Use a driver-native allocator that can create an advertised NVIDIA block-linear DMA-BUF modifier, or adjust the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd."
-    }
-  ]
+  "findings": []
 }

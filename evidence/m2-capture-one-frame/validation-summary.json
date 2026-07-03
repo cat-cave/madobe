@@ -1,9 +1,10 @@
 {
   "nodeId": "m2-capture-one-frame",
-  "status": "blocked",
-  "capturedFrameReady": false,
+  "status": "complete",
+  "capturedFrameReady": true,
+  "targetOutput": "madobe-qd-m2-capture-one-frame",
+  "protocolPath": "ext_output_image_capture_source_manager_v1.create_source(wl_output) -> ext_image_copy_capture_manager_v1.create_session(source, options=0) -> zwp_linux_dmabuf_v1.create_params/create -> ext_image_copy_capture_frame_v1.capture",
   "hyprlandOutput": {
-    "name": "madobe-qd-m2-capture-one-frame",
     "created": true,
     "waylandOutputDiscovered": true,
     "reportedWidth": 1920,
@@ -12,64 +13,48 @@
     "refreshHz": 60,
     "removed": true
   },
-  "protocolPath": {
-    "source": "ext_output_image_capture_source_manager_v1.create_source(wl_output)",
-    "capture": "ext_image_copy_capture_manager_v1.create_session(source, options=0)",
-    "frame": "ext_image_copy_capture_frame_v1.capture",
-    "portalRequired": false
-  },
   "metadataEvidence": {
-    "bufferPath": "linux-dmabuf/drm-dumb-prime-fd",
+    "bufferPath": "linux-dmabuf/gbm-render-node",
+    "allocationApi": "GBM",
     "advertisedDmabufDevice": "/dev/dri/renderD128",
-    "allocationNode": "/dev/dri/card1",
+    "allocationNode": "/dev/dri/renderD128",
+    "driverBackend": "nvidia",
     "size": {
       "width": 1920,
-      "height": 1080,
-      "source": "direct-capture-frame.json constraints.buffer_size"
+      "height": 1080
     },
     "format": {
       "fourcc": "AR24",
-      "drmFormatCode": 875713089,
-      "source": "direct-capture-frame.json constraints.chosenFormat"
+      "drmFormatCode": 875713089
     },
     "modifier": {
-      "value": 72057594037927935,
-      "kind": "implicit-invalid",
-      "source": "direct-capture-frame.json constraints.chosenModifier"
+      "value": 216172782120099856,
+      "hex": "0x0300000000606010",
+      "kind": "NVIDIA_BLOCK_LINEAR_2D"
     },
+    "planes": 1,
+    "stride": 7680,
     "timestamp": {
       "seen": true,
       "clock": "CLOCK_MONOTONIC",
-      "tvSec": 1031971,
-      "tvNsec": 127485650,
-      "source": "direct-capture-frame.json frame.timestamp"
+      "tvSec": 1035024,
+      "tvNsec": 423597405
     },
     "syncMode": {
-      "readyEventSeen": false,
-      "attemptedMode": "implicit/protocol-ready",
-      "explicitSyncFd": false,
-      "source": "direct-capture-frame.json frame.ready=false and frame.failed=true"
+      "readyEventSeen": true,
+      "mode": "implicit/protocol-ready",
+      "explicitSyncFd": false
     }
-  },
-  "failure": {
-    "stage": "ext_image_copy_capture_frame_v1 capture completion",
-    "reason": "frame.failed reason 0 (unknown) after timestamp and damage events; no ready event",
-    "firstAllocatorFailure": "DRM_IOCTL_MODE_CREATE_DUMB on /dev/dri/renderD128 failed with Permission denied",
-    "fallbackResult": "dumb allocation on /dev/dri/card1 succeeded, PRIME fd submission reached frame.failed"
   },
   "claims": {
     "cpuReadback": false,
-    "successfulFrameCapture": false,
+    "successfulFrameCapture": true,
     "explicitSyncFd": false
   },
   "evidence": [
     "evidence/m2-capture-one-frame/direct-capture-frame.json",
     "evidence/m2-capture-one-frame/hyprland-monitors-with-output.json",
     "evidence/m2-capture-one-frame/hyprland-monitors-after-remove.json",
-    "evidence/m2-capture-one-frame/wayland-output-inventory.txt",
-    "evidence/m2-capture-one-frame/wayland-ext-output-source.txt",
-    "evidence/m2-capture-one-frame/wayland-ext-image-copy.txt",
-    "evidence/m2-capture-one-frame/wayland-linux-drm-syncobj.txt"
-  ],
-  "bestNextUnblocker": "Use a driver-native allocator that can create a DMA-BUF with one of the advertised NVIDIA block-linear modifiers, or change the compositor/protocol path to accept the implicit-modifier dumb-buffer PRIME fd."
+    "evidence/m2-capture-one-frame/notes.md"
+  ]
 }

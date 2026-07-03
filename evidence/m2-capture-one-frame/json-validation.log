@@ -1,1 +1,7 @@
-Command: jq empty evidence/m2-capture-one-frame/validation-summary.json evidence/m2-capture-one-frame/direct-capture-frame.json reports/qd/m2-capture-one-frame/completion.json reports/qd/m2-capture-one-frame/audit.json
+ok evidence/m2-capture-one-frame/direct-capture-frame.json
+ok evidence/m2-capture-one-frame/validation-summary.json
+ok evidence/m2-capture-one-frame/hyprland-monitors-before.json
+ok evidence/m2-capture-one-frame/hyprland-monitors-with-output.json
+ok evidence/m2-capture-one-frame/hyprland-monitors-after-remove.json
+ok reports/qd/m2-capture-one-frame/completion.json
+ok reports/qd/m2-capture-one-frame/audit.json

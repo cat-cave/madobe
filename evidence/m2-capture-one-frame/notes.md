@@ -4,51 +4,51 @@ Captured on the reference Linux host on July 3, 2026.
 
 ## Result
 
-Status: blocked after live direct-capture fallback.
+Status: complete.
 
-The probe reached the required direct Wayland path:
+The proof captured one frame from the node-scoped Hyprland headless output
+`madobe-qd-m2-capture-one-frame` through the direct Wayland capture path:
 
-`wl_output` named `madobe-qd-m2-capture-one-frame` ->
-`ext_output_image_capture_source_manager_v1.create_source` ->
+`wl_output` -> `ext_output_image_capture_source_manager_v1.create_source` ->
 `ext_image_copy_capture_manager_v1.create_session` ->
+GBM allocation on `/dev/dri/renderD128` ->
+`zwp_linux_dmabuf_v1.create_params` / `create` ->
 `ext_image_copy_capture_frame_v1.capture`.
 
-The compositor returned capture constraints and frame metadata, but did not produce a completed frame. The frame ended
-with `ext_image_copy_capture_frame_v1.failed` reason `0` (`unknown`) instead of `ready`, so this node cannot claim a
-successful one-frame capture or protocol-ready synchronization.
+The compositor emitted `ext_image_copy_capture_frame_v1.ready`, so this node
+now has a completed frame with protocol-ready implicit synchronization.
 
-## Output Identity
+## Frame Metadata
 
-The node-scoped Hyprland output was created as `madobe-qd-m2-capture-one-frame` and was visible through both Hyprland
-monitor state and Wayland `wl_output` inventory. Hyprland reported the configured output at `1920x1080`, scale `2`, and
-`60 Hz`. The output was removed after probing, and the cleanup snapshot contains no monitor with the node output name.
-
-## Buffer Fallback Attempt
-
-The capture session advertised DMA-BUF constraints:
+The successful capture is recorded in `direct-capture-frame.json`:
 
 - Size: `1920x1080`.
-- Advertised DMA-BUF device: `/dev/dri/renderD128`, matching Wayland DMA-BUF main device `0xE280`.
-- Candidate format: `AR24`, DRM format code `875713089`.
-- Candidate modifier: `72057594037927935`, `DRM_FORMAT_MOD_INVALID` / implicit modifier.
-
-Initial dumb-buffer allocation on the advertised render node failed with `Permission denied` in the first probe run. The
-fallback then attempted dumb allocation on primary card nodes and succeeded on `/dev/dri/card1`. The resulting DRM dumb
-buffer was exported as a PRIME fd and submitted through `zwp_linux_dmabuf_v1`.
-
-The compositor accepted enough of the frame request to emit:
-
-- Timestamp: `CLOCK_MONOTONIC`, `tvSec=1031971`, `tvNsec=127485650`.
-- Damage: full output, `1920x1080`.
+- Buffer path: `linux-dmabuf/gbm-render-node`.
+- Allocation API: GBM.
+- Allocation node: `/dev/dri/renderD128`.
+- Driver backend: `nvidia`.
+- Format: `AR24`, DRM format code `875713089`.
+- Modifier: `216172782120099856` / `0x0300000000606010`, NVIDIA block-linear.
+- Planes: `1`.
+- Stride: `7680`.
+- Timestamp: `CLOCK_MONOTONIC`, `tvSec=1035024`, `tvNsec=423597405`.
 - Transform: `0`.
-
-It then returned `failed` reason `0` instead of `ready`.
-
-## Blocker
-
-The missing condition is a successful `ext_image_copy_capture_frame_v1.ready` event for the submitted Linux DMA-BUF. The
-best next unblocker is to allocate the buffer through a driver-native allocator that can produce one of Hyprland's
-advertised NVIDIA block-linear modifiers, or to adjust the compositor/protocol path so an implicit-modifier PRIME fd
-created from a dumb primary-node buffer is accepted for capture.
+- Damage: full output, `1920x1080`.
+- Sync mode: `implicit/protocol-ready`.
+- Explicit sync fd: not emitted by this protocol path.
 
 No CPU readback is claimed.
+
+## Output Lifecycle
+
+The output was created, configured, captured, and removed. Cleanup evidence is in
+`hyprland-monitors-after-remove.json`, which contains no monitor named
+`madobe-qd-m2-capture-one-frame`.
+
+## Dependency Note
+
+This proof reused the native allocation path established by
+`m2-native-dmabuf-allocation-proof`: a temporary proof environment with GBM,
+Wayland protocol headers, libdrm, and wayland-scanner. The current repo dev
+shell can run validation, but a committed native capture helper would need the
+native graphics development packages documented by that prerequisite node.
