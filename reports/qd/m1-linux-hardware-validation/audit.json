@@ -1,0 +1,38 @@
+{
+  "nodeId": "m1-linux-hardware-validation",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Remote output lifecycle succeeds on hardware.",
+      "status": "passed",
+      "evidence": "validation-summary.json and Hyprland monitor snapshots prove create, adopt/configure, park, remove, and final absence for the named output."
+    },
+    {
+      "criterion": "Restart or reconciliation scenario is exercised or blocked with exact condition.",
+      "status": "passed",
+      "evidence": "cli-create-adopt-existing.out and hyprland-monitors-after-adopt.json show a second create against the existing output succeeded through the adapter's existing-output configure path."
+    },
+    {
+      "criterion": "evidence/m1-linux-hardware-validation contains commands, host logs, Hyprland JSON, and notes.",
+      "status": "passed",
+      "evidence": "commands.log, host.log, host-env.txt, notes.md, validation-summary.json, monitor JSON, and workspace JSON are present."
+    },
+    {
+      "criterion": "Findings are filed for any flaky or unproven behavior.",
+      "status": "passed",
+      "evidence": "No flaky or unproven behavior was observed in command statuses or artifacts, so no findings were filed."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "redactionReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live reference-host Hyprland lifecycle validation passed."
+  },
+  "resolvedFindings": [],
+  "findings": []
+}

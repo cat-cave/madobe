@@ -1,0 +1,236 @@
+[
+  {
+    "id": 1,
+    "name": "DP-2",
+    "description": "<redacted-physical-monitor>",
+    "make": "<redacted>",
+    "model": "<redacted>",
+    "serial": "<redacted>",
+    "width": 3840,
+    "height": 2160,
+    "physicalWidth": 600,
+    "physicalHeight": 340,
+    "refreshRate": 94.98100,
+    "x": 0,
+    "y": 0,
+    "activeWorkspace": {
+      "id": 11,
+      "name": "11"
+    },
+    "specialWorkspace": {
+      "id": 0,
+      "name": ""
+    },
+    "reserved": [
+      0,
+      30,
+      0,
+      0
+    ],
+    "scale": 1.00,
+    "transform": 0,
+    "focused": true,
+    "dpmsStatus": true,
+    "vrr": false,
+    "solitary": "0",
+    "solitaryBlockedBy": [
+      "WINDOWED",
+      "CANDIDATE"
+    ],
+    "activelyTearing": false,
+    "tearingBlockedBy": [
+      "NOT_TORN",
+      "USER",
+      "CANDIDATE"
+    ],
+    "directScanoutTo": "0",
+    "directScanoutBlockedBy": [
+      "USER",
+      "SW",
+      "CANDIDATE"
+    ],
+    "disabled": false,
+    "currentFormat": "XRGB8888",
+    "mirrorOf": "none",
+    "availableModes": [
+      "3840x2160@144.00Hz",
+      "3840x2160@94.98Hz",
+      "3840x2160@60.00Hz",
+      "2560x1440@143.97Hz",
+      "1920x1080@143.98Hz",
+      "1920x1080@60.00Hz",
+      "1920x1080@59.94Hz",
+      "1280x720@59.94Hz",
+      "1024x768@60.00Hz",
+      "800x600@60.32Hz",
+      "720x480@59.94Hz",
+      "640x480@59.95Hz",
+      "640x480@59.94Hz",
+      "640x480@59.93Hz"
+    ],
+    "colorManagementPreset": "srgb",
+    "sdrBrightness": 1.00,
+    "sdrSaturation": 1.00,
+    "sdrMinLuminance": 0.20,
+    "sdrMaxLuminance": 80,
+    "hardwareCursorsInUse": false
+  },
+  {
+    "id": 2,
+    "name": "DP-3",
+    "description": "<redacted-physical-monitor>",
+    "make": "<redacted>",
+    "model": "<redacted>",
+    "serial": "<redacted>",
+    "width": 2560,
+    "height": 1440,
+    "physicalWidth": 600,
+    "physicalHeight": 340,
+    "refreshRate": 144.00000,
+    "x": 3840,
+    "y": 0,
+    "activeWorkspace": {
+      "id": 12,
+      "name": "12"
+    },
+    "specialWorkspace": {
+      "id": 0,
+      "name": ""
+    },
+    "reserved": [
+      0,
+      30,
+      0,
+      0
+    ],
+    "scale": 1.00,
+    "transform": 0,
+    "focused": false,
+    "dpmsStatus": true,
+    "vrr": false,
+    "solitary": "0",
+    "solitaryBlockedBy": [
+      "WINDOWED",
+      "CANDIDATE"
+    ],
+    "activelyTearing": false,
+    "tearingBlockedBy": [
+      "NOT_TORN",
+      "USER",
+      "CANDIDATE",
+      "HW_CURSOR"
+    ],
+    "directScanoutTo": "0",
+    "directScanoutBlockedBy": [
+      "USER",
+      "CANDIDATE"
+    ],
+    "disabled": false,
+    "currentFormat": "XRGB8888",
+    "mirrorOf": "none",
+    "availableModes": [
+      "2560x1440@144.00Hz",
+      "2560x1440@165.00Hz",
+      "2560x1440@120.00Hz",
+      "2560x1440@59.95Hz",
+      "1920x1080@165.00Hz",
+      "1920x1080@143.98Hz",
+      "1920x1080@119.88Hz",
+      "1920x1080@60.00Hz",
+      "1920x1080@59.94Hz",
+      "1920x1080@50.00Hz",
+      "1680x1050@59.95Hz",
+      "1600x900@60.00Hz",
+      "1280x1024@75.03Hz",
+      "1280x1024@60.02Hz",
+      "1440x900@59.89Hz",
+      "1280x800@59.81Hz",
+      "1152x864@75.00Hz",
+      "1280x720@60.00Hz",
+      "1280x720@59.94Hz",
+      "1280x720@50.00Hz",
+      "1024x768@75.03Hz",
+      "1024x768@70.07Hz",
+      "1024x768@60.00Hz",
+      "800x600@75.00Hz",
+      "800x600@72.19Hz",
+      "800x600@60.32Hz",
+      "800x600@56.25Hz",
+      "720x576@50.00Hz",
+      "720x480@59.94Hz",
+      "640x480@75.00Hz",
+      "640x480@72.81Hz",
+      "640x480@59.94Hz"
+    ],
+    "colorManagementPreset": "srgb",
+    "sdrBrightness": 1.00,
+    "sdrSaturation": 1.00,
+    "sdrMinLuminance": 0.20,
+    "sdrMaxLuminance": 80,
+    "hardwareCursorsInUse": false
+  },
+  {
+    "id": 3,
+    "name": "madobe-qd-m1-linux-hardware-validation",
+    "description": "",
+    "make": "",
+    "model": "",
+    "serial": "",
+    "width": 1280,
+    "height": 720,
+    "physicalWidth": 0,
+    "physicalHeight": 0,
+    "refreshRate": 60.00000,
+    "x": 50000,
+    "y": 50000,
+    "activeWorkspace": {
+      "id": 13,
+      "name": "13"
+    },
+    "specialWorkspace": {
+      "id": 0,
+      "name": ""
+    },
+    "reserved": [
+      0,
+      30,
+      0,
+      0
+    ],
+    "scale": 1.00,
+    "transform": 0,
+    "focused": false,
+    "dpmsStatus": true,
+    "vrr": false,
+    "solitary": "0",
+    "solitaryBlockedBy": [
+      "WINDOWED",
+      "CANDIDATE"
+    ],
+    "activelyTearing": false,
+    "tearingBlockedBy": [
+      "NOT_TORN",
+      "USER",
+      "SUPPORT",
+      "CANDIDATE"
+    ],
+    "directScanoutTo": "0",
+    "directScanoutBlockedBy": [
+      "USER",
+      "SW",
+      "CANDIDATE"
+    ],
+    "disabled": false,
+    "currentFormat": "XRGB8888",
+    "mirrorOf": "none",
+    "availableModes": [
+      "1920x1080@60.00Hz"
+    ],
+    "colorManagementPreset": "srgb",
+    "sdrBrightness": 1.00,
+    "sdrSaturation": 1.00,
+    "sdrMinLuminance": 0.20,
+    "sdrMaxLuminance": 80,
+    "hardwareCursorsInUse": false
+  }
+]

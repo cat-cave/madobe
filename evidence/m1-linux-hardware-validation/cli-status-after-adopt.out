@@ -1,0 +1,3 @@
+madobe dev shell: use 'just --list' to see commands
+display status count=1
+output id=madobe-qd-m1-linux-hardware-validation state=ready size=1280x720 refresh_millihertz=60000 scale=1/1 position=50000x50000 color_depth=8 workspace=13

@@ -1,0 +1,128 @@
+Node: m1-linux-hardware-validation
+Date: 2026-07-03T13:46:34-05:00
+Output: madobe-qd-m1-linux-hardware-validation
+Hyprland signature: <redacted>
+
+## precleanup-hyprctl-output-remove
+Command: hyprctl output remove madobe-qd-m1-linux-hardware-validation
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/precleanup-hyprctl-output-remove.out
+stderr: evidence/m1-linux-hardware-validation/precleanup-hyprctl-output-remove.err
+
+## cli-status-before
+Command: env HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> nix develop -c cargo run -q -p madobectl -- display status
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/cli-status-before.out
+stderr: evidence/m1-linux-hardware-validation/cli-status-before.err
+
+## hyprland-monitors-before
+Command: hyprctl -j monitors
+Status: 0
+json: evidence/m1-linux-hardware-validation/hyprland-monitors-before.json
+stderr: evidence/m1-linux-hardware-validation/hyprland-monitors-before.err
+
+## hyprland-workspaces-before
+Command: hyprctl -j workspaces
+Status: 0
+json: evidence/m1-linux-hardware-validation/hyprland-workspaces-before.json
+stderr: evidence/m1-linux-hardware-validation/hyprland-workspaces-before.err
+
+## cli-create
+Command: env HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> nix develop -c cargo run -q -p madobectl -- display create --id madobe-qd-m1-linux-hardware-validation
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/cli-create.out
+stderr: evidence/m1-linux-hardware-validation/cli-create.err
+
+## hyprland-monitors-after-create
+Command: hyprctl -j monitors
+Status: 0
+json: evidence/m1-linux-hardware-validation/hyprland-monitors-after-create.json
+stderr: evidence/m1-linux-hardware-validation/hyprland-monitors-after-create.err
+
+## cli-create-adopt-existing
+Command: env HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> nix develop -c cargo run -q -p madobectl -- display create --id madobe-qd-m1-linux-hardware-validation
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/cli-create-adopt-existing.out
+stderr: evidence/m1-linux-hardware-validation/cli-create-adopt-existing.err
+
+## hyprland-monitors-after-adopt
+Command: hyprctl -j monitors
+Status: 0
+json: evidence/m1-linux-hardware-validation/hyprland-monitors-after-adopt.json
+stderr: evidence/m1-linux-hardware-validation/hyprland-monitors-after-adopt.err
+
+## cli-status-after-adopt
+Command: env HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> nix develop -c cargo run -q -p madobectl -- display status
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/cli-status-after-adopt.out
+stderr: evidence/m1-linux-hardware-validation/cli-status-after-adopt.err
+
+## cli-park
+Command: env HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> nix develop -c cargo run -q -p madobectl -- display park --id madobe-qd-m1-linux-hardware-validation
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/cli-park.out
+stderr: evidence/m1-linux-hardware-validation/cli-park.err
+
+## hyprland-monitors-after-park
+Command: hyprctl -j monitors
+Status: 0
+json: evidence/m1-linux-hardware-validation/hyprland-monitors-after-park.json
+stderr: evidence/m1-linux-hardware-validation/hyprland-monitors-after-park.err
+
+## cli-status-after-park
+Command: env HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> nix develop -c cargo run -q -p madobectl -- display status
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/cli-status-after-park.out
+stderr: evidence/m1-linux-hardware-validation/cli-status-after-park.err
+
+## cli-remove
+Command: env HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> nix develop -c cargo run -q -p madobectl -- display remove --id madobe-qd-m1-linux-hardware-validation
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/cli-remove.out
+stderr: evidence/m1-linux-hardware-validation/cli-remove.err
+
+## hyprland-monitors-after-remove
+Command: hyprctl -j monitors
+Status: 0
+json: evidence/m1-linux-hardware-validation/hyprland-monitors-after-remove.json
+stderr: evidence/m1-linux-hardware-validation/hyprland-monitors-after-remove.err
+
+## hyprland-workspaces-after-remove
+Command: hyprctl -j workspaces
+Status: 0
+json: evidence/m1-linux-hardware-validation/hyprland-workspaces-after-remove.json
+stderr: evidence/m1-linux-hardware-validation/hyprland-workspaces-after-remove.err
+
+## cli-status-final
+Command: env HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> nix develop -c cargo run -q -p madobectl -- display status
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/cli-status-final.out
+stderr: evidence/m1-linux-hardware-validation/cli-status-final.err
+
+## host-log
+Command: journalctl --user --since 2026-07-03T13:40:00 selected services
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/host.log
+stderr: evidence/m1-linux-hardware-validation/host-log.err
+
+## final-cleanup
+Command: hyprctl output remove madobe-qd-m1-linux-hardware-validation
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/final-cleanup.out
+stderr: evidence/m1-linux-hardware-validation/final-cleanup.err
+
+## rust-toolchain-versions
+Command: nix develop -c cargo --version; nix develop -c rustc --version
+Status: 0
+stdout: evidence/m1-linux-hardware-validation/cargo-version.out, evidence/m1-linux-hardware-validation/rustc-version.out
+stderr: evidence/m1-linux-hardware-validation/cargo-version.err, evidence/m1-linux-hardware-validation/rustc-version.err
+
+## just-verify
+Command: nix develop -c just verify
+Status: 0
+stdout/stderr: evidence/m1-linux-hardware-validation/just-verify.log
+
+## final-just-check
+Command: nix develop -c just check
+Status: 0
+Evidence: orchestrator command output immediately before branch commit

@@ -1,0 +1,2 @@
+madobe dev shell: use 'just --list' to see commands
+display remove id=madobe-qd-m1-linux-hardware-validation status=removed
