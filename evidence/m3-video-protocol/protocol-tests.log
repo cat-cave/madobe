@@ -1,0 +1,15 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.00s
+     Running unittests src/lib.rs (target/debug/deps/madobe_protocol-0ed76d844b84fc31)
+
+running 3 tests
+test tests::golden_video_frame_fixture_covers_expected_metadata ... ok
+test tests::golden_video_frame_fixture_round_trips_semantically ... ok
+test tests::hello_carries_stable_identity ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_protocol
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

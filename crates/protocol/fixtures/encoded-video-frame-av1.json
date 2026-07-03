@@ -1,0 +1,14 @@
+{
+  "frameId": 42,
+  "codec": "av1",
+  "width": 2560,
+  "height": 1440,
+  "captureTimestampNs": 1720000000000000000,
+  "encodeTimestampNs": 1720000000004166667,
+  "keyframe": true,
+  "payloadBytes": 38,
+  "payloadHash": {
+    "algorithm": "sha256",
+    "value": "4808d39bb0065087388612224cfda59f52f0278772f390065aa5e743f7bc0667"
+  }
+}

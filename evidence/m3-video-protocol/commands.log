@@ -1,0 +1,200 @@
+Node: m3-video-protocol
+Agent: trevor-mac-orchestrator
+Branch: qd/m3-video-protocol
+Platform: macOS
+Date: 2026-07-03
+
+1. qd claim m3-video-protocol --agent trevor-mac-orchestrator --branch qd/m3-video-protocol
+   Result: passed
+
+2. qd worktree create m3-video-protocol --branch qd/m3-video-protocol
+   Result: passed
+   Worktree: .qd/worktrees/m3-video-protocol
+
+3. printf 'madobe-m3-golden-video-frame-payload-v1' | shasum -a 256
+   Result: passed
+   Output: 4808d39bb0065087388612224cfda59f52f0278772f390065aa5e743f7bc0667
+
+4. cargo fmt --all
+   Result: passed
+
+5. cargo check -p madobe-protocol --all-targets --all-features
+   Result: passed
+
+6. just check
+   Result: passed
+   Evidence: evidence/m3-video-protocol/just-check.log
+   Note: initial sandboxed capture hit the known Taplo macOS SystemConfiguration panic; rerun with normal macOS tool access passed.
+
+7. just test
+   Result: passed
+   Evidence: terminal output
+   Notes: ran workspace Rust tests and current macOS apple-test path; all tests passed.
+
+8. cargo test -p madobe-protocol --all-features
+   Result: passed
+   Evidence: evidence/m3-video-protocol/protocol-tests.log
+
+9. Environment capture
+   Result: passed
+   Evidence: evidence/m3-video-protocol/mac-env.txt
+
+10. qd complete m3-video-protocol --from-report reports/qd/m3-video-protocol/completion.json
+    Result: passed
+    Note: node moved to review.
+
+11. qd audit start m3-video-protocol
+    Result: passed
+
+12. qd audit pass m3-video-protocol --from-report reports/qd/m3-video-protocol/audit.json
+    Result: passed
+    Note: imported zero findings.
+
+13. qd gate m3-video-protocol --phase ci
+    Result: passed
+    Note: merge gate remains blocked until GitHub CI passes.
+
+14. qd export --out roadmap/qd-export.json --deterministic
+    Result: passed
+
+15. cargo test -p madobe-protocol --all-features
+    Result: passed
+
+16. just check
+    Result: passed
+    Note: post-export validation passed. Local macOS does not have typos or markdownlint-cli2 installed; GitHub CI covers those optional checks.
+
+17. git pull --rebase --autostash origin main
+    Result: conflict, resolved
+    Note: main had advanced with m1-hyprland-fixtures and m1-compositor-contract qd records.
+
+18. cargo generate-lockfile
+    Result: passed
+    Note: regenerated lockfile from merged manifests to preserve both the compositor crate and serde dependencies.
+
+19. qd sync --from /private/tmp/madobe-main-qd-export.json
+    Result: passed
+    Note: imported current main qd export before replaying m3 lifecycle records.
+
+20. qd claim/complete/audit/gate/export for m3-video-protocol
+    Result: passed
+    Note: replayed claim, completion, audit pass, CI-phase gate, and deterministic export after rebase.
+
+21. cargo test -p madobe-protocol --all-features
+    Result: passed
+    Evidence: evidence/m3-video-protocol/protocol-tests.log
+
+22. just check
+    Result: passed
+    Evidence: evidence/m3-video-protocol/just-check.log
+    Note: refreshed after rebase onto origin/main.
+
+23. git pull --rebase --autostash origin main
+    Result: conflict, resolved
+    Note: main advanced to 6367fa5 with m1-compositor-contract merge state and manual CI dispatch.
+
+24. qd sync --from /private/tmp/madobe-main-qd-export.json
+    Result: passed
+    Note: imported current main qd export before replaying m3 lifecycle records again.
+
+25. qd claim/complete/audit/gate/export for m3-video-protocol
+    Result: passed
+    Note: replayed claim, completion, audit pass, CI-phase gate, and deterministic export after second rebase.
+
+26. cargo test -p madobe-protocol --all-features
+    Result: passed
+    Evidence: evidence/m3-video-protocol/protocol-tests.log
+
+27. just check
+    Result: passed
+    Evidence: evidence/m3-video-protocol/just-check.log
+    Note: refreshed after rebase onto 6367fa5.
+
+28. gh pr checks 7 --watch --interval 10
+    Result: linux failed, macos passed
+    Evidence: https://github.com/cat-cave/madobe/actions/runs/28671693232
+
+29. gh run view 28671693232 --log-failed
+    Result: passed
+    Note: Linux Nix builder failed because plain cargo check tried to fetch serde from crates.io inside the build sandbox.
+
+30. Update nix/flake.nix
+    Result: passed
+    Note: switched checks.rust to rustPlatform.buildRustPackage with Cargo.lock-driven vendoring.
+
+31. cargo test -p madobe-protocol --all-features
+    Result: passed
+    Evidence: evidence/m3-video-protocol/protocol-tests.log
+
+32. just check
+    Result: passed
+    Evidence: evidence/m3-video-protocol/just-check.log
+    Note: refreshed after Linux CI fix.
+
+33. gh pr checks 7 --watch --interval 10
+    Result: linux failed, macos passed
+    Evidence: https://github.com/cat-cave/madobe/actions/runs/28671887279
+
+34. gh run view 28671887279 --log-failed
+    Result: passed
+    Note: Linux just security failed because cargo-deny rejected Unicode-3.0 from unicode-ident via serde_derive.
+
+35. Update deny.toml
+    Result: passed
+    Note: explicitly allowed Unicode-3.0 for the serde_derive transitive dependency path.
+
+36. cargo machete --skip-target-dir
+    Result: passed
+
+37. cargo deny check
+    Result: passed
+    Note: advisories ok, bans ok, licenses ok, sources ok.
+
+38. cargo test -p madobe-protocol --all-features
+    Result: passed
+    Evidence: evidence/m3-video-protocol/protocol-tests.log
+
+39. just check
+    Result: passed
+    Evidence: evidence/m3-video-protocol/just-check.log
+    Note: refreshed after license policy fix.
+
+40. Remove serde/serde_json approach
+    Result: passed
+    Note: superseded steps 30 and 35; final implementation adds no external Rust dependencies, avoiding new cargo-vet backlog for this fixture node.
+
+41. cargo generate-lockfile
+    Result: passed
+    Note: regenerated lockfile after removing serde/serde_json.
+
+42. cargo fmt --all
+    Result: passed
+
+43. cargo test -p madobe-protocol --all-features
+    Result: passed
+    Evidence: evidence/m3-video-protocol/protocol-tests.log
+
+44. just check
+    Result: passed
+    Evidence: evidence/m3-video-protocol/just-check.log
+
+45. cargo deny check
+    Result: passed
+    Note: advisories ok, bans ok, licenses ok, sources ok.
+
+46. cargo machete --skip-target-dir
+    Result: passed
+
+47. gh pr checks 7 --watch --interval 10
+    Result: passed
+    Evidence: https://github.com/cat-cave/madobe/actions/runs/28672329174
+
+48. qd ci record-pass m3-video-protocol --summary "GitHub Actions ci passed on linux and macos for PR #7 run 28672329174" --url https://github.com/cat-cave/madobe/actions/runs/28672329174
+    Result: passed
+    Note: node moved to mergeable.
+
+49. qd gate m3-video-protocol --phase merge
+    Result: passed
+
+50. qd export --out roadmap/qd-export.json --deterministic
+    Result: passed

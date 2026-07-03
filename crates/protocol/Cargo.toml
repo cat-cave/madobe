@@ -1,6 +1,6 @@
 [package]
 name = "madobe-protocol"
-description = "Protocol identity types for madobe"
+description = "Protocol identity and wire metadata types for madobe"
 edition.workspace = true
 license.workspace = true
 rust-version.workspace = true
