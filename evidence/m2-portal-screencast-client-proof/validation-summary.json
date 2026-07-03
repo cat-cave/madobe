@@ -1,0 +1,28 @@
+{
+  "nodeId": "m2-portal-screencast-client-proof",
+  "status": "completed-with-blocker",
+  "hyprlandOutput": {
+    "id": "madobe-qd-m2-portal-screencast-client-proof",
+    "created": true,
+    "workspaceBound": true,
+    "removed": true
+  },
+  "portalClient": {
+    "helperCompiled": true,
+    "createSessionResponseReceived": true,
+    "sessionHandleExtracted": true,
+    "selectSourcesResponseReceived": false,
+    "selectSourcesTimeoutSeconds": 30,
+    "startCalled": false,
+    "streamIdsReceived": false,
+    "openPipeWireRemoteCalled": false
+  },
+  "pipeWire": {
+    "videoPortalMadobeStreamObserved": false,
+    "metadataSufficientForM2CaptureOneFrame": false
+  },
+  "cleanup": {
+    "outputAbsent": true
+  },
+  "m2CaptureOneFrameDisposition": "remain-blocked"
+}

@@ -1,0 +1,84 @@
+Node: m2-portal-screencast-client-proof
+Worktree: <repo>/.qd/worktrees/m2-portal-screencast-client-proof
+Date: 2026-07-03T15:37:37-05:00
+
+## host-env
+Command: pipewire/pw-cli/pw-dump/wireplumber/hyprctl/busctl versions
+Status: recorded
+Evidence: host-env.txt
+
+## precleanup-output-remove
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl output remove madobe-qd-m2-portal-screencast-client-proof
+Status: tolerated
+Evidence: hyprland-output-precleanup.txt/.err
+
+## hyprland-state-before
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl -j monitors/workspaces
+Status: 0
+Evidence: hyprland-monitors-before.json, hyprland-workspaces-before.json
+
+## hyprland-output-create
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl output create headless madobe-qd-m2-portal-screencast-client-proof
+Status: 0
+Evidence: hyprland-output-create.txt/.err
+
+## hyprland-output-configure
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl keyword monitor madobe-qd-m2-portal-screencast-client-proof,1280x720@60,50000x50000,1
+Status: 0
+Evidence: hyprland-output-configure.txt/.err
+
+## hyprland-workspace-bind
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl dispatch focusmonitor/workspace/moveworkspacetomonitor for node workspace
+Status: 0
+Evidence: hyprland-workspace-bind.txt/.err
+
+## hyprland-state-with-output
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl -j monitors/workspaces
+Status: 0
+Evidence: hyprland-monitors-with-output.json, hyprland-workspaces-with-output.json
+
+## portal-introspection
+Command: busctl introspect/get-property org.freedesktop.portal.ScreenCast
+Status: 0
+Evidence: portal-introspection.txt/.err
+
+## pipewire-before-portal-client
+Command: pw-dump focused Video/portal/Hyprland/madobe summary
+Status: 0
+Evidence: pipewire-before-portal-client-summary.json
+
+## portal-client
+Command: <tmp-helper> --response-timeout 45 --hold-seconds 25
+Status: 5
+OpenPipeWireRemoteObserved: 0
+Evidence: portal-client.txt/.err
+
+## pipewire-after-portal-client
+Command: pw-dump focused Video/portal/Hyprland/madobe summary
+Status: 0
+Evidence: pipewire-after-portal-client-summary.json
+## cleanup-output-remove
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl output remove madobe-qd-m2-portal-screencast-client-proof
+
+## orchestrator-rerun 2026-07-03T15:40:25-05:00
+Reason: rerun setup with Hyprland Lua dispatchers and patched portal helper.
+
+## orchestrator-rerun2 2026-07-03T15:41:36-05:00
+Reason: rerun patched portal helper through nix develop.
+rerun2 status portal-client=127
+rerun2 evidence prefix=rerun2-*
+
+## orchestrator-rerun3 2026-07-03T15:43:02-05:00
+Reason: compile patched portal helper with explicit Nix pkg-config path.
+rerun3 status portal-client=127
+rerun3 evidence prefix=rerun3-*
+
+## orchestrator-rerun4 2026-07-03T15:44:33-05:00
+Reason: compile patched portal helper with exported PKG_CONFIG_PATH.
+rerun4 status portal-client=127
+rerun4 evidence prefix=rerun4-*
+
+## orchestrator-rerun5 2026-07-03T15:45:24-05:00
+Reason: compile patched portal helper with explicit Nix gcc and pkg-config paths.
+rerun5 status portal-client=7
+rerun5 evidence prefix=rerun5-*

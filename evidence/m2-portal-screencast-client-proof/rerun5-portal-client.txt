@@ -1,0 +1,12 @@
+request.method=CreateSession
+request.path=/org/freedesktop/portal/desktop/request/<sender>/madobe_m2_portal_screencast_client_proof_create
+response.stage=CreateSession
+response.path=/org/freedesktop/portal/desktop/request/<sender>/madobe_m2_portal_screencast_client_proof_create
+response.code=0
+response.results={'session_handle': <'/org/freedesktop/portal/desktop/session/<sender>/madobe_m2_portal_screencast_client_proof_session'>}
+session.handle=/org/freedesktop/portal/desktop/session/<sender>/madobe_m2_portal_screencast_client_proof_session
+request.method=SelectSources
+request.path=/org/freedesktop/portal/desktop/request/<sender>/madobe_m2_portal_screencast_client_proof_select
+response.stage=SelectSources
+response.path=/org/freedesktop/portal/desktop/request/<sender>/madobe_m2_portal_screencast_client_proof_select
+response.timeout_seconds=30

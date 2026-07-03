@@ -1,0 +1,26 @@
+[
+  {
+    "id": 11,
+    "name": "11",
+    "monitor": "<redacted-monitor>",
+    "monitorID": 1,
+    "windows": 3,
+    "hasfullscreen": false,
+    "lastwindow": "0x0",
+    "lastwindowtitle": "<redacted-window-title>",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  },
+  {
+    "id": 12,
+    "name": "12",
+    "monitor": "<redacted-monitor>",
+    "monitorID": 2,
+    "windows": 0,
+    "hasfullscreen": false,
+    "lastwindow": "0x0",
+    "lastwindowtitle": "<redacted-window-title>",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  }
+]
