@@ -837,6 +837,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m2-portal-screencast-client-proof",
+      "title": "Prove portal ScreenCast client lifecycle",
+      "kind": "feature",
+      "milestone": "M2-gpu-video-path",
+      "status": "ready",
+      "priority": "P1",
+      "estimate_points": 1,
+      "risk": "high",
+      "owner": null,
+      "branch": null,
+      "spec": "Implement or run a real portal ScreenCast request client that owns the request lifecycle, waits for org.freedesktop.portal.Request.Response, accepts user consent, calls OpenPipeWireRemote, and persists stream/node metadata for the madobe-owned Hyprland output.",
+      "acceptance": "Uses the node-scoped madobe output and disposable workspace setup with cleanup evidence\nCaptures the portal response and returned stream ids from a consented ScreenCast session, or documents the exact manual UI or environment blocker\nCalls OpenPipeWireRemote or records the exact blocker before that call\nCaptures PipeWire stream or node metadata sufficient to decide whether m2-capture-one-frame can proceed\nDoes not add third-party Rust dependencies without a separate dependency-policy finding or node\nArtifacts are saved under evidence/m2-portal-screencast-client-proof and reports/qd/m2-portal-screencast-client-proof",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nhardware:PipeWire,XDPH,Hyprland\nvalidation:hardware",
+      "created_at": "2026-07-03T20:25:01.552Z",
+      "updated_at": "2026-07-03T20:25:01.552Z",
+      "claimed_at": null,
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -1001,6 +1031,18 @@
       "to_node": "m2-capture-one-frame",
       "type": "requires",
       "created_at": "2026-07-03T20:00:34.540Z"
+    },
+    {
+      "from_node": "m2-capture-stream-proof",
+      "to_node": "m2-portal-screencast-client-proof",
+      "type": "requires",
+      "created_at": "2026-07-03T20:25:01.661Z"
+    },
+    {
+      "from_node": "m2-portal-screencast-client-proof",
+      "to_node": "m2-capture-one-frame",
+      "type": "requires",
+      "created_at": "2026-07-03T20:25:01.751Z"
     }
   ],
   "findings": [
