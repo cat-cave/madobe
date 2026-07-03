@@ -11,6 +11,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "madobe-capture"
+version = "0.1.0"
+
+[[package]]
 name = "madobe-compositor"
 version = "0.1.0"
 

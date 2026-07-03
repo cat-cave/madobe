@@ -1,0 +1,76 @@
+{
+  "nodeId": "m2-capture-contract",
+  "summary": "Added the dependency-free madobe-capture crate with platform-neutral captured frame metadata types for DMA-BUF descriptors, format/modifier metadata, damage, sync, size, and timestamps, plus a deterministic golden JSON fixture and evidence logs.",
+  "changedFiles": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "crates/capture/Cargo.toml",
+    "crates/capture/fixtures/captured-frame-dmabuf.json",
+    "crates/capture/src/lib.rs",
+    "crates/capture/tests/captured_frame.rs",
+    "evidence/m2-capture-contract/commands.log",
+    "evidence/m2-capture-contract/just-check.log",
+    "evidence/m2-capture-contract/just-test.log",
+    "evidence/m2-capture-contract/notes.md",
+    "reports/qd/m2-capture-contract/audit.json",
+    "reports/qd/m2-capture-contract/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Capture metadata types compile under workspace lints.",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-contract/just-check.log"
+    },
+    {
+      "criterion": "Types represent format, modifier, size, damage, sync, and timestamp fields.",
+      "status": "passed",
+      "evidence": "crates/capture/src/lib.rs"
+    },
+    {
+      "criterion": "Serialization fixtures or golden debug output exist.",
+      "status": "passed",
+      "evidence": "crates/capture/fixtures/captured-frame-dmabuf.json"
+    },
+    {
+      "criterion": "No platform API is claimed beyond documented evidence.",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-contract/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo clippy -p madobe-capture --all-targets --all-features -- -D warnings",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-contract/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-capture --all-features",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-contract/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-contract/just-check.log"
+    },
+    {
+      "command": "nix develop -c just test",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-contract/just-test.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-capture-contract/commands.log",
+    "evidence/m2-capture-contract/just-check.log",
+    "evidence/m2-capture-contract/just-test.log",
+    "evidence/m2-capture-contract/notes.md"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Contract-only node; no live capture, platform descriptor ownership, compositor integration, or graphics API behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

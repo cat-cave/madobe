@@ -1,0 +1,75 @@
+Node: m2-capture-contract
+Branch: spec/m2-capture-contract
+Worktree: /home/trevor/projects/madobe/.qd/worktrees/m2-capture-contract
+Platform: Linux
+Date: 2026-07-03
+
+1. pwd && git status --short --branch
+   Result: passed
+   Note: confirmed qd worktree and clean starting branch.
+
+2. rg --files
+   Result: passed
+   Note: inspected repository layout and existing crate/report patterns.
+
+3. sed -n '1,220p' Cargo.toml
+   Result: passed
+   Note: inspected workspace members, workspace dependencies, and lint policy.
+
+4. sed -n '1,220p' crates/protocol/src/lib.rs
+   Result: passed
+   Note: inspected existing dependency-free fixture serialization pattern.
+
+5. sed -n '1,260p' crates/compositor/src/config.rs
+   Result: passed
+   Note: inspected typed contract style and public documentation pattern.
+
+6. mkdir -p crates/capture/src crates/capture/fixtures evidence/m2-capture-contract reports/qd/m2-capture-contract
+   Result: passed
+
+7. apply_patch
+   Result: passed
+   Note: added `madobe-capture` workspace crate, public capture metadata API, and fixture tests.
+
+8. nix develop -c cargo fmt --all -- --check
+   Result: passed
+
+9. nix develop -c cargo clippy -p madobe-capture --all-targets --all-features -- -D warnings
+   Result: failed
+   Note: initial integration test needed crate docs and a reasoned allowance for the long golden renderer.
+
+10. apply_patch
+    Result: passed
+    Note: added integration-test crate docs and reasoned `clippy::too_many_lines` allowance.
+
+11. nix develop -c cargo clippy -p madobe-capture --all-targets --all-features -- -D warnings
+    Result: passed
+
+12. nix develop -c cargo test -p madobe-capture --all-features
+    Result: passed
+
+13. nix develop -c bash -c 'just check > evidence/m2-capture-contract/just-check.log 2>&1'
+    Result: passed
+    Evidence: evidence/m2-capture-contract/just-check.log
+
+14. nix develop -c bash -c 'just test > evidence/m2-capture-contract/just-test.log 2>&1'
+    Result: passed
+    Evidence: evidence/m2-capture-contract/just-test.log
+
+15. apply_patch
+    Result: passed
+    Note: added node notes, command evidence, completion report, and audit report.
+
+16. nix develop -c bash -c 'just check > evidence/m2-capture-contract/just-check.log 2>&1'
+    Result: passed
+    Evidence: evidence/m2-capture-contract/just-check.log
+    Note: final validation after adding evidence and report files.
+
+17. nix develop -c bash -c 'just test > evidence/m2-capture-contract/just-test.log 2>&1'
+    Result: passed
+    Evidence: evidence/m2-capture-contract/just-test.log
+    Note: final validation after adding evidence and report files.
+
+18. nix develop -c jq empty reports/qd/m2-capture-contract/completion.json reports/qd/m2-capture-contract/audit.json crates/capture/fixtures/captured-frame-dmabuf.json
+    Result: passed
+    Note: confirmed new JSON fixture and reports parse successfully.

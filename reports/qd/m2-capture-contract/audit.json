@@ -1,0 +1,36 @@
+{
+  "nodeId": "m2-capture-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Capture metadata types compile under workspace lints.",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-contract/just-check.log"
+    },
+    {
+      "criterion": "Types represent format, modifier, size, damage, sync, and timestamp fields.",
+      "status": "passed",
+      "evidence": "crates/capture/src/lib.rs"
+    },
+    {
+      "criterion": "Serialization fixtures or golden debug output exist.",
+      "status": "passed",
+      "evidence": "crates/capture/fixtures/captured-frame-dmabuf.json"
+    },
+    {
+      "criterion": "No platform API is claimed beyond documented evidence.",
+      "status": "passed",
+      "evidence": "evidence/m2-capture-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Contract-only node; descriptor values are opaque evidence and no hardware or platform behavior is claimed."
+  },
+  "findings": []
+}

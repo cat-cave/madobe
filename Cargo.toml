@@ -2,6 +2,7 @@
 members = [
   "apps/cli",
   "apps/hostd",
+  "crates/capture",
   "crates/compositor",
   "crates/protocol",
   "crates/telemetry",
@@ -20,6 +21,7 @@ version = "0.1.0"
 
 [workspace.dependencies]
 madobe-compositor = { path = "crates/compositor", version = "0.1.0" }
+madobe-capture = { path = "crates/capture", version = "0.1.0" }
 madobe-protocol = { path = "crates/protocol", version = "0.1.0" }
 madobe-telemetry = { path = "crates/telemetry", version = "0.1.0" }
 
