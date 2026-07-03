@@ -1,0 +1,10 @@
+[package]
+name = "madobe-compositor"
+description = "Platform-neutral compositor adapter contract for madobe"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,36 @@
+{
+  "nodeId": "m1-compositor-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Adapter trait and typed errors compile under workspace lints.",
+      "status": "passed",
+      "evidence": "`nix develop -c just check` passed."
+    },
+    {
+      "criterion": "Contract includes create, configure, park, remove, list, reconcile, and bind operations.",
+      "status": "passed",
+      "evidence": "crates/compositor/src/adapter.rs and crates/compositor/tests/lifecycle.rs"
+    },
+    {
+      "criterion": "No capture, encode, transport, or session code depends on Hyprland types.",
+      "status": "passed",
+      "evidence": "`rg -n \"Hyprland|hypr|hyprctl|wlroots\" crates apps` returned no matches."
+    },
+    {
+      "criterion": "Unit tests or compile-time examples cover the expected lifecycle.",
+      "status": "passed",
+      "evidence": "`nix develop -c just test` passed with 8 tests."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node is a platform-neutral Rust contract with mock lifecycle tests; real compositor backend validation belongs to later nodes."
+  },
+  "findings": []
+}

@@ -1,0 +1,76 @@
+{
+  "nodeId": "m1-compositor-contract",
+  "summary": "Added a platform-neutral Rust compositor adapter contract crate with typed lifecycle operations, typed configuration/status values, typed errors, and mock lifecycle tests.",
+  "changedFiles": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "crates/compositor/Cargo.toml",
+    "crates/compositor/src/adapter.rs",
+    "crates/compositor/src/config.rs",
+    "crates/compositor/src/error.rs",
+    "crates/compositor/src/ids.rs",
+    "crates/compositor/src/lib.rs",
+    "crates/compositor/src/status.rs",
+    "crates/compositor/tests/lifecycle.rs",
+    "evidence/m1-compositor-contract/commands.log",
+    "evidence/m1-compositor-contract/notes.md",
+    "reports/qd/m1-compositor-contract/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Adapter trait and typed errors compile under workspace lints",
+      "status": "passed",
+      "evidence": "nix develop -c just check"
+    },
+    {
+      "criterion": "Contract includes create, configure, park, remove, list, reconcile, and bind operations",
+      "status": "passed",
+      "evidence": "crates/compositor/src/adapter.rs"
+    },
+    {
+      "criterion": "No capture, encode, transport, or session code depends on Hyprland types",
+      "status": "passed",
+      "evidence": "rg -n \"Hyprland|hypr|hyprctl|wlroots\" crates apps"
+    },
+    {
+      "criterion": "Unit tests or compile-time examples cover the expected lifecycle",
+      "status": "passed",
+      "evidence": "crates/compositor/tests/lifecycle.rs; nix develop -c just test"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd node show m1-compositor-contract --full",
+      "status": "passed",
+      "evidence": "evidence/m1-compositor-contract/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m1-compositor-contract/commands.log"
+    },
+    {
+      "command": "nix develop -c just test",
+      "status": "passed",
+      "evidence": "evidence/m1-compositor-contract/commands.log"
+    },
+    {
+      "command": "rg -n \"Hyprland|hypr|hyprctl|wlroots\" crates apps",
+      "status": "passed",
+      "evidence": "evidence/m1-compositor-contract/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m1-compositor-contract/commands.log",
+    "evidence/m1-compositor-contract/notes.md",
+    "reports/qd/m1-compositor-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node defines a platform-neutral contract and mock lifecycle coverage; no real compositor integration is part of this node."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

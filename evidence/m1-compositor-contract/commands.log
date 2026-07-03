@@ -1,0 +1,302 @@
+Worktree: /home/trevor/projects/madobe/.qd/worktrees/m1-compositor-contract
+Branch: qd/m1-compositor-contract
+
+Command: pwd && git status --short --branch
+Result: passed
+Log: confirmed worktree path and branch qd/m1-compositor-contract.
+
+Command: sed -n '1,220p' docs/ORCHESTRATION.md
+Result: passed
+Log: read implementor/orchestration requirements.
+
+Command: sed -n '1,240p' docs/LINUX_ORCHESTRATOR.md
+Result: passed
+Log: read Linux validation and evidence requirements.
+
+Command: rg --files
+Result: passed
+Log: inspected repository file layout.
+
+Command: qd node show m1-compositor-contract --full
+Result: failed
+Log: DB schema is older than this qd binary (no schema_migrations table found). Run qd migrate.
+
+Command: sed -n '1,220p' Cargo.toml
+Result: passed
+Log: inspected workspace members, dependencies, and lints.
+
+Command: sed -n '1,220p' crates/protocol/Cargo.toml
+Result: passed
+Log: inspected existing crate manifest style.
+
+Command: sed -n '1,260p' crates/protocol/src/lib.rs
+Result: passed
+Log: inspected Rust style and tests.
+
+Command: sed -n '1,220p' crates/telemetry/src/lib.rs
+Result: passed
+Log: inspected Rust style and tests.
+
+Command: sed -n '1,220p' justfile
+Result: passed
+Log: inspected check and test recipes.
+
+Command: ls -la .qd
+Result: passed
+Log: qd.db and qd.db-wal were empty local files.
+
+Command: rg -n "m1-compositor-contract|compositor" roadmap/qd-export.json docs crates apps Cargo.toml
+Result: passed
+Log: found node export entry and PRD compositor adapter context.
+
+Command: qd --help
+Result: passed
+Log: inspected qd command surface.
+
+Command: find .qd -maxdepth 2 -type f -print
+Result: passed
+Log: local qd files were agents.md, config.toml, qd.db, and qd.db-wal.
+
+Command: qd migrate
+Result: passed
+Log: initialized local qd schema through 008_evidence_first_blockers.
+
+Command: sed -n '120,180p' docs/PRD.md
+Result: passed
+Log: read compositor adapter product requirements.
+
+Command: qd sync --from roadmap/qd-export.json --expect-clean
+Result: failed
+Log: expected local cache drift from empty DB; 25 export-only nodes.
+
+Command: sed -n '90,115p' docs/PRD.md
+Result: passed
+Log: confirmed planned crates include compositor and backend-specific crates.
+
+Command: sed -n '180,215p' roadmap/qd-export.json
+Result: passed
+Log: inspected exported node spec and acceptance.
+
+Command: qd sync --from roadmap/qd-export.json --dry-run --json
+Result: passed
+Log: confirmed action would replace empty local cache from export.
+
+Command: find crates apps -maxdepth 3 -type f -name '*.rs' -print
+Result: passed
+Log: confirmed existing Rust surface was protocol, telemetry, CLI, and hostd.
+
+Command: qd sync --from roadmap/qd-export.json
+Result: failed
+Log: qd method was not acknowledged; qd requested method acknowledgement.
+
+Command: sed -n '1,180p' apps/hostd/src/lib.rs
+Result: passed
+Log: inspected hostd bootstrap code.
+
+Command: sed -n '1,180p' apps/cli/src/lib.rs
+Result: passed
+Log: inspected CLI bootstrap code.
+
+Command: qd method show
+Result: passed
+Log: read qd evidence-first method.
+
+Command: qd config show
+Result: passed
+Log: inspected qd repo config.
+
+Command: qd method acknowledge --agent codex-implementor-m1-compositor-contract
+Result: passed
+Log: acknowledged qd method locally after reading orchestration docs.
+
+Command: git status --short
+Result: passed
+Log: tracked worktree was clean after local qd acknowledgement.
+
+Command: qd sync --from roadmap/qd-export.json
+Result: passed
+Log: replaced empty local cache from committed roadmap export.
+
+Command: git status --short --ignored=.matching .qd
+Result: failed
+Log: fatal: Invalid ignored mode '.matching'.
+
+Command: qd node show m1-compositor-contract --full
+Result: passed
+Log: inspected claimed node, spec, acceptance, context, and empty findings.
+
+Command: git status --short --branch
+Result: passed
+Log: confirmed branch qd/m1-compositor-contract.
+
+Command: sed -n '1,180p' apps/hostd/Cargo.toml
+Result: passed
+Log: inspected existing application manifest style.
+
+Command: sed -n '1,180p' apps/cli/Cargo.toml
+Result: passed
+Log: inspected existing application manifest style.
+
+Command: mkdir -p crates/compositor/src evidence/m1-compositor-contract reports/qd/m1-compositor-contract
+Result: passed
+Log: created owned crate, evidence, and report directories.
+
+Command: cargo fmt --all -- --check
+Result: failed
+Log: cargo was not available on ambient PATH.
+
+Command: cargo check --workspace --all-targets --all-features
+Result: failed
+Log: cargo was not available on ambient PATH.
+
+Command: nix develop -c cargo fmt --all -- --check
+Result: failed
+Log: rustfmt reported formatting changes needed in crates/compositor/src/lib.rs.
+
+Command: nix develop -c cargo check --workspace --all-targets --all-features
+Result: failed
+Log: missing documentation on public ErrorKind fields.
+
+Command: nix develop -c cargo fmt --all
+Result: passed
+Log: formatted Rust workspace.
+
+Command: git diff -- Cargo.toml crates/compositor/Cargo.toml crates/compositor/src/lib.rs
+Result: passed
+Log: inspected tracked manifest diff; new crate files were still untracked.
+
+Command: nix develop -c cargo check --workspace --all-targets --all-features
+Result: passed
+Log: workspace cargo check passed after documentation fixes.
+
+Command: git status --short --branch
+Result: passed
+Log: Cargo.toml, Cargo.lock, and new crate changes present.
+
+Command: wc -l crates/compositor/src/lib.rs
+Result: passed
+Log: single-file implementation had 1042 lines, above repo limit.
+
+Command: nl -b a crates/compositor/src/lib.rs | sed -n '1,220p'
+Result: passed
+Log: inspected first section before module split.
+
+Command: nl -b a crates/compositor/src/lib.rs | sed -n '220,520p'
+Result: passed
+Log: inspected config/status section before module split.
+
+Command: nl -b a crates/compositor/src/lib.rs | sed -n '520,760p'
+Result: passed
+Log: inspected error/trait section before module split.
+
+Command: nl -b a crates/compositor/src/lib.rs | sed -n '760,1060p'
+Result: passed
+Log: inspected tests before moving lifecycle coverage to integration test.
+
+Command: sed -n '1,120p' Cargo.lock
+Result: passed
+Log: confirmed Cargo.lock gained madobe-compositor package entry.
+
+Command: nix develop -c cargo fmt --all
+Result: passed
+Log: formatted split module layout.
+
+Command: wc -l crates/compositor/src/*.rs crates/compositor/tests/*.rs
+Result: passed
+Log: all compositor source and test files were under 500 lines.
+
+Command: git status --short --branch
+Result: passed
+Log: confirmed modified Cargo.lock, Cargo.toml, and untracked crates/compositor.
+
+Command: nix develop -c just check
+Result: failed
+Log: missing documentation for integration test crate root.
+
+Command: nix develop -c just check
+Result: failed
+Log: clippy flagged enum variant names and const accessor opportunities.
+
+Command: rg -n "Zero|EightBit|pub fn (id|workspace|session|output)" crates/compositor/src crates/compositor/tests/lifecycle.rs
+Result: passed
+Log: located names and accessors to update.
+
+Command: sed -n '190,230p' crates/compositor/tests/lifecycle.rs
+Result: passed
+Log: inspected validation assertions before renaming ConfigError variants.
+
+Command: nix develop -c cargo fmt --all
+Result: passed
+Log: formatted after enum/accessor updates.
+
+Command: rg -n "ZeroDimension|ZeroRefreshRate|ZeroScale|EightBit|TenBit|TwelveBit" crates/compositor
+Result: passed
+Log: no stale color-depth or config-error names remained.
+
+Command: nix develop -c just check
+Result: failed
+Log: clippy flagged ConfigError variants with common Zero postfix.
+
+Command: nix develop -c cargo fmt --all
+Result: passed
+Log: formatted after final ConfigError rename.
+
+Command: rg -n "DimensionZero|RefreshRateZero|ScaleZero|ZeroDimension|ZeroRefreshRate|ZeroScale" crates/compositor
+Result: passed
+Log: no stale ConfigError variant names remained.
+
+Command: nix develop -c just check
+Result: failed
+Log: clippy flagged test helper error() as missing const.
+
+Command: nix develop -c just check
+Result: passed
+Log: fmt, taplo, cargo check, clippy, typos, markdownlint, and lint-lines passed.
+
+Command: nix develop -c just test
+Result: passed
+Log: nextest ran 8 tests, all passed; doc tests passed; apple tests skipped outside macOS.
+
+Command: git diff --stat
+Result: passed
+Log: tracked stat showed Cargo.lock and Cargo.toml; new crate files were untracked.
+
+Command: git diff -- Cargo.toml Cargo.lock crates/compositor/Cargo.toml crates/compositor/src/lib.rs crates/compositor/src/adapter.rs crates/compositor/src/config.rs crates/compositor/src/error.rs crates/compositor/src/ids.rs crates/compositor/src/status.rs crates/compositor/tests/lifecycle.rs
+Result: passed
+Log: inspected tracked diff; untracked crate files do not appear in git diff until added.
+
+Command: rg -n "Hyprland|hypr|hyprctl|wlroots" crates apps
+Result: passed
+Log: no compositor-backend-specific references found in crates or apps.
+
+Command: qd template completion-report
+Result: passed
+Log: inspected qd completion report schema.
+
+Command: git status --short --branch
+Result: passed
+Log: confirmed modified Cargo.lock, Cargo.toml, and untracked crates/compositor.
+
+Command: find crates/compositor -type f -print | sort
+Result: passed
+Log: listed new compositor crate files.
+
+Command: wc -l crates/compositor/src/*.rs crates/compositor/tests/*.rs
+Result: passed
+Log: all new Rust files remain under 500 lines.
+
+Command: wc -l evidence/m1-compositor-contract/commands.log evidence/m1-compositor-contract/notes.md reports/qd/m1-compositor-contract/completion.json
+Result: passed
+Log: evidence files were below the repository line limit.
+
+Command: nix develop -c just check
+Result: failed
+Log: typos flagged the compact nl option spelling in commands.log.
+
+Command: nix develop -c just check
+Result: passed
+Log: final check passed after command-log spelling adjustment.
+
+Command: nix develop -c just test
+Result: passed
+Log: final test run passed 8 nextest tests and doc tests; Apple tests skipped outside macOS.
