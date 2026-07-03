@@ -1,0 +1,41 @@
+{
+  "nodeId": "m0-qd-orchestration-smoke",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Linux orchestrator qd ready and status outputs are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m0-qd-orchestration-smoke/notes.md"
+    },
+    {
+      "criterion": "Mac orchestrator qd ready and status outputs are recorded.",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/issues/1#issuecomment-4878040145"
+    },
+    {
+      "criterion": "Both orchestrators post structured status in the coordination issue.",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/issues/1"
+    },
+    {
+      "criterion": "A claimed Mac node and claimed Linux node are visible in exported qd state.",
+      "status": "passed",
+      "evidence": "roadmap/qd-export.json"
+    },
+    {
+      "criterion": "No .qd/qd.db file is committed.",
+      "status": "passed",
+      "evidence": "evidence/m0-qd-orchestration-smoke/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Workflow smoke only; no hardware or cross-device behavior claimed."
+  },
+  "findings": []
+}
