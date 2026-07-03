@@ -1,0 +1,75 @@
+{
+  "nodeId": "m3-swift-protocol-mirror",
+  "summary": "Added Swift encoded video frame metadata models, decoded the Rust-authored AV1 golden fixture in XCTest, covered mismatch behavior, and captured macOS Xcode evidence.",
+  "changedFiles": [
+    "apple/Sources/MadobeClientCore/EncodedVideoFrameMetadata.swift",
+    "apple/Tests/MadobeClientCoreTests/MadobeClientCoreTests.swift",
+    "evidence/m3-swift-protocol-mirror/commands.log",
+    "evidence/m3-swift-protocol-mirror/just-macos-check.log",
+    "evidence/m3-swift-protocol-mirror/mac-env.txt",
+    "evidence/m3-swift-protocol-mirror/notes.md",
+    "evidence/m3-swift-protocol-mirror/xcodebuild.log",
+    "reports/qd/m3-swift-protocol-mirror/completion.json",
+    "reports/qd/m3-swift-protocol-mirror/audit.json",
+    "roadmap/qd-export.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Swift tests read or mirror the golden fixture semantics.",
+      "status": "passed",
+      "evidence": "evidence/m3-swift-protocol-mirror/xcodebuild.log"
+    },
+    {
+      "criterion": "Tuist/Xcode tests pass on macOS.",
+      "status": "passed",
+      "evidence": "evidence/m3-swift-protocol-mirror/just-macos-check.log"
+    },
+    {
+      "criterion": "Fixture mismatch behavior is tested.",
+      "status": "passed",
+      "evidence": "apple/Tests/MadobeClientCoreTests/MadobeClientCoreTests.swift"
+    },
+    {
+      "criterion": "Mac evidence includes xcodebuild log.",
+      "status": "passed",
+      "evidence": "evidence/m3-swift-protocol-mirror/xcodebuild.log"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "swiftformat apple",
+      "status": "passed",
+      "evidence": "evidence/m3-swift-protocol-mirror/commands.log"
+    },
+    {
+      "command": "swiftformat --lint apple",
+      "status": "passed",
+      "evidence": "evidence/m3-swift-protocol-mirror/commands.log"
+    },
+    {
+      "command": "just macos-check",
+      "status": "passed",
+      "evidence": "evidence/m3-swift-protocol-mirror/just-macos-check.log"
+    },
+    {
+      "command": "xcodebuild test -scheme MadobeMac -destination 'platform=macOS'",
+      "status": "passed",
+      "evidence": "evidence/m3-swift-protocol-mirror/xcodebuild.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m3-swift-protocol-mirror/commands.log",
+    "evidence/m3-swift-protocol-mirror/just-macos-check.log",
+    "evidence/m3-swift-protocol-mirror/mac-env.txt",
+    "evidence/m3-swift-protocol-mirror/notes.md",
+    "evidence/m3-swift-protocol-mirror/xcodebuild.log"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m3-swift-protocol-mirror/xcodebuild.log"
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

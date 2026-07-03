@@ -1,0 +1,26 @@
+Command: cd apple && xcodebuild test -scheme MadobeMac -destination 'platform=macOS'
+Result: passed
+Date: 2026-07-03
+
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -scheme MadobeMac -destination platform=macOS
+
+Destination warning:
+    xcodebuild used the first of two matching My Mac destinations: arm64 and x86_64.
+
+Test Suite 'All tests' started.
+Test Suite 'MadobeClientCoreTests.xctest' started.
+Test Suite 'MadobeClientCoreTests' started.
+
+Test Case '-[MadobeClientCoreTests.MadobeClientCoreTests testEncodedVideoFrameFixtureMatchesRustGoldenVector]' passed.
+Test Case '-[MadobeClientCoreTests.MadobeClientCoreTests testEncodedVideoFramePayloadHashMismatchChangesSemantics]' passed.
+Test Case '-[MadobeClientCoreTests.MadobeClientCoreTests testEncodedVideoFrameRejectsUnknownCodecFixtureMismatch]' passed.
+Test Case '-[MadobeClientCoreTests.MadobeClientCoreTests testIdentityMatchesRustBootstrapProof]' passed.
+
+Test Suite 'MadobeClientCoreTests' passed.
+Executed 4 tests, with 0 failures.
+
+Test session results:
+    /Users/trevor/Library/Developer/Xcode/DerivedData/MadobeMac-eynbcditvclvllbyfgjumyhahxvy/Logs/Test/Test-MadobeMac-2026.07.03_11-38-57--0500.xcresult
+
+** TEST SUCCEEDED **
