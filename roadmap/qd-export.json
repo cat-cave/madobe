@@ -867,6 +867,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m2-portal-chooser-interaction-proof",
+      "title": "Prove portal chooser interaction path",
+      "kind": "feature",
+      "milestone": "M2-gpu-video-path",
+      "status": "ready",
+      "priority": "P1",
+      "estimate_points": 1,
+      "risk": "high",
+      "owner": null,
+      "branch": null,
+      "spec": "Determine whether the remaining XDPH SelectSources timeout is caused by missing visible chooser or parent-window interaction, or whether the portal selection path is blocked on the reference Linux host even with a proper visible client flow.",
+      "acceptance": "Uses the node-scoped madobe output and disposable workspace setup with cleanup evidence\nRuns or implements a visible portal client flow with a parent or window token if supported by available APIs or tools\nCaptures whether the chooser appears, whether it can be selected and approved autonomously, and whether SelectSources returns\nIf SelectSources returns, continues through Start, returned stream ids, OpenPipeWireRemote, and PipeWire metadata capture\nIf the flow cannot complete autonomously, records the exact UI manual action or portal-side limitation and keeps m2-capture-one-frame blocked\nDoes not add third-party Rust dependencies without a separate dependency-policy finding or node\nArtifacts are saved under evidence/m2-portal-chooser-interaction-proof and reports/qd/m2-portal-chooser-interaction-proof",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nhardware:PipeWire,XDPH,Hyprland\nvalidation:hardware",
+      "created_at": "2026-07-03T20:57:51.601Z",
+      "updated_at": "2026-07-03T20:57:51.601Z",
+      "claimed_at": null,
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -1043,6 +1073,18 @@
       "to_node": "m2-capture-one-frame",
       "type": "requires",
       "created_at": "2026-07-03T20:25:01.751Z"
+    },
+    {
+      "from_node": "m2-portal-screencast-client-proof",
+      "to_node": "m2-portal-chooser-interaction-proof",
+      "type": "requires",
+      "created_at": "2026-07-03T20:57:51.706Z"
+    },
+    {
+      "from_node": "m2-portal-chooser-interaction-proof",
+      "to_node": "m2-capture-one-frame",
+      "type": "requires",
+      "created_at": "2026-07-03T20:57:51.816Z"
     }
   ],
   "findings": [
