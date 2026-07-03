@@ -1,0 +1,31 @@
+Captured: 2026-07-03T21:42:53Z
+Node: m3-videotoolbox-capability-probe
+
+$ sw_vers
+ProductName: macOS
+ProductVersion: 26.5.1
+BuildVersion: 25F80
+
+$ uname -a
+Darwin Trevors-MacBook-Pro.local 25.5.0 Darwin Kernel Version 25.5.0: Mon Apr 27 20:39:29 PDT 2026; root:xnu-12377.121.6~2/RELEASE_ARM64_T8142 arm64
+
+$ sysctl -n hw.model
+Mac17,2
+
+$ xcodebuild -version
+Xcode 26.2
+Build version 17C52
+
+$ xcrun swift --version
+swift-driver version: 1.127.14.1 Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Target: arm64-apple-macosx26.0
+
+$ tuist version
+4.200.5
+
+Xcode warning observed during test:
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:macOS, arch:arm64, id:00008142-000A31A622C2401C, name:My Mac }
+{ platform:macOS, arch:x86_64, id:00008142-000A31A622C2401C, name:My Mac }
+
+No CoreSimulator warning was emitted by this node's xcodebuild run. The multiple-matching macOS destination warning is non-blocking; xcodebuild selected arm64 My Mac and tests passed.

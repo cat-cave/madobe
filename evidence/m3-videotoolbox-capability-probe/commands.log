@@ -1,0 +1,56 @@
+2026-07-03T21:18:34Z qd ready --json
+result: []
+notes: No preexisting claimable qd nodes on macOS after syncing main.
+
+2026-07-03T21:20:51Z qd node add --from-json /private/tmp/m3-videotoolbox-capability-probe-node.json
+result: passed
+notes: Added m3-videotoolbox-capability-probe as a Mac-only M3 preflight node.
+
+2026-07-03T21:20:55Z qd edge add m3-swift-protocol-mirror m3-videotoolbox-capability-probe --type requires
+result: passed
+
+2026-07-03T21:21:04Z qd edge add m3-videotoolbox-capability-probe m3-videotoolbox-decode-sample --type requires
+result: passed
+
+2026-07-03T21:21:20Z qd claim m3-videotoolbox-capability-probe --agent trevor-mac-orchestrator --branch spec/m3-videotoolbox-capability-probe
+result: passed
+
+2026-07-03T21:27:13Z qd worktree create m3-videotoolbox-capability-probe --branch spec/m3-videotoolbox-capability-probe
+result: passed after rerun with elevated local Git permission
+worktree: .qd/worktrees/m3-videotoolbox-capability-probe
+
+2026-07-03T21:35:xxZ just macos-check
+result: failed
+exit: 1
+notes: SwiftFormat rejected lowercase hexadecimal masks in VideoToolboxCapabilityProbe.swift.
+
+2026-07-03T21:38:xxZ just macos-check
+result: failed
+exit: 2
+notes: SwiftLint rejected String(decoding:) use for byte/data to String conversion.
+
+2026-07-03T21:41:47Z just macos-check
+result: passed
+notes: Rust fmt/check/clippy, SwiftFormat, SwiftLint, Tuist generation, and xcodebuild tests passed.
+
+2026-07-03T21:42:xxZ xcrun swift -e '<VideoToolbox AV1 capability JSON probe>'
+result: passed
+output: codec av1, CoreMedia FourCC av01, hardwareDecodeSupported true
+
+2026-07-03T21:55:04Z just macos-check
+result: passed
+notes: Final validation after adding evidence and qd report files. Rust fmt/check/clippy, SwiftFormat, SwiftLint, Tuist generation, and xcodebuild tests passed.
+
+2026-07-03T22:06:xxZ git rebase origin/main
+result: passed after resolving roadmap/qd-export.json by syncing current origin/main qd export, replaying the Mac node qd state, and re-exporting the merged graph.
+
+2026-07-03T22:10:32Z just macos-check
+result: passed
+notes: Final validation on the rebased branch. Rust fmt/check/clippy, SwiftFormat, SwiftLint, Tuist generation, and xcodebuild tests passed.
+
+2026-07-03T22:15:xxZ git rebase origin/main
+result: passed after resolving roadmap/qd-export.json by syncing current origin/main qd export, replaying the Mac node qd state, and re-exporting the merged graph.
+
+2026-07-03T22:22:06Z just macos-check
+result: passed
+notes: Final validation on the branch rebased to main commit e55e2a0. Rust fmt/check/clippy, SwiftFormat, SwiftLint, Tuist generation, and xcodebuild tests passed.
