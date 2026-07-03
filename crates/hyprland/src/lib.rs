@@ -5,12 +5,14 @@
     reason = "The public API names Hyprland types explicitly to keep backend boundaries clear."
 )]
 
+mod adapter;
 mod client;
 mod command;
 mod error;
 mod event;
 mod model;
 
+pub use adapter::{HyprlandAdapter, monitor_rule};
 pub use client::HyprlandClient;
 pub use command::{
     CommandExecutor, CommandOutput, HyprctlCommand, HyprctlEndpoint, HyprctlExecutor,

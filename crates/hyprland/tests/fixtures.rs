@@ -163,9 +163,9 @@ impl CommandExecutor for FixtureExecutor {
     }
 }
 
-fn must<T>(result: Result<T>) -> T {
+fn must<T, E: std::fmt::Debug>(result: std::result::Result<T, E>) -> T {
     match result {
         Ok(value) => value,
-        Err(error) => panic!("{error}"),
+        Err(error) => panic!("{error:?}"),
     }
 }

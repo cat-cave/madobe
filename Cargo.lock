@@ -21,6 +21,9 @@ version = "0.1.0"
 [[package]]
 name = "madobe-hyprland"
 version = "0.1.0"
+dependencies = [
+ "madobe-compositor",
+]
 
 [[package]]
 name = "madobe-protocol"
