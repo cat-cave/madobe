@@ -2,8 +2,8 @@
 # qd expects one canonical command that means "this node is safe to merge".
 schema_version = 1
 skills_dir = ".qd/skills"
-check_command = "nix develop -c just check"
-ci_command = ""
+check_command = "just check"
+ci_command = "gh workflow run ci.yml"
 ci_provider = "github"
 ci_repo = "cat-cave/madobe"
 ci_workflow = "ci.yml"

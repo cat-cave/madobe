@@ -11,6 +11,10 @@ Both orchestrators may develop Rust and repo-wide code. Platform ownership is ab
 implementation permission. macOS-only behavior must be validated on the Mac. Linux host behavior must be validated
 on the Linux workstation.
 
+The shared command surface is `just`. The environment boundary is platform-specific: the Linux orchestrator usually
+runs those commands inside Nix, while the macOS orchestrator runs them with native Xcode, Tuist, Mise, and Homebrew
+tools on PATH.
+
 ## Roles
 
 Orchestrators coordinate. They keep qd synced, choose ready work, spawn implementors, audit results, adapt the DAG,

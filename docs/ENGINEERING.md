@@ -59,15 +59,23 @@ Keep shared protocol and state-machine logic in Rust unless there is a strong re
 
 ## Toolchain
 
-Use Nix as the authoritative toolchain boundary:
+Use `just` as the shared command surface. Toolchain boundaries are platform-specific.
+
+Linux uses Nix as the authoritative toolchain boundary:
 
 - Pin Rust stable and nightly where needed.
 - Pin clang/LLVM, bindgen, pkg-config, PipeWire headers, Vulkan SDK pieces, CUDA/NVIDIA SDK glue, GStreamer/FFmpeg tools, and cargo tools.
-- Pin SwiftLint and SwiftFormat for local and CI use.
 - Expose one `nix develop` shell with every required tool.
-- CI must use the same flake inputs as local development.
+- Linux CI must use the same flake inputs as local development.
 
-Human-facing commands should live behind `cargo xtask` or `just`, but those commands must call pinned tools from the Nix shell.
+macOS uses native Xcode plus Mise/Homebrew:
+
+- Pin Tuist and Rust tools in `.mise.toml`.
+- Install SwiftFormat and SwiftLint through the native macOS environment.
+- Do not require Nix on macOS CI or MacBook orchestrator sessions.
+
+Human-facing commands should live behind `cargo xtask` or `just`. The command should not assume which platform
+manager put the tools on PATH.
 
 Recommended commands:
 
@@ -320,6 +328,12 @@ Nix:
 
 - Every non-trivial external tool enters through the flake.
 - Overrides and forks need owner, reason, and exit criteria.
+
+macOS:
+
+- Project generation enters through Tuist.
+- Mise-pinned tools should be updated deliberately and reviewed like other dependency changes.
+- Homebrew-installed CI tools must be named explicitly in the workflow.
 
 ## ADRs and Review
 

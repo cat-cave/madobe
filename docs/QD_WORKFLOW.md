@@ -61,15 +61,21 @@ The method matters for madobe because most work touches real graphics, media, in
 
 ## qd Configuration Plan
 
-Current config is intentionally conservative: merge requires audits, verification, CI, and clean worktrees. `checkCommand` and `ciCommand` are empty until the repo has real build commands.
+Current config is intentionally conservative: merge requires audits, verification, CI, and clean worktrees. The qd
+check command should stay platform-neutral and call the shared repo command surface.
 
 Once the monorepo skeleton exists, set:
 
 ```sh
-qd config set check-command "nix develop -c just check"
+qd config set check-command "just check"
+qd config set ci-command "gh workflow run ci.yml"
 qd config set ci-provider github --repo <owner>/madobe --workflow ci.yml --auth gh-cli
 qd doctor --strict
 ```
+
+On Linux, run qd checks from inside the Nix environment when Nix-provided tools are needed. On macOS, run qd checks
+after `just macos-bootstrap`, using the native Xcode/Tuist/Mise/Homebrew environment. Do not put a Nix command in
+the shared qd check command, because that makes macOS orchestrators unable to use the same qd gate.
 
 If qd's installed command names differ for config keys, update this document after verifying with `qd config --help`. Do not hand-edit policy around a failing doctor result unless the failure is understood.
 

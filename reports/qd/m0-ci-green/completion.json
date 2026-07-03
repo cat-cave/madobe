@@ -1,0 +1,85 @@
+{
+  "nodeId": "m0-ci-green",
+  "summary": "Reworked macOS CI to use native macOS tooling, kept Linux CI on Nix, and verified the PR workflow passed on both hosted jobs.",
+  "changedFiles": [
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    ".github/workflows/ci.yml",
+    ".mise.toml",
+    ".qd/config.toml",
+    "docs/ENGINEERING.md",
+    "docs/MACOS_ORCHESTRATOR.md",
+    "docs/ORCHESTRATION.md",
+    "docs/QD_WORKFLOW.md",
+    "justfile",
+    "roadmap/qd-export.json",
+    "evidence/m0-ci-green/notes.md"
+  ],
+  "commits": [
+    "63b1c6b"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "GitHub Actions ci workflow runs on a bootstrap PR.",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/actions/runs/28633801053"
+    },
+    {
+      "criterion": "Linux job passes from clean checkout.",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/actions/runs/28633801053/job/84915937778"
+    },
+    {
+      "criterion": "macOS job passes from clean checkout.",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/actions/runs/28633801053/job/84915937781"
+    },
+    {
+      "criterion": "Nightly workflow is syntactically valid.",
+      "status": "passed",
+      "evidence": "`nix develop -c just check` ran actionlint against .github/workflows/*.yml"
+    },
+    {
+      "criterion": "CI result URL is recorded in evidence/m0-ci-green/notes.md.",
+      "status": "passed",
+      "evidence": "evidence/m0-ci-green/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix flake check",
+      "status": "passed",
+      "evidence": "local terminal output"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "local terminal output"
+    },
+    {
+      "command": "nix develop -c just test",
+      "status": "passed",
+      "evidence": "local terminal output"
+    },
+    {
+      "command": "qd doctor --strict",
+      "status": "passed",
+      "evidence": "local terminal output"
+    },
+    {
+      "command": "gh pr checks 2 --watch --interval 10",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/actions/runs/28633801053"
+    }
+  ],
+  "evidence": [
+    "evidence/m0-ci-green/notes.md",
+    "https://github.com/cat-cave/madobe/pull/2"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Hosted GitHub Actions run passed on linux and macos jobs."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -42,6 +42,11 @@ security:
 
 ci-local: verify coverage
 
+macos-bootstrap:
+  if [ "$(uname -s)" != Darwin ]; then echo "macOS bootstrap skipped outside Darwin"; else if ! command -v mise >/dev/null 2>&1; then command -v brew >/dev/null 2>&1 || { echo "Homebrew missing; install mise, tuist, swiftformat, and swiftlint manually"; exit 127; }; brew install mise; fi; brew list swiftformat >/dev/null 2>&1 || brew install swiftformat; brew list swiftlint >/dev/null 2>&1 || brew install swiftlint; mise install; fi
+
+macos-check: check apple-generate apple-test
+
 lint-lines:
   max=500; \
   status=0; \
@@ -70,7 +75,7 @@ lint-lines:
   exit "$status"
 
 apple-generate:
-  if [ "$(uname -s)" = Darwin ] && command -v tuist >/dev/null 2>&1; then cd apple && tuist generate --no-open; else echo "tuist generation skipped outside macOS with tuist"; fi
+  if [ "$(uname -s)" != Darwin ]; then echo "tuist generation skipped outside macOS"; else cd apple && if command -v tuist >/dev/null 2>&1; then tuist generate; elif command -v mise >/dev/null 2>&1; then mise exec -- tuist generate; else echo "tuist missing; run just macos-bootstrap"; exit 127; fi; fi
 
 apple-test:
-  if [ "$(uname -s)" = Darwin ] && command -v tuist >/dev/null 2>&1; then cd apple && tuist generate --no-open && xcodebuild test -scheme MadobeMac -destination 'platform=macOS'; else echo "apple tests skipped outside macOS with tuist"; fi
+  if [ "$(uname -s)" != Darwin ]; then echo "apple tests skipped outside macOS"; else cd apple && { if command -v tuist >/dev/null 2>&1; then tuist generate; elif command -v mise >/dev/null 2>&1; then mise exec -- tuist generate; else echo "tuist missing; run just macos-bootstrap"; exit 127; fi; } && xcodebuild test -scheme MadobeMac -destination 'platform=macOS'; fi
