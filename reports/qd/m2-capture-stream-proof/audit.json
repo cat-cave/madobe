@@ -1,0 +1,43 @@
+{
+  "nodeId": "m2-capture-stream-proof",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Node-scoped madobe remote output was created and cleaned up.",
+      "status": "passed",
+      "evidence": "hyprland-monitors-with-output.json and hyprland-monitors-after-direct-grim-cleanup.json."
+    },
+    {
+      "criterion": "Portal ScreenCast stream selection was attempted.",
+      "status": "passed",
+      "evidence": "portal-create-session.txt, portal-select-sources.err, and commands.log."
+    },
+    {
+      "criterion": "Stream mapping to the madobe output is proven or blocked with evidence.",
+      "status": "passed",
+      "evidence": "pipewire-focused-after-portal-error-summary.json records no matching video/portal/madobe stream, and blocker.md records the remaining request-lifecycle/user-consent gap."
+    },
+    {
+      "criterion": "Direct named-output options are tested or documented.",
+      "status": "passed",
+      "evidence": "direct-grim-named-output-with-wayland-metadata.txt proves a bounded direct `grim -o` PNG capture."
+    },
+    {
+      "criterion": "m2-capture-one-frame is not unblocked without required frame metadata.",
+      "status": "passed",
+      "evidence": "validation-summary.json and blocker.md explicitly keep m2-capture-one-frame blocked."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "redactionScanReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live output creation, portal probing, direct grim capture, and cleanup evidence were collected on the reference Linux host. The proof node completed with a documented blocker rather than a capture-stream success claim."
+  },
+  "resolvedFindings": [],
+  "findings": []
+}

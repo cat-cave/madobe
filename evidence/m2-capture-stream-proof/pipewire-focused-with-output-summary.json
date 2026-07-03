@@ -1,0 +1,22 @@
+[
+  {
+    "id": 120,
+    "media_class": "Stream/Input/Audio",
+    "media_type": null,
+    "node_name": "sunshine",
+    "node_description": null,
+    "app": "sunshine",
+    "has_params": true,
+    "param_keys": [
+      "EnumFormat",
+      "EnumPortConfig",
+      "Format",
+      "Latency",
+      "PortConfig",
+      "ProcessLatency",
+      "PropInfo",
+      "Props",
+      "Tag"
+    ]
+  }
+]

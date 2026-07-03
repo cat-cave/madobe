@@ -1,0 +1,2 @@
+Command: busctl --user call org.freedesktop.portal.ScreenCast CreateSession handle_token=<node-token> session_handle_token=<node-token>
+o "/org/freedesktop/portal/desktop/request/1_50222/madobe_m2_capture_stream_proof_create"

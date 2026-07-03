@@ -1,0 +1,1 @@
+Command: WAYLAND_DISPLAY=<session> grim -o madobe-qd-m2-capture-stream-proof -t png <tmp-png>

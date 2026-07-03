@@ -1,0 +1,93 @@
+Node: m2-capture-stream-proof
+Branch: spec/m2-capture-stream-proof
+Worktree: <repo>/.qd/worktrees/m2-capture-stream-proof
+Date: 2026-07-03T15:06:53-05:00
+
+## host-env
+Command: pipewire --version; pw-cli --version; pw-dump --version; wireplumber --version; hyprctl version; command -v ...
+Status: 0
+Evidence: host-env.txt
+
+## precleanup-output-remove
+Time: 2026-07-03T15:06:53-05:00
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl output remove madobe-qd-m2-capture-stream-proof
+Status: tolerated (idempotent)
+Evidence: hyprland-output-precleanup.txt/.err
+
+## hyprland-state-before
+Time: 2026-07-03T15:06:53-05:00
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl -j monitors; hyprctl -j workspaces
+Status: 0
+Evidence: hyprland-monitors-before.json, hyprland-workspaces-before.json
+
+## hyprland-output-create
+Time: 2026-07-03T15:06:53-05:00
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl output create headless madobe-qd-m2-capture-stream-proof
+Status: 0
+Evidence: hyprland-output-create.txt/.err
+
+## hyprland-output-configure
+Time: 2026-07-03T15:06:53-05:00
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl eval hl.monitor output=madobe-qd-m2-capture-stream-proof mode=1280x720@60 position=50000x50000 scale=1
+Status: 0
+Evidence: hyprland-output-configure.txt/.err
+
+## hyprland-workspace-bind
+Time: 2026-07-03T15:06:53-05:00
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl eval focus/move disposable workspace madobe-qd-m2-capture-stream-proof-workspace to madobe-qd-m2-capture-stream-proof
+Status: 0
+Evidence: hyprland-workspace-bind.txt/.err
+
+## hyprland-state-with-output
+Time: 2026-07-03T15:06:53-05:00
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl -j monitors; hyprctl -j workspaces
+Status: 0
+Evidence: hyprland-monitors-with-output.json, hyprland-workspaces-with-output.json
+
+## portal-introspection
+Time: 2026-07-03T15:07:38-05:00
+Command: busctl --user introspect/get-property org.freedesktop.portal.ScreenCast and org.freedesktop.impl.portal.ScreenCast
+Status: 0
+Evidence: portal-introspection.txt, portal-screencast-properties.txt
+
+## pipewire-with-output
+Time: 2026-07-03T15:07:38-05:00
+Command: pw-dump; jq focused Video/portal/Hyprland/madobe node summary
+Status: 0
+Evidence: pipewire-focused-with-output.json, pipewire-focused-with-output-summary.json
+
+## portal-create-session
+Time: 2026-07-03T15:08:12-05:00
+Command: busctl --user call org.freedesktop.portal.ScreenCast CreateSession handle_token=<node-token> session_handle_token=<node-token>
+Status: 0
+Evidence: portal-create-session.txt/.err, portal-create-monitor.txt
+
+## portal-select-sources
+Time: 2026-07-03T15:09:01-05:00
+Command: busctl --user call org.freedesktop.portal.ScreenCast SelectSources session=<derived-session> types=monitor cursor_mode=hidden multiple=false
+Status: 1
+Evidence: portal-select-sources.txt/.err, portal-select-monitor.txt
+
+## direct-grim-named-output
+Time: 2026-07-03T15:09:57-05:00
+Command: WAYLAND_DISPLAY=<session> grim -o madobe-qd-m2-capture-stream-proof -t png <tmp-png>
+Status: 1
+Evidence: direct-grim-named-output.txt/.err, direct-grim-named-output-metadata.txt
+
+## pipewire-after-portal-error
+Time: 2026-07-03T15:09:57-05:00
+Command: pw-dump; jq focused Video/portal/Hyprland/madobe node summary
+Status: 0
+Evidence: pipewire-focused-after-portal-error.json, pipewire-focused-after-portal-error-summary.json
+
+## cleanup-output-remove
+Time: 2026-07-03T15:09:57-05:00
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl output remove madobe-qd-m2-capture-stream-proof
+Status: 0
+Evidence: hyprland-output-remove.txt/.err, hyprland-monitors-after-remove.json, hyprland-workspaces-after-remove.json
+
+## direct-grim-retry-with-wayland
+Time: 2026-07-03T15:10:47-05:00
+Command: recreate madobe-qd-m2-capture-stream-proof, then XDG_RUNTIME_DIR=<redacted-runtime> WAYLAND_DISPLAY=<wayland-socket> grim -o madobe-qd-m2-capture-stream-proof -t png <tmp-png>, then cleanup
+Status: recreate=0 grim=0 cleanup=0
+Evidence: direct-grim-recreate-output.txt/.err, direct-grim-named-output-with-wayland.txt/.err, direct-grim-named-output-with-wayland-metadata.txt, direct-grim-cleanup-output.txt/.err, hyprland-monitors-after-direct-grim-cleanup.json

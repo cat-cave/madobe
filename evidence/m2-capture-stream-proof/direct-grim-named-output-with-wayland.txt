@@ -1,0 +1,1 @@
+Command: XDG_RUNTIME_DIR=<redacted-runtime> WAYLAND_DISPLAY=<wayland-socket> grim -o madobe-qd-m2-capture-stream-proof -t png <tmp-png>

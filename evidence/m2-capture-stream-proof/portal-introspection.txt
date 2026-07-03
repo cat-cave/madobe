@@ -1,0 +1,18 @@
+Portal ScreenCast public interface:
+NAME                  TYPE     SIGNATURE RESULT/VALUE FLAGS
+.CreateSession        method   a{sv}     o            -
+.OpenPipeWireRemote   method   oa{sv}    h            -
+.SelectSources        method   oa{sv}    o            -
+.Start                method   osa{sv}   o            -
+.AvailableCursorModes property u         3            emits-change
+.AvailableSourceTypes property u         7            emits-change
+.version              property u         5            emits-change
+
+Portal ScreenCast implementation interface:
+NAME                  TYPE     SIGNATURE RESULT/VALUE FLAGS
+.CreateSession        method   oosa{sv}  ua{sv}       -
+.SelectSources        method   oosa{sv}  ua{sv}       -
+.Start                method   oossa{sv} ua{sv}       -
+.AvailableCursorModes property u         3            emits-change
+.AvailableSourceTypes property u         7            emits-change
+.version              property u         3            emits-change

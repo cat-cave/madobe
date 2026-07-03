@@ -1,0 +1,4 @@
+signal time=1783109290.429797 sender=org.freedesktop.DBus -> destination=:<bus> serial=4294967295 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameAcquired
+   string ":<bus>"
+signal time=1783109290.429866 sender=org.freedesktop.DBus -> destination=:<bus> serial=4294967295 path=/org/freedesktop/DBus; interface=org.freedesktop.DBus; member=NameLost
+   string ":<bus>"

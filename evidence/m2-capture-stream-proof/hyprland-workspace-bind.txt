@@ -1,0 +1,5 @@
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl eval focus disposable workspace madobe-qd-m2-capture-stream-proof-workspace
+ok
+
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl eval move disposable workspace madobe-qd-m2-capture-stream-proof-workspace to madobe-qd-m2-capture-stream-proof
+ok

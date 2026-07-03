@@ -1,0 +1,2 @@
+Command: HYPRLAND_INSTANCE_SIGNATURE=<redacted> XDG_RUNTIME_DIR=<redacted-runtime> hyprctl output remove madobe-qd-m2-capture-stream-proof
+ok

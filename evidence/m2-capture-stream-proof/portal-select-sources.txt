@@ -1,0 +1,1 @@
+Command: busctl --user call org.freedesktop.portal.ScreenCast SelectSources session=<derived-session> types=monitor cursor_mode=hidden multiple=false
