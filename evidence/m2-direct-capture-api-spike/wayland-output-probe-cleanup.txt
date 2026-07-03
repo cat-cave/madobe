@@ -1,0 +1,3 @@
+Command: hyprctl output remove madobe-qd-m2-direct-capture-api-spike # cleanup after wayland-output probe
+removed node-scoped output only
+status=0

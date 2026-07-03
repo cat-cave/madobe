@@ -1,0 +1,2 @@
+Command: wc -l over node evidence and reports
+Result: passed; all files under 500 lines.

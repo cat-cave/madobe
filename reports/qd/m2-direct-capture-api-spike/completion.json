@@ -1,0 +1,100 @@
+{
+  "nodeId": "m2-direct-capture-api-spike",
+  "summary": "Identified a viable non-portal direct capture implementation path using ext-image-copy-capture-v1 against a generated Hyprland wl_output. Live probes created, configured, discovered, captured via grim for targetability, and removed the node-scoped output. The path can provide size, DRM format/modifier constraints, presentation timestamp, and implicit/protocol-ready sync mode, but not an explicit sync fd.",
+  "changedFiles": [
+    "evidence/m2-direct-capture-api-spike/commands.log",
+    "evidence/m2-direct-capture-api-spike/tools-and-protocols.md",
+    "evidence/m2-direct-capture-api-spike/notes.md",
+    "evidence/m2-direct-capture-api-spike/validation-summary.json",
+    "evidence/m2-direct-capture-api-spike/hyprland-output-create.txt",
+    "evidence/m2-direct-capture-api-spike/hyprland-output-configure.txt",
+    "evidence/m2-direct-capture-api-spike/hyprland-monitors-with-output.json",
+    "evidence/m2-direct-capture-api-spike/direct-grim-ppm-capture.txt",
+    "evidence/m2-direct-capture-api-spike/hyprland-output-remove.txt",
+    "evidence/m2-direct-capture-api-spike/hyprland-monitors-after-remove.json",
+    "evidence/m2-direct-capture-api-spike/wayland-output-generated-source.txt",
+    "evidence/m2-direct-capture-api-spike/wayland-output-probe-cleanup.txt",
+    "evidence/m2-direct-capture-api-spike/hyprland-monitors-after-wayland-output-probe.json",
+    "reports/qd/m2-direct-capture-api-spike/completion.json",
+    "reports/qd/m2-direct-capture-api-spike/audit.json",
+    "evidence/m2-direct-capture-api-spike/json-validation.log",
+    "evidence/m2-direct-capture-api-spike/redaction-scan.log",
+    "evidence/m2-direct-capture-api-spike/line-limit-check.log"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Identifies candidate direct capture APIs or tools available on the reference Linux host.",
+      "status": "passed",
+      "evidence": "tools-and-protocols.md records local tools and active Wayland protocol globals."
+    },
+    {
+      "criterion": "Runs a bounded probe against a node-scoped madobe output where possible.",
+      "status": "passed",
+      "evidence": "hyprland-monitors-with-output.json, direct-grim-ppm-capture.txt, wayland-output-generated-source.txt, and cleanup snapshots."
+    },
+    {
+      "criterion": "Records whether size, format, modifier, timestamp, and sync metadata are available.",
+      "status": "passed",
+      "evidence": "validation-summary.json metadataAvailability and notes.md."
+    },
+    {
+      "criterion": "If viable, documents the exact implementation path for m2-capture-one-frame.",
+      "status": "passed",
+      "evidence": "notes.md Implementation Path For m2-capture-one-frame."
+    },
+    {
+      "criterion": "Artifacts are saved under evidence/m2-direct-capture-api-spike and reports/qd/m2-direct-capture-api-spike.",
+      "status": "passed",
+      "evidence": "Node-scoped evidence and report directories only."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "wayland-info protocol global inventory",
+      "status": "passed",
+      "evidence": "evidence/m2-direct-capture-api-spike/tools-and-protocols.md"
+    },
+    {
+      "command": "hyprctl output create/configure/remove madobe-qd-m2-direct-capture-api-spike",
+      "status": "passed",
+      "evidence": "evidence/m2-direct-capture-api-spike/hyprland-monitors-with-output.json and cleanup snapshots"
+    },
+    {
+      "command": "grim -o madobe-qd-m2-direct-capture-api-spike -t ppm",
+      "status": "passed",
+      "evidence": "evidence/m2-direct-capture-api-spike/direct-grim-ppm-capture.txt"
+    },
+    {
+      "command": "wayland-info -i wl_output filtered to node output",
+      "status": "passed",
+      "evidence": "evidence/m2-direct-capture-api-spike/wayland-output-generated-source.txt"
+    },
+    {
+      "command": "focused JSON parse, redaction scan, and line limit checks",
+      "status": "passed",
+      "evidence": "evidence/m2-direct-capture-api-spike/json-validation.log, redaction-scan.log, and line-limit-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-direct-capture-api-spike/notes.md",
+    "evidence/m2-direct-capture-api-spike/validation-summary.json",
+    "evidence/m2-direct-capture-api-spike/tools-and-protocols.md",
+    "reports/qd/m2-direct-capture-api-spike/completion.json",
+    "reports/qd/m2-direct-capture-api-spike/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live Hyprland and Wayland probes were run against the reference Linux user session with cleanup evidence."
+  },
+  "m2CaptureOneFrameDisposition": "can-unblock-implicit-sync-direct-client",
+  "unverifiedItems": [],
+  "residualRisks": [
+    "No ext-image-copy-capture client was implemented in this spike, so no real DMA-BUF allocation or frame-ready event was captured.",
+    "Explicit sync-fd metadata is not available from ext-image-copy-capture-v1.",
+    "Hyprland's ext-image-copy-capture implementation may reject a specific client-allocated DMA-BUF format/modifier choice at runtime; m2-capture-one-frame must handle buffer_constraints failures.",
+    "The protocol is staging and may change in future Wayland protocol releases."
+  ],
+  "dagChangesNeeded": []
+}
