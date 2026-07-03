@@ -174,3 +174,10 @@ Date: 2026-07-03
 50. just macos-check
     Result: passed
     Note: final validation on rebased commit 87c9452 with current main 3f37152; included SwiftFormat, SwiftLint, cargo checks with the Hyprland crate, Tuist generation, and 4 XCTest cases.
+
+51. qd merge m3-swift-protocol-mirror --strategy squash --use-existing-commit a38be70fb90548992d845e78099f26881eb26f7a
+    Result: passed
+    Note: recorded PR #11 squash merge state on main.
+
+52. qd export --out roadmap/qd-export.json --deterministic
+    Result: passed
