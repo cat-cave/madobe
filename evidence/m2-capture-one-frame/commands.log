@@ -1,0 +1,31 @@
+# Commands for m2-capture-one-frame
+
+2026-07-03T17:11:29-05:00
+
+## Live Hyprland output lifecycle with explicit runtime env
+- export XDG_RUNTIME_DIR=<runtime-dir>; WAYLAND_DISPLAY=<wayland-socket>; HYPRLAND_INSTANCE_SIGNATURE=<hyprland-instance>
+- hyprctl -j monitors > hyprland-monitors-before.json
+- hyprctl output remove madobe-qd-m2-capture-one-frame || true
+- hyprctl output create headless madobe-qd-m2-capture-one-frame
+- hyprctl keyword monitor madobe-qd-m2-capture-one-frame,1280x720@60,50000x50000,1
+- hyprctl -j monitors > hyprland-monitors-with-output.json
+
+## Build direct capture probe
+- generate Wayland protocol glue in /tmp/m2-capture-one-frame-build
+- compile evidence/m2-capture-one-frame/direct_capture_probe.c to /tmp/m2-capture-one-frame-build/direct_capture_probe
+
+## Build direct capture probe retry after worktree relocation
+- compile evidence/m2-capture-one-frame/direct_capture_probe.c to /tmp/m2-capture-one-frame-build/direct_capture_probe
+
+## Build direct capture probe retry with ext-foreign-toplevel-list glue
+
+## Run one-frame direct capture probe
+- XDG_RUNTIME_DIR=<runtime-dir> WAYLAND_DISPLAY=<wayland-socket> /tmp/m2-capture-one-frame-build/direct_capture_probe madobe-qd-m2-capture-one-frame > direct-capture-frame.json
+
+## Build direct capture probe after DRM primary-node retry patch
+
+## Run one-frame direct capture probe after DRM primary-node retry patch
+
+## Cleanup node-scoped Hyprland output
+- hyprctl output remove madobe-qd-m2-capture-one-frame
+- hyprctl -j monitors > hyprland-monitors-after-remove.json

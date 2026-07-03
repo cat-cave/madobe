@@ -1,0 +1,1 @@
+Command: jq empty evidence/m2-capture-one-frame/validation-summary.json evidence/m2-capture-one-frame/direct-capture-frame.json reports/qd/m2-capture-one-frame/completion.json reports/qd/m2-capture-one-frame/audit.json
