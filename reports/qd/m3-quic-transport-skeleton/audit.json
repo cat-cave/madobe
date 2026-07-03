@@ -1,0 +1,41 @@
+{
+  "nodeId": "m3-quic-transport-skeleton",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Loopback sender and receiver tests pass.",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/transport-tests.log"
+    },
+    {
+      "criterion": "Video lane carries framed sample payloads.",
+      "status": "passed",
+      "evidence": "crates/transport/src/lib.rs and crates/transport/tests/loopback.rs"
+    },
+    {
+      "criterion": "Telemetry records send and receive timestamps.",
+      "status": "passed",
+      "evidence": "TransportTelemetryLog plus video_lane_records_send_and_receive_timestamps test."
+    },
+    {
+      "criterion": "Transport errors are typed.",
+      "status": "passed",
+      "evidence": "TransportErrorKind and typed mismatch assertion in crates/transport/tests/loopback.rs."
+    },
+    {
+      "criterion": "No live network claim is made without cross-device validation.",
+      "status": "passed",
+      "evidence": "Crate docs, evidence notes, and realWorldValidation status all state loopback-only behavior."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Skeleton-only loopback node; no live network or cross-device validation was performed or claimed."
+  },
+  "findings": []
+}

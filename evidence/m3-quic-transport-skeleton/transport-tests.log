@@ -1,0 +1,22 @@
+   Compiling madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m3-quic-transport-skeleton/crates/transport)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.46s
+     Running unittests src/lib.rs (target/debug/deps/madobe_transport-317cd3ddb725c9d7)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+     Running tests/loopback.rs (target/debug/deps/loopback-46a8421d40cb54de)
+
+running 4 tests
+test loopback_sender_and_receiver_exchange_video_sample ... ok
+test video_lane_identifier_is_stable ... ok
+test video_lane_records_send_and_receive_timestamps ... ok
+test video_sample_rejects_mismatched_payload_size_with_typed_error ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_transport
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

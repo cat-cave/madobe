@@ -1,0 +1,119 @@
+{
+  "nodeId": "m3-quic-transport-skeleton",
+  "summary": "Added a dependency-free madobe-transport crate with an in-memory QUIC-shaped loopback session, a framed video sample lane, typed transport errors, deterministic send/receive telemetry timestamps, focused loopback tests, and evidence that avoids live-network claims.",
+  "changedFiles": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "crates/transport/Cargo.toml",
+    "crates/transport/src/lib.rs",
+    "crates/transport/tests/loopback.rs",
+    "evidence/m3-quic-transport-skeleton/commands.log",
+    "evidence/m3-quic-transport-skeleton/host-env.txt",
+    "evidence/m3-quic-transport-skeleton/just-check.log",
+    "evidence/m3-quic-transport-skeleton/just-test.log",
+    "evidence/m3-quic-transport-skeleton/notes.md",
+    "evidence/m3-quic-transport-skeleton/report-json-check.log",
+    "evidence/m3-quic-transport-skeleton/transport-clippy.log",
+    "evidence/m3-quic-transport-skeleton/transport-tests.log",
+    "reports/qd/m3-quic-transport-skeleton/audit.json",
+    "reports/qd/m3-quic-transport-skeleton/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Loopback sender and receiver tests pass.",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/transport-tests.log"
+    },
+    {
+      "criterion": "Video lane carries framed sample payloads.",
+      "status": "passed",
+      "evidence": "crates/transport/src/lib.rs defines VideoSample and VideoLane::send/receive; crates/transport/tests/loopback.rs asserts a sample round trip."
+    },
+    {
+      "criterion": "Telemetry records send and receive timestamps.",
+      "status": "passed",
+      "evidence": "crates/transport/tests/loopback.rs video_lane_records_send_and_receive_timestamps asserts send and receive TransportTelemetryEvent timestamps."
+    },
+    {
+      "criterion": "Transport errors are typed.",
+      "status": "passed",
+      "evidence": "TransportErrorKind and video_sample_rejects_mismatched_payload_size_with_typed_error in crates/transport/tests/loopback.rs."
+    },
+    {
+      "criterion": "No live network claim is made without cross-device validation.",
+      "status": "passed",
+      "evidence": "crates/transport/src/lib.rs crate docs and evidence/m3-quic-transport-skeleton/notes.md state this is loopback-only with no socket I/O or cross-device claim."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo fmt --all",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo generate-lockfile",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-transport --all-features",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/transport-tests.log"
+    },
+    {
+      "command": "nix develop -c cargo clippy -p madobe-transport --all-targets --all-features -- -D warnings",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/transport-clippy.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/just-check.log"
+    },
+    {
+      "command": "nix develop -c just test",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/just-test.log"
+    },
+    {
+      "command": "nix develop -c just security",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/commands.log"
+    },
+    {
+      "command": "nix flake check",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/commands.log"
+    },
+    {
+      "command": "nix develop -c jq empty reports/qd/m3-quic-transport-skeleton/completion.json reports/qd/m3-quic-transport-skeleton/audit.json",
+      "status": "passed",
+      "evidence": "evidence/m3-quic-transport-skeleton/report-json-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m3-quic-transport-skeleton/commands.log",
+    "evidence/m3-quic-transport-skeleton/host-env.txt",
+    "evidence/m3-quic-transport-skeleton/just-check.log",
+    "evidence/m3-quic-transport-skeleton/just-test.log",
+    "evidence/m3-quic-transport-skeleton/notes.md",
+    "evidence/m3-quic-transport-skeleton/report-json-check.log",
+    "evidence/m3-quic-transport-skeleton/transport-clippy.log",
+    "evidence/m3-quic-transport-skeleton/transport-tests.log"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Skeleton-only loopback node; no live network or cross-device validation was performed or claimed."
+  },
+  "unverifiedItems": [],
+  "residualRisks": [
+    "Real QUIC networking is not implemented in this node.",
+    "Cross-device send/receive validation is deferred to a later live transport validation node.",
+    "The loopback transport uses in-memory queues and does not model packet loss, congestion, stream scheduling, TLS, or real QUIC handshakes.",
+    "Payload hashes are carried from protocol metadata but not cryptographically verified by this skeleton."
+  ],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,88 @@
+if command -v cargo-nextest >/dev/null 2>&1; then cargo nextest run --workspace --all-features; else cargo test --workspace --all-features; fi
+   Compiling madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m3-quic-transport-skeleton/crates/compositor)
+   Compiling madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m3-quic-transport-skeleton/crates/hyprland)
+   Compiling madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m3-quic-transport-skeleton/crates/capture)
+   Compiling madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m3-quic-transport-skeleton/crates/protocol)
+   Compiling madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m3-quic-transport-skeleton/crates/telemetry)
+   Compiling hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m3-quic-transport-skeleton/apps/hostd)
+   Compiling madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m3-quic-transport-skeleton/apps/cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.29s
+────────────
+ Nextest run ID 3df81922-e509-4c6c-b207-7248fe000228 with nextest profile: default
+    Starting 21 tests across 14 binaries
+        PASS [   0.005s] ( 1/21) hostd tests::status_line_links_shared_crates
+        PASS [   0.005s] ( 2/21) madobe-compositor::lifecycle lifecycle_supports_create_configure_bind_park_remove_list_and_reconcile
+        PASS [   0.006s] ( 3/21) madobe-hyprland::fixtures parses_monitor_fixture
+        PASS [   0.006s] ( 4/21) madobe-protocol tests::hello_carries_stable_identity
+        PASS [   0.006s] ( 5/21) madobe-capture::captured_frame golden_capture_fixture_covers_expected_metadata
+        PASS [   0.006s] ( 6/21) madobe-telemetry tests::event_has_deterministic_timestamp
+        PASS [   0.006s] ( 7/21) madobe-hyprland::fixtures parses_socket_event_lines
+        PASS [   0.006s] ( 8/21) madobe-protocol tests::golden_video_frame_fixture_covers_expected_metadata
+        PASS [   0.006s] ( 9/21) madobe-compositor::lifecycle typed_validation_errors_reject_invalid_values
+        PASS [   0.006s] (10/21) madobe-transport::loopback video_lane_identifier_is_stable
+        PASS [   0.007s] (11/21) madobe-capture::captured_frame golden_capture_fixture_round_trips_semantically
+        PASS [   0.007s] (12/21) madobe-hyprland::fixtures parse_errors_preserve_command_context
+        PASS [   0.007s] (13/21) madobectl tests::hello_line_links_shared_crates
+        PASS [   0.007s] (14/21) madobe-transport::loopback video_lane_records_send_and_receive_timestamps
+        PASS [   0.007s] (15/21) madobectl tests::hello_command_renders_status
+        PASS [   0.007s] (16/21) madobectl tests::unknown_command_returns_usage
+        PASS [   0.008s] (17/21) madobe-hyprland::fixtures client_uses_injected_executor_for_json_endpoints
+        PASS [   0.008s] (18/21) madobe-hyprland::fixtures parses_workspace_fixtures
+        PASS [   0.008s] (19/21) madobe-transport::loopback loopback_sender_and_receiver_exchange_video_sample
+        PASS [   0.009s] (20/21) madobe-transport::loopback video_sample_rejects_mismatched_payload_size_with_typed_error
+        PASS [   0.009s] (21/21) madobe-protocol tests::golden_video_frame_fixture_round_trips_semantically
+────────────
+     Summary [   0.009s] 21 tests run: 21 passed, 0 skipped
+cargo test --doc --workspace --all-features
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.02s
+   Doc-tests hostd
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_capture
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_compositor
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_hyprland
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_protocol
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_telemetry
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_transport
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobectl
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+just apple-test
+if [ "$(uname -s)" != Darwin ]; then echo "apple tests skipped outside macOS"; else cd apple && { if command -v tuist >/dev/null 2>&1; then tuist generate; elif command -v mise >/dev/null 2>&1; then mise exec -- tuist generate; else echo "tuist missing; run just macos-bootstrap"; exit 127; fi; } && xcodebuild test -scheme MadobeMac -destination 'platform=macOS'; fi
+apple tests skipped outside macOS

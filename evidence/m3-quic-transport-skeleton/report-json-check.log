@@ -1,0 +1,4 @@
+Command:
+nix develop -c jq empty reports/qd/m3-quic-transport-skeleton/completion.json reports/qd/m3-quic-transport-skeleton/audit.json
+
+Result: passed
