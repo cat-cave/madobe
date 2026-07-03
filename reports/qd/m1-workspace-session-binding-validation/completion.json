@@ -1,0 +1,79 @@
+{
+  "nodeId": "m1-workspace-session-binding-validation",
+  "summary": "Validated live workspace/session binding to a madobe-owned Hyprland output on Linux hardware, fixed the Hyprland 0.55 adapter command form, and exposed a narrow madobectl display bind command for the existing compositor binding contract.",
+  "changedFiles": [
+    "apps/cli/src/lib.rs",
+    "apps/hostd/src/lib.rs",
+    "apps/hostd/tests/display_bind.rs",
+    "crates/hyprland/src/adapter.rs",
+    "crates/hyprland/tests/adapter_binding.rs",
+    "evidence/m1-workspace-session-binding-validation/commands.log",
+    "evidence/m1-workspace-session-binding-validation/notes.md",
+    "evidence/m1-workspace-session-binding-validation/validation-summary.json",
+    "reports/qd/m1-workspace-session-binding-validation/completion.json",
+    "reports/qd/m1-workspace-session-binding-validation/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "A node-scoped madobe remote output is created on Linux hardware",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/cli-create.out"
+    },
+    {
+      "criterion": "A disposable workspace or session is bound or moved to that output with live Hyprland evidence",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/validation-summary.json"
+    },
+    {
+      "criterion": "Redacted Hyprland monitor and workspace JSON is recorded before, during, and after validation",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/hyprland-monitors-before.json"
+    },
+    {
+      "criterion": "Cleanup removes only the madobe-owned output and restores developer-session state",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/hyprland-monitors-after.json"
+    },
+    {
+      "criterion": "Findings are filed for any flaky or unproven binding behavior",
+      "status": "passed",
+      "evidence": "reports/qd/m1-workspace-session-binding-validation/audit.json"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo fmt --all",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/commands.log"
+    },
+    {
+      "command": "nix develop -c just verify",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo run -q -p madobectl -- display bind --id madobe-qd-m1-workspace-session-binding-validation --session madobe-qd-m1-workspace-session-binding-validation-session --workspace madobe-qd-m1-workspace-session-binding-validation-workspace",
+      "status": "passed",
+      "evidence": "evidence/m1-workspace-session-binding-validation/cli-bind.out"
+    }
+  ],
+  "evidence": [
+    "evidence/m1-workspace-session-binding-validation/commands.log",
+    "evidence/m1-workspace-session-binding-validation/notes.md",
+    "evidence/m1-workspace-session-binding-validation/validation-summary.json",
+    "evidence/m1-workspace-session-binding-validation/hyprland-monitors-before.json",
+    "evidence/m1-workspace-session-binding-validation/hyprland-monitors-during-bound.json",
+    "evidence/m1-workspace-session-binding-validation/hyprland-monitors-after.json",
+    "evidence/m1-workspace-session-binding-validation/hyprland-workspaces-before.json",
+    "evidence/m1-workspace-session-binding-validation/hyprland-workspaces-during-bound.json",
+    "evidence/m1-workspace-session-binding-validation/hyprland-workspaces-after.json"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m1-workspace-session-binding-validation/validation-summary.json"
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

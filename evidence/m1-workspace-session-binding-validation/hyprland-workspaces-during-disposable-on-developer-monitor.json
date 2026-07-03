@@ -1,0 +1,46 @@
+[
+  {
+    "id": null,
+    "name": "<developer-workspace>",
+    "monitor": "<physical-monitor>",
+    "windows": 3,
+    "hasfullscreen": false,
+    "lastwindow": "<redacted-window-address>",
+    "lastwindowtitle": "<redacted-window-title>",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  },
+  {
+    "id": null,
+    "name": "<developer-workspace>",
+    "monitor": "<physical-monitor>",
+    "windows": 0,
+    "hasfullscreen": false,
+    "lastwindow": "0x0",
+    "lastwindowtitle": "",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  },
+  {
+    "id": null,
+    "name": "<developer-workspace>",
+    "monitor": "madobe-qd-m1-workspace-session-binding-validation",
+    "windows": 0,
+    "hasfullscreen": false,
+    "lastwindow": "0x0",
+    "lastwindowtitle": "",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  },
+  {
+    "id": -1337,
+    "name": "madobe-qd-m1-workspace-session-binding-validation-workspace",
+    "monitor": "<physical-monitor>",
+    "windows": 0,
+    "hasfullscreen": false,
+    "lastwindow": "0x0",
+    "lastwindowtitle": "",
+    "ispersistent": false,
+    "tiledLayout": "dwindle"
+  }
+]

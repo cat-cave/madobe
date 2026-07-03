@@ -1,0 +1,50 @@
+[
+  {
+    "id": null,
+    "name": "<physical-monitor>",
+    "width": 3840,
+    "height": 2160,
+    "x": 0,
+    "y": 0,
+    "refreshRate": 94.98100,
+    "activeWorkspace": {
+      "id": null,
+      "name": "<developer-workspace>"
+    },
+    "focused": false,
+    "disabled": false,
+    "currentFormat": "XRGB8888"
+  },
+  {
+    "id": null,
+    "name": "<physical-monitor>",
+    "width": 2560,
+    "height": 1440,
+    "x": 3840,
+    "y": 0,
+    "refreshRate": 144.00000,
+    "activeWorkspace": {
+      "id": null,
+      "name": "<developer-workspace>"
+    },
+    "focused": false,
+    "disabled": false,
+    "currentFormat": "XRGB8888"
+  },
+  {
+    "id": 3,
+    "name": "madobe-qd-m1-workspace-session-binding-validation",
+    "width": 1280,
+    "height": 720,
+    "x": 50000,
+    "y": 50000,
+    "refreshRate": 60.00000,
+    "activeWorkspace": {
+      "id": -1337,
+      "name": "madobe-qd-m1-workspace-session-binding-validation-workspace"
+    },
+    "focused": true,
+    "disabled": false,
+    "currentFormat": "XRGB8888"
+  }
+]

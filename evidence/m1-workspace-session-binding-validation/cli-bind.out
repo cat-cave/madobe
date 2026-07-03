@@ -1,0 +1,2 @@
+madobe dev shell: use 'just --list' to see commands
+display bind id=madobe-qd-m1-workspace-session-binding-validation session=madobe-qd-m1-workspace-session-binding-validation-session workspace=madobe-qd-m1-workspace-session-binding-validation-workspace status=bound

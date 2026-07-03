@@ -1,0 +1,79 @@
+## precleanup-output-remove
+Time: 2026-07-03T14:46:42-05:00
+Command: nix develop -c cargo run -q -p madobectl -- display remove --id madobe-qd-m1-workspace-session-binding-validation
+Status: 0
+
+## hyprland-state-before
+Time: 2026-07-03T14:46:42-05:00
+Command: hyprctl -j monitors && hyprctl -j workspaces
+Status: 0
+
+## cli-create
+Time: 2026-07-03T14:46:43-05:00
+Command: nix develop -c cargo run -q -p madobectl -- display create --id madobe-qd-m1-workspace-session-binding-validation
+Status: 0
+
+## hyprland-state-during-created
+Time: 2026-07-03T14:46:43-05:00
+Command: hyprctl -j monitors && hyprctl -j workspaces
+Status: 0
+
+## create-disposable-workspace
+Time: 2026-07-03T14:46:43-05:00
+Command: hyprctl eval return hl.dispatch(hl.dsp.focus({ workspace = 'name:madobe-qd-m1-workspace-session-binding-validation-workspace' }))
+Status: 0
+
+## hyprland-state-during-disposable-on-developer-monitor
+Time: 2026-07-03T14:46:43-05:00
+Command: hyprctl -j monitors && hyprctl -j workspaces
+Status: 0
+
+## cli-bind
+Time: 2026-07-03T14:46:43-05:00
+Command: nix develop -c cargo run -q -p madobectl -- display bind --id madobe-qd-m1-workspace-session-binding-validation --session madobe-qd-m1-workspace-session-binding-validation-session --workspace madobe-qd-m1-workspace-session-binding-validation-workspace
+Status: 0
+
+## hyprland-state-during-bound
+Time: 2026-07-03T14:46:44-05:00
+Command: hyprctl -j monitors && hyprctl -j workspaces
+Status: 0
+
+## restore-dp2-workspace
+Time: 2026-07-03T14:46:44-05:00
+Command: hyprctl eval return hl.dispatch(hl.dsp.focus({ monitor = '<physical-monitor-1>' }))
+Status: 0
+
+## restore-workspace-11
+Time: 2026-07-03T14:46:44-05:00
+Command: hyprctl eval return hl.dispatch(hl.dsp.focus({ workspace = '<developer-workspace-1>' }))
+Status: 0
+
+## restore-dp3-workspace
+Time: 2026-07-03T14:46:44-05:00
+Command: hyprctl eval return hl.dispatch(hl.dsp.focus({ monitor = '<physical-monitor-2>' }))
+Status: 0
+
+## restore-workspace-12
+Time: 2026-07-03T14:46:44-05:00
+Command: hyprctl eval return hl.dispatch(hl.dsp.focus({ workspace = '<developer-workspace-2>' }))
+Status: 0
+
+## cli-remove
+Time: 2026-07-03T14:46:44-05:00
+Command: nix develop -c cargo run -q -p madobectl -- display remove --id madobe-qd-m1-workspace-session-binding-validation
+Status: 0
+
+## hyprland-state-after
+Time: 2026-07-03T14:46:44-05:00
+Command: hyprctl -j monitors && hyprctl -j workspaces
+Status: 0
+
+## validation-summary
+Time: 2026-07-03T14:46:44-05:00
+Command: jq generated sanitized validation summary from redacted Hyprland snapshots
+Status: 0
+
+## verify
+Time: 2026-07-03T14:54:00-05:00
+Command: nix develop -c just verify
+Status: 0

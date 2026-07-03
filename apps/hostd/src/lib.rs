@@ -2,9 +2,9 @@
 #![forbid(unsafe_code)]
 
 use madobe_compositor::{
-    ColorDepth, CompositorAdapter, CompositorError, ConfigError, CreateOutput, Dimensions,
-    IdentifierError, OutputConfig, OutputId, OutputMode, OutputState, OutputStatus, Position,
-    RefreshRate, Scale,
+    BindSession, BindingStatus, ColorDepth, CompositorAdapter, CompositorError, ConfigError,
+    CreateOutput, Dimensions, IdentifierError, OutputConfig, OutputId, OutputMode, OutputState,
+    OutputStatus, Position, RefreshRate, Scale, SessionId, WorkspaceId,
 };
 use madobe_protocol::MadobeHello;
 use madobe_telemetry::bootstrap_event;
@@ -44,6 +44,15 @@ pub enum DisplayAction {
     Remove {
         /// Display identifier.
         id: OutputId,
+    },
+    /// Bind a session/workspace to the named display.
+    Bind {
+        /// Display identifier.
+        id: OutputId,
+        /// Remote session identifier.
+        session: SessionId,
+        /// Workspace identifier.
+        workspace: WorkspaceId,
     },
     /// Create, park, and remove the named display.
     Smoke {
@@ -146,6 +155,14 @@ pub fn run_display_action(
             adapter.remove_output(&id)?;
             Ok(format!("display remove id={id} status=removed"))
         }
+        DisplayAction::Bind {
+            id,
+            session,
+            workspace,
+        } => {
+            let status = adapter.bind_session(BindSession::new(session, id, workspace))?;
+            Ok(render_binding_status(&status))
+        }
         DisplayAction::Smoke { id } => run_smoke(adapter, &id),
     }
 }
@@ -182,6 +199,15 @@ fn run_smoke(
 
 fn render_operation_status(operation: &str, status: &OutputStatus) -> String {
     render_status_line(&format!("display {operation}"), status)
+}
+
+fn render_binding_status(status: &BindingStatus) -> String {
+    format!(
+        "display bind id={} session={} workspace={} status=bound",
+        status.output(),
+        status.session(),
+        status.workspace()
+    )
 }
 
 fn render_status_line(prefix: &str, status: &OutputStatus) -> String {
