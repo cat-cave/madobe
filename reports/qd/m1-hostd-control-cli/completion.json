@@ -1,0 +1,103 @@
+{
+  "nodeId": "m1-hostd-control-cli",
+  "summary": "Wired hostd display control through the platform-neutral CompositorAdapter contract, exposed deterministic madobectl display status and lifecycle smoke commands, added focused hostd/CLI tests with mock adapters, and documented safe Linux hardware validation commands.",
+  "changedFiles": [
+    "Cargo.lock",
+    "apps/cli/Cargo.toml",
+    "apps/cli/src/lib.rs",
+    "apps/hostd/Cargo.toml",
+    "apps/hostd/src/lib.rs",
+    "docs/LINUX_ORCHESTRATOR.md",
+    "evidence/m1-hostd-control-cli/commands.log",
+    "evidence/m1-hostd-control-cli/notes.md",
+    "reports/qd/m1-hostd-control-cli/audit.json",
+    "reports/qd/m1-hostd-control-cli/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "madobectl exposes display status and lifecycle commands.",
+      "status": "passed",
+      "evidence": "apps/cli/src/lib.rs parses display status, create, park, remove, and smoke commands; CLI tests cover status, explicit lifecycle id, and deterministic default id."
+    },
+    {
+      "criterion": "hostd uses the adapter contract rather than Hyprland internals.",
+      "status": "passed",
+      "evidence": "hostd::run_display_action accepts &mut impl CompositorAdapter; hostd::run_hyprland_display_action only constructs HyprlandAdapter<HyprctlExecutor> and delegates to the generic runner. hostd tests use a mock CompositorAdapter."
+    },
+    {
+      "criterion": "CLI output is deterministic enough for tests.",
+      "status": "passed",
+      "evidence": "Status output sorts outputs by OutputId and renders fixed field order; lifecycle commands render stable one-line summaries. Covered by hostd and madobectl unit tests."
+    },
+    {
+      "criterion": "Linux hardware validation commands are documented.",
+      "status": "passed",
+      "evidence": "docs/LINUX_ORCHESTRATOR.md documents node-specific madobe-* output ids, status/create/park/remove/smoke commands, expected hyprctl monitor evidence, and cleanup instructions."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "cargo test -p hostd -p madobectl",
+      "status": "failed",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p hostd -p madobectl",
+      "status": "passed",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo fmt --all",
+      "status": "passed",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log"
+    },
+    {
+      "command": "nix develop -c just test",
+      "status": "passed",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log"
+    },
+    {
+      "command": "implementor: nix develop -c cargo run -q -p madobectl -- display status",
+      "status": "failed",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log"
+    },
+    {
+      "command": "nix develop -c just verify",
+      "status": "passed",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log"
+    },
+    {
+      "command": "nix flake check",
+      "status": "passed",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log"
+    },
+    {
+      "command": "orchestrator: nix develop -c cargo run -q -p madobectl -- display status",
+      "status": "failed",
+      "evidence": "evidence/m1-hostd-control-cli/commands.log"
+    }
+  ],
+  "residualRisks": [
+    "Live Hyprland status/lifecycle behavior was not validated from the implementor or orchestrator shell because the real adapter could not access Hyprland state. The safe hardware validation commands and expected evidence are documented for the Linux orchestrator.",
+    "The smoke command is intentionally a local lifecycle control surface, not a daemon protocol or cross-device session workflow."
+  ],
+  "evidence": [
+    "evidence/m1-hostd-control-cli/commands.log",
+    "evidence/m1-hostd-control-cli/notes.md",
+    "reports/qd/m1-hostd-control-cli/audit.json",
+    "reports/qd/m1-hostd-control-cli/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "A non-mutating display status probe failed because Hyprland state was unavailable from this shell; no lifecycle mutation was attempted. Hardware validation commands are documented in docs/LINUX_ORCHESTRATOR.md."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
