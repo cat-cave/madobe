@@ -1,0 +1,24 @@
+CoreSimulator warning evidence
+==============================
+
+Status: non-blocking
+
+During the earlier macOS startup validation on this Mac, Xcode emitted this warning before continuing to run the
+native macOS destination tests successfully:
+
+  DVTErrorPresenter: Unable to load simulator devices.
+  CoreSimulator is out of date. Current version (1048.0.0) is older than build version (1051.17.7).
+  Simulator device support disabled.
+
+Current node reruns on 2026-07-03 did not reproduce the CoreSimulator warning in `xcodebuild.log` or
+`macos-check.log`. They did reproduce only this non-blocking destination selection warning:
+
+  xcodebuild: WARNING: Using the first of multiple matching destinations:
+  { platform:macOS, arch:arm64, id:00008142-000A31A622C2401C, name:My Mac }
+  { platform:macOS, arch:x86_64, id:00008142-000A31A622C2401C, name:My Mac }
+
+Reason this is non-blocking for m0-mac-bootstrap-verify:
+
+- The node validates the native macOS destination, not iOS Simulator execution.
+- `xcodebuild test -scheme MadobeMac -destination 'platform=macOS'` passed.
+- `just macos-check` passed.

@@ -1,0 +1,51 @@
+{
+  "nodeId": "m0-mac-bootstrap-verify",
+  "acceptanceReviewed": [
+    {
+      "criterion": "MacBook can clone or pull cat-cave/madobe over HTTPS.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/commands.log"
+    },
+    {
+      "criterion": "macOS qd sync from roadmap/qd-export.json succeeds.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/commands.log"
+    },
+    {
+      "criterion": "macOS qd method is acknowledged as trevor-mac-orchestrator.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/commands.log"
+    },
+    {
+      "criterion": "Corrected macOS-native checks pass without Nix.",
+      "status": "passed",
+      "evidence": "reports/qd/m0-mac-bootstrap-verify/acceptance-correction.md"
+    },
+    {
+      "criterion": "Tuist generation and Xcode macOS tests are logged.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/tuist-generate.log and evidence/m0-mac-bootstrap-verify/xcodebuild.log"
+    },
+    {
+      "criterion": "CoreSimulator warning is recorded as non-blocking evidence.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/core-simulator-warning.txt"
+    },
+    {
+      "criterion": "Linux CI typos false positive is resolved without editing raw Xcode evidence.",
+      "status": "passed",
+      "evidence": "typos.toml allows Xcode's `cmo` compiler flag"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Native macOS Tuist generation and Xcode tests passed on the MacBook."
+  },
+  "findings": []
+}

@@ -1,0 +1,54 @@
+timestamp_utc: 2026-07-03T15:28:05Z
+repo: https://github.com/cat-cave/madobe.git
+branch: qd/m0-mac-bootstrap-verify
+commit: a2bd90f9f26c378112282f597d5eae48afdc2582
+
+[sw_vers]
+ProductName:		macOS
+ProductVersion:		26.5.1
+BuildVersion:		25F80
+
+[uname]
+Darwin Trevors-MacBook-Pro.local 25.5.0 Darwin Kernel Version 25.5.0: Mon Apr 27 20:39:29 PDT 2026; root:xnu-12377.121.6~2/RELEASE_ARM64_T8142 arm64
+
+[xcodebuild]
+Xcode 26.2
+Build version 17C52
+
+[tuist]
+4.200.5
+
+[swiftformat]
+0.61.1
+
+[swiftlint]
+0.65.0
+
+[qd]
+0.2.1
+
+[mise current]
+rust stable
+just 1.55.1
+tuist 4.200.5
+
+[mise exec rustc]
+rustc 1.96.1 (31fca3adb 2026-06-26)
+
+[mise exec cargo]
+cargo 1.96.1 (356927216 2026-06-26)
+
+[mise exec just]
+just 1.55.1
+
+[path rustc]
+/Users/trevor/.cargo/bin/rustc
+rustc 1.95.0 (59807616e 2026-04-14)
+
+[path cargo]
+/Users/trevor/.cargo/bin/cargo
+cargo 1.95.0 (f2d3ce0bd 2026-03-21)
+
+[path just]
+/Users/trevor/.cargo/bin/just
+just 1.49.0
