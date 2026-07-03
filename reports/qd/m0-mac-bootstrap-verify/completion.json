@@ -1,0 +1,136 @@
+{
+  "nodeId": "m0-mac-bootstrap-verify",
+  "summary": "Verified the bootstrap scaffold on macOS with native Mise/Homebrew/Tuist/Xcode tooling and recorded the stale Nix acceptance correction.",
+  "changedFiles": [
+    "evidence/m0-mac-bootstrap-verify/commands.log",
+    "evidence/m0-mac-bootstrap-verify/core-simulator-warning.txt",
+    "evidence/m0-mac-bootstrap-verify/mac-env.txt",
+    "evidence/m0-mac-bootstrap-verify/macos-bootstrap.log",
+    "evidence/m0-mac-bootstrap-verify/macos-check.log",
+    "evidence/m0-mac-bootstrap-verify/notes.md",
+    "evidence/m0-mac-bootstrap-verify/tuist-generate.log",
+    "evidence/m0-mac-bootstrap-verify/xcodebuild.log",
+    "reports/qd/m0-mac-bootstrap-verify/acceptance-correction.md",
+    "reports/qd/m0-mac-bootstrap-verify/completion.json",
+    "reports/qd/m0-mac-bootstrap-verify/audit.json",
+    "roadmap/qd-export.json",
+    "typos.toml"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "MacBook can clone or pull cat-cave/madobe over HTTPS.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/commands.log"
+    },
+    {
+      "criterion": "macOS qd sync from roadmap/qd-export.json succeeds.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/commands.log"
+    },
+    {
+      "criterion": "macOS qd method is acknowledged as trevor-mac-orchestrator.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/commands.log"
+    },
+    {
+      "criterion": "Current macOS-native check surface succeeds.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/macos-check.log"
+    },
+    {
+      "criterion": "Tuist generation succeeds.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/tuist-generate.log"
+    },
+    {
+      "criterion": "Xcode macOS destination tests succeed.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/xcodebuild.log"
+    },
+    {
+      "criterion": "evidence/m0-mac-bootstrap-verify contains command log and mac-env.txt.",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/"
+    },
+    {
+      "criterion": "Stale Nix acceptance text is corrected or documented.",
+      "status": "passed",
+      "evidence": "reports/qd/m0-mac-bootstrap-verify/acceptance-correction.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "git pull --rebase --autostash",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/commands.log"
+    },
+    {
+      "command": "qd sync --from roadmap/qd-export.json --expect-clean",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/commands.log"
+    },
+    {
+      "command": "qd doctor --strict",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/commands.log"
+    },
+    {
+      "command": "just macos-bootstrap",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/macos-bootstrap.log"
+    },
+    {
+      "command": "just macos-check",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/macos-check.log"
+    },
+    {
+      "command": "tuist generate",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/tuist-generate.log"
+    },
+    {
+      "command": "xcodebuild test -scheme MadobeMac -destination 'platform=macOS'",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/xcodebuild.log"
+    },
+    {
+      "command": "just macos-check",
+      "status": "passed",
+      "evidence": "rerun after typos.toml update; local terminal output"
+    },
+    {
+      "command": "typos",
+      "status": "not-run",
+      "evidence": "native Mac PATH did not include typos; Linux CI verifies typos.toml"
+    },
+    {
+      "command": "gh pr checks 3 --repo cat-cave/madobe --watch --interval 10",
+      "status": "passed",
+      "evidence": "https://github.com/cat-cave/madobe/actions/runs/28670241701"
+    },
+    {
+      "command": "qd gate m0-mac-bootstrap-verify --phase merge",
+      "status": "passed",
+      "evidence": "evidence/m0-mac-bootstrap-verify/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m0-mac-bootstrap-verify/commands.log",
+    "evidence/m0-mac-bootstrap-verify/mac-env.txt",
+    "evidence/m0-mac-bootstrap-verify/macos-bootstrap.log",
+    "evidence/m0-mac-bootstrap-verify/macos-check.log",
+    "evidence/m0-mac-bootstrap-verify/tuist-generate.log",
+    "evidence/m0-mac-bootstrap-verify/xcodebuild.log",
+    "evidence/m0-mac-bootstrap-verify/core-simulator-warning.txt",
+    "reports/qd/m0-mac-bootstrap-verify/acceptance-correction.md"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Native macOS Tuist generation and Xcode tests passed on the MacBook."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

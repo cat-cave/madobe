@@ -1,0 +1,94 @@
+Node: m0-mac-bootstrap-verify
+Agent: trevor-mac-orchestrator
+Platform: macOS
+Date: 2026-07-03
+
+Startup commands run from main checkout:
+
+1. git pull --rebase --autostash
+   Result: passed
+   Notes: main was already up to date with origin/main.
+
+2. qd sync --from roadmap/qd-export.json --expect-clean
+   Result: passed
+   Notes: no drift; 25 nodes, 24 edges, 1 finding, 12 runs.
+
+3. qd doctor --strict
+   Result: passed
+   Notes: qd config uses checkCommand = "just check" and ciCommand = "gh workflow run ci.yml".
+
+4. just macos-bootstrap
+   Result: passed
+   Evidence: evidence/m0-mac-bootstrap-verify/macos-bootstrap.log
+   Notes: initial sandboxed startup pass emitted Mise cache write warnings; evidence rerun used normal Homebrew/Mise access and passed without those warnings.
+
+5. just macos-check
+   Result: passed
+   Evidence: evidence/m0-mac-bootstrap-verify/macos-check.log
+   Notes: ran Rust fmt/check/clippy, SwiftFormat/SwiftLint, Tuist generation, and Xcode tests with native macOS tooling.
+
+6. qd ready --json
+   Result: passed
+   Notes: m0-mac-bootstrap-verify was first in the ready queue before claim.
+
+Node commands:
+
+1. qd claim m0-mac-bootstrap-verify --agent trevor-mac-orchestrator --branch qd/m0-mac-bootstrap-verify
+   Result: passed
+
+2. qd worktree create m0-mac-bootstrap-verify --branch qd/m0-mac-bootstrap-verify
+   Result: passed after escalation for Git branch/worktree metadata writes.
+   Worktree: .qd/worktrees/m0-mac-bootstrap-verify
+
+3. qd method acknowledge --agent trevor-mac-orchestrator
+   Result: passed in the qd worktree cache.
+
+4. qd migrate
+   Result: passed in the qd worktree cache.
+
+5. qd sync --from roadmap/qd-export.json
+   Result: passed in the qd worktree cache.
+
+6. tuist generate
+   Result: passed
+   Evidence: evidence/m0-mac-bootstrap-verify/tuist-generate.log
+
+7. xcodebuild test -scheme MadobeMac -destination 'platform=macOS'
+   Result: passed
+   Evidence: evidence/m0-mac-bootstrap-verify/xcodebuild.log
+
+8. Environment and tool version capture
+   Result: passed
+   Evidence: evidence/m0-mac-bootstrap-verify/mac-env.txt
+
+CI follow-up:
+
+1. gh pr checks 3 --repo cat-cave/madobe --watch --interval 10
+   Result: linux failed, macos passed
+   Run: https://github.com/cat-cave/madobe/actions/runs/28670050100
+
+2. gh run view 28670050100 --repo cat-cave/madobe --job 85031012624 --log
+   Result: passed
+   Finding: Linux `typos` flagged Xcode's `-disable-cmo` compiler flag in xcodebuild.log as a typo.
+
+3. Update typos.toml to accept `cmo`
+   Result: passed
+   Notes: preserves raw Xcode command evidence instead of editing the log.
+
+4. typos
+   Result: not run locally
+   Notes: native Mac PATH does not currently include `typos`; Linux CI verifies this check.
+
+5. just macos-check
+   Result: passed after the typos.toml update
+
+6. gh pr checks 3 --repo cat-cave/madobe --watch --interval 10
+   Result: passed
+   Run: https://github.com/cat-cave/madobe/actions/runs/28670241701
+   Jobs: linux pass, macos pass
+
+7. qd ci record-pass m0-mac-bootstrap-verify --summary "GitHub Actions ci passed on linux and macos for PR #3 run 28670241701" --url https://github.com/cat-cave/madobe/actions/runs/28670241701
+   Result: passed
+
+8. qd gate m0-mac-bootstrap-verify --phase merge
+   Result: passed
