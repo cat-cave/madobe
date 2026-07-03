@@ -1,0 +1,35 @@
+# Node/class summary before temporary output
+120	<redacted-app>	Stream/Input/Audio	1	1
+135	<redacted-audio-sink>	Audio/Sink	1	1
+144	<redacted-audio-sink>	Audio/Sink	1	0
+150	<redacted-audio-sink>	Audio/Sink	1	0
+31	<redacted-driver-node>		0	0
+32	<redacted-driver-node>		0	0
+47	<redacted-audio-node>	Audio/Sink	1	0
+52	<redacted-midi-node>	Midi/Bridge	0	0
+55	<redacted-midi-node>	Midi/Bridge	0	0
+58	<redacted-audio-node>	Audio/Source	1	0
+59	<redacted-audio-node>	Audio/Source	1	0
+60	<redacted-audio-node>	Audio/Sink	1	0
+61	<redacted-audio-node>	Audio/Sink	1	0
+64	<redacted-audio-node>	Audio/Source	1	0
+65	<redacted-audio-node>	Audio/Sink	2	0
+
+# Node/class summary with temporary output present
+120	<redacted-app>	Stream/Input/Audio	1	1
+135	<redacted-audio-sink>	Audio/Sink	1	1
+144	<redacted-audio-sink>	Audio/Sink	1	0
+150	<redacted-audio-sink>	Audio/Sink	1	0
+31	<redacted-driver-node>		0	0
+32	<redacted-driver-node>		0	0
+47	<redacted-audio-node>	Audio/Sink	1	0
+52	<redacted-midi-node>	Midi/Bridge	0	0
+55	<redacted-midi-node>	Midi/Bridge	0	0
+58	<redacted-audio-node>	Audio/Source	1	0
+59	<redacted-audio-node>	Audio/Source	1	0
+60	<redacted-audio-node>	Audio/Sink	1	0
+61	<redacted-audio-node>	Audio/Sink	1	0
+64	<redacted-audio-node>	Audio/Source	1	0
+65	<redacted-audio-node>	Audio/Sink	2	0
+
+# Added/removed node names (name + media_class)

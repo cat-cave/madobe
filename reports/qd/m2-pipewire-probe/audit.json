@@ -1,0 +1,37 @@
+{
+  "nodeId": "m2-pipewire-probe",
+  "acceptanceReviewed": [
+    {
+      "criterion": "PipeWire and portal versions are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m2-pipewire-probe/host-env.txt and user-services-and-journal.txt."
+    },
+    {
+      "criterion": "Available capture nodes and formats are dumped.",
+      "status": "passed",
+      "evidence": "PipeWire dumps and node/format summaries are present before and while the temporary named output existed."
+    },
+    {
+      "criterion": "Named remote output capture path is identified or blocked with evidence.",
+      "status": "passed",
+      "evidence": "portal-introspection.txt, portal-screencast-properties.txt, pipewire-capture-node-query.txt, and reports/qd/m2-pipewire-probe/blocker.md."
+    },
+    {
+      "criterion": "Artifacts are saved under evidence/m2-pipewire-probe.",
+      "status": "passed",
+      "evidence": "Evidence directory contains command log, host env, PipeWire dumps, portal introspection, Hyprland before/with/after state, and notes."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live reference-host probes collected; capture success is not claimed, and the missing named-output path is documented as the accepted blocked-with-evidence outcome for this probe node."
+  },
+  "resolvedFindings": [],
+  "findings": []
+}

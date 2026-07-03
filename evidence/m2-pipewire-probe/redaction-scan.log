@@ -1,0 +1,2 @@
+redaction scan passed: no local user names, home-directory paths, runtime paths, physical monitor identifiers,
+hostnames, machine ids, process ids, raw PipeWire process fields, or local application/device names matched

@@ -1,0 +1,105 @@
+Node: m2-pipewire-probe
+Branch: spec/m2-pipewire-probe
+Worktree: <repo>/.qd/worktrees/m2-pipewire-probe
+Date: 2026-07-03T13:06:26-05:00
+
+Sandbox preflight:
+- command -v pipewire pw-cli pw-dump pw-top wpctl pactl xdg-desktop-portal xdg-desktop-portal-hyprland gdbus dbus-send busctl hyprctl jq grim slurp wf-recorder
+  status: xdg-desktop-portal executables not on PATH in sandbox; PipeWire tools and Hyprland tools present.
+- systemctl --user status pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-hyprland
+  status: blocked in sandbox by user bus isolation; rerun with escalated live-session access.
+
+Live-session probes:
+1. pipewire --version; pw-cli --version; pw-dump --version; wireplumber --version
+   status: passed; versions recorded in host-env.txt.
+
+2. systemctl --user --no-pager --plain status pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-hyprland
+   status: passed with escalated live-session access.
+   evidence: user-services-and-journal.txt.
+
+3. journalctl --user --no-pager --since '2026-07-03 00:00:00' -u xdg-desktop-portal -u xdg-desktop-portal-hyprland -u pipewire -u wireplumber
+   status: passed with escalated live-session access; output sanitized.
+   evidence: user-services-and-journal.txt.
+
+4. pw-dump > evidence/m2-pipewire-probe/pipewire-dump-before.json
+   status: passed with escalated PipeWire socket access; output sanitized.
+
+5. jq extracts from pipewire-dump-before.json
+   status: passed.
+   evidence: pipewire-nodes-before.json and pipewire-node-format-summary-before.json.
+
+6. wpctl status > evidence/m2-pipewire-probe/wireplumber-status.txt
+   status: passed with escalated PipeWire/WirePlumber socket access; output sanitized.
+
+7. busctl --user list and busctl --user introspect org.freedesktop.portal.Desktop /org/freedesktop/portal/desktop org.freedesktop.portal.ScreenCast
+   status: passed with escalated DBus session access.
+   evidence: portal-introspection.txt.
+
+8. busctl --user introspect org.freedesktop.impl.portal.desktop.hyprland /org/freedesktop/portal/desktop org.freedesktop.impl.portal.ScreenCast
+   status: passed with escalated DBus session access.
+   evidence: portal-introspection.txt.
+
+9. busctl --user get-property for public and Hyprland implementation ScreenCast version, AvailableSourceTypes, and AvailableCursorModes
+   status: passed with escalated DBus session access.
+   evidence: portal-screencast-properties.txt.
+
+10. hyprctl -j monitors
+    status: passed with transient HYPRLAND_INSTANCE_SIGNATURE from the live socket directory.
+    evidence: hyprland-monitors-before.json.
+
+11. hyprctl output remove madobe-qd-m2-pipewire-probe
+    status: passed as pre-cleanup/idempotence guard; output may already be absent.
+    evidence: hyprland-output-precleanup.txt and .err.
+
+12. hyprctl output create headless madobe-qd-m2-pipewire-probe
+    status: passed.
+    evidence: hyprland-output-create.txt.
+
+13. hyprctl eval "hl.monitor({ output = 'madobe-qd-m2-pipewire-probe', mode = '1280x720@60', position = '50000x50000', scale = 1 })"
+    status: passed.
+    evidence: hyprland-output-configure.txt and hyprland-monitors-with-output.json.
+
+14. pw-dump while madobe-qd-m2-pipewire-probe existed
+    status: passed with escalated PipeWire socket access; output sanitized.
+    evidence: pipewire-dump-with-output.json, pipewire-nodes-with-output.json, pipewire-node-format-summary-with-output.json.
+
+15. hyprctl output remove madobe-qd-m2-pipewire-probe
+    status: passed; cleanup completed.
+    evidence: hyprland-output-remove.txt and hyprland-monitors-after-remove.json.
+
+16. jq capture/video node query against before and with-output PipeWire dumps
+    status: passed; query returned [] for both states.
+    evidence: pipewire-capture-node-query.txt.
+
+17. jq/perl/sed evidence validation and redaction scans
+    status: passed; JSON artifacts parse and sensitive local user/runtime values were redacted.
+    evidence: terminal output and sanitized artifacts.
+
+18. nix develop -c just check > evidence/m2-pipewire-probe/just-check.log 2>&1
+    status: failed initially on typos in raw evidence strings and line-count limits for large pretty-printed JSON dumps.
+    resolution: redacted ALSA device strings, normalized the truncated Hyprland process name, minified the four large PipeWire JSON artifacts, and reran.
+    final status: passed.
+    evidence: just-check.log.
+
+19. jq validation for evidence/m2-pipewire-probe/*.json and reports/qd/m2-pipewire-probe/*.json
+    status: passed.
+    evidence: json-validation.log.
+
+20. rg redaction scan for local user, home/runtime paths, sensitive words, and non-zero hex addresses
+    status: passed with no matches.
+    evidence: redaction-scan.log.
+
+21. nix develop -c typos evidence/m2-pipewire-probe reports/qd/m2-pipewire-probe
+    status: passed after final command-log and validation-log edits.
+    evidence: typos-focused.log.
+
+Orchestrator audit edits:
+- Removed raw local PipeWire session details from the public evidence by replacing full `pw-dump` artifacts with
+  sanitized node-format summaries derived from those dumps.
+- Redacted physical monitor descriptions, hostnames, process ids, application names, machine ids, and local audio
+  device node names from human-readable evidence.
+- Re-ran `nix develop -c just check`: passed.
+- Re-ran JSON validation for evidence and qd reports: passed.
+- Re-ran `nix develop -c typos evidence/m2-pipewire-probe reports/qd/m2-pipewire-probe`: passed.
+- Re-ran the stronger redaction scan successfully; remaining matches were explanatory text naming redaction classes, not
+  local identifiers.

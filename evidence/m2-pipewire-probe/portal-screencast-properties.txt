@@ -1,0 +1,9 @@
+# Public portal ScreenCast properties
+u 5
+u 7
+u 3
+
+# Hyprland implementation ScreenCast properties
+u 3
+u 7
+u 3
