@@ -1,0 +1,11 @@
+exclude = [
+  ".qd/**",
+  "target/**",
+]
+
+[formatting]
+align_comments = false
+align_entries = false
+array_auto_collapse = false
+column_width = 100
+reorder_keys = false

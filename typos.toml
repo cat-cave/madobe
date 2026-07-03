@@ -1,0 +1,20 @@
+[default]
+extend-ignore-identifiers-re = [
+  "Madobe",
+  "madobectl",
+]
+
+[default.extend-words]
+CLL = "CLL"
+EIS = "EIS"
+FALL = "FALL"
+MaxCLL = "MaxCLL"
+MaxFALL = "MaxFALL"
+
+[files]
+extend-exclude = [
+  ".qd/qd.db",
+  ".qd/qd.db-*",
+  "lcov.info",
+  "target",
+]

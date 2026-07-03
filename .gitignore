@@ -1,0 +1,21 @@
+.qd/qd.db
+.qd/qd.db-*
+.qd/method-acknowledgement.json
+.qd/worktrees/
+.qd/skills/
+
+target/
+.direnv/
+.env
+.env.*
+
+# Apple/Tuist generated outputs
+apple/*.xcodeproj/
+apple/*.xcworkspace/
+apple/Derived/
+apple/.build/
+
+# Tool caches
+.cargo-mutants/
+coverage/
+lcov.info

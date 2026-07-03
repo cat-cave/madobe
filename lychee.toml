@@ -1,0 +1,7 @@
+accept = [200, 204, 206, 429]
+exclude_path = [
+  ".qd",
+  "target",
+]
+max_retries = 2
+timeout = 20

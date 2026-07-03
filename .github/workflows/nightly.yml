@@ -1,0 +1,26 @@
+name: nightly
+
+on:
+  schedule:
+    - cron: "17 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  deep-checks:
+    name: deep-checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.0
+      - uses: cachix/install-nix-action@v31.10.6
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - run: nix develop -c just coverage
+      - run: nix develop -c just mutants
+      - run: nix develop -c lychee .
+      - run: nix develop -c zizmor .github/workflows
+      - run: nix develop -c deadnix --fail .
+      - run: nix develop -c statix check .

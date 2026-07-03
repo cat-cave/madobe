@@ -1,0 +1,10 @@
+[package]
+name = "madobe-telemetry"
+description = "Telemetry primitives for madobe"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true

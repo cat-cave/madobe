@@ -1,0 +1,14 @@
+[package]
+name = "madobectl"
+description = "madobe command-line control utility"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+madobe-protocol.workspace = true
+madobe-telemetry.workspace = true
+
+[lints]
+workspace = true

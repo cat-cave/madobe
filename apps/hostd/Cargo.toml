@@ -1,0 +1,14 @@
+[package]
+name = "hostd"
+description = "madobe host daemon bootstrap binary"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+madobe-protocol.workspace = true
+madobe-telemetry.workspace = true
+
+[lints]
+workspace = true
