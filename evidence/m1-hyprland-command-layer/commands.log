@@ -1,4 +1,4 @@
-Commands run from /home/trevor/projects/madobe/.qd/worktrees/m1-hyprland-command-layer.
+Commands run from <repo>/.qd/worktrees/m1-hyprland-command-layer.
 
 2026-07-03 pwd && git status --short --branch
   status: passed; confirmed assigned qd worktree and branch spec/m1-hyprland-command-layer.

@@ -109,7 +109,7 @@ fi
 2026-07-03T15:35Z jq 'if type == "array" then {type: type, length: length, first_keys: (.[0] | keys)} else {type: type, keys: keys} end' fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json
   status: passed.
 
-2026-07-03T15:36Z rg -n --ignore-case 'trevor|/home|/run/user|secret|token|password|key|https?://|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' fixtures/hyprland
+2026-07-03T15:36Z rg -n --ignore-case '<redacted-user>|/home|/run/user|secret|token|password|key|https?://|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' fixtures/hyprland
   status: passed; no matches.
 
 2026-07-03T15:36Z wc -c /tmp/m1-hyprland-fixtures-raw/socket2-events.raw.txt /tmp/m1-hyprland-fixtures-raw/socket2-events.err
@@ -118,7 +118,7 @@ fi
 2026-07-03T15:42Z jq -e . fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json > /tmp/m1-hyprland-fixtures-jq-validation.txt
   status: passed.
 
-2026-07-03T15:42Z rg -n --ignore-case 'trevor|/home|/run/user|secret|token|password|key|https?://|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' fixtures/hyprland
+2026-07-03T15:42Z rg -n --ignore-case '<redacted-user>|/home|/run/user|secret|token|password|key|https?://|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' fixtures/hyprland
   status: passed; no matches.
 
 2026-07-03T15:45Z nix develop -c just check
@@ -127,7 +127,7 @@ fi
 2026-07-03T15:49Z jq -e . fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json reports/qd/m1-hyprland-fixtures/completion.json > /tmp/m1-hyprland-fixtures-final-jq-validation.txt
   status: passed.
 
-2026-07-03T15:49Z rg -n --ignore-case 'trevor|/home|/run/user|secret|token|password|key|https?://|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' fixtures/hyprland
+2026-07-03T15:49Z rg -n --ignore-case '<redacted-user>|/home|/run/user|secret|token|password|key|https?://|[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' fixtures/hyprland
   status: passed; no matches.
 
 2026-07-03T15:50Z nix develop -c just check
@@ -142,7 +142,7 @@ fi
 2026-07-03T16:02Z jq '.[] | {id, name, lastwindow, lastwindowtitle}' fixtures/hyprland/workspaces.json
   status: passed; workspace id 11 now has lastwindow set to <redacted-window-address>, workspace id 12 keeps Hyprland's 0x0 null sentinel.
 
-2026-07-03T16:02Z rg -n '"lastwindow": "0x[1-9a-fA-F][0-9a-fA-F]*"' fixtures/hyprland
+2026-07-03T16:02Z rg -n '"lastwindow": "<redacted-window-address-pattern>"' fixtures/hyprland
   status: passed; no matches.
 
 2026-07-03T16:02Z jq -e . fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json reports/qd/m1-hyprland-fixtures/completion.json > /tmp/m1-hyprland-fixtures-post-finding-jq-validation.txt
@@ -157,7 +157,7 @@ fi
 2026-07-03T16:05Z jq -e . fixtures/hyprland/monitors.json fixtures/hyprland/workspaces.json fixtures/hyprland/clients.json fixtures/hyprland/activeworkspace.json reports/qd/m1-hyprland-fixtures/completion.json > /tmp/m1-hyprland-fixtures-final-audit-fix-jq-validation.txt
   status: passed after completion report update.
 
-2026-07-03T16:05Z rg -n '"lastwindow": "0x[1-9a-fA-F][0-9a-fA-F]*"' fixtures/hyprland
+2026-07-03T16:05Z rg -n '"lastwindow": "<redacted-window-address-pattern>"' fixtures/hyprland
   status: passed; no matches.
 
 2026-07-03T16:06Z nix develop -c just check

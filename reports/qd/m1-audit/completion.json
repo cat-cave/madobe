@@ -1,0 +1,94 @@
+{
+  "nodeId": "m1-audit",
+  "summary": "Audited M1 implementation, evidence, and DAG state; resolved code-boundary and evidence-redaction findings; and identified workspace/session binding as a required follow-up validation node before M1 closes.",
+  "changedFiles": [
+    "Cargo.lock",
+    "apps/cli/Cargo.toml",
+    "apps/cli/src/lib.rs",
+    "apps/cli/src/main.rs",
+    "apps/hostd/Cargo.toml",
+    "apps/hostd/src/lib.rs",
+    "evidence/m1-audit/cli-hello-after-boundary-cleanup.out",
+    "evidence/m1-audit/cli-status-after-boundary-cleanup.out",
+    "evidence/m1-audit/commands.log",
+    "evidence/m1-audit/notes.md",
+    "evidence/m1-audit/open-findings.txt",
+    "evidence/m1-audit/qd-ready.json",
+    "evidence/m1-audit/qd-status.json",
+    "reports/qd/m1-audit/audit.json",
+    "reports/qd/m1-audit/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "qd audit is started for M1 implementation nodes",
+      "status": "passed",
+      "evidence": "evidence/m1-audit/notes.md"
+    },
+    {
+      "criterion": "P0/P1 findings are resolved or explicitly dispositioned",
+      "status": "passed",
+      "evidence": "evidence/m1-audit/open-findings.txt"
+    },
+    {
+      "criterion": "Hardware evidence is reviewed",
+      "status": "passed",
+      "evidence": "reports/qd/m1-linux-hardware-validation/completion.json"
+    },
+    {
+      "criterion": "No direct Hyprland dependency leaks outside the adapter boundary",
+      "status": "passed",
+      "evidence": "apps/hostd/src/lib.rs"
+    },
+    {
+      "criterion": "qd audit pass reports are recorded",
+      "status": "passed",
+      "evidence": "reports/qd/m1-audit/audit.json"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo fmt --all",
+      "status": "passed",
+      "evidence": "evidence/m1-audit/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo check --workspace --all-targets --all-features",
+      "status": "passed",
+      "evidence": "evidence/m1-audit/commands.log"
+    },
+    {
+      "command": "nix develop -c just verify",
+      "status": "passed",
+      "evidence": "evidence/m1-audit/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo run -q -p madobectl -- display status",
+      "status": "passed",
+      "evidence": "evidence/m1-audit/cli-status-after-boundary-cleanup.out"
+    },
+    {
+      "command": "nix develop -c cargo run -q -p madobectl -- hello",
+      "status": "passed",
+      "evidence": "evidence/m1-audit/cli-hello-after-boundary-cleanup.out"
+    }
+  ],
+  "evidence": [
+    "evidence/m1-audit/commands.log",
+    "evidence/m1-audit/notes.md",
+    "evidence/m1-audit/qd-status.json",
+    "evidence/m1-audit/qd-ready.json",
+    "evidence/m1-audit/open-findings.txt",
+    "evidence/m1-audit/cli-hello-after-boundary-cleanup.out",
+    "evidence/m1-audit/cli-status-after-boundary-cleanup.out"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m1-audit/cli-status-after-boundary-cleanup.out"
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": [
+    "Added P1 node m1-workspace-session-binding-validation after m1-audit to validate moving a live workspace/session onto a madobe-owned remote output before M1 closes."
+  ]
+}

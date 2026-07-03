@@ -1,0 +1,73 @@
+{
+  "nodeId": "m1-audit",
+  "acceptanceReviewed": [
+    {
+      "criterion": "qd audit is started for M1 implementation nodes",
+      "status": "passed",
+      "evidence": "evidence/m1-audit/notes.md"
+    },
+    {
+      "criterion": "P0/P1 findings are resolved or explicitly dispositioned",
+      "status": "passed",
+      "evidence": "evidence/m1-audit/open-findings.txt"
+    },
+    {
+      "criterion": "Hardware evidence is reviewed",
+      "status": "passed",
+      "evidence": "reports/qd/m1-linux-hardware-validation/completion.json"
+    },
+    {
+      "criterion": "No direct Hyprland dependency leaks outside the adapter boundary",
+      "status": "passed",
+      "evidence": "apps/hostd/src/lib.rs"
+    },
+    {
+      "criterion": "qd audit pass reports are recorded",
+      "status": "passed",
+      "evidence": "reports/qd/m1-audit/audit.json"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m1-audit/cli-status-after-boundary-cleanup.out"
+  },
+  "resolvedFindings": [
+    {
+      "severity": "P1",
+      "title": "Hyprland dependency leaked through hostd public API",
+      "status": "resolved",
+      "evidence": "apps/hostd/src/lib.rs and apps/cli/src/main.rs now keep the real Hyprland adapter construction in the CLI binary composition root.",
+      "observed": "hostd depended on madobe-hyprland and exposed a public run_hyprland_display_action entrypoint.",
+      "expected": "The host daemon library should remain behind the backend-neutral CompositorAdapter contract, with concrete Hyprland wiring at an executable composition root.",
+      "classification": "implementation",
+      "summary": "Removed the hostd madobe-hyprland dependency and moved real Hyprland adapter construction to madobectl's binary entrypoint."
+    },
+    {
+      "severity": "P1",
+      "title": "Public M1 evidence retained local window/user identifiers",
+      "status": "resolved",
+      "evidence": "M1 evidence command logs, host env files, and workspace JSON artifacts are redacted in this audit branch.",
+      "observed": "Prior public M1 evidence included workspace window addresses/titles plus local hostname and user paths.",
+      "expected": "Committed evidence should preserve technical facts without exposing local user, host, runtime, or window-title data.",
+      "classification": "policy",
+      "summary": "Redacted older M1 evidence artifacts and command logs to match the M1 fixture redaction standard."
+    },
+    {
+      "severity": "P1",
+      "title": "Workspace/session binding lacks live hardware validation",
+      "status": "dispositioned",
+      "evidence": "Added m1-workspace-session-binding-validation as a P1 Linux validation node before M1 closeout.",
+      "observed": "M1 lifecycle hardware evidence proves remote output ownership, but workspace/session binding to the madobe-owned output is only unit-level evidence.",
+      "expected": "M1 should include live Linux evidence for moving or binding a disposable workspace/session to a madobe-owned output before the milestone closes.",
+      "classification": "spec-gap",
+      "summary": "Split the live binding proof into m1-workspace-session-binding-validation, unlocked by this audit node."
+    }
+  ],
+  "findings": []
+}

@@ -1,0 +1,3 @@
+warning: Git tree '<repo>/.qd/worktrees/m1-audit' is dirty
+madobe dev shell: use 'just --list' to see commands
+madobe 0.1.0 protocol=1 event=madobe.bootstrap ts=0 status=ok

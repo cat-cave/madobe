@@ -7,7 +7,6 @@ name = "hostd"
 version = "0.1.0"
 dependencies = [
  "madobe-compositor",
- "madobe-hyprland",
  "madobe-protocol",
  "madobe-telemetry",
 ]
@@ -49,6 +48,7 @@ version = "0.1.0"
 dependencies = [
  "hostd",
  "madobe-compositor",
+ "madobe-hyprland",
  "madobe-protocol",
  "madobe-telemetry",
 ]

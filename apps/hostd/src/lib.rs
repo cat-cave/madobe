@@ -6,7 +6,6 @@ use madobe_compositor::{
     IdentifierError, OutputConfig, OutputId, OutputMode, OutputState, OutputStatus, Position,
     RefreshRate, Scale,
 };
-use madobe_hyprland::{HyprctlExecutor, HyprlandAdapter};
 use madobe_protocol::MadobeHello;
 use madobe_telemetry::bootstrap_event;
 use std::error::Error;
@@ -151,17 +150,6 @@ pub fn run_display_action(
     }
 }
 
-/// Runs a display lifecycle action through the real Hyprland adapter.
-///
-/// # Errors
-///
-/// Returns [`HostControlError`] when Hyprland is unavailable, the built-in smoke configuration is
-/// invalid, or the adapter rejects the requested operation.
-pub fn run_hyprland_display_action(action: DisplayAction) -> Result<String, HostControlError> {
-    let mut adapter = HyprlandAdapter::new(HyprctlExecutor)?;
-    run_display_action(&mut adapter, action)
-}
-
 fn display_status(adapter: &impl CompositorAdapter) -> Result<String, CompositorError> {
     let mut outputs = adapter.list_outputs()?;
     outputs.sort_by(|left, right| left.id().cmp(right.id()));
@@ -241,8 +229,8 @@ const fn render_color_depth(color_depth: ColorDepth) -> &'static str {
 #[cfg(test)]
 mod tests {
     use super::{
-        DisplayAction, HostControlError, default_display_config, default_smoke_output_id,
-        run_display_action, run_hyprland_display_action, status_line,
+        DisplayAction, default_display_config, default_smoke_output_id, run_display_action,
+        status_line,
     };
     use madobe_compositor::{
         BindSession, BindingStatus, CompositorAdapter, CompositorError, CreateOutput, ErrorKind,
@@ -328,13 +316,10 @@ mod tests {
     }
 
     #[test]
-    fn real_hyprland_runner_is_exposed_without_running_commands() {
+    fn default_smoke_identifier_is_stable() {
         let action = DisplayAction::Status;
-        let runner: fn(DisplayAction) -> std::result::Result<String, HostControlError> =
-            run_hyprland_display_action;
 
         assert_eq!(action, DisplayAction::Status);
-        let _ = runner;
         assert_eq!(must(default_smoke_output_id()).as_str(), "madobe-cli-smoke");
     }
 

@@ -1,4 +1,4 @@
-Worktree: /home/trevor/projects/madobe/.qd/worktrees/m1-compositor-contract
+Worktree: <repo>/.qd/worktrees/m1-compositor-contract
 Branch: qd/m1-compositor-contract
 
 Command: pwd && git status --short --branch

@@ -16,12 +16,12 @@ usage: madobectl hello
        madobectl display remove [--id <madobe-output-id>]
        madobectl display smoke [--id <madobe-output-id>]";
 
-/// Runs a CLI command and returns process output.
+/// Runs an adapter-independent CLI command and returns process output.
 ///
 /// # Errors
 ///
-/// Returns a CLI error when the command is unknown, arguments are invalid, or the compositor
-/// operation fails.
+/// Returns a CLI error when the command is unknown, arguments are invalid, or the command requires
+/// a compositor adapter.
 pub fn run<I, S>(args: I) -> Result<String, CliError>
 where
     I: IntoIterator<Item = S>,
@@ -29,7 +29,7 @@ where
 {
     match parse(args)? {
         Command::Hello => Ok(hello_line()),
-        Command::Display(action) => hostd::run_hyprland_display_action(action).map_err(Into::into),
+        Command::Display(_) => Err(CliError::Usage),
     }
 }
 
@@ -51,6 +51,19 @@ where
         Command::Hello => Ok(hello_line()),
         Command::Display(action) => hostd::run_display_action(adapter, action).map_err(Into::into),
     }
+}
+
+/// Returns whether a parsed command needs a compositor adapter.
+///
+/// # Errors
+///
+/// Returns a CLI error when the command is unknown or arguments are invalid.
+pub fn requires_compositor_adapter<I, S>(args: I) -> Result<bool, CliError>
+where
+    I: IntoIterator<Item = S>,
+    S: AsRef<str>,
+{
+    Ok(matches!(parse(args)?, Command::Display(_)))
 }
 
 /// Returns the deterministic M0 hello line.
@@ -151,7 +164,7 @@ fn is_lifecycle_subcommand(subcommand: &str) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use super::{CliError, hello_line, run, run_with_adapter};
+    use super::{CliError, hello_line, requires_compositor_adapter, run, run_with_adapter};
     use madobe_compositor::{
         BindSession, BindingStatus, CompositorAdapter, CompositorError, CreateOutput, ErrorKind,
         Operation, OutputConfig, OutputId, OutputState, OutputStatus, ReconcileReport,
@@ -186,6 +199,21 @@ mod tests {
             must(output),
             "display status count=1\noutput id=madobe-cli-output state=ready size=1280x720 refresh_millihertz=60000 scale=1/1 position=50000x50000 color_depth=8 workspace=-"
         );
+    }
+
+    #[test]
+    fn display_command_without_adapter_returns_usage() {
+        assert!(matches!(run(["display", "status"]), Err(CliError::Usage)));
+    }
+
+    #[test]
+    fn adapter_requirement_is_detected_after_parse() {
+        assert!(!must(requires_compositor_adapter(["hello"])));
+        assert!(must(requires_compositor_adapter(["display", "status"])));
+        assert!(matches!(
+            requires_compositor_adapter(["unknown"]),
+            Err(CliError::Usage)
+        ));
     }
 
     #[test]

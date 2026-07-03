@@ -1,6 +1,6 @@
 node=m1-remote-output-lifecycle
 2026-07-03T12:38:23-05:00
-Linux workstation 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
+Linux <redacted-host> 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
 hyprland_instance_signature=<redacted>
 /run/current-system/sw/bin/hyprctl
 Hyprland 0.55.2 built from branch v0.55.2-b at commit 39d7e209c79d451efab1b21151d5938289da838d clean (version: bump to 0.55.2).

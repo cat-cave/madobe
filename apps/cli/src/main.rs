@@ -4,7 +4,26 @@
 use std::{env, process::ExitCode};
 
 fn main() -> ExitCode {
-    match madobectl::run(env::args().skip(1)) {
+    let args = env::args().skip(1).collect::<Vec<_>>();
+
+    let output = match madobectl::requires_compositor_adapter(args.iter().map(String::as_str)) {
+        Ok(true) => {
+            let mut adapter =
+                match madobe_hyprland::HyprlandAdapter::new(madobe_hyprland::HyprctlExecutor) {
+                    Ok(adapter) => adapter,
+                    Err(error) => {
+                        eprintln!("invalid display configuration: {error}");
+                        return ExitCode::from(2);
+                    }
+                };
+
+            madobectl::run_with_adapter(args.iter().map(String::as_str), &mut adapter)
+        }
+        Ok(false) => madobectl::run(args.iter().map(String::as_str)),
+        Err(error) => Err(error),
+    };
+
+    match output {
         Ok(output) => {
             println!("{output}");
             ExitCode::SUCCESS
