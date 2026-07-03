@@ -1,0 +1,6 @@
+Captured: 2026-07-03T22:48:37Z
+Worktree: <repo-worktree>
+Node output: madobe-qd-m2-native-dmabuf-allocation-proof
+Wayland display: <redacted-wayland-display>
+Hyprland instance signature: <redacted>
+Ran live output lifecycle, dependency probes, throwaway native GBM allocator helper, and cleanup.

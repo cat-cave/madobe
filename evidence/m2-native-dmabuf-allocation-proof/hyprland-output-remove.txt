@@ -1,0 +1,2 @@
+Command: hyprctl output remove madobe-qd-m2-native-dmabuf-allocation-proof # cleanup
+ok

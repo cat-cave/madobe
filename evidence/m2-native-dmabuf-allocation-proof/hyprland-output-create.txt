@@ -1,0 +1,2 @@
+Command: hyprctl output create headless madobe-qd-m2-native-dmabuf-allocation-proof
+ok

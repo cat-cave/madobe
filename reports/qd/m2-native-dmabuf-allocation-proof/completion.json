@@ -1,0 +1,108 @@
+{
+  "nodeId": "m2-native-dmabuf-allocation-proof",
+  "status": "complete",
+  "summary": "Proved driver-native GBM DMA-BUF allocation on the advertised Hyprland capture device. The throwaway direct Wayland client allocated an NVIDIA block-linear AR24 buffer on /dev/dri/renderD128, imported it through zwp_linux_dmabuf_v1, submitted it to ext_image_copy_capture_frame_v1, and received a ready frame with timestamp, transform, and full damage.",
+  "changedFiles": [
+    "evidence/m2-native-dmabuf-allocation-proof/commands.log",
+    "evidence/m2-native-dmabuf-allocation-proof/drm-devices.txt",
+    "evidence/m2-native-dmabuf-allocation-proof/hyprland-monitors-after-remove.json",
+    "evidence/m2-native-dmabuf-allocation-proof/hyprland-monitors-before.json",
+    "evidence/m2-native-dmabuf-allocation-proof/hyprland-monitors-with-output.json",
+    "evidence/m2-native-dmabuf-allocation-proof/hyprland-output-configure.txt",
+    "evidence/m2-native-dmabuf-allocation-proof/hyprland-output-create.txt",
+    "evidence/m2-native-dmabuf-allocation-proof/hyprland-output-remove.txt",
+    "evidence/m2-native-dmabuf-allocation-proof/json-validation.log",
+    "evidence/m2-native-dmabuf-allocation-proof/just-verify.log",
+    "evidence/m2-native-dmabuf-allocation-proof/line-limit-check.log",
+    "evidence/m2-native-dmabuf-allocation-proof/native-dmabuf-capture.json",
+    "evidence/m2-native-dmabuf-allocation-proof/nix-develop-dependencies.txt",
+    "evidence/m2-native-dmabuf-allocation-proof/nix-shell-dependencies.txt",
+    "evidence/m2-native-dmabuf-allocation-proof/notes.md",
+    "evidence/m2-native-dmabuf-allocation-proof/plain-path-dependencies.txt",
+    "evidence/m2-native-dmabuf-allocation-proof/probe-compile.txt",
+    "evidence/m2-native-dmabuf-allocation-proof/qd-status-readonly.txt",
+    "evidence/m2-native-dmabuf-allocation-proof/qdcli-check.txt",
+    "evidence/m2-native-dmabuf-allocation-proof/redaction-scan.log",
+    "evidence/m2-native-dmabuf-allocation-proof/validation-summary.json",
+    "evidence/m2-native-dmabuf-allocation-proof/wayland-direct-globals.txt",
+    "reports/qd/m2-native-dmabuf-allocation-proof/audit.json",
+    "reports/qd/m2-native-dmabuf-allocation-proof/completion.json"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Use a node-scoped generated Hyprland output with cleanup evidence.",
+      "status": "passed",
+      "evidence": "hyprland-monitors-with-output.json shows madobe-qd-m2-native-dmabuf-allocation-proof; hyprland-monitors-after-remove.json confirms cleanup."
+    },
+    {
+      "criterion": "Record allocator dependencies and whether the Nix dev shell needs native allocation dependencies.",
+      "status": "passed",
+      "evidence": "nix-develop-dependencies.txt records missing pkg-config in the repo shell; notes.md recommends pkg-config, wayland-scanner, wayland, wayland-protocols, libgbm, and libdrm."
+    },
+    {
+      "criterion": "Allocate a DMA-BUF against the advertised capture device or justified same-driver device using an advertised format/modifier when possible.",
+      "status": "passed",
+      "evidence": "native-dmabuf-capture.json records advertised /dev/dri/renderD128, GBM backend nvidia, AR24, modifier 216172782120099856, stride 7680, and one plane."
+    },
+    {
+      "criterion": "Submit the buffer through zwp_linux_dmabuf_v1 to ext_image_copy_capture_frame_v1.",
+      "status": "passed",
+      "evidence": "native-dmabuf-capture.json records bufferImport.created=true and frame.ready=true."
+    },
+    {
+      "criterion": "Evidence includes advertised device, allocation node/device, selected format, modifier, stride/planes, timestamp/damage, ready/fail result, and cleanup.",
+      "status": "passed",
+      "evidence": "validation-summary.json and native-dmabuf-capture.json include the required fields; cleanup is in hyprland-monitors-after-remove.json."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "plain PATH, nix develop, and temporary nix-shell dependency probes",
+      "status": "passed",
+      "evidence": "evidence/m2-native-dmabuf-allocation-proof/plain-path-dependencies.txt; evidence/m2-native-dmabuf-allocation-proof/nix-develop-dependencies.txt; evidence/m2-native-dmabuf-allocation-proof/nix-shell-dependencies.txt"
+    },
+    {
+      "command": "hyprctl output remove/create/configure/remove madobe-qd-m2-native-dmabuf-allocation-proof",
+      "status": "passed",
+      "evidence": "evidence/m2-native-dmabuf-allocation-proof/hyprland-monitors-with-output.json; evidence/m2-native-dmabuf-allocation-proof/hyprland-monitors-after-remove.json"
+    },
+    {
+      "command": "wayland-info filtered to direct capture and linux-dmabuf globals",
+      "status": "passed",
+      "evidence": "evidence/m2-native-dmabuf-allocation-proof/wayland-direct-globals.txt"
+    },
+    {
+      "command": "throwaway GBM/Wayland probe using /dev/dri/renderD128",
+      "status": "passed",
+      "evidence": "evidence/m2-native-dmabuf-allocation-proof/native-dmabuf-capture.json"
+    },
+    {
+      "command": "focused jq JSON validation, redaction scan, line check, and nix develop -c just verify",
+      "status": "passed",
+      "evidence": "evidence/m2-native-dmabuf-allocation-proof/json-validation.log; evidence/m2-native-dmabuf-allocation-proof/redaction-scan.log; evidence/m2-native-dmabuf-allocation-proof/line-limit-check.log; evidence/m2-native-dmabuf-allocation-proof/just-verify.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-native-dmabuf-allocation-proof/notes.md",
+    "evidence/m2-native-dmabuf-allocation-proof/validation-summary.json",
+    "evidence/m2-native-dmabuf-allocation-proof/native-dmabuf-capture.json",
+    "reports/qd/m2-native-dmabuf-allocation-proof/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m2-native-dmabuf-allocation-proof/native-dmabuf-capture.json"
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": [],
+  "result": {
+    "frameReady": true,
+    "frameFailed": false,
+    "allocatorCondition": "GBM on advertised render node with explicit NVIDIA block-linear modifier succeeds.",
+    "previousFailureDisposition": "The prior dumb-buffer PRIME frame.failed was allocator-specific.",
+    "residualNotes": [
+      "The proof helper is disposable evidence code, not a committed production capture implementation.",
+      "The current repo dev shell cannot rebuild this helper without adding native Wayland/GBM development dependencies."
+    ]
+  }
+}

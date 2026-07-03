@@ -1,0 +1,105 @@
+{
+  "nodeId": "m2-native-dmabuf-allocation-proof",
+  "status": "complete",
+  "targetOutput": "madobe-qd-m2-native-dmabuf-allocation-proof",
+  "protocolPath": "ext_output_image_capture_source_manager_v1.create_source(wl_output) -> ext_image_copy_capture_manager_v1.create_session(source, options=0) -> zwp_linux_dmabuf_v1.create_params/create -> ext_image_copy_capture_frame_v1.capture",
+  "outputLifecycle": {
+    "created": true,
+    "configured": true,
+    "cleanupConfirmed": true,
+    "withOutputEvidence": "evidence/m2-native-dmabuf-allocation-proof/hyprland-monitors-with-output.json",
+    "cleanupEvidence": "evidence/m2-native-dmabuf-allocation-proof/hyprland-monitors-after-remove.json"
+  },
+  "constraints": {
+    "done": true,
+    "size": {
+      "width": 1920,
+      "height": 1080
+    },
+    "dmabufDeviceSeen": true,
+    "advertisedDmabufDevice": {
+      "dev": "0xE280",
+      "path": "/dev/dri/renderD128"
+    },
+    "chosenFormat": {
+      "fourcc": "AR24",
+      "drmFormatCode": 875713089
+    },
+    "chosenModifier": {
+      "value": 216172782120099856,
+      "hex": "0x0300000000606010",
+      "kind": "NVIDIA_BLOCK_LINEAR_2D"
+    }
+  },
+  "allocation": {
+    "api": "GBM",
+    "driverBackend": "nvidia",
+    "node": "/dev/dri/renderD128",
+    "sameAsAdvertisedDevice": true,
+    "usedExplicitModifierAllocation": true,
+    "boModifier": 216172782120099856,
+    "submittedModifier": 216172782120099856,
+    "planes": [
+      {
+        "index": 0,
+        "offset": 0,
+        "stride": 7680
+      }
+    ]
+  },
+  "bufferImport": {
+    "created": true,
+    "failed": false
+  },
+  "frame": {
+    "ready": true,
+    "failed": false,
+    "failureReason": 0,
+    "timestamp": {
+      "seen": true,
+      "clock": "CLOCK_MONOTONIC",
+      "tvSec": 1033806,
+      "tvNsec": 896411311
+    },
+    "syncMode": "implicit/protocol-ready",
+    "explicitSyncFd": false,
+    "transform": {
+      "seen": true,
+      "value": 0
+    },
+    "damage": {
+      "seen": true,
+      "x": 0,
+      "y": 0,
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "dependencies": {
+    "repoNixDevelopSufficient": false,
+    "repoNixDevelopFinding": "Current nix develop shell has cc but lacks pkg-config, so pkg-config lookups for wayland-client, wayland-protocols, gbm, egl, and libdrm cannot run.",
+    "temporaryProofEnvironment": [
+      "pkg-config",
+      "wayland",
+      "wayland-protocols",
+      "libgbm",
+      "libdrm",
+      "libglvnd",
+      "wayland-scanner",
+      "gcc"
+    ],
+    "recommendedRepoShellAdditions": [
+      "pkg-config",
+      "wayland-scanner",
+      "wayland",
+      "wayland-protocols",
+      "libgbm",
+      "libdrm"
+    ],
+    "eglRequiredForThisProof": false,
+    "eglNote": "libglvnd supplied egl.pc in the temporary environment; EGL was checked but not linked by the GBM-only helper."
+  },
+  "sourceChanges": [],
+  "nixChanges": [],
+  "blocker": null
+}

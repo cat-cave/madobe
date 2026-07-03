@@ -1,0 +1,1 @@
+DB schema is older than this qd binary (no schema_migrations table found). Run qd migrate.

@@ -1,0 +1,56 @@
+{
+  "nodeId": "m2-native-dmabuf-allocation-proof",
+  "status": "pass",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Node-scoped output is cleaned up.",
+      "status": "passed",
+      "evidence": "hyprland-monitors-after-remove.json contains no madobe-qd-m2-native-dmabuf-allocation-proof output."
+    },
+    {
+      "criterion": "Driver-native allocation is proven against the advertised device.",
+      "status": "passed",
+      "evidence": "native-dmabuf-capture.json records advertised /dev/dri/renderD128 and allocation node /dev/dri/renderD128 with GBM backend nvidia."
+    },
+    {
+      "criterion": "Advertised format/modifier is used when possible.",
+      "status": "passed",
+      "evidence": "Selected AR24 modifier 216172782120099856; GBM BO and submitted modifier match."
+    },
+    {
+      "criterion": "Frame result includes timestamp, damage, transform, and ready/fail status.",
+      "status": "passed",
+      "evidence": "native-dmabuf-capture.json records ready=true, timestamp CLOCK_MONOTONIC, transform=0, and full 1920x1080 damage."
+    },
+    {
+      "criterion": "Repo source/Nix changes are scoped.",
+      "status": "passed",
+      "evidence": "No source or Nix files were changed; generated protocol glue and compiled helper remained in /tmp."
+    },
+    {
+      "criterion": "qd internals are not edited.",
+      "status": "passed",
+      "evidence": "Only read-only qd/qdcli checks were attempted; qd migrate was not run."
+    },
+    {
+      "criterion": "Focused validation and practical repo gate pass.",
+      "status": "passed",
+      "evidence": "json-validation.log, redaction-scan.log, line-limit-check.log, and just-verify.log."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m2-native-dmabuf-allocation-proof/native-dmabuf-capture.json"
+  },
+  "findings": [],
+  "residualRisk": [
+    "The proof helper is disposable evidence code, not a committed production capture implementation.",
+    "The current repo dev shell cannot rebuild this helper without adding native Wayland/GBM development dependencies."
+  ]
+}

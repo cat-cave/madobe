@@ -1,0 +1,8 @@
+Command: jq empty focused JSON artifacts
+ok evidence/m2-native-dmabuf-allocation-proof/native-dmabuf-capture.json
+ok evidence/m2-native-dmabuf-allocation-proof/validation-summary.json
+ok evidence/m2-native-dmabuf-allocation-proof/hyprland-monitors-before.json
+ok evidence/m2-native-dmabuf-allocation-proof/hyprland-monitors-with-output.json
+ok evidence/m2-native-dmabuf-allocation-proof/hyprland-monitors-after-remove.json
+ok reports/qd/m2-native-dmabuf-allocation-proof/completion.json
+ok reports/qd/m2-native-dmabuf-allocation-proof/audit.json

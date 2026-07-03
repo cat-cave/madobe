@@ -1,0 +1,3 @@
+Command: nix develop -c dependency probe
+madobe dev shell: use 'just --list' to see commands
+/nix/store/xcnqqnhw9hb4j5rjgds2yjryi8qki5f3-gcc-wrapper-15.2.0/bin/cc

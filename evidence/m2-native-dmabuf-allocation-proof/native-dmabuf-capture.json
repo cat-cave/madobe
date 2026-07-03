@@ -1,0 +1,7 @@
+{
+  "targetOutput": "madobe-qd-m2-native-dmabuf-allocation-proof",
+  "advertisedDmabufDevice": {"dev": "0xE280", "path": "/dev/dri/renderD128"},
+  "allocation": {"node": "/dev/dri/renderD128", "driverBackend": "nvidia", "width": 1920, "height": 1080, "format": {"fourcc": "AR24", "drmFormatCode": 875713089}, "chosenModifier": 216172782120099856, "boModifier": 216172782120099856, "submittedModifier": 216172782120099856, "usedExplicitModifierAllocation": true, "planes": 1, "stride": 7680, "offset": 0},
+  "bufferImport": {"created": true, "failed": false},
+  "frame": {"ready": true, "failed": false, "failureReason": 0, "dispatchResult": 1, "timestamp": {"seen": true, "clock": "CLOCK_MONOTONIC", "tvSec": 1033806, "tvNsec": 896411311}, "transform": {"seen": true, "value": 0}, "damage": {"seen": true, "x": 0, "y": 0, "width": 1920, "height": 1080}}
+}
