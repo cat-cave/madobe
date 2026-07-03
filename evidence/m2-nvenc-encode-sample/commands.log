@@ -1,0 +1,106 @@
+Node: m2-nvenc-encode-sample
+Branch: spec/m2-nvenc-encode-sample
+Worktree: <repo>/.qd/worktrees/m2-nvenc-encode-sample
+Date: 2026-07-03T18:27:31-05:00
+
+## host-env
+Command: uname -a; nvidia-smi; ffmpeg -version; ffmpeg -encoders | rg av1_nvenc; ffmpeg -h encoder=av1_nvenc
+Status: pending
+Evidence: host-env.txt, nvidia-smi.txt, ffmpeg-version.txt, ffmpeg-av1-nvenc-encoder.txt, ffmpeg-av1-nvenc-help.txt
+## host-env
+Status: complete
+
+## precleanup-output-remove
+Time: 2026-07-03T18:28:42-05:00
+Command: hyprctl output remove madobe-qd-m2-nvenc-encode-sample
+Status: tolerated
+Evidence: hyprland-output-precleanup.txt/.err
+
+## hyprland-state-before
+Time: 2026-07-03T18:28:43-05:00
+Command: hyprctl -j monitors
+Status: 0
+Evidence: hyprland-monitors-before.json/.err
+
+## hyprland-output-create
+Time: 2026-07-03T18:28:43-05:00
+Command: hyprctl output create headless madobe-qd-m2-nvenc-encode-sample
+Status: 0
+Evidence: hyprland-output-create.txt/.err
+
+## hyprland-output-configure
+Time: 2026-07-03T18:28:43-05:00
+Command: hyprctl keyword monitor madobe-qd-m2-nvenc-encode-sample,160x90@60,50000x50000,1
+Status: 0
+Evidence: hyprland-output-configure.txt/.err
+
+## hyprland-state-with-output
+Time: 2026-07-03T18:28:43-05:00
+Command: hyprctl -j monitors
+Status: 0
+Evidence: hyprland-monitors-with-output.json/.err
+
+## capture-headless-output
+Time: 2026-07-03T18:28:43-05:00
+Command: grim -o madobe-qd-m2-nvenc-encode-sample -t png captured-sample.png
+Status: 0
+Evidence: captured-sample.png, grim-capture.txt/.err
+
+## prepare-raw-frame
+Time: 2026-07-03T18:28:43-05:00
+Command: ffmpeg -i captured-sample.png ... captured-sample.rgb
+Status: 0
+Evidence: captured-sample.rgb, prepare-raw-frame.txt/.err
+
+## encode-av1-nvenc
+Time: 2026-07-03T18:28:43-05:00
+Command: ffmpeg -f rawvideo -pix_fmt rgb24 -s:v 160x90 -r 60 -i captured-sample.rgb -c:v av1_nvenc -preset p4 -tune hq -rc vbr -cq 28 -b:v 0 -g 60 -frames:v 1 -f ivf sample-av1.ivf
+Status: failed
+Evidence: encode-av1-nvenc-rgb-autoconvert.txt/.err, sample-av1-rgb-autoconvert-failed.ivf
+Reason: av1_nvenc rejected ffmpeg's auto-selected YUV444P on this device.
+
+## artifact-validation
+Time: 2026-07-03T18:28:43-05:00
+Command: ffprobe, sha256sum, wc -c, xxd
+Status: 0
+Evidence: ffprobe-sample-av1.txt/.err, artifact-sha256.txt, artifact-sizes.txt, sample-av1-header.txt
+
+## cleanup-output-remove
+Time: 2026-07-03T18:28:43-05:00
+Command: hyprctl output remove madobe-qd-m2-nvenc-encode-sample; hyprctl -j monitors
+Status: 0
+Evidence: hyprland-output-remove.txt/.err, hyprland-monitors-after-remove.json/.err
+
+## encode-av1-nvenc-rgb-autoconvert-result
+Time: 2026-07-03T18:29:37-05:00
+Command: previous ffmpeg encode without explicit NV12 conversion
+Status: failed
+Evidence: encode-av1-nvenc-rgb-autoconvert.txt/.err, sample-av1-rgb-autoconvert-failed.ivf
+Reason: av1_nvenc rejected auto-selected YUV444P on this device.
+
+## encode-av1-nvenc-nv12-retry
+Time: 2026-07-03T18:29:37-05:00
+Command: ffmpeg -f rawvideo -pix_fmt rgb24 -s:v 160x90 -r 60 -i captured-sample.rgb -vf format=nv12 -c:v av1_nvenc -preset p4 -tune hq -rc vbr -cq 28 -b:v 0 -g 60 -frames:v 1 -f ivf sample-av1.ivf
+Status: 0
+Evidence: sample-av1.ivf, encode-av1-nvenc.txt/.err
+
+## artifact-validation-retry
+Time: 2026-07-03T18:29:37-05:00
+Command: ffprobe, sha256sum, wc -c, xxd
+Status: 0
+Evidence: ffprobe-sample-av1.txt/.err, artifact-sha256.txt, artifact-sizes.txt, sample-av1-header.txt
+
+## encode-av1-nvenc-low-latency-update
+Command: ffmpeg -f rawvideo -pix_fmt rgb24 -s:v 160x90 -r 60 -i captured-sample.rgb -vf format=nv12 -c:v av1_nvenc -preset p4 -tune ll -rc vbr -cq 28 -b:v 0 -g 60 -frames:v 1 -f ivf sample-av1.ivf
+Status: 0
+Evidence: sample-av1.ivf, encode-av1-nvenc.txt/.err
+
+## artifact-validation-low-latency-update
+Command: ffprobe, sha256sum, wc -c, xxd
+Status: 0
+Evidence: ffprobe-sample-av1.txt/.err, artifact-sha256.txt, artifact-sizes.txt, sample-av1-header.txt
+
+## repo-verify
+Command: nix develop -c just verify
+Status: 0
+Evidence: just-verify.log

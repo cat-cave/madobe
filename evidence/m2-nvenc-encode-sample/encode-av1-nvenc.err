@@ -1,0 +1,17 @@
+[in#0/rawvideo @ 0x646cd1959680] Estimating duration from bitrate, this may be inaccurate
+Input #0, rawvideo, from 'evidence/m2-nvenc-encode-sample/captured-sample.rgb':
+  Duration: 00:00:00.02, start: 0.000000, bitrate: 20735 kb/s
+  Stream #0:0: Video: rawvideo (RGB[24] / 0x18424752), rgb24, 160x90, 20736 kb/s, 60 tbr, 60 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (rawvideo (native) -> av1 (av1_nvenc))
+Press [q] to stop, [?] for help
+Output #0, ivf, to 'evidence/m2-nvenc-encode-sample/sample-av1.ivf':
+  Metadata:
+    encoder         : Lavf62.12.100
+  Stream #0:0: Video: av1 (Main) (AV01 / 0x31305641), nv12(tv, progressive), 160x90, q=2-31, 60 fps, 60 tbn
+    Metadata:
+      encoder         : Lavc62.28.100 av1_nvenc
+    Side data:
+      CPB properties: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+[out#0/ivf @ 0x646cd196ea00] video:0KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 110.000000%
+frame=    1 fps=0.0 q=42.0 Lsize=       0KiB time=00:00:00.01 bitrate=  40.3kbits/s speed=0.116x elapsed=0:00:00.14    

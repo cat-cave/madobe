@@ -1,0 +1,128 @@
+{
+  "nodeId": "m2-nvenc-encode-sample",
+  "status": "complete",
+  "summary": "Added an isolated Linux NVENC system boundary around ffmpeg and a safe product-level AV1 encode API. On the reference Linux host, captured one 160x90 frame from a node-scoped Hyprland output and encoded it with low-latency av1_nvenc settings into a tiny IVF AV1 artifact.",
+  "changedFiles": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "crates/encode/Cargo.toml",
+    "crates/encode/src/lib.rs",
+    "crates/encode-nv-sys/Cargo.toml",
+    "crates/encode-nv-sys/src/lib.rs",
+    "evidence/m2-nvenc-encode-sample/artifact-sha256.txt",
+    "evidence/m2-nvenc-encode-sample/artifact-sizes.txt",
+    "evidence/m2-nvenc-encode-sample/captured-sample.png",
+    "evidence/m2-nvenc-encode-sample/captured-sample.rgb",
+    "evidence/m2-nvenc-encode-sample/commands.log",
+    "evidence/m2-nvenc-encode-sample/encode-av1-nvenc.err",
+    "evidence/m2-nvenc-encode-sample/encode-av1-nvenc.txt",
+    "evidence/m2-nvenc-encode-sample/encode-av1-nvenc-rgb-autoconvert.err",
+    "evidence/m2-nvenc-encode-sample/encode-av1-nvenc-rgb-autoconvert.txt",
+    "evidence/m2-nvenc-encode-sample/ffmpeg-av1-nvenc-encoder.txt",
+    "evidence/m2-nvenc-encode-sample/ffmpeg-av1-nvenc-help.txt",
+    "evidence/m2-nvenc-encode-sample/ffmpeg-version.txt",
+    "evidence/m2-nvenc-encode-sample/ffprobe-sample-av1.txt",
+    "evidence/m2-nvenc-encode-sample/host-env.txt",
+    "evidence/m2-nvenc-encode-sample/hyprland-monitors-after-remove.json",
+    "evidence/m2-nvenc-encode-sample/hyprland-monitors-before.json",
+    "evidence/m2-nvenc-encode-sample/hyprland-monitors-with-output.json",
+    "evidence/m2-nvenc-encode-sample/hyprland-output-configure.txt",
+    "evidence/m2-nvenc-encode-sample/hyprland-output-create.txt",
+    "evidence/m2-nvenc-encode-sample/hyprland-output-remove.txt",
+    "evidence/m2-nvenc-encode-sample/json-validation.log",
+    "evidence/m2-nvenc-encode-sample/just-verify.log",
+    "evidence/m2-nvenc-encode-sample/notes.md",
+    "evidence/m2-nvenc-encode-sample/nvidia-smi.txt",
+    "evidence/m2-nvenc-encode-sample/prepare-raw-frame.err",
+    "evidence/m2-nvenc-encode-sample/prepare-raw-frame.txt",
+    "evidence/m2-nvenc-encode-sample/sample-av1-header.txt",
+    "evidence/m2-nvenc-encode-sample/sample-av1-rgb-autoconvert-failed.ivf",
+    "evidence/m2-nvenc-encode-sample/sample-av1.ivf",
+    "evidence/m2-nvenc-encode-sample/unsafe-boundary-scan.log",
+    "evidence/m2-nvenc-encode-sample/validation-summary.json",
+    "reports/qd/m2-nvenc-encode-sample/audit.json",
+    "reports/qd/m2-nvenc-encode-sample/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Unsafe FFI, if needed, is isolated to an encode-nv-sys boundary.",
+      "status": "passed",
+      "evidence": "No direct FFI was introduced; madobe-encode-nv-sys is the ffmpeg/NVENC process boundary and forbids unsafe code."
+    },
+    {
+      "criterion": "Safe encode API exposes only product-level settings.",
+      "status": "passed",
+      "evidence": "madobe-encode exposes DesktopAv1EncodeSettings and CapturedSampleFrame; NVENC flags are mapped internally."
+    },
+    {
+      "criterion": "A captured sample is encoded to an artifact.",
+      "status": "passed",
+      "evidence": "captured-sample.png and captured-sample.rgb were encoded to evidence/m2-nvenc-encode-sample/sample-av1.ivf."
+    },
+    {
+      "criterion": "Driver, GPU, encoder settings, and command logs are recorded.",
+      "status": "passed",
+      "evidence": "nvidia-smi.txt, ffmpeg-av1-nvenc-help.txt, validation-summary.json, and commands.log."
+    },
+    {
+      "criterion": "Audit focus includes unsafe boundary and artifact validity.",
+      "status": "passed",
+      "evidence": "audit.json reviews unsafe boundary and artifact validity; ffprobe-sample-av1.txt and sample-av1-header.txt validate sample-av1.ivf."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nvidia-smi; ffmpeg -version; ffmpeg -encoders | rg av1_nvenc; ffmpeg -h encoder=av1_nvenc",
+      "status": "passed",
+      "evidence": "nvidia-smi.txt, ffmpeg-version.txt, ffmpeg-av1-nvenc-encoder.txt, ffmpeg-av1-nvenc-help.txt"
+    },
+    {
+      "command": "hyprctl output remove/create/configure/remove madobe-qd-m2-nvenc-encode-sample; grim -o madobe-qd-m2-nvenc-encode-sample",
+      "status": "passed",
+      "evidence": "hyprland-monitors-with-output.json, captured-sample.png, hyprland-monitors-after-remove.json"
+    },
+    {
+      "command": "ffmpeg raw RGB prepare and av1_nvenc encode with -vf format=nv12 -tune ll",
+      "status": "passed",
+      "evidence": "captured-sample.rgb, sample-av1.ivf, encode-av1-nvenc.err"
+    },
+    {
+      "command": "ffprobe, sha256sum, wc -c, xxd artifact validation",
+      "status": "passed",
+      "evidence": "ffprobe-sample-av1.txt, artifact-sha256.txt, artifact-sizes.txt, sample-av1-header.txt"
+    },
+    {
+      "command": "jq -e validation-summary.json audit.json completion.json",
+      "status": "passed",
+      "evidence": "evidence/m2-nvenc-encode-sample/json-validation.log"
+    },
+    {
+      "command": "nix develop -c cargo fmt --all -- --check; nix develop -c cargo test -p madobe-encode-nv-sys -p madobe-encode; nix develop -c cargo clippy -p madobe-encode-nv-sys -p madobe-encode --all-targets --all-features -- -D warnings",
+      "status": "passed",
+      "evidence": "terminal output in implementor transcript"
+    },
+    {
+      "command": "nix develop -c just verify",
+      "status": "passed",
+      "evidence": "evidence/m2-nvenc-encode-sample/just-verify.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-nvenc-encode-sample/notes.md",
+    "evidence/m2-nvenc-encode-sample/validation-summary.json",
+    "evidence/m2-nvenc-encode-sample/sample-av1.ivf",
+    "evidence/m2-nvenc-encode-sample/ffprobe-sample-av1.txt",
+    "reports/qd/m2-nvenc-encode-sample/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "sample-av1.ivf was produced by av1_nvenc on RTX 4090 driver 595.80."
+  },
+  "unverifiedItems": [],
+  "residualRisks": [
+    "Direct zero-copy DMA-BUF import into NVENC was not implemented in this node; ffmpeg is the explicit system boundary."
+  ],
+  "dagChangesNeeded": []
+}

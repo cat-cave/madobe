@@ -1,0 +1,1 @@
+ V....D av1_nvenc            NVIDIA NVENC av1 encoder (codec av1)

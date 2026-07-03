@@ -1,0 +1,68 @@
+{
+  "nodeId": "m2-nvenc-encode-sample",
+  "status": "passed",
+  "host": {
+    "kernel": "Linux workstation 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "driverVersion": "595.80",
+    "cudaVersion": "13.2",
+    "ffmpegVersion": "8.1",
+    "encoderAdvertised": "av1_nvenc"
+  },
+  "sample": {
+    "source": "grim capture from node-scoped Hyprland headless output",
+    "output": "madobe-qd-m2-nvenc-encode-sample",
+    "inputPng": "captured-sample.png",
+    "rawFrame": "captured-sample.rgb",
+    "width": 160,
+    "height": 90,
+    "frameRate": 60,
+    "rawPixelFormat": "rgb24"
+  },
+  "encode": {
+    "artifact": "sample-av1.ivf",
+    "container": "ivf",
+    "codec": "av1",
+    "codecTag": "AV01",
+    "frames": 1,
+    "pixelFormat": "yuv420p",
+    "sizeBytes": 84,
+    "sha256": "51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875",
+    "settings": {
+      "encoder": "av1_nvenc",
+      "preset": "p4",
+      "tune": "ll",
+      "rateControl": "vbr",
+      "constantQuality": 28,
+      "bitrate": "0",
+      "gopFrames": 60,
+      "videoFilter": "format=nv12"
+    }
+  },
+  "boundary": {
+    "directFfiIntroduced": false,
+    "systemBoundary": "madobe-encode-nv-sys",
+    "safeApi": "madobe-encode",
+    "unsafePolicy": "Both new crates use #![forbid(unsafe_code)].",
+    "scanEvidence": "unsafe-boundary-scan.log"
+  },
+  "artifactValidity": {
+    "ivfHeader": "DKIF",
+    "ivfCodecTag": "AV01",
+    "ffprobeEvidence": "ffprobe-sample-av1.txt",
+    "hashEvidence": "artifact-sha256.txt",
+    "headerEvidence": "sample-av1-header.txt"
+  },
+  "cleanup": {
+    "nodeScopedOutputRemoved": true,
+    "evidence": "hyprland-monitors-after-remove.json"
+  },
+  "knownRetries": [
+    {
+      "attempt": "rgb-autoconvert",
+      "status": "failed",
+      "reason": "ffmpeg selected YUV444P automatically and av1_nvenc rejected it",
+      "evidence": "encode-av1-nvenc-rgb-autoconvert.err"
+    }
+  ]
+}

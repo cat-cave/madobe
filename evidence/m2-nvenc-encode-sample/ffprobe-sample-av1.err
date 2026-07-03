@@ -1,0 +1,3 @@
+Input #0, ivf, from 'evidence/m2-nvenc-encode-sample/sample-av1.ivf':
+  Duration: 00:00:00.02, start: 0.000000, bitrate: 40 kb/s
+  Stream #0:0: Video: av1 (libdav1d) (Main) (AV01 / 0x31305641), yuv420p(tv), 160x90 [SAR 1:1 DAR 16:9], 60 tbr, 60 tbn

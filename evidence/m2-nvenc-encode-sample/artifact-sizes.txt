@@ -1,0 +1,4 @@
+ 8576 evidence/m2-nvenc-encode-sample/captured-sample.png
+43200 evidence/m2-nvenc-encode-sample/captured-sample.rgb
+   84 evidence/m2-nvenc-encode-sample/sample-av1.ivf
+51860 total

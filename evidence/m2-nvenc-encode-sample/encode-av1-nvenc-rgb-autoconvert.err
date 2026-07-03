@@ -1,0 +1,19 @@
+[in#0/rawvideo @ 0x6314005b6680] Estimating duration from bitrate, this may be inaccurate
+Input #0, rawvideo, from 'evidence/m2-nvenc-encode-sample/captured-sample.rgb':
+  Duration: 00:00:00.02, start: 0.000000, bitrate: 20735 kb/s
+  Stream #0:0: Video: rawvideo (RGB[24] / 0x18424752), rgb24, 160x90, 20736 kb/s, 60 tbr, 60 tbn
+Stream mapping:
+  Stream #0:0 -> #0:0 (rawvideo (native) -> av1 (av1_nvenc))
+Press [q] to stop, [?] for help
+[av1_nvenc @ 0x6314005cc340] YUV444P not supported
+[av1_nvenc @ 0x6314005cc340] No capable devices found
+[vost#0:0/av1_nvenc @ 0x6314005cbd80] [enc:av1_nvenc @ 0x6314005cc2c0] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 0x6314005e7680] Error sending frames to consumers: Generic error in an external library
+[vf#0:0 @ 0x6314005e7680] Task finished with error code: -542398533 (Generic error in an external library)
+[vf#0:0 @ 0x6314005e7680] Terminating thread with return code -542398533 (Generic error in an external library)
+[vost#0:0/av1_nvenc @ 0x6314005cbd80] [enc:av1_nvenc @ 0x6314005cc2c0] Could not open encoder before EOF
+[vost#0:0/av1_nvenc @ 0x6314005cbd80] Task finished with error code: -22 (Invalid argument)
+[vost#0:0/av1_nvenc @ 0x6314005cbd80] Terminating thread with return code -22 (Invalid argument)
+[out#0/ivf @ 0x6314005cba00] Nothing was written into output file, because at least one of its streams received no packets.
+frame=    0 fps=0.0 q=0.0 Lsize=       0KiB time=N/A bitrate=N/A speed=N/A elapsed=0:00:00.23    
+Conversion failed!

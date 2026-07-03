@@ -4,6 +4,8 @@ members = [
   "apps/hostd",
   "crates/capture",
   "crates/compositor",
+  "crates/encode",
+  "crates/encode-nv-sys",
   "crates/hyprland",
   "crates/protocol",
   "crates/telemetry",
@@ -25,6 +27,8 @@ version = "0.1.0"
 madobe-compositor = { path = "crates/compositor", version = "0.1.0" }
 madobe-capture = { path = "crates/capture", version = "0.1.0" }
 madobe-hyprland = { path = "crates/hyprland", version = "0.1.0" }
+madobe-encode = { path = "crates/encode", version = "0.1.0" }
+madobe-encode-nv-sys = { path = "crates/encode-nv-sys", version = "0.1.0" }
 madobe-protocol = { path = "crates/protocol", version = "0.1.0" }
 madobe-telemetry = { path = "crates/telemetry", version = "0.1.0" }
 madobe-transport = { path = "crates/transport", version = "0.1.0" }

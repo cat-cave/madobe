@@ -1,0 +1,53 @@
+{
+  "nodeId": "m2-nvenc-encode-sample",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Unsafe FFI, if needed, is isolated to an encode-nv-sys boundary.",
+      "status": "passed",
+      "evidence": "No direct FFI was introduced. crates/encode-nv-sys/src/lib.rs is the system process boundary and uses #![forbid(unsafe_code)]; unsafe-boundary-scan.log found no extern C or unsafe use."
+    },
+    {
+      "criterion": "Safe encode API exposes only product-level settings.",
+      "status": "passed",
+      "evidence": "crates/encode/src/lib.rs exposes DesktopAv1EncodeSettings::balanced_realtime and CapturedSampleFrame, while raw ffmpeg/NVENC flags remain in madobe-encode-nv-sys."
+    },
+    {
+      "criterion": "A captured sample is encoded to an artifact.",
+      "status": "passed",
+      "evidence": "captured-sample.png was captured from madobe-qd-m2-nvenc-encode-sample, converted to captured-sample.rgb, and encoded to sample-av1.ivf."
+    },
+    {
+      "criterion": "Driver, GPU, encoder settings, and command logs are recorded.",
+      "status": "passed",
+      "evidence": "nvidia-smi.txt records RTX 4090 and driver 595.80; ffmpeg-av1-nvenc-help.txt and validation-summary.json record settings; commands.log records the command sequence."
+    },
+    {
+      "criterion": "Audit focus includes unsafe boundary and artifact validity.",
+      "status": "passed",
+      "evidence": "validation-summary.json records directFfiIntroduced=false and artifact validity; ffprobe-sample-av1.txt and sample-av1-header.txt validate AV1/IVF."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "unsafeBoundaryReviewed": true,
+    "artifactValidityReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "sample-av1.ivf was produced by av1_nvenc on the reference Linux host and validated with ffprobe."
+  },
+  "resolvedFindings": [
+    {
+      "finding": "Initial ffmpeg RGB input auto-converted to YUV444P, which this av1_nvenc path rejected.",
+      "resolution": "The encode boundary now inserts -vf format=nv12 before av1_nvenc; the successful retry is recorded in encode-av1-nvenc.err."
+    }
+  ],
+  "findings": [],
+  "residualRisks": [
+    "This node validates a one-frame process-boundary sample, not direct DMA-BUF import into NVENC.",
+    "The current safe API builds an auditable ffmpeg command; execution orchestration is intentionally outside the library surface."
+  ]
+}

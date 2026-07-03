@@ -1,0 +1,11 @@
+Linux workstation 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
+
+--- tools ---
+/run/current-system/sw/bin/nvidia-smi
+/etc/profiles/per-user/trevor/bin/ffmpeg
+/etc/profiles/per-user/trevor/bin/ffprobe
+/etc/profiles/per-user/trevor/bin/grim
+/run/current-system/sw/bin/hyprctl
+
+--- rust ---
+/run/current-system/sw/bin/nix
