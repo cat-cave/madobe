@@ -1,0 +1,52 @@
+{
+  "nodeId": "m1-remote-output-lifecycle",
+  "acceptanceReviewed": [
+    {
+      "criterion": "A named remote output can be created on the Linux host.",
+      "status": "passed",
+      "evidence": "evidence/m1-remote-output-lifecycle/hyprland-monitors-after-create.json and commands.log."
+    },
+    {
+      "criterion": "Output can be parked without disrupting the developer session.",
+      "status": "passed",
+      "evidence": "evidence/m1-remote-output-lifecycle/hyprland-monitors-after-park.json keeps DP-2/DP-3 and parks the named output at 50000x50000."
+    },
+    {
+      "criterion": "Output can be removed idempotently.",
+      "status": "passed",
+      "evidence": "Adapter tests call remove twice; live evidence confirms final absence after remove."
+    },
+    {
+      "criterion": "Restart or stale-output reconciliation behavior is typed and tested.",
+      "status": "passed",
+      "evidence": "adapter_lifecycle reconciliation test asserts typed ReconcileReport counters for missing desired and stale current outputs."
+    },
+    {
+      "criterion": "Hardware evidence includes command logs and Hyprland state before and after lifecycle operations.",
+      "status": "passed",
+      "evidence": "commands.log, host-env.txt, and before/after Hyprland JSON are present under evidence/m1-remote-output-lifecycle."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live Hyprland 0.55.2 lifecycle evidence collected on 2026-07-03."
+  },
+  "resolvedFindings": [
+    {
+      "title": "Hyprland 0.55 keyword monitor no-op avoided",
+      "severity": "P1",
+      "evidence": "evidence/m1-remote-output-lifecycle/notes.md",
+      "observed": "hyprctl keyword monitor exits 0 on Hyprland 0.55.2 but reports that keyword cannot work with non-legacy parsers and did not change monitor state.",
+      "expected": "The adapter must not report configuration success unless Hyprland state reflects the requested output configuration.",
+      "classification": "behavioral",
+      "summary": "The adapter now uses hyprctl eval with hl.monitor(...) and verifies monitor JSON after create/configure/park."
+    }
+  ],
+  "findings": []
+}

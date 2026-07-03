@@ -1,0 +1,32 @@
+$ hypr -j monitors > evidence/m1-remote-output-lifecycle/hyprland-monitors-before.json 2> evidence/m1-remote-output-lifecycle/hyprland-monitors-before.json.err
+status=0
+$ hypr -j workspaces > evidence/m1-remote-output-lifecycle/hyprland-workspaces-before.json 2> evidence/m1-remote-output-lifecycle/hyprland-workspaces-before.json.err
+status=0
+$ hypr output create headless madobe-qd-m1-remote-output-lifecycle > evidence/m1-remote-output-lifecycle/output-create.txt 2> evidence/m1-remote-output-lifecycle/output-create.txt.err
+status=0
+$ hypr eval hl.monitor({ output = 'madobe-qd-m1-remote-output-lifecycle', mode = '1280x720@60', position = '50000x50000', scale = 1 }) > evidence/m1-remote-output-lifecycle/output-configure.txt 2> evidence/m1-remote-output-lifecycle/output-configure.txt.err
+status=0
+$ hypr -j monitors > evidence/m1-remote-output-lifecycle/hyprland-monitors-after-create.json 2> evidence/m1-remote-output-lifecycle/hyprland-monitors-after-create.json.err
+status=0
+$ hypr eval hl.monitor({ output = 'madobe-qd-m1-remote-output-lifecycle', mode = '640x480@30', position = '50000x50000', scale = 1 }) > evidence/m1-remote-output-lifecycle/output-park.txt 2> evidence/m1-remote-output-lifecycle/output-park.txt.err
+status=0
+$ hypr -j monitors > evidence/m1-remote-output-lifecycle/hyprland-monitors-after-park.json 2> evidence/m1-remote-output-lifecycle/hyprland-monitors-after-park.json.err
+status=0
+$ hypr output remove madobe-qd-m1-remote-output-lifecycle > evidence/m1-remote-output-lifecycle/output-remove.txt 2> evidence/m1-remote-output-lifecycle/output-remove.txt.err
+status=0
+$ hypr -j monitors > evidence/m1-remote-output-lifecycle/hyprland-monitors-after-remove.json 2> evidence/m1-remote-output-lifecycle/hyprland-monitors-after-remove.json.err
+status=0
+$ hyprctl output remove madobe-qd-m1-remote-output-lifecycle # cleanup finalizer
+status=ignored
+
+$ nix develop -c just check
+status=0; orchestrator rerun after rebase and evidence redaction.
+
+$ nix develop -c just test
+status=0; orchestrator rerun after rebase, 24 nextest tests passed and doc tests passed.
+
+$ nix develop -c just security
+status=0; orchestrator rerun, cargo-vet reported no third-party dependencies.
+
+$ nix flake check
+status=0; orchestrator rerun after lifecycle integration review.

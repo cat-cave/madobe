@@ -1,0 +1,104 @@
+{
+  "nodeId": "m1-remote-output-lifecycle",
+  "summary": "Implemented a Hyprland compositor adapter for madobe-owned headless outputs with create, configure, park, idempotent remove, list, bind, and reconcile behavior through the existing mockable hyprctl command boundary. Live Hyprland 0.55.2 evidence confirms a named output was created, configured, parked off-session, and removed.",
+  "changedFiles": [
+    "Cargo.lock",
+    "crates/hyprland/Cargo.toml",
+    "crates/hyprland/src/adapter.rs",
+    "crates/hyprland/src/adapter/rule.rs",
+    "crates/hyprland/src/lib.rs",
+    "crates/hyprland/tests/adapter_lifecycle.rs",
+    "crates/hyprland/tests/fixtures.rs",
+    "evidence/m1-remote-output-lifecycle/commands.log",
+    "evidence/m1-remote-output-lifecycle/host-env.txt",
+    "evidence/m1-remote-output-lifecycle/hyprland-monitors-before.json",
+    "evidence/m1-remote-output-lifecycle/hyprland-workspaces-before.json",
+    "evidence/m1-remote-output-lifecycle/hyprland-monitors-after-create.json",
+    "evidence/m1-remote-output-lifecycle/hyprland-monitors-after-park.json",
+    "evidence/m1-remote-output-lifecycle/hyprland-monitors-after-remove.json",
+    "evidence/m1-remote-output-lifecycle/notes.md",
+    "reports/qd/m1-remote-output-lifecycle/audit.json",
+    "reports/qd/m1-remote-output-lifecycle/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "A named remote output can be created on the Linux host.",
+      "status": "passed",
+      "evidence": "evidence/m1-remote-output-lifecycle/hyprland-monitors-after-create.json shows madobe-qd-m1-remote-output-lifecycle at 1280x720@60 and 50000x50000; commands.log records output create and eval configuration status=0."
+    },
+    {
+      "criterion": "Output can be parked without disrupting the developer session.",
+      "status": "passed",
+      "evidence": "evidence/m1-remote-output-lifecycle/hyprland-monitors-after-park.json shows the named output at 640x480@30 and 50000x50000 while DP-2 and DP-3 remain present."
+    },
+    {
+      "criterion": "Output can be removed idempotently.",
+      "status": "passed",
+      "evidence": "HyprlandAdapter::remove_output checks monitor state before removal and returns Ok when absent; adapter_lifecycle test calls remove_output twice. Live after-remove JSON shows the named output absent."
+    },
+    {
+      "criterion": "Restart or stale-output reconciliation behavior is typed and tested.",
+      "status": "passed",
+      "evidence": "crates/hyprland/tests/adapter_lifecycle.rs asserts ReconcileReport { created: 1, parked: 1 } when a desired output is missing and a stale madobe output exists."
+    },
+    {
+      "criterion": "Hardware evidence includes command logs and Hyprland state before and after lifecycle operations.",
+      "status": "passed",
+      "evidence": "evidence/m1-remote-output-lifecycle/commands.log, host-env.txt, hyprland-monitors-before.json, hyprland-workspaces-before.json, hyprland-monitors-after-create.json, hyprland-monitors-after-park.json, and hyprland-monitors-after-remove.json."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo test -p madobe-hyprland",
+      "status": "passed",
+      "evidence": "Terminal output: 8 Hyprland tests passed."
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "Terminal output: fmt, taplo, cargo check, clippy, typos, markdownlint, actionlint, and line-count gates passed."
+    },
+    {
+      "command": "nix develop -c just test",
+      "status": "passed",
+      "evidence": "evidence/m1-remote-output-lifecycle/commands.log; orchestrator rerun after rebase passed with 24 nextest tests, doc tests passed, and Apple tests skipped outside macOS."
+    },
+    {
+      "command": "nix develop -c just security",
+      "status": "passed",
+      "evidence": "evidence/m1-remote-output-lifecycle/commands.log"
+    },
+    {
+      "command": "nix flake check",
+      "status": "passed",
+      "evidence": "evidence/m1-remote-output-lifecycle/commands.log"
+    },
+    {
+      "command": "hyprctl lifecycle evidence script using HYPRLAND_INSTANCE_SIGNATURE=<redacted>",
+      "status": "passed",
+      "evidence": "evidence/m1-remote-output-lifecycle/commands.log"
+    }
+  ],
+  "residualRisks": [
+    "The adapter is validated on the reference Hyprland 0.55.2 Lua config path. Older legacy-parser Hyprland behavior was not live-tested.",
+    "Binding uses Hyprland moveworkspacetomonitor through the command boundary and is unit-tested only; this node's live evidence focused on output lifecycle."
+  ],
+  "evidence": [
+    "evidence/m1-remote-output-lifecycle/commands.log",
+    "evidence/m1-remote-output-lifecycle/host-env.txt",
+    "evidence/m1-remote-output-lifecycle/hyprland-monitors-before.json",
+    "evidence/m1-remote-output-lifecycle/hyprland-workspaces-before.json",
+    "evidence/m1-remote-output-lifecycle/hyprland-monitors-after-create.json",
+    "evidence/m1-remote-output-lifecycle/hyprland-monitors-after-park.json",
+    "evidence/m1-remote-output-lifecycle/hyprland-monitors-after-remove.json",
+    "evidence/m1-remote-output-lifecycle/notes.md"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Live Hyprland 0.55.2 evidence under evidence/m1-remote-output-lifecycle."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

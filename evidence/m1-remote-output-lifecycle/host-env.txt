@@ -1,0 +1,20 @@
+node=m1-remote-output-lifecycle
+2026-07-03T12:38:23-05:00
+Linux workstation 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
+hyprland_instance_signature=<redacted>
+/run/current-system/sw/bin/hyprctl
+Hyprland 0.55.2 built from branch v0.55.2-b at commit 39d7e209c79d451efab1b21151d5938289da838d clean (version: bump to 0.55.2).
+Date: 2026-05-16
+Tag: v0.55.2, commits: -1
+
+Libraries:
+Hyprgraphics: built against 0.5.1, system has unknown
+Hyprutils: built against 0.13.1, system has unknown
+Hyprcursor: built against 0.1.13, system has unknown
+Hyprlang: built against 0.6.8, system has unknown
+Aquamarine: built against 0.11.0, system has unknown
+
+Version ABI string: 39d7e209c79d451efab1b21151d5938289da838d_aq_0.11_hu_0.13_hg_0.5_hc_0.1_hlg_0.6
+flags set:
+nix
+
