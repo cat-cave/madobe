@@ -1,0 +1,10 @@
+[package]
+name = "madobe-hyprland"
+description = "Mockable Hyprland command and event layer for madobe"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lints]
+workspace = true

@@ -1,0 +1,55 @@
+Commands run from /home/trevor/projects/madobe/.qd/worktrees/m1-hyprland-command-layer.
+
+2026-07-03 pwd && git status --short --branch
+  status: passed; confirmed assigned qd worktree and branch spec/m1-hyprland-command-layer.
+
+2026-07-03 rg --files
+  status: passed; inspected repository layout and existing fixtures.
+
+2026-07-03 rg -n "std::process::Command|Command::new|hyprctl" crates apps
+  status: passed; before implementation there were no product Hyprland command calls.
+
+2026-07-03 nix develop -c cargo fmt --all
+  status: passed after escalation for Nix daemon socket access.
+
+2026-07-03 nix develop -c cargo test -p madobe-hyprland --all-features
+  status: passed; 5 integration tests passed and doc tests passed.
+
+2026-07-03 nix develop -c just check
+  status: passed after fixing clippy findings during development.
+
+2026-07-03 nix develop -c just test
+  status: passed; 15 nextest tests passed, doc tests passed, apple tests skipped outside macOS.
+
+2026-07-03 rg -n "std::process::Command|Command::new" crates apps
+  status: passed; only crates/hyprland/src/command.rs contains the real process boundary.
+
+2026-07-03 rg -n "serde|serde_json" Cargo.toml Cargo.lock crates/hyprland
+  status: passed; no serde or serde_json references remained after the audit fix.
+
+2026-07-03 wc -l crates/hyprland/src/model.rs crates/hyprland/src/model/parser.rs crates/hyprland/src/client.rs crates/hyprland/src/command.rs crates/hyprland/tests/fixtures.rs
+  status: passed; parser files are under the repository 500-line limit.
+
+2026-07-03 nix develop -c just check
+  status: passed after refactoring to the dependency-free parser.
+
+2026-07-03 nix develop -c just test
+  status: passed after refactoring to the dependency-free parser.
+
+2026-07-03 nix develop -c just security
+  status: passed; cargo-vet reported "Vetting Succeeded (because you have no third-party dependencies)".
+
+2026-07-03 git rebase main
+  status: passed after resolving the root Cargo.toml workspace dependency conflict by keeping both madobe-capture and madobe-hyprland.
+
+2026-07-03 nix develop -c just check
+  status: passed on the rebased branch.
+
+2026-07-03 nix develop -c just test
+  status: passed on the rebased branch; 17 nextest tests passed, doc tests passed, apple tests skipped outside macOS.
+
+2026-07-03 nix develop -c just security
+  status: passed on the rebased branch; cargo-vet reported no third-party dependencies.
+
+2026-07-03 nix flake check
+  status: passed on the rebased branch.
