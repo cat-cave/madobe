@@ -1,0 +1,87 @@
+{
+  "nodeId": "m1-hyprland-command-layer",
+  "summary": "Added a dependency-free mockable madobe-hyprland crate with an injectable hyprctl command executor, typed errors that preserve command context, fixture-backed monitor/workspace parsing, and a small socket2 event parsing layer.",
+  "changedFiles": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "crates/hyprland/Cargo.toml",
+    "crates/hyprland/src/client.rs",
+    "crates/hyprland/src/command.rs",
+    "crates/hyprland/src/error.rs",
+    "crates/hyprland/src/event.rs",
+    "crates/hyprland/src/lib.rs",
+    "crates/hyprland/src/model.rs",
+    "crates/hyprland/src/model/parser.rs",
+    "crates/hyprland/tests/fixtures.rs",
+    "evidence/m1-hyprland-command-layer/commands.log",
+    "evidence/m1-hyprland-command-layer/notes.md",
+    "reports/qd/m1-hyprland-command-layer/audit.json",
+    "reports/qd/m1-hyprland-command-layer/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Command executor is injectable for tests.",
+      "status": "passed",
+      "evidence": "CommandExecutor trait and HyprlandClient<E>; crates/hyprland/tests/fixtures.rs uses FixtureExecutor."
+    },
+    {
+      "criterion": "Fixture-backed tests cover monitor and workspace parsing.",
+      "status": "passed",
+      "evidence": "crates/hyprland/tests/fixtures.rs reads fixtures/hyprland/monitors.json, workspaces.json, and activeworkspace.json."
+    },
+    {
+      "criterion": "Errors are typed and preserve command context.",
+      "status": "passed",
+      "evidence": "HyprlandErrorKind plus CommandContext; parse_errors_preserve_command_context test asserts hyprctl arguments are retained."
+    },
+    {
+      "criterion": "No product code shells out directly except through the command layer.",
+      "status": "passed",
+      "evidence": "rg -n \"std::process::Command|Command::new\" crates apps returns only crates/hyprland/src/command.rs."
+    },
+    {
+      "criterion": "No new third-party dependency policy exception is required.",
+      "status": "passed",
+      "evidence": "The serde/serde_json dependency graph was removed; nix develop -c just security passes and cargo-vet reports no third-party dependencies."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-command-layer/commands.log"
+    },
+    {
+      "command": "nix develop -c just test",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-command-layer/commands.log"
+    },
+    {
+      "command": "nix develop -c just security",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-command-layer/commands.log"
+    },
+    {
+      "command": "nix flake check",
+      "status": "passed",
+      "evidence": "evidence/m1-hyprland-command-layer/commands.log"
+    }
+  ],
+  "residualRisks": [
+    "Live Hyprland socket and hardware lifecycle behavior are not exercised in this node.",
+    "The event layer parses socket2 lines but does not yet own a live Unix socket connection.",
+    "The internal JSON parser is intentionally scoped to the current Hyprland hyprctl fixture shapes."
+  ],
+  "evidence": [
+    "evidence/m1-hyprland-command-layer/commands.log",
+    "evidence/m1-hyprland-command-layer/notes.md"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Command-layer node only; live Hyprland socket and hardware lifecycle behavior are deferred."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
