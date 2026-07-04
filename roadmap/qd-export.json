@@ -1702,6 +1702,36 @@
         "No file overlap with PR #49 product QUIC work",
         "Mutation evidence does not overstate whole-workspace mutation status"
       ]
+    },
+    {
+      "id": "m4-direct-capture-helper-reproducibility",
+      "title": "Make direct capture helper rebuildability reproducible",
+      "kind": "feature",
+      "milestone": "M4-integrated-video-path",
+      "status": "ready",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "medium",
+      "owner": null,
+      "branch": null,
+      "spec": "Close the M2 audit residual risk that direct Wayland/GBM capture proof code was throwaway by adding or documenting a repo-supported helper/preflight path that can be rebuilt from the Linux development environment.",
+      "acceptance": "Evidence records the M2 audit residual risk and the exact direct-capture helper reproducibility boundary\nThe Linux dev environment exposes or documents the required Wayland/GBM build tools for the helper path\nA bounded build/preflight command proves the helper path is reproducible, or a precise blocker/follow-up is recorded\nNo product capture, portal, capture-to-NVENC, zero-copy, cross-device, decode, render, presentation, or latency claim is made\n`nix develop -c just check` passes\n`qd gate m4-direct-capture-helper-reproducibility --phase ci` passes before PR promotion",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nvalidation:repo-quality\nsource:m2-audit-follow-up",
+      "created_at": "2026-07-04T17:24:22.803Z",
+      "updated_at": "2026-07-04T17:24:22.803Z",
+      "claimed_at": null,
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
