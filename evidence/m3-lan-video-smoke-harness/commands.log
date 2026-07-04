@@ -1,0 +1,36 @@
+Node: m3-lan-video-smoke-harness
+Worktree: /home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness
+Branch: spec/m3-lan-video-smoke-harness
+
+Pre-edit context:
+- Read docs/ORCHESTRATION.md.
+- Read docs/LINUX_ORCHESTRATOR.md.
+- Read docs/CROSS_DEVICE_VALIDATION.md.
+- Ran qd migrate because the worktree qd database was empty/old.
+- Ran qd method acknowledge --agent codex-m3-lan-video-smoke-harness.
+- Ran qd sync --from roadmap/qd-export.json.
+- Ran qd node show m3-lan-video-smoke-harness --full.
+
+Implementation checks:
+- cargo fmt --all
+  - ambient PATH failed because cargo was unavailable.
+  - nix develop -c cargo fmt --all passed.
+- nix develop -c cargo test -p madobe-transport --all-features
+  - first run exposed a negative-test fixture issue.
+  - final run passed; see transport-tests.log.
+- nix develop -c just check
+  - intermediate runs exposed local clippy issues.
+  - final run passed; see just-check.log.
+
+Localhost CLI smoke:
+- Sandbox attempt:
+  - ./target/debug/madobectl video-smoke receive --bind 127.0.0.1:47031 --evidence-dir evidence/m3-lan-video-smoke-harness
+  - ./target/debug/madobectl video-smoke send --addr 127.0.0.1:47031 --sample evidence/m2-nvenc-encode-sample/sample-av1.ivf --evidence-dir evidence/m3-lan-video-smoke-harness
+  - failed under sandbox with Operation not permitted for localhost sockets.
+- Escalated localhost rerun:
+  - ./target/debug/madobectl video-smoke receive --bind 127.0.0.1:47031 --evidence-dir evidence/m3-lan-video-smoke-harness
+  - ./target/debug/madobectl video-smoke send --addr 127.0.0.1:47031 --sample evidence/m2-nvenc-encode-sample/sample-av1.ivf --evidence-dir evidence/m3-lan-video-smoke-harness
+  - passed; see sender-cli.out, receiver-cli.out, sender.log, receiver.log, sender-timeline.json, receiver-timeline.json, and result.json.
+
+Sample evidence:
+- sha256sum and wc -c for evidence/m2-nvenc-encode-sample/sample-av1.ivf were captured in sample-hash.txt.

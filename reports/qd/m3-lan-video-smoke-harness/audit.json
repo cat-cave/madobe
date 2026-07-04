@@ -1,0 +1,41 @@
+{
+  "nodeId": "m3-lan-video-smoke-harness",
+  "acceptanceReviewed": [
+    {
+      "criterion": "A CLI or test helper can run as a sender using evidence/m2-nvenc-encode-sample/sample-av1.ivf.",
+      "status": "passed",
+      "evidence": "apps/cli/src/main.rs, crates/transport/src/video_smoke/cli.rs, evidence/m3-lan-video-smoke-harness/sender-cli.out, evidence/m3-lan-video-smoke-harness/sender.log"
+    },
+    {
+      "criterion": "A CLI or test helper can run as a receiver and validate frame metadata, payload byte count, and payload SHA-256.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/mod.rs, evidence/m3-lan-video-smoke-harness/receiver.log, evidence/m3-lan-video-smoke-harness/result.json"
+    },
+    {
+      "criterion": "A localhost integration test proves the sender/receiver exchange without requiring macOS hardware.",
+      "status": "passed",
+      "evidence": "crates/transport/tests/lan_video_smoke.rs, evidence/m3-lan-video-smoke-harness/transport-tests.log, evidence/m3-lan-video-smoke-harness/just-verify.log"
+    },
+    {
+      "criterion": "Evidence records commands, sample hash, sender log, receiver log, and a result/timeline artifact.",
+      "status": "passed",
+      "evidence": "evidence/m3-lan-video-smoke-harness/"
+    },
+    {
+      "criterion": "Docs explain the harness is not QUIC, not VideoToolbox decode, not Metal render, not presentation, and not latency proof.",
+      "status": "passed",
+      "evidence": "docs/LAN_VIDEO_SMOKE_HARNESS.md, evidence/m3-lan-video-smoke-harness/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node requires localhost smoke proof only. It prepares later cross-device validation and makes no live Mac/LAN, QUIC, decode, render, presentation, or latency claim."
+  },
+  "findings": []
+}

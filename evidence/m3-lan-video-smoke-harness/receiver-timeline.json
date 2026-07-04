@@ -1,0 +1,11 @@
+{
+  "nodeId": "m3-lan-video-smoke-harness",
+  "side": "receiver",
+  "clock": "sequence-only",
+  "events": [
+    { "sequence": 0, "event": "listening", "detail": "127.0.0.1:47031" },
+    { "sequence": 1, "event": "accepted", "detail": "127.0.0.1:44738" },
+    { "sequence": 2, "event": "frame_received", "detail": "51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875" },
+    { "sequence": 3, "event": "validated", "detail": "metadata,payload_bytes,sha256" }
+  ]
+}

@@ -62,4 +62,5 @@ dependencies = [
  "madobe-hyprland",
  "madobe-protocol",
  "madobe-telemetry",
+ "madobe-transport",
 ]
