@@ -45,6 +45,28 @@ validate_real_world_status() {
     "realWorldValidation.status must be passed or not_required"
 }
 
+validate_completion_status_values() {
+  local file=$1
+
+  expect_jq \
+    "$file" \
+    '(.acceptanceEvidence | type != "array" or all(.[]; type != "object" or (.status | type != "string") or (.status == "passed" or .status == "failed" or .status == "not_required")))' \
+    "acceptanceEvidence.status must be passed, failed, or not_required"
+  expect_jq \
+    "$file" \
+    '(.commandsRun | type != "array" or all(.[]; type != "object" or (.status | type != "string") or (.status == "passed" or .status == "failed" or .status == "not-run")))' \
+    "commandsRun.status must be passed, failed, or not-run"
+}
+
+validate_audit_status_values() {
+  local file=$1
+
+  expect_jq \
+    "$file" \
+    '(.acceptanceReviewed | type != "array" or all(.[]; type != "object" or (.status | type != "string") or (.status == "passed" or .status == "failed" or .status == "not_required")))' \
+    "acceptanceReviewed.status must be passed, failed, or not_required"
+}
+
 validate_node_id() {
   local file=$1
   local expected_node_id
@@ -61,6 +83,7 @@ validate_completion() {
   json_ok "$file" || return
   validate_node_id "$file"
   validate_real_world_status "$file"
+  validate_completion_status_values "$file"
 
   expect_jq "$file" 'type == "object"' "top level must be an object"
   expect_jq "$file" '.nodeId | type == "string" and length > 0' "nodeId must be a non-empty string"
@@ -121,6 +144,7 @@ validate_audit() {
   json_ok "$file" || return
   validate_node_id "$file"
   validate_real_world_status "$file"
+  validate_audit_status_values "$file"
 
   expect_jq "$file" 'type == "object"' "top level must be an object"
   expect_jq "$file" '.nodeId | type == "string" and length > 0' "nodeId must be a non-empty string"
