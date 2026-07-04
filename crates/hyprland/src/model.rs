@@ -294,3 +294,119 @@ pub fn parse_active_workspace_with_context(
 ) -> Result<HyprlandWorkspace> {
     parser::parse_active_workspace(payload, context)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{parse_monitors, parse_workspaces};
+
+    const ACCESSOR_MONITORS: &str = r#"[
+        {
+            "id": 31,
+            "name": "HEADLESS-31",
+            "description": "Madobe virtual display A",
+            "make": "madobe",
+            "model": "remote-a",
+            "width": 1600,
+            "height": 900,
+            "physicalWidth": 0,
+            "physicalHeight": 0,
+            "refreshRate": 60,
+            "x": 0,
+            "y": 0,
+            "activeWorkspace": {
+                "id": 41,
+                "name": "workspace-41"
+            },
+            "scale": 1.25,
+            "focused": false,
+            "dpmsStatus": false,
+            "disabled": true
+        },
+        {
+            "id": 32,
+            "name": "HEADLESS-32",
+            "description": "Madobe virtual display B",
+            "make": "madobe",
+            "model": "remote-b",
+            "width": 1920,
+            "height": 1080,
+            "physicalWidth": 0,
+            "physicalHeight": 0,
+            "refreshRate": 144,
+            "x": 1600,
+            "y": 0,
+            "activeWorkspace": {
+                "id": 42,
+                "name": "workspace-42"
+            },
+            "scale": 0.75,
+            "focused": true,
+            "dpmsStatus": true,
+            "disabled": false
+        }
+    ]"#;
+
+    const ACCESSOR_WORKSPACES: &str = r#"[
+        {
+            "id": 41,
+            "name": "workspace-41",
+            "monitor": "HEADLESS-31",
+            "monitorID": 31,
+            "windows": 1,
+            "hasfullscreen": true,
+            "lastwindow": "0x123",
+            "lastwindowtitle": "fullscreen window",
+            "ispersistent": true,
+            "tiledLayout": "master"
+        },
+        {
+            "id": 42,
+            "name": "workspace-42",
+            "monitor": "HEADLESS-32",
+            "monitorID": 32,
+            "windows": 0,
+            "hasfullscreen": false,
+            "lastwindow": "0x0",
+            "lastwindowtitle": "",
+            "ispersistent": false,
+            "tiledLayout": "dwindle"
+        }
+    ]"#;
+
+    #[test]
+    fn parsed_monitor_accessors_return_description_scale_dpms_and_disabled() {
+        let monitors = must(parse_monitors(ACCESSOR_MONITORS));
+
+        assert_eq!(monitors.len(), 2);
+        assert_eq!(monitors[0].description(), "Madobe virtual display A");
+        assert!((monitors[0].scale() - 1.25).abs() < f64::EPSILON);
+        assert!(!monitors[0].dpms_status());
+        assert!(monitors[0].disabled());
+
+        assert_eq!(monitors[1].description(), "Madobe virtual display B");
+        assert!((monitors[1].scale() - 0.75).abs() < f64::EPSILON);
+        assert!(monitors[1].dpms_status());
+        assert!(!monitors[1].disabled());
+    }
+
+    #[test]
+    fn parsed_workspace_accessors_return_monitor_id_fullscreen_and_persistent() {
+        let workspaces = must(parse_workspaces(ACCESSOR_WORKSPACES));
+
+        assert_eq!(workspaces.len(), 2);
+        assert_eq!(workspaces[0].monitor_id(), 31);
+        assert!(workspaces[0].has_fullscreen());
+        assert!(workspaces[0].is_persistent());
+
+        assert_eq!(workspaces[1].monitor_id(), 32);
+        assert!(!workspaces[1].has_fullscreen());
+        assert!(!workspaces[1].is_persistent());
+    }
+
+    fn must<T, E: std::fmt::Debug>(result: std::result::Result<T, E>) -> T {
+        match result {
+            Ok(value) => value,
+            Err(error) => panic!("{error:?}"),
+        }
+    }
+}
