@@ -1,0 +1,88 @@
+{
+  "nodeId": "m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr",
+  "status": "passed",
+  "summary": "Verified that the grim-based NVENC encode sample is not treated as no-CPU-readback or zero-copy evidence. The m2-video-path-validation bundle already recorded the non-claim; m2-nvenc-encode-sample notes were narrowly clarified to state that captured-sample.png and captured-sample.rgb are materialized diagnostic inputs and do not prove no CPU readback, zero-copy capture, or direct capture-to-NVENC DMA-BUF transfer.",
+  "changedFiles": [
+    "evidence/m2-nvenc-encode-sample/notes.md",
+    "evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/json-validation.log",
+    "evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/report.md",
+    "reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/completion.json",
+    "reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Finding is addressed and verified.",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/report.md records the reviewed files, exact strings, commands, and conclusion."
+    },
+    {
+      "criterion": "evidence/m2-nvenc-encode-sample explicitly records that the grim PNG/RGB sample is materialized/diagnostic and does not prove no CPU readback or zero-copy.",
+      "status": "passed",
+      "evidence": "evidence/m2-nvenc-encode-sample/notes.md states that captured-sample.png and captured-sample.rgb are materialized diagnostic sample inputs and do not prove no CPU readback, zero-copy capture, or direct capture-to-NVENC DMA-BUF transfer."
+    },
+    {
+      "criterion": "evidence/m2-video-path-validation explicitly records that the grim PNG/RGB sample does not prove no CPU readback or zero-copy.",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation/notes.md and bundle-manifest.json record the no-CPU-readback-after-grim non-claim and known qd finding language that no zero-copy or no-CPU-readback claim should be made."
+    },
+    {
+      "criterion": "Node-specific evidence report exists.",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/report.md"
+    },
+    {
+      "criterion": "completion.json and audit.json exist for orchestrator review.",
+      "status": "passed",
+      "evidence": "reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/completion.json and reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/audit.json"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "rg -n \"materialized diagnostic|does not prove no CPU readback|zero-copy|direct capture-to-NVENC|grim PNG/RGB|captured-sample\\.png|captured-sample\\.rgb|no CPU readback after the grim-based encode sample\" evidence/m2-nvenc-encode-sample evidence/m2-video-path-validation reports/qd/m2-video-path-validation",
+      "status": "passed",
+      "evidence": "Found the patched encode-sample non-claim and existing validation bundle non-claims."
+    },
+    {
+      "command": "jq -e '.explicitNonClaims[] | select(test(\"no CPU readback after the grim-based encode sample\"))' evidence/m2-video-path-validation/bundle-manifest.json",
+      "status": "passed",
+      "evidence": "The manifest contains the explicit no-CPU-readback-after-grim non-claim."
+    },
+    {
+      "command": "jq -e '.sample.inputPng == \"captured-sample.png\" and .sample.rawFrame == \"captured-sample.rgb\" and .sample.source == \"grim capture from node-scoped Hyprland headless output\"' evidence/m2-nvenc-encode-sample/validation-summary.json",
+      "status": "passed",
+      "evidence": "The encode sample validation summary records the materialized grim PNG and raw RGB sample path."
+    },
+    {
+      "command": "jq -e . reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/completion.json reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/audit.json",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/json-validation.log"
+    },
+    {
+      "command": "nix develop -c just verify",
+      "status": "passed",
+      "evidence": "Formatting checks, cargo check, clippy, markdown lint, line lint, 38 nextest tests, doc tests, cargo-deny, cargo-vet, cargo-audit, cargo-machete, and cargo-semver-checks passed; apple tests skipped outside macOS."
+    }
+  ],
+  "evidence": [
+    "evidence/m2-nvenc-encode-sample/notes.md",
+    "evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/json-validation.log",
+    "evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/report.md",
+    "reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/completion.json",
+    "reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node verifies evidence wording and classification only; it does not attempt live capture or no-CPU-readback validation."
+  },
+  "wordingPatched": true,
+  "patchedWording": [
+    {
+      "file": "evidence/m2-nvenc-encode-sample/notes.md",
+      "summary": "Added explicit non-claim wording for captured-sample.png and captured-sample.rgb."
+    }
+  ],
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
