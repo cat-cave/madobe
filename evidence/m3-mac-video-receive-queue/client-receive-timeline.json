@@ -1,0 +1,24 @@
+{
+  "events": [
+    {
+      "frameId": 4,
+      "kind": "received",
+      "timestampNs": 4000
+    },
+    {
+      "frameId": 4,
+      "kind": "dropped",
+      "timestampNs": 5000
+    },
+    {
+      "frameId": 5,
+      "kind": "received",
+      "timestampNs": 5000
+    },
+    {
+      "frameId": 5,
+      "kind": "dequeued",
+      "timestampNs": 5100
+    }
+  ]
+}

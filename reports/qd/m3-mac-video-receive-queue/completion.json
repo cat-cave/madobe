@@ -1,0 +1,78 @@
+{
+  "nodeId": "m3-mac-video-receive-queue",
+  "summary": "Added a Swift client-side encoded video receive queue with payload byte-count validation, SHA-256 hash validation, depth-one stale-frame dropping, deterministic timeline events, and XCTest coverage. The node remains synthetic/in-memory and makes no live network, capture, decode, render, or latency claim.",
+  "changedFiles": [
+    "apple/Sources/MadobeClientCore/VideoReceiveQueue.swift",
+    "apple/Tests/MadobeClientCoreTests/VideoReceiveQueueTests.swift",
+    "evidence/m3-mac-video-receive-queue/client-receive-timeline.json",
+    "evidence/m3-mac-video-receive-queue/commands.log",
+    "evidence/m3-mac-video-receive-queue/mac-env.txt",
+    "evidence/m3-mac-video-receive-queue/notes.md",
+    "evidence/m3-mac-video-receive-queue/xcodebuild.log",
+    "roadmap/qd-export.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Swift client core validates incoming encoded frame metadata against payload byte count and SHA-256 payload hash.",
+      "status": "passed",
+      "evidence": "apple/Sources/MadobeClientCore/VideoReceiveQueue.swift and apple/Tests/MadobeClientCoreTests/VideoReceiveQueueTests.swift"
+    },
+    {
+      "criterion": "Queue depth is bounded to one ready frame and accepting a newer frame drops stale queued frame evidence deterministically.",
+      "status": "passed",
+      "evidence": "apple/Tests/MadobeClientCoreTests/VideoReceiveQueueTests.swift and evidence/m3-mac-video-receive-queue/client-receive-timeline.json"
+    },
+    {
+      "criterion": "Receive and dequeue timeline events can be emitted as Codable evidence for later latency reports.",
+      "status": "passed",
+      "evidence": "apple/Sources/MadobeClientCore/VideoReceiveQueue.swift and evidence/m3-mac-video-receive-queue/client-receive-timeline.json"
+    },
+    {
+      "criterion": "XCTest coverage exercises valid enqueue/dequeue, byte-count mismatch, hash mismatch, stale-frame drop, and stable timeline JSON.",
+      "status": "passed",
+      "evidence": "evidence/m3-mac-video-receive-queue/xcodebuild.log"
+    },
+    {
+      "criterion": "Evidence is saved under evidence/m3-mac-video-receive-queue and reports under reports/qd/m3-mac-video-receive-queue.",
+      "status": "passed",
+      "evidence": "evidence/m3-mac-video-receive-queue and reports/qd/m3-mac-video-receive-queue"
+    },
+    {
+      "criterion": "No live network, Linux capture, VideoToolbox decode, Metal render, or cross-device latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m3-mac-video-receive-queue/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd node add --from-json /private/tmp/m3-mac-video-receive-queue-node.json",
+      "status": "passed",
+      "evidence": "evidence/m3-mac-video-receive-queue/commands.log"
+    },
+    {
+      "command": "qd claim m3-mac-video-receive-queue --agent trevor-mac-orchestrator --branch spec/m3-mac-video-receive-queue",
+      "status": "passed",
+      "evidence": "evidence/m3-mac-video-receive-queue/commands.log"
+    },
+    {
+      "command": "just macos-check",
+      "status": "passed",
+      "evidence": "evidence/m3-mac-video-receive-queue/xcodebuild.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m3-mac-video-receive-queue/client-receive-timeline.json",
+    "evidence/m3-mac-video-receive-queue/commands.log",
+    "evidence/m3-mac-video-receive-queue/mac-env.txt",
+    "evidence/m3-mac-video-receive-queue/notes.md",
+    "evidence/m3-mac-video-receive-queue/xcodebuild.log"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Synthetic in-memory Mac receive queue only; no live network or cross-device claim."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

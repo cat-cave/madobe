@@ -1,0 +1,28 @@
+Command:
+just macos-check
+
+Relevant xcodebuild excerpt:
+
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -scheme MadobeMac -destination platform=macOS
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:macOS, arch:arm64, id:00008142-000A31A622C2401C, name:My Mac }
+{ platform:macOS, arch:x86_64, id:00008142-000A31A622C2401C, name:My Mac }
+
+Test Suite 'MadobeClientCoreTests' passed at 2026-07-03 19:00:34.952.
+Executed 4 tests, with 0 failures (0 unexpected) in 0.582 seconds
+
+Test Suite 'VideoReceiveQueueTests' passed at 2026-07-03 19:00:34.964.
+Executed 5 tests, with 0 failures (0 unexpected) in 0.007 seconds
+
+Test Suite 'VideoToolboxCapabilityProbeTests' passed at 2026-07-03 19:00:34.989.
+Executed 2 tests, with 0 failures (0 unexpected) in 0.020 seconds
+
+Test Suite 'All tests' passed at 2026-07-03 19:00:34.990.
+Executed 11 tests, with 0 failures (0 unexpected) in 0.610 seconds
+
+Test session results:
+/Users/trevor/Library/Developer/Xcode/DerivedData/MadobeMac-aijvutajxtlelhgkwfvcpkdabtir/Logs/Test/Test-MadobeMac-2026.07.03_19-00-32--0500.xcresult
+
+** TEST SUCCEEDED **

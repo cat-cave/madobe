@@ -1,0 +1,46 @@
+{
+  "nodeId": "m3-mac-video-receive-queue",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Swift client core validates incoming encoded frame metadata against payload byte count and SHA-256 payload hash.",
+      "status": "passed",
+      "evidence": "apple/Sources/MadobeClientCore/VideoReceiveQueue.swift and apple/Tests/MadobeClientCoreTests/VideoReceiveQueueTests.swift"
+    },
+    {
+      "criterion": "Queue depth is bounded to one ready frame and accepting a newer frame drops stale queued frame evidence deterministically.",
+      "status": "passed",
+      "evidence": "apple/Tests/MadobeClientCoreTests/VideoReceiveQueueTests.swift and evidence/m3-mac-video-receive-queue/client-receive-timeline.json"
+    },
+    {
+      "criterion": "Receive and dequeue timeline events can be emitted as Codable evidence for later latency reports.",
+      "status": "passed",
+      "evidence": "apple/Sources/MadobeClientCore/VideoReceiveQueue.swift and evidence/m3-mac-video-receive-queue/client-receive-timeline.json"
+    },
+    {
+      "criterion": "XCTest coverage exercises valid enqueue/dequeue, byte-count mismatch, hash mismatch, stale-frame drop, and stable timeline JSON.",
+      "status": "passed",
+      "evidence": "evidence/m3-mac-video-receive-queue/xcodebuild.log"
+    },
+    {
+      "criterion": "Evidence is saved under evidence/m3-mac-video-receive-queue and reports under reports/qd/m3-mac-video-receive-queue.",
+      "status": "passed",
+      "evidence": "evidence/m3-mac-video-receive-queue and reports/qd/m3-mac-video-receive-queue"
+    },
+    {
+      "criterion": "No live network, Linux capture, VideoToolbox decode, Metal render, or cross-device latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m3-mac-video-receive-queue/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Synthetic in-memory Mac receive queue only; no live network or cross-device claim."
+  },
+  "findings": []
+}
