@@ -16,6 +16,7 @@ fmt:
 check: fmt
   cargo check --workspace --all-targets --all-features
   cargo clippy --workspace --all-targets --all-features -- -D warnings
+  if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
   if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
   if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
   if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
