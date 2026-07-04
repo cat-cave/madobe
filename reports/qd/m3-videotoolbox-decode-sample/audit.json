@@ -1,0 +1,41 @@
+{
+  "nodeId": "m3-videotoolbox-decode-sample",
+  "acceptanceReviewed": [
+    {
+      "criterion": "VideoToolbox AV1 capability is recorded",
+      "status": "passed",
+      "evidence": "decode-report.json records hardwareDecodeSupported true and usingHardwareAcceleratedDecoder true."
+    },
+    {
+      "criterion": "Sample hash is recorded",
+      "status": "passed",
+      "evidence": "sample-input-hash.txt and decode-report.json record SHA-256 51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875."
+    },
+    {
+      "criterion": "Decode succeeds or exact unsupported-condition blocker is filed",
+      "status": "passed",
+      "evidence": "decode-report.json records decodeStatus decoded with a 160x90 420v frame."
+    },
+    {
+      "criterion": "Decode timing report is saved under evidence/m3-videotoolbox-decode-sample",
+      "status": "passed",
+      "evidence": "decode-report.json includes decodeDurationNanoseconds."
+    },
+    {
+      "criterion": "Xcode or command-line validation log is recorded",
+      "status": "passed",
+      "evidence": "xcodebuild.log records the focused passing decode test; macos-check.log records the final full macOS gate."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m3-videotoolbox-decode-sample/decode-report.json"
+  },
+  "findings": []
+}

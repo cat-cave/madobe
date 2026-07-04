@@ -1,0 +1,86 @@
+{
+  "nodeId": "m3-videotoolbox-decode-sample",
+  "summary": "Added a macOS VideoToolbox AV1 sample decoder that parses the checked-in Linux IVF sample, constructs the AV1 format description, decodes one frame in the signed Xcode test host, and records hash, capability, dimensions, pixel format, hardware decoder use, and timing evidence.",
+  "changedFiles": [
+    "apple/Sources/MadobeClientCore/IVFAV1Sample.swift",
+    "apple/Sources/MadobeClientCore/VideoToolboxAV1DecodeCore.swift",
+    "apple/Sources/MadobeClientCore/VideoToolboxAV1SampleDecoder.swift",
+    "apple/Tests/MadobeClientCoreTests/VideoToolboxAV1SampleDecoderTests.swift",
+    "evidence/m3-videotoolbox-decode-sample/commands.log",
+    "evidence/m3-videotoolbox-decode-sample/decode-report.json",
+    "evidence/m3-videotoolbox-decode-sample/mac-env.txt",
+    "evidence/m3-videotoolbox-decode-sample/macos-check.log",
+    "evidence/m3-videotoolbox-decode-sample/notes.md",
+    "evidence/m3-videotoolbox-decode-sample/sample-input-hash.txt",
+    "evidence/m3-videotoolbox-decode-sample/xcodebuild.log",
+    "reports/qd/m3-videotoolbox-decode-sample/audit.json",
+    "reports/qd/m3-videotoolbox-decode-sample/completion.json",
+    "roadmap/qd-export.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "VideoToolbox AV1 capability is recorded",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-decode-sample/decode-report.json records hardwareDecodeSupported true and usingHardwareAcceleratedDecoder true."
+    },
+    {
+      "criterion": "Sample hash is recorded",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-decode-sample/sample-input-hash.txt and decode-report.json record SHA-256 51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875."
+    },
+    {
+      "criterion": "Decode succeeds or exact unsupported-condition blocker is filed",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-decode-sample/decode-report.json records decodeStatus decoded, decodedWidth 160, decodedHeight 90, decodedPixelFormat 420v."
+    },
+    {
+      "criterion": "Decode timing report is saved under evidence/m3-videotoolbox-decode-sample",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-decode-sample/decode-report.json includes decodeDurationNanoseconds."
+    },
+    {
+      "criterion": "Xcode or command-line validation log is recorded",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-decode-sample/xcodebuild.log records the passing VideoToolboxAV1SampleDecoderTests decode case; macos-check.log records the full macOS gate."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd claim m3-videotoolbox-decode-sample --agent trevor-mac-orchestrator --branch spec/m3-videotoolbox-decode-sample",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-decode-sample/commands.log"
+    },
+    {
+      "command": "qd worktree create m3-videotoolbox-decode-sample --branch spec/m3-videotoolbox-decode-sample",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-decode-sample/commands.log"
+    },
+    {
+      "command": "xcodebuild test -scheme MadobeMac -destination platform=macOS",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-decode-sample/xcodebuild.log"
+    },
+    {
+      "command": "just macos-check",
+      "status": "passed",
+      "evidence": "evidence/m3-videotoolbox-decode-sample/macos-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m3-videotoolbox-decode-sample/commands.log",
+    "evidence/m3-videotoolbox-decode-sample/decode-report.json",
+    "evidence/m3-videotoolbox-decode-sample/mac-env.txt",
+    "evidence/m3-videotoolbox-decode-sample/macos-check.log",
+    "evidence/m3-videotoolbox-decode-sample/notes.md",
+    "evidence/m3-videotoolbox-decode-sample/sample-input-hash.txt",
+    "evidence/m3-videotoolbox-decode-sample/xcodebuild.log"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m3-videotoolbox-decode-sample/decode-report.json"
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
