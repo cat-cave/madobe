@@ -123,6 +123,14 @@
       "colorManagementBehaviorProven": false,
       "wideGamutPreservationProven": false,
       "endToEndColorAccuracyProven": false,
+      "endToEndStreamingLatencyMeasured": false,
+      "encodeLatencyMeasured": false,
+      "throughputMeasured": false,
+      "framePacingJitterMeasured": false,
+      "cpuUtilizationMeasured": false,
+      "gpuUtilizationMeasured": false,
+      "networkBehaviorValidated": false,
+      "crossDeviceLatencyMeasured": false,
       "nvencEncoderInvocationProven": true,
       "decoderConsumableAv1IvfSampleProven": true
     },
@@ -139,13 +147,22 @@
       "direct capture DMA-BUF import into NVENC",
       "zero-copy Linux capture-to-encode",
       "no-readback Linux capture-to-encode",
+      "end-to-end streaming latency",
+      "encode latency",
+      "throughput",
+      "frame pacing or jitter",
+      "CPU utilization",
+      "GPU utilization",
+      "network behavior",
+      "cross-device latency",
       "HDR handling",
       "color-management behavior",
       "wide-gamut preservation",
       "end-to-end color accuracy"
     ],
     "futureWorkForDirectDmaBufProof": "A future proof must pass a capture DMA-BUF directly into NVENC or NVIDIA SDK/driver import APIs and record import/synchronization evidence. That proof is not present in this bundle.",
-    "futureWorkForHdrColorValidation": "A future HDR/color proof must use appropriate source material, tagged color metadata, and validation for HDR handling, color-management behavior, wide-gamut preservation, and end-to-end color accuracy. That proof is not present in this bundle."
+    "futureWorkForHdrColorValidation": "A future HDR/color proof must use appropriate source material, tagged color metadata, and validation for HDR handling, color-management behavior, wide-gamut preservation, and end-to-end color accuracy. That proof is not present in this bundle.",
+    "futureWorkForStreamingPerformanceValidation": "Future streaming performance validation must run an end-to-end stream with instrumentation for streaming latency, encode latency, throughput, frame pacing/jitter, CPU utilization, GPU utilization, network behavior, and cross-device latency as applicable. That validation is not present in this bundle."
   },
   "referencedArtifacts": [
     {
@@ -247,6 +264,13 @@
   ],
   "explicitNonClaims": [
     "This bundle does not prove end-to-end streaming latency.",
+    "This bundle does not measure encode latency.",
+    "This bundle does not measure throughput.",
+    "This bundle does not measure frame pacing or jitter.",
+    "This bundle does not measure CPU utilization.",
+    "This bundle does not measure GPU utilization.",
+    "This bundle does not validate network behavior.",
+    "This bundle does not measure cross-device latency.",
     "This bundle does not prove direct capture DMA-BUF import into NVENC.",
     "This bundle does not prove zero-copy Linux capture-to-encode.",
     "This bundle does not prove VideoToolbox decode.",
@@ -269,7 +293,7 @@
     },
     {
       "title": "m2-video-path-validation does not measure streaming latency or performance",
-      "body": "The bundle contains a one-frame artifact and command logs only. No end-to-end streaming latency, encode latency, throughput, or CPU/GPU utilization claims are proven."
+      "body": "The bundle contains a one-frame artifact and command logs only. No end-to-end streaming latency, encode latency, throughput, frame pacing/jitter, CPU utilization, GPU utilization, network behavior, or cross-device latency claims are proven."
     },
     {
       "title": "m2-video-path-validation does not validate HDR or color-management behavior",

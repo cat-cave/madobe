@@ -1,0 +1,60 @@
+{
+  "nodeId": "m2-video-path-validation-does-not-measure-streaming-latency-or-p",
+  "status": "passed",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Finding is addressed and verified.",
+      "status": "passed",
+      "evidence": "The validation bundle now records machine-checkable false claims for streaming latency and performance measurements under evidenceBoundary.machineCheckableClaims."
+    },
+    {
+      "criterion": "The one-frame sample is not treated as performance evidence.",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation/notes.md and evidence/m2-nvenc-encode-sample/notes.md state that the one-frame AV1/IVF artifact and command logs are not streaming performance evidence."
+    },
+    {
+      "criterion": "The low-latency encoder tune is not treated as a latency result.",
+      "status": "passed",
+      "evidence": "The notes state that tune=ll records only the configured encoder mode and no latency or performance result is claimed."
+    },
+    {
+      "criterion": "Future streaming performance validation is separated from this evidence bundle.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json and notes.md state that future validation must run an end-to-end stream with instrumentation for latency, throughput, utilization, network behavior, and cross-device timing."
+    },
+    {
+      "criterion": "Focused checks passed.",
+      "status": "passed",
+      "evidence": "jq parsing, focused jq predicate, focused rg wording check, git diff --check, just lint-lines, qd gate --phase ci, and nix develop -c just verify passed."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "evidenceReportReviewed": true,
+    "bundleManifestReviewed": true,
+    "encodeSampleNotesReviewed": true,
+    "videoPathValidationNotesReviewed": true,
+    "jsonValidated": true,
+    "lineLintRun": true,
+    "qdGateCiRun": true,
+    "justVerifyRun": true,
+    "fullVerifyRequired": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This audit-fix verifies evidence boundaries and non-claims only. It does not implement or validate live streaming, latency measurement, benchmarking, telemetry, or cross-device tests."
+  },
+  "resolvedFindings": [
+    {
+      "finding": "m2-video-path-validation does not measure streaming latency or performance",
+      "resolution": "Resolved by making the performance non-claims machine-checkable and documenting future validation requirements."
+    }
+  ],
+  "findings": [],
+  "residualRisks": [
+    "End-to-end streaming latency, encode latency, throughput, frame pacing/jitter, CPU utilization, GPU utilization, network behavior, and cross-device latency remain future validation work."
+  ]
+}

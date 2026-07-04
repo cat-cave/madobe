@@ -1,0 +1,101 @@
+{
+  "nodeId": "m2-video-path-validation-does-not-measure-streaming-latency-or-p",
+  "status": "passed",
+  "summary": "Made the M2 video path streaming latency and performance boundary explicit and machine-checkable. The bundle now records that the one-frame AV1/IVF artifact and command logs do not measure end-to-end streaming latency, encode latency, throughput, frame pacing/jitter, CPU utilization, GPU utilization, network behavior, or cross-device latency. Future streaming performance validation is documented as future work, not completed evidence.",
+  "changedFiles": [
+    "evidence/m2-video-path-validation/bundle-manifest.json",
+    "evidence/m2-video-path-validation/notes.md",
+    "evidence/m2-nvenc-encode-sample/notes.md",
+    "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/commands.log",
+    "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/report.md",
+    "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/json-validation.log",
+    "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/qd-gate-ci.json",
+    "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/just-verify.log",
+    "reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json",
+    "reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Streaming latency and performance boundary is explicit and machine-checkable.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json includes evidenceBoundary.machineCheckableClaims false values for streaming latency, encode latency, throughput, frame pacing/jitter, CPU utilization, GPU utilization, network behavior, and cross-device latency."
+    },
+    {
+      "criterion": "The one-frame AV1/IVF artifact and command logs are not presented as performance evidence.",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation/notes.md and evidence/m2-nvenc-encode-sample/notes.md state that the sample and command logs do not measure streaming performance."
+    },
+    {
+      "criterion": "The low-latency encoder tune is recorded only as a setting.",
+      "status": "passed",
+      "evidence": "The validation notes state that av1_nvenc tune=ll is a configured encoder mode only and no latency or performance result is claimed."
+    },
+    {
+      "criterion": "Future latency/performance validation is noted as future work only.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json evidenceBoundary.futureWorkForStreamingPerformanceValidation and report.md document the future-work boundary."
+    },
+    {
+      "criterion": "Required node evidence files exist.",
+      "status": "passed",
+      "evidence": "commands.log, report.md, json-validation.log, and completion.json are present for this node."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "jq -e 'true' evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/json-validation.log"
+    },
+    {
+      "command": "jq -e '<machine-checkable streaming performance boundary predicate>' evidence/m2-video-path-validation/bundle-manifest.json",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/json-validation.log"
+    },
+    {
+      "command": "rg -n \"end-to-end streaming latency|encode latency|throughput|frame pacing|CPU utilization|GPU utilization|network behavior|cross-device latency|tune=ll|future work\" evidence/m2-video-path-validation/bundle-manifest.json evidence/m2-video-path-validation/notes.md evidence/m2-nvenc-encode-sample/notes.md evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/report.md",
+      "status": "passed",
+      "evidence": "Focused wording check found the performance non-claims and future-work strings in scoped files."
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "No whitespace errors were reported."
+    },
+    {
+      "command": "just lint-lines",
+      "status": "passed",
+      "evidence": "No file exceeded the repository line-count limit."
+    },
+    {
+      "command": "qd gate m2-video-path-validation-does-not-measure-streaming-latency-or-p --phase ci",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/qd-gate-ci.json"
+    },
+    {
+      "command": "nix develop -c just verify",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/just-verify.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-video-path-validation/bundle-manifest.json",
+    "evidence/m2-video-path-validation/notes.md",
+    "evidence/m2-nvenc-encode-sample/notes.md",
+    "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/commands.log",
+    "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/report.md",
+    "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/json-validation.log",
+    "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/qd-gate-ci.json",
+    "evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/just-verify.log",
+    "reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json",
+    "reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node clarifies evidence boundaries and non-claims only. It does not implement or validate live streaming, latency measurement, benchmarking, telemetry, or cross-device tests."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

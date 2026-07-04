@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "blocking": [],
+  "runningAudits": [],
+  "blockedDependencies": [],
+  "explanations": [],
+  "structuralOk": true,
+  "phase": "ci",
+  "policy": {
+    "ci": {
+      "ok": true,
+      "phase": "ci",
+      "node_id": "m2-video-path-validation-does-not-measure-streaming-latency-or-p",
+      "violations": []
+    },
+    "merge": {
+      "ok": false,
+      "phase": "merge",
+      "node_id": "m2-video-path-validation-does-not-measure-streaming-latency-or-p",
+      "violations": [
+        {
+          "code": "ciRequired",
+          "phase": "merge",
+          "node_id": "m2-video-path-validation-does-not-measure-streaming-latency-or-p",
+          "message": "Node m2-video-path-validation-does-not-measure-streaming-latency-or-p needs a latest passed CI run before merge.",
+          "evidence": {
+            "latestCi": null
+          }
+        }
+      ]
+    },
+    "selected": {
+      "ok": true,
+      "phase": "ci",
+      "node_id": "m2-video-path-validation-does-not-measure-streaming-latency-or-p",
+      "violations": []
+    }
+  },
+  "checks": {
+    "latestCheck": null,
+    "latestCi": null,
+    "undisposedP2P3": []
+  },
+  "next": "qd ci run m2-video-path-validation-does-not-measure-streaming-latency-or-p"
+}

@@ -1,0 +1,59 @@
+Command:
+jq -e empty evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json
+
+Status: failed
+Output:
+No output. The command parsed JSON but emitted no result, so jq -e returned 4. Re-run with an expression that emits true
+after parsing.
+
+Command:
+jq -e 'true' evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json
+
+Status: passed
+Output:
+true
+
+Final rerun after completion.json log metadata update:
+
+Command:
+jq -e 'true' evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json
+
+Status: passed
+Output:
+true
+true
+
+Command:
+jq -e '<same machine-checkable streaming performance boundary predicate>' evidence/m2-video-path-validation/bundle-manifest.json
+
+Status: passed
+Output:
+true
+true
+
+Command:
+jq -e '
+  (.evidenceBoundary.machineCheckableClaims.endToEndStreamingLatencyMeasured == false) and
+  (.evidenceBoundary.machineCheckableClaims.encodeLatencyMeasured == false) and
+  (.evidenceBoundary.machineCheckableClaims.throughputMeasured == false) and
+  (.evidenceBoundary.machineCheckableClaims.framePacingJitterMeasured == false) and
+  (.evidenceBoundary.machineCheckableClaims.cpuUtilizationMeasured == false) and
+  (.evidenceBoundary.machineCheckableClaims.gpuUtilizationMeasured == false) and
+  (.evidenceBoundary.machineCheckableClaims.networkBehaviorValidated == false) and
+  (.evidenceBoundary.machineCheckableClaims.crossDeviceLatencyMeasured == false) and
+  (["end-to-end streaming latency", "encode latency", "throughput", "frame pacing or jitter", "CPU utilization", "GPU utilization", "network behavior", "cross-device latency"] - .evidenceBoundary.notEvidenceFor | length == 0) and
+  (.explicitNonClaims | any(. == "This bundle does not prove end-to-end streaming latency.")) and
+  (.explicitNonClaims | any(. == "This bundle does not measure encode latency.")) and
+  (.explicitNonClaims | any(. == "This bundle does not measure throughput.")) and
+  (.explicitNonClaims | any(. == "This bundle does not measure frame pacing or jitter.")) and
+  (.explicitNonClaims | any(. == "This bundle does not measure CPU utilization.")) and
+  (.explicitNonClaims | any(. == "This bundle does not measure GPU utilization.")) and
+  (.explicitNonClaims | any(. == "This bundle does not validate network behavior.")) and
+  (.explicitNonClaims | any(. == "This bundle does not measure cross-device latency.")) and
+  (.evidenceBoundary.futureWorkForStreamingPerformanceValidation | test("Future streaming performance validation")) and
+  (.evidenceBoundary.futureWorkForStreamingPerformanceValidation | test("not present in this bundle"))
+' evidence/m2-video-path-validation/bundle-manifest.json
+
+Status: passed
+Output:
+true
