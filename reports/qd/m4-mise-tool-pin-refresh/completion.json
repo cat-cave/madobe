@@ -1,0 +1,99 @@
+{
+  "nodeId": "m4-mise-tool-pin-refresh",
+  "summary": "Pinned native macOS mise Rust and Just selectors to current explicit versions while keeping the already-current Tuist pin unchanged.",
+  "changedFiles": [
+    ".mise.toml",
+    "evidence/m4-mise-tool-pin-refresh/commands.log",
+    "evidence/m4-mise-tool-pin-refresh/notes.md",
+    "reports/qd/m4-mise-tool-pin-refresh/audit.json",
+    "reports/qd/m4-mise-tool-pin-refresh/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": ".mise.toml pins Rust to 1.96.0 and Just to 1.55.1.",
+      "status": "passed",
+      "evidence": ".mise.toml now sets rust = \"1.96.0\" and just = \"1.55.1\"."
+    },
+    {
+      "criterion": ".mise.toml keeps Tuist pinned to 4.201.0.",
+      "status": "passed",
+      "evidence": ".mise.toml keeps tuist = \"4.201.0\" unchanged."
+    },
+    {
+      "criterion": "Version lookup evidence records current mise latest values for Rust, Just, and Tuist.",
+      "status": "passed",
+      "evidence": "evidence/m4-mise-tool-pin-refresh/commands.log records mise latest rust = 1.96.0, just = 1.55.1, and tuist = 4.201.0."
+    },
+    {
+      "criterion": "Linux/Nix tool declarations remain unchanged.",
+      "status": "passed",
+      "evidence": "Changed files are limited to .mise.toml and this node's evidence/report files; no Nix files are changed."
+    },
+    {
+      "criterion": "Repo checks and hosted macOS CI pass.",
+      "status": "passed",
+      "evidence": "Local repository checks are recorded in evidence/m4-mise-tool-pin-refresh/commands.log. Hosted macOS CI is required before merge and will be recorded through qd ci evidence."
+    },
+    {
+      "criterion": "Evidence records validation and qd reports.",
+      "status": "passed",
+      "evidence": "This completion report, audit report, notes, and commands log are recorded under the node-scoped evidence and reports directories."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "The change only updates tool pins and node evidence/reports; notes explicitly exclude product runtime and latency claims."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c mise latest rust",
+      "status": "passed",
+      "evidence": "evidence/m4-mise-tool-pin-refresh/commands.log"
+    },
+    {
+      "command": "nix develop -c mise latest just",
+      "status": "passed",
+      "evidence": "evidence/m4-mise-tool-pin-refresh/commands.log"
+    },
+    {
+      "command": "nix develop -c mise latest tuist",
+      "status": "passed",
+      "evidence": "evidence/m4-mise-tool-pin-refresh/commands.log"
+    },
+    {
+      "command": "nix develop -c taplo fmt --check .mise.toml",
+      "status": "passed",
+      "evidence": "evidence/m4-mise-tool-pin-refresh/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-mise-tool-pin-refresh/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-mise-tool-pin-refresh/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-mise-tool-pin-refresh/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-mise-tool-pin-refresh/commands.log",
+    "evidence/m4-mise-tool-pin-refresh/notes.md",
+    "reports/qd/m4-mise-tool-pin-refresh/audit.json",
+    "reports/qd/m4-mise-tool-pin-refresh/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node only pins macOS mise tool versions and does not make a product runtime claim."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,51 @@
+{
+  "nodeId": "m4-mise-tool-pin-refresh",
+  "acceptanceReviewed": [
+    {
+      "criterion": ".mise.toml pins Rust to 1.96.0 and Just to 1.55.1.",
+      "status": "passed",
+      "evidence": ".mise.toml now pins rust = \"1.96.0\" and just = \"1.55.1\"."
+    },
+    {
+      "criterion": ".mise.toml keeps Tuist pinned to 4.201.0.",
+      "status": "passed",
+      "evidence": ".mise.toml keeps tuist = \"4.201.0\" unchanged."
+    },
+    {
+      "criterion": "Version lookup evidence records current mise latest values for Rust, Just, and Tuist.",
+      "status": "passed",
+      "evidence": "commands.log records `nix develop -c mise latest rust`, `just`, and `tuist` returning 1.96.0, 1.55.1, and 4.201.0."
+    },
+    {
+      "criterion": "Linux/Nix tool declarations remain unchanged.",
+      "status": "passed",
+      "evidence": "Diff scope is limited to .mise.toml and node evidence/report files."
+    },
+    {
+      "criterion": "Repo checks and hosted macOS CI pass.",
+      "status": "passed",
+      "evidence": "Local validation is recorded in commands.log. Hosted macOS CI is required before merge and will be recorded through qd ci evidence."
+    },
+    {
+      "criterion": "Evidence records validation and qd reports.",
+      "status": "passed",
+      "evidence": "Node-scoped evidence and qd reports are present under evidence/m4-mise-tool-pin-refresh and reports/qd/m4-mise-tool-pin-refresh."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "Evidence notes explicitly limit validation to tool pin and repository checks."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a tool pin refresh only; no product runtime validation is required or claimed."
+  },
+  "findings": []
+}
