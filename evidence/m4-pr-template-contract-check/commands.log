@@ -1,0 +1,78 @@
+# m4-pr-template-contract-check commands
+
+## nix develop -c shfmt -w scripts/pr-template-check.sh
+
+Status: passed
+
+Output:
+
+```text
+madobe dev shell: use 'just --list' to see commands
+```
+
+## nix develop -c just pr-template-check
+
+Status: passed
+
+Output:
+
+```text
+bash scripts/pr-template-check.sh
+pr template check: passed
+```
+
+## nix develop -c shellcheck scripts/pr-template-check.sh
+
+Status: passed
+
+Output:
+
+```text
+madobe dev shell: use 'just --list' to see commands
+```
+
+## temp-copy negative smoke test
+
+Setup:
+
+```text
+cp .github/PULL_REQUEST_TEMPLATE.md /tmp/m4-pr-template-contract-negative.md
+perl -0pi -e 's/- Node id: `TBD`\n//' /tmp/m4-pr-template-contract-negative.md
+```
+
+Command:
+
+```text
+bash scripts/pr-template-check.sh /tmp/m4-pr-template-contract-negative.md
+```
+
+Status: passed; the check failed as expected.
+
+Output:
+
+```text
+pr template check: /tmp/m4-pr-template-contract-negative.md: missing qd node id field: - Node id:
+pr template check: failed with 1 error(s)
+```
+
+## nix develop -c just check
+
+Status: passed
+
+Relevant output:
+
+```text
+qd report check: validated 71 completion report(s) and 71 audit report(s)
+pin hygiene check: passed
+pr template check: passed
+Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.76s
+Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.95s
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Summary: 0 error(s)
+```
+
+## git diff --check
+
+Status: passed
+
+Output: no output.

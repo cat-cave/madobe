@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-pr-template-contract-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The check validates required PR template headings and fields for node id, acceptance criteria, evidence paths, qd reports, platform validation, residual risks, DAG/topology changes, Linux readiness, macOS validation, and qd evidence/report linkage.",
+      "status": "passed",
+      "evidence": "scripts/pr-template-check.sh"
+    },
+    {
+      "criterion": "Missing required fields produce file-scoped errors.",
+      "status": "passed",
+      "evidence": "scripts/pr-template-check.sh"
+    },
+    {
+      "criterion": "just pr-template-check and just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-pr-template-contract-check/commands.log"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m4-pr-template-contract-check/ and reports/qd/m4-pr-template-contract-check/"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-pr-template-contract-check/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository check and PR template contract validation only; no product runtime validation is required."
+  },
+  "findings": []
+}
