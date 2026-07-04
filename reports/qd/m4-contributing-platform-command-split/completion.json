@@ -8,7 +8,9 @@
     "reports/qd/m4-contributing-platform-command-split/audit.json",
     "reports/qd/m4-contributing-platform-command-split/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "d9cbd491a30a3626e057da2fe4710793c2f07505"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "`CONTRIBUTING.md` describes `just` as the shared command surface.",
