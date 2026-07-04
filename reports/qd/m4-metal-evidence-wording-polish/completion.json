@@ -1,0 +1,85 @@
+{
+  "nodeId": "m4-metal-evidence-wording-polish",
+  "summary": "Clarified Metal render evidence wording by replacing the ambiguous future report field presentedTestPattern with explicit offscreen render-target and display-presentation fields, then annotated the historical M3 renderer evidence so it cannot be mistaken for onscreen presentation proof.",
+  "changedFiles": [
+    "apple/Sources/MadobeClientCore/MetalRenderTimingProbe.swift",
+    "apple/Tests/MadobeClientCoreTests/MetalRenderTimingProbeTests.swift",
+    "evidence/m3-metal-renderer-skeleton/notes.md",
+    "evidence/m4-metal-evidence-wording-polish/commands.log",
+    "evidence/m4-metal-evidence-wording-polish/macos-check.log",
+    "evidence/m4-metal-evidence-wording-polish/notes.md",
+    "evidence/m4-metal-evidence-wording-polish/render-report.json",
+    "evidence/m4-metal-evidence-wording-polish/tuist-generate.log",
+    "evidence/m4-metal-evidence-wording-polish/xcodebuild-metal-probe.log",
+    "reports/qd/m3-metal-renderer-skeleton/audit.json",
+    "reports/qd/m3-metal-renderer-skeleton/completion.json",
+    "reports/qd/m4-metal-evidence-wording-polish/audit.json",
+    "reports/qd/m4-metal-evidence-wording-polish/completion.json",
+    "roadmap/qd-export.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Metal render report field names or notes distinguish offscreen render timing from display presentation",
+      "status": "passed",
+      "evidence": "apple/Sources/MadobeClientCore/MetalRenderTimingProbe.swift now emits renderTargetKind, offscreenTestPatternRendered, and displayPresented; evidence/m4-metal-evidence-wording-polish/render-report.json records renderTargetKind offscreen-texture and displayPresented false."
+    },
+    {
+      "criterion": "Existing M3 evidence references are updated or annotated without changing historical raw evidence",
+      "status": "passed",
+      "evidence": "evidence/m3-metal-renderer-skeleton/notes.md and reports/qd/m3-metal-renderer-skeleton/{completion,audit}.json annotate historical presentedTestPattern as offscreen validation; evidence/m3-metal-renderer-skeleton/render-report.json is unchanged."
+    },
+    {
+      "criterion": "Swift tests and macOS check remain green",
+      "status": "passed",
+      "evidence": "evidence/m4-metal-evidence-wording-polish/xcodebuild-metal-probe.log records 2 focused Metal tests passing; evidence/m4-metal-evidence-wording-polish/macos-check.log records just macos-check passing with 16 Xcode tests."
+    },
+    {
+      "criterion": "No cross-device presentation claim is added",
+      "status": "passed",
+      "evidence": "evidence/m4-metal-evidence-wording-polish/notes.md records displayPresented false and explicitly excludes live network, received-frame presentation, screenshot evidence, and latency claims."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd claim m4-metal-evidence-wording-polish --agent trevor-mac-orchestrator --branch spec/m4-metal-evidence-wording-polish",
+      "status": "passed",
+      "evidence": "evidence/m4-metal-evidence-wording-polish/commands.log"
+    },
+    {
+      "command": "qd worktree create m4-metal-evidence-wording-polish",
+      "status": "passed",
+      "evidence": "evidence/m4-metal-evidence-wording-polish/commands.log"
+    },
+    {
+      "command": "tuist generate",
+      "status": "passed",
+      "evidence": "evidence/m4-metal-evidence-wording-polish/tuist-generate.log"
+    },
+    {
+      "command": "xcodebuild test -scheme MadobeMac -destination 'platform=macOS' -only-testing:MadobeClientCoreTests/MetalRenderTimingProbeTests",
+      "status": "passed",
+      "evidence": "evidence/m4-metal-evidence-wording-polish/xcodebuild-metal-probe.log"
+    },
+    {
+      "command": "just macos-check",
+      "status": "passed",
+      "evidence": "evidence/m4-metal-evidence-wording-polish/macos-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-metal-evidence-wording-polish/commands.log",
+    "evidence/m4-metal-evidence-wording-polish/macos-check.log",
+    "evidence/m4-metal-evidence-wording-polish/notes.md",
+    "evidence/m4-metal-evidence-wording-polish/render-report.json",
+    "evidence/m4-metal-evidence-wording-polish/tuist-generate.log",
+    "evidence/m4-metal-evidence-wording-polish/xcodebuild-metal-probe.log"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m4-metal-evidence-wording-polish/render-report.json"
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,24 @@
+{
+  "clearColor" : {
+    "alpha" : 1,
+    "blue" : 0,
+    "green" : 0,
+    "red" : 1
+  },
+  "commandBufferStatus" : "completed",
+  "deviceName" : "Apple M5",
+  "displayPresented" : false,
+  "height" : 36,
+  "offscreenTestPatternRendered" : true,
+  "pixelFormat" : "bgra8Unorm",
+  "renderDurationNanoseconds" : 2279875,
+  "renderTargetKind" : "offscreen-texture",
+  "renderer" : "metal-clear-test-pattern",
+  "sampledPixelBGRA8" : [
+    0,
+    0,
+    255,
+    255
+  ],
+  "width" : 64
+}

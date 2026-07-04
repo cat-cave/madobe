@@ -9,12 +9,12 @@
     {
       "criterion": "A visible frame or test pattern is presented",
       "status": "passed",
-      "evidence": "MetalTestPatternView is an MTKView-backed renderer and MadobeMacApp wires it into ContentView."
+      "evidence": "MetalTestPatternView is an MTKView-backed renderer and MadobeMacApp wires it into ContentView. The hardware render report remains offscreen render-target evidence, not display/drawable presentation evidence."
     },
     {
       "criterion": "Render timing report is produced",
       "status": "passed",
-      "evidence": "render-report.json includes commandBufferStatus completed, sampledPixelBGRA8 [0,0,255,255], and renderDurationNanoseconds."
+      "evidence": "render-report.json includes commandBufferStatus completed, sampledPixelBGRA8 [0,0,255,255], and renderDurationNanoseconds. The legacy presentedTestPattern field is annotated as offscreen test-pattern validation, not display presentation."
     },
     {
       "criterion": "Screenshot evidence is saved when practical",

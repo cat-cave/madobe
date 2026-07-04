@@ -19,10 +19,12 @@ final class MetalRenderTimingProbeTests: XCTestCase {
         XCTAssertEqual(report.width, 64)
         XCTAssertEqual(report.height, 36)
         XCTAssertEqual(report.pixelFormat, "bgra8Unorm")
+        XCTAssertEqual(report.renderTargetKind, "offscreen-texture")
         XCTAssertEqual(report.clearColor, .validationRed)
         XCTAssertEqual(report.sampledPixelBGRA8, [0, 0, 255, 255])
         XCTAssertEqual(report.commandBufferStatus, "completed")
-        XCTAssertEqual(report.presentedTestPattern, true)
+        XCTAssertEqual(report.offscreenTestPatternRendered, true)
+        XCTAssertEqual(report.displayPresented, false)
         XCTAssertGreaterThan(report.renderDurationNanoseconds, 0)
     }
 
@@ -33,10 +35,12 @@ final class MetalRenderTimingProbeTests: XCTestCase {
             width: 64,
             height: 36,
             pixelFormat: "bgra8Unorm",
+            renderTargetKind: "offscreen-texture",
             clearColor: .validationRed,
             sampledPixelBGRA8: [0, 0, 255, 255],
             commandBufferStatus: "completed",
-            presentedTestPattern: true,
+            offscreenTestPatternRendered: true,
+            displayPresented: false,
             renderDurationNanoseconds: 1234
         )
 
@@ -47,6 +51,10 @@ final class MetalRenderTimingProbeTests: XCTestCase {
         XCTAssertEqual(decoded, report)
         XCTAssertTrue(json.contains("\"renderer\" : \"metal-clear-test-pattern\""))
         XCTAssertTrue(json.contains("\"pixelFormat\" : \"bgra8Unorm\""))
+        XCTAssertTrue(json.contains("\"renderTargetKind\" : \"offscreen-texture\""))
+        XCTAssertTrue(json.contains("\"offscreenTestPatternRendered\" : true"))
+        XCTAssertTrue(json.contains("\"displayPresented\" : false"))
+        XCTAssertFalse(json.contains("presentedTestPattern"))
     }
 
     private static func writeRenderReportIfRequested(

@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-metal-evidence-wording-polish",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Metal render report field names or notes distinguish offscreen render timing from display presentation",
+      "status": "passed",
+      "evidence": "Diff review confirms the new report fields renderTargetKind, offscreenTestPatternRendered, and displayPresented; generated evidence records offscreen-texture and displayPresented false."
+    },
+    {
+      "criterion": "Existing M3 evidence references are updated or annotated without changing historical raw evidence",
+      "status": "passed",
+      "evidence": "Historical M3 notes/completion/audit wording now scopes presentedTestPattern to offscreen target validation. The historical raw render-report.json is not edited."
+    },
+    {
+      "criterion": "Swift tests and macOS check remain green",
+      "status": "passed",
+      "evidence": "Focused Metal tests and full just macos-check passed; logs are under evidence/m4-metal-evidence-wording-polish/."
+    },
+    {
+      "criterion": "No cross-device presentation claim is added",
+      "status": "passed",
+      "evidence": "The node evidence records displayPresented false and keeps cross-device presentation as a future node."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m4-metal-evidence-wording-polish/render-report.json"
+  },
+  "findings": []
+}
