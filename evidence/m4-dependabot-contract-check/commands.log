@@ -1,0 +1,84 @@
+$ bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+
+$ nix develop -c just check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 73 completion report(s) and 73 audit report(s)
+just pin-hygiene-check
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+just pr-template-check
+bash scripts/pr-template-check.sh
+pr template check: passed
+just workflow-contract-check
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+just dependabot-contract-check
+bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+cargo check --workspace --all-targets --all-features
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/compositor)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/telemetry)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/protocol)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/transport)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/hyprland)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/apps/hostd)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.97s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/compositor)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/protocol)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/telemetry)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/transport)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/crates/hyprland)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/apps/hostd)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.79s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 103 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+
+$ bash scripts/qd-reports-check.sh
+qd report check: validated 73 completion report(s) and 73 audit report(s)
+
+$ git diff --check
+
+$ bash scripts/qd-reports-check.sh # final report validation
+qd report check: validated 73 completion report(s) and 73 audit report(s)
+
+$ nix develop -c shellcheck scripts/dependabot-contract-check.sh
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-dependabot-contract-check' is dirty
+madobe dev shell: use 'just --list' to see commands
+
+$ bash scripts/qd-reports-check.sh # final report validation after shellcheck entry
+qd report check: validated 73 completion report(s) and 73 audit report(s)
+
+$ git diff --check # final whitespace validation
+

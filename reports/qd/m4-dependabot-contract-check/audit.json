@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-dependabot-contract-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Add a deterministic shell checker for .github/dependabot.yml.",
+      "status": "passed",
+      "evidence": "scripts/dependabot-contract-check.sh uses Bash, awk, and grep only; no new dependencies were added."
+    },
+    {
+      "criterion": "Require weekly github-actions and cargo update entries rooted at /.",
+      "status": "passed",
+      "evidence": "The checker counts update entries only when ecosystem, directory, and interval match the required values in the same entry."
+    },
+    {
+      "criterion": "Wire the check into just check through a dedicated just target.",
+      "status": "passed",
+      "evidence": "justfile contains `dependabot-contract-check` and `check` invokes it."
+    },
+    {
+      "criterion": "Record evidence and reports under the node-owned paths.",
+      "status": "passed",
+      "evidence": "evidence/m4-dependabot-contract-check/ and reports/qd/m4-dependabot-contract-check/"
+    },
+    {
+      "criterion": "Run required verification and note macOS validation is not required.",
+      "status": "passed",
+      "evidence": "evidence/m4-dependabot-contract-check/commands.log records verification commands; reports record realWorldValidation.status as not_required."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node validates repository Dependabot metadata only; macOS validation is not required."
+  },
+  "findings": []
+}
