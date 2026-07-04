@@ -1,0 +1,252 @@
+Script started on 2026-07-04 14:35:28-05:00 [COMMAND="nix develop -c just security" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate' is dirty
+madobe dev shell: use 'just --list' to see commands
+if command -v cargo-deny >/dev/null 2>&1; then cargo deny check; else echo "cargo-deny missing; run inside nix develop"; exit 127; fi
+advisories ok, bans ok, licenses ok, sources ok
+if command -v cargo-vet >/dev/null 2>&1; then cargo vet; else echo "cargo-vet missing; run inside nix develop"; exit 127; fi
+     Running `cargo metadata` ⠁                                                      Running `cargo metadata` ⠉                                                     Fetching imported audits [=========================================================] 0/0    Fetching crate publishers [=========================================================] 0/0  Validating audit-as-crates-io specifications [                                                         ] 0/10  Validating audit-as-crates-io specifications [=====>                                                   ] 1/10  Validating audit-as-crates-io specifications [===========>                                             ] 2/10  Validating audit-as-crates-io specifications [=================>                                       ] 3/10  Validating audit-as-crates-io specifications [======================>                                  ] 4/10  Validating audit-as-crates-io specifications [============================>                            ] 5/10  Validating audit-as-crates-io specifications [==================================>                      ] 6/10  Validating audit-as-crates-io specifications [=======================================>                 ] 7/10  Validating audit-as-crates-io specifications [=============================================>           ] 8/10  Validating audit-as-crates-io specifications [===================================================>     ] 9/10  Validating audit-as-crates-io specifications [=========================================================] 10/10Vetting Succeeded (because you have no third-party dependencies)
+if command -v cargo-audit >/dev/null 2>&1; then cargo audit; else echo "cargo-audit missing; run inside nix develop"; exit 127; fi
+    Fetching advisory database from `https://github.com/RustSec/advisory-db.git`
+      Loaded 1153 security advisories (from /scratch/cache/cargo/advisory-db)
+    Updating crates.io index
+    Scanning Cargo.lock for vulnerabilities (10 crate dependencies)
+if command -v cargo-machete >/dev/null 2>&1; then cargo machete --skip-target-dir; else echo "cargo-machete missing; run inside nix develop"; exit 127; fi
+Analyzing dependencies of crates in this directory...
+cargo-machete didn't find any unused dependencies in this directory. Good job!
+Done!
+if command -v cargo-semver-checks >/dev/null 2>&1; then cargo semver-checks check-release --workspace --baseline-root .; else echo "cargo-semver-checks missing; run inside nix develop"; exit 127; fi
+    Building hostd v0.1.0 (current)
+       Built [   1.047s] (current)
+     Parsing hostd v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building hostd v0.1.0 (baseline)
+       Built [   0.729s] (baseline)
+     Parsing hostd v0.1.0 (baseline)
+      Parsed [   0.003s] (baseline)
+    Checking hostd v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.003s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   2.277s] hostd
+    Building madobe-capture v0.1.0 (current)
+       Built [   0.650s] (current)
+     Parsing madobe-capture v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-capture v0.1.0 (baseline)
+       Built [   0.484s] (baseline)
+     Parsing madobe-capture v0.1.0 (baseline)
+      Parsed [   0.004s] (baseline)
+    Checking madobe-capture v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.005s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.611s] madobe-capture
+    Building madobe-compositor v0.1.0 (current)
+       Built [   0.572s] (current)
+     Parsing madobe-compositor v0.1.0 (current)
+      Parsed [   0.006s] (current)
+    Building madobe-compositor v0.1.0 (baseline)
+       Built [   0.772s] (baseline)
+     Parsing madobe-compositor v0.1.0 (baseline)
+      Parsed [   0.004s] (baseline)
+    Checking madobe-compositor v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.006s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.751s] madobe-compositor
+    Building madobe-encode v0.1.0 (current)
+       Built [   0.770s] (current)
+     Parsing madobe-encode v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-encode v0.1.0 (baseline)
+       Built [   0.603s] (baseline)
+     Parsing madobe-encode v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobe-encode v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.003s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.785s] madobe-encode
+    Building madobe-encode-nv-sys v0.1.0 (current)
+       Built [   0.595s] (current)
+     Parsing madobe-encode-nv-sys v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-encode-nv-sys v0.1.0 (baseline)
+       Built [   0.608s] (baseline)
+     Parsing madobe-encode-nv-sys v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobe-encode-nv-sys v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.005s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.692s] madobe-encode-nv-sys
+    Building madobe-hyprland v0.1.0 (current)
+       Built [   1.160s] (current)
+     Parsing madobe-hyprland v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-hyprland v0.1.0 (baseline)
+       Built [   0.703s] (baseline)
+     Parsing madobe-hyprland v0.1.0 (baseline)
+      Parsed [   0.005s] (baseline)
+    Checking madobe-hyprland v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   2.273s] madobe-hyprland
+    Building madobe-protocol v0.1.0 (current)
+       Built [   0.810s] (current)
+     Parsing madobe-protocol v0.1.0 (current)
+      Parsed [   0.004s] (current)
+    Building madobe-protocol v0.1.0 (baseline)
+       Built [   0.483s] (baseline)
+     Parsing madobe-protocol v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobe-protocol v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.003s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.726s] madobe-protocol
+    Building madobe-telemetry v0.1.0 (current)
+       Built [   0.578s] (current)
+     Parsing madobe-telemetry v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-telemetry v0.1.0 (baseline)
+       Built [   0.538s] (baseline)
+     Parsing madobe-telemetry v0.1.0 (baseline)
+      Parsed [   0.001s] (baseline)
+    Checking madobe-telemetry v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.585s] madobe-telemetry
+    Building madobe-transport v0.1.0 (current)
+       Built [   0.795s] (current)
+     Parsing madobe-transport v0.1.0 (current)
+      Parsed [   0.006s] (current)
+    Building madobe-transport v0.1.0 (baseline)
+       Built [   0.577s] (baseline)
+     Parsing madobe-transport v0.1.0 (baseline)
+      Parsed [   0.006s] (baseline)
+    Checking madobe-transport v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.005s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.784s] madobe-transport
+    Building madobectl v0.1.0 (current)
+       Built [   1.091s] (current)
+     Parsing madobectl v0.1.0 (current)
+      Parsed [   0.002s] (current)
+    Building madobectl v0.1.0 (baseline)
+       Built [   0.473s] (baseline)
+     Parsing madobectl v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobectl v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.006s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   2.037s] madobectl
+
+Script done on 2026-07-04 14:35:51-05:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-07-04 14:36:00-05:00 [COMMAND="nix develop -c actionlint .github/workflows/*.yml" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate' is dirty
+madobe dev shell: use 'just --list' to see commands
+
+Script done on 2026-07-04 14:36:03-05:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-07-04 14:36:11-05:00 [COMMAND="nix develop -c just check" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=32 excluded=11 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+cargo check --workspace --all-targets --all-features
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/compositor)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/telemetry)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/protocol)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/transport)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/hyprland)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/apps/hostd)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.93s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/compositor)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/protocol)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/telemetry)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/transport)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/apps/hostd)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/hyprland)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.97s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+typos reported a truncated path in this evidence transcript. The transcript was
+normalized and `just check` was rerun below.
+
+Script done on 2026-07-04 14:36:14-05:00 [COMMAND_EXIT_CODE="2"]
+
+$ nix develop -c just check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=32 excluded=11 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+cargo check --workspace --all-targets --all-features
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.15s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 87 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+[exit 0]
+
+$ git diff --check
+[exit 0]
+
+$ nix develop -c just check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=32 excluded=11 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-supply-chain-regression-gate"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+cargo check --workspace --all-targets --all-features
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.09s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 88 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+[exit 0]
+
+$ git diff --check
+[exit 0]

@@ -1,0 +1,72 @@
+{
+  "nodeId": "m4-nightly-supply-chain-regression-gate",
+  "summary": "Added the existing `nix develop -c just security` supply-chain gate to the nightly `deep-checks` workflow before coverage and mutation checks, leaving PR and main CI unchanged.",
+  "changedFiles": [
+    ".github/workflows/nightly.yml",
+    "evidence/m4-nightly-supply-chain-regression-gate/commands.log",
+    "evidence/m4-nightly-supply-chain-regression-gate/notes.md",
+    "reports/qd/m4-nightly-supply-chain-regression-gate/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Nightly deep checks run `nix develop -c just security` before long-running coverage or mutation steps.",
+      "status": "passed",
+      "evidence": ".github/workflows/nightly.yml now runs `nix develop -c just security` immediately after Nix setup and before `nix develop -c just coverage` and `nix develop -c just mutants`."
+    },
+    {
+      "criterion": "PR and main CI behavior remains unchanged.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml was inspected and not modified; the existing PR, push-to-main, merge_group, workflow_call, and workflow_dispatch CI steps remain unchanged."
+    },
+    {
+      "criterion": "Workflow syntax validates with actionlint.",
+      "status": "passed",
+      "evidence": "`nix develop -c actionlint .github/workflows/*.yml` passed; see evidence/m4-nightly-supply-chain-regression-gate/commands.log."
+    },
+    {
+      "criterion": "Evidence records focused security, workflow lint, and repo check commands.",
+      "status": "passed",
+      "evidence": "commands.log records `nix develop -c just security`, `nix develop -c actionlint .github/workflows/*.yml`, `nix develop -c just check`, and `git diff --check`."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "Only workflow scheduling/evidence files were changed; notes.md records the no-product-claim boundary."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just security",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-supply-chain-regression-gate/commands.log"
+    },
+    {
+      "command": "nix develop -c actionlint .github/workflows/*.yml",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-supply-chain-regression-gate/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-supply-chain-regression-gate/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-supply-chain-regression-gate/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-nightly-supply-chain-regression-gate/commands.log",
+    "evidence/m4-nightly-supply-chain-regression-gate/notes.md",
+    "reports/qd/m4-nightly-supply-chain-regression-gate/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node only changes scheduled repository workflow gate ordering."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
