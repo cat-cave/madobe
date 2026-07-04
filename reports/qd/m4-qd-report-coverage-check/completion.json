@@ -9,7 +9,9 @@
     "reports/qd/m4-qd-report-coverage-check/completion.json",
     "scripts/qd-reports-check.sh"
   ],
-  "commits": [],
+  "commits": [
+    "1b7492ddd2b28c6f574e2d7517e74c2ae1c18225"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "The qd report validation command reads roadmap/qd-export.json.",
