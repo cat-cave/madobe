@@ -106,5 +106,24 @@ Passed with no output.
 
 ## Hosted CI
 
-Hosted macOS CI was not run from this local worktree. It remains a required
-pre-merge validation gate after the branch is pushed.
+First hosted PR CI run:
+https://github.com/cat-cave/madobe/actions/runs/28720908680
+
+Result:
+- Linux passed.
+- macOS failed in `just macos-check`.
+
+Relevant macOS failure:
+
+```text
+error: 'cargo-fmt' is not installed for the toolchain '1.96.0-aarch64-apple-darwin'.
+help: run `rustup component add --toolchain 1.96.0-aarch64-apple-darwin rustfmt` to install it
+error: recipe `fmt` failed on line 12 with exit code 1
+```
+
+Follow-up:
+- Added `rustup component add rustfmt clippy` after `jdx/mise-action` in hosted macOS CI.
+- Added the same component install after `mise install` in `just macos-bootstrap`.
+
+Hosted macOS CI remains a required pre-merge validation gate after the branch is
+updated.

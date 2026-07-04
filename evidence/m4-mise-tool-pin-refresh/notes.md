@@ -8,6 +8,9 @@ reviewed versions:
 - `rust` changed from `stable` to `1.96.0`.
 - `just` changed from `latest` to `1.55.1`.
 - `tuist` remains pinned to `4.201.0`.
+- Native macOS setup now installs the Rust `rustfmt` and `clippy` components
+  after `mise install`, because hosted CI proved the pinned Rust toolchain does
+  not include `cargo-fmt` by default.
 
 The current latest values were checked with `mise latest` through the Nix dev
 shell. Linux/Nix tool declarations were not edited.

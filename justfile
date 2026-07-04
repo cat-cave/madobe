@@ -57,7 +57,7 @@ ci-local:
   just coverage
 
 macos-bootstrap:
-  if [ "$(uname -s)" != Darwin ]; then echo "macOS bootstrap skipped outside Darwin"; else if ! command -v mise >/dev/null 2>&1; then command -v brew >/dev/null 2>&1 || { echo "Homebrew missing; install jq, mise, tuist, swiftformat, and swiftlint manually"; exit 127; }; brew install mise; fi; brew list jq >/dev/null 2>&1 || brew install jq; brew list swiftformat >/dev/null 2>&1 || brew install swiftformat; brew list swiftlint >/dev/null 2>&1 || brew install swiftlint; mise install; fi
+  if [ "$(uname -s)" != Darwin ]; then echo "macOS bootstrap skipped outside Darwin"; else if ! command -v mise >/dev/null 2>&1; then command -v brew >/dev/null 2>&1 || { echo "Homebrew missing; install jq, mise, tuist, swiftformat, and swiftlint manually"; exit 127; }; brew install mise; fi; brew list jq >/dev/null 2>&1 || brew install jq; brew list swiftformat >/dev/null 2>&1 || brew install swiftformat; brew list swiftlint >/dev/null 2>&1 || brew install swiftlint; mise install; rustup component add rustfmt clippy; fi
 
 macos-check: check macos-swiftformat macos-swiftlint apple-generate apple-test
 

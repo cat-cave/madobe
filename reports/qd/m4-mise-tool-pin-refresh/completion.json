@@ -2,9 +2,11 @@
   "nodeId": "m4-mise-tool-pin-refresh",
   "summary": "Pinned native macOS mise Rust and Just selectors to current explicit versions while keeping the already-current Tuist pin unchanged.",
   "changedFiles": [
+    ".github/workflows/ci.yml",
     ".mise.toml",
     "evidence/m4-mise-tool-pin-refresh/commands.log",
     "evidence/m4-mise-tool-pin-refresh/notes.md",
+    "justfile",
     "reports/qd/m4-mise-tool-pin-refresh/audit.json",
     "reports/qd/m4-mise-tool-pin-refresh/completion.json"
   ],
@@ -30,12 +32,12 @@
     {
       "criterion": "Linux/Nix tool declarations remain unchanged.",
       "status": "passed",
-      "evidence": "Changed files are limited to .mise.toml and this node's evidence/report files; no Nix files are changed."
+      "evidence": "No Nix files are changed; hosted and local macOS setup now explicitly install Rust rustfmt and clippy components required by the pinned Rust toolchain."
     },
     {
       "criterion": "Repo checks and hosted macOS CI pass.",
       "status": "passed",
-      "evidence": "Local repository checks are recorded in evidence/m4-mise-tool-pin-refresh/commands.log. Hosted macOS CI is required before merge and will be recorded through qd ci evidence."
+      "evidence": "Local repository checks are recorded in evidence/m4-mise-tool-pin-refresh/commands.log. The first hosted macOS CI run found missing rustfmt for Rust 1.96.0; the branch now installs rustfmt and clippy explicitly before macOS checks. Final hosted CI is required before merge and will be recorded through qd ci evidence."
     },
     {
       "criterion": "Evidence records validation and qd reports.",

@@ -19,12 +19,12 @@
     {
       "criterion": "Linux/Nix tool declarations remain unchanged.",
       "status": "passed",
-      "evidence": "Diff scope is limited to .mise.toml and node evidence/report files."
+      "evidence": "No Nix files are changed; hosted and local macOS setup now explicitly install Rust rustfmt and clippy components required by the pinned Rust toolchain."
     },
     {
       "criterion": "Repo checks and hosted macOS CI pass.",
       "status": "passed",
-      "evidence": "Local validation is recorded in commands.log. Hosted macOS CI is required before merge and will be recorded through qd ci evidence."
+      "evidence": "Local validation is recorded in commands.log. The first hosted macOS CI run found missing rustfmt for Rust 1.96.0; the branch now installs rustfmt and clippy explicitly before macOS checks. Final hosted CI is required before merge and will be recorded through qd ci evidence."
     },
     {
       "criterion": "Evidence records validation and qd reports.",
