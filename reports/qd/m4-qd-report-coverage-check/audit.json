@@ -1,0 +1,51 @@
+{
+  "nodeId": "m4-qd-report-coverage-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The qd report validation command reads roadmap/qd-export.json.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validate_roadmap_export runs before coverage validation."
+    },
+    {
+      "criterion": "Every done qd node requires completion and audit reports.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validate_done_node_report_coverage checks both report paths for each done node."
+    },
+    {
+      "criterion": "Every report directory containing completion or audit JSON corresponds to a node id in the roadmap export.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validate_report_directory_coverage checks report directories against roadmap node ids."
+    },
+    {
+      "criterion": "In-flight report directories remain allowed for claimed or review nodes before final qd merge.",
+      "status": "passed",
+      "evidence": "The implementation only requires complete report coverage for done nodes and accepts directories for any real roadmap node."
+    },
+    {
+      "criterion": "The coverage check remains wired into just check through existing just qd-reports-check.",
+      "status": "passed",
+      "evidence": "justfile already invokes just qd-reports-check from just check; validation passed."
+    },
+    {
+      "criterion": "Evidence records validation and qd reports.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-coverage-check/commands.log and reports/qd/m4-qd-report-coverage-check/*.json exist."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-coverage-check/notes.md limits the claim to repository metadata validation."
+    }
+  ],
+  "verificationEvidence": {
+    "completionReportReviewed": true,
+    "diffReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report coverage validation only; no product runtime behavior is claimed."
+  },
+  "findings": []
+}

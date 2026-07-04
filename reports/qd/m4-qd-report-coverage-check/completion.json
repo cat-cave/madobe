@@ -1,0 +1,97 @@
+{
+  "nodeId": "m4-qd-report-coverage-check",
+  "summary": "Extended the qd report validation gate so it reads roadmap/qd-export.json, requires completion and audit reports for every done node, and rejects report directories whose node id is absent from the roadmap export while allowing in-flight reports for real non-done nodes.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "evidence/m4-qd-report-coverage-check/commands.log",
+    "evidence/m4-qd-report-coverage-check/notes.md",
+    "reports/qd/m4-qd-report-coverage-check/audit.json",
+    "reports/qd/m4-qd-report-coverage-check/completion.json",
+    "scripts/qd-reports-check.sh"
+  ],
+  "commits": [
+    "1b7492ddd2b28c6f574e2d7517e74c2ae1c18225"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "The qd report validation command reads roadmap/qd-export.json.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates roadmap/qd-export.json before running coverage checks."
+    },
+    {
+      "criterion": "Every qd node with status done requires reports/qd/<node-id>/completion.json and reports/qd/<node-id>/audit.json.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validate_done_node_report_coverage checks both files for every done node; just qd-reports-check passed."
+    },
+    {
+      "criterion": "Every report directory containing completion or audit JSON corresponds to a node id in the roadmap export.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validate_report_directory_coverage rejects report dirs missing from roadmap/qd-export.json; just qd-reports-check passed."
+    },
+    {
+      "criterion": "In-flight report directories remain allowed for claimed or review nodes before final qd merge.",
+      "status": "passed",
+      "evidence": "Only done nodes are required to have both reports; any report directory for a real roadmap node id remains allowed."
+    },
+    {
+      "criterion": "The coverage check remains wired into just check through existing just qd-reports-check.",
+      "status": "passed",
+      "evidence": "justfile already runs just qd-reports-check from just check; nix develop -c just check passed."
+    },
+    {
+      "criterion": "Evidence records validation and qd reports.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-coverage-check/commands.log; reports/qd/m4-qd-report-coverage-check/completion.json; reports/qd/m4-qd-report-coverage-check/audit.json"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-coverage-check/notes.md records the repository-metadata-only validation boundary."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "bash scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-coverage-check/commands.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-coverage-check/commands.log"
+    },
+    {
+      "command": "nix develop -c shfmt -d scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-coverage-check/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-coverage-check/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-coverage-check/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-coverage-check/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-coverage-check/commands.log",
+    "evidence/m4-qd-report-coverage-check/notes.md",
+    "reports/qd/m4-qd-report-coverage-check/audit.json",
+    "reports/qd/m4-qd-report-coverage-check/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report coverage validation only; no product runtime behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
