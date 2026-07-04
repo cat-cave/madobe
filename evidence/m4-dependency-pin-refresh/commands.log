@@ -1,0 +1,127 @@
+# m4-dependency-pin-refresh commands
+
+Worktree: /home/trevor/projects/madobe/.qd/worktrees/m4-dependency-pin-refresh
+Branch: spec/m4-dependency-pin-refresh
+
+## Baseline pins
+
+Command:
+`jq -r '.nodes.nixpkgs.locked | "rev=\(.rev) lastModified=\(.lastModified) narHash=\(.narHash)"' flake.lock`
+
+Summary:
+Before refresh, nixpkgs was pinned to:
+`rev=b5aa0fbd538984f6e3d201be0005b4463d8b09f8 lastModified=1782723713 narHash=sha256-oPXCU/SSUokcGaJREHibG1CBX3+s/W7orDWQOZDsEeQ=`
+
+Command:
+`sed -n '1,40p' .mise.toml`
+
+Summary:
+Before refresh, `.mise.toml` pinned Tuist to `4.200.5`.
+
+## Refresh
+
+Command:
+`nix flake update`
+
+Summary:
+Passed. Nix updated `flake.lock` input `nixpkgs`:
+`github:NixOS/nixpkgs/b5aa0fbd538984f6e3d201be0005b4463d8b09f8?...` dated 2026-06-29
+to
+`github:NixOS/nixpkgs/65179426c83bb3f6bc14898b42ea1c6f01d374b0?...` dated 2026-07-02.
+
+Command:
+`nix develop -c mise latest tuist`
+
+Summary:
+Passed. Output included the dev shell banner and reported latest Tuist version `4.201.0`.
+
+Command:
+`apply_patch`
+
+Summary:
+Updated `.mise.toml` Tuist pin from `4.200.5` to `4.201.0`.
+
+## Resulting pins
+
+Command:
+`jq -r '.nodes.nixpkgs.locked | "rev=\(.rev) lastModified=\(.lastModified) narHash=\(.narHash)"' flake.lock`
+
+Summary:
+After refresh, nixpkgs is pinned to:
+`rev=65179426c83bb3f6bc14898b42ea1c6f01d374b0 lastModified=1782959384 narHash=sha256-xnJJk+ct+D2+wdRxj1wk36w5zV9RVESwRqcklPdt3fM=`
+
+Command:
+`sed -n '1,40p' .mise.toml`
+
+Summary:
+After refresh, `.mise.toml` pins Tuist to `4.201.0`.
+
+## Validation
+
+Command:
+`nix flake check`
+
+Summary:
+Passed. The flake evaluated devShells, formatter, and checks for `x86_64-linux`; the Rust check derivation built and reported `all checks passed`.
+
+Command:
+`nix develop -c just check`
+
+Summary:
+Passed before adding evidence files. The check ran `cargo fmt --all -- --check`, `taplo fmt --check`, `shfmt -d`, `cargo check --workspace --all-targets --all-features`, `cargo clippy --workspace --all-targets --all-features -- -D warnings`, `typos`, `markdownlint-cli2`, `actionlint`, and `just lint-lines`.
+
+Command:
+`nix develop -c just check`
+
+Summary:
+Failed after adding evidence files because `markdownlint-cli2` reported `evidence/m4-dependency-pin-refresh/notes.md:17 error MD012/no-multiple-blanks Multiple consecutive blank lines [Expected: 1; Actual: 2]`.
+
+Command:
+`apply_patch`
+
+Summary:
+Removed the extra trailing blank line from `evidence/m4-dependency-pin-refresh/notes.md`.
+
+Command:
+`nix develop -c just check`
+
+Summary:
+Passed after the evidence formatting fix. `markdownlint-cli2` linted 86 files with `Summary: 0 error(s)`, and the recipe completed through `actionlint` and `just lint-lines`.
+
+Command:
+`git diff --check`
+
+Summary:
+Passed with no output.
+
+Command:
+`jq empty reports/qd/m4-dependency-pin-refresh/completion.json`
+
+Summary:
+Passed with no output.
+
+## Orchestrator Verification
+
+Command:
+`jq empty reports/qd/m4-dependency-pin-refresh/completion.json reports/qd/m4-dependency-pin-refresh/audit.json`
+
+Summary:
+Passed with no output.
+
+Command:
+`git diff --check`
+
+Summary:
+Passed with no output.
+
+Command:
+`nix flake check`
+
+Summary:
+Passed after orchestrator audit report addition.
+
+Command:
+`nix develop -c just check`
+
+Summary:
+Passed after orchestrator audit report addition.

@@ -1,4 +1,4 @@
 [tools]
 rust = "stable"
 just = "latest"
-tuist = "4.200.5"
+tuist = "4.201.0"
