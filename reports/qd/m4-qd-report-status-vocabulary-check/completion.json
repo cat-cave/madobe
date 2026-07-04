@@ -1,0 +1,94 @@
+{
+  "nodeId": "m4-qd-report-status-vocabulary-check",
+  "summary": "Extended the qd report checker to enforce documented status vocabularies for completion and audit report array fields while keeping existing report compatibility.",
+  "changedFiles": [
+    "evidence/m4-qd-report-status-vocabulary-check/commands.log",
+    "evidence/m4-qd-report-status-vocabulary-check/notes.md",
+    "reports/qd/m4-qd-report-status-vocabulary-check/audit.json",
+    "reports/qd/m4-qd-report-status-vocabulary-check/completion.json",
+    "scripts/qd-reports-check.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Completion acceptanceEvidence statuses are constrained to passed/failed/not_required.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates completion `acceptanceEvidence[].status` values and rejects strings outside `passed`, `failed`, and `not_required`."
+    },
+    {
+      "criterion": "Completion commandsRun statuses are constrained to passed/failed/not-run.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates completion `commandsRun[].status` values and rejects strings outside `passed`, `failed`, and `not-run`."
+    },
+    {
+      "criterion": "realWorldValidation remains constrained to passed/not_required.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh keeps the existing `validate_real_world_status` constraint for completion and audit reports."
+    },
+    {
+      "criterion": "Audit acceptanceReviewed statuses are constrained to passed/failed/not_required.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates audit `acceptanceReviewed[].status` values and rejects strings outside `passed`, `failed`, and `not_required`."
+    },
+    {
+      "criterion": "The checker emits file-scoped errors for invalid status values.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/commands.log records a temporary-copy invalid status smoke test failing with a file-scoped error."
+    },
+    {
+      "criterion": "just qd-reports-check and just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/commands.log"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded under this node's required paths.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/commands.log; evidence/m4-qd-report-status-vocabulary-check/notes.md; reports/qd/m4-qd-report-status-vocabulary-check/completion.json; reports/qd/m4-qd-report-status-vocabulary-check/audit.json"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/notes.md records the repository-metadata-only boundary."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "bash scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/commands.log"
+    },
+    {
+      "command": "temporary-copy invalid status smoke test",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-status-vocabulary-check/commands.log",
+    "evidence/m4-qd-report-status-vocabulary-check/notes.md",
+    "reports/qd/m4-qd-report-status-vocabulary-check/audit.json",
+    "reports/qd/m4-qd-report-status-vocabulary-check/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report metadata validation only; no product runtime behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

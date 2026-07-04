@@ -1,0 +1,36 @@
+Command: bash scripts/qd-reports-check.sh
+Status: passed
+Output:
+qd report check: validated 68 completion report(s) and 68 audit report(s)
+
+Command: nix develop -c just qd-reports-check
+Status: passed
+Output:
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-report-status-vocabulary-check' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 68 completion report(s) and 68 audit report(s)
+
+Command: nix develop -c just check
+Status: passed
+Relevant output:
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-report-status-vocabulary-check' is dirty
+madobe dev shell: use 'just --list' to see commands
+...
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 68 completion report(s) and 68 audit report(s)
+cargo check --workspace --all-targets --all-features
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+markdownlint-cli2 summary: 0 error(s)
+just lint-lines
+
+Command: git diff --check
+Status: passed
+Output: no output
+
+Command: temporary-copy invalid status smoke test
+Status: passed
+Output:
+qd report check: reports/qd/m4-qd-report-status-vocabulary-check/completion.json: acceptanceEvidence.status must be passed, failed, or not_required
+invalid status smoke test failed as expected

@@ -1,0 +1,56 @@
+{
+  "nodeId": "m4-qd-report-status-vocabulary-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Completion acceptanceEvidence statuses are constrained to passed/failed/not_required.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh"
+    },
+    {
+      "criterion": "Completion commandsRun statuses are constrained to passed/failed/not-run.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh"
+    },
+    {
+      "criterion": "realWorldValidation remains constrained to passed/not_required.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh"
+    },
+    {
+      "criterion": "Audit acceptanceReviewed statuses are constrained to passed/failed/not_required.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh"
+    },
+    {
+      "criterion": "Invalid status values produce file-scoped errors.",
+      "status": "passed",
+      "evidence": "The new checks call `expect_jq`, preserving the existing `report_error` file/message pattern."
+    },
+    {
+      "criterion": "Required validation commands passed.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/commands.log"
+    },
+    {
+      "criterion": "Evidence and reports are recorded under the required paths.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/notes.md; reports/qd/m4-qd-report-status-vocabulary-check/completion.json"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-status-vocabulary-check/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report metadata validation only; `nix develop -c just qd-reports-check` and `nix develop -c just check` are recorded in the command log."
+  },
+  "findings": []
+}
