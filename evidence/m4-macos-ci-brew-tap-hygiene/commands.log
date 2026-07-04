@@ -1,0 +1,107 @@
+# m4-macos-ci-brew-tap-hygiene commands
+
+Command: `git status --short --branch`
+Result: passed
+Output:
+```text
+## spec/m4-macos-ci-brew-tap-hygiene
+```
+
+Command: `rg -n "swiftformat|swiftlint|brew install|aws/tap|Homebrew" .github/workflows/ci.yml docs/ENGINEERING.md docs/MACOS_ORCHESTRATOR.md`
+Result: passed
+Output:
+```text
+docs/ENGINEERING.md:71:macOS uses native Xcode plus Mise/Homebrew:
+docs/ENGINEERING.md:172:swiftformat --lint
+docs/ENGINEERING.md:173:swiftlint lint --strict
+docs/ENGINEERING.md:358:- Homebrew-installed CI tools must be named explicitly in the workflow.
+docs/MACOS_ORCHESTRATOR.md:22:Mise, Homebrew, Xcode, and Tuist. The command surface is still `just`; only the environment manager differs.
+.github/workflows/ci.yml:35:      - run: brew install swiftformat swiftlint
+```
+
+Command: `nix develop -c just check`
+Result: passed
+Output summary:
+```text
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-macos-ci-brew-tap-hygiene' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+taplo fmt --check
+shfmt -d
+cargo check --workspace --all-targets --all-features
+Finished `dev` profile [unoptimized + debuginfo] target(s)
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+Finished `dev` profile [unoptimized + debuginfo] target(s)
+typos
+markdownlint-cli2 "**/*.md"
+Summary: 0 error(s)
+actionlint .github/workflows/*.yml
+just lint-lines
+```
+
+## Hosted CI Validation
+
+Run: <https://github.com/cat-cave/madobe/actions/runs/28715640440>
+
+Command:
+```sh
+gh run view 28715640440 --repo cat-cave/madobe --job 85156393334 --log | rg -n "aws/tap|not trusted|Tap-Trust|HOMEBREW_NO_REQUIRE_TAP_TRUST|Remove hosted CI runner aws/tap|brew install swiftformat swiftlint|brew untap"
+```
+
+Result: passed.
+
+Key macOS job evidence:
+
+```text
+Remove hosted CI runner aws/tap ... HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew untap aws/tap || true
+Remove hosted CI runner aws/tap ... Untapping aws/tap...
+Remove hosted CI runner aws/tap ... Untapped 1 cask and 26 formulae (59 files, 1.6MB).
+Run brew install swiftformat swiftlint ... brew install swiftformat swiftlint
+Run brew install swiftformat swiftlint ... swiftformat 0.61.1 is already installed and up-to-date.
+Run brew install swiftformat swiftlint ... Bottle swiftlint (0.65.0)
+```
+
+The filtered hosted macOS log did not contain the previous `not trusted` or
+`Tap-Trust` annotation for the `brew install swiftformat swiftlint` step.
+
+Command: `git diff --check`
+Result: passed
+Output:
+```text
+
+```
+
+Command: `jq empty reports/qd/m4-macos-ci-brew-tap-hygiene/completion.json`
+Result: passed
+Output:
+```text
+
+```
+
+## Orchestrator Verification
+
+Refinement: changed the cleanup step to run `brew untap aws/tap` directly with
+`HOMEBREW_NO_REQUIRE_TAP_TRUST=1` scoped only to that cleanup command. The
+following `brew install swiftformat swiftlint` step remains under normal
+Homebrew trust checks.
+
+Command: `jq empty reports/qd/m4-macos-ci-brew-tap-hygiene/completion.json reports/qd/m4-macos-ci-brew-tap-hygiene/audit.json`
+Result: passed
+
+Command: `git diff --check`
+Result: passed
+
+Command: `nix develop -c just check`
+Result: passed
+Output summary:
+```text
+cargo fmt --all -- --check
+taplo fmt --check
+cargo check --workspace --all-targets --all-features
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+typos
+markdownlint-cli2 "**/*.md"
+Summary: 0 error(s)
+actionlint .github/workflows/*.yml
+just lint-lines
+```

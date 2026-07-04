@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-macos-ci-brew-tap-hygiene",
+  "acceptanceReviewed": [
+    {
+      "criterion": "macOS CI sanitizes or avoids the hosted-runner aws/tap trust warning before installing swiftformat and swiftlint.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml adds `Remove hosted CI runner aws/tap` immediately before `brew install swiftformat swiftlint`."
+    },
+    {
+      "criterion": "The change is scoped to CI/native macOS bootstrap hygiene and does not introduce Nix on macOS.",
+      "status": "passed",
+      "evidence": "Only the macOS GitHub Actions job is changed; it continues to use mise, Homebrew, and `just macos-check`."
+    },
+    {
+      "criterion": "Linux CI behavior remains unchanged except normal workflow linting.",
+      "status": "passed",
+      "evidence": "The linux job in .github/workflows/ci.yml is unchanged."
+    },
+    {
+      "criterion": "Evidence records local workflow/repo checks and hosted macOS CI passing without a tap-trust annotation when logs expose that signal.",
+      "status": "passed",
+      "evidence": "Local `nix develop -c just check`, `git diff --check`, and JSON validation passed. Hosted GitHub Actions run 28715640440 passed and the filtered macOS job log showed no `not trusted` or `Tap-Trust` annotation in the `brew install swiftformat swiftlint` step."
+    },
+    {
+      "criterion": "No product runtime, cross-device, decode, render, capture, transport, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-macos-ci-brew-tap-hygiene/notes.md scopes the work to hosted CI runner hygiene."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "GitHub-hosted macos-15 validation passed in run 28715640440."
+  },
+  "findings": []
+}
