@@ -9,7 +9,9 @@
     "reports/qd/m4-dependabot-contract-check/audit.json",
     "reports/qd/m4-dependabot-contract-check/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "055ec4072c5123c29fbbf3c7b4756f72d1a30acb"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Add a deterministic shell checker for .github/dependabot.yml.",
