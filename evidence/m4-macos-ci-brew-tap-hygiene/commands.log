@@ -39,6 +39,31 @@ actionlint .github/workflows/*.yml
 just lint-lines
 ```
 
+## Hosted CI Validation
+
+Run: <https://github.com/cat-cave/madobe/actions/runs/28715640440>
+
+Command:
+```sh
+gh run view 28715640440 --repo cat-cave/madobe --job 85156393334 --log | rg -n "aws/tap|not trusted|Tap-Trust|HOMEBREW_NO_REQUIRE_TAP_TRUST|Remove hosted CI runner aws/tap|brew install swiftformat swiftlint|brew untap"
+```
+
+Result: passed.
+
+Key macOS job evidence:
+
+```text
+Remove hosted CI runner aws/tap ... HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew untap aws/tap || true
+Remove hosted CI runner aws/tap ... Untapping aws/tap...
+Remove hosted CI runner aws/tap ... Untapped 1 cask and 26 formulae (59 files, 1.6MB).
+Run brew install swiftformat swiftlint ... brew install swiftformat swiftlint
+Run brew install swiftformat swiftlint ... swiftformat 0.61.1 is already installed and up-to-date.
+Run brew install swiftformat swiftlint ... Bottle swiftlint (0.65.0)
+```
+
+The filtered hosted macOS log did not contain the previous `not trusted` or
+`Tap-Trust` annotation for the `brew install swiftformat swiftlint` step.
+
 Command: `git diff --check`
 Result: passed
 Output:

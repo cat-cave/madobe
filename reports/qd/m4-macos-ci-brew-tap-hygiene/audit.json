@@ -19,7 +19,7 @@
     {
       "criterion": "Evidence records local workflow/repo checks and hosted macOS CI passing without a tap-trust annotation when logs expose that signal.",
       "status": "passed",
-      "evidence": "Local `nix develop -c just check`, `git diff --check`, and JSON validation passed; hosted CI validation is expected after PR creation."
+      "evidence": "Local `nix develop -c just check`, `git diff --check`, and JSON validation passed. Hosted GitHub Actions run 28715640440 passed and the filtered macOS job log showed no `not trusted` or `Tap-Trust` annotation in the `brew install swiftformat swiftlint` step."
     },
     {
       "criterion": "No product runtime, cross-device, decode, render, capture, transport, or latency claim is made.",
@@ -33,9 +33,9 @@
     "verificationEvidenceReviewed": true
   },
   "realWorldValidation": {
-    "required": false,
-    "status": "not_required",
-    "evidence": "Audit covers local readiness for PR. GitHub-hosted macos-15 validation is recorded as qd CI evidence before merge."
+    "required": true,
+    "status": "passed",
+    "evidence": "GitHub-hosted macos-15 validation passed in run 28715640440."
   },
   "findings": []
 }

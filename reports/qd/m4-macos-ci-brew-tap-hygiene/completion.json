@@ -55,9 +55,9 @@
     "reports/qd/m4-macos-ci-brew-tap-hygiene/completion.json"
   ],
   "realWorldValidation": {
-    "required": false,
-    "status": "not_required",
-    "evidence": "Local completion proves the workflow edit and repo checks only. Hosted GitHub Actions macos-15 validation is recorded through qd CI/PR evidence before merge."
+    "required": true,
+    "status": "passed",
+    "evidence": "Hosted GitHub Actions run 28715640440 passed on macOS and the filtered macOS job log showed aws/tap was untapped before `brew install swiftformat swiftlint`, with no `not trusted` or `Tap-Trust` annotation in the install step."
   },
   "unverifiedItems": [],
   "dagChangesNeeded": []
