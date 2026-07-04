@@ -1,0 +1,76 @@
+{
+  "nodeId": "m4-macos-ci-jq-tooling",
+  "summary": "Updated hosted macOS CI to install jq explicitly through Homebrew alongside swiftformat and swiftlint before running `just macos-check`, so the shared `just check` path can run the qd report validator without depending on runner-image jq availability.",
+  "changedFiles": [
+    ".github/workflows/ci.yml",
+    "evidence/m4-macos-ci-jq-tooling/commands.log",
+    "evidence/m4-macos-ci-jq-tooling/notes.md",
+    "reports/qd/m4-macos-ci-jq-tooling/audit.json",
+    "reports/qd/m4-macos-ci-jq-tooling/completion.json"
+  ],
+  "commits": [
+    "0ccc40dc97a1a3b7f1034dfa4a7ede23a4ee988b"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Hosted macOS CI installs `jq` explicitly alongside the Homebrew-managed tools needed by `just macos-check`.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml now runs `brew install jq swiftformat swiftlint` before `just macos-check`."
+    },
+    {
+      "criterion": "Linux/Nix tool declarations remain unchanged.",
+      "status": "passed",
+      "evidence": "The only workflow behavior change is in the macOS Homebrew install line; no Nix files or Linux job commands were changed."
+    },
+    {
+      "criterion": "Workflow syntax and repo hygiene checks pass.",
+      "status": "passed",
+      "evidence": "`nix develop -c actionlint .github/workflows/ci.yml` and `git diff --check` passed; qd report and full check results are recorded in evidence/m4-macos-ci-jq-tooling/commands.log."
+    },
+    {
+      "criterion": "Evidence records workflow validation and qd reports.",
+      "status": "passed",
+      "evidence": "evidence/m4-macos-ci-jq-tooling/commands.log records workflow validation, and this completion report plus audit report are under reports/qd/m4-macos-ci-jq-tooling/."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim.",
+      "status": "passed",
+      "evidence": "evidence/m4-macos-ci-jq-tooling/notes.md scopes the work to hosted macOS CI tooling only."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c actionlint .github/workflows/ci.yml",
+      "status": "passed",
+      "evidence": "evidence/m4-macos-ci-jq-tooling/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-macos-ci-jq-tooling/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-macos-ci-jq-tooling/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-macos-ci-jq-tooling/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-macos-ci-jq-tooling/commands.log",
+    "evidence/m4-macos-ci-jq-tooling/notes.md",
+    "reports/qd/m4-macos-ci-jq-tooling/audit.json",
+    "reports/qd/m4-macos-ci-jq-tooling/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node changes GitHub Actions tool installation only; workflow linting, qd report validation, and repo hygiene checks cover the acceptance without making product runtime claims."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

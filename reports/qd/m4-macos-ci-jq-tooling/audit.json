@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-macos-ci-jq-tooling",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Hosted macOS CI installs `jq` explicitly alongside the Homebrew-managed tools needed by `just macos-check`.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml contains `brew install jq swiftformat swiftlint` immediately before `just macos-check`."
+    },
+    {
+      "criterion": "Linux/Nix tool declarations remain unchanged.",
+      "status": "passed",
+      "evidence": "The workflow diff changes only the macOS Homebrew install command, with no flake or Linux job edits."
+    },
+    {
+      "criterion": "Workflow syntax and repo hygiene checks pass.",
+      "status": "passed",
+      "evidence": "actionlint and git diff whitespace validation passed; qd report and full check validation are recorded in evidence/m4-macos-ci-jq-tooling/commands.log."
+    },
+    {
+      "criterion": "Evidence records workflow validation and qd reports.",
+      "status": "passed",
+      "evidence": "Workflow validation is recorded in evidence/m4-macos-ci-jq-tooling/commands.log; completion and audit reports are present under reports/qd/m4-macos-ci-jq-tooling/."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim.",
+      "status": "passed",
+      "evidence": "The notes and reports describe CI tooling only."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "No live hosted run is required for this CI configuration node; local workflow syntax and repository gates validate the scoped change."
+  },
+  "findings": []
+}

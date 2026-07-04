@@ -1,0 +1,73 @@
+# m4-macos-ci-jq-tooling commands
+
+Command: `git diff -- .github/workflows/ci.yml`
+Result: passed
+Output:
+```diff
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index b759e5f..da2d216 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -35,5 +35,5 @@ jobs:
+       - name: Remove hosted CI runner aws/tap
+         run: |
+           HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew untap aws/tap || true
+-      - run: brew install swiftformat swiftlint
++      - run: brew install jq swiftformat swiftlint
+       - run: just macos-check
+```
+
+Command: `git diff --check`
+Result: passed
+Output:
+```text
+
+```
+
+Command: `nix develop -c actionlint .github/workflows/ci.yml`
+Result: blocked in sandbox
+Output:
+```text
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-macos-ci-jq-tooling' is dirty
+error:
+       ... while fetching the input 'git+file:///home/trevor/projects/madobe/.qd/worktrees/m4-macos-ci-jq-tooling'
+
+       error: executing SQLite statement 'pragma synchronous = off': unable to open database file, unable to open database file (in '/home/trevor/.cache/nix/fetcher-cache-v4.sqlite')
+```
+
+Command: `nix develop -c actionlint .github/workflows/ci.yml`
+Result: passed with elevated sandbox permissions for Nix cache access
+Output:
+```text
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-macos-ci-jq-tooling' is dirty
+madobe dev shell: use 'just --list' to see commands
+```
+
+Command: `nix develop -c just qd-reports-check`
+Result: passed with elevated sandbox permissions for Nix cache access
+Output:
+```text
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-macos-ci-jq-tooling' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 63 completion report(s) and 63 audit report(s)
+```
+
+Command: `nix develop -c just check`
+Result: passed with elevated sandbox permissions for Nix cache access
+Output summary:
+```text
+cargo fmt --all -- --check
+taplo fmt --check
+shfmt -d
+just qd-reports-check
+qd report check: validated 63 completion report(s) and 63 audit report(s)
+cargo check --workspace --all-targets --all-features
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+shellcheck
+typos
+markdownlint-cli2 "**/*.md"
+Summary: 0 error(s)
+actionlint .github/workflows/*.yml
+just lint-lines
+```
