@@ -1,0 +1,133 @@
+Command: nix develop -c cargo fmt --check
+Status: failed
+Notes: Formatter reported line wrapping needed in
+crates/hyprland/src/adapter/rule.rs after adding the focused unit tests.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Hyprland package tests passed with 12 unit tests, 9 integration tests,
+and 0 doc tests. The new rule helper tests all passed.
+
+Command: nix develop -c cargo fmt
+Status: passed
+Notes: Applied rustfmt wrapping to crates/hyprland/src/adapter/rule.rs.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/adapter/rule.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-rule-mutants-m4-hyprland-rule-mutation-hardening
+Status: failed
+Notes: Targeted rule.rs mutation run found 43 mutants. Baseline passed.
+Result: 1 missed, 24 caught, 18 unviable. The missed mutant was
+crates/hyprland/src/adapter/rule.rs:102:27 replacing / with * in the integer
+branch of format_scale. Added a non-1 denominator integer-scale assertion.
+
+Command: nix develop -c cargo fmt --check
+Status: passed
+Notes: Formatting passed after the extra integer format_scale assertion.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Hyprland package tests passed with 12 unit tests, 9 integration tests,
+and 0 doc tests. Nix printed an ignored busy SQLite cache warning.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/adapter/rule.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-rule-mutants-m4-hyprland-rule-mutation-hardening-rerun
+Status: passed
+Notes: Final targeted rule.rs mutation run. Result: 43 mutants tested in 15s:
+25 caught, 18 unviable. No missed mutants and no timeouts. Nix printed an
+ignored busy SQLite cache warning.
+
+Command: nix develop -c just check
+Status: failed
+Notes: The check reached cargo clippy. Clippy rejected expect/expect_err usage
+in the new test code because the workspace denies clippy::expect_used. Replaced
+the test code with local must and must_err helpers using explicit matches.
+
+Command: nix develop -c cargo fmt --check
+Status: failed
+Notes: Formatter reported indentation/wrapping needed after the clippy helper
+refactor.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Hyprland package tests passed after the clippy helper refactor with 12
+unit tests, 9 integration tests, and 0 doc tests.
+
+Command: nix develop -c cargo fmt
+Status: passed
+Notes: Applied rustfmt wrapping after the clippy helper refactor.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final required repository check passed. The check ran cargo fmt, taplo,
+shfmt, cargo check, cargo clippy, typos, markdownlint-cli2, actionlint, and
+just lint-lines. Markdownlint reported 78 files and 0 errors.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/adapter/rule.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-rule-mutants-m4-hyprland-rule-mutation-hardening-final
+Status: passed
+Notes: Final targeted rule.rs mutation rerun after the test helper refactor.
+Result: 43 mutants tested in 15s: 25 caught, 18 unviable. No missed mutants and
+no timeouts.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final tree check after evidence/report updates passed. The check ran
+cargo fmt, taplo, shfmt, cargo check, cargo clippy, typos, markdownlint-cli2,
+actionlint, and just lint-lines. Markdownlint reported 78 files and 0 errors.
+
+Command: nix develop -c cargo fmt --check
+Status: passed
+Notes: Formatting passed after tightening f64_to_nonzero_u32 to reject values
+below the first rounded nonzero boundary.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Hyprland package tests passed after the nonzero rounding-boundary
+change with 12 unit tests, 9 integration tests, and 0 doc tests.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/adapter/rule.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-rule-mutants-m4-hyprland-rule-mutation-hardening-nonzero-final
+Status: passed
+Notes: Final targeted rule.rs mutation run after the nonzero
+rounding-boundary change. Result: 45 mutants tested in 16s: 27 caught, 18
+unviable. No missed mutants and no timeouts.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final required repository check passed after the nonzero
+rounding-boundary change. The check ran cargo fmt, taplo, shfmt, cargo check,
+cargo clippy, typos, markdownlint-cli2, actionlint, and just lint-lines.
+Markdownlint reported 78 files and 0 errors.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final verification after all Markdown and JSON evidence/report edits
+passed. The check ran cargo fmt, taplo, shfmt, cargo check, cargo clippy,
+typos, markdownlint-cli2, actionlint, and just lint-lines. Markdownlint
+reported 78 files and 0 errors.
+
+Command: main baseline supplied by qd node
+Status: recorded
+Notes: Relevant workspace mutation baseline cluster from main was:
+crates/hyprland/src/adapter/rule.rs f64_to_nonzero_u32 survived
+boolean/operator boundary mutations; format_scale survived division/operator
+mutation; lua_string survived escape-condition mutation; and
+greatest_common_divisor survived comparison/modulo mutations.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Orchestrator rerun passed after implementor handoff. Hyprland package
+tests passed with 12 unit tests, 9 integration tests, and 0 doc tests.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/adapter/rule.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-rule-mutants-orchestrator
+Status: passed
+Notes: Orchestrator targeted mutation rerun passed. Result: 45 mutants tested
+in 16s: 27 caught, 18 unviable. No missed mutants and no timeouts.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Orchestrator rerun passed. The check ran cargo fmt, taplo, shfmt,
+cargo check, cargo clippy, typos, markdownlint-cli2, actionlint, and
+just lint-lines.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final orchestrator verification after qd completion/audit report
+normalization passed. The check ran cargo fmt, taplo, shfmt, cargo check,
+cargo clippy, typos, markdownlint-cli2, actionlint, and just lint-lines.

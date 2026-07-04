@@ -1,0 +1,72 @@
+{
+  "nodeId": "m4-hyprland-rule-mutation-hardening",
+  "summary": "Added focused Hyprland monitor rule helper tests that harden f64 boundary conversion, scale formatting, Lua string escaping, and gcd-based scale reduction against the supplied mutation survivor cluster.",
+  "changedFiles": [
+    "crates/hyprland/src/adapter/rule.rs",
+    "evidence/m4-hyprland-rule-mutation-hardening/commands.log",
+    "evidence/m4-hyprland-rule-mutation-hardening/notes.md",
+    "reports/qd/m4-hyprland-rule-mutation-hardening/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Evidence records the relevant workspace mutation baseline cluster for Hyprland monitor rule helpers.",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-rule-mutation-hardening/notes.md records the f64_to_nonzero_u32, format_scale, lua_string, and greatest_common_divisor survivors supplied by the qd node."
+    },
+    {
+      "criterion": "Focused tests cover f64_to_nonzero_u32 boundary handling, format_scale formatting, lua_string escaping, and scale/gcd reduction through public or crate-local behavior.",
+      "status": "passed",
+      "evidence": "crates/hyprland/src/adapter/rule.rs contains focused unit tests for all listed helpers, including public monitor_rule formatting and config_from_monitor scale reduction."
+    },
+    {
+      "criterion": "Run a targeted mutation check for crates/hyprland/src/adapter/rule.rs if feasible, or document residual surviving rule mutants with rationale.",
+      "status": "passed",
+      "evidence": "Orchestrator rerun: 45 mutants tested in 16s: 27 caught, 18 unviable. No missed mutants and no timeouts."
+    },
+    {
+      "criterion": "nix develop -c cargo test -p madobe-hyprland --all-features passes.",
+      "status": "passed",
+      "evidence": "Orchestrator rerun passed with 12 unit tests, 9 integration tests, and 0 doc tests."
+    },
+    {
+      "criterion": "nix develop -c just check passes.",
+      "status": "passed",
+      "evidence": "Orchestrator rerun passed after all evidence and report edits."
+    },
+    {
+      "criterion": "Produce requested evidence and report files.",
+      "status": "passed",
+      "evidence": "Created evidence/m4-hyprland-rule-mutation-hardening/commands.log, evidence/m4-hyprland-rule-mutation-hardening/notes.md, and reports/qd/m4-hyprland-rule-mutation-hardening/completion.json."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo test -p madobe-hyprland --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-rule-mutation-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/adapter/rule.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-rule-mutants-orchestrator",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-rule-mutation-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-rule-mutation-hardening/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-hyprland-rule-mutation-hardening/commands.log",
+    "evidence/m4-hyprland-rule-mutation-hardening/notes.md",
+    "reports/qd/m4-hyprland-rule-mutation-hardening/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node hardens Hyprland monitor rule/config helper tests only."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
