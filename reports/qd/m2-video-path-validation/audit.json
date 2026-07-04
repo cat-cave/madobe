@@ -1,0 +1,53 @@
+{
+  "nodeId": "m2-video-path-validation",
+  "status": "passed",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Evidence bundle includes capture metadata, encoded sample, hashes, logs, and notes.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json contains captureMetadataSummary, encodedSample, referencedArtifacts with SHA-256 hashes and sizes, plus references to upstream/local logs and notes."
+    },
+    {
+      "criterion": "Sample artifact can be consumed by a non-Linux decoder later.",
+      "status": "passed",
+      "evidence": "sample-av1.ivf is stable at evidence/m2-nvenc-encode-sample/sample-av1.ivf and ffprobe validates IVF/AV1 Main with AV01 tag, yuv420p, 160x90, one frame."
+    },
+    {
+      "criterion": "All unproven performance or zero-copy claims are explicitly absent or filed as findings.",
+      "status": "passed",
+      "evidence": "explicitNonClaims in bundle-manifest.json and notes.md exclude latency, direct DMA-BUF import, VideoToolbox decode, Metal render, HDR, no-CPU-readback after grim, and performance claims."
+    },
+    {
+      "criterion": "qd findings exist for any known gaps.",
+      "status": "passed",
+      "evidence": "qd findings eed2a910-d829-46e8-af64-837ed01ed78e, 28358c32-733e-4e8e-8f6b-f5c2d4d13c99, 77eec369-a6fe-4261-8dcf-1fbd8a575ca7, fcaaae62-2275-44ce-ae76-a99e45e06cb8, and a2842577-9a8b-4601-862b-0cddb671c832 track the known gaps."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "bundleManifestReviewed": true,
+    "hashesReviewed": true,
+    "ffprobeReviewed": true,
+    "jsonValidated": true,
+    "justVerifyReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "ffprobe successfully parsed the existing encoded sample; upstream reports record the Linux capture and NVENC encode hardware validation."
+  },
+  "findings": [],
+  "trackedQdFindings": [
+    "eed2a910-d829-46e8-af64-837ed01ed78e",
+    "28358c32-733e-4e8e-8f6b-f5c2d4d13c99",
+    "77eec369-a6fe-4261-8dcf-1fbd8a575ca7",
+    "fcaaae62-2275-44ce-ae76-a99e45e06cb8",
+    "a2842577-9a8b-4601-862b-0cddb671c832"
+  ],
+  "residualRisks": [
+    "The bundle is a stable evidence reference, not a replacement for downstream Mac decoder validation.",
+    "The sample is intentionally a one-frame IVF artifact and is not representative of streaming duration or latency."
+  ]
+}

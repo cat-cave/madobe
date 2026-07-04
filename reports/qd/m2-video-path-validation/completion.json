@@ -1,0 +1,108 @@
+{
+  "nodeId": "m2-video-path-validation",
+  "status": "complete",
+  "summary": "Bundled stable Linux capture and NVENC encode evidence for downstream non-Linux decoder work. The bundle references upstream artifacts by repo-relative path, records SHA-256 hashes and byte sizes, validates sample-av1.ivf with ffprobe, and explicitly excludes unproven performance, zero-copy, Mac decode/render, HDR, and no-CPU-readback claims.",
+  "changedFiles": [
+    "evidence/m2-video-path-validation/bundle-manifest.json",
+    "evidence/m2-video-path-validation/commands.log",
+    "evidence/m2-video-path-validation/json-validation.log",
+    "evidence/m2-video-path-validation/just-verify.log",
+    "evidence/m2-video-path-validation/notes.md",
+    "reports/qd/m2-video-path-validation/audit.json",
+    "reports/qd/m2-video-path-validation/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Evidence bundle includes capture metadata, encoded sample, hashes, logs, and notes.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json references capture metadata, sample-av1.ivf, upstream and local logs, notes, reports, SHA-256 hashes, and byte sizes."
+    },
+    {
+      "criterion": "Sample artifact can be consumed by a non-Linux decoder later.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json identifies evidence/m2-nvenc-encode-sample/sample-av1.ivf as the stable decoder-consumable sample; local ffprobe validates AV1 Main in IVF with AV01 tag."
+    },
+    {
+      "criterion": "All unproven performance or zero-copy claims are explicitly absent or filed as findings.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json and notes.md list explicit non-claims for latency, direct DMA-BUF import into NVENC, VideoToolbox decode, Metal render, HDR, no CPU readback after grim, and performance from low-latency tune."
+    },
+    {
+      "criterion": "qd findings exist for any known gaps.",
+      "status": "passed",
+      "evidence": "qd findings eed2a910-d829-46e8-af64-837ed01ed78e, 28358c32-733e-4e8e-8f6b-f5c2d4d13c99, 77eec369-a6fe-4261-8dcf-1fbd8a575ca7, fcaaae62-2275-44ce-ae76-a99e45e06cb8, and a2842577-9a8b-4601-862b-0cddb671c832 track the known gaps."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "rg --files evidence/m2-capture-one-frame reports/qd/m2-capture-one-frame evidence/m2-nvenc-encode-sample reports/qd/m2-nvenc-encode-sample",
+      "status": "passed",
+      "evidence": "terminal output; summarized in evidence/m2-video-path-validation/commands.log"
+    },
+    {
+      "command": "ffprobe -v error -show_streams -show_format -of json evidence/m2-nvenc-encode-sample/sample-av1.ivf",
+      "status": "passed",
+      "evidence": "terminal output; summarized in evidence/m2-video-path-validation/commands.log and bundle-manifest.json"
+    },
+    {
+      "command": "sha256sum/stat over referenced upstream evidence and reports",
+      "status": "passed",
+      "evidence": "bundle-manifest.json referencedArtifacts"
+    },
+    {
+      "command": "jq -e . evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation/completion.json reports/qd/m2-video-path-validation/audit.json",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation/json-validation.log"
+    },
+    {
+      "command": "nix develop -c just verify",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation/just-verify.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-video-path-validation/bundle-manifest.json",
+    "evidence/m2-video-path-validation/json-validation.log",
+    "evidence/m2-video-path-validation/just-verify.log",
+    "evidence/m2-video-path-validation/notes.md",
+    "evidence/m2-video-path-validation/commands.log",
+    "evidence/m2-nvenc-encode-sample/sample-av1.ivf",
+    "evidence/m2-nvenc-encode-sample/ffprobe-sample-av1.txt",
+    "reports/qd/m2-video-path-validation/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "ffprobe successfully parsed sample-av1.ivf in this node and upstream evidence records the Linux capture and NVENC encode runs."
+  },
+  "unverifiedItems": [],
+  "trackedQdFindings": [
+    {
+      "id": "eed2a910-d829-46e8-af64-837ed01ed78e",
+      "title": "m2-video-path-validation does not prove direct DMA-BUF import into NVENC",
+      "body": "The stable sample was produced through a grim PNG/RGB capture and ffmpeg/NVENC process boundary with format=nv12. File this as a gap before any downstream work claims zero-copy Linux capture-to-encode."
+    },
+    {
+      "id": "28358c32-733e-4e8e-8f6b-f5c2d4d13c99",
+      "title": "m2-video-path-validation does not prove downstream Mac decode/render",
+      "body": "sample-av1.ivf probes as AV1/IVF on Linux, but no VideoToolbox decode or Metal render has been executed yet. Downstream Mac work must validate that path before claiming it."
+    },
+    {
+      "id": "77eec369-a6fe-4261-8dcf-1fbd8a575ca7",
+      "title": "m2-video-path-validation does not measure streaming latency or performance",
+      "body": "The bundle contains a one-frame artifact and command logs only. No end-to-end streaming latency, encode latency, throughput, or CPU/GPU utilization claims are proven."
+    },
+    {
+      "id": "fcaaae62-2275-44ce-ae76-a99e45e06cb8",
+      "title": "m2-video-path-validation does not validate HDR or color-management behavior",
+      "body": "ffprobe reports yuv420p with color_range=tv and unknown color_space/color_transfer/color_primaries. HDR handling remains unvalidated."
+    },
+    {
+      "id": "a2842577-9a8b-4601-862b-0cddb671c832",
+      "title": "m2-video-path-validation does not prove no CPU readback after grim capture",
+      "body": "The encode sample explicitly materializes captured-sample.png and captured-sample.rgb before NVENC encode. No zero-copy or no-CPU-readback claim should be made for the grim-based sample."
+    }
+  ],
+  "dagChangesNeeded": []
+}

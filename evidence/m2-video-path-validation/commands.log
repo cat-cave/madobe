@@ -1,0 +1,92 @@
+# m2-video-path-validation commands
+
+Worktree:
+
+```sh
+pwd
+```
+
+Result: `/home/trevor/projects/madobe/.qd/worktrees/m2-video-path-validation`
+
+```sh
+rg --files evidence reports/qd | sort | sed -n '1,200p'
+```
+
+Result: inspected available evidence and report paths.
+
+```sh
+rg --files evidence/m2-capture-one-frame reports/qd/m2-capture-one-frame evidence/m2-nvenc-encode-sample reports/qd/m2-nvenc-encode-sample
+find evidence/m2-nvenc-encode-sample -maxdepth 2 -type f -printf '%p %s bytes\n' | sort
+find reports/qd/m2-capture-one-frame reports/qd/m2-nvenc-encode-sample -maxdepth 2 -type f -printf '%p %s bytes\n' | sort
+```
+
+Result: confirmed upstream capture and encode evidence/report files exist. `sample-av1.ivf` is present at 84 bytes.
+
+```sh
+sed -n '1,220p' evidence/m2-capture-one-frame/validation-summary.json
+sed -n '1,260p' evidence/m2-nvenc-encode-sample/validation-summary.json
+sed -n '1,220p' evidence/m2-nvenc-encode-sample/ffprobe-sample-av1.txt
+sed -n '1,240p' reports/qd/m2-nvenc-encode-sample/completion.json
+sed -n '1,220p' reports/qd/m2-capture-one-frame/completion.json
+```
+
+Result: extracted capture metadata, encode metadata, upstream verification status, and sample codec/container fields.
+
+```sh
+git status --short --branch
+command -v ffprobe && command -v jq && command -v sha256sum && command -v stat
+sed -n '1,240p' reports/qd/m2-nvenc-encode-sample/audit.json
+sed -n '1,220p' reports/qd/m2-capture-one-frame/audit.json
+```
+
+Result: branch was clean before edits; local `ffprobe`, `jq`, `sha256sum`, and `stat` were available; upstream audits had no open findings but did list residual direct-DMA-BUF/system-boundary risk for the encode node.
+
+```sh
+mkdir -p evidence/m2-video-path-validation reports/qd/m2-video-path-validation
+ffprobe -v error -show_streams -show_format -of json evidence/m2-nvenc-encode-sample/sample-av1.ivf
+```
+
+Result: `ffprobe` successfully parsed one AV1 Main video stream in IVF:
+
+```json
+{
+  "codec_name": "av1",
+  "profile": "Main",
+  "codec_tag_string": "AV01",
+  "mime_codec_string": "av01.0.00M.08",
+  "width": 160,
+  "height": 90,
+  "pix_fmt": "yuv420p",
+  "r_frame_rate": "60/1",
+  "time_base": "1/60",
+  "duration": "0.016667",
+  "nb_frames": "1",
+  "format_name": "ivf",
+  "format_long_name": "On2 IVF",
+  "size": "84",
+  "probe_score": 98
+}
+```
+
+```sh
+sha256sum evidence/m2-capture-one-frame/direct-capture-frame.json evidence/m2-capture-one-frame/validation-summary.json evidence/m2-capture-one-frame/commands.log evidence/m2-capture-one-frame/notes.md evidence/m2-nvenc-encode-sample/sample-av1.ivf evidence/m2-nvenc-encode-sample/validation-summary.json evidence/m2-nvenc-encode-sample/ffprobe-sample-av1.txt evidence/m2-nvenc-encode-sample/sample-av1-header.txt evidence/m2-nvenc-encode-sample/artifact-sha256.txt evidence/m2-nvenc-encode-sample/artifact-sizes.txt evidence/m2-nvenc-encode-sample/commands.log evidence/m2-nvenc-encode-sample/notes.md reports/qd/m2-capture-one-frame/completion.json reports/qd/m2-capture-one-frame/audit.json reports/qd/m2-nvenc-encode-sample/completion.json reports/qd/m2-nvenc-encode-sample/audit.json
+stat -c '%s %n' evidence/m2-capture-one-frame/direct-capture-frame.json evidence/m2-capture-one-frame/validation-summary.json evidence/m2-capture-one-frame/commands.log evidence/m2-capture-one-frame/notes.md evidence/m2-nvenc-encode-sample/sample-av1.ivf evidence/m2-nvenc-encode-sample/validation-summary.json evidence/m2-nvenc-encode-sample/ffprobe-sample-av1.txt evidence/m2-nvenc-encode-sample/sample-av1-header.txt evidence/m2-nvenc-encode-sample/artifact-sha256.txt evidence/m2-nvenc-encode-sample/artifact-sizes.txt evidence/m2-nvenc-encode-sample/commands.log evidence/m2-nvenc-encode-sample/notes.md reports/qd/m2-capture-one-frame/completion.json reports/qd/m2-capture-one-frame/audit.json reports/qd/m2-nvenc-encode-sample/completion.json reports/qd/m2-nvenc-encode-sample/audit.json
+sed -n '1,260p' evidence/m2-capture-one-frame/direct-capture-frame.json
+sed -n '1,120p' evidence/m2-nvenc-encode-sample/sample-av1-header.txt
+sed -n '1,80p' evidence/m2-nvenc-encode-sample/artifact-sha256.txt
+sed -n '1,80p' evidence/m2-nvenc-encode-sample/artifact-sizes.txt
+```
+
+Result: hashes and byte sizes were copied into `bundle-manifest.json`; capture metadata was cross-checked from the source JSON.
+
+```sh
+jq -e . evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation/completion.json reports/qd/m2-video-path-validation/audit.json
+```
+
+Result: passed. All new JSON files parsed successfully.
+
+```sh
+nix develop -c just verify
+```
+
+Result: passed. Verification covered formatting checks, taplo, cargo check, clippy with `-D warnings`, typos, markdownlint, line lint, nextest (`38 passed`), doc tests, Linux-only skip for Apple tests, cargo-deny, cargo-vet, cargo-audit, cargo-machete, and cargo-semver-checks.
