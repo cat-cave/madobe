@@ -1,0 +1,75 @@
+{
+  "nodeId": "m4-ci-job-timeouts",
+  "summary": "Added explicit conservative job-level timeouts to hosted Linux CI, hosted macOS CI, and nightly deep-checks without changing commands or action versions.",
+  "changedFiles": [
+    ".github/workflows/ci.yml",
+    ".github/workflows/nightly.yml",
+    "evidence/m4-ci-job-timeouts/commands.log",
+    "evidence/m4-ci-job-timeouts/notes.md",
+    "reports/qd/m4-ci-job-timeouts/audit.json",
+    "reports/qd/m4-ci-job-timeouts/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Linux CI, macOS CI, and nightly deep-checks jobs declare conservative `timeout-minutes` values.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml sets linux to 45 minutes and macos to 30 minutes; .github/workflows/nightly.yml sets deep-checks to 180 minutes."
+    },
+    {
+      "criterion": "Existing commands and action versions remain unchanged.",
+      "status": "passed",
+      "evidence": "The workflow diff adds only job-level `timeout-minutes` keys; step commands and `uses:` versions are unchanged."
+    },
+    {
+      "criterion": "Workflow syntax and repo hygiene checks pass.",
+      "status": "passed",
+      "evidence": "`nix develop -c actionlint .github/workflows/ci.yml .github/workflows/nightly.yml`, `nix develop -c just qd-reports-check`, `nix develop -c just check`, and `git diff --check` passed; results are recorded in evidence/m4-ci-job-timeouts/commands.log."
+    },
+    {
+      "criterion": "Evidence records workflow validation and qd reports.",
+      "status": "passed",
+      "evidence": "evidence/m4-ci-job-timeouts/commands.log records validation, and completion plus audit reports are under reports/qd/m4-ci-job-timeouts/."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim.",
+      "status": "passed",
+      "evidence": "evidence/m4-ci-job-timeouts/notes.md scopes the work to GitHub Actions job metadata only."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c actionlint .github/workflows/ci.yml .github/workflows/nightly.yml",
+      "status": "passed",
+      "evidence": "evidence/m4-ci-job-timeouts/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-ci-job-timeouts/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-ci-job-timeouts/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-ci-job-timeouts/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-ci-job-timeouts/commands.log",
+    "evidence/m4-ci-job-timeouts/notes.md",
+    "reports/qd/m4-ci-job-timeouts/audit.json",
+    "reports/qd/m4-ci-job-timeouts/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node changes GitHub Actions job metadata only; local workflow syntax and repository hygiene checks cover the acceptance without product runtime claims."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

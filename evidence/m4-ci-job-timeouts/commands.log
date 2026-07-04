@@ -1,0 +1,57 @@
+# m4-ci-job-timeouts command log
+
+## nix develop -c actionlint .github/workflows/ci.yml .github/workflows/nightly.yml
+
+Initial sandboxed run failed before actionlint because Nix could not write its
+fetcher cache outside the workspace:
+
+```text
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-ci-job-timeouts' is dirty
+error:
+       ... while fetching the input 'git+file:///home/trevor/projects/madobe/.qd/worktrees/m4-ci-job-timeouts'
+
+       error: executing SQLite statement 'insert or replace into Cache(domain, key, value, timestamp) values (...)': attempt to write a readonly database, attempt to write a readonly database (in '/home/trevor/.cache/nix/fetcher-cache-v4.sqlite')
+```
+
+Rerun with escalated filesystem access for Nix cache writes: passed.
+
+```text
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-ci-job-timeouts' is dirty
+madobe dev shell: use 'just --list' to see commands
+```
+
+## nix develop -c just qd-reports-check
+
+Status: passed.
+
+```text
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-ci-job-timeouts' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 64 completion report(s) and 64 audit report(s)
+```
+
+## nix develop -c just check
+
+Status: passed.
+
+```text
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-ci-job-timeouts' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+taplo fmt --check
+shfmt -d
+just qd-reports-check
+cargo check --workspace --all-targets --all-features
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+shellcheck
+typos
+markdownlint-cli2 "**/*.md"
+actionlint .github/workflows/*.yml
+just lint-lines
+Summary: 0 markdownlint error(s)
+```
+
+## git diff --check
+
+Status: passed with no output.
