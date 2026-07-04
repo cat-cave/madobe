@@ -1,0 +1,13 @@
+{
+  "id": "m3-mac-video-frame-pipeline",
+  "title": "Bridge Mac video frame queue to decode and render",
+  "kind": "feature",
+  "milestone": "M3-mac-video-endpoint",
+  "priority": "P1",
+  "estimate_points": 1,
+  "risk": "medium",
+  "owner": "trevor-mac-orchestrator",
+  "spec": "Add a local Swift client pipeline that accepts the checked encoded AV1 frame payload through the receive queue, decodes it with VideoToolbox when available, passes the decoded frame into the Metal render/timing path, and emits stage evidence for queue, decode, and render without making live network, product QUIC, cross-device presentation, or latency claims.",
+  "acceptance": "Swift client core exposes a local pipeline or test harness that exercises receive queue validation, VideoToolbox decode, and Metal render/timing with the checked AV1 sample\nXCTest coverage verifies the successful queue/decode/render path when hardware support is available and records a precise unsupported-condition result otherwise\nThe pipeline emits stable Codable evidence for queue, decode, and render stages\nEvidence is saved under evidence/m3-mac-video-frame-pipeline and reports under reports/qd/m3-mac-video-frame-pipeline\njust macos-check passes on macOS\nNo live network, product QUIC, cross-device presentation, or latency claim is made",
+  "context": "platform:macos\nowner:macos-orchestrator\narea:Swift client video pipeline\nvalidation:local-xcode\nnonclaims:live network, product QUIC, cross-device presentation, cross-device latency"
+}

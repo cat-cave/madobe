@@ -1287,6 +1287,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m3-mac-video-frame-pipeline",
+      "title": "Bridge Mac video frame queue to decode and render",
+      "kind": "feature",
+      "milestone": "M3-mac-video-endpoint",
+      "status": "claimed",
+      "priority": "P1",
+      "estimate_points": 1,
+      "risk": "medium",
+      "owner": "trevor-mac-orchestrator",
+      "branch": "spec/m3-mac-video-frame-pipeline",
+      "spec": "Add a local Swift client pipeline that accepts the checked encoded AV1 frame payload through the receive queue, decodes it with VideoToolbox when available, passes the decoded frame into the Metal render/timing path, and emits stage evidence for queue, decode, and render without making live network, product QUIC, cross-device presentation, or latency claims.",
+      "acceptance": "Swift client core exposes a local pipeline or test harness that exercises receive queue validation, VideoToolbox decode, and Metal render/timing with the checked AV1 sample\nXCTest coverage verifies the successful queue/decode/render path when hardware support is available and records a precise unsupported-condition result otherwise\nThe pipeline emits stable Codable evidence for queue, decode, and render stages\nEvidence is saved under evidence/m3-mac-video-frame-pipeline and reports under reports/qd/m3-mac-video-frame-pipeline\njust macos-check passes on macOS\nNo live network, product QUIC, cross-device presentation, or latency claim is made",
+      "validation": null,
+      "context": "platform:macos\nowner:macos-orchestrator\narea:Swift client video pipeline\nvalidation:local-xcode\nnonclaims:live network, product QUIC, cross-device presentation, cross-device latency",
+      "created_at": "2026-07-04T04:52:43.529Z",
+      "updated_at": "2026-07-04T04:53:08.861Z",
+      "claimed_at": "2026-07-04T04:53:08.861Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -1541,6 +1571,24 @@
       "to_node": "m3-cross-device-video-smoke",
       "type": "requires",
       "created_at": "2026-07-04T02:46:11.735Z"
+    },
+    {
+      "from_node": "m3-mac-video-receive-queue",
+      "to_node": "m3-mac-video-frame-pipeline",
+      "type": "requires",
+      "created_at": "2026-07-04T04:52:51.002Z"
+    },
+    {
+      "from_node": "m3-videotoolbox-decode-sample",
+      "to_node": "m3-mac-video-frame-pipeline",
+      "type": "requires",
+      "created_at": "2026-07-04T04:52:56.079Z"
+    },
+    {
+      "from_node": "m3-metal-renderer-skeleton",
+      "to_node": "m3-mac-video-frame-pipeline",
+      "type": "requires",
+      "created_at": "2026-07-04T04:52:56.093Z"
     }
   ],
   "findings": [
