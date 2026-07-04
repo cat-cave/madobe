@@ -1,0 +1,92 @@
+# m4-hyprland-model-accessor-mutation-hardening Commands
+
+Command: git status --short --branch
+Status: passed
+Notes: Confirmed worktree was on branch
+spec/m4-hyprland-model-accessor-mutation-hardening and initially clean.
+
+Command: rg -n "description|dpms_status|monitor_id|has_fullscreen|is_persistent|struct Monitor|struct Workspace|impl Monitor|impl Workspace" crates/hyprland/src/model.rs crates/hyprland -S
+Status: passed
+Notes: Located the Hyprland monitor and workspace accessor implementation and
+existing fixture coverage.
+
+Command: rg --files crates/hyprland evidence reports | rg "hyprland|m4-hyprland|model|qd"
+Status: passed
+Notes: Located adjacent Hyprland tests and previous qd evidence/report
+patterns.
+
+Command: sed -n '1,280p' crates/hyprland/src/model.rs
+Status: passed
+Notes: Inspected accessor implementation and parser entry points.
+
+Command: sed -n '1,220p' crates/hyprland/src/model/parser.rs
+Status: passed
+Notes: Confirmed parsed model construction maps JSON fields to private model
+fields before accessors expose them.
+
+Command: sed -n '1,180p' crates/hyprland/tests/fixtures.rs
+Status: passed
+Notes: Existing broad fixture tests covered some values but did not pin all
+surviving accessor mutants with focused contrasting parsed fixtures.
+
+Command: sed -n '1,220p' fixtures/hyprland/monitors.json
+Status: passed
+Notes: Existing monitor fixture uses equal descriptions and default scale 1.0,
+so focused inline fixtures were needed.
+
+Command: sed -n '1,220p' fixtures/hyprland/workspaces.json
+Status: passed
+Notes: Existing workspace fixture uses only false fullscreen and persistent
+booleans, so focused true and false cases were needed.
+
+Command: rg -n "cargo mutants|mutants|missed|replacement|model.rs" evidence reports crates -S
+Status: passed
+Notes: Reviewed existing mutation evidence style and confirmed prior baseline
+records.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Initial run after adding focused accessor tests passed: 7 unit tests,
+1 adapter binding test, 3 adapter lifecycle tests, 5 fixture tests, and doc
+tests all passed.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/model.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-hyprland-model-mutants
+Status: passed
+Notes: Initial targeted model mutation run passed. Result: 70 mutants tested in
+28s: 58 caught, 12 unviable. No missed mutants and no timeouts.
+
+Command: nix develop -c just check
+Status: failed
+Notes: Clippy rejected test-only `expect()` usage and direct f64 equality in
+the newly added unit tests. Production code was not implicated.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Final run after lint fixes passed: 7 unit tests, 1 adapter binding test,
+3 adapter lifecycle tests, 5 fixture tests, and doc tests all passed.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/model.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-hyprland-model-mutants-final
+Status: passed
+Notes: Final targeted model mutation run passed. Result: 70 mutants tested in
+31s: 58 caught, 12 unviable. No missed mutants and no timeouts.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final repository check after adding evidence/report files passed,
+including fmt, taplo, shfmt, cargo check, clippy with -D warnings, typos,
+markdownlint, actionlint, and lint-lines.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Orchestrator rerun. Hyprland package tests passed, including the 2 new
+model accessor tests.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/model.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-hyprland-model-mutants-orchestrator
+Status: passed
+Notes: Orchestrator targeted mutation rerun. Result: 70 mutants tested in 28s:
+58 caught, 12 unviable. No missed mutants and no timeouts.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Orchestrator rerun. Full repository check passed from the node
+worktree.

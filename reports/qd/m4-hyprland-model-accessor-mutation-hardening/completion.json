@@ -1,0 +1,72 @@
+{
+  "nodeId": "m4-hyprland-model-accessor-mutation-hardening",
+  "summary": "Added focused parsed-fixture tests for Hyprland monitor and workspace accessors that survived the workspace mutation baseline, then verified the targeted model mutation surface has no missed mutants.",
+  "changedFiles": [
+    "crates/hyprland/src/model.rs",
+    "evidence/m4-hyprland-model-accessor-mutation-hardening/commands.log",
+    "evidence/m4-hyprland-model-accessor-mutation-hardening/notes.md",
+    "reports/qd/m4-hyprland-model-accessor-mutation-hardening/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Evidence records the relevant workspace mutation baseline cluster for Hyprland model accessors.",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-model-accessor-mutation-hardening/notes.md records the supplied model.rs survivor cluster for monitor description, scale, dpms_status, disabled, and workspace monitor_id, has_fullscreen, and is_persistent."
+    },
+    {
+      "criterion": "Focused tests cover monitor description, scale, dpms_status, disabled, workspace monitor_id, has_fullscreen, and is_persistent behavior through parsed fixtures.",
+      "status": "passed",
+      "evidence": "crates/hyprland/src/model.rs adds parsed inline fixture tests with distinct monitor descriptions, non-default scales, opposite monitor booleans, distinct monitor IDs, and opposite workspace booleans."
+    },
+    {
+      "criterion": "Run a targeted mutation check for crates/hyprland/src/model.rs if feasible, or document residual surviving model mutants with rationale.",
+      "status": "passed",
+      "evidence": "Final targeted run: cargo mutants -p madobe-hyprland --file crates/hyprland/src/model.rs --timeout 120 --jobs 2 --all-features. Result: 70 mutants tested in 31s: 58 caught, 12 unviable; no missed mutants and no timeouts."
+    },
+    {
+      "criterion": "nix develop -c cargo test -p madobe-hyprland --all-features passes.",
+      "status": "passed",
+      "evidence": "Final run passed: 7 unit tests, 1 adapter binding test, 3 adapter lifecycle tests, 5 fixture tests, and doc tests all passed."
+    },
+    {
+      "criterion": "nix develop -c just check passes.",
+      "status": "passed",
+      "evidence": "Final run passed after test lint fixes."
+    },
+    {
+      "criterion": "Produce commands.log, notes.md, and completion.json.",
+      "status": "passed",
+      "evidence": "Created evidence/m4-hyprland-model-accessor-mutation-hardening/commands.log, evidence/m4-hyprland-model-accessor-mutation-hardening/notes.md, and reports/qd/m4-hyprland-model-accessor-mutation-hardening/completion.json."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo test -p madobe-hyprland --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-model-accessor-mutation-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/model.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-hyprland-model-mutants-final",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-model-accessor-mutation-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-model-accessor-mutation-hardening/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-hyprland-model-accessor-mutation-hardening/commands.log",
+    "evidence/m4-hyprland-model-accessor-mutation-hardening/notes.md",
+    "reports/qd/m4-hyprland-model-accessor-mutation-hardening/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node hardens parsed model accessor unit and mutation coverage only."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
