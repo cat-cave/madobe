@@ -1,3 +1,5 @@
+//! Internal SHA-256 helper shared by smoke harnesses.
+
 const INITIAL_STATE: [u32; 8] = [
     0x6a09_e667,
     0xbb67_ae85,
@@ -76,7 +78,7 @@ const ROUND_CONSTANTS: [u32; 64] = [
     0xc671_78f2,
 ];
 
-pub(super) fn digest_hex(message: &[u8]) -> String {
+pub(crate) fn digest_hex(message: &[u8]) -> String {
     hex(&digest(message))
 }
 

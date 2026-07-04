@@ -7,7 +7,6 @@
 
 mod artifacts;
 mod cli;
-mod sha256;
 mod wire;
 
 use std::error::Error;
@@ -19,7 +18,7 @@ use std::path::{Path, PathBuf};
 
 use madobe_protocol::{EncodedVideoFrameMetadata, PayloadHash, PayloadHashAlgorithm, VideoCodec};
 
-use crate::{TransportError, VideoSample};
+use crate::{TransportError, VideoSample, sha256};
 
 pub use artifacts::{SmokeArtifactSet, SmokeSide};
 pub use cli::run_cli;
@@ -56,6 +55,21 @@ impl SmokeSample {
     pub fn load(path: impl AsRef<Path>) -> Result<Self, SmokeError> {
         let path = path.as_ref();
         let payload = fs::read(path).map_err(|error| SmokeError::io("read sample", &error))?;
+        Self::from_checked_payload(payload, path)
+    }
+
+    /// Builds a checked sample from already-received IVF bytes.
+    ///
+    /// # Errors
+    ///
+    /// Returns an error when the IVF header is not the expected AV1 shape, the
+    /// payload byte count cannot fit in metadata, or the SHA-256 is not the
+    /// checked-in sample hash.
+    pub fn from_checked_payload(
+        payload: Vec<u8>,
+        source_path: impl AsRef<Path>,
+    ) -> Result<Self, SmokeError> {
+        let path = source_path.as_ref();
         let header = IvfHeader::parse(&payload)?;
         let hash = sha256::digest_hex(&payload);
 

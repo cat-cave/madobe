@@ -1,0 +1,13 @@
+{
+  "nodeId": "m4-product-quic-cross-device-smoke",
+  "side": "sender",
+  "transport": "quic",
+  "productQuic": true,
+  "clock": "sequence-only",
+  "events": [
+    { "sequence": 0, "event": "sample_loaded", "detail": "evidence/m2-nvenc-encode-sample/sample-av1.ivf" },
+    { "sequence": 1, "event": "handshake_complete", "detail": "127.0.0.1:47142" },
+    { "sequence": 2, "event": "frame_sent", "detail": "checked-in-av1-sample" },
+    { "sequence": 3, "event": "ack_received", "detail": "payload sha256 validated by receiver" }
+  ]
+}

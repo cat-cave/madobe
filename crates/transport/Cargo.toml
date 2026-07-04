@@ -1,6 +1,6 @@
 [package]
 name = "madobe-transport"
-description = "Dependency-free loopback transport skeleton for madobe"
+description = "Loopback, LAN smoke, and product QUIC transport skeletons for madobe"
 edition.workspace = true
 license.workspace = true
 rust-version.workspace = true
@@ -9,6 +9,10 @@ version.workspace = true
 [dependencies]
 madobe-protocol.workspace = true
 madobe-telemetry.workspace = true
+quinn.workspace = true
+rcgen.workspace = true
+rustls.workspace = true
+tokio.workspace = true
 
 [lints]
 workspace = true

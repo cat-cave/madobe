@@ -1,12 +1,17 @@
-#![doc = "Dependency-free transport skeletons and smoke harnesses for madobe."]
+#![doc = "Transport skeletons and smoke harnesses for madobe."]
 #![doc = ""]
 #![doc = "The core QUIC-shaped session and video lane remain in-memory only."]
 #![doc = "The `video_smoke` module adds a TCP validation harness for evidence"]
 #![doc = "collection, but it is not product QUIC and makes no capture, decode,"]
-#![doc = "render, presentation, or latency claim."]
+#![doc = "render, presentation, or latency claim. The `product_quic_smoke`"]
+#![doc = "module sends the same checked-in sample over the product QUIC stack,"]
+#![doc = "but still makes no decode, render, presentation, or latency claim."]
 #![forbid(unsafe_code)]
 
+pub mod product_quic_smoke;
 pub mod video_smoke;
+
+pub mod sha256;
 
 use std::cell::RefCell;
 use std::collections::VecDeque;
