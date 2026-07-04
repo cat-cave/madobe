@@ -1,0 +1,20 @@
+# m3-audit commands
+
+1. `qd migrate`
+   - status: passed in the m3-audit worktree.
+2. `qd method acknowledge --agent trevor-linux-orchestrator`
+   - status: passed.
+3. `qd sync --from roadmap/qd-export.json`
+   - status: passed; loaded the branch qd export into the worktree cache.
+4. Spawned three independent audit workers:
+   - protocol/transport/result compatibility -> `reports/qd/m3-audit/subreports/protocol-transport.md`
+   - Mac decode/render/Swift evidence -> `reports/qd/m3-audit/subreports/mac-evidence.md`
+   - milestone readiness and follow-up node pitch -> `reports/qd/m3-audit/subreports/milestone-readiness.md`
+5. `qd finding list --open`
+   - status: passed; no open findings.
+6. Reviewed M3 completion/audit report finding counts with `jq`.
+   - status: passed; existing M3 reports had zero embedded findings.
+7. Focused protocol/transport checks from the subreport:
+   - `nix develop -c cargo test -p madobe-protocol cross_device -- --nocapture`: passed.
+   - `nix develop -c cargo test -p madobe-transport --all-features`: passed.
+8. Final JSON, qd, and full check commands are recorded in `reports/qd/m3-audit/completion.json`.
