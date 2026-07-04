@@ -1,0 +1,80 @@
+{
+  "nodeId": "m4-dependabot-contract-check",
+  "summary": "Added a deterministic Bash Dependabot contract check for required weekly github-actions and cargo update entries rooted at `/`, exposed it through a dedicated just target, and wired it into `just check`.",
+  "changedFiles": [
+    "scripts/dependabot-contract-check.sh",
+    "justfile",
+    "evidence/m4-dependabot-contract-check/commands.log",
+    "evidence/m4-dependabot-contract-check/notes.md",
+    "reports/qd/m4-dependabot-contract-check/audit.json",
+    "reports/qd/m4-dependabot-contract-check/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Add a deterministic shell checker for .github/dependabot.yml.",
+      "status": "passed",
+      "evidence": "scripts/dependabot-contract-check.sh parses Dependabot update entries with awk and reports file-scoped errors through the same style as existing contract checks."
+    },
+    {
+      "criterion": "Require weekly github-actions and cargo update entries rooted at /.",
+      "status": "passed",
+      "evidence": "scripts/dependabot-contract-check.sh requires matching `package-ecosystem`, `directory`, and `schedule.interval` values within the same update entry; `bash scripts/dependabot-contract-check.sh` passed in evidence/m4-dependabot-contract-check/commands.log."
+    },
+    {
+      "criterion": "Wire the check into just check through a dedicated just target.",
+      "status": "passed",
+      "evidence": "justfile defines `dependabot-contract-check` and `check` invokes it with the other contract checks."
+    },
+    {
+      "criterion": "Record evidence under evidence/m4-dependabot-contract-check/.",
+      "status": "passed",
+      "evidence": "evidence/m4-dependabot-contract-check/commands.log and evidence/m4-dependabot-contract-check/notes.md"
+    },
+    {
+      "criterion": "Write qd completion and audit reports and note that macOS validation is not required.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-dependabot-contract-check/completion.json and reports/qd/m4-dependabot-contract-check/audit.json record repository metadata validation with macOS validation not required."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "bash scripts/dependabot-contract-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-dependabot-contract-check/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-dependabot-contract-check/commands.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/dependabot-contract-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-dependabot-contract-check/commands.log"
+    },
+    {
+      "command": "bash scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-dependabot-contract-check/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-dependabot-contract-check/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-dependabot-contract-check/commands.log",
+    "evidence/m4-dependabot-contract-check/notes.md",
+    "reports/qd/m4-dependabot-contract-check/audit.json",
+    "reports/qd/m4-dependabot-contract-check/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository metadata contract check only; native macOS validation is not required."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
