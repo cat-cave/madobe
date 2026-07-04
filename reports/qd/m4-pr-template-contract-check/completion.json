@@ -9,7 +9,9 @@
     "reports/qd/m4-pr-template-contract-check/completion.json",
     "reports/qd/m4-pr-template-contract-check/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "37613d09fd54683d4b6581b9c5f900bc031937e5"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "The check validates required PR template headings and fields for node id, acceptance criteria, evidence paths, qd reports, platform validation, residual risks, DAG/topology changes, Linux readiness, macOS validation, and qd evidence/report linkage.",
