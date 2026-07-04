@@ -15,3 +15,14 @@ Expected claim boundary for this first attempt:
 - It does not by itself prove product QUIC, live capture, VideoToolbox decode, Metal render, presentation, or latency.
 
 If decode/render/presentation cannot be driven from the received sample in the current app/tooling, the final result must record zero for those metrics and create qd findings or follow-up nodes instead of implying success.
+
+Live run status:
+
+- The first Mac receiver result at commit `633ae25` validated the sample on
+  the receiver path, but it was explicitly Mac-local and is not Linux-to-Mac
+  proof.
+- Linux later ran the real sender from this workstation to
+  `192.168.1.15:47044` using the checked-in AV1 sample.
+- Linux sender artifacts under `linux/` prove connection and send from the
+  Linux worktree; final completion still requires the Mac receiver result for
+  that Linux-originated send.

@@ -1,0 +1,2 @@
+madobe dev shell: use 'just --list' to see commands
+video-smoke send addr=192.168.1.15:47044 payload_bytes=84 sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875 status=sent
