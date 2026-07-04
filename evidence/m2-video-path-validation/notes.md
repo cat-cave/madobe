@@ -28,6 +28,27 @@ This makes the artifact stable for a later non-Linux decoder consumer, but it do
 The same `ffprobe` metadata records `pixelFormat=yuv420p`, `colorRange=tv`, and unknown `colorSpace`,
 `colorTransfer`, and `colorPrimaries`. The sample is therefore not HDR or color-management evidence.
 
+## Downstream Mac Decode/Render Boundary
+
+The current positive claim is intentionally narrow: the Linux-produced `sample-av1.ivf` probes as AV1 in an IVF
+container and is decoder-consumable sample evidence.
+
+This bundle does not validate:
+
+- VideoToolbox decode
+- Metal render
+- Mac presentation/display
+- Mac frame timing
+- cross-device render behavior
+
+`bundle-manifest.json` records those gaps as machine-checkable false claims under
+`evidenceBoundary.machineCheckableClaims` and lists the same boundary under
+`evidenceBoundary.downstreamMacDecodeRenderBoundary`. Downstream consumers must not treat the M2 bundle as proof that
+the sample has decoded through VideoToolbox, rendered through Metal, presented on a Mac display, met Mac frame-timing
+expectations, or behaved correctly across devices.
+
+Positive proof remains future Mac validation work, likely via `m3-videotoolbox-decode-sample`.
+
 ## Explicit Non-Claims
 
 The current M2 encode sample path is:
@@ -47,6 +68,9 @@ This bundle does not prove:
 - zero-copy Linux capture-to-encode
 - VideoToolbox decode
 - Metal render
+- Mac presentation/display
+- Mac frame timing
+- cross-device render behavior
 - HDR handling
 - color-management behavior
 - wide-gamut preservation
@@ -77,6 +101,10 @@ The bundle does not measure or validate:
 
 A future direct DMA-BUF proof must import a capture DMA-BUF into NVENC or NVIDIA SDK/driver import APIs and record the
 import and synchronization evidence. That proof is future work and is not present in this bundle.
+
+Future Mac decode/render validation must execute VideoToolbox decode and record downstream render/presentation evidence
+before this sample can support Mac decode/render claims. That validation is future work and is not present in this
+bundle.
 
 A future HDR/color proof must use appropriate source material, tagged color metadata, and validation for HDR handling,
 color-management behavior, wide-gamut preservation, and end-to-end color accuracy. That proof is future work and is not

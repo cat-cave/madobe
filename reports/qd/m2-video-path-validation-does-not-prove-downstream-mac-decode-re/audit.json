@@ -1,0 +1,60 @@
+{
+  "nodeId": "m2-video-path-validation-does-not-prove-downstream-mac-decode-re",
+  "status": "passed",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Finding is addressed and verified.",
+      "status": "passed",
+      "evidence": "The validation bundle now records machine-checkable false claims for downstream Mac decode/render, VideoToolbox decode, Metal render, Mac presentation/display, Mac frame timing, and cross-device render behavior."
+    },
+    {
+      "criterion": "The current positive claim remains narrow.",
+      "status": "passed",
+      "evidence": "evidenceBoundary.downstreamMacDecodeRenderBoundary states that the Linux sample is decoder-consumable AV1/IVF sample evidence only."
+    },
+    {
+      "criterion": "The repo does not treat the M2 bundle as Mac decode/render proof.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json, video-path notes, and encode-sample notes all state that VideoToolbox decode, Metal render, Mac presentation/display, Mac frame timing, and cross-device render behavior are not validated."
+    },
+    {
+      "criterion": "Future Mac validation is separated from this evidence bundle.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json and notes.md identify future Mac validation, likely via m3-videotoolbox-decode-sample, as the positive proof path."
+    },
+    {
+      "criterion": "Focused checks passed.",
+      "status": "passed",
+      "evidence": "jq parsing, focused jq predicate, focused rg wording check, git diff --check, just lint-lines, qd gate --phase ci, and nix develop -c just verify passed."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "evidenceReportReviewed": true,
+    "bundleManifestReviewed": true,
+    "encodeSampleNotesReviewed": true,
+    "videoPathValidationNotesReviewed": true,
+    "jsonValidated": true,
+    "lineLintRun": true,
+    "qdGateCiRun": true,
+    "justVerifyRun": true,
+    "fullVerifyRequired": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This audit-fix verifies evidence boundaries and non-claims only. It does not implement or validate VideoToolbox decode, Metal render, Mac presentation/display, Mac frame timing, or cross-device render behavior."
+  },
+  "resolvedFindings": [
+    {
+      "finding": "m2-video-path-validation does not prove downstream Mac decode/render",
+      "resolution": "Resolved by making downstream Mac decode/render non-claims machine-checkable and documenting the future Mac validation path."
+    }
+  ],
+  "findings": [],
+  "residualRisks": [
+    "VideoToolbox decode, Metal render, Mac presentation/display, Mac frame timing, and cross-device render behavior remain future Mac validation work."
+  ]
+}
