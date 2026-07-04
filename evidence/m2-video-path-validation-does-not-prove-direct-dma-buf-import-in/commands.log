@@ -1,0 +1,120 @@
+Commands recorded for node `m2-video-path-validation-does-not-prove-direct-dma-buf-import-in`.
+
+Date: July 3, 2026
+
+1. Inspect scoped evidence and related reports
+
+Command:
+
+```text
+rg --files evidence reports .qd 2>/dev/null | rg 'm2-video-path-validation|m2-nvenc-encode-sample|reports/qd' | sort
+sed -n '1,220p' evidence/m2-video-path-validation/bundle-manifest.json
+sed -n '1,240p' evidence/m2-video-path-validation/notes.md
+sed -n '1,260p' evidence/m2-nvenc-encode-sample/notes.md
+sed -n '1,220p' evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/report.md
+sed -n '1,220p' reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/completion.json
+sed -n '180,280p' evidence/m2-video-path-validation/bundle-manifest.json
+sed -n '1,220p' evidence/m2-nvenc-encode-sample/validation-summary.json
+sed -n '1,180p' reports/qd/m2-video-path-validation/completion.json
+git status --short
+```
+
+Result: passed. Confirmed this node's target evidence/report directories were absent, the existing sample is a
+grim/PNG/RGB/ffmpeg path, and the working tree had no pre-existing changes.
+
+2. Create node output directories
+
+Command:
+
+```text
+mkdir -p evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in
+```
+
+Result: passed.
+
+3. JSON parser validation
+
+Command:
+
+```text
+jq -e . evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json
+```
+
+Result: passed. Output recorded in
+`evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/json-validation.log`.
+
+4. Machine-checkable boundary validation
+
+Command:
+
+```text
+jq -e '
+  .evidenceBoundary.currentM2SamplePath == [
+    "grim materialized capture",
+    "captured-sample.png diagnostic artifact",
+    "captured-sample.rgb raw diagnostic artifact",
+    "ffmpeg/NVENC process boundary",
+    "format=nv12 filter before av1_nvenc"
+  ]
+  and .evidenceBoundary.machineCheckableClaims.directCaptureDmaBufImportIntoNvencProven == false
+  and .evidenceBoundary.machineCheckableClaims.zeroCopyCaptureToEncodeProven == false
+  and .evidenceBoundary.machineCheckableClaims.noCpuReadbackAfterGrimCaptureProven == false
+  and .evidenceBoundary.machineCheckableClaims.nvencEncoderInvocationProven == true
+  and .evidenceBoundary.machineCheckableClaims.decoderConsumableAv1IvfSampleProven == true
+' evidence/m2-video-path-validation/bundle-manifest.json
+```
+
+Result: passed. Output recorded in
+`evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/json-validation.log`.
+
+5. Focused wording check
+
+Command:
+
+```text
+rg -n "direct capture DMA-BUF import into NVENC|zero-copy Linux capture-to-encode|format=nv12|captured-sample\.png|captured-sample\.rgb|future work" evidence/m2-video-path-validation/bundle-manifest.json evidence/m2-video-path-validation/notes.md evidence/m2-nvenc-encode-sample/notes.md evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/report.md
+```
+
+Result: passed. Output confirmed the boundary and future-work wording in scoped files.
+
+6. Whitespace sanity check
+
+Command:
+
+```text
+git diff --check
+```
+
+Result: passed. No whitespace errors were reported.
+
+7. Lightweight repository line-count check
+
+Command:
+
+```text
+just lint-lines
+```
+
+Result: passed. No file exceeded the repository line-count limit.
+
+8. qd CI gate
+
+Command:
+
+```text
+qd gate m2-video-path-validation-does-not-prove-direct-dma-buf-import-in --phase ci
+```
+
+Result: passed. Output recorded in
+`evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/qd-gate-ci.json`.
+
+9. Full Linux verification
+
+Command:
+
+```text
+nix develop -c just verify
+```
+
+Result: passed. Output recorded in
+`evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/just-verify.log`.

@@ -107,6 +107,29 @@
       "videoFilter": "format=nv12"
     }
   },
+  "evidenceBoundary": {
+    "currentM2SamplePath": [
+      "grim materialized capture",
+      "captured-sample.png diagnostic artifact",
+      "captured-sample.rgb raw diagnostic artifact",
+      "ffmpeg/NVENC process boundary",
+      "format=nv12 filter before av1_nvenc"
+    ],
+    "machineCheckableClaims": {
+      "directCaptureDmaBufImportIntoNvencProven": false,
+      "zeroCopyCaptureToEncodeProven": false,
+      "noCpuReadbackAfterGrimCaptureProven": false,
+      "nvencEncoderInvocationProven": true,
+      "decoderConsumableAv1IvfSampleProven": true
+    },
+    "nvencInputBoundary": "ffmpeg process invocation consumes a materialized rgb24 raw frame and applies format=nv12",
+    "notEvidenceFor": [
+      "direct capture DMA-BUF import into NVENC",
+      "zero-copy Linux capture-to-encode",
+      "no-readback Linux capture-to-encode"
+    ],
+    "futureWorkForDirectDmaBufProof": "A future proof must pass a capture DMA-BUF directly into NVENC or NVIDIA SDK/driver import APIs and record import/synchronization evidence. That proof is not present in this bundle."
+  },
   "referencedArtifacts": [
     {
       "path": "evidence/m2-capture-one-frame/direct-capture-frame.json",
@@ -207,7 +230,8 @@
   ],
   "explicitNonClaims": [
     "This bundle does not prove end-to-end streaming latency.",
-    "This bundle does not prove direct DMA-BUF import into NVENC.",
+    "This bundle does not prove direct capture DMA-BUF import into NVENC.",
+    "This bundle does not prove zero-copy Linux capture-to-encode.",
     "This bundle does not prove VideoToolbox decode.",
     "This bundle does not prove Metal render.",
     "This bundle does not prove HDR handling.",
@@ -217,7 +241,7 @@
   "knownGapsForQdFindings": [
     {
       "title": "m2-video-path-validation does not prove direct DMA-BUF import into NVENC",
-      "body": "The stable sample was produced through a grim PNG/RGB capture and ffmpeg/NVENC process boundary with format=nv12. File this as a gap before any downstream work claims zero-copy Linux capture-to-encode."
+      "body": "The stable sample was produced through a grim materialized capture, captured-sample.png/captured-sample.rgb diagnostic artifacts, and an ffmpeg/NVENC process boundary with format=nv12. This is not direct capture DMA-BUF import into NVENC, zero-copy, or no-readback evidence. A direct DMA-BUF import proof is future work and is not present in this bundle."
     },
     {
       "title": "m2-video-path-validation does not prove downstream Mac decode/render",

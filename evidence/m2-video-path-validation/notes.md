@@ -27,16 +27,30 @@ This makes the artifact stable for a later non-Linux decoder consumer, but it do
 
 ## Explicit Non-Claims
 
+The current M2 encode sample path is:
+
+1. `grim` materialized capture.
+2. `captured-sample.png` diagnostic artifact.
+3. `captured-sample.rgb` raw diagnostic artifact.
+4. ffmpeg/NVENC process boundary with a `format=nv12` filter before `av1_nvenc`.
+
+That path proves that the resulting tiny AV1/IVF sample is decoder-consumable evidence. It is not evidence for direct
+capture DMA-BUF import into NVENC, zero-copy Linux capture-to-encode, or no-readback Linux capture-to-encode.
+
 This bundle does not prove:
 
 - end-to-end streaming latency
-- direct DMA-BUF import into NVENC
+- direct capture DMA-BUF import into NVENC
+- zero-copy Linux capture-to-encode
 - VideoToolbox decode
 - Metal render
 - HDR handling
 - no CPU readback after the grim-based encode sample
 
 The upstream NVENC sample uses a grim PNG/RGB capture path and an ffmpeg/NVENC process boundary. The low-latency encoder tune is recorded only as a setting; no latency or throughput result is claimed.
+
+A future direct DMA-BUF proof must import a capture DMA-BUF into NVENC or NVIDIA SDK/driver import APIs and record the
+import and synchronization evidence. That proof is future work and is not present in this bundle.
 
 ## Proposed qd Findings
 

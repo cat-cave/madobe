@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "blocking": [],
+  "runningAudits": [],
+  "blockedDependencies": [],
+  "explanations": [],
+  "structuralOk": true,
+  "phase": "ci",
+  "policy": {
+    "ci": {
+      "ok": true,
+      "phase": "ci",
+      "node_id": "m2-video-path-validation-does-not-prove-direct-dma-buf-import-in",
+      "violations": []
+    },
+    "merge": {
+      "ok": false,
+      "phase": "merge",
+      "node_id": "m2-video-path-validation-does-not-prove-direct-dma-buf-import-in",
+      "violations": [
+        {
+          "code": "ciRequired",
+          "phase": "merge",
+          "node_id": "m2-video-path-validation-does-not-prove-direct-dma-buf-import-in",
+          "message": "Node m2-video-path-validation-does-not-prove-direct-dma-buf-import-in needs a latest passed CI run before merge.",
+          "evidence": {
+            "latestCi": null
+          }
+        }
+      ]
+    },
+    "selected": {
+      "ok": true,
+      "phase": "ci",
+      "node_id": "m2-video-path-validation-does-not-prove-direct-dma-buf-import-in",
+      "violations": []
+    }
+  },
+  "checks": {
+    "latestCheck": null,
+    "latestCi": null,
+    "undisposedP2P3": []
+  },
+  "next": "qd ci run m2-video-path-validation-does-not-prove-direct-dma-buf-import-in"
+}
