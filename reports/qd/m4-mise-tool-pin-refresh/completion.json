@@ -11,7 +11,8 @@
     "reports/qd/m4-mise-tool-pin-refresh/completion.json"
   ],
   "commits": [
-    "0ccb33b332dce83ac7997060d297442a44762539"
+    "0ccb33b332dce83ac7997060d297442a44762539",
+    "bb952edd4af9fefd7b147c851758cd328bd25bd1"
   ],
   "acceptanceEvidence": [
     {
