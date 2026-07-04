@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-direct-capture-helper-reproducibility",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Evidence records the M2 audit residual risk and the exact direct-capture helper reproducibility boundary.",
+      "status": "passed",
+      "evidence": "docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md and evidence/m4-direct-capture-helper-reproducibility/notes.md"
+    },
+    {
+      "criterion": "The Linux dev environment exposes or documents the required Wayland/GBM build tools for the helper path.",
+      "status": "passed",
+      "evidence": "nix/flake.nix and nix/direct-capture-preflight.sh"
+    },
+    {
+      "criterion": "A bounded build/preflight command proves the helper path is reproducible.",
+      "status": "passed",
+      "evidence": "Orchestrator rerun: nix develop -c just direct-capture-preflight"
+    },
+    {
+      "criterion": "No product capture, portal, capture-to-NVENC, zero-copy, cross-device, decode, render, presentation, or latency claim is made.",
+      "status": "passed",
+      "evidence": "The preflight compiles and links symbols only; docs and notes explicitly disclaim runtime/product claims."
+    },
+    {
+      "criterion": "`nix flake check` and `nix develop -c just check` pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-helper-reproducibility/commands.log"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "The node validates repo-supported build/preflight reproducibility only; live capture remains separate hardware evidence."
+  },
+  "findings": []
+}

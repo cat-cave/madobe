@@ -16,13 +16,19 @@ let
     coreutils
     findutils
     git
+    libdrm
+    libgbm
     gnugrep
     gnused
     just
     llvmPackages.llvm
     nixpkgs-fmt
+    pkg-config
     shellcheck
     shfmt
+    wayland
+    wayland-protocols
+    wayland-scanner
   ];
   optionalTools =
     optionalPackage "actionlint"
