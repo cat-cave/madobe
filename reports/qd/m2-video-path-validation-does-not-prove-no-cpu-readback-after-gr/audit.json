@@ -1,0 +1,52 @@
+{
+  "nodeId": "m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr",
+  "status": "passed",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Repo does not treat the grim-based encode sample as no-CPU-readback evidence.",
+      "status": "passed",
+      "evidence": "m2-video-path-validation notes and bundle-manifest explicitly record the no-CPU-readback-after-grim non-claim; m2-nvenc-encode-sample notes now state that the materialized PNG/RGB artifacts do not prove no CPU readback."
+    },
+    {
+      "criterion": "Repo does not treat the grim-based encode sample as zero-copy evidence.",
+      "status": "passed",
+      "evidence": "m2-video-path-validation bundle-manifest records direct DMA-BUF import as an unproven non-claim and its known finding says no zero-copy claim should be made; m2-nvenc-encode-sample notes now state that the materialized PNG/RGB artifacts do not prove zero-copy capture or direct capture-to-NVENC DMA-BUF transfer."
+    },
+    {
+      "criterion": "Node-specific evidence and qd reports are present.",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/report.md plus completion.json and audit.json under reports/qd."
+    },
+    {
+      "criterion": "Focused checks were run.",
+      "status": "passed",
+      "evidence": "rg and jq checks passed; nix develop -c just verify also passed."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true,
+    "evidenceReportReviewed": true,
+    "bundleManifestReviewed": true,
+    "encodeSampleNotesReviewed": true,
+    "videoPathValidationNotesReviewed": true,
+    "jsonValidated": true,
+    "justVerifyRun": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node verifies evidence wording and classification only; it does not attempt live capture or no-CPU-readback validation."
+  },
+  "resolvedFindings": [
+    {
+      "finding": "m2-video-path-validation does not prove no CPU readback after grim capture",
+      "resolution": "Verified as an explicit non-claim, not a positive evidence claim. Added narrow encode-sample note clarification so both upstream and bundled evidence directories state the materialized diagnostic sample limitation."
+    }
+  ],
+  "findings": [],
+  "residualRisks": [
+    "This node verifies wording and evidence classification only. It does not attempt to prove no CPU readback, zero-copy capture, or direct capture-to-NVENC DMA-BUF transfer."
+  ]
+}

@@ -14,6 +14,10 @@ The encoded artifact is intentionally tiny: 84 bytes. `ffprobe-sample-av1.txt` i
 IVF container, `sample-av1-header.txt` starts with `DKIF` and codec tag `AV01`, and `artifact-sha256.txt` records the
 artifact hash.
 
+The grim PNG and raw RGB artifacts (`captured-sample.png` and `captured-sample.rgb`) are materialized diagnostic
+sample inputs for this encode proof. They do not prove no CPU readback, zero-copy capture, or direct capture-to-NVENC
+DMA-BUF transfer.
+
 ## Boundary
 
 No direct NVIDIA SDK or driver FFI was introduced. The unsafe-prone host boundary is isolated as
