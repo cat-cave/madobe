@@ -1,0 +1,84 @@
+{
+  "nodeId": "m4-contributing-platform-command-split",
+  "summary": "Updated contributor onboarding so `just` is the shared command surface, Linux readiness is documented through Nix, and macOS readiness is documented through native Xcode, Mise, and Homebrew commands without requiring Nix.",
+  "changedFiles": [
+    "CONTRIBUTING.md",
+    "evidence/m4-contributing-platform-command-split/commands.log",
+    "evidence/m4-contributing-platform-command-split/notes.md",
+    "reports/qd/m4-contributing-platform-command-split/audit.json",
+    "reports/qd/m4-contributing-platform-command-split/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "`CONTRIBUTING.md` describes `just` as the shared command surface.",
+      "status": "passed",
+      "evidence": "`CONTRIBUTING.md` now opens onboarding by naming `just` as the shared command surface."
+    },
+    {
+      "criterion": "`CONTRIBUTING.md` documents Linux readiness through `nix develop` and `nix develop -c just ci-local`.",
+      "status": "passed",
+      "evidence": "The Linux Readiness section documents entering `nix develop` and running `nix develop -c just ci-local` for local PR readiness."
+    },
+    {
+      "criterion": "`CONTRIBUTING.md` documents macOS readiness through `just macos-bootstrap` and `just macos-check` without requiring Nix.",
+      "status": "passed",
+      "evidence": "The macOS Readiness section documents `just macos-bootstrap`, `just macos-check`, and states that Nix is not required for macOS onboarding or readiness checks."
+    },
+    {
+      "criterion": "Existing generated-file and Rust crate policy remains intact.",
+      "status": "passed",
+      "evidence": "The generated-file and new Rust crate policy statements remain present in `CONTRIBUTING.md`."
+    },
+    {
+      "criterion": "Markdown and repo hygiene checks pass.",
+      "status": "passed",
+      "evidence": "`nix develop -c markdownlint-cli2 CONTRIBUTING.md`, `nix develop -c just qd-reports-check`, `nix develop -c just check`, and `git diff --check` passed."
+    },
+    {
+      "criterion": "Evidence records validation and qd reports.",
+      "status": "passed",
+      "evidence": "Evidence notes, command log, completion report, and audit report are present under the node evidence and reports directories."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim.",
+      "status": "passed",
+      "evidence": "The change is limited to contributor onboarding and qd evidence/report files."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c markdownlint-cli2 CONTRIBUTING.md",
+      "status": "passed",
+      "evidence": "evidence/m4-contributing-platform-command-split/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-contributing-platform-command-split/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-contributing-platform-command-split/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-contributing-platform-command-split/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-contributing-platform-command-split/commands.log",
+    "evidence/m4-contributing-platform-command-split/notes.md",
+    "reports/qd/m4-contributing-platform-command-split/audit.json",
+    "reports/qd/m4-contributing-platform-command-split/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node changes contributor onboarding documentation and qd records only; markdown and repository hygiene gates cover the scoped change."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

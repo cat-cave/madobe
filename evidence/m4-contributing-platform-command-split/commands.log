@@ -1,0 +1,42 @@
+Command: nix develop -c markdownlint-cli2 CONTRIBUTING.md
+Status: passed
+Output:
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-contributing-platform-command-split' is dirty
+madobe dev shell: use 'just --list' to see commands
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: CONTRIBUTING.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 95 file(s)
+Summary: 0 error(s)
+Notes: CONTRIBUTING.md passed focused Markdown linting.
+
+Command: nix develop -c just qd-reports-check
+Status: passed
+Output:
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-contributing-platform-command-split' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 65 completion report(s) and 65 audit report(s)
+Notes: The qd report shape check passed with this node's completion and audit
+reports present.
+
+Command: nix develop -c just check
+Status: passed
+Output summary:
+- cargo fmt --all -- --check
+- taplo fmt --check
+- shfmt diff over shell scripts
+- just qd-reports-check
+- cargo check --workspace --all-targets --all-features
+- cargo clippy --workspace --all-targets --all-features -- -D warnings
+- shellcheck over tracked shell scripts
+- typos
+- markdownlint-cli2 "**/*.md"
+- actionlint .github/workflows/*.yml
+- just lint-lines
+Notes: The repository hygiene gate passed. Markdownlint reported 95 files and
+0 errors; qd report validation counted 65 completion reports and 65 audit
+reports.
+
+Command: git diff --check
+Status: passed
+Notes: No whitespace errors reported.

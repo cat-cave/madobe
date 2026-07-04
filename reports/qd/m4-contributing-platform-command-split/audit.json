@@ -1,0 +1,51 @@
+{
+  "nodeId": "m4-contributing-platform-command-split",
+  "acceptanceReviewed": [
+    {
+      "criterion": "`CONTRIBUTING.md` describes `just` as the shared command surface.",
+      "status": "passed",
+      "evidence": "`CONTRIBUTING.md` says to use `just` as the shared command surface."
+    },
+    {
+      "criterion": "`CONTRIBUTING.md` documents Linux readiness through `nix develop` and `nix develop -c just ci-local`.",
+      "status": "passed",
+      "evidence": "The Linux Readiness section includes both commands."
+    },
+    {
+      "criterion": "`CONTRIBUTING.md` documents macOS readiness through `just macos-bootstrap` and `just macos-check` without requiring Nix.",
+      "status": "passed",
+      "evidence": "The macOS Readiness section includes both commands and says Nix is not required for macOS onboarding or readiness checks."
+    },
+    {
+      "criterion": "Existing generated-file and Rust crate policy remains intact.",
+      "status": "passed",
+      "evidence": "The generated-file and new Rust crate policy statements remain present."
+    },
+    {
+      "criterion": "Markdown and repo hygiene checks pass.",
+      "status": "passed",
+      "evidence": "`nix develop -c markdownlint-cli2 CONTRIBUTING.md`, `nix develop -c just qd-reports-check`, `nix develop -c just check`, and `git diff --check` passed."
+    },
+    {
+      "criterion": "Evidence records validation and qd reports.",
+      "status": "passed",
+      "evidence": "The node includes evidence notes, command log, completion report, and audit report."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim.",
+      "status": "passed",
+      "evidence": "Diff scope is documentation and qd records only."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "No live product validation is required for this contributor documentation node."
+  },
+  "findings": []
+}
