@@ -112,3 +112,38 @@ Sender result:
 ```text
 video-smoke send addr=192.168.1.15:47044 payload_bytes=84 sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875 status=sent
 ```
+
+## Mac receiver result for Linux-originated send
+
+After the Linux sender evidence above, Mac receiver artifacts were recorded under
+`macos/linux-attempt/`.
+
+Receiver command:
+
+```sh
+cargo run -q -p madobectl -- \
+  video-smoke receive \
+  --bind 0.0.0.0:47044 \
+  --evidence-dir evidence/m3-cross-device-video-smoke/macos/linux-attempt
+```
+
+Captured logs:
+
+- `macos/mac-client-linux-attempt.log`
+- `macos/linux-attempt/receiver-listening.log`
+- `macos/linux-attempt/receiver.log`
+- `macos/linux-attempt/receiver-timeline.json`
+- `macos/linux-attempt/result.json`
+- `macos/linux-attempt/notes.md`
+
+Receiver result:
+
+```text
+video-smoke receive bind=0.0.0.0:47044 peer=192.168.1.23:46968 payload_bytes=84 sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875 status=passed
+```
+
+Validation boundary:
+
+- The receiver peer `192.168.1.23` is distinct from the Mac receiver address `192.168.1.15`.
+- This proves TCP LAN sample transfer and receiver-side sample validation for this attempt.
+- It still does not claim product QUIC, VideoToolbox decode, Metal render, presentation, or latency.

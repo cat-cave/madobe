@@ -26,3 +26,9 @@ Live run status:
 - Linux sender artifacts under `linux/` prove connection and send from the
   Linux worktree; final completion still requires the Mac receiver result for
   that Linux-originated send.
+- Mac receiver artifacts under `macos/linux-attempt/` record the matching
+  receiver result for the Linux-originated send. The receiver observed peer
+  `192.168.1.23:46968`, payload bytes `84`, and the expected SHA-256.
+- The completed live attempt proves TCP LAN sample transfer and byte/hash
+  validation only. It does not prove product QUIC, VideoToolbox decode, Metal
+  render, presentation, or latency.
