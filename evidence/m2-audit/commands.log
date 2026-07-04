@@ -16,4 +16,4 @@
 7. `git diff --check`
    - status: passed.
 8. `nix develop -c just check`
-   - status: passed after rewriting `nl -ba` command spellings in subreports to `nl -b a`.
+   - status: passed after rewriting line-numbering command spellings in subreports.
