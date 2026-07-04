@@ -1,0 +1,103 @@
+{
+  "nodeId": "m4-compositor-identity-mutation-hardening",
+  "summary": "Added focused compositor unit tests that harden identity as_str accessors and OutputStatus::workspace against the supplied mutation baseline survivor cluster.",
+  "changedFiles": [
+    "crates/compositor/src/ids.rs",
+    "crates/compositor/src/status.rs",
+    "evidence/m4-compositor-identity-mutation-hardening/commands.log",
+    "evidence/m4-compositor-identity-mutation-hardening/notes.md",
+    "reports/qd/m4-compositor-identity-mutation-hardening/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Evidence records the relevant workspace mutation baseline cluster for compositor identity/status accessors.",
+      "status": "passed",
+      "evidence": "evidence/m4-compositor-identity-mutation-hardening/notes.md records the ids.rs as_str survivors and status.rs workspace survivor supplied by the node."
+    },
+    {
+      "criterion": "Focused tests cover OutputId, WorkspaceId, SessionId, and OutputStatus::workspace behavior.",
+      "status": "passed",
+      "evidence": "crates/compositor/src/ids.rs and crates/compositor/src/status.rs contain focused unit tests for the accessors."
+    },
+    {
+      "criterion": "nix develop -c cargo test -p madobe-compositor --all-features passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-compositor-identity-mutation-hardening/commands.log"
+    },
+    {
+      "criterion": "nix develop -c just check passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-compositor-identity-mutation-hardening/commands.log"
+    },
+    {
+      "criterion": "Targeted mutation checks are clean for compositor identity and status accessors.",
+      "status": "passed",
+      "evidence": "Orchestrator targeted runs passed: ids.rs 12 mutants tested with 7 caught and 5 unviable; status.rs 19 mutants tested with 3 caught and 16 unviable. No missed mutants and no timeouts."
+    },
+    {
+      "criterion": "Produce commands.log, notes.md, and completion.json.",
+      "status": "passed",
+      "evidence": "Created the requested files under evidence/m4-compositor-identity-mutation-hardening and reports/qd/m4-compositor-identity-mutation-hardening."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo fmt --check",
+      "status": "failed",
+      "evidence": "Rustfmt reported formatting changes in new tests before cargo fmt was run."
+    },
+    {
+      "command": "nix develop -c cargo fmt",
+      "status": "passed",
+      "evidence": "Formatted new tests."
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-compositor --all-features",
+      "status": "passed",
+      "evidence": "Focused compositor tests passed."
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "failed",
+      "evidence": "Initial run failed on clippy expect_used in the new tests."
+    },
+    {
+      "command": "nix develop -c cargo fmt --check",
+      "status": "failed",
+      "evidence": "Rustfmt reported wrapping changes after clippy cleanup."
+    },
+    {
+      "command": "nix develop -c cargo fmt",
+      "status": "passed",
+      "evidence": "Formatted clippy cleanup."
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-compositor --all-features",
+      "status": "passed",
+      "evidence": "Final compositor package test run passed."
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "Final repository check passed."
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "Reran after adding evidence and completion files; markdownlint and lint-lines passed."
+    }
+  ],
+  "evidence": [
+    "evidence/m4-compositor-identity-mutation-hardening/commands.log",
+    "evidence/m4-compositor-identity-mutation-hardening/notes.md",
+    "reports/qd/m4-compositor-identity-mutation-hardening/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node only adds focused unit tests for pure compositor accessor behavior."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
