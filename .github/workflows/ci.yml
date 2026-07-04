@@ -35,5 +35,5 @@ jobs:
       - name: Remove hosted CI runner aws/tap
         run: |
           HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew untap aws/tap || true
-      - run: brew install swiftformat swiftlint
+      - run: brew install jq swiftformat swiftlint
       - run: just macos-check
