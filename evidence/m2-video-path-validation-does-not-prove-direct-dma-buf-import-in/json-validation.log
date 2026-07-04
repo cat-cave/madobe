@@ -1,0 +1,53 @@
+JSON validation for node `m2-video-path-validation-does-not-prove-direct-dma-buf-import-in`.
+
+Date: July 3, 2026
+
+Command:
+
+```text
+jq -e . evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json
+```
+
+Result: passed. Both files parsed successfully as JSON.
+
+Command:
+
+```text
+jq -e type evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json
+```
+
+Output:
+
+```text
+"object"
+"object"
+```
+
+Result: passed. Both JSON roots are objects.
+
+Command:
+
+```text
+jq -e '
+  .evidenceBoundary.currentM2SamplePath == [
+    "grim materialized capture",
+    "captured-sample.png diagnostic artifact",
+    "captured-sample.rgb raw diagnostic artifact",
+    "ffmpeg/NVENC process boundary",
+    "format=nv12 filter before av1_nvenc"
+  ]
+  and .evidenceBoundary.machineCheckableClaims.directCaptureDmaBufImportIntoNvencProven == false
+  and .evidenceBoundary.machineCheckableClaims.zeroCopyCaptureToEncodeProven == false
+  and .evidenceBoundary.machineCheckableClaims.noCpuReadbackAfterGrimCaptureProven == false
+  and .evidenceBoundary.machineCheckableClaims.nvencEncoderInvocationProven == true
+  and .evidenceBoundary.machineCheckableClaims.decoderConsumableAv1IvfSampleProven == true
+' evidence/m2-video-path-validation/bundle-manifest.json
+```
+
+Output:
+
+```text
+true
+```
+
+Result: passed. The direct-DMA-BUF-import, zero-copy, and no-readback non-claims are machine-checkable.

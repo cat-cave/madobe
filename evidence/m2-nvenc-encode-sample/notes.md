@@ -18,6 +18,9 @@ The grim PNG and raw RGB artifacts (`captured-sample.png` and `captured-sample.r
 sample inputs for this encode proof. They do not prove no CPU readback, zero-copy capture, or direct capture-to-NVENC
 DMA-BUF transfer.
 
+The NVENC proof starts after those diagnostic artifacts are materialized: ffmpeg consumes a raw `rgb24` frame and
+applies `format=nv12` before `av1_nvenc`. This is not direct capture DMA-BUF import into NVENC.
+
 ## Boundary
 
 No direct NVIDIA SDK or driver FFI was introduced. The unsafe-prone host boundary is isolated as

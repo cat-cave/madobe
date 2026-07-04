@@ -1,0 +1,106 @@
+{
+  "nodeId": "m2-video-path-validation-does-not-prove-direct-dma-buf-import-in",
+  "status": "passed",
+  "summary": "Made the M2 video path evidence boundary explicit and machine-checkable. The validation bundle now records that the current sample path is grim materialized capture -> captured-sample.png -> captured-sample.rgb -> ffmpeg/NVENC process boundary with format=nv12, and that it does not prove direct capture DMA-BUF import into NVENC, zero-copy capture-to-encode, or no-readback capture-to-encode. Future direct DMA-BUF import proof is documented as future work, not completed evidence.",
+  "changedFiles": [
+    "evidence/m2-video-path-validation/bundle-manifest.json",
+    "evidence/m2-video-path-validation/notes.md",
+    "evidence/m2-nvenc-encode-sample/notes.md",
+    "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/commands.log",
+    "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/report.md",
+    "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/json-validation.log",
+    "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/qd-gate-ci.json",
+    "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/just-verify.log",
+    "reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json",
+    "reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "The evidence boundary is explicit and machine-checkable.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json includes evidenceBoundary.currentM2SamplePath and evidenceBoundary.machineCheckableClaims with directCaptureDmaBufImportIntoNvencProven=false, zeroCopyCaptureToEncodeProven=false, and noCpuReadbackAfterGrimCaptureProven=false."
+    },
+    {
+      "criterion": "The current M2 sample path is documented as grim materialized capture -> raw/PNG diagnostic artifact -> ffmpeg/NVENC process boundary with format=nv12.",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation/notes.md and evidence/m2-video-path-validation/bundle-manifest.json spell out the grim, captured-sample.png, captured-sample.rgb, ffmpeg/NVENC, and format=nv12 path."
+    },
+    {
+      "criterion": "The evidence does not claim direct capture DMA-BUF import into NVENC, zero-copy, or no-readback proof.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json explicitNonClaims and evidenceBoundary.notEvidenceFor list those non-claims; m2-nvenc-encode-sample notes clarify that NVENC evidence starts after diagnostic artifacts are materialized."
+    },
+    {
+      "criterion": "Future direct DMA-BUF proof is noted as future work and not done here.",
+      "status": "passed",
+      "evidence": "bundle-manifest.json evidenceBoundary.futureWorkForDirectDmaBufProof and evidence/m2-video-path-validation/notes.md state that direct DMA-BUF import proof is future work and not present in this bundle."
+    },
+    {
+      "criterion": "Required node evidence files exist.",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/commands.log, report.md, and json-validation.log are present."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "jq -e . evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/json-validation.log"
+    },
+    {
+      "command": "jq -e type evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/json-validation.log"
+    },
+    {
+      "command": "jq -e '<machine-checkable evidenceBoundary predicate>' evidence/m2-video-path-validation/bundle-manifest.json",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/json-validation.log"
+    },
+    {
+      "command": "rg -n \"direct capture DMA-BUF import into NVENC|zero-copy Linux capture-to-encode|format=nv12|captured-sample\\.png|captured-sample\\.rgb|future work\" evidence/m2-video-path-validation/bundle-manifest.json evidence/m2-video-path-validation/notes.md evidence/m2-nvenc-encode-sample/notes.md evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/report.md",
+      "status": "passed",
+      "evidence": "Focused wording check found boundary and future-work strings in scoped files."
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "No whitespace errors were reported."
+    },
+    {
+      "command": "just lint-lines",
+      "status": "passed",
+      "evidence": "No file exceeded the repository line-count limit."
+    },
+    {
+      "command": "qd gate m2-video-path-validation-does-not-prove-direct-dma-buf-import-in --phase ci",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/qd-gate-ci.json"
+    },
+    {
+      "command": "nix develop -c just verify",
+      "status": "passed",
+      "evidence": "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/just-verify.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-video-path-validation/bundle-manifest.json",
+    "evidence/m2-video-path-validation/notes.md",
+    "evidence/m2-nvenc-encode-sample/notes.md",
+    "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/commands.log",
+    "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/report.md",
+    "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/json-validation.log",
+    "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/qd-gate-ci.json",
+    "evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/just-verify.log",
+    "reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json",
+    "reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node only clarifies evidence boundaries and non-claims. It does not implement or validate direct DMA-BUF import into NVENC."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
