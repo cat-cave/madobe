@@ -1,9 +1,12 @@
-#![doc = "Dependency-free loopback transport skeleton for madobe."]
+#![doc = "Dependency-free transport skeletons and smoke harnesses for madobe."]
 #![doc = ""]
-#![doc = "This crate models the first QUIC-shaped session and video lane in"]
-#![doc = "memory only. It performs no socket I/O and makes no live network,"]
-#![doc = "cross-device, capture, decode, render, or latency claim."]
+#![doc = "The core QUIC-shaped session and video lane remain in-memory only."]
+#![doc = "The `video_smoke` module adds a TCP validation harness for evidence"]
+#![doc = "collection, but it is not product QUIC and makes no capture, decode,"]
+#![doc = "render, presentation, or latency claim."]
 #![forbid(unsafe_code)]
+
+pub mod video_smoke;
 
 use std::cell::RefCell;
 use std::collections::VecDeque;

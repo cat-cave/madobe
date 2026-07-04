@@ -12,6 +12,7 @@ madobe-compositor.workspace = true
 madobe-hyprland.workspace = true
 madobe-protocol.workspace = true
 madobe-telemetry.workspace = true
+madobe-transport.workspace = true
 
 [lints]
 workspace = true

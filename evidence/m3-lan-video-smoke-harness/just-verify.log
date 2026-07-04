@@ -1,0 +1,274 @@
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if command -v taplo >/dev/null 2>&1; then taplo fmt --check; fi
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=32 excluded=11 files=["/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m3-lan-video-smoke-harness"
+if command -v swiftformat >/dev/null 2>&1 && [ -d apple ]; then swiftformat --lint apple; fi
+if command -v shfmt >/dev/null 2>&1; then find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+cargo check --workspace --all-targets --all-features
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.02s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.09s
+if command -v typos >/dev/null 2>&1; then typos; fi
+if command -v markdownlint-cli2 >/dev/null 2>&1; then markdownlint-cli2 "**/*.md"; fi
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 59 file(s)
+Summary: 0 error(s)
+if command -v actionlint >/dev/null 2>&1; then actionlint .github/workflows/*.yml; fi
+if command -v swiftlint >/dev/null 2>&1 && [ -d apple ]; then swiftlint lint --strict --config apple/.swiftlint.yml; fi
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+if command -v cargo-nextest >/dev/null 2>&1; then cargo nextest run --workspace --all-features; else cargo test --workspace --all-features; fi
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.03s
+────────────
+ Nextest run ID 344f1693-9032-4eac-9f71-2bff6b214a3a with nextest profile: default
+    Starting 46 tests across 20 binaries
+        PASS [   0.005s] ( 1/46) madobectl tests::display_command_without_adapter_returns_usage
+        PASS [   0.005s] ( 2/46) madobectl tests::display_bind_command_accepts_session_and_workspace_ids
+        PASS [   0.006s] ( 3/46) hostd tests::status_line_links_shared_crates
+        PASS [   0.006s] ( 4/46) hostd tests::smoke_command_uses_adapter_contract_for_lifecycle
+        PASS [   0.006s] ( 5/46) madobe-transport::lan_video_smoke sample_loader_rejects_non_sample_payload_hash
+        PASS [   0.006s] ( 6/46) madobe-protocol cross_device::tests::rejects_decode_render_presentation_and_latency_without_evidence
+        PASS [   0.006s] ( 7/46) madobe-hyprland::adapter_lifecycle reconciles_missing_and_stale_outputs_with_typed_report
+        PASS [   0.006s] ( 8/46) madobectl tests::adapter_requirement_is_detected_after_parse
+        PASS [   0.013s] ( 9/46) madobectl tests::display_lifecycle_command_has_deterministic_default_output_id
+        PASS [   0.013s] (10/46) madobe-transport::loopback video_lane_records_send_and_receive_timestamps
+        PASS [   0.013s] (11/46) madobectl tests::hello_command_renders_status
+        PASS [   0.013s] (12/46) hostd tests::display_status_is_sorted_and_deterministic
+        PASS [   0.013s] (13/46) madobe-compositor::lifecycle typed_validation_errors_reject_invalid_values
+        PASS [   0.013s] (14/46) madobe-transport::lan_video_smoke sender_and_receiver_exchange_checked_in_av1_sample_on_localhost
+        PASS [   0.013s] (15/46) madobectl tests::unknown_command_returns_usage
+        PASS [   0.013s] (16/46) madobe-protocol cross_device::tests::fixture_covers_required_fields_without_live_claims
+        PASS [   0.013s] (17/46) madobe-protocol tests::hello_carries_stable_identity
+        PASS [   0.013s] (18/46) madobe-protocol cross_device::tests::rejects_invalid_latency_order
+        PASS [   0.013s] (19/46) madobe-transport::loopback video_lane_identifier_is_stable
+        PASS [   0.013s] (20/46) madobectl tests::display_lifecycle_command_accepts_explicit_output_id
+        PASS [   0.013s] (21/46) madobe-protocol cross_device::tests::fixture_round_trips_semantically
+        PASS [   0.014s] (22/46) hostd::display_bind bind_command_renders_session_workspace_result
+        PASS [   0.014s] (23/46) hostd tests::lifecycle_commands_render_single_operation_results
+        PASS [   0.013s] (24/46) madobe-hyprland::fixtures parses_monitor_fixture
+        PASS [   0.014s] (25/46) madobe-hyprland::adapter_binding binds_workspace_to_named_output_with_lua_dispatcher
+        PASS [   0.013s] (26/46) madobectl tests::display_status_command_renders_adapter_output
+        PASS [   0.013s] (27/46) madobe-telemetry tests::event_has_deterministic_timestamp
+        PASS [   0.013s] (28/46) madobe-hyprland::fixtures parses_socket_event_lines
+        PASS [   0.014s] (29/46) madobe-hyprland::adapter_lifecycle creates_configures_parks_and_removes_named_headless_output
+        PASS [   0.013s] (30/46) madobe-encode tests::safe_api_maps_product_settings_to_nvenc_boundary
+        PASS [   0.013s] (31/46) madobe-capture::captured_frame golden_capture_fixture_covers_expected_metadata
+        PASS [   0.014s] (32/46) hostd tests::default_smoke_identifier_is_stable
+        PASS [   0.014s] (33/46) madobe-hyprland::fixtures parse_errors_preserve_command_context
+        PASS [   0.013s] (34/46) madobectl tests::hello_line_links_shared_crates
+        PASS [   0.014s] (35/46) madobe-hyprland::adapter_lifecycle rejects_unowned_outputs_and_unsupported_color_depth
+        PASS [   0.014s] (36/46) madobe-capture::captured_frame golden_capture_fixture_round_trips_semantically
+        PASS [   0.014s] (37/46) madobe-encode-nv-sys tests::av1_command_uses_nvenc_and_ivf_container
+        PASS [   0.013s] (38/46) madobe-transport::loopback loopback_sender_and_receiver_exchange_video_sample
+        PASS [   0.014s] (39/46) madobe-protocol cross_device::tests::accepts_metric_claims_with_matching_evidence
+        PASS [   0.014s] (40/46) madobe-transport::loopback video_sample_rejects_mismatched_payload_size_with_typed_error
+        PASS [   0.014s] (41/46) madobe-hyprland::fixtures parses_workspace_fixtures
+        PASS [   0.015s] (42/46) madobe-compositor::lifecycle lifecycle_supports_create_configure_bind_park_remove_list_and_reconcile
+        PASS [   0.014s] (43/46) madobe-protocol tests::golden_video_frame_fixture_covers_expected_metadata
+        PASS [   0.015s] (44/46) madobe-transport video_smoke::sha256::tests::sha256_matches_standard_vectors
+        PASS [   0.017s] (45/46) madobe-protocol tests::golden_video_frame_fixture_round_trips_semantically
+        PASS [   0.018s] (46/46) madobe-hyprland::fixtures client_uses_injected_executor_for_json_endpoints
+────────────
+     Summary [   0.018s] 46 tests run: 46 passed, 0 skipped
+cargo test --doc --workspace --all-features
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.01s
+   Doc-tests hostd
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_capture
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_compositor
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_encode
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_encode_nv_sys
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_hyprland
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_protocol
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_telemetry
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_transport
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobectl
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+just apple-test
+if [ "$(uname -s)" != Darwin ]; then echo "apple tests skipped outside macOS"; else cd apple && { if command -v tuist >/dev/null 2>&1; then tuist generate; elif command -v mise >/dev/null 2>&1; then mise exec -- tuist generate; else echo "tuist missing; run just macos-bootstrap"; exit 127; fi; } && xcodebuild test -scheme MadobeMac -destination 'platform=macOS'; fi
+apple tests skipped outside macOS
+if command -v cargo-deny >/dev/null 2>&1; then cargo deny check; else echo "cargo-deny missing; run inside nix develop"; exit 127; fi
+advisories ok, bans ok, licenses ok, sources ok
+if command -v cargo-vet >/dev/null 2>&1; then cargo vet; else echo "cargo-vet missing; run inside nix develop"; exit 127; fi
+Vetting Succeeded (because you have no third-party dependencies)
+if command -v cargo-audit >/dev/null 2>&1; then cargo audit; else echo "cargo-audit missing; run inside nix develop"; exit 127; fi
+    Fetching advisory database from `https://github.com/RustSec/advisory-db.git`
+      Loaded 1152 security advisories (from /scratch/cache/cargo/advisory-db)
+    Updating crates.io index
+    Scanning Cargo.lock for vulnerabilities (10 crate dependencies)
+if command -v cargo-machete >/dev/null 2>&1; then cargo machete --skip-target-dir; else echo "cargo-machete missing; run inside nix develop"; exit 127; fi
+Analyzing dependencies of crates in this directory...
+cargo-machete didn't find any unused dependencies in this directory. Good job!
+Done!
+if command -v cargo-semver-checks >/dev/null 2>&1; then cargo semver-checks check-release --workspace --baseline-root .; else echo "cargo-semver-checks missing; run inside nix develop"; exit 127; fi
+    Building hostd v0.1.0 (current)
+       Built [   0.602s] (current)
+     Parsing hostd v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building hostd v0.1.0 (baseline)
+       Built [   0.569s] (baseline)
+     Parsing hostd v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking hostd v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.003s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.428s] hostd
+    Building madobe-capture v0.1.0 (current)
+       Built [   0.669s] (current)
+     Parsing madobe-capture v0.1.0 (current)
+      Parsed [   0.002s] (current)
+    Building madobe-capture v0.1.0 (baseline)
+       Built [   0.541s] (baseline)
+     Parsing madobe-capture v0.1.0 (baseline)
+      Parsed [   0.004s] (baseline)
+    Checking madobe-capture v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.490s] madobe-capture
+    Building madobe-compositor v0.1.0 (current)
+       Built [   0.474s] (current)
+     Parsing madobe-compositor v0.1.0 (current)
+      Parsed [   0.004s] (current)
+    Building madobe-compositor v0.1.0 (baseline)
+       Built [   0.467s] (baseline)
+     Parsing madobe-compositor v0.1.0 (baseline)
+      Parsed [   0.005s] (baseline)
+    Checking madobe-compositor v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.006s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.182s] madobe-compositor
+    Building madobe-encode v0.1.0 (current)
+       Built [   0.636s] (current)
+     Parsing madobe-encode v0.1.0 (current)
+      Parsed [   0.001s] (current)
+    Building madobe-encode v0.1.0 (baseline)
+       Built [   0.428s] (baseline)
+     Parsing madobe-encode v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobe-encode v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.012s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.319s] madobe-encode
+    Building madobe-encode-nv-sys v0.1.0 (current)
+       Built [   0.439s] (current)
+     Parsing madobe-encode-nv-sys v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-encode-nv-sys v0.1.0 (baseline)
+       Built [   0.450s] (baseline)
+     Parsing madobe-encode-nv-sys v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobe-encode-nv-sys v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.141s] madobe-encode-nv-sys
+    Building madobe-hyprland v0.1.0 (current)
+       Built [   0.458s] (current)
+     Parsing madobe-hyprland v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-hyprland v0.1.0 (baseline)
+       Built [   0.476s] (baseline)
+     Parsing madobe-hyprland v0.1.0 (baseline)
+      Parsed [   0.003s] (baseline)
+    Checking madobe-hyprland v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.171s] madobe-hyprland
+    Building madobe-protocol v0.1.0 (current)
+       Built [   0.496s] (current)
+     Parsing madobe-protocol v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-protocol v0.1.0 (baseline)
+       Built [   0.719s] (baseline)
+     Parsing madobe-protocol v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobe-protocol v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.514s] madobe-protocol
+    Building madobe-telemetry v0.1.0 (current)
+       Built [   0.567s] (current)
+     Parsing madobe-telemetry v0.1.0 (current)
+      Parsed [   0.001s] (current)
+    Building madobe-telemetry v0.1.0 (baseline)
+       Built [   0.501s] (baseline)
+     Parsing madobe-telemetry v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobe-telemetry v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.014s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.349s] madobe-telemetry
+    Building madobe-transport v0.1.0 (current)
+       Built [   0.517s] (current)
+     Parsing madobe-transport v0.1.0 (current)
+      Parsed [   0.005s] (current)
+    Building madobe-transport v0.1.0 (baseline)
+       Built [   0.560s] (baseline)
+     Parsing madobe-transport v0.1.0 (baseline)
+      Parsed [   0.005s] (baseline)
+    Checking madobe-transport v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.391s] madobe-transport
+    Building madobectl v0.1.0 (current)
+       Built [   0.436s] (current)
+     Parsing madobectl v0.1.0 (current)
+      Parsed [   0.002s] (current)
+    Building madobectl v0.1.0 (baseline)
+       Built [   0.428s] (baseline)
+     Parsing madobectl v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobectl v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.007s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.101s] madobectl

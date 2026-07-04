@@ -1,0 +1,130 @@
+{
+  "nodeId": "m3-lan-video-smoke-harness",
+  "summary": "Added a dependency-free TCP AV1 sample smoke harness in madobe-transport, exposed it as madobectl video-smoke send/receive, proved a localhost sender/receiver exchange without macOS hardware, and recorded deterministic logs, timelines, result, and command evidence. The harness explicitly does not claim QUIC, VideoToolbox decode, Metal render, presentation, or latency.",
+  "changedFiles": [
+    "Cargo.lock",
+    "apps/cli/Cargo.toml",
+    "apps/cli/src/main.rs",
+    "crates/transport/src/lib.rs",
+    "crates/transport/src/video_smoke/artifacts.rs",
+    "crates/transport/src/video_smoke/cli.rs",
+    "crates/transport/src/video_smoke/mod.rs",
+    "crates/transport/src/video_smoke/sha256.rs",
+    "crates/transport/src/video_smoke/wire.rs",
+    "crates/transport/tests/lan_video_smoke.rs",
+    "docs/LAN_VIDEO_SMOKE_HARNESS.md",
+    "evidence/m3-lan-video-smoke-harness/commands.log",
+    "evidence/m3-lan-video-smoke-harness/just-check.log",
+    "evidence/m3-lan-video-smoke-harness/json-validation.log",
+    "evidence/m3-lan-video-smoke-harness/notes.md",
+    "evidence/m3-lan-video-smoke-harness/just-verify.log",
+    "evidence/m3-lan-video-smoke-harness/receiver-cli.err",
+    "evidence/m3-lan-video-smoke-harness/receiver-cli.out",
+    "evidence/m3-lan-video-smoke-harness/receiver-listening.log",
+    "evidence/m3-lan-video-smoke-harness/receiver-timeline.json",
+    "evidence/m3-lan-video-smoke-harness/receiver.log",
+    "evidence/m3-lan-video-smoke-harness/result.json",
+    "evidence/m3-lan-video-smoke-harness/sample-hash.txt",
+    "evidence/m3-lan-video-smoke-harness/sender-cli.err",
+    "evidence/m3-lan-video-smoke-harness/sender-cli.out",
+    "evidence/m3-lan-video-smoke-harness/sender-timeline.json",
+    "evidence/m3-lan-video-smoke-harness/sender.log",
+    "evidence/m3-lan-video-smoke-harness/transport-tests.log",
+    "reports/qd/m3-lan-video-smoke-harness/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "A CLI or test helper can run as a sender using evidence/m2-nvenc-encode-sample/sample-av1.ivf.",
+      "status": "passed",
+      "evidence": "madobectl video-smoke send was run against evidence/m2-nvenc-encode-sample/sample-av1.ivf; see evidence/m3-lan-video-smoke-harness/sender-cli.out and sender.log."
+    },
+    {
+      "criterion": "A CLI or test helper can run as a receiver and validate frame metadata, payload byte count, and payload SHA-256.",
+      "status": "passed",
+      "evidence": "evidence/m3-lan-video-smoke-harness/receiver.log and result.json record metadata_valid=true, payload_byte_count_valid=true, payload_sha256_valid=true, payloadBytes=84, and the expected SHA-256."
+    },
+    {
+      "criterion": "A localhost integration test proves the sender/receiver exchange without requiring macOS hardware.",
+      "status": "passed",
+      "evidence": "crates/transport/tests/lan_video_smoke.rs and evidence/m3-lan-video-smoke-harness/transport-tests.log."
+    },
+    {
+      "criterion": "Evidence records commands, sample hash, sender log, receiver log, and a result/timeline artifact.",
+      "status": "passed",
+      "evidence": "commands.log, sample-hash.txt, sender.log, receiver.log, sender-timeline.json, receiver-timeline.json, and result.json under evidence/m3-lan-video-smoke-harness/."
+    },
+    {
+      "criterion": "Docs explain the harness is not QUIC, not VideoToolbox decode, not Metal render, not presentation, and not latency proof.",
+      "status": "passed",
+      "evidence": "docs/LAN_VIDEO_SMOKE_HARNESS.md and evidence/m3-lan-video-smoke-harness/notes.md."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd migrate; qd method acknowledge --agent codex-m3-lan-video-smoke-harness; qd sync --from roadmap/qd-export.json; qd node show m3-lan-video-smoke-harness --full",
+      "status": "passed",
+      "evidence": "Pre-edit qd context captured in evidence/m3-lan-video-smoke-harness/commands.log."
+    },
+    {
+      "command": "nix develop -c cargo fmt --all",
+      "status": "passed",
+      "evidence": "Formatting completed before final checks."
+    },
+    {
+      "command": "nix develop -c cargo build -p madobectl",
+      "status": "passed",
+      "evidence": "CLI binary built before localhost smoke; see commands.log."
+    },
+    {
+      "command": "./target/debug/madobectl video-smoke receive/send on 127.0.0.1:47031",
+      "status": "passed",
+      "evidence": "Sandboxed attempt failed with Operation not permitted; escalated rerun passed. See sender-cli.out, receiver-cli.out, sender.log, receiver.log, and result.json."
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-transport --all-features",
+      "status": "passed",
+      "evidence": "evidence/m3-lan-video-smoke-harness/transport-tests.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m3-lan-video-smoke-harness/just-check.log"
+    },
+    {
+      "command": "nix develop -c just verify",
+      "status": "passed",
+      "evidence": "evidence/m3-lan-video-smoke-harness/just-verify.log"
+    },
+    {
+      "command": "jq empty evidence/m3-lan-video-smoke-harness/result.json reports/qd/m3-lan-video-smoke-harness/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m3-lan-video-smoke-harness/json-validation.log"
+    }
+  ],
+  "evidence": [
+    "docs/LAN_VIDEO_SMOKE_HARNESS.md",
+    "evidence/m3-lan-video-smoke-harness/commands.log",
+    "evidence/m3-lan-video-smoke-harness/just-check.log",
+    "evidence/m3-lan-video-smoke-harness/just-verify.log",
+    "evidence/m3-lan-video-smoke-harness/json-validation.log",
+    "evidence/m3-lan-video-smoke-harness/notes.md",
+    "evidence/m3-lan-video-smoke-harness/receiver-cli.out",
+    "evidence/m3-lan-video-smoke-harness/receiver-listening.log",
+    "evidence/m3-lan-video-smoke-harness/receiver-timeline.json",
+    "evidence/m3-lan-video-smoke-harness/receiver.log",
+    "evidence/m3-lan-video-smoke-harness/result.json",
+    "evidence/m3-lan-video-smoke-harness/sample-hash.txt",
+    "evidence/m3-lan-video-smoke-harness/sender-cli.out",
+    "evidence/m3-lan-video-smoke-harness/sender-timeline.json",
+    "evidence/m3-lan-video-smoke-harness/sender.log",
+    "evidence/m3-lan-video-smoke-harness/transport-tests.log"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "A local TCP sender/receiver smoke passed on 127.0.0.1:47031. No Mac hardware, product QUIC, VideoToolbox decode, Metal render, presentation, or latency validation was required or claimed by this node."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

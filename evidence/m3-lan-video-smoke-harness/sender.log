@@ -1,0 +1,12 @@
+lan-video-smoke sender
+node_id=m3-lan-video-smoke-harness
+transport=tcp
+product_quic=false
+remote_addr=127.0.0.1:47031
+sample=evidence/m2-nvenc-encode-sample/sample-av1.ivf
+frame_id=1
+codec=av1
+dimensions=160x90
+payload_bytes=84
+sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875
+result=sent
