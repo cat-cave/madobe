@@ -1,0 +1,19 @@
+# m2-audit commands
+
+1. `qd migrate && qd method acknowledge --agent trevor-linux-orchestrator`
+   - status: passed in the m2-audit worktree.
+2. `qd sync --from roadmap/qd-export.json && qd sync --from roadmap/qd-export.json --expect-clean`
+   - status: passed in the m2-audit worktree.
+3. Spawned three independent audit workers:
+   - capture evidence audit -> `reports/qd/m2-audit/subreports/capture-evidence.md`
+   - NVENC boundary audit -> `reports/qd/m2-audit/subreports/nvenc-boundary.md`
+   - downstream readiness audit -> `reports/qd/m2-audit/subreports/downstream-readiness.md`
+4. `sed -n` review of all subreports.
+   - status: passed.
+5. Updated stale `reports/qd/m2-capture-one-frame/blocker.md` to mark it superseded by the completed GBM/native DMA-BUF capture evidence.
+6. `jq empty reports/qd/m2-audit/completion.json reports/qd/m2-audit/audit.json`
+   - status: passed.
+7. `git diff --check`
+   - status: passed.
+8. `nix develop -c just check`
+   - status: passed after rewriting line-numbering command spellings in subreports.

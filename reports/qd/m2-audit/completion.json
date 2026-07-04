@@ -1,0 +1,93 @@
+{
+  "nodeId": "m2-audit",
+  "summary": "Audited M2 capture, NVENC/unsafe boundaries, and downstream sample expectations with three independent subreports. No P0/P1 findings were found. Non-blocking P2/P3 follow-ups were dispositioned, and a stale m2-capture-one-frame blocker file was marked superseded by the current successful GBM/native DMA-BUF capture evidence.",
+  "changedFiles": [
+    "evidence/m2-audit/commands.log",
+    "evidence/m2-audit/notes.md",
+    "reports/qd/m2-audit/subreports/capture-evidence.md",
+    "reports/qd/m2-audit/subreports/nvenc-boundary.md",
+    "reports/qd/m2-audit/subreports/downstream-readiness.md",
+    "reports/qd/m2-audit/completion.json",
+    "reports/qd/m2-audit/audit.json",
+    "reports/qd/m2-capture-one-frame/blocker.md"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Capture evidence is reviewed",
+      "status": "passed",
+      "evidence": "reports/qd/m2-audit/subreports/capture-evidence.md"
+    },
+    {
+      "criterion": "NVENC unsafe boundary is reviewed",
+      "status": "passed",
+      "evidence": "reports/qd/m2-audit/subreports/nvenc-boundary.md"
+    },
+    {
+      "criterion": "P0/P1 findings are resolved or dispositioned",
+      "status": "passed",
+      "evidence": "All three subreports record no P0/P1 findings. Non-blocking P2/P3 items are summarized in evidence/m2-audit/notes.md."
+    },
+    {
+      "criterion": "Downstream sample artifact expectations are documented",
+      "status": "passed",
+      "evidence": "reports/qd/m2-audit/subreports/downstream-readiness.md and evidence/m2-audit/notes.md"
+    },
+    {
+      "criterion": "qd audit pass reports are recorded",
+      "status": "passed",
+      "evidence": "reports/qd/m2-audit/audit.json"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd migrate && qd method acknowledge --agent trevor-linux-orchestrator",
+      "status": "passed",
+      "evidence": "evidence/m2-audit/commands.log"
+    },
+    {
+      "command": "qd sync --from roadmap/qd-export.json && qd sync --from roadmap/qd-export.json --expect-clean",
+      "status": "passed",
+      "evidence": "evidence/m2-audit/commands.log"
+    },
+    {
+      "command": "parallel subagent audit of capture evidence, NVENC boundary, and downstream readiness",
+      "status": "passed",
+      "evidence": "reports/qd/m2-audit/subreports/"
+    },
+    {
+      "command": "jq empty reports/qd/m2-audit/completion.json reports/qd/m2-audit/audit.json",
+      "status": "passed",
+      "evidence": "evidence/m2-audit/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m2-audit/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m2-audit/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m2-audit/commands.log",
+    "evidence/m2-audit/notes.md",
+    "reports/qd/m2-audit/subreports/capture-evidence.md",
+    "reports/qd/m2-audit/subreports/nvenc-boundary.md",
+    "reports/qd/m2-audit/subreports/downstream-readiness.md",
+    "reports/qd/m2-audit/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node is an evidence audit. Real-world validation evidence is inherited from the audited M2 nodes and reviewed in the subreports."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": [
+    "Non-blocking follow-up: add encode parameter validation before productizing runtime encode settings.",
+    "Non-blocking follow-up: add a repo-supported direct capture helper/dev-shell dependency path before claiming reproducible product capture helper behavior.",
+    "M3 cross-device smoke must directly inspect live artifacts before claiming decode/render/presentation/latency metrics."
+  ]
+}
