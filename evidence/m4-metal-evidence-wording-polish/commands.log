@@ -1,0 +1,54 @@
+# m4-metal-evidence-wording-polish commands
+
+1. `git pull --rebase --autostash`
+   - status: passed on main; fast-forwarded to the M4 DAG at `f3eafe0`.
+2. `qd sync --from roadmap/qd-export.json`
+   - status: passed after replacing the stale local qd cache from the checked-in export.
+3. `qd doctor --strict`
+   - status: passed.
+4. `qd claim m4-metal-evidence-wording-polish --agent trevor-mac-orchestrator --branch spec/m4-metal-evidence-wording-polish`
+   - status: passed.
+5. `qd worktree create m4-metal-evidence-wording-polish`
+   - status: passed after escalation for Git worktree ref creation.
+6. `qd migrate`
+   - status: passed in the node worktree.
+7. `qd method acknowledge --agent trevor-mac-orchestrator`
+   - status: passed in the node worktree.
+8. `qd sync --from roadmap/qd-export.json`
+   - status: passed in the node worktree.
+9. `qd claim m4-metal-evidence-wording-polish --agent trevor-mac-orchestrator --branch spec/m4-metal-evidence-wording-polish`
+   - status: passed in the node worktree.
+10. `qd export --out roadmap/qd-export.json --deterministic`
+    - status: passed.
+11. `qd doctor --strict`
+    - status: passed.
+12. `tuist generate`
+    - status: passed; log: `evidence/m4-metal-evidence-wording-polish/tuist-generate.log`.
+13. `xcodebuild test -scheme MadobeMac -destination 'platform=macOS' -only-testing:MadobeClientCoreTests/MetalRenderTimingProbeTests`
+    - status: passed; log: `evidence/m4-metal-evidence-wording-polish/xcodebuild-metal-probe.log`.
+    - generated: `evidence/m4-metal-evidence-wording-polish/render-report.json`.
+14. `just macos-check`
+    - status: passed; log: `evidence/m4-metal-evidence-wording-polish/macos-check.log`.
+15. `jq . evidence/m4-metal-evidence-wording-polish/render-report.json reports/qd/m4-metal-evidence-wording-polish/completion.json reports/qd/m4-metal-evidence-wording-polish/audit.json reports/qd/m3-metal-renderer-skeleton/completion.json reports/qd/m3-metal-renderer-skeleton/audit.json`
+    - status: passed.
+16. `git diff --check`
+    - status: passed.
+17. `qd prompt audit m4-metal-evidence-wording-polish`
+    - status: passed; qd reported no current gate blockers.
+18. `qd audit start m4-metal-evidence-wording-polish`
+    - status: passed.
+19. `qd complete m4-metal-evidence-wording-polish --from-report reports/qd/m4-metal-evidence-wording-polish/completion.json`
+    - status: passed; node moved to review.
+20. `qd audit pass m4-metal-evidence-wording-polish --from-report reports/qd/m4-metal-evidence-wording-polish/audit.json`
+    - status: passed with 0 findings.
+21. `qd export --out roadmap/qd-export.json --deterministic`
+    - status: passed; exported 48 nodes, 50 edges, 7 findings, 176 runs, and 8 node notes.
+22. `qd doctor --strict`
+    - status: passed.
+23. `qd gate m4-metal-evidence-wording-polish --phase ci`
+    - status: passed; merge remains correctly blocked until hosted CI is recorded.
+
+Notes:
+
+- A first focused `xcodebuild` attempt before `tuist generate` exited because the worktree had no generated Xcode workspace yet; the successful run above supersedes it.
+- Xcode did not propagate `MADOBE_METAL_RENDER_REPORT_PATH` into the test process reliably, so the final focused run used the existing test marker-file path support. The temporary marker file was removed before commit.

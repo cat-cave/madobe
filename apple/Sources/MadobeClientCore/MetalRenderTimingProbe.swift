@@ -55,10 +55,12 @@ public struct MetalRenderTimingReport: Codable, Equatable, Sendable {
     public let width: Int
     public let height: Int
     public let pixelFormat: String
+    public let renderTargetKind: String
     public let clearColor: MetalTestPatternColor
     public let sampledPixelBGRA8: [UInt8]
     public let commandBufferStatus: String
-    public let presentedTestPattern: Bool
+    public let offscreenTestPatternRendered: Bool
+    public let displayPresented: Bool
     public let renderDurationNanoseconds: UInt64
 
     public init(
@@ -67,10 +69,12 @@ public struct MetalRenderTimingReport: Codable, Equatable, Sendable {
         width: Int,
         height: Int,
         pixelFormat: String,
+        renderTargetKind: String,
         clearColor: MetalTestPatternColor,
         sampledPixelBGRA8: [UInt8],
         commandBufferStatus: String,
-        presentedTestPattern: Bool,
+        offscreenTestPatternRendered: Bool,
+        displayPresented: Bool,
         renderDurationNanoseconds: UInt64
     ) {
         self.renderer = renderer
@@ -78,10 +82,12 @@ public struct MetalRenderTimingReport: Codable, Equatable, Sendable {
         self.width = width
         self.height = height
         self.pixelFormat = pixelFormat
+        self.renderTargetKind = renderTargetKind
         self.clearColor = clearColor
         self.sampledPixelBGRA8 = sampledPixelBGRA8
         self.commandBufferStatus = commandBufferStatus
-        self.presentedTestPattern = presentedTestPattern
+        self.offscreenTestPatternRendered = offscreenTestPatternRendered
+        self.displayPresented = displayPresented
         self.renderDurationNanoseconds = renderDurationNanoseconds
     }
 
@@ -130,10 +136,12 @@ public enum MetalRenderTimingProbe {
             width: width,
             height: height,
             pixelFormat: "bgra8Unorm",
+            renderTargetKind: "offscreen-texture",
             clearColor: clearColor,
             sampledPixelBGRA8: sampleFirstPixel(texture),
             commandBufferStatus: commandBuffer.status.reportName,
-            presentedTestPattern: true,
+            offscreenTestPatternRendered: true,
+            displayPresented: false,
             renderDurationNanoseconds: duration
         )
     }

@@ -27,12 +27,12 @@
     {
       "criterion": "A visible frame or test pattern is presented",
       "status": "passed",
-      "evidence": "apple/Sources/MadobeMac/MetalTestPatternView.swift provides the MTKView-backed test pattern view and apple/Sources/MadobeMac/MadobeMacApp.swift wires it into the app shell."
+      "evidence": "apple/Sources/MadobeMac/MetalTestPatternView.swift provides the MTKView-backed test pattern view and apple/Sources/MadobeMac/MadobeMacApp.swift wires it into the app shell. The hardware render report is offscreen render-target evidence, not display/drawable presentation evidence."
     },
     {
       "criterion": "Render timing report is produced",
       "status": "passed",
-      "evidence": "evidence/m3-metal-renderer-skeleton/render-report.json records renderer metal-clear-test-pattern, commandBufferStatus completed, sampledPixelBGRA8 [0,0,255,255], and renderDurationNanoseconds."
+      "evidence": "evidence/m3-metal-renderer-skeleton/render-report.json records renderer metal-clear-test-pattern, commandBufferStatus completed, sampledPixelBGRA8 [0,0,255,255], and renderDurationNanoseconds. Its legacy presentedTestPattern field means offscreen test-pattern validation, not display presentation."
     },
     {
       "criterion": "Screenshot evidence is saved when practical",
