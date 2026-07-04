@@ -39,3 +39,47 @@ cargo run -q -p madobectl -- \
   --sample evidence/m2-nvenc-encode-sample/sample-av1.ivf \
   --evidence-dir evidence/m3-cross-device-video-smoke/linux
 ```
+
+## Mac orchestration setup
+
+1. `git fetch origin`
+   - status: passed in `.qd/worktrees/m3-cross-device-video-smoke`.
+2. `git pull --ff-only origin spec/m3-cross-device-video-smoke`
+   - status: passed; worktree fast-forwarded to `ca33556522acd36ac97b355fc432824d84137e10`.
+3. `qd migrate`
+   - status: passed; initialized the worktree-local qd cache schema.
+4. `qd method acknowledge --agent trevor-mac-orchestrator`
+   - status: passed.
+5. `qd sync --from roadmap/qd-export.json`
+   - status: passed; loaded the branch qd export into the worktree cache.
+6. macOS preflight commands recorded in `macos/preflight.log`.
+   - status: passed after escalation for real `ipconfig` and Xcode/Swift version reads.
+
+## Mac live command
+
+Receiver address posted for Linux sender:
+
+```text
+192.168.1.15:47044
+```
+
+Receiver command:
+
+```sh
+cargo run -q -p madobectl -- \
+  video-smoke receive \
+  --bind 0.0.0.0:47044 \
+  --evidence-dir evidence/m3-cross-device-video-smoke/macos
+```
+
+Receiver result:
+
+```text
+video-smoke receive bind=0.0.0.0:47044 peer=192.168.1.15:52212 payload_bytes=84 sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875 status=passed
+```
+
+Mac-side validation boundary:
+
+- Receiver-side sample validation passed.
+- The observed peer address matches the Mac host address (`192.168.1.15`), so this Mac evidence alone does not prove Linux host sender provenance.
+- Linux sender logs are required before the node can be completed as a cross-device validation.
