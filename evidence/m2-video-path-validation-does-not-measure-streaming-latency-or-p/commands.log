@@ -1,0 +1,102 @@
+2026-07-03
+
+Worktree:
+/home/trevor/projects/madobe/.qd/worktrees/m2-video-path-validation-does-not-measure-streaming-latency-or-p
+
+Commands run:
+
+1. pwd
+   status: passed
+   output: /home/trevor/projects/madobe/.qd/worktrees/m2-video-path-validation-does-not-measure-streaming-latency-or-p
+
+2. git status --short
+   status: passed
+   output: clean at start
+
+3. rg --files evidence reports | sort
+   status: passed
+   output: inspected existing evidence and report paths
+
+4. sed -n '1,220p' evidence/m2-video-path-validation/bundle-manifest.json
+   status: passed
+   output: reviewed existing manifest boundary fields
+
+5. sed -n '1,220p' evidence/m2-video-path-validation/notes.md
+   status: passed
+   output: reviewed existing bundle notes
+
+6. sed -n '1,220p' evidence/m2-nvenc-encode-sample/notes.md
+   status: passed
+   output: reviewed existing encode sample notes
+
+7. sed -n '220,520p' evidence/m2-video-path-validation/bundle-manifest.json
+   status: passed
+   output: reviewed manifest explicitNonClaims and knownGapsForQdFindings
+
+8. sed -n '1,220p' reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json
+   status: passed
+   output: reviewed prior completion report pattern
+
+9. sed -n '1,220p' reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/completion.json
+   status: passed
+   output: reviewed prior completion report pattern
+
+10. sed -n '1,220p' evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/report.md
+    status: passed
+    output: reviewed prior evidence report pattern
+
+11. sed -n '1,220p' evidence/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/report.md
+    status: passed
+    output: reviewed prior evidence report pattern
+
+12. mkdir -p evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p
+    status: passed
+    output: created node evidence/report directories
+
+13. jq -e empty evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json
+    status: failed
+    output: no parser errors, but jq -e returned 4 because empty emits no result
+
+14. jq -e 'true' evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json
+    status: passed
+    output: true, true
+
+15. jq -e '<machine-checkable streaming performance boundary predicate>' evidence/m2-video-path-validation/bundle-manifest.json
+    status: passed
+    output: true
+
+16. rg -n "end-to-end streaming latency|encode latency|throughput|frame pacing|CPU utilization|GPU utilization|network behavior|cross-device latency|tune=ll|future work" evidence/m2-video-path-validation/bundle-manifest.json evidence/m2-video-path-validation/notes.md evidence/m2-nvenc-encode-sample/notes.md evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/report.md
+    status: passed
+    output: found the required non-claim and future-work strings in scoped files
+
+17. git diff --check
+    status: passed
+    output: no whitespace errors
+
+18. just lint-lines
+    status: passed
+    output: no file exceeded the repository line-count limit
+
+19. jq -e 'true' evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json
+    status: passed
+    output: true, true
+
+20. jq -e '<machine-checkable streaming performance boundary predicate>' evidence/m2-video-path-validation/bundle-manifest.json
+    status: passed
+    output: true
+
+21. git diff --check
+    status: passed
+    output: no whitespace errors
+
+22. just lint-lines
+    status: passed
+    output: no file exceeded the repository line-count limit
+
+23. qd gate m2-video-path-validation-does-not-measure-streaming-latency-or-p --phase ci
+    status: passed
+    output: recorded in evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/qd-gate-ci.json
+
+24. nix develop -c just verify
+    status: passed
+    output: recorded in evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/just-verify.log

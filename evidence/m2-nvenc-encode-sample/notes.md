@@ -25,6 +25,11 @@ DMA-BUF transfer.
 The NVENC proof starts after those diagnostic artifacts are materialized: ffmpeg consumes a raw `rgb24` frame and
 applies `format=nv12` before `av1_nvenc`. This is not direct capture DMA-BUF import into NVENC.
 
+This one-frame encode sample does not measure or validate streaming performance. It is not evidence for end-to-end
+streaming latency, encode latency, throughput, frame pacing/jitter, CPU utilization, GPU utilization, network behavior,
+or cross-device latency. The `tune=ll` setting below records the configured encoder mode only; no latency or
+performance result is claimed.
+
 ## Boundary
 
 No direct NVIDIA SDK or driver FFI was introduced. The unsafe-prone host boundary is isolated as

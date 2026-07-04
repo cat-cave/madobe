@@ -55,12 +55,36 @@ This bundle does not prove:
 
 The upstream NVENC sample uses a grim PNG/RGB capture path and an ffmpeg/NVENC process boundary. The low-latency encoder tune is recorded only as a setting; no latency or throughput result is claimed.
 
+## Streaming Performance Boundary
+
+The M2 bundle contains a one-frame AV1/IVF artifact and command logs only. It is decoder-consumable sample evidence,
+not live-streaming performance evidence.
+
+The bundle does not measure or validate:
+
+- end-to-end streaming latency
+- encode latency
+- throughput
+- frame pacing or jitter
+- CPU utilization
+- GPU utilization
+- network behavior
+- cross-device latency
+
+`bundle-manifest.json` records these as machine-checkable false claims under
+`evidenceBoundary.machineCheckableClaims`. Downstream consumers must not treat the M2 sample, command logs, or
+`av1_nvenc` low-latency tune setting as performance evidence.
+
 A future direct DMA-BUF proof must import a capture DMA-BUF into NVENC or NVIDIA SDK/driver import APIs and record the
 import and synchronization evidence. That proof is future work and is not present in this bundle.
 
 A future HDR/color proof must use appropriate source material, tagged color metadata, and validation for HDR handling,
 color-management behavior, wide-gamut preservation, and end-to-end color accuracy. That proof is future work and is not
 present in this bundle.
+
+Future streaming performance validation must run an end-to-end stream with instrumentation for streaming latency,
+encode latency, throughput, frame pacing/jitter, CPU utilization, GPU utilization, network behavior, and cross-device
+latency as applicable. That validation is future work and is not present in this bundle.
 
 ## Proposed qd Findings
 
