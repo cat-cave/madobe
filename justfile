@@ -17,6 +17,7 @@ check: fmt
   just qd-reports-check
   just pin-hygiene-check
   just pr-template-check
+  just workflow-contract-check
   cargo check --workspace --all-targets --all-features
   cargo clippy --workspace --all-targets --all-features -- -D warnings
   if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
@@ -36,6 +37,9 @@ pin-hygiene-check:
 
 pr-template-check:
   bash scripts/pr-template-check.sh
+
+workflow-contract-check:
+  bash scripts/workflow-contract-check.sh
 
 test:
   if command -v cargo-nextest >/dev/null 2>&1; then cargo nextest run --workspace --all-features; else cargo test --workspace --all-features; fi

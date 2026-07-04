@@ -1,0 +1,87 @@
+{
+  "nodeId": "m4-workflow-contract-check",
+  "summary": "Added a lightweight Bash workflow contract check for key CI and nightly GitHub Actions invariants, exposed it as a just target, and wired it into just check.",
+  "changedFiles": [
+    "scripts/workflow-contract-check.sh",
+    "justfile",
+    "evidence/m4-workflow-contract-check/commands.log",
+    "evidence/m4-workflow-contract-check/notes.md",
+    "reports/qd/m4-workflow-contract-check/audit.json",
+    "reports/qd/m4-workflow-contract-check/completion.json"
+  ],
+  "commits": [
+    "20579e292d6e3ad59ca3b75fe4a4726b4e9314f0"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "CI workflow contract checks cover required triggers, top-level contents read permission, Linux and macOS jobs, explicit job timeouts, required actions, Rust components, and standard run commands.",
+      "status": "passed",
+      "evidence": "scripts/workflow-contract-check.sh and evidence/m4-workflow-contract-check/commands.log"
+    },
+    {
+      "criterion": "Nightly workflow contract checks cover scheduled and manual triggers, top-level contents read and security events write permissions, explicit job timeout, and deep-check commands.",
+      "status": "passed",
+      "evidence": "scripts/workflow-contract-check.sh and evidence/m4-workflow-contract-check/commands.log"
+    },
+    {
+      "criterion": "Missing required workflow fields produce file-scoped errors via report_error.",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/commands.log records a temporary missing merge_group smoke test failing with a file-scoped error."
+    },
+    {
+      "criterion": "The check is wired into just check through just workflow-contract-check.",
+      "status": "passed",
+      "evidence": "justfile"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/notes.md and reports/qd/m4-workflow-contract-check/"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just workflow-contract-check",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/commands.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/workflow-contract-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/commands.log"
+    },
+    {
+      "command": "temporary copy negative smoke test with missing merge_group",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-workflow-contract-check/commands.log",
+    "evidence/m4-workflow-contract-check/notes.md",
+    "reports/qd/m4-workflow-contract-check/audit.json",
+    "reports/qd/m4-workflow-contract-check/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository workflow contract tooling only; no product runtime validation is required."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,74 @@
+# m4-workflow-contract-check commands
+
+Worktree: `/home/trevor/projects/madobe/.qd/worktrees/m4-workflow-contract-check`
+
+## Focused workflow contract check
+
+Command: `nix develop -c just workflow-contract-check`
+
+Status: passed.
+
+Output:
+
+```text
+madobe dev shell: use 'just --list' to see commands
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+```
+
+## ShellCheck
+
+Command: `nix develop -c shellcheck scripts/workflow-contract-check.sh`
+
+Status: passed.
+
+Output:
+
+```text
+madobe dev shell: use 'just --list' to see commands
+```
+
+## Negative smoke test
+
+Command: temporary copy of `.github/workflows/ci.yml` and
+`.github/workflows/nightly.yml`, with `merge_group` removed from the copied CI
+workflow, then `bash scripts/workflow-contract-check.sh <tmp-ci> <tmp-nightly>`.
+
+Status: passed; the modified copy failed as expected.
+
+Output:
+
+```text
+negative smoke test failed as expected
+workflow contract check: /tmp/m4-workflow-contract-check.CqdKKQ/ci-missing-merge-group.yml: missing merge_group trigger
+workflow contract check: failed with 1 error(s)
+temp dir: /tmp/m4-workflow-contract-check.CqdKKQ
+```
+
+## Full repository check
+
+Command: `nix develop -c just check`
+
+Status: passed.
+
+Summary:
+
+```text
+qd report check: validated 72 completion report(s) and 72 audit report(s)
+pin hygiene check: passed
+pr template check: passed
+workflow contract check: passed
+cargo check --workspace --all-targets --all-features: passed
+cargo clippy --workspace --all-targets --all-features -- -D warnings: passed
+shellcheck for tracked shell scripts: passed
+typos: passed
+markdownlint-cli2: 0 error(s)
+actionlint .github/workflows/*.yml: passed
+just lint-lines: passed
+```
+
+## Diff whitespace check
+
+Command: `git diff --check`
+
+Status: passed.
