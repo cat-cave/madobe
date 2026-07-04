@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-hyprland-rule-mutation-hardening",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Evidence records the relevant workspace mutation baseline cluster for Hyprland monitor rule helpers.",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-rule-mutation-hardening/notes.md"
+    },
+    {
+      "criterion": "Focused tests cover f64_to_nonzero_u32 boundary handling, format_scale formatting, lua_string escaping, and scale/gcd reduction through public or crate-local behavior.",
+      "status": "passed",
+      "evidence": "crates/hyprland/src/adapter/rule.rs"
+    },
+    {
+      "criterion": "A targeted mutation check for crates/hyprland/src/adapter/rule.rs passes.",
+      "status": "passed",
+      "evidence": "Orchestrator rerun: 45 mutants tested in 16s, 27 caught, 18 unviable, no missed mutants and no timeouts."
+    },
+    {
+      "criterion": "`nix develop -c cargo test -p madobe-hyprland --all-features` passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-rule-mutation-hardening/commands.log"
+    },
+    {
+      "criterion": "`nix develop -c just check` passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-rule-mutation-hardening/commands.log"
+    },
+    {
+      "criterion": "No transport, product QUIC, capture, encode, Apple, Nix, or supply-chain claim is changed.",
+      "status": "passed",
+      "evidence": "git diff is limited to crates/hyprland/src/adapter/rule.rs plus node evidence and reports"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node hardens Hyprland monitor rule/config helper unit and mutation coverage only."
+  },
+  "findings": []
+}
