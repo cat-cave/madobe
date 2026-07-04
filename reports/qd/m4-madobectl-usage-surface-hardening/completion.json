@@ -1,0 +1,73 @@
+{
+  "nodeId": "m4-madobectl-usage-surface-hardening",
+  "summary": "Hardened the madobectl usage surface by listing the already-dispatched video-smoke send and receive entry points in top-level usage, with focused usage-error tests that avoid sender and receiver execution.",
+  "changedFiles": [
+    "apps/cli/src/lib.rs",
+    "crates/transport/src/video_smoke/cli.rs",
+    "evidence/m4-madobectl-usage-surface-hardening/commands.log",
+    "evidence/m4-madobectl-usage-surface-hardening/notes.md",
+    "reports/qd/m4-madobectl-usage-surface-hardening/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Top-level madobectl usage includes the video-smoke command entry point without running sender or receiver logic.",
+      "status": "passed",
+      "evidence": "apps/cli/src/lib.rs usage now lists `madobectl video-smoke send` and `madobectl video-smoke receive`; the new top-level usage test exercises a usage-error path only."
+    },
+    {
+      "criterion": "Parser and usage tests cover unknown top-level commands and the video-smoke usage surface.",
+      "status": "passed",
+      "evidence": "Existing unknown top-level command coverage remains in apps/cli/src/lib.rs, and new tests cover top-level video-smoke usage plus video-smoke usage errors in crates/transport/src/video_smoke/cli.rs."
+    },
+    {
+      "criterion": "Existing display and hello behavior remains unchanged.",
+      "status": "passed",
+      "evidence": "`nix develop -c cargo test -p madobectl` passed with existing hello and display tests."
+    },
+    {
+      "criterion": "Rust and repo hygiene checks pass.",
+      "status": "passed",
+      "evidence": "`nix develop -c cargo test -p madobectl`, `nix develop -c cargo test -p madobe-transport video_smoke`, `nix develop -c just check`, and `git diff --check` passed in evidence/m4-madobectl-usage-surface-hardening/commands.log."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "Only CLI usage text, usage tests, and node evidence were changed; evidence/m4-madobectl-usage-surface-hardening/notes.md records the boundary."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo test -p madobectl",
+      "status": "passed",
+      "evidence": "evidence/m4-madobectl-usage-surface-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-transport video_smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-madobectl-usage-surface-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-madobectl-usage-surface-hardening/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-madobectl-usage-surface-hardening/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-madobectl-usage-surface-hardening/commands.log",
+    "evidence/m4-madobectl-usage-surface-hardening/notes.md",
+    "reports/qd/m4-madobectl-usage-surface-hardening/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node only changes CLI usage text and usage-error tests."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
