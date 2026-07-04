@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "blocking": [],
+  "runningAudits": [],
+  "blockedDependencies": [],
+  "explanations": [],
+  "structuralOk": true,
+  "phase": "ci",
+  "policy": {
+    "ci": {
+      "ok": true,
+      "phase": "ci",
+      "node_id": "m2-video-path-validation-does-not-validate-hdr-or-color-manageme",
+      "violations": []
+    },
+    "merge": {
+      "ok": false,
+      "phase": "merge",
+      "node_id": "m2-video-path-validation-does-not-validate-hdr-or-color-manageme",
+      "violations": [
+        {
+          "code": "ciRequired",
+          "phase": "merge",
+          "node_id": "m2-video-path-validation-does-not-validate-hdr-or-color-manageme",
+          "message": "Node m2-video-path-validation-does-not-validate-hdr-or-color-manageme needs a latest passed CI run before merge.",
+          "evidence": {
+            "latestCi": null
+          }
+        }
+      ]
+    },
+    "selected": {
+      "ok": true,
+      "phase": "ci",
+      "node_id": "m2-video-path-validation-does-not-validate-hdr-or-color-manageme",
+      "violations": []
+    }
+  },
+  "checks": {
+    "latestCheck": null,
+    "latestCi": null,
+    "undisposedP2P3": []
+  },
+  "next": "qd ci run m2-video-path-validation-does-not-validate-hdr-or-color-manageme"
+}

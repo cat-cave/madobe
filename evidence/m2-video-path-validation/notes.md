@@ -25,6 +25,9 @@ This bundle validates stable references for downstream decoder work without dupl
 
 This makes the artifact stable for a later non-Linux decoder consumer, but it does not prove that any specific non-Linux decode path has consumed it yet.
 
+The same `ffprobe` metadata records `pixelFormat=yuv420p`, `colorRange=tv`, and unknown `colorSpace`,
+`colorTransfer`, and `colorPrimaries`. The sample is therefore not HDR or color-management evidence.
+
 ## Explicit Non-Claims
 
 The current M2 encode sample path is:
@@ -45,12 +48,19 @@ This bundle does not prove:
 - VideoToolbox decode
 - Metal render
 - HDR handling
+- color-management behavior
+- wide-gamut preservation
+- end-to-end color accuracy
 - no CPU readback after the grim-based encode sample
 
 The upstream NVENC sample uses a grim PNG/RGB capture path and an ffmpeg/NVENC process boundary. The low-latency encoder tune is recorded only as a setting; no latency or throughput result is claimed.
 
 A future direct DMA-BUF proof must import a capture DMA-BUF into NVENC or NVIDIA SDK/driver import APIs and record the
 import and synchronization evidence. That proof is future work and is not present in this bundle.
+
+A future HDR/color proof must use appropriate source material, tagged color metadata, and validation for HDR handling,
+color-management behavior, wide-gamut preservation, and end-to-end color accuracy. That proof is future work and is not
+present in this bundle.
 
 ## Proposed qd Findings
 

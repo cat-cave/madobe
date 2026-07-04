@@ -1,0 +1,27 @@
+$ jq -e . evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json
+Result: passed. Both JSON files parsed successfully. The command emitted the normalized JSON documents.
+
+$ jq -e type evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json
+"object"
+"object"
+
+$ jq -e '
+  .evidenceBoundary.sampleColorMetadata == {
+    "source": "ffprobe stream metadata for evidence/m2-nvenc-encode-sample/sample-av1.ivf",
+    "pixelFormat": "yuv420p",
+    "colorRange": "tv",
+    "colorSpace": "unknown",
+    "colorTransfer": "unknown",
+    "colorPrimaries": "unknown"
+  }
+  and .evidenceBoundary.machineCheckableClaims.hdrHandlingProven == false
+  and .evidenceBoundary.machineCheckableClaims.colorManagementBehaviorProven == false
+  and .evidenceBoundary.machineCheckableClaims.wideGamutPreservationProven == false
+  and .evidenceBoundary.machineCheckableClaims.endToEndColorAccuracyProven == false
+  and (.evidenceBoundary.notEvidenceFor | index("HDR handling") != null)
+  and (.evidenceBoundary.notEvidenceFor | index("color-management behavior") != null)
+  and (.evidenceBoundary.notEvidenceFor | index("wide-gamut preservation") != null)
+  and (.evidenceBoundary.notEvidenceFor | index("end-to-end color accuracy") != null)
+  and (.evidenceBoundary.futureWorkForHdrColorValidation | contains("future HDR/color proof"))
+' evidence/m2-video-path-validation/bundle-manifest.json
+true

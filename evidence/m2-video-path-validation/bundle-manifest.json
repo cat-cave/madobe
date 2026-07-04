@@ -119,16 +119,33 @@
       "directCaptureDmaBufImportIntoNvencProven": false,
       "zeroCopyCaptureToEncodeProven": false,
       "noCpuReadbackAfterGrimCaptureProven": false,
+      "hdrHandlingProven": false,
+      "colorManagementBehaviorProven": false,
+      "wideGamutPreservationProven": false,
+      "endToEndColorAccuracyProven": false,
       "nvencEncoderInvocationProven": true,
       "decoderConsumableAv1IvfSampleProven": true
+    },
+    "sampleColorMetadata": {
+      "source": "ffprobe stream metadata for evidence/m2-nvenc-encode-sample/sample-av1.ivf",
+      "pixelFormat": "yuv420p",
+      "colorRange": "tv",
+      "colorSpace": "unknown",
+      "colorTransfer": "unknown",
+      "colorPrimaries": "unknown"
     },
     "nvencInputBoundary": "ffmpeg process invocation consumes a materialized rgb24 raw frame and applies format=nv12",
     "notEvidenceFor": [
       "direct capture DMA-BUF import into NVENC",
       "zero-copy Linux capture-to-encode",
-      "no-readback Linux capture-to-encode"
+      "no-readback Linux capture-to-encode",
+      "HDR handling",
+      "color-management behavior",
+      "wide-gamut preservation",
+      "end-to-end color accuracy"
     ],
-    "futureWorkForDirectDmaBufProof": "A future proof must pass a capture DMA-BUF directly into NVENC or NVIDIA SDK/driver import APIs and record import/synchronization evidence. That proof is not present in this bundle."
+    "futureWorkForDirectDmaBufProof": "A future proof must pass a capture DMA-BUF directly into NVENC or NVIDIA SDK/driver import APIs and record import/synchronization evidence. That proof is not present in this bundle.",
+    "futureWorkForHdrColorValidation": "A future HDR/color proof must use appropriate source material, tagged color metadata, and validation for HDR handling, color-management behavior, wide-gamut preservation, and end-to-end color accuracy. That proof is not present in this bundle."
   },
   "referencedArtifacts": [
     {
@@ -235,6 +252,9 @@
     "This bundle does not prove VideoToolbox decode.",
     "This bundle does not prove Metal render.",
     "This bundle does not prove HDR handling.",
+    "This bundle does not prove color-management behavior.",
+    "This bundle does not prove wide-gamut preservation.",
+    "This bundle does not prove end-to-end color accuracy.",
     "This bundle does not prove no CPU readback after the grim-based encode sample.",
     "The low-latency encoder tune is recorded as an encoder setting only; no performance result is claimed."
   ],
@@ -253,7 +273,7 @@
     },
     {
       "title": "m2-video-path-validation does not validate HDR or color-management behavior",
-      "body": "ffprobe reports yuv420p with color_range=tv and unknown color_space/color_transfer/color_primaries. HDR handling remains unvalidated."
+      "body": "ffprobe reports yuv420p with color_range=tv and unknown color_space/color_transfer/color_primaries. The sample does not validate HDR handling, color-management behavior, wide-gamut preservation, or end-to-end color accuracy."
     },
     {
       "title": "m2-video-path-validation does not prove no CPU readback after grim capture",
