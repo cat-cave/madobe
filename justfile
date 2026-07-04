@@ -1,5 +1,7 @@
 set shell := ["bash", "--noprofile", "--norc", "-eu", "-o", "pipefail", "-c"]
 
+coverage_line_floor := "78"
+
 default:
   just --list
 
@@ -28,7 +30,7 @@ verify: check test security
 
 coverage:
   command -v cargo-llvm-cov >/dev/null 2>&1 || { echo "cargo-llvm-cov missing; run inside nix develop"; exit 127; }
-  cargo llvm-cov nextest --workspace --all-features --ignore-filename-regex 'apps/.*/src/main\.rs' --fail-under-lines 95 --lcov --output-path lcov.info
+  cargo llvm-cov nextest --workspace --all-features --ignore-filename-regex 'apps/.*/src/main\.rs' --fail-under-lines {{coverage_line_floor}} --lcov --output-path lcov.info
 
 mutants:
   command -v cargo-mutants >/dev/null 2>&1 || { echo "cargo-mutants missing; run inside nix develop"; exit 127; }

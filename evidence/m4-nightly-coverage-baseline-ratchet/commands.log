@@ -1,0 +1,121 @@
+# m4-nightly-coverage-baseline-ratchet commands
+
+Worktree: /home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet
+Branch: spec/m4-nightly-coverage-baseline-ratchet
+
+## Failing historical 95% policy
+
+Command:
+
+```sh
+nix develop -c cargo llvm-cov nextest --workspace --all-features --ignore-filename-regex 'apps/.*/src/main\.rs' --fail-under-lines 95 --lcov --output-path lcov.info
+```
+
+Status: failed with exit code 1.
+
+Evidence:
+
+- Raw log: evidence/m4-nightly-coverage-baseline-ratchet/coverage-95-failure.log
+- The run compiled the workspace test targets and wrote `lcov.info`, then exited 1 under the 95% line threshold.
+
+## Calibrated nightly gate
+
+Command:
+
+```sh
+nix develop -c just coverage
+```
+
+Status: passed.
+
+Evidence:
+
+- Raw log: evidence/m4-nightly-coverage-baseline-ratchet/just-coverage.log
+- The recipe invoked `cargo llvm-cov nextest ... --fail-under-lines 78 --lcov --output-path lcov.info`.
+
+## Measured coverage summary
+
+Command:
+
+```sh
+nix develop -c cargo llvm-cov report --summary-only --ignore-filename-regex 'apps/.*/src/main\.rs'
+```
+
+Status: passed.
+
+Evidence:
+
+- Raw summary: evidence/m4-nightly-coverage-baseline-ratchet/coverage-summary.txt
+- Total line coverage: 78.84%.
+
+## Diff whitespace check
+
+Command:
+
+```sh
+git diff --check
+```
+
+Status: passed.
+
+## Completion report JSON parse
+
+Command:
+
+```sh
+jq empty reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json
+```
+
+Status: passed.
+
+## Orchestrator validation
+
+Command:
+
+```sh
+jq empty reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json reports/qd/m4-nightly-coverage-baseline-ratchet/audit.json
+```
+
+Status: passed.
+
+Command:
+
+```sh
+git diff --check
+```
+
+Status: passed.
+
+Command:
+
+```sh
+nix develop -c just coverage
+```
+
+Status: passed.
+
+Notes: Reran from the branch after adding audit evidence. The recipe invoked
+`--fail-under-lines 78`, ran all 46 tests, and wrote `lcov.info`.
+
+Command:
+
+```sh
+nix develop -c just check
+```
+
+Status: failed.
+
+Notes: Initial orchestrator rerun caught markdownlint MD012 in
+`evidence/m4-nightly-coverage-baseline-ratchet/notes.md`. The extra trailing
+blank line was removed.
+
+Command:
+
+```sh
+nix develop -c just check
+```
+
+Status: passed.
+
+Notes: Final orchestrator rerun passed after the markdown fix. Markdownlint
+reported 74 files and 0 errors.

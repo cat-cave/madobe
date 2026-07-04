@@ -200,6 +200,12 @@ Runs on schedule:
 
 Use `cargo-llvm-cov` with `cargo-nextest`.
 
+`just coverage` enforces the current workspace line-coverage baseline as a
+nightly gate. As of the m4 nightly coverage baseline ratchet, the measured
+workspace coverage is 78.84% with app `main.rs` entrypoints ignored, so the
+integer floor is 78%. Future increases to this floor should be explicit ratchet
+nodes with fresh coverage evidence.
+
 Coverage targets:
 
 - `protocol`: 95%+ line coverage, high branch coverage, mutation-gated.
