@@ -147,9 +147,10 @@ Repository-wide:
 Generated files must be clearly marked and excluded only when regeneration is deterministic and checked elsewhere.
 
 Linux `nix develop -c just check` is the required repository hygiene gate for
-Rust formatting, TOML formatting, shell formatting, spelling, Markdown linting,
-GitHub Actions linting, and line-limit checks. These Linux hygiene tools are
-required in `PATH`; missing tools must fail fast instead of skipping checks.
+Rust formatting, TOML formatting, shell formatting, ShellCheck, spelling,
+Markdown linting, GitHub Actions linting, and line-limit checks. These Linux
+hygiene tools are required in `PATH`; missing tools must fail fast instead of
+skipping checks.
 On macOS, the same hygiene checks run when the tools are installed and otherwise
 print explicit non-Linux skips so native `just macos-check` remains focused on
 Rust, SwiftFormat, SwiftLint, Tuist generation, and Xcode tests.

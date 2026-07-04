@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-script_dir="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+script_dir="$(CDPATH='' cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 repo_root="$(cd -- "$script_dir/.." && pwd)"
 build_dir="$(mktemp -d "${TMPDIR:-/tmp}/madobe-direct-capture-preflight.XXXXXX")"
 trap 'rm -rf "$build_dir"' EXIT

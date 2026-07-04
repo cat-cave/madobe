@@ -1,0 +1,69 @@
+{
+  "nodeId": "m4-shellcheck-hygiene-gate",
+  "summary": "Added ShellCheck to the tracked shell-script hygiene surface in `just check`, fixed the direct-capture preflight script's ShellCheck warning, and aligned engineering documentation with the command surface while preserving explicit macOS native skips.",
+  "changedFiles": [
+    "docs/ENGINEERING.md",
+    "evidence/m4-shellcheck-hygiene-gate/commands.log",
+    "evidence/m4-shellcheck-hygiene-gate/notes.md",
+    "justfile",
+    "nix/direct-capture-preflight.sh",
+    "reports/qd/m4-shellcheck-hygiene-gate/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Linux `just check` runs ShellCheck over repository shell scripts including `nix/direct-capture-preflight.sh`.",
+      "status": "passed",
+      "evidence": "`just check` now requires ShellCheck outside the Darwin-native missing-tool skip and runs it over tracked `git ls-files -- '*.sh'` results; `nix develop -c just check` passed in evidence/m4-shellcheck-hygiene-gate/commands.log."
+    },
+    {
+      "criterion": "macOS behavior remains native and explicitly skips ShellCheck only when the tool is unavailable outside Linux/Nix.",
+      "status": "passed",
+      "evidence": "The ShellCheck gate follows the existing Darwin skip pattern: missing ShellCheck on Darwin prints `shellcheck skipped outside Linux/Nix`; otherwise the tool is required and run."
+    },
+    {
+      "criterion": "Engineering docs and command surface remain aligned.",
+      "status": "passed",
+      "evidence": "docs/ENGINEERING.md lists ShellCheck in the Linux `nix develop -c just check` hygiene gate."
+    },
+    {
+      "criterion": "Evidence records focused ShellCheck and full repo check commands.",
+      "status": "passed",
+      "evidence": "evidence/m4-shellcheck-hygiene-gate/commands.log records `nix develop -c shellcheck nix/direct-capture-preflight.sh`, `nix develop -c just check`, and `git diff --check`."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-shellcheck-hygiene-gate/notes.md records the hygiene-only boundary and no product claims were added."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c shellcheck nix/direct-capture-preflight.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-shellcheck-hygiene-gate/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-shellcheck-hygiene-gate/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-shellcheck-hygiene-gate/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-shellcheck-hygiene-gate/commands.log",
+    "evidence/m4-shellcheck-hygiene-gate/notes.md",
+    "reports/qd/m4-shellcheck-hygiene-gate/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node only changes repository hygiene command behavior and documentation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-shellcheck-hygiene-gate",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Linux `just check` runs ShellCheck over repository shell scripts including `nix/direct-capture-preflight.sh`.",
+      "status": "passed",
+      "evidence": "evidence/m4-shellcheck-hygiene-gate/commands.log"
+    },
+    {
+      "criterion": "macOS behavior remains native and explicitly skips ShellCheck only when the tool is unavailable outside Linux/Nix.",
+      "status": "passed",
+      "evidence": "justfile"
+    },
+    {
+      "criterion": "Engineering docs and command surface remain aligned.",
+      "status": "passed",
+      "evidence": "docs/ENGINEERING.md"
+    },
+    {
+      "criterion": "Evidence records focused ShellCheck and full repo check commands.",
+      "status": "passed",
+      "evidence": "evidence/m4-shellcheck-hygiene-gate/commands.log"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-shellcheck-hygiene-gate/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository hygiene command change only; `nix develop -c shellcheck nix/direct-capture-preflight.sh` and `nix develop -c just check` passed."
+  },
+  "findings": []
+}
