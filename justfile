@@ -46,7 +46,10 @@ security:
   if command -v cargo-machete >/dev/null 2>&1; then cargo machete --skip-target-dir; else echo "cargo-machete missing; run inside nix develop"; exit 127; fi
   if command -v cargo-semver-checks >/dev/null 2>&1; then cargo semver-checks check-release --workspace --baseline-root .; else echo "cargo-semver-checks missing; run inside nix develop"; exit 127; fi
 
-ci-local: verify coverage
+ci-local:
+  just direct-capture-preflight
+  just verify
+  just coverage
 
 macos-bootstrap:
   if [ "$(uname -s)" != Darwin ]; then echo "macOS bootstrap skipped outside Darwin"; else if ! command -v mise >/dev/null 2>&1; then command -v brew >/dev/null 2>&1 || { echo "Homebrew missing; install mise, tuist, swiftformat, and swiftlint manually"; exit 127; }; brew install mise; fi; brew list swiftformat >/dev/null 2>&1 || brew install swiftformat; brew list swiftlint >/dev/null 2>&1 || brew install swiftlint; mise install; fi

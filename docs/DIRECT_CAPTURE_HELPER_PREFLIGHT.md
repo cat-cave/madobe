@@ -15,6 +15,8 @@ nix develop -c just direct-capture-preflight
 Hosted Linux CI runs the same command after `nix flake check` and before the
 repo-wide `just check`/test/security gates. The macOS CI job does not run this
 preflight and remains responsible only for the native macOS check surface.
+Local Linux PR readiness uses `nix develop -c just ci-local`, which invokes this
+preflight before `verify` and `coverage`.
 
 The target runs `nix/direct-capture-preflight.sh`, which:
 

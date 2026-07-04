@@ -82,12 +82,20 @@ Recommended commands:
 ```text
 just fmt
 just check
+just direct-capture-preflight
 just test
 just verify
 just coverage
+just ci-local
 just mutants
 just hardware
 ```
+
+Linux PR readiness is `nix develop -c just ci-local`. The recipe runs
+`direct-capture-preflight` before the broader `verify` and `coverage` gates so
+local validation matches hosted Linux CI's direct-capture helper check.
+macOS validation remains native through `just macos-check`; it is not
+responsible for Linux/Nix direct-capture build dependencies.
 
 ## Rust Standards
 
