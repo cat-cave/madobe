@@ -1,0 +1,18 @@
+Script started on 2026-07-04 10:38:32-05:00 [COMMAND="nix develop -c cargo llvm-cov nextest --workspace --all-features --ignore-filename-regex "apps/.*/src/main\\.rs" --fail-under-lines 95 --lcov --output-path lcov.info" <not executed on terminal>]
+madobe dev shell: use 'just --list' to see commands
+info: cargo-llvm-cov currently setting cfg(coverage); you can opt-out it by passing --no-cfg-coverage
+   Compiling madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/compositor)
+   Compiling madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/telemetry)
+   Compiling madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/protocol)
+   Compiling madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/encode-nv-sys)
+   Compiling madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/capture)
+   Compiling madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/transport)
+   Compiling madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/encode)
+   Compiling madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/hyprland)
+   Compiling hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/apps/hostd)
+   Compiling madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/apps/cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.90s
+
+    Finished report saved to lcov.info
+
+Script done on 2026-07-04 10:38:38-05:00 [COMMAND_EXIT_CODE="1"]

@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-nightly-coverage-baseline-ratchet",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Nightly `just coverage` passes at the current measured line coverage baseline",
+      "status": "passed",
+      "evidence": "Orchestrator reran `nix develop -c just coverage`; the recipe passed with `coverage_line_floor := \"78\"`."
+    },
+    {
+      "criterion": "The coverage threshold does not drop below the measured current baseline floor",
+      "status": "passed",
+      "evidence": "Measured current total line coverage is 78.84%; the calibrated integer floor is 78%, which preserves a failing signal below the current measured floor while allowing the current workspace to pass."
+    },
+    {
+      "criterion": "Evidence records the failing 95% policy, the measured current coverage summary, and the passing calibrated gate",
+      "status": "passed",
+      "evidence": "Evidence files include coverage-95-failure.log, coverage-summary.txt, just-coverage.log, commands.log, and notes.md."
+    },
+    {
+      "criterion": "Documentation or node notes explain that future coverage increases should be explicit ratchet nodes",
+      "status": "passed",
+      "evidence": "docs/ENGINEERING.md and evidence/m4-nightly-coverage-baseline-ratchet/notes.md both document future increases as explicit ratchet nodes with fresh evidence."
+    },
+    {
+      "criterion": "No product QUIC, decode, render, presentation, or latency claim is changed",
+      "status": "passed",
+      "evidence": "Diff review confirms changes are limited to justfile, docs/ENGINEERING.md, and node evidence/report files."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node calibrates the repository coverage gate; Linux Nix coverage validation was run locally."
+  },
+  "findings": []
+}

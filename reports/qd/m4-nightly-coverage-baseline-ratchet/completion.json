@@ -1,0 +1,86 @@
+{
+  "nodeId": "m4-nightly-coverage-baseline-ratchet",
+  "summary": "Calibrated the nightly `just coverage` gate from an unreachable 95% workspace line threshold to a documented 78% baseline floor, based on the measured current 78.84% total line coverage with app main entrypoints ignored. Documented that future increases should be explicit ratchet nodes.",
+  "changedFiles": [
+    "justfile",
+    "docs/ENGINEERING.md",
+    "evidence/m4-nightly-coverage-baseline-ratchet/commands.log",
+    "evidence/m4-nightly-coverage-baseline-ratchet/coverage-95-failure.log",
+    "evidence/m4-nightly-coverage-baseline-ratchet/coverage-summary.txt",
+    "evidence/m4-nightly-coverage-baseline-ratchet/just-coverage.log",
+    "evidence/m4-nightly-coverage-baseline-ratchet/notes.md",
+    "reports/qd/m4-nightly-coverage-baseline-ratchet/audit.json",
+    "reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Record evidence for the failing 95% policy.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-coverage-baseline-ratchet/coverage-95-failure.log records the 95% llvm-cov command exiting with code 1 after writing lcov.info."
+    },
+    {
+      "criterion": "Measure the current coverage baseline.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-coverage-baseline-ratchet/coverage-summary.txt records TOTAL line coverage of 78.84%."
+    },
+    {
+      "criterion": "Calibrate just coverage to a documented current baseline floor that does not exceed the measured baseline.",
+      "status": "passed",
+      "evidence": "justfile defines coverage_line_floor := \"78\" and `nix develop -c just coverage` passed with --fail-under-lines 78."
+    },
+    {
+      "criterion": "Document future increases as explicit ratchet nodes.",
+      "status": "passed",
+      "evidence": "docs/ENGINEERING.md and evidence/m4-nightly-coverage-baseline-ratchet/notes.md document that future coverage floor increases should be explicit ratchet nodes with fresh evidence."
+    },
+    {
+      "criterion": "Do not change product QUIC/decode/render/presentation/latency claims.",
+      "status": "passed",
+      "evidence": "Only coverage tooling, engineering coverage policy, and node evidence/report files were changed."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo llvm-cov nextest --workspace --all-features --ignore-filename-regex 'apps/.*/src/main\\.rs' --fail-under-lines 95 --lcov --output-path lcov.info",
+      "status": "failed",
+      "evidence": "evidence/m4-nightly-coverage-baseline-ratchet/coverage-95-failure.log"
+    },
+    {
+      "command": "nix develop -c just coverage",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-coverage-baseline-ratchet/just-coverage.log"
+    },
+    {
+      "command": "nix develop -c cargo llvm-cov report --summary-only --ignore-filename-regex 'apps/.*/src/main\\.rs'",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-coverage-baseline-ratchet/coverage-summary.txt"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-coverage-baseline-ratchet/commands.log"
+    },
+    {
+      "command": "jq empty reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-coverage-baseline-ratchet/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-nightly-coverage-baseline-ratchet/commands.log",
+    "evidence/m4-nightly-coverage-baseline-ratchet/coverage-95-failure.log",
+    "evidence/m4-nightly-coverage-baseline-ratchet/coverage-summary.txt",
+    "evidence/m4-nightly-coverage-baseline-ratchet/just-coverage.log",
+    "evidence/m4-nightly-coverage-baseline-ratchet/notes.md",
+    "reports/qd/m4-nightly-coverage-baseline-ratchet/audit.json",
+    "reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node only calibrates the repository coverage gate. Linux Nix coverage validation was run locally."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

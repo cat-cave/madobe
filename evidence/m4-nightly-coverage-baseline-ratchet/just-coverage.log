@@ -1,0 +1,21 @@
+Script started on 2026-07-04 10:39:14-05:00 [COMMAND="nix develop -c just coverage" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet' is dirty
+madobe dev shell: use 'just --list' to see commands
+[1mcommand -v cargo-llvm-cov >/dev/null 2>&1 || { echo "cargo-llvm-cov missing; run inside nix develop"; exit 127; }[0m
+[1mcargo llvm-cov nextest --workspace --all-features --ignore-filename-regex 'apps/.*/src/main\.rs' --fail-under-lines 78 --lcov --output-path lcov.info[0m
+info: cargo-llvm-cov currently setting cfg(coverage); you can opt-out it by passing --no-cfg-coverage
+   Compiling madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/compositor)
+   Compiling madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/protocol)
+   Compiling madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/telemetry)
+   Compiling madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/encode-nv-sys)
+   Compiling madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/capture)
+   Compiling madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/transport)
+   Compiling madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/encode)
+   Compiling madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/crates/hyprland)
+   Compiling hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/apps/hostd)
+   Compiling madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-coverage-baseline-ratchet/apps/cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.54s
+
+    Finished report saved to lcov.info
+
+Script done on 2026-07-04 10:39:21-05:00 [COMMAND_EXIT_CODE="0"]
