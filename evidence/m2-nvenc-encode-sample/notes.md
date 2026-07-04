@@ -30,6 +30,11 @@ streaming latency, encode latency, throughput, frame pacing/jitter, CPU utilizat
 or cross-device latency. The `tune=ll` setting below records the configured encoder mode only; no latency or
 performance result is claimed.
 
+This one-frame Linux-produced sample is decoder-consumable AV1/IVF evidence only. It does not validate downstream Mac
+decode/render behavior, including VideoToolbox decode, Metal render, Mac presentation/display, Mac frame timing, or
+cross-device render behavior. That positive proof remains future Mac validation work, likely via
+`m3-videotoolbox-decode-sample`.
+
 ## Boundary
 
 No direct NVIDIA SDK or driver FFI was introduced. The unsafe-prone host boundary is isolated as

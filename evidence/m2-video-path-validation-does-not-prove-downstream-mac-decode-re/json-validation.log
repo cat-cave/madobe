@@ -1,0 +1,6 @@
+$ jq -e 'type == "object"' evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/completion.json
+true
+true
+
+$ jq -e '.evidenceBoundary.machineCheckableClaims as $c | .evidenceBoundary.downstreamMacDecodeRenderBoundary as $b | ($c.downstreamMacDecodeRenderValidated == false and $c.videoToolboxDecodeProven == false and $c.metalRenderProven == false and $c.macPresentationDisplayValidated == false and $c.macFrameTimingValidated == false and $c.crossDeviceRenderBehaviorValidated == false and $c.decoderConsumableAv1IvfSampleProven == true and ($b.currentPositiveClaim | test("decoder-consumable sample evidence")) and (($b.notValidated | index("VideoToolbox decode")) != null) and (($b.notValidated | index("Metal render")) != null) and (($b.notValidated | index("Mac presentation/display")) != null) and (($b.notValidated | index("Mac frame timing")) != null) and (($b.notValidated | index("cross-device render behavior")) != null) and (.evidenceBoundary.futureWorkForMacDecodeRenderValidation | test("m3-videotoolbox-decode-sample")))' evidence/m2-video-path-validation/bundle-manifest.json
+true

@@ -131,8 +131,39 @@
       "gpuUtilizationMeasured": false,
       "networkBehaviorValidated": false,
       "crossDeviceLatencyMeasured": false,
+      "downstreamMacDecodeRenderValidated": false,
+      "videoToolboxDecodeProven": false,
+      "metalRenderProven": false,
+      "macPresentationDisplayValidated": false,
+      "macFrameTimingValidated": false,
+      "crossDeviceRenderBehaviorValidated": false,
       "nvencEncoderInvocationProven": true,
       "decoderConsumableAv1IvfSampleProven": true
+    },
+    "downstreamMacDecodeRenderBoundary": {
+      "sourceSample": "evidence/m2-nvenc-encode-sample/sample-av1.ivf",
+      "currentPositiveClaim": "The Linux-produced sample probes as AV1 in an IVF container and is suitable decoder-consumable sample evidence.",
+      "validatedOnLinuxOnly": [
+        "ffprobe identifies the sample as AV1/IVF",
+        "IVF header starts with DKIF and codec tag AV01",
+        "sample hash and size are recorded"
+      ],
+      "notValidated": [
+        "VideoToolbox decode",
+        "Metal render",
+        "Mac presentation/display",
+        "Mac frame timing",
+        "cross-device render behavior"
+      ],
+      "mustNotBeUsedAsProofFor": [
+        "downstream Mac decode/render",
+        "VideoToolbox decode success",
+        "Metal render success",
+        "Mac display presentation",
+        "Mac frame timing",
+        "cross-device render behavior"
+      ],
+      "futurePositiveProof": "Future Mac validation, likely via m3-videotoolbox-decode-sample, must execute and record VideoToolbox decode plus downstream render/presentation evidence before those claims can be made."
     },
     "sampleColorMetadata": {
       "source": "ffprobe stream metadata for evidence/m2-nvenc-encode-sample/sample-av1.ivf",
@@ -155,12 +186,19 @@
       "GPU utilization",
       "network behavior",
       "cross-device latency",
+      "downstream Mac decode/render",
+      "VideoToolbox decode",
+      "Metal render",
+      "Mac presentation/display",
+      "Mac frame timing",
+      "cross-device render behavior",
       "HDR handling",
       "color-management behavior",
       "wide-gamut preservation",
       "end-to-end color accuracy"
     ],
     "futureWorkForDirectDmaBufProof": "A future proof must pass a capture DMA-BUF directly into NVENC or NVIDIA SDK/driver import APIs and record import/synchronization evidence. That proof is not present in this bundle.",
+    "futureWorkForMacDecodeRenderValidation": "Future Mac validation, likely via m3-videotoolbox-decode-sample, must execute VideoToolbox decode and record downstream render/presentation evidence before the M2 sample can support Mac decode/render claims. That validation is not present in this bundle.",
     "futureWorkForHdrColorValidation": "A future HDR/color proof must use appropriate source material, tagged color metadata, and validation for HDR handling, color-management behavior, wide-gamut preservation, and end-to-end color accuracy. That proof is not present in this bundle.",
     "futureWorkForStreamingPerformanceValidation": "Future streaming performance validation must run an end-to-end stream with instrumentation for streaming latency, encode latency, throughput, frame pacing/jitter, CPU utilization, GPU utilization, network behavior, and cross-device latency as applicable. That validation is not present in this bundle."
   },
@@ -271,10 +309,14 @@
     "This bundle does not measure GPU utilization.",
     "This bundle does not validate network behavior.",
     "This bundle does not measure cross-device latency.",
+    "This bundle does not validate downstream Mac decode/render.",
     "This bundle does not prove direct capture DMA-BUF import into NVENC.",
     "This bundle does not prove zero-copy Linux capture-to-encode.",
     "This bundle does not prove VideoToolbox decode.",
     "This bundle does not prove Metal render.",
+    "This bundle does not prove Mac presentation/display.",
+    "This bundle does not validate Mac frame timing.",
+    "This bundle does not validate cross-device render behavior.",
     "This bundle does not prove HDR handling.",
     "This bundle does not prove color-management behavior.",
     "This bundle does not prove wide-gamut preservation.",
@@ -289,7 +331,7 @@
     },
     {
       "title": "m2-video-path-validation does not prove downstream Mac decode/render",
-      "body": "sample-av1.ivf probes as AV1/IVF on Linux, but no VideoToolbox decode or Metal render has been executed yet. Downstream Mac work must validate that path before claiming it."
+      "body": "sample-av1.ivf probes as AV1/IVF on Linux and is decoder-consumable sample evidence only. No VideoToolbox decode, Metal render, Mac presentation/display, Mac frame timing, or cross-device render behavior has been executed or validated yet. Downstream Mac work, likely m3-videotoolbox-decode-sample, must validate that path before claiming it."
     },
     {
       "title": "m2-video-path-validation does not measure streaming latency or performance",
