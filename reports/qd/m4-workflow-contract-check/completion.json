@@ -9,7 +9,9 @@
     "reports/qd/m4-workflow-contract-check/audit.json",
     "reports/qd/m4-workflow-contract-check/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "20579e292d6e3ad59ca3b75fe4a4726b4e9314f0"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "CI workflow contract checks cover required triggers, top-level contents read permission, Linux and macOS jobs, explicit job timeouts, required actions, Rust components, and standard run commands.",
