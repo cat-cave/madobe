@@ -21,6 +21,9 @@ check: fmt
   if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
   just lint-lines
 
+direct-capture-preflight:
+  bash nix/direct-capture-preflight.sh
+
 test:
   if command -v cargo-nextest >/dev/null 2>&1; then cargo nextest run --workspace --all-features; else cargo test --workspace --all-features; fi
   cargo test --doc --workspace --all-features

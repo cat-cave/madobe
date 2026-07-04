@@ -1,0 +1,183 @@
+# m4-direct-capture-helper-reproducibility commands
+
+Worktree:
+`/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-helper-reproducibility`
+
+## Context reads
+
+Status: passed.
+
+```sh
+pwd && git status --short --branch
+sed -n '1,220p' docs/ORCHESTRATION.md
+sed -n '1,260p' docs/LINUX_ORCHESTRATOR.md
+sed -n '1,520p' docs/QD_WORKFLOW.md
+jq '.nodes[] | select(.id == "m4-direct-capture-helper-reproducibility")' roadmap/qd-export.json
+sed -n '1,260p' reports/qd/m2-audit/subreports/capture-evidence.md
+jq '.' reports/qd/m2-audit/completion.json
+sed -n '1,260p' evidence/m2-native-dmabuf-allocation-proof/notes.md
+sed -n '1,280p' evidence/m2-direct-capture-api-spike/notes.md
+sed -n '1,260p' docs/LINUX_VIDEO_SMOKE_HOST_PREFLIGHT.md
+sed -n '1,220p' Cargo.toml
+rg -n "direct capture|ext-image|GBM|dmabuf|wayland-scanner|pkg-config|preflight" docs justfile nix crates apps evidence reports -g '*.md' -g '*.nix' -g '*.rs' -g 'justfile'
+```
+
+## Formatter probe outside Nix
+
+Status: failed as expected outside the repo dev shell.
+
+```sh
+shfmt -w nix/direct-capture-preflight.sh && nixpkgs-fmt nix/flake.nix
+```
+
+Result:
+
+```text
+zsh:1: command not found: shfmt
+```
+
+## First preflight run
+
+Status: failed, then fixed. This run proved the Nix shell could realize the new
+Wayland/GBM packages and exposed an incorrect generated protocol symbol in the
+initial preflight source.
+
+```sh
+nix develop -c just direct-capture-preflight
+```
+
+Key result:
+
+```text
+error: 'ext_output_image_capture_source_manager_v1_interface' undeclared
+```
+
+## Protocol dependency inspection
+
+Status: passed.
+
+```sh
+nix develop -c bash -lc 'protocol_dir=$(pkg-config --variable=pkgdatadir wayland-protocols); tmp=$(mktemp -d); wayland-scanner client-header "$protocol_dir/staging/ext-image-copy-capture/ext-image-copy-capture-v1.xml" "$tmp/ext.h"; grep -n "interface" "$tmp/ext.h" | head -60; rm -rf "$tmp"'
+nix develop -c bash -lc 'protocol_dir=$(pkg-config --variable=pkgdatadir wayland-protocols); find "$protocol_dir" -name "*capture*source*.xml" -o -name "*image*capture*.xml" | sort'
+nix develop -c bash -lc 'protocol_dir=$(pkg-config --variable=pkgdatadir wayland-protocols); grep -n "foreign_toplevel\|import" "$protocol_dir/staging/ext-image-capture-source/ext-image-capture-source-v1.xml"; find "$protocol_dir" -name "*foreign*toplevel*.xml" -print'
+```
+
+Key results:
+
+```text
+ext-image-copy-capture-v1 exports ext_image_copy_capture_manager_v1_interface.
+wayland-protocols 1.48 provides staging/ext-image-capture-source/ext-image-capture-source-v1.xml.
+ext-image-capture-source-v1 references ext_foreign_toplevel_handle_v1.
+wayland-protocols 1.48 provides staging/ext-foreign-toplevel-list/ext-foreign-toplevel-list-v1.xml.
+```
+
+## Passing direct capture preflight
+
+Status: passed.
+
+```sh
+nix develop -c just direct-capture-preflight
+```
+
+Result:
+
+```text
+direct capture build preflight ok
+wayland-client 1.25.0
+wayland-protocols 1.48
+gbm 26.0.3
+libdrm 2.4.133
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-foreign-toplevel-list/ext-foreign-toplevel-list-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-image-capture-source/ext-image-capture-source-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-image-copy-capture/ext-image-copy-capture-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/stable/linux-dmabuf/linux-dmabuf-v1.xml
+```
+
+## Formatting
+
+Status: passed.
+
+```sh
+nix develop -c bash -lc 'shfmt -w nix/direct-capture-preflight.sh && nixpkgs-fmt nix/flake.nix'
+```
+
+Result:
+
+```text
+0 / 1 have been reformatted
+```
+
+## Required repo check
+
+Status: passed before and after adding node evidence.
+
+```sh
+nix develop -c just check
+```
+
+Key result:
+
+```text
+cargo check --workspace --all-targets --all-features
+Finished `dev` profile [unoptimized + debuginfo]
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+Finished `dev` profile [unoptimized + debuginfo]
+markdownlint-cli2 ... Summary: 0 error(s)
+just lint-lines
+```
+
+## Evidence validation
+
+Status: passed.
+
+```sh
+jq empty reports/qd/m4-direct-capture-helper-reproducibility/completion.json
+git diff --check
+nix develop -c just check
+```
+
+Final check result:
+
+```text
+cargo check --workspace --all-targets --all-features
+Finished `dev` profile [unoptimized + debuginfo]
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+Finished `dev` profile [unoptimized + debuginfo]
+markdownlint-cli2 ... Summary: 0 error(s)
+just lint-lines
+```
+
+## Orchestrator Verification
+
+Status: passed.
+
+```sh
+nix develop -c just direct-capture-preflight
+nix flake check
+nix develop -c just check
+git diff --check
+jq empty reports/qd/m4-direct-capture-helper-reproducibility/completion.json
+```
+
+Key results:
+
+```text
+direct capture build preflight ok
+wayland-client 1.25.0
+wayland-protocols 1.48
+gbm 26.0.3
+libdrm 2.4.133
+all checks passed!
+markdownlint-cli2 ... Summary: 0 error(s)
+just lint-lines
+```
+
+Final report-normalization check:
+
+```sh
+jq empty reports/qd/m4-direct-capture-helper-reproducibility/completion.json reports/qd/m4-direct-capture-helper-reproducibility/audit.json
+git diff --check
+nix develop -c just check
+```
+
+Status: passed.
