@@ -28,9 +28,9 @@
     }
   ],
   "verificationEvidence": {
-    "commandsLog": "evidence/m4-dependabot-contract-check/commands.log",
-    "notes": "evidence/m4-dependabot-contract-check/notes.md",
-    "macosValidation": "not_required"
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
   },
   "realWorldValidation": {
     "required": false,
