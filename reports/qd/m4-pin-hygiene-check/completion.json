@@ -9,7 +9,9 @@
     "reports/qd/m4-pin-hygiene-check/completion.json",
     "reports/qd/m4-pin-hygiene-check/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "d3c83aeb344d5574eceb71fa52aaf760c6728bee"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": ".mise.toml rejects latest/stable tool selectors.",
