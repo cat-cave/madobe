@@ -1,0 +1,41 @@
+{
+  "nodeId": "m2-audit",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Capture evidence is reviewed",
+      "status": "passed",
+      "evidence": "reports/qd/m2-audit/subreports/capture-evidence.md"
+    },
+    {
+      "criterion": "NVENC unsafe boundary is reviewed",
+      "status": "passed",
+      "evidence": "reports/qd/m2-audit/subreports/nvenc-boundary.md"
+    },
+    {
+      "criterion": "P0/P1 findings are resolved or dispositioned",
+      "status": "passed",
+      "evidence": "No P0/P1 findings were reported by any subreport."
+    },
+    {
+      "criterion": "Downstream sample artifact expectations are documented",
+      "status": "passed",
+      "evidence": "reports/qd/m2-audit/subreports/downstream-readiness.md and evidence/m2-audit/notes.md"
+    },
+    {
+      "criterion": "qd audit pass reports are recorded",
+      "status": "passed",
+      "evidence": "reports/qd/m2-audit/audit.json"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Audit-only node; reviewed real-world evidence from completed M2 nodes instead of running new hardware validation."
+  },
+  "findings": []
+}
