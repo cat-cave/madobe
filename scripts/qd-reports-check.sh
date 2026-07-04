@@ -2,6 +2,7 @@
 set -euo pipefail
 
 error_count=0
+roadmap_export=roadmap/qd-export.json
 
 report_error() {
   printf 'qd report check: %s: %s\n' "$1" "$2" >&2
@@ -129,15 +130,82 @@ validate_audit() {
   expect_jq "$file" '.findings | type == "array"' "findings must be an array"
 }
 
+validate_roadmap_export() {
+  if [[ ! -f $roadmap_export ]]; then
+    report_error "$roadmap_export" "required roadmap export is missing"
+    return 1
+  fi
+
+  json_ok "$roadmap_export" || return 1
+
+  if ! jq -e 'type == "object" and (.nodes | type == "array")' "$roadmap_export" >/dev/null; then
+    report_error "$roadmap_export" "must be an object with a nodes array"
+    return 1
+  fi
+
+  if ! jq -e 'all(.nodes[]; (.id | type == "string" and length > 0) and (.status | type == "string" and length > 0))' "$roadmap_export" >/dev/null; then
+    report_error "$roadmap_export" "each node must include non-empty string id and status fields"
+    return 1
+  fi
+
+  if ! jq -e '([.nodes[].id] | length) == ([.nodes[].id] | unique | length)' "$roadmap_export" >/dev/null; then
+    report_error "$roadmap_export" "node ids must be unique"
+    return 1
+  fi
+}
+
+node_exists_in_roadmap() {
+  local node_id=$1
+
+  jq -e --arg node_id "$node_id" 'any(.nodes[]; .id == $node_id)' "$roadmap_export" >/dev/null
+}
+
+validate_report_directory_coverage() {
+  local file
+  local node_id
+  local previous_node_id=
+
+  while IFS= read -r -d '' file; do
+    node_id=$(node_id_for_report "$file")
+    if [[ $node_id == "$previous_node_id" ]]; then
+      continue
+    fi
+    previous_node_id=$node_id
+
+    if ! node_exists_in_roadmap "$node_id"; then
+      report_error "reports/qd/$node_id" "report directory must match a node id in $roadmap_export"
+    fi
+  done < <(find reports/qd -mindepth 2 -maxdepth 2 -type f \( -name completion.json -o -name audit.json \) -print0 | sort -z)
+}
+
+validate_done_node_report_coverage() {
+  local node_id
+
+  while IFS= read -r node_id; do
+    if [[ ! -f reports/qd/$node_id/completion.json ]]; then
+      report_error "reports/qd/$node_id" "done node is missing completion.json"
+    fi
+
+    if [[ ! -f reports/qd/$node_id/audit.json ]]; then
+      report_error "reports/qd/$node_id" "done node is missing audit.json"
+    fi
+  done < <(jq -r '.nodes[] | select(.status == "done") | .id' "$roadmap_export" | sort)
+}
+
 main() {
   local completion_count=0
   local audit_count=0
   local file
+  local roadmap_valid=0
 
   command -v jq >/dev/null 2>&1 || {
     printf 'qd report check: required tool missing: jq\n' >&2
     exit 127
   }
+
+  if validate_roadmap_export; then
+    roadmap_valid=1
+  fi
 
   while IFS= read -r -d '' file; do
     completion_count=$((completion_count + 1))
@@ -154,6 +222,11 @@ main() {
   fi
   if [[ $audit_count -eq 0 ]]; then
     report_error reports/qd "no audit reports found"
+  fi
+
+  if [[ $roadmap_valid -eq 1 ]]; then
+    validate_report_directory_coverage
+    validate_done_node_report_coverage
   fi
 
   if [[ $error_count -ne 0 ]]; then

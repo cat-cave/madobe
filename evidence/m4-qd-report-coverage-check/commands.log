@@ -1,0 +1,41 @@
+2026-07-04 m4-qd-report-coverage-check validation
+
+$ bash scripts/qd-reports-check.sh
+qd report check: validated 66 completion report(s) and 66 audit report(s)
+
+$ nix develop -c shfmt -d scripts/qd-reports-check.sh
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-report-coverage-check' is dirty
+error (ignored): SQLite database '/home/trevor/.cache/nix/eval-cache-v6/cbb2eca9cba8d69b020f32b2e56fbfc6507ba4ab3d9a654c8a414f784eb82003.sqlite' is busy
+madobe dev shell: use 'just --list' to see commands
+
+$ nix develop -c shellcheck scripts/qd-reports-check.sh
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-report-coverage-check' is dirty
+madobe dev shell: use 'just --list' to see commands
+
+$ nix develop -c just qd-reports-check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-report-coverage-check' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 66 completion report(s) and 66 audit report(s)
+
+$ nix develop -c just check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-report-coverage-check' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+taplo fmt --check
+shfmt -d ran through just fmt with no diff
+just qd-reports-check
+qd report check: validated 66 completion report(s) and 66 audit report(s)
+cargo check --workspace --all-targets --all-features
+Finished `dev` profile [unoptimized + debuginfo] target(s)
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+Finished `dev` profile [unoptimized + debuginfo] target(s)
+shellcheck ran for tracked shell scripts
+typos
+markdownlint-cli2 "**/*.md"
+Summary: 0 error(s)
+actionlint .github/workflows/*.yml
+just lint-lines
+
+$ git diff --check
+# no output
