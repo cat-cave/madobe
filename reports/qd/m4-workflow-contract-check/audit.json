@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-workflow-contract-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": "CI workflow contract checks cover required triggers, top-level contents read permission, Linux and macOS jobs, explicit job timeouts, required actions, Rust components, and standard run commands.",
+      "status": "passed",
+      "evidence": "scripts/workflow-contract-check.sh"
+    },
+    {
+      "criterion": "Nightly workflow contract checks cover scheduled and manual triggers, top-level contents read and security events write permissions, explicit job timeout, and deep-check commands.",
+      "status": "passed",
+      "evidence": "scripts/workflow-contract-check.sh"
+    },
+    {
+      "criterion": "Missing required workflow fields produce file-scoped errors via report_error.",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/commands.log"
+    },
+    {
+      "criterion": "The check is wired into just check through just workflow-contract-check.",
+      "status": "passed",
+      "evidence": "justfile"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/ and reports/qd/m4-workflow-contract-check/"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-workflow-contract-check/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository workflow contract tooling only; no product runtime validation is required."
+  },
+  "findings": []
+}
