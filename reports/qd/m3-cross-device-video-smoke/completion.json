@@ -1,0 +1,105 @@
+{
+  "nodeId": "m3-cross-device-video-smoke",
+  "summary": "Completed the first Linux-to-Mac live video smoke using the TCP LAN harness. Linux sent the checked-in 84-byte AV1 IVF sample from the Linux worktree, and the Mac receiver accepted one sample from Linux host peer 192.168.1.23:46968 with matching metadata, byte count, and SHA-256. The result records only the proven TCP sample-transfer claim and leaves decode, render, presentation, and latency metrics at zero or null.",
+  "changedFiles": [
+    "evidence/m3-cross-device-video-smoke/commands.log",
+    "evidence/m3-cross-device-video-smoke/notes.md",
+    "evidence/m3-cross-device-video-smoke/result.json",
+    "evidence/m3-cross-device-video-smoke/linux/sender-cli.err",
+    "evidence/m3-cross-device-video-smoke/linux/sender-cli.out",
+    "evidence/m3-cross-device-video-smoke/linux/sender.log",
+    "evidence/m3-cross-device-video-smoke/linux/sender-timeline.json",
+    "evidence/m3-cross-device-video-smoke/macos/linux-attempt/notes.md",
+    "evidence/m3-cross-device-video-smoke/macos/linux-attempt/receiver-listening.log",
+    "evidence/m3-cross-device-video-smoke/macos/linux-attempt/receiver.log",
+    "evidence/m3-cross-device-video-smoke/macos/linux-attempt/receiver-timeline.json",
+    "evidence/m3-cross-device-video-smoke/macos/linux-attempt/result.json",
+    "evidence/m3-cross-device-video-smoke/macos/mac-client-linux-attempt.log",
+    "reports/qd/m3-cross-device-video-smoke/completion.json",
+    "reports/qd/m3-cross-device-video-smoke/audit.json"
+  ],
+  "commits": [
+    "05b41a532fd1ad0c6e9138c0bd4d46d2f9da5f74",
+    "c3b1f3cbe766c2b0efda3100b7b9ff0f3b78885a"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Both orchestrators sync the same branch and commits.",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-video-smoke/commands.log records the shared branch, Linux sender evidence commit 05b41a5, and Mac receiver evidence commit c3b1f3c."
+    },
+    {
+      "criterion": "Linux host command and logs are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-video-smoke/linux/sender.log, sender-cli.out, and sender-timeline.json record the Linux sender command to 192.168.1.15:47044, payload_bytes=84, and the expected SHA-256."
+    },
+    {
+      "criterion": "Mac client command and logs are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-video-smoke/macos/linux-attempt/receiver.log and mac-client-linux-attempt.log record bind=0.0.0.0:47044, peer=192.168.1.23:46968, payload_bytes=84, and status=passed."
+    },
+    {
+      "criterion": "result.json records frames sent, decoded, and presented where available.",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-video-smoke/result.json records frames_sent=1, frames_decoded=0, frames_rendered=0, frames_presented=0, and null latency metrics."
+    },
+    {
+      "criterion": "Failures create qd findings or prerequisite nodes rather than hidden notes.",
+      "status": "passed",
+      "evidence": "The live transfer passed. Unsupported product QUIC, decode, render, presentation, and latency claims are explicitly excluded in result.json and notes.md rather than being counted as successful metrics."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "git pull --ff-only",
+      "status": "passed",
+      "evidence": "Pulled Mac receiver evidence commit c3b1f3c into the shared worktree."
+    },
+    {
+      "command": "qd sync --from roadmap/qd-export.json --expect-clean",
+      "status": "passed",
+      "evidence": "Worktree qd cache matched the branch export before completion."
+    },
+    {
+      "command": "nix develop -c cargo run -q -p madobectl -- video-smoke send --addr 192.168.1.15:47044 --sample evidence/m2-nvenc-encode-sample/sample-av1.ivf --evidence-dir evidence/m3-cross-device-video-smoke/linux",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-video-smoke/linux/sender-cli.out"
+    },
+    {
+      "command": "jq empty evidence/m3-cross-device-video-smoke/result.json evidence/m3-cross-device-video-smoke/macos/linux-attempt/result.json reports/qd/m3-cross-device-video-smoke/completion.json reports/qd/m3-cross-device-video-smoke/audit.json",
+      "status": "passed",
+      "evidence": "JSON validation passed before qd complete."
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-protocol cross_device -- --nocapture",
+      "status": "passed",
+      "evidence": "Protocol cross-device result guardrail tests passed: 5 passed."
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "Full Linux check gate passed before qd complete."
+    }
+  ],
+  "evidence": [
+    "evidence/m3-cross-device-video-smoke/commands.log",
+    "evidence/m3-cross-device-video-smoke/notes.md",
+    "evidence/m3-cross-device-video-smoke/result.json",
+    "evidence/m3-cross-device-video-smoke/linux/sender.log",
+    "evidence/m3-cross-device-video-smoke/macos/linux-attempt/receiver.log",
+    "evidence/m3-cross-device-video-smoke/macos/linux-attempt/result.json",
+    "reports/qd/m3-cross-device-video-smoke/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Linux sender evidence and Mac receiver evidence prove one live TCP LAN sample transfer from Linux to Mac with matching byte count and SHA-256."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": [
+    "Add follow-up node for product QUIC cross-device validation before claiming product transport.",
+    "Add follow-up node for live VideoToolbox decode from a received network sample before claiming cross-device decode.",
+    "Add follow-up node for Metal render/presentation evidence from a received network sample before claiming cross-device render or presentation.",
+    "Add follow-up node for cross-device latency instrumentation before recording non-null latency metrics."
+  ]
+}

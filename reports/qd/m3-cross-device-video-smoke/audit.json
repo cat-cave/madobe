@@ -1,0 +1,41 @@
+{
+  "nodeId": "m3-cross-device-video-smoke",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Both orchestrators sync the same branch and commits.",
+      "status": "passed",
+      "evidence": "The shared branch contains Linux sender commit 05b41a5 and Mac receiver commit c3b1f3c; evidence/commands.log records both sides."
+    },
+    {
+      "criterion": "Linux host command and logs are recorded.",
+      "status": "passed",
+      "evidence": "Linux sender.log and sender-timeline.json record connection to 192.168.1.15:47044 and frame_sent for SHA-256 51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875."
+    },
+    {
+      "criterion": "Mac client command and logs are recorded.",
+      "status": "passed",
+      "evidence": "Mac receiver.log records peer_addr=192.168.1.23:46968, metadata_valid=true, payload_byte_count_valid=true, payload_sha256_valid=true, and passed=true."
+    },
+    {
+      "criterion": "result.json records frames sent, decoded, and presented where available.",
+      "status": "passed",
+      "evidence": "Aggregate result.json records frames_sent=1 and zero/null for decode, render, presentation, and latency where no supporting artifacts exist."
+    },
+    {
+      "criterion": "Failures create qd findings or prerequisite nodes rather than hidden notes.",
+      "status": "passed",
+      "evidence": "No live transfer failure remains. Unsupported product transport, decode, render, presentation, and latency claims are explicit non-claims and are listed as follow-up DAG work in the completion report."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Linux-to-Mac TCP LAN sample transfer passed with receiver peer 192.168.1.23:46968 and matching 84-byte SHA-256 on both sides."
+  },
+  "findings": []
+}

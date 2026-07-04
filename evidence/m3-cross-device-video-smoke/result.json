@@ -1,0 +1,60 @@
+{
+  "node_id": "m3-cross-device-video-smoke",
+  "branch": "spec/m3-cross-device-video-smoke",
+  "linux_commit": "05b41a532fd1ad0c6e9138c0bd4d46d2f9da5f74",
+  "macos_commit": "c3b1f3cbe766c2b0efda3100b7b9ff0f3b78885a",
+  "started_at": "2026-07-04T04:02:42Z",
+  "ended_at": "2026-07-04T04:13:29Z",
+  "passed": true,
+  "metrics": {
+    "frames_sent": 1,
+    "frames_decoded": 0,
+    "frames_rendered": 0,
+    "frames_presented": 0,
+    "median_glass_to_glass_ms": null,
+    "p95_glass_to_glass_ms": null
+  },
+  "artifacts": [
+    {
+      "path": "evidence/m3-cross-device-video-smoke/commands.log",
+      "kind": "commands_log"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/linux/preflight.log",
+      "kind": "linux_host_log"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/linux/sender.log",
+      "kind": "linux_host_log"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/linux/sender-cli.out",
+      "kind": "other"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/linux/sender-timeline.json",
+      "kind": "other"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/macos/mac-client-linux-attempt.log",
+      "kind": "mac_client_log"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/macos/linux-attempt/receiver.log",
+      "kind": "mac_client_log"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/macos/linux-attempt/result.json",
+      "kind": "other"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/macos/linux-attempt/receiver-timeline.json",
+      "kind": "other"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/notes.md",
+      "kind": "notes"
+    }
+  ],
+  "notes": "Live Linux-to-Mac TCP LAN sample transfer passed using the checked-in 84-byte AV1 IVF sample. The receiver observed peer 192.168.1.23:46968, distinct from the Mac receiver address 192.168.1.15:47044, and validated metadata, byte count, and SHA-256. This result does not claim product QUIC, VideoToolbox decode, Metal render, presentation, or latency."
+}
