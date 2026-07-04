@@ -8,7 +8,9 @@
     "reports/qd/m4-mise-tool-pin-refresh/audit.json",
     "reports/qd/m4-mise-tool-pin-refresh/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "0ccb33b332dce83ac7997060d297442a44762539"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": ".mise.toml pins Rust to 1.96.0 and Just to 1.55.1.",
