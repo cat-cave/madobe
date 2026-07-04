@@ -1,0 +1,10 @@
+Fixture validation result: passed
+
+Validated by:
+- cross_device::tests::fixture_covers_required_fields_without_live_claims
+- cross_device::tests::fixture_round_trips_semantically
+- cross_device::tests::rejects_decode_render_presentation_and_latency_without_evidence
+- cross_device::tests::accepts_metric_claims_with_matching_evidence
+- cross_device::tests::rejects_invalid_latency_order
+
+No live cross-device smoke was run or claimed by this schema-fixture node.

@@ -1,0 +1,41 @@
+{
+  "nodeId": "m3-cross-device-result-schema-fixture",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Result fixture covers node_id, branch, Linux and macOS commits, start/end timestamps, pass/fail state, metrics, artifacts, and notes.",
+      "status": "passed",
+      "evidence": "crates/protocol/fixtures/m3-cross-device-video-smoke/result.json includes all required fields and is covered by protocol tests."
+    },
+    {
+      "criterion": "Latency metrics are nullable when not measured.",
+      "status": "passed",
+      "evidence": "The fixture stores median_glass_to_glass_ms and p95_glass_to_glass_ms as null, and tests assert the None values."
+    },
+    {
+      "criterion": "Validation rejects invented decode, render, presentation, or latency values without matching evidence.",
+      "status": "passed",
+      "evidence": "crates/protocol/src/cross_device.rs tests reject decode, render, presentation, and latency metrics without matching artifact roles."
+    },
+    {
+      "criterion": "Tests or command evidence prove the fixture validates successfully.",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-result-schema-fixture/protocol-tests.log and just-check.log record passing validation."
+    },
+    {
+      "criterion": "No live cross-device behavior claim is made.",
+      "status": "passed",
+      "evidence": "Fixture notes and docs state this is schema-only and claims no live decode, render, presentation, or latency behavior."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node validates a result schema fixture only; live cross-device behavior remains in m3-cross-device-video-smoke."
+  },
+  "findings": []
+}
