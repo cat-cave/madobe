@@ -1,0 +1,41 @@
+{
+  "nodeId": "m3-audit",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Protocol and Swift fixture compatibility are reviewed.",
+      "status": "passed",
+      "evidence": "protocol-transport.md and mac-evidence.md review the Rust fixture, Swift mirror, cross-device result model, and compatibility tests."
+    },
+    {
+      "criterion": "Mac decode/render evidence is reviewed.",
+      "status": "passed",
+      "evidence": "mac-evidence.md reviews local VideoToolbox capability/decode, Metal render timing, receive queue, and Mac receiver artifacts with no P0/P1 findings."
+    },
+    {
+      "criterion": "Cross-device evidence is reviewed if available.",
+      "status": "passed",
+      "evidence": "protocol-transport.md and milestone-readiness.md review the live Linux-to-Mac TCP sample-transfer result and its non-claims."
+    },
+    {
+      "criterion": "P0/P1 findings are resolved or dispositioned.",
+      "status": "passed",
+      "evidence": "All subreports list no P0/P1 findings. Existing qd open findings list is empty."
+    },
+    {
+      "criterion": "qd audit pass reports are recorded.",
+      "status": "passed",
+      "evidence": "This audit report is the qd audit pass input for m3-audit."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "M3 audit reviewed recorded real-world Mac and cross-device evidence. No new live hardware run was required for the audit itself."
+  },
+  "findings": []
+}

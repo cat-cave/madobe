@@ -1,0 +1,89 @@
+{
+  "nodeId": "m3-audit",
+  "summary": "Audited M3 protocol, transport, Mac decode/render evidence, receive queue evidence, and the completed cross-device smoke. Three independent subreports found no P0/P1 blockers. M3 can be completed as a conservative endpoint-foundation milestone with explicit non-claims for product QUIC, network-driven VideoToolbox decode, received-sample Metal render/presentation, and latency.",
+  "changedFiles": [
+    "evidence/m3-audit/commands.log",
+    "evidence/m3-audit/notes.md",
+    "reports/qd/m3-audit/subreports/protocol-transport.md",
+    "reports/qd/m3-audit/subreports/mac-evidence.md",
+    "reports/qd/m3-audit/subreports/milestone-readiness.md",
+    "reports/qd/m3-audit/completion.json",
+    "reports/qd/m3-audit/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Protocol and Swift fixture compatibility are reviewed.",
+      "status": "passed",
+      "evidence": "reports/qd/m3-audit/subreports/protocol-transport.md and reports/qd/m3-audit/subreports/mac-evidence.md review Rust protocol fixtures, Swift EncodedVideoFrameMetadata, fixture mirror tests, and protocol guardrail tests."
+    },
+    {
+      "criterion": "Mac decode/render evidence is reviewed.",
+      "status": "passed",
+      "evidence": "reports/qd/m3-audit/subreports/mac-evidence.md reviews VideoToolbox capability/decode reports, Metal renderer reports, Mac receive queue evidence, and Mac receiver artifacts."
+    },
+    {
+      "criterion": "Cross-device evidence is reviewed if available.",
+      "status": "passed",
+      "evidence": "reports/qd/m3-audit/subreports/protocol-transport.md and reports/qd/m3-audit/subreports/milestone-readiness.md review evidence/m3-cross-device-video-smoke/result.json and the Linux/Mac live-run artifacts."
+    },
+    {
+      "criterion": "P0/P1 findings are resolved or dispositioned.",
+      "status": "passed",
+      "evidence": "All three subreports record no P0/P1 findings; qd finding list --open returned no open findings."
+    },
+    {
+      "criterion": "qd audit pass reports are recorded.",
+      "status": "passed",
+      "evidence": "reports/qd/m3-audit/audit.json is prepared for qd audit pass."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd finding list --open",
+      "status": "passed",
+      "evidence": "evidence/m3-audit/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-protocol cross_device -- --nocapture",
+      "status": "passed",
+      "evidence": "reports/qd/m3-audit/subreports/protocol-transport.md"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-transport --all-features",
+      "status": "passed",
+      "evidence": "reports/qd/m3-audit/subreports/protocol-transport.md"
+    },
+    {
+      "command": "jq empty reports/qd/m3-audit/completion.json reports/qd/m3-audit/audit.json",
+      "status": "passed",
+      "evidence": "JSON validation passed before qd complete."
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "Full Linux check gate passed before qd complete."
+    }
+  ],
+  "evidence": [
+    "evidence/m3-audit/commands.log",
+    "evidence/m3-audit/notes.md",
+    "reports/qd/m3-audit/subreports/protocol-transport.md",
+    "reports/qd/m3-audit/subreports/mac-evidence.md",
+    "reports/qd/m3-audit/subreports/milestone-readiness.md",
+    "reports/qd/m3-audit/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "This audit reviewed already-recorded real Mac and cross-device evidence, including VideoToolbox decode, Metal render timing, and Linux-to-Mac TCP sample transfer artifacts."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": [
+    "Future product transport node: validate real QUIC cross-device transport before claiming product streaming.",
+    "Future integrated decode node: decode a received network sample with VideoToolbox before claiming network-driven Mac decode.",
+    "Future render/presentation node: render and present a received decoded sample with Metal before claiming visible cross-device presentation.",
+    "Future latency node: add cross-device frame/latency instrumentation before recording non-null glass-to-glass metrics.",
+    "Polish node: rename or clarify Metal render-report presentedTestPattern wording so it cannot be mistaken for onscreen presentation evidence."
+  ]
+}
