@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-direct-capture-preflight-ci-gate",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Linux CI runs `nix develop -c just direct-capture-preflight` or an equivalent Linux-only gate.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml"
+    },
+    {
+      "criterion": "macOS CI is not made responsible for Linux/Nix direct-capture dependencies.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml leaves the macOS job unchanged; docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md states the split."
+    },
+    {
+      "criterion": "Evidence records local `nix develop -c just direct-capture-preflight`, `nix flake check`, and `nix develop -c just check`.",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-preflight-ci-gate/commands.log"
+    },
+    {
+      "criterion": "No runtime capture, product QUIC, portal, capture-to-NVENC, zero-copy, cross-device, decode, render, presentation, or latency claim is made.",
+      "status": "passed",
+      "evidence": "docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md and evidence/m4-direct-capture-preflight-ci-gate/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node wires a hosted Linux build/preflight gate only; live capture remains separate hardware evidence."
+  },
+  "findings": []
+}
