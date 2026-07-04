@@ -8,7 +8,9 @@
     "reports/qd/m4-macos-ci-jq-tooling/audit.json",
     "reports/qd/m4-macos-ci-jq-tooling/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "0ccc40dc97a1a3b7f1034dfa4a7ede23a4ee988b"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Hosted macOS CI installs `jq` explicitly alongside the Homebrew-managed tools needed by `just macos-check`.",
