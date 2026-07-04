@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-ci-job-timeouts",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Linux CI, macOS CI, and nightly deep-checks jobs declare conservative `timeout-minutes` values.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml contains linux `timeout-minutes: 45` and macos `timeout-minutes: 30`; .github/workflows/nightly.yml contains deep-checks `timeout-minutes: 180`."
+    },
+    {
+      "criterion": "Existing commands and action versions remain unchanged.",
+      "status": "passed",
+      "evidence": "The workflow diff adds only job-level timeout metadata."
+    },
+    {
+      "criterion": "Workflow syntax and repo hygiene checks pass.",
+      "status": "passed",
+      "evidence": "actionlint, qd report validation, full `just check`, and `git diff --check` passed; results are recorded in evidence/m4-ci-job-timeouts/commands.log."
+    },
+    {
+      "criterion": "Evidence records workflow validation and qd reports.",
+      "status": "passed",
+      "evidence": "Workflow validation is recorded in evidence/m4-ci-job-timeouts/commands.log; completion and audit reports are present under reports/qd/m4-ci-job-timeouts/."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim.",
+      "status": "passed",
+      "evidence": "The notes and reports describe GitHub Actions job metadata only."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "No live hosted run is required for this CI metadata node; workflow linting, qd report validation, and repo hygiene checks validate the scoped change."
+  },
+  "findings": []
+}
