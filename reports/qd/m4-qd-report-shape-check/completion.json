@@ -1,0 +1,100 @@
+{
+  "nodeId": "m4-qd-report-shape-check",
+  "summary": "Added a fast jq-backed qd report shape gate for completion and audit reports, wired it into `just check`, documented the gate, and normalized one existing completion report that was missing the documented `commits` array.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "evidence/m4-qd-report-shape-check/commands.log",
+    "evidence/m4-qd-report-shape-check/notes.md",
+    "justfile",
+    "nix/flake.nix",
+    "reports/qd/m2-native-dmabuf-allocation-proof/completion.json",
+    "reports/qd/m4-qd-report-shape-check/audit.json",
+    "reports/qd/m4-qd-report-shape-check/completion.json",
+    "scripts/qd-reports-check.sh"
+  ],
+  "commits": [
+    "c39af81ecb322b0dc294aafecd8df32239b85e78"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Add a repo command validating `reports/qd/*/completion.json` and `reports/qd/*/audit.json` for parseability, required top-level keys, expected field types, nodeId matching the containing directory, and valid `realWorldValidation.status` values.",
+      "status": "passed",
+      "evidence": "`just qd-reports-check` runs `scripts/qd-reports-check.sh`; validation passed in evidence/m4-qd-report-shape-check/commands.log."
+    },
+    {
+      "criterion": "Completion reports require `unverifiedItems` to be present and empty.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates `.unverifiedItems | type == \"array\" and length == 0` for every completion report."
+    },
+    {
+      "criterion": "Plain repo-path entries in completion evidence arrays are checked for existence while URLs and prose are ignored.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh checks plain path-like strings from completion `evidence[]` with `-e` and skips URLs, absolute paths, and prose-like strings."
+    },
+    {
+      "criterion": "Wire the check into `just check` if it remains fast and stable.",
+      "status": "passed",
+      "evidence": "`nix develop -c just check` passed with `just qd-reports-check` running before cargo checks; see evidence/m4-qd-report-shape-check/commands.log."
+    },
+    {
+      "criterion": "Add evidence under `evidence/m4-qd-report-shape-check/` and completion/audit JSON reports under `reports/qd/m4-qd-report-shape-check/`.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/commands.log; evidence/m4-qd-report-shape-check/notes.md; reports/qd/m4-qd-report-shape-check/completion.json; reports/qd/m4-qd-report-shape-check/audit.json"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/notes.md records the repository-metadata-only boundary."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/commands.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/commands.log"
+    },
+    {
+      "command": "nix develop -c shfmt -d scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/commands.log"
+    },
+    {
+      "command": "nix develop -c nixpkgs-fmt --check nix/flake.nix",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-shape-check/commands.log",
+    "evidence/m4-qd-report-shape-check/notes.md",
+    "reports/qd/m4-qd-report-shape-check/audit.json",
+    "reports/qd/m4-qd-report-shape-check/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository report-shape validation only; no product runtime behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

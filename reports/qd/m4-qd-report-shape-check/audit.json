@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-qd-report-shape-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Repo command validates completion and audit report parseability, required top-level keys, expected field types, nodeId directory matching, and valid real-world validation statuses.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh; evidence/m4-qd-report-shape-check/commands.log"
+    },
+    {
+      "criterion": "Completion reports require present and empty unverifiedItems.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh"
+    },
+    {
+      "criterion": "Plain repo-path entries in completion evidence arrays are checked for existence while URLs and prose are ignored.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh"
+    },
+    {
+      "criterion": "The check is wired into just check and remains fast and stable.",
+      "status": "passed",
+      "evidence": "justfile; evidence/m4-qd-report-shape-check/commands.log"
+    },
+    {
+      "criterion": "Node evidence and qd reports were added under the required paths.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/commands.log; reports/qd/m4-qd-report-shape-check/completion.json"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-shape-check/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository report-shape validation only; `nix develop -c just qd-reports-check` and `nix develop -c just check` passed."
+  },
+  "findings": []
+}

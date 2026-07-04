@@ -1,0 +1,47 @@
+Command: just qd-reports-check
+Status: passed
+Output:
+bash scripts/qd-reports-check.sh
+qd report check: validated 62 completion report(s) and 62 audit report(s)
+
+Command: nix develop -c just qd-reports-check
+Status: passed
+Output:
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 62 completion report(s) and 62 audit report(s)
+
+Command: nix develop -c just check
+Status: passed
+Relevant output:
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-report-shape-check' is dirty
+madobe dev shell: use 'just --list' to see commands
+...
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 62 completion report(s) and 62 audit report(s)
+cargo check --workspace --all-targets --all-features
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+markdownlint-cli2 summary: 0 error(s)
+just lint-lines
+
+Command: nix develop -c shellcheck scripts/qd-reports-check.sh
+Status: passed
+Output:
+madobe dev shell: use 'just --list' to see commands
+
+Command: nix develop -c shfmt -d scripts/qd-reports-check.sh
+Status: passed
+Output:
+madobe dev shell: use 'just --list' to see commands
+
+Command: nix develop -c nixpkgs-fmt --check nix/flake.nix
+Status: passed
+Output:
+madobe dev shell: use 'just --list' to see commands
+0 / 1 would have been reformatted
+Note: one rerun emitted an ignored Nix eval-cache busy warning before entering the dev shell; the command still exited 0.
+
+Command: git diff --check
+Status: passed
+Output: no output

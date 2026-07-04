@@ -267,6 +267,13 @@ reports/qd/<node-id>/
   audit.json
 ```
 
+`just qd-reports-check` validates committed report shape for `reports/qd/*/completion.json` and
+`reports/qd/*/audit.json`. The gate requires parseable JSON, required top-level fields with expected types, a
+`nodeId` matching the containing directory, and `realWorldValidation.status` set to `passed` or `not_required`.
+Completion reports must include an empty `unverifiedItems` array. Plain repo-path strings in completion
+`evidence` arrays must exist; URLs and prose are ignored. The command is wired into `just check` so malformed qd
+evidence records are caught before merge.
+
 Do not manufacture evidence for unavailable hardware. If the node depends on hardware, compositor, driver, network, credential, or macOS access that is unavailable, block the node with the correct typed blocker and record the exact missing condition.
 
 Before using `qd complete --from-report`, make the completion report final enough for qd to accept it:
