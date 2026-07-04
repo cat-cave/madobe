@@ -1,0 +1,64 @@
+{
+  "nodeId": "m4-macos-ci-brew-tap-hygiene",
+  "summary": "Added a hosted macOS CI runner hygiene step that untaps the preinstalled aws/tap before installing native Homebrew Swift tooling, using the Homebrew tap-trust override only for that cleanup command so the normal swiftformat/swiftlint install step runs after the unrelated tap is removed.",
+  "changedFiles": [
+    ".github/workflows/ci.yml",
+    "evidence/m4-macos-ci-brew-tap-hygiene/commands.log",
+    "evidence/m4-macos-ci-brew-tap-hygiene/notes.md",
+    "reports/qd/m4-macos-ci-brew-tap-hygiene/audit.json",
+    "reports/qd/m4-macos-ci-brew-tap-hygiene/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "macOS CI removes the hosted-runner aws/tap before installing swiftformat and swiftlint.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml adds the named step Remove hosted CI runner aws/tap immediately before brew install swiftformat swiftlint."
+    },
+    {
+      "criterion": "The hygiene behavior is scoped to CI runner state, not local Mac setup.",
+      "status": "passed",
+      "evidence": "The step name and evidence/m4-macos-ci-brew-tap-hygiene/notes.md describe this as hosted CI runner hygiene."
+    },
+    {
+      "criterion": "macOS remains native and Linux CI behavior is unchanged.",
+      "status": "passed",
+      "evidence": "The macOS job still uses jdx/mise-action, Homebrew, and just macos-check; the linux job was not modified."
+    },
+    {
+      "criterion": "Repository checks pass after the workflow edit.",
+      "status": "passed",
+      "evidence": "nix develop -c just check and git diff --check passed; see evidence/m4-macos-ci-brew-tap-hygiene/commands.log."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-macos-ci-brew-tap-hygiene/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-macos-ci-brew-tap-hygiene/commands.log"
+    },
+    {
+      "command": "jq empty reports/qd/m4-macos-ci-brew-tap-hygiene/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m4-macos-ci-brew-tap-hygiene/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-macos-ci-brew-tap-hygiene/commands.log",
+    "evidence/m4-macos-ci-brew-tap-hygiene/notes.md",
+    "reports/qd/m4-macos-ci-brew-tap-hygiene/audit.json",
+    "reports/qd/m4-macos-ci-brew-tap-hygiene/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Local completion proves the workflow edit and repo checks only. Hosted GitHub Actions macos-15 validation is recorded through qd CI/PR evidence before merge."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

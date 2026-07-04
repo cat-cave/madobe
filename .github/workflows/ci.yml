@@ -32,5 +32,8 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.0
       - uses: jdx/mise-action@v4.2.0
+      - name: Remove hosted CI runner aws/tap
+        run: |
+          HOMEBREW_NO_REQUIRE_TAP_TRUST=1 brew untap aws/tap || true
       - run: brew install swiftformat swiftlint
       - run: just macos-check
