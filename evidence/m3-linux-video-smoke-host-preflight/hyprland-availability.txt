@@ -1,0 +1,19 @@
+node: m3-linux-video-smoke-host-preflight
+captured_at_utc: 2026-07-04T01:42:20Z
+
+[hyprctl version]
+/run/current-system/sw/bin/hyprctl
+HYPRLAND_INSTANCE_SIGNATURE not set! (is hyprland running?)
+
+
+[hyprctl monitors]
+HYPRLAND_INSTANCE_SIGNATURE not set! (is hyprland running?)
+
+
+[hyprctl workspaces]
+HYPRLAND_INSTANCE_SIGNATURE not set! (is hyprland running?)
+
+
+[hyprland sockets]
+/run/user/1000/hypr/39d7e209c79d451efab1b21151d5938289da838d_1782135614_1817586190/.socket.sock
+/run/user/1000/hypr/39d7e209c79d451efab1b21151d5938289da838d_1782135614_1817586190/.socket2.sock

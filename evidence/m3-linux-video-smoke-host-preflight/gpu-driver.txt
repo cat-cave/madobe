@@ -1,0 +1,22 @@
+node: m3-linux-video-smoke-host-preflight
+captured_at_utc: 2026-07-04T01:41:59Z
+
+[nvidia-smi]
+/run/current-system/sw/bin/nvidia-smi
+NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.
+
+
+[lspci display]
+lspci unavailable
+
+[drm devices]
+ls: cannot access '/dev/dri': No such file or directory
+
+[driver modules]
+nvidia_uvm           2596864  4
+nvidia_drm            159744  80
+nvidia_modeset       2195456  20 nvidia_drm
+nvidia              16424960  624 nvidia_uvm,nvidia_modeset
+drm_ttm_helper         20480  2 nvidia_drm
+video                  81920  1 nvidia_modeset
+aead                   20480  4 dm_crypt,nvidia,mac80211,aesni_intel

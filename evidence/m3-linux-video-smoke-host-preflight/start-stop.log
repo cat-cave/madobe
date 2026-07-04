@@ -1,0 +1,28 @@
+node: m3-linux-video-smoke-host-preflight
+captured_at_utc: 2026-07-04T01:43:36Z
+output_id: madobe-qd-m3-linux-video-smoke-host-preflight
+
+$ hyprctl -j monitors
+HYPRLAND_INSTANCE_SIGNATURE not set! (is hyprland running?)
+
+exit_status=1
+
+$ nix develop -c cargo run -q -p madobectl -- display create --id madobe-qd-m3-linux-video-smoke-host-preflight
+madobe dev shell: use 'just --list' to see commands
+compositor Create failed: Unavailable { reason: "" }
+exit_status=2
+
+$ hyprctl -j monitors
+HYPRLAND_INSTANCE_SIGNATURE not set! (is hyprland running?)
+
+exit_status=1
+
+$ nix develop -c cargo run -q -p madobectl -- display remove --id madobe-qd-m3-linux-video-smoke-host-preflight
+madobe dev shell: use 'just --list' to see commands
+compositor Remove failed: Unavailable { reason: "" }
+exit_status=2
+
+$ hyprctl -j monitors
+HYPRLAND_INSTANCE_SIGNATURE not set! (is hyprland running?)
+
+exit_status=1

@@ -1,0 +1,72 @@
+{
+  "nodeId": "m3-linux-video-smoke-host-preflight",
+  "capturedAtUtc": "2026-07-04T01:45:11Z",
+  "worktree": "/home/trevor/projects/madobe/.qd/worktrees/m3-linux-video-smoke-host-preflight",
+  "branch": "spec/m3-linux-video-smoke-host-preflight",
+  "host": {
+    "hostname": "workstation",
+    "primaryLanAddress": "192.168.1.23",
+    "tailscaleAddress": "100.120.148.20",
+    "firewallServices": {
+      "nftables": "inactive or unit missing",
+      "firewalld": "inactive or unit missing",
+      "iptables": "inactive or unit missing"
+    },
+    "gpuProbe": {
+      "nvidiaKernelModulesLoaded": true,
+      "nvidiaSmi": "failed to communicate with NVIDIA driver",
+      "devDri": "unavailable in captured shell"
+    },
+    "hyprland": {
+      "hyprctlAvailable": true,
+      "runtimeSocketsPresent": true,
+      "hyprlandInstanceSignatureSet": false,
+      "displayLifecycleResult": "unavailable: hyprctl and madobectl display commands could not reach the live Hyprland instance"
+    },
+    "pipewire": {
+      "pipewireService": "active",
+      "pipewirePulseService": "active",
+      "wireplumberService": "active",
+      "versionObserved": "1.6.5"
+    }
+  },
+  "hostCommand": {
+    "statusCommand": "nix develop -c cargo run -q -p madobectl -- display status",
+    "startCommand": "nix develop -c cargo run -q -p madobectl -- display create --id madobe-qd-m3-linux-video-smoke-host-preflight",
+    "stopCommand": "nix develop -c cargo run -q -p madobectl -- display remove --id madobe-qd-m3-linux-video-smoke-host-preflight",
+    "smokeCommand": "nix develop -c cargo run -q -p madobectl -- display smoke --id madobe-qd-m3-linux-video-smoke-host-preflight",
+    "nixValidation": "madobectl hello succeeded from nix; display status was runnable but returned compositor unavailable in this shell"
+  },
+  "sample": {
+    "source": "evidence/m2-nvenc-encode-sample/sample-av1.ivf",
+    "expectedStreamSource": "Linux host-produced AV1 IVF sample from m2-nvenc-encode-sample for later cross-device video smoke transport",
+    "sha256": "51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875",
+    "bytes": 84,
+    "container": "ivf",
+    "codec": "av1",
+    "dimensions": "160x90",
+    "frames": 1
+  },
+  "evidence": {
+    "commands": "evidence/m3-linux-video-smoke-host-preflight/commands.log",
+    "hostEnvironment": "evidence/m3-linux-video-smoke-host-preflight/host-env.txt",
+    "gpuDriver": "evidence/m3-linux-video-smoke-host-preflight/gpu-driver.txt",
+    "hyprland": "evidence/m3-linux-video-smoke-host-preflight/hyprland-availability.txt",
+    "pipewire": "evidence/m3-linux-video-smoke-host-preflight/pipewire-availability.txt",
+    "networkFirewall": "evidence/m3-linux-video-smoke-host-preflight/network-firewall.txt",
+    "sampleHash": "evidence/m3-linux-video-smoke-host-preflight/sample-hash.txt",
+    "nixCommandValidation": "evidence/m3-linux-video-smoke-host-preflight/nix-command-validation.log",
+    "startStop": "evidence/m3-linux-video-smoke-host-preflight/start-stop.log",
+    "checks": "evidence/m3-linux-video-smoke-host-preflight/just-check.log"
+  },
+  "explicitlyExcludedClaims": [
+    "Mac decode",
+    "VideoToolbox decode",
+    "Metal render",
+    "Mac presentation",
+    "Mac display output",
+    "end-to-end latency",
+    "frame pacing",
+    "cross-device render correctness"
+  ]
+}
