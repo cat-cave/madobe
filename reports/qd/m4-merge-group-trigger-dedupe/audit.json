@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-merge-group-trigger-dedupe",
+  "acceptanceReviewed": [
+    {
+      "criterion": "There is one authoritative merge-queue entry point.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml is the only workflow file with a `merge_group` trigger."
+    },
+    {
+      "criterion": "Pull request and push-to-main CI behavior remains unchanged.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml still includes `pull_request` and `push` to `main`; the file was not changed."
+    },
+    {
+      "criterion": "Merge queue coverage remains present via `merge_group`.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml still includes `merge_group`."
+    },
+    {
+      "criterion": "Workflow syntax validates with actionlint.",
+      "status": "passed",
+      "evidence": "evidence/m4-merge-group-trigger-dedupe/commands.log"
+    },
+    {
+      "criterion": "Evidence records workflow lint and repo hygiene checks.",
+      "status": "passed",
+      "evidence": "evidence/m4-merge-group-trigger-dedupe/commands.log"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-merge-group-trigger-dedupe/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Workflow routing cleanup only; actionlint, `just check`, and diff hygiene passed."
+  },
+  "findings": []
+}
