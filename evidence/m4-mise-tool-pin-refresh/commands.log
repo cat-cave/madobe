@@ -1,0 +1,129 @@
+# m4-mise-tool-pin-refresh commands
+
+Worktree: /home/trevor/projects/madobe/.qd/worktrees/m4-mise-tool-pin-refresh
+Branch: spec/m4-mise-tool-pin-refresh
+
+## Baseline
+
+Command:
+`sed -n '1,40p' .mise.toml`
+
+Summary:
+Before this node, `.mise.toml` used floating selectors:
+`rust = "stable"` and `just = "latest"`.
+Tuist was already pinned to `tuist = "4.201.0"`.
+
+## Version lookups
+
+Command:
+`nix develop -c mise latest rust`
+
+Output:
+```text
+madobe dev shell: use 'just --list' to see commands
+1.96.0
+```
+
+Summary:
+Passed. Current latest Rust reported by mise was `1.96.0`.
+
+Command:
+`nix develop -c mise latest just`
+
+Output:
+```text
+error (ignored): SQLite database '/home/trevor/.cache/nix/eval-cache-v6/e81806e2e35ca704e5016185f4931500b306860002b3a43a0fc90b803af6e3e6.sqlite' is busy
+madobe dev shell: use 'just --list' to see commands
+1.55.1
+```
+
+Summary:
+Passed. Current latest Just reported by mise was `1.55.1`.
+The Nix eval-cache busy warning was printed as ignored.
+
+Command:
+`nix develop -c mise latest tuist`
+
+Output:
+```text
+error (ignored): SQLite database '/home/trevor/.cache/nix/eval-cache-v6/e81806e2e35ca704e5016185f4931500b306860002b3a43a0fc90b803af6e3e6.sqlite' is busy
+madobe dev shell: use 'just --list' to see commands
+4.201.0
+```
+
+Summary:
+Passed. Current latest Tuist reported by mise was `4.201.0`.
+The existing Tuist pin was already current and was kept unchanged.
+
+## Pin update
+
+Command:
+`apply_patch`
+
+Summary:
+Updated `.mise.toml` from `rust = "stable"` and `just = "latest"` to
+`rust = "1.96.0"` and `just = "1.55.1"`.
+Kept `tuist = "4.201.0"` unchanged.
+
+Command:
+`git diff -- .mise.toml`
+
+Summary:
+The only `.mise.toml` diff replaces Rust and Just floating selectors with
+explicit versions. No Linux/Nix tool declaration files are changed.
+
+## Validation
+
+Command:
+`nix develop -c taplo fmt --check .mise.toml`
+
+Summary:
+Passed. Taplo loaded `taplo.toml`, checked `.mise.toml`, and reported no
+formatting diff. Nix printed the expected dirty-tree warning.
+
+Command:
+`nix develop -c just qd-reports-check`
+
+Summary:
+Passed. The qd report check validated 67 completion reports and 67 audit
+reports. Nix printed an ignored eval-cache busy warning before entering the dev
+shell.
+
+Command:
+`nix develop -c just check`
+
+Summary:
+Passed. The check ran cargo fmt, Taplo, shfmt, qd report validation, cargo
+check, cargo clippy with `-D warnings`, shellcheck, typos, markdownlint-cli2,
+actionlint, and line-limit validation. Markdownlint linted 97 Markdown files
+with 0 errors.
+
+Command:
+`git diff --check`
+
+Summary:
+Passed with no output.
+
+## Hosted CI
+
+First hosted PR CI run:
+https://github.com/cat-cave/madobe/actions/runs/28720908680
+
+Result:
+- Linux passed.
+- macOS failed in `just macos-check`.
+
+Relevant macOS failure:
+
+```text
+error: 'cargo-fmt' is not installed for the toolchain '1.96.0-aarch64-apple-darwin'.
+help: run `rustup component add --toolchain 1.96.0-aarch64-apple-darwin rustfmt` to install it
+error: recipe `fmt` failed on line 12 with exit code 1
+```
+
+Follow-up:
+- Added `rustup component add rustfmt clippy` after `jdx/mise-action` in hosted macOS CI.
+- Added the same component install after `mise install` in `just macos-bootstrap`.
+
+Hosted macOS CI remains a required pre-merge validation gate after the branch is
+updated.
