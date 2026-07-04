@@ -1,0 +1,83 @@
+{
+  "nodeId": "m4-linux-hygiene-tooling-hardening",
+  "summary": "Hardened the repository hygiene just recipes so Linux Nix checks fail fast when required formatting and linting tools are missing, kept macOS compatibility with explicit non-Linux skips for missing Linux hygiene tools, moved SwiftFormat and SwiftLint into explicit macOS-native recipes under macos-check, and documented the Linux-required versus macOS-native tooling boundary.",
+  "changedFiles": [
+    "justfile",
+    "docs/ENGINEERING.md",
+    "evidence/m4-linux-hygiene-tooling-hardening/commands.log",
+    "evidence/m4-linux-hygiene-tooling-hardening/notes.md",
+    "reports/qd/m4-linux-hygiene-tooling-hardening/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Linux nix develop -c just check fails with a clear missing-tool message if required repo hygiene tools are unavailable.",
+      "status": "passed",
+      "evidence": "PATH=/run/current-system/sw/bin just require-tool taplo failed with exit code 127 and printed: required tool missing: taplo; run inside nix develop."
+    },
+    {
+      "criterion": "Linux nix develop -c just check runs TOML formatting, shell formatting, typos, markdownlint, actionlint, and line-limit checks without optional skips.",
+      "status": "passed",
+      "evidence": "nix develop -c just check passed and output showed require-tool plus direct execution for taplo, shfmt, typos, markdownlint-cli2, actionlint, and just lint-lines."
+    },
+    {
+      "criterion": "macOS-native SwiftFormat and SwiftLint behavior remains compatible with just macos-check.",
+      "status": "passed",
+      "evidence": "justfile now routes macos-check through macos-swiftformat and macos-swiftlint after the shared check recipe; missing Linux hygiene tools print explicit non-Linux skips on Darwin, while each Swift Darwin branch requires the native tool and runs the previous SwiftFormat/SwiftLint commands."
+    },
+    {
+      "criterion": "Documentation or evidence records the Linux-required and macOS-native tool boundary.",
+      "status": "passed",
+      "evidence": "docs/ENGINEERING.md and evidence/m4-linux-hygiene-tooling-hardening/notes.md document the boundary."
+    },
+    {
+      "criterion": "No product QUIC, decode, render, presentation, or latency claim is changed.",
+      "status": "passed",
+      "evidence": "Only justfile, docs/ENGINEERING.md, and node evidence/report files were changed."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just --list",
+      "status": "passed",
+      "evidence": "evidence/m4-linux-hygiene-tooling-hardening/commands.log"
+    },
+    {
+      "command": "PATH=/run/current-system/sw/bin just require-tool taplo",
+      "status": "failed",
+      "evidence": "evidence/m4-linux-hygiene-tooling-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "failed",
+      "evidence": "evidence/m4-linux-hygiene-tooling-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-linux-hygiene-tooling-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-linux-hygiene-tooling-hardening/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-linux-hygiene-tooling-hardening/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-linux-hygiene-tooling-hardening/commands.log",
+    "evidence/m4-linux-hygiene-tooling-hardening/notes.md",
+    "reports/qd/m4-linux-hygiene-tooling-hardening/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node only hardens local repository hygiene tooling. Linux Nix validation and a focused missing-tool check were run."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

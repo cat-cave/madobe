@@ -3,19 +3,20 @@ set shell := ["bash", "--noprofile", "--norc", "-eu", "-o", "pipefail", "-c"]
 default:
   just --list
 
+require-tool tool:
+  command -v "{{tool}}" >/dev/null 2>&1 || { echo "required tool missing: {{tool}}; run inside nix develop"; exit 127; }
+
 fmt:
   cargo fmt --all -- --check
-  if command -v taplo >/dev/null 2>&1; then taplo fmt --check; fi
-  if command -v swiftformat >/dev/null 2>&1 && [ -d apple ]; then swiftformat --lint apple; fi
-  if command -v shfmt >/dev/null 2>&1; then find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+  if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+  if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
 
 check: fmt
   cargo check --workspace --all-targets --all-features
   cargo clippy --workspace --all-targets --all-features -- -D warnings
-  if command -v typos >/dev/null 2>&1; then typos; fi
-  if command -v markdownlint-cli2 >/dev/null 2>&1; then markdownlint-cli2 "**/*.md"; fi
-  if command -v actionlint >/dev/null 2>&1; then actionlint .github/workflows/*.yml; fi
-  if command -v swiftlint >/dev/null 2>&1 && [ -d apple ]; then swiftlint lint --strict --config apple/.swiftlint.yml; fi
+  if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+  if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+  if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
   just lint-lines
 
 test:
@@ -45,7 +46,13 @@ ci-local: verify coverage
 macos-bootstrap:
   if [ "$(uname -s)" != Darwin ]; then echo "macOS bootstrap skipped outside Darwin"; else if ! command -v mise >/dev/null 2>&1; then command -v brew >/dev/null 2>&1 || { echo "Homebrew missing; install mise, tuist, swiftformat, and swiftlint manually"; exit 127; }; brew install mise; fi; brew list swiftformat >/dev/null 2>&1 || brew install swiftformat; brew list swiftlint >/dev/null 2>&1 || brew install swiftlint; mise install; fi
 
-macos-check: check apple-generate apple-test
+macos-check: check macos-swiftformat macos-swiftlint apple-generate apple-test
+
+macos-swiftformat:
+  if [ "$(uname -s)" != Darwin ]; then echo "SwiftFormat skipped outside macOS"; else command -v swiftformat >/dev/null 2>&1 || { echo "swiftformat missing; run just macos-bootstrap"; exit 127; }; swiftformat --lint apple; fi
+
+macos-swiftlint:
+  if [ "$(uname -s)" != Darwin ]; then echo "SwiftLint skipped outside macOS"; else command -v swiftlint >/dev/null 2>&1 || { echo "swiftlint missing; run just macos-bootstrap"; exit 127; }; swiftlint lint --strict --config apple/.swiftlint.yml; fi
 
 lint-lines:
   max=500; \

@@ -1,0 +1,94 @@
+Command: just --list
+Status: passed
+Notes: Parsed the updated justfile and listed recipes, including require-tool,
+check, macos-check, macos-swiftformat, and macos-swiftlint.
+
+Command: PATH=/run/current-system/sw/bin just require-tool taplo
+Status: failed as expected with exit code 127
+Output:
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+required tool missing: taplo; run inside nix develop
+error: recipe `require-tool` failed on line 7 with exit code 127
+Notes: Focused missing-tool check proves the helper fails fast and names the
+missing Linux hygiene tool when PATH does not include the Nix-provided tool.
+
+Command: nix develop -c just check
+Status: failed in sandbox
+Output:
+error: attempt to write a readonly database (in
+'/home/trevor/.cache/nix/fetcher-cache-v4.sqlite')
+Notes: The workspace sandbox blocked Nix user-cache writes outside the repo.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Reran with sandbox escalation for Nix cache access. The gate ran:
+- cargo fmt --all -- --check
+- just require-tool taplo
+- taplo fmt --check
+- just require-tool shfmt
+- shfmt diff over shell scripts
+- cargo check --workspace --all-targets --all-features
+- cargo clippy --workspace --all-targets --all-features -- -D warnings
+- just require-tool typos
+- typos
+- just require-tool markdownlint-cli2
+- markdownlint-cli2 "**/*.md"
+- just require-tool actionlint
+- actionlint .github/workflows/*.yml
+- just lint-lines
+Markdownlint reported 72 files and 0 errors.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final rerun after adding evidence and completion files. The same gate
+passed with markdownlint reporting 73 files and 0 errors.
+
+Command: git diff --check
+Status: passed
+Notes: No whitespace errors reported.
+
+Command: orchestrator diff review
+Status: correction applied
+Notes: The first implementation made `macos-check` depend on fail-fast Linux
+hygiene tools, which could break hosted macOS where Taplo, shfmt, typos,
+markdownlint-cli2, or actionlint are not installed by the native bootstrap.
+The orchestrator corrected the recipes so Linux/Nix remains fail-fast, while
+Darwin runs those hygiene tools when present and otherwise prints explicit
+non-Linux skip messages. SwiftFormat and SwiftLint remain required on Darwin
+through `macos-swiftformat` and `macos-swiftlint`.
+
+Command: just --list
+Status: passed
+Notes: Orchestrator rerun parsed the corrected justfile and listed
+`require-tool`, `check`, `macos-check`, `macos-swiftformat`, and
+`macos-swiftlint`.
+
+Command: PATH=/run/current-system/sw/bin just require-tool taplo
+Status: failed as expected with exit code 127
+Output:
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+error: recipe `require-tool` failed on line 7 with exit code 127
+required tool missing: taplo; run inside nix develop
+Notes: Focused missing-tool check still proves the fail-fast helper names the
+missing Linux hygiene tool and exits non-zero.
+
+Command: git diff --check
+Status: passed
+Notes: Orchestrator rerun reported no whitespace errors.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Orchestrator rerun with sandbox escalation for Nix cache access. The
+Linux gate required and executed taplo, shfmt, typos, markdownlint-cli2, and
+actionlint before line-limit checks. Markdownlint reported 73 files and 0
+errors.
+
+Command: jq empty reports/qd/m4-linux-hygiene-tooling-hardening/audit.json reports/qd/m4-linux-hygiene-tooling-hardening/completion.json
+Status: passed
+Notes: Completion and audit reports parse as JSON.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final orchestrator rerun after adding audit evidence. The Linux gate
+again required and executed taplo, shfmt, typos, markdownlint-cli2, actionlint,
+and line-limit checks. Markdownlint reported 73 files and 0 errors.

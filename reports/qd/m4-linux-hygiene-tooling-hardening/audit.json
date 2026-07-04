@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-linux-hygiene-tooling-hardening",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Linux `nix develop -c just check` fails with a clear missing-tool message if required repo hygiene tools are unavailable",
+      "status": "passed",
+      "evidence": "`PATH=/run/current-system/sw/bin just require-tool taplo` exited 127 and printed `required tool missing: taplo; run inside nix develop`; evidence is in evidence/m4-linux-hygiene-tooling-hardening/commands.log."
+    },
+    {
+      "criterion": "Linux `nix develop -c just check` runs TOML formatting, shell formatting, typos, markdownlint, actionlint, and line-limit checks without optional skips",
+      "status": "passed",
+      "evidence": "Orchestrator reran `nix develop -c just check`; output shows `require-tool` and direct execution for taplo, shfmt, typos, markdownlint-cli2, actionlint, and `just lint-lines`."
+    },
+    {
+      "criterion": "macOS-native SwiftFormat and SwiftLint behavior remains compatible with `just macos-check`",
+      "status": "passed",
+      "evidence": "Diff review found and corrected an initial macOS compatibility risk. The final justfile keeps Linux hygiene fail-fast on Linux, emits explicit non-Linux skips for missing hygiene tools on Darwin, and runs SwiftFormat/SwiftLint as explicit required Darwin recipes under `macos-check`."
+    },
+    {
+      "criterion": "Documentation or evidence records the Linux-required and macOS-native tool boundary",
+      "status": "passed",
+      "evidence": "docs/ENGINEERING.md and evidence/m4-linux-hygiene-tooling-hardening/notes.md document the Linux-required and macOS-native boundaries."
+    },
+    {
+      "criterion": "No product QUIC, decode, render, presentation, or latency claim is changed",
+      "status": "passed",
+      "evidence": "Diff is limited to justfile, docs/ENGINEERING.md, and node evidence/report files."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is repo command-surface hardening; Linux Nix validation and focused missing-tool behavior were verified."
+  },
+  "findings": []
+}
