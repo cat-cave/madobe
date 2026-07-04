@@ -21,8 +21,11 @@ struct ContentView: View {
             Text(identity.statusLine)
                 .font(.system(.body, design: .monospaced))
                 .textSelection(.enabled)
+            MetalTestPatternView()
+                .frame(width: 320, height: 180)
+                .accessibilityLabel("Madobe Metal test pattern")
         }
         .padding(24)
-        .frame(minWidth: 520, minHeight: 180)
+        .frame(minWidth: 520, minHeight: 420)
     }
 }

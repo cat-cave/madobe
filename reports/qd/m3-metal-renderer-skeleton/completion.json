@@ -1,0 +1,91 @@
+{
+  "nodeId": "m3-metal-renderer-skeleton",
+  "summary": "Added a minimal Metal renderer skeleton for the macOS app shell plus a core render timing probe that clears a BGRA8 render target to a validation-red test pattern, samples the rendered pixel, and writes stable JSON evidence from Xcode tests.",
+  "changedFiles": [
+    "apple/Sources/MadobeClientCore/MetalRenderTimingProbe.swift",
+    "apple/Sources/MadobeMac/MadobeMacApp.swift",
+    "apple/Sources/MadobeMac/MetalTestPatternView.swift",
+    "apple/Tests/MadobeClientCoreTests/MetalRenderTimingProbeTests.swift",
+    "evidence/m3-metal-renderer-skeleton/commands.log",
+    "evidence/m3-metal-renderer-skeleton/mac-env.txt",
+    "evidence/m3-metal-renderer-skeleton/macos-check.log",
+    "evidence/m3-metal-renderer-skeleton/notes.md",
+    "evidence/m3-metal-renderer-skeleton/render-report.json",
+    "evidence/m3-metal-renderer-skeleton/tuist-generate.log",
+    "evidence/m3-metal-renderer-skeleton/xcodebuild.log",
+    "reports/qd/m3-metal-renderer-skeleton/audit.json",
+    "reports/qd/m3-metal-renderer-skeleton/completion.json",
+    "roadmap/qd-export.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Renderer path builds and tests on macOS",
+      "status": "passed",
+      "evidence": "evidence/m3-metal-renderer-skeleton/xcodebuild.log records a passing Xcode run; evidence/m3-metal-renderer-skeleton/macos-check.log records the final passing full macOS gate."
+    },
+    {
+      "criterion": "A visible frame or test pattern is presented",
+      "status": "passed",
+      "evidence": "apple/Sources/MadobeMac/MetalTestPatternView.swift provides the MTKView-backed test pattern view and apple/Sources/MadobeMac/MadobeMacApp.swift wires it into the app shell."
+    },
+    {
+      "criterion": "Render timing report is produced",
+      "status": "passed",
+      "evidence": "evidence/m3-metal-renderer-skeleton/render-report.json records renderer metal-clear-test-pattern, commandBufferStatus completed, sampledPixelBGRA8 [0,0,255,255], and renderDurationNanoseconds."
+    },
+    {
+      "criterion": "Screenshot evidence is saved when practical",
+      "status": "passed",
+      "evidence": "evidence/m3-metal-renderer-skeleton/notes.md records why no GUI screenshot was practical in this noninteractive run; the MTKView app path and hardware render report provide practical validation evidence."
+    },
+    {
+      "criterion": "No streaming latency claim is made until cross-device validation",
+      "status": "passed",
+      "evidence": "evidence/m3-metal-renderer-skeleton/notes.md explicitly limits the node to local Metal render skeleton/timing evidence and makes no streaming or cross-device latency claim."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd claim m3-metal-renderer-skeleton --agent trevor-mac-orchestrator --branch spec/m3-metal-renderer-skeleton",
+      "status": "passed",
+      "evidence": "evidence/m3-metal-renderer-skeleton/commands.log"
+    },
+    {
+      "command": "qd worktree create m3-metal-renderer-skeleton --branch spec/m3-metal-renderer-skeleton",
+      "status": "passed",
+      "evidence": "evidence/m3-metal-renderer-skeleton/commands.log"
+    },
+    {
+      "command": "tuist generate",
+      "status": "passed",
+      "evidence": "evidence/m3-metal-renderer-skeleton/tuist-generate.log"
+    },
+    {
+      "command": "xcodebuild test -scheme MadobeMac -destination platform=macOS",
+      "status": "passed",
+      "evidence": "evidence/m3-metal-renderer-skeleton/xcodebuild.log"
+    },
+    {
+      "command": "just macos-check",
+      "status": "passed",
+      "evidence": "evidence/m3-metal-renderer-skeleton/macos-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m3-metal-renderer-skeleton/commands.log",
+    "evidence/m3-metal-renderer-skeleton/mac-env.txt",
+    "evidence/m3-metal-renderer-skeleton/macos-check.log",
+    "evidence/m3-metal-renderer-skeleton/notes.md",
+    "evidence/m3-metal-renderer-skeleton/render-report.json",
+    "evidence/m3-metal-renderer-skeleton/tuist-generate.log",
+    "evidence/m3-metal-renderer-skeleton/xcodebuild.log"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m3-metal-renderer-skeleton/render-report.json"
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
