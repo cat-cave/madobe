@@ -15,6 +15,7 @@ fmt:
 
 check: fmt
   just qd-reports-check
+  just pin-hygiene-check
   cargo check --workspace --all-targets --all-features
   cargo clippy --workspace --all-targets --all-features -- -D warnings
   if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
@@ -28,6 +29,9 @@ direct-capture-preflight:
 
 qd-reports-check:
   bash scripts/qd-reports-check.sh
+
+pin-hygiene-check:
+  bash scripts/pin-hygiene-check.sh
 
 test:
   if command -v cargo-nextest >/dev/null 2>&1; then cargo nextest run --workspace --all-features; else cargo test --workspace --all-features; fi

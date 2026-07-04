@@ -1,0 +1,95 @@
+{
+  "nodeId": "m4-pin-hygiene-check",
+  "summary": "Added a pin hygiene shell check for native tool selectors and GitHub workflow action refs, exposed it as a just target, and wired it into just check.",
+  "changedFiles": [
+    "scripts/pin-hygiene-check.sh",
+    "justfile",
+    "evidence/m4-pin-hygiene-check/commands.log",
+    "evidence/m4-pin-hygiene-check/notes.md",
+    "reports/qd/m4-pin-hygiene-check/completion.json",
+    "reports/qd/m4-pin-hygiene-check/audit.json"
+  ],
+  "commits": [
+    "d3c83aeb344d5574eceb71fa52aaf760c6728bee"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": ".mise.toml rejects latest/stable tool selectors.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log records temporary negative smoke tests for `latest` and `stable` failing as expected."
+    },
+    {
+      "criterion": "GitHub workflow uses refs reject main/master/latest and major-only @vN tags for external actions.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log records a temporary negative smoke test for `uses: actions/checkout@v4` failing as expected."
+    },
+    {
+      "criterion": "Full semver action tags and SHA refs are accepted.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log records `nix develop -c just pin-hygiene-check` passing with current full semver action refs and a temporary commit SHA ref smoke test passing."
+    },
+    {
+      "criterion": "Local actions are ignored/accepted.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log records a temporary positive smoke test with `uses: ./actions/local` passing."
+    },
+    {
+      "criterion": "just pin-hygiene-check and just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/notes.md"
+    },
+    {
+      "criterion": "No product runtime, cross-device, or related claims are made.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just pin-hygiene-check",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/pin-hygiene-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "command": "temporary negative smoke tests for latest/stable/@v4",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "command": "temporary positive smoke test for commit SHA and local action refs",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-pin-hygiene-check/commands.log",
+    "evidence/m4-pin-hygiene-check/notes.md"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository hygiene gate only; no product runtime validation required."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
