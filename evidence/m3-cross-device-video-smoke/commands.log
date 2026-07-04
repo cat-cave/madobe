@@ -1,0 +1,149 @@
+# m3-cross-device-video-smoke commands
+
+## Linux orchestration setup
+
+1. `git pull --rebase --autostash`
+   - status: passed on main before claim.
+2. `qd sync --from roadmap/qd-export.json --expect-clean`
+   - status: passed on main before claim.
+3. `qd doctor --strict`
+   - status: passed on main before claim.
+4. `qd claim m3-cross-device-video-smoke --agent trevor-linux-orchestrator --branch spec/m3-cross-device-video-smoke`
+   - status: passed.
+5. `qd worktree create m3-cross-device-video-smoke --branch spec/m3-cross-device-video-smoke`
+   - status: passed.
+6. `git -C .qd/worktrees/m3-cross-device-video-smoke merge --ff-only main`
+   - status: passed.
+7. `git -C .qd/worktrees/m3-cross-device-video-smoke push -u origin spec/m3-cross-device-video-smoke`
+   - status: passed.
+8. Linux preflight commands recorded in `linux/preflight.log`.
+   - status: passed after escalation for real network/GPU inspection.
+
+## Planned live commands
+
+Mac receiver command, to be run by the Mac orchestrator after syncing this branch:
+
+```sh
+cargo run -q -p madobectl -- \
+  video-smoke receive \
+  --bind 0.0.0.0:47044 \
+  --evidence-dir evidence/m3-cross-device-video-smoke/macos
+```
+
+Linux sender command, to be run after Mac posts its reachable receiver address:
+
+```sh
+cargo run -q -p madobectl -- \
+  video-smoke send \
+  --addr <mac-receiver-ip>:47044 \
+  --sample evidence/m2-nvenc-encode-sample/sample-av1.ivf \
+  --evidence-dir evidence/m3-cross-device-video-smoke/linux
+```
+
+## Mac orchestration setup
+
+1. `git fetch origin`
+   - status: passed in `.qd/worktrees/m3-cross-device-video-smoke`.
+2. `git pull --ff-only origin spec/m3-cross-device-video-smoke`
+   - status: passed; worktree fast-forwarded to `ca33556522acd36ac97b355fc432824d84137e10`.
+3. `qd migrate`
+   - status: passed; initialized the worktree-local qd cache schema.
+4. `qd method acknowledge --agent trevor-mac-orchestrator`
+   - status: passed.
+5. `qd sync --from roadmap/qd-export.json`
+   - status: passed; loaded the branch qd export into the worktree cache.
+6. macOS preflight commands recorded in `macos/preflight.log`.
+   - status: passed after escalation for real `ipconfig` and Xcode/Swift version reads.
+
+## Mac live command
+
+Receiver address posted for Linux sender:
+
+```text
+192.168.1.15:47044
+```
+
+Receiver command:
+
+```sh
+cargo run -q -p madobectl -- \
+  video-smoke receive \
+  --bind 0.0.0.0:47044 \
+  --evidence-dir evidence/m3-cross-device-video-smoke/macos
+```
+
+Receiver result:
+
+```text
+video-smoke receive bind=0.0.0.0:47044 peer=192.168.1.15:52212 payload_bytes=84 sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875 status=passed
+```
+
+Mac-side validation boundary:
+
+- Receiver-side sample validation passed.
+- The observed peer address matches the Mac host address (`192.168.1.15`), so this Mac evidence alone does not prove Linux host sender provenance.
+- Linux sender logs are required before the node can be completed as a cross-device validation.
+
+## Linux live sender command
+
+The first Mac receiver result was an accidental Mac-local sender run caused by
+shell quoting in the coordination comment. The real Linux-host sender was run
+after Mac restarted the receiver and posted `192.168.1.15:47044`.
+
+Sender command:
+
+```sh
+nix develop -c cargo run -q -p madobectl -- \
+  video-smoke send \
+  --addr 192.168.1.15:47044 \
+  --sample evidence/m2-nvenc-encode-sample/sample-av1.ivf \
+  --evidence-dir evidence/m3-cross-device-video-smoke/linux
+```
+
+Captured logs:
+
+- `linux/sender-cli.out`
+- `linux/sender-cli.err`
+- `linux/sender.log`
+- `linux/sender-timeline.json`
+
+Sender result:
+
+```text
+video-smoke send addr=192.168.1.15:47044 payload_bytes=84 sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875 status=sent
+```
+
+## Mac receiver result for Linux-originated send
+
+After the Linux sender evidence above, Mac receiver artifacts were recorded under
+`macos/linux-attempt/`.
+
+Receiver command:
+
+```sh
+cargo run -q -p madobectl -- \
+  video-smoke receive \
+  --bind 0.0.0.0:47044 \
+  --evidence-dir evidence/m3-cross-device-video-smoke/macos/linux-attempt
+```
+
+Captured logs:
+
+- `macos/mac-client-linux-attempt.log`
+- `macos/linux-attempt/receiver-listening.log`
+- `macos/linux-attempt/receiver.log`
+- `macos/linux-attempt/receiver-timeline.json`
+- `macos/linux-attempt/result.json`
+- `macos/linux-attempt/notes.md`
+
+Receiver result:
+
+```text
+video-smoke receive bind=0.0.0.0:47044 peer=192.168.1.23:46968 payload_bytes=84 sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875 status=passed
+```
+
+Validation boundary:
+
+- The receiver peer `192.168.1.23` is distinct from the Mac receiver address `192.168.1.15`.
+- This proves TCP LAN sample transfer and receiver-side sample validation for this attempt.
+- It still does not claim product QUIC, VideoToolbox decode, Metal render, presentation, or latency.

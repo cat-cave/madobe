@@ -1,0 +1,36 @@
+# m3-cross-device-video-smoke macOS preflight
+
+timestamp_utc: 2026-07-04T03:52:30Z
+node_id: m3-cross-device-video-smoke
+branch: spec/m3-cross-device-video-smoke
+commit: ca33556522acd36ac97b355fc432824d84137e10
+agent: trevor-mac-orchestrator
+
+macOS:
+ProductName: macOS
+ProductVersion: 26.5.1
+BuildVersion: 25F80
+
+kernel:
+Darwin Trevors-MacBook-Pro.local 25.5.0 Darwin Kernel Version 25.5.0: Mon Apr 27 20:39:29 PDT 2026; root:xnu-12377.121.6~2/RELEASE_ARM64_T8142 arm64
+
+toolchain:
+Xcode 26.2
+Build version 17C52
+Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Target: arm64-apple-macosx26.0
+cargo 1.95.0 (f2d3ce0bd 2026-03-21)
+rustc 1.95.0 (59807616e 2026-04-14)
+
+network:
+receiver_bind: 0.0.0.0:47044
+reachable_receiver_addr: 192.168.1.15:47044
+interface: en0
+interface_status: active
+interface_ipv4: 192.168.1.15/24
+interface_broadcast: 192.168.1.255
+
+notes:
+- `ipconfig getifaddr en0` returned 192.168.1.15 after running with normal macOS network permissions.
+- `ifconfig en0` showed interface en0 active with IPv4 192.168.1.15.
+- Interface hardware address is intentionally omitted from this committed evidence.

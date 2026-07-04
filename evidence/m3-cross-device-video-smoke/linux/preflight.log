@@ -1,0 +1,33 @@
+# m3-cross-device-video-smoke Linux preflight
+started_at=2026-07-04T03:37:13Z
+branch=spec/m3-cross-device-video-smoke
+commit=bf16af77142787501b470c222ecf4524615d3254
+repo=/home/trevor/projects/madobe/.qd/worktrees/m3-cross-device-video-smoke
+
+## uname -a
+Linux workstation 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
+
+## network summary
+Escalated host inspection succeeded.
+Candidate Linux LAN address class: RFC1918 192.168.1.0/24.
+Candidate Linux Tailscale address class: 100.64.0.0/10.
+Full interface addresses are intentionally omitted from committed evidence because this is a public repository.
+For this node Linux is the sender, so the live test requires the Mac receiver address rather than a Linux listening address.
+
+## firewall summary
+nft command unavailable in the validation shell.
+
+## nvidia-smi
+NVIDIA GeForce RTX 4090, driver 595.80
+
+## hyprctl version
+hyprctl was present, but HYPRLAND_INSTANCE_SIGNATURE was not set in this shell.
+This live smoke uses the checked-in AV1 sample and does not require a new Hyprland capture.
+
+## pipewire --version
+pipewire
+Compiled with libpipewire 1.6.5
+Linked with libpipewire 1.6.5
+
+## sample sha256
+51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875  evidence/m2-nvenc-encode-sample/sample-av1.ivf
