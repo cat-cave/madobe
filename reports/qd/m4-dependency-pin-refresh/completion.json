@@ -1,0 +1,85 @@
+{
+  "nodeId": "m4-dependency-pin-refresh",
+  "summary": "Refreshed current dependency and tool pins by updating nixpkgs in flake.lock from b5aa0fbd538984f6e3d201be0005b4463d8b09f8 dated 2026-06-29 to 65179426c83bb3f6bc14898b42ea1c6f01d374b0 dated 2026-07-02, and updating the Tuist mise pin from 4.200.5 to 4.201.0 after confirming the current latest value.",
+  "changedFiles": [
+    ".mise.toml",
+    "flake.lock",
+    "evidence/m4-dependency-pin-refresh/commands.log",
+    "evidence/m4-dependency-pin-refresh/notes.md",
+    "reports/qd/m4-dependency-pin-refresh/audit.json",
+    "reports/qd/m4-dependency-pin-refresh/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Run nix flake update and refresh nixpkgs without changing flake input policy.",
+      "status": "passed",
+      "evidence": "nix flake update updated only the locked nixpkgs metadata in flake.lock; flake.nix was not changed."
+    },
+    {
+      "criterion": "Run nix develop -c mise latest tuist and update .mise.toml if latest is still 4.201.0.",
+      "status": "passed",
+      "evidence": "nix develop -c mise latest tuist reported 4.201.0, and .mise.toml now pins tuist = \"4.201.0\"."
+    },
+    {
+      "criterion": "Do not change product code.",
+      "status": "passed",
+      "evidence": "Changed files are limited to flake.lock, .mise.toml, and evidence/report files for this node."
+    },
+    {
+      "criterion": "Record before/after pins and no-product-runtime-claim notes.",
+      "status": "passed",
+      "evidence": "evidence/m4-dependency-pin-refresh/commands.log records before/after nixpkgs and Tuist pins; evidence/m4-dependency-pin-refresh/notes.md documents the scoped validation claim."
+    },
+    {
+      "criterion": "Run required local validation commands.",
+      "status": "passed",
+      "evidence": "nix flake check and nix develop -c just check passed; git diff --check and jq validation are recorded in evidence/m4-dependency-pin-refresh/commands.log."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix flake update",
+      "status": "passed",
+      "evidence": "evidence/m4-dependency-pin-refresh/commands.log"
+    },
+    {
+      "command": "nix develop -c mise latest tuist",
+      "status": "passed",
+      "evidence": "evidence/m4-dependency-pin-refresh/commands.log"
+    },
+    {
+      "command": "nix flake check",
+      "status": "passed",
+      "evidence": "evidence/m4-dependency-pin-refresh/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-dependency-pin-refresh/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-dependency-pin-refresh/commands.log"
+    },
+    {
+      "command": "jq empty reports/qd/m4-dependency-pin-refresh/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m4-dependency-pin-refresh/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-dependency-pin-refresh/commands.log",
+    "evidence/m4-dependency-pin-refresh/notes.md",
+    "reports/qd/m4-dependency-pin-refresh/audit.json",
+    "reports/qd/m4-dependency-pin-refresh/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node only refreshes dependency/tool pins. Repository checks validated the refreshed pins; product runtime validation is not required and no product runtime behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

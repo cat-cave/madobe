@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-dependency-pin-refresh",
+  "acceptanceReviewed": [
+    {
+      "criterion": "flake.lock is refreshed with the current nixpkgs revision from `nix flake update` without changing flake input policy.",
+      "status": "passed",
+      "evidence": "flake.lock updates nixpkgs from `b5aa0fbd538984f6e3d201be0005b4463d8b09f8` to `65179426c83bb3f6bc14898b42ea1c6f01d374b0`; flake.nix is unchanged."
+    },
+    {
+      "criterion": ".mise.toml pins Tuist to the latest version reported by `nix develop -c mise latest tuist`.",
+      "status": "passed",
+      "evidence": "evidence/m4-dependency-pin-refresh/commands.log records latest Tuist `4.201.0`; .mise.toml now pins `tuist = \"4.201.0\"`."
+    },
+    {
+      "criterion": "Evidence records the before/after pin versions and exact commands used.",
+      "status": "passed",
+      "evidence": "evidence/m4-dependency-pin-refresh/commands.log records baseline pins, refresh commands, resulting pins, and validation commands."
+    },
+    {
+      "criterion": "`nix flake check` and `nix develop -c just check` pass locally.",
+      "status": "passed",
+      "evidence": "evidence/m4-dependency-pin-refresh/commands.log records both commands passing."
+    },
+    {
+      "criterion": "Hosted Linux and macOS CI pass before merge.",
+      "status": "passed",
+      "evidence": "This will be enforced by qd CI and merge gates before merge; local audit confirms readiness for CI promotion."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "Changed files are limited to dependency pins and node evidence/reports; evidence notes explicitly avoid runtime claims."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a dependency/tool pin refresh; hosted CI is required before merge but no product runtime validation is claimed."
+  },
+  "findings": []
+}
