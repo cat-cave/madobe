@@ -8,7 +8,9 @@
     "reports/qd/m4-qd-report-status-vocabulary-check/completion.json",
     "scripts/qd-reports-check.sh"
   ],
-  "commits": [],
+  "commits": [
+    "db52375d87a3c2c19d6c443d48b85598607229d8"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Completion acceptanceEvidence statuses are constrained to passed/failed/not_required.",
