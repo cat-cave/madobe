@@ -226,9 +226,10 @@ fn shell_word(path: &Path) -> String {
 }
 
 fn shell_arg(value: &str) -> String {
-    if value
-        .chars()
-        .all(|ch| ch.is_ascii_alphanumeric() || matches!(ch, '/' | '.' | '_' | '-' | ':' | '='))
+    if !value.is_empty()
+        && value
+            .chars()
+            .all(|ch| ch.is_ascii_alphanumeric() || matches!(ch, '/' | '.' | '_' | '-' | ':' | '='))
     {
         value.to_owned()
     } else {
@@ -240,6 +241,7 @@ fn shell_arg(value: &str) -> String {
 mod tests {
     use super::{
         FfmpegNvenc, NvencAv1Request, NvencPreset, NvencTune, RawVideoInput, RawVideoPixelFormat,
+        shell_arg,
     };
 
     #[test]
@@ -270,5 +272,30 @@ mod tests {
                 .any(|args| args == ["-vf", "format=nv12"])
         );
         assert!(command.display_command().contains("av1_nvenc"));
+    }
+
+    #[test]
+    fn nvenc_preset_ffmpeg_name_matches_ffmpeg_token() {
+        assert_eq!(NvencPreset::P4.ffmpeg_name(), "p4");
+    }
+
+    #[test]
+    fn nvenc_tune_ffmpeg_name_matches_ffmpeg_token() {
+        assert_eq!(NvencTune::Ll.ffmpeg_name(), "ll");
+    }
+
+    #[test]
+    fn shell_arg_leaves_safe_ffmpeg_tokens_unquoted() {
+        assert_eq!(shell_arg("av1_nvenc"), "av1_nvenc");
+        assert_eq!(shell_arg("/tmp/frame-01.rgb"), "/tmp/frame-01.rgb");
+        assert_eq!(shell_arg("format=nv12"), "format=nv12");
+        assert_eq!(shell_arg("stream:0"), "stream:0");
+    }
+
+    #[test]
+    fn shell_arg_quotes_empty_and_unsafe_values() {
+        assert_eq!(shell_arg(""), "''");
+        assert_eq!(shell_arg("two words"), "'two words'");
+        assert_eq!(shell_arg("it's.raw"), "'it'\"'\"'s.raw'");
     }
 }
