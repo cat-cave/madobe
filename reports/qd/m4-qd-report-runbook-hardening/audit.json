@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-qd-report-runbook-hardening",
+  "acceptanceReviewed": [
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents completion report readiness, including empty unverifiedItems and realWorldValidation statuses accepted by qd complete.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md documents empty `unverifiedItems`, `realWorldValidation.status` values of `passed` or `not_required`, and blocker/split behavior for missing validation."
+    },
+    {
+      "criterion": "docs/QD_WORKFLOW.md tells orchestrators to block or split a node instead of completing it when required validation remains unresolved.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md says unresolved required validation should become a blocker, a split follow-up node, or stay out of `qd complete`."
+    },
+    {
+      "criterion": "docs/ORCHESTRATION.md or a platform runbook documents exporting qd state from the main checkout into qd worktree branches rather than running qd export from a worktree without the qd database.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md and docs/QD_WORKFLOW.md both show exporting from the main checkout into `.qd/worktrees/<node-id>/roadmap/qd-export.json`."
+    },
+    {
+      "criterion": "The docs explain that hosted CI validation belongs in qd CI evidence before merge, while audit/finding disposition gates happen before CI promotion.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and docs/ORCHESTRATION.md document audit/finding disposition before CI promotion and `qd ci record-pass` for hosted CI evidence."
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded under evidence/m4-qd-report-runbook-hardening and reports/qd/m4-qd-report-runbook-hardening.",
+      "status": "passed",
+      "evidence": "Node evidence and reports are present under the requested paths."
+    },
+    {
+      "criterion": "No product runtime, platform, capture, encode, transport, decode, render, or latency claim is made.",
+      "status": "passed",
+      "evidence": "The diff is limited to qd/orchestration documentation and node evidence/report files."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a documentation-only qd workflow hardening node."
+  },
+  "findings": []
+}

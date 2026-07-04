@@ -39,6 +39,15 @@ qd export --out roadmap/qd-export.json --deterministic
 git add roadmap/qd-export.json
 ```
 
+When exporting qd state for a qd worktree branch, run `qd export` from the main checkout or qd root that has the qd
+database and migrations, and write the result into the worktree path:
+
+```sh
+qd export --out .qd/worktrees/<node-id>/roadmap/qd-export.json --deterministic
+```
+
+Do not run `qd export` from a qd worktree that lacks the qd database or migrations.
+
 If two branches modify the roadmap, resolve the JSON as source, then run:
 
 ```sh
@@ -256,6 +265,17 @@ reports/qd/<node-id>/
 
 Do not manufacture evidence for unavailable hardware. If the node depends on hardware, compositor, driver, network, credential, or macOS access that is unavailable, block the node with the correct typed blocker and record the exact missing condition.
 
+Before using `qd complete --from-report`, make the completion report final enough for qd to accept it:
+
+- `unverifiedItems` must be empty. Unresolved required validation should become a blocker, a split follow-up node, or
+  stay out of `qd complete` until it is resolved.
+- `realWorldValidation.status` must be `passed` or `not_required`.
+- If hosted CI is the required real-world validation, record the pass with `qd ci record-pass` before merge and cite
+  the hosted CI run in qd CI evidence and PR logs.
+
+Do not use a completion report to hide deferred acceptance criteria. If evidence is missing, keep the node incomplete
+or blocked instead of marking an item unverified and attempting completion.
+
 ## Audit Flow
 
 Every meaningful node gets independent review before CI promotion:
@@ -269,6 +289,9 @@ qd audit pass <node-id>
 ```
 
 Audit checks the diff, completion report, acceptance criteria, artifacts, failure paths, and claims about real hardware behavior. CI passing is useful evidence, but it is not an audit.
+
+Audit and finding disposition happen before CI promotion. Resolve, accept, or split findings before treating hosted CI
+as promotion evidence. Hosted CI logs belong in qd CI evidence and the PR before merge, not as a substitute for audit.
 
 Use broader DAG review after reality changes or after roughly 30 merged nodes:
 

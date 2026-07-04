@@ -1,0 +1,70 @@
+{
+  "nodeId": "m4-qd-report-runbook-hardening",
+  "summary": "Documented qd lifecycle pitfalls around completion report eligibility, real-world validation status, audit and CI promotion ordering, hosted CI recording, and safe qd export handling for qd worktree branches.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "docs/ORCHESTRATION.md",
+    "evidence/m4-qd-report-runbook-hardening/commands.log",
+    "evidence/m4-qd-report-runbook-hardening/notes.md",
+    "reports/qd/m4-qd-report-runbook-hardening/audit.json",
+    "reports/qd/m4-qd-report-runbook-hardening/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Document that `qd complete --from-report` requires completion reports to have no `unverifiedItems`.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and docs/ORCHESTRATION.md now state that unresolved required validation must remain incomplete, become a blocker, or be split into follow-up nodes instead of being submitted as unverified completion items."
+    },
+    {
+      "criterion": "Document that `realWorldValidation.status` must be `passed` or `not_required` when completing, and hosted CI validation should be recorded through qd CI evidence before merge.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and docs/ORCHESTRATION.md now describe the accepted real-world validation statuses and the `qd ci record-pass` step for required hosted CI validation."
+    },
+    {
+      "criterion": "Document that audit and finding disposition happen before CI promotion.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and docs/ORCHESTRATION.md now state that findings should be resolved, accepted, or split before hosted CI is treated as promotion evidence."
+    },
+    {
+      "criterion": "Document the safe qd export location for qd worktree branches.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and docs/ORCHESTRATION.md now instruct operators to run `qd export` from the main checkout or qd root and write to `.qd/worktrees/<node-id>/roadmap/qd-export.json`."
+    },
+    {
+      "criterion": "Create node evidence and qd-compatible completion report with no unresolved or unverified items.",
+      "status": "passed",
+      "evidence": "Created evidence/m4-qd-report-runbook-hardening/commands.log, evidence/m4-qd-report-runbook-hardening/notes.md, and reports/qd/m4-qd-report-runbook-hardening/completion.json with an empty `unverifiedItems` array."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-runbook-hardening/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-runbook-hardening/commands.log"
+    },
+    {
+      "command": "jq empty reports/qd/m4-qd-report-runbook-hardening/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-runbook-hardening/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-runbook-hardening/commands.log",
+    "evidence/m4-qd-report-runbook-hardening/notes.md",
+    "reports/qd/m4-qd-report-runbook-hardening/audit.json",
+    "reports/qd/m4-qd-report-runbook-hardening/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a documentation-only runbook hardening node. Repository checks and JSON validation were sufficient."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

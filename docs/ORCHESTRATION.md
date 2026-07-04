@@ -129,6 +129,17 @@ qd export --out roadmap/qd-export.json --deterministic
 If command names differ on the installed qdcli, run the relevant `qd <command> --help` and update this runbook in
 the same PR.
 
+Completion report rules for `qd complete --from-report`:
+
+- Do not submit reports with unresolved `unverifiedItems`; required validation gaps should remain incomplete, become
+  blockers, or be split into follow-up nodes.
+- Set `realWorldValidation.status` only to `passed` or `not_required` when completing.
+- If hosted CI is the required validation, record it through `qd ci record-pass` before merge and link the CI evidence
+  in qd and the PR.
+
+Audit and finding disposition come before CI promotion. Hosted CI evidence supports promotion after findings are
+resolved or explicitly split; it does not replace audit.
+
 ## Work Selection
 
 Prefer multiple independent nodes in parallel. Good batches have low file overlap and clear ownership:
@@ -179,6 +190,15 @@ Record DAG changes in qd, export deterministically, and send them through a smal
 ```sh
 qd export --out roadmap/qd-export.json --deterministic
 ```
+
+For qd worktree branches, export from the main checkout or qd root that has the qd database and migrations, targeting
+the worktree file:
+
+```sh
+qd export --out .qd/worktrees/<node-id>/roadmap/qd-export.json --deterministic
+```
+
+Do not run `qd export` from a worktree that lacks qd's database or migrations.
 
 Only one orchestrator should make topology changes at a time unless the edits are coordinated in the issue.
 

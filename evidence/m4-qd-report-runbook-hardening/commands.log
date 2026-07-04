@@ -1,0 +1,32 @@
+# m4-qd-report-runbook-hardening Commands
+
+1. `pwd && git status --short --branch`
+   - status: passed; confirmed worktree and branch `spec/m4-qd-report-runbook-hardening`.
+2. `rg -n "from-report|unverifiedItems|realWorldValidation|ci record-pass|qd export|Audit|finding|completion" docs reports evidence .qd 2>/dev/null`
+   - status: passed; reviewed existing qd lifecycle wording and report references.
+3. `rg --files docs reports evidence | sort`
+   - status: passed; inspected existing docs, evidence, and report layout.
+4. `sed -n '1,340p' docs/QD_WORKFLOW.md`
+   - status: passed; reviewed primary qd workflow runbook.
+5. `sed -n '1,300p' docs/ORCHESTRATION.md`
+   - status: passed; reviewed shared orchestration lifecycle runbook.
+6. `sed -n '1,180p' reports/qd/m4-macos-ci-brew-tap-hygiene/completion.json`
+   - status: passed; reviewed recent qd-compatible completion report shape.
+7. `sed -n '1,180p' reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json`
+   - status: passed; reviewed recent qd-compatible completion report shape.
+8. `nix develop -c just check`
+   - status: first sandboxed attempt failed because Nix needed to write `~/.cache/nix/fetcher-cache-v4.sqlite`;
+     rerun with escalated cache access passed.
+9. `git diff --check`
+   - status: passed.
+10. `jq empty reports/qd/m4-qd-report-runbook-hardening/completion.json`
+    - status: passed.
+
+## Orchestrator Verification
+
+1. `jq empty reports/qd/m4-qd-report-runbook-hardening/completion.json reports/qd/m4-qd-report-runbook-hardening/audit.json`
+   - status: passed.
+2. `git diff --check`
+   - status: passed.
+3. `nix develop -c just check`
+   - status: passed.
