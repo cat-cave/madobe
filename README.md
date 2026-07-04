@@ -10,8 +10,19 @@ and Tuist-generated macOS shell before product protocol or capture work begins.
 
 ```sh
 nix develop
+just direct-capture-preflight
 just verify
 ```
+
+For Linux PR readiness, run the local CI parity gate:
+
+```sh
+nix develop -c just ci-local
+```
+
+That gate runs the direct-capture helper preflight before the broader
+`verify` and `coverage` checks. macOS validation stays native with
+`just macos-check`; it does not own Linux/Nix direct-capture dependencies.
 
 Without Nix, the dependency-free Rust proof can still be checked with:
 

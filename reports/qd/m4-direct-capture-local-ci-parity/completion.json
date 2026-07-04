@@ -1,0 +1,79 @@
+{
+  "nodeId": "m4-direct-capture-local-ci-parity",
+  "summary": "Aligned local Linux PR readiness with hosted Linux CI by making just ci-local run direct-capture-preflight before verify and coverage, then documenting that gate in the PR template and Linux/repo guidance.",
+  "changedFiles": [
+    ".github/PULL_REQUEST_TEMPLATE.md",
+    "README.md",
+    "docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md",
+    "docs/ENGINEERING.md",
+    "docs/LINUX_ORCHESTRATOR.md",
+    "evidence/m4-direct-capture-local-ci-parity/commands.log",
+    "evidence/m4-direct-capture-local-ci-parity/notes.md",
+    "justfile",
+    "reports/qd/m4-direct-capture-local-ci-parity/audit.json",
+    "reports/qd/m4-direct-capture-local-ci-parity/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "A local Linux CI or PR-readiness command includes `nix develop -c just direct-capture-preflight` before broader checks.",
+      "status": "passed",
+      "evidence": "`just ci-local` now invokes `direct-capture-preflight` before `verify` and `coverage`; commands.log records `nix develop -c just ci-local` running in that order."
+    },
+    {
+      "criterion": "PR template and Linux/repo documentation identify the direct-capture preflight as part of Linux PR readiness.",
+      "status": "passed",
+      "evidence": "Updated .github/PULL_REQUEST_TEMPLATE.md, README.md, docs/ENGINEERING.md, docs/LINUX_ORCHESTRATOR.md, and docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md."
+    },
+    {
+      "criterion": "Evidence records local `nix develop -c just direct-capture-preflight`, the updated local gate, and `nix develop -c just check`.",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-local-ci-parity/commands.log records all three commands with zero exit status."
+    },
+    {
+      "criterion": "macOS validation remains native and is not made responsible for Linux/Nix direct-capture dependencies.",
+      "status": "passed",
+      "evidence": "PR template and docs keep macOS validation on `just macos-check` and state that Linux/Nix direct-capture dependency validation is not routed through macOS."
+    },
+    {
+      "criterion": "No runtime capture, product QUIC, portal, capture-to-NVENC, zero-copy, cross-device, decode, render, presentation, or latency claim is made.",
+      "status": "passed",
+      "evidence": "Documentation and evidence notes describe this node as command ordering and guidance only."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just direct-capture-preflight",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-local-ci-parity/commands.log"
+    },
+    {
+      "command": "nix develop -c just ci-local",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-local-ci-parity/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-local-ci-parity/commands.log"
+    },
+    {
+      "command": "jq empty reports/qd/m4-direct-capture-local-ci-parity/completion.json && git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-local-ci-parity/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-direct-capture-local-ci-parity/commands.log",
+    "evidence/m4-direct-capture-local-ci-parity/notes.md",
+    "reports/qd/m4-direct-capture-local-ci-parity/audit.json",
+    "reports/qd/m4-direct-capture-local-ci-parity/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node changes local Linux verification command ordering and documentation only; runtime capture and hardware/media-path behavior are out of scope."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -23,6 +23,7 @@ implementors when those nodes are platform-neutral.
 git pull --rebase
 qd sync --from roadmap/qd-export.json --expect-clean
 qd doctor --strict
+nix develop -c just direct-capture-preflight
 nix develop -c just verify
 qd ready --json
 ```
@@ -47,7 +48,7 @@ qd audit start <node-id>
 qd finding add ...
 qd finding resolve ...
 qd audit pass <node-id>
-nix develop -c just verify
+nix develop -c just ci-local
 ```
 
 If qd has a configured gate command, run it before requesting CI or merge.
@@ -82,6 +83,7 @@ qd worktree create <node-id>
 Default checks:
 
 ```sh
+nix develop -c just direct-capture-preflight
 nix develop -c just check
 nix develop -c just test
 ```
@@ -89,10 +91,14 @@ nix develop -c just test
 For merge-ready host work:
 
 ```sh
-nix develop -c just verify
-nix develop -c just coverage
-nix develop -c just security
+nix develop -c just ci-local
 ```
+
+Linux PR readiness should use `nix develop -c just ci-local` when the full local
+gate is needed. That target runs the direct-capture helper preflight before the
+broader repository checks. Keep macOS readiness on the native `just macos-check`
+surface; do not route Linux/Nix direct-capture dependency validation through the
+Mac orchestrator.
 
 ## Evidence Standards
 

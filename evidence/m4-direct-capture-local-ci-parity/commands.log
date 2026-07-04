@@ -1,0 +1,400 @@
+# m4-direct-capture-local-ci-parity verification
+
+## 2026-07-04T13:04:45-05:00
+$ nix develop -c just direct-capture-preflight
+Script started on 2026-07-04 13:04:45-05:00 [COMMAND="nix develop -c just direct-capture-preflight" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity' is dirty
+madobe dev shell: use 'just --list' to see commands
+[1mbash nix/direct-capture-preflight.sh[0m
+direct capture build preflight ok
+wayland-client 1.25.0
+wayland-protocols 1.48
+gbm 26.0.3
+libdrm 2.4.133
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-foreign-toplevel-list/ext-foreign-toplevel-list-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-image-capture-source/ext-image-capture-source-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-image-copy-capture/ext-image-copy-capture-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/stable/linux-dmabuf/linux-dmabuf-v1.xml
+
+Script done on 2026-07-04 13:04:48-05:00 [COMMAND_EXIT_CODE="0"]
+
+## 2026-07-04T13:05:00-05:00
+$ nix develop -c just ci-local
+Script started on 2026-07-04 13:05:00-05:00 [COMMAND="nix develop -c just ci-local" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity' is dirty
+madobe dev shell: use 'just --list' to see commands
+[1mjust direct-capture-preflight[0m
+[1mbash nix/direct-capture-preflight.sh[0m
+direct capture build preflight ok
+wayland-client 1.25.0
+wayland-protocols 1.48
+gbm 26.0.3
+libdrm 2.4.133
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-foreign-toplevel-list/ext-foreign-toplevel-list-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-image-capture-source/ext-image-capture-source-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-image-copy-capture/ext-image-copy-capture-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/stable/linux-dmabuf/linux-dmabuf-v1.xml
+[1mjust verify[0m
+[1mcargo fmt --all -- --check[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi[0m
+[1mcommand -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }[0m
+[32m INFO[0m [1mtaplo[0m:[1mformat_files[0m:[1mload_config[0m: found configuration file [3mpath[0m[2m=[0m"/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/taplo.toml"
+[32m INFO[0m [1mtaplo[0m:[1mformat_files[0m:[1mcollect_files[0m: found files [3mtotal[0m[2m=[0m22 [3mexcluded[0m[2m=[0m1 [3mfiles[0m[2m=[0m["/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/typos.toml"] [2m[3mcwd[0m[2m=[0m"/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity"[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi[0m
+[1mcommand -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }[0m
+[1mcargo check --workspace --all-targets --all-features[0m
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/compositor)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/protocol)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/telemetry)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/transport)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/hyprland)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/hostd)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.06s
+[1mcargo clippy --workspace --all-targets --all-features -- -D warnings[0m
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/compositor)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/telemetry)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/protocol)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/capture)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/transport)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/hostd)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/hyprland)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.98s
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi[0m
+[1mcommand -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi[0m
+[1mcommand -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }[0m
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 82 file(s)
+Summary: 0 error(s)
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi[0m
+[1mcommand -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }[0m
+[1mjust lint-lines[0m
+[1mmax=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"[0m
+[1mif command -v cargo-nextest >/dev/null 2>&1; then cargo nextest run --workspace --all-features; else cargo test --workspace --all-features; fi[0m
+   Compiling madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/compositor)
+   Compiling madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/telemetry)
+   Compiling madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/protocol)
+   Compiling madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode-nv-sys)
+   Compiling madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/capture)
+   Compiling madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/transport)
+   Compiling madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode)
+   Compiling hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/hostd)
+   Compiling madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/hyprland)
+   Compiling madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.16s
+[1mcargo test --doc --workspace --all-features[0m
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.02s
+   Doc-tests hostd
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_capture
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_compositor
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_encode
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_encode_nv_sys
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_hyprland
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_protocol
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_telemetry
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_transport
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobectl
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[1mjust apple-test[0m
+[1mif [ "$(uname -s)" != Darwin ]; then echo "apple tests skipped outside macOS"; else cd apple && { if command -v tuist >/dev/null 2>&1; then tuist generate; elif command -v mise >/dev/null 2>&1; then mise exec -- tuist generate; else echo "tuist missing; run just macos-bootstrap"; exit 127; fi; } && xcodebuild test -scheme MadobeMac -destination 'platform=macOS'; fi[0m
+apple tests skipped outside macOS
+[1mif command -v cargo-deny >/dev/null 2>&1; then cargo deny check; else echo "cargo-deny missing; run inside nix develop"; exit 127; fi[0m
+advisories [32mok[0m, bans [32mok[0m, licenses [32mok[0m, sources [32mok[0m
+[1mif command -v cargo-vet >/dev/null 2>&1; then cargo vet; else echo "cargo-vet missing; run inside nix develop"; exit 127; fi[0m
+     Running `cargo metadata` ⠁                                                 [2K    Fetching imported audits [=========================================================] 0/0[2K    Fetching crate publishers [=========================================================] 0/0[2K  Validating audit-as-crates-io specifications [                                                         ] 0/10[2K  Validating audit-as-crates-io specifications [=====>                                                   ] 1/10[2K  Validating audit-as-crates-io specifications [===========>                                             ] 2/10[2K  Validating audit-as-crates-io specifications [=================>                                       ] 3/10[2K  Validating audit-as-crates-io specifications [======================>                                  ] 4/10[2K  Validating audit-as-crates-io specifications [============================>                            ] 5/10[2K  Validating audit-as-crates-io specifications [==================================>                      ] 6/10[2K  Validating audit-as-crates-io specifications [=======================================>                 ] 7/10[2K  Validating audit-as-crates-io specifications [=============================================>           ] 8/10[2K  Validating audit-as-crates-io specifications [===================================================>     ] 9/10[2K  Validating audit-as-crates-io specifications [=========================================================] 10/10[2KVetting Succeeded (because you have no third-party dependencies)
+[1mif command -v cargo-audit >/dev/null 2>&1; then cargo audit; else echo "cargo-audit missing; run inside nix develop"; exit 127; fi[0m
+    Fetching advisory database from `https://github.com/RustSec/advisory-db.git`
+      Loaded 1153 security advisories (from /scratch/cache/cargo/advisory-db)
+    Updating crates.io index
+    Scanning Cargo.lock for vulnerabilities (10 crate dependencies)
+[1mif command -v cargo-machete >/dev/null 2>&1; then cargo machete --skip-target-dir; else echo "cargo-machete missing; run inside nix develop"; exit 127; fi[0m
+Analyzing dependencies of crates in this directory...
+cargo-machete didn't find any unused dependencies in this directory. Good job!
+Done!
+[1mif command -v cargo-semver-checks >/dev/null 2>&1; then cargo semver-checks check-release --workspace --baseline-root .; else echo "cargo-semver-checks missing; run inside nix develop"; exit 127; fi[0m
+    Building hostd v0.1.0 (current)
+       Built [   1.024s] (current)
+     Parsing hostd v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building hostd v0.1.0 (baseline)
+       Built [   0.593s] (baseline)
+     Parsing hostd v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking hostd v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.003s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   2.057s] hostd
+    Building madobe-capture v0.1.0 (current)
+       Built [   0.577s] (current)
+     Parsing madobe-capture v0.1.0 (current)
+      Parsed [   0.004s] (current)
+    Building madobe-capture v0.1.0 (baseline)
+       Built [   0.437s] (baseline)
+     Parsing madobe-capture v0.1.0 (baseline)
+      Parsed [   0.004s] (baseline)
+    Checking madobe-capture v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.447s] madobe-capture
+    Building madobe-compositor v0.1.0 (current)
+       Built [   0.684s] (current)
+     Parsing madobe-compositor v0.1.0 (current)
+      Parsed [   0.006s] (current)
+    Building madobe-compositor v0.1.0 (baseline)
+       Built [   0.473s] (baseline)
+     Parsing madobe-compositor v0.1.0 (baseline)
+      Parsed [   0.006s] (baseline)
+    Checking madobe-compositor v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.006s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.578s] madobe-compositor
+    Building madobe-encode v0.1.0 (current)
+       Built [   0.876s] (current)
+     Parsing madobe-encode v0.1.0 (current)
+      Parsed [   0.002s] (current)
+    Building madobe-encode v0.1.0 (baseline)
+       Built [   0.674s] (baseline)
+     Parsing madobe-encode v0.1.0 (baseline)
+      Parsed [   0.003s] (baseline)
+    Checking madobe-encode v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   2.030s] madobe-encode
+    Building madobe-encode-nv-sys v0.1.0 (current)
+       Built [   0.576s] (current)
+     Parsing madobe-encode-nv-sys v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-encode-nv-sys v0.1.0 (baseline)
+       Built [   0.453s] (baseline)
+     Parsing madobe-encode-nv-sys v0.1.0 (baseline)
+      Parsed [   0.003s] (baseline)
+    Checking madobe-encode-nv-sys v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.003s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.466s] madobe-encode-nv-sys
+    Building madobe-hyprland v0.1.0 (current)
+       Built [   0.828s] (current)
+     Parsing madobe-hyprland v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-hyprland v0.1.0 (baseline)
+       Built [   0.481s] (baseline)
+     Parsing madobe-hyprland v0.1.0 (baseline)
+      Parsed [   0.003s] (baseline)
+    Checking madobe-hyprland v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.750s] madobe-hyprland
+    Building madobe-protocol v0.1.0 (current)
+       Built [   0.818s] (current)
+     Parsing madobe-protocol v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-protocol v0.1.0 (baseline)
+       Built [   0.498s] (baseline)
+     Parsing madobe-protocol v0.1.0 (baseline)
+      Parsed [   0.003s] (baseline)
+    Checking madobe-protocol v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.780s] madobe-protocol
+    Building madobe-telemetry v0.1.0 (current)
+       Built [   0.523s] (current)
+     Parsing madobe-telemetry v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobe-telemetry v0.1.0 (baseline)
+       Built [   0.493s] (baseline)
+     Parsing madobe-telemetry v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobe-telemetry v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.003s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.453s] madobe-telemetry
+    Building madobe-transport v0.1.0 (current)
+       Built [   0.676s] (current)
+     Parsing madobe-transport v0.1.0 (current)
+      Parsed [   0.006s] (current)
+    Building madobe-transport v0.1.0 (baseline)
+       Built [   0.480s] (baseline)
+     Parsing madobe-transport v0.1.0 (baseline)
+      Parsed [   0.006s] (baseline)
+    Checking madobe-transport v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.601s] madobe-transport
+    Building madobectl v0.1.0 (current)
+       Built [   1.124s] (current)
+     Parsing madobectl v0.1.0 (current)
+      Parsed [   0.003s] (current)
+    Building madobectl v0.1.0 (baseline)
+       Built [   0.446s] (baseline)
+     Parsing madobectl v0.1.0 (baseline)
+      Parsed [   0.002s] (baseline)
+    Checking madobectl v0.1.0 -> v0.1.0 (no change; assume minor)
+     Checked [   0.004s] 196 checks: 196 pass, 57 skip
+     Summary no semver update required
+    Finished [   1.975s] madobectl
+[1mjust coverage[0m
+[1mcommand -v cargo-llvm-cov >/dev/null 2>&1 || { echo "cargo-llvm-cov missing; run inside nix develop"; exit 127; }[0m
+[1mcargo llvm-cov nextest --workspace --all-features --ignore-filename-regex 'apps/.*/src/main\.rs' --fail-under-lines 78 --lcov --output-path lcov.info[0m
+info: cargo-llvm-cov currently setting cfg(coverage); you can opt-out it by passing --no-cfg-coverage
+   Compiling madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/compositor)
+   Compiling madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/protocol)
+   Compiling madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/telemetry)
+   Compiling madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode-nv-sys)
+   Compiling madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/capture)
+   Compiling madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/transport)
+   Compiling madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode)
+   Compiling hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/hostd)
+   Compiling madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/hyprland)
+   Compiling madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/cli)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.04s
+
+    Finished report saved to lcov.info
+
+Script done on 2026-07-04 13:05:31-05:00 [COMMAND_EXIT_CODE="0"]
+
+## 2026-07-04T13:05:50-05:00
+$ nix develop -c just check
+Script started on 2026-07-04 13:05:50-05:00 [COMMAND="nix develop -c just check" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity' is dirty
+madobe dev shell: use 'just --list' to see commands
+[1mcargo fmt --all -- --check[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi[0m
+[1mcommand -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }[0m
+[32m INFO[0m [1mtaplo[0m:[1mformat_files[0m:[1mload_config[0m: found configuration file [3mpath[0m[2m=[0m"/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/taplo.toml"
+[32m INFO[0m [1mtaplo[0m:[1mformat_files[0m:[1mcollect_files[0m: found files [3mtotal[0m[2m=[0m32 [3mexcluded[0m[2m=[0m11 [3mfiles[0m[2m=[0m["/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/typos.toml"] [2m[3mcwd[0m[2m=[0m"/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity"[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi[0m
+[1mcommand -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }[0m
+[1mcargo check --workspace --all-targets --all-features[0m
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.02s
+[1mcargo clippy --workspace --all-targets --all-features -- -D warnings[0m
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.09s
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi[0m
+[1mcommand -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi[0m
+[1mcommand -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }[0m
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 82 file(s)
+Summary: 0 error(s)
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi[0m
+[1mcommand -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }[0m
+[1mjust lint-lines[0m
+[1mmax=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"[0m
+
+Script done on 2026-07-04 13:05:53-05:00 [COMMAND_EXIT_CODE="0"]
+
+## 2026-07-04T13:06:44-05:00
+$ nix develop -c just check
+Script started on 2026-07-04 13:06:44-05:00 [COMMAND="nix develop -c just check" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity' is dirty
+madobe dev shell: use 'just --list' to see commands
+[1mcargo fmt --all -- --check[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi[0m
+[1mcommand -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }[0m
+[32m INFO[0m [1mtaplo[0m:[1mformat_files[0m:[1mload_config[0m: found configuration file [3mpath[0m[2m=[0m"/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/taplo.toml"
+[32m INFO[0m [1mtaplo[0m:[1mformat_files[0m:[1mcollect_files[0m: found files [3mtotal[0m[2m=[0m32 [3mexcluded[0m[2m=[0m11 [3mfiles[0m[2m=[0m["/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity/typos.toml"] [2m[3mcwd[0m[2m=[0m"/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-local-ci-parity"[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi[0m
+[1mcommand -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }[0m
+[1mcargo check --workspace --all-targets --all-features[0m
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s
+[1mcargo clippy --workspace --all-targets --all-features -- -D warnings[0m
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.09s
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi[0m
+[1mcommand -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi[0m
+[1mcommand -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }[0m
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 83 file(s)
+Summary: 0 error(s)
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi[0m
+[1mcommand -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }[0m
+[1mjust lint-lines[0m
+[1mmax=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"[0m
+
+Script done on 2026-07-04 13:06:46-05:00 [COMMAND_EXIT_CODE="0"]
+
+## 2026-07-04T13:07:09-05:00
+$ jq empty reports/qd/m4-direct-capture-local-ci-parity/completion.json
+
+## 2026-07-04T13:07:09-05:00
+$ git diff --check
+
+## Orchestrator Verification
+
+Status: passed.
+
+```sh
+jq empty reports/qd/m4-direct-capture-local-ci-parity/completion.json reports/qd/m4-direct-capture-local-ci-parity/audit.json
+git diff --check
+nix develop -c just direct-capture-preflight
+nix develop -c just check
+```
+
+Key results:
+
+```text
+direct capture build preflight ok
+wayland-client 1.25.0
+wayland-protocols 1.48
+gbm 26.0.3
+libdrm 2.4.133
+markdownlint-cli2 ... Summary: 0 error(s)
+```
