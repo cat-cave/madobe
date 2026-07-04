@@ -8,7 +8,9 @@
     "reports/qd/m4-action-ref-strict-pin-check/completion.json",
     "reports/qd/m4-action-ref-strict-pin-check/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "1d4dd25e1a7bc56c7d60ac1eacd2e3030d1de5ee"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Current workflow refs pass.",
