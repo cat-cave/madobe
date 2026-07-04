@@ -219,3 +219,64 @@ pub struct ReconcileReport {
     /// Number of session bindings applied.
     pub bound: u32,
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{OutputState, OutputStatus};
+    use crate::{
+        ColorDepth, Dimensions, OutputConfig, OutputId, OutputMode, Position, RefreshRate, Scale,
+        WorkspaceId,
+    };
+
+    #[test]
+    fn output_status_workspace_returns_bound_workspace() {
+        let workspace = workspace("workspace-bound-9");
+        let status = OutputStatus::new(
+            output("remote-output-9"),
+            config(),
+            OutputState::Bound,
+            Some(workspace.clone()),
+        );
+
+        assert_eq!(status.workspace(), Some(&workspace));
+    }
+
+    #[test]
+    fn output_status_workspace_returns_none_when_unbound() {
+        let status = OutputStatus::new(
+            output("remote-output-10"),
+            config(),
+            OutputState::Ready,
+            None,
+        );
+
+        assert_eq!(status.workspace(), None);
+    }
+
+    fn output(value: &str) -> OutputId {
+        must(OutputId::new(value), "valid output id")
+    }
+
+    fn workspace(value: &str) -> WorkspaceId {
+        must(WorkspaceId::new(value), "valid workspace id")
+    }
+
+    fn config() -> OutputConfig {
+        OutputConfig::new(
+            OutputMode::new(
+                must(Dimensions::new(1280, 720), "valid dimensions"),
+                must(RefreshRate::from_millihertz(60_000), "valid refresh rate"),
+            ),
+            Scale::one(),
+            Position { x: 0, y: 0 },
+            ColorDepth::Eight,
+        )
+    }
+
+    fn must<T, E: std::fmt::Debug>(result: Result<T, E>, context: &str) -> T {
+        match result {
+            Ok(value) => value,
+            Err(error) => panic!("{context}: {error:?}"),
+        }
+    }
+}

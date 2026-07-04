@@ -124,3 +124,39 @@ fn validate_identifier(value: &str) -> Result<(), IdentifierError> {
 
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{OutputId, SessionId, WorkspaceId};
+
+    #[test]
+    fn output_id_as_str_returns_original_identifier() {
+        let id = must(OutputId::new("remote-output-primary"), "valid output id");
+
+        assert_eq!(id.as_str(), "remote-output-primary");
+    }
+
+    #[test]
+    fn workspace_id_as_str_returns_original_identifier() {
+        let id = must(
+            WorkspaceId::new("workspace-client-42"),
+            "valid workspace id",
+        );
+
+        assert_eq!(id.as_str(), "workspace-client-42");
+    }
+
+    #[test]
+    fn session_id_as_str_returns_original_identifier() {
+        let id = must(SessionId::new("session-alpha-7"), "valid session id");
+
+        assert_eq!(id.as_str(), "session-alpha-7");
+    }
+
+    fn must<T, E: std::fmt::Debug>(result: Result<T, E>, context: &str) -> T {
+        match result {
+            Ok(value) => value,
+            Err(error) => panic!("{context}: {error:?}"),
+        }
+    }
+}

@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-compositor-identity-mutation-hardening",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Evidence records the relevant workspace mutation baseline cluster for compositor identity/status accessors.",
+      "status": "passed",
+      "evidence": "evidence/m4-compositor-identity-mutation-hardening/notes.md"
+    },
+    {
+      "criterion": "Focused tests cover OutputId, WorkspaceId, SessionId, and OutputStatus workspace behavior.",
+      "status": "passed",
+      "evidence": "crates/compositor/src/ids.rs and crates/compositor/src/status.rs"
+    },
+    {
+      "criterion": "`nix develop -c cargo test -p madobe-compositor --all-features` passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-compositor-identity-mutation-hardening/commands.log"
+    },
+    {
+      "criterion": "`nix develop -c just check` passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-compositor-identity-mutation-hardening/commands.log"
+    },
+    {
+      "criterion": "Targeted mutation checks are clean for compositor identity and status accessors.",
+      "status": "passed",
+      "evidence": "ids.rs: 12 mutants tested, 7 caught, 5 unviable; status.rs: 19 mutants tested, 3 caught, 16 unviable; no missed mutants and no timeouts."
+    },
+    {
+      "criterion": "No transport, product QUIC, capture, encode, Apple, Nix, or supply-chain claim is changed.",
+      "status": "passed",
+      "evidence": "git diff is limited to crates/compositor/src/ids.rs, crates/compositor/src/status.rs, plus node evidence and reports"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node hardens pure compositor accessor unit coverage only."
+  },
+  "findings": []
+}

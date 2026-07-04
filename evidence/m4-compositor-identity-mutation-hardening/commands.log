@@ -1,0 +1,58 @@
+Command: nix develop -c cargo fmt --check
+Status: failed
+Notes: Rustfmt reported one wrapping change in the new status.rs test.
+
+Command: nix develop -c cargo fmt
+Status: passed
+Notes: Applied formatting to the new compositor unit tests.
+
+Command: nix develop -c cargo test -p madobe-compositor --all-features
+Status: passed
+Notes: Compositor package tests passed. New unit tests covered
+OutputId::as_str, WorkspaceId::as_str, SessionId::as_str, and
+OutputStatus::workspace for Some and None states.
+
+Command: nix develop -c just check
+Status: failed
+Notes: The repository check reached clippy. Clippy rejected expect() in the
+new tests under the repository's expect_used deny setting.
+
+Command: nix develop -c cargo fmt --check
+Status: failed
+Notes: Rustfmt reported two wrapping changes after replacing expect() with
+explicit match helpers.
+
+Command: nix develop -c cargo fmt
+Status: passed
+Notes: Applied formatting after the clippy-driven test helper edits.
+
+Command: nix develop -c cargo test -p madobe-compositor --all-features
+Status: passed
+Notes: Compositor package tests passed after the clippy cleanup: 5 unit tests,
+2 integration tests, and doc tests.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final required repository check passed. The gate ran cargo fmt, taplo,
+shfmt, cargo check, cargo clippy, typos, markdownlint-cli2, actionlint, and
+just lint-lines.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Reran after adding evidence and completion files. Markdownlint scanned
+76 markdown files with 0 errors, and lint-lines passed.
+
+Command: nix develop -c cargo test -p madobe-compositor --all-features
+Status: passed
+Notes: Orchestrator rerun. Compositor package tests passed: 5 unit tests, 2
+integration tests, and doc tests.
+
+Command: nix develop -c cargo mutants -p madobe-compositor --file crates/compositor/src/ids.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-compositor-ids-mutants-orchestrator
+Status: passed
+Notes: Orchestrator targeted mutation rerun. Result: 12 mutants tested in 4s:
+7 caught, 5 unviable. No missed mutants and no timeouts.
+
+Command: nix develop -c cargo mutants -p madobe-compositor --file crates/compositor/src/status.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-compositor-status-mutants-orchestrator
+Status: passed
+Notes: Orchestrator targeted mutation rerun. Result: 19 mutants tested in 5s:
+3 caught, 16 unviable. No missed mutants and no timeouts.
