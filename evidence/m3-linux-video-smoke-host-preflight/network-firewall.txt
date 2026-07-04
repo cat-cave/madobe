@@ -1,0 +1,262 @@
+node: m3-linux-video-smoke-host-preflight
+captured_at_utc: 2026-07-04T01:45:11Z
+
+[hostname]
+workstation
+100.120.148.20 192.168.1.23 192.168.122.1 10.89.0.1 169.254.86.194 169.254.45.218 169.254.76.149 169.254.8.234 10.89.1.1 169.254.188.254 169.254.235.173 10.99.1.1 169.254.115.46 10.99.2.1 169.254.103.98 10.99.0.1 169.254.15.253 fd7a:115c:a1e0::3639:9415 
+
+[ip addr]
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+tailscale0       UNKNOWN        100.120.148.20/32 fd7a:115c:a1e0::3639:9415/128 fe80::df24:f6b8:fc96:7c7c/64 
+wlp71s0          DOWN           
+enp67s0f0        UP             192.168.1.23/24 fe80::b62e:99ff:fef9:181a/64 
+enp67s0f1        DOWN           
+virbr0           UP             192.168.122.1/24 
+podman1          UP             10.89.0.1/24 fe80::826:24ff:feb4:a12a/64 
+veth0@if2        UP             169.254.86.194/16 fe80::90fb:b5ff:fe35:3a3c/64 fe80::1c34:74ff:fe6d:366f/64 
+veth1@if2        UP             169.254.45.218/16 fe80::c469:b7ff:fe66:b786/64 fe80::a030:1ff:fe49:1c6a/64 
+veth2@if2        UP             169.254.76.149/16 fe80::fc46:22ff:febc:5262/64 fe80::e0a0:e5ff:fe8f:69fd/64 
+veth3@if2        UP             169.254.8.234/16 fe80::74f8:bcff:fe0f:566c/64 fe80::4077:acff:fec2:b916/64 
+podman2          UP             10.89.1.1/24 fe80::689e:2ff:fe0a:1dee/64 
+veth4@if2        UP             169.254.188.254/16 fe80::4eb:acff:fe1a:9c23/64 fe80::28a3:f9ff:fe33:cb59/64 
+veth5@if2        UP             169.254.235.173/16 fe80::900e:70ff:fe2b:6549/64 fe80::7008:44ff:fed5:ff4b/64 
+vnet7            UNKNOWN        fe80::fc54:ff:fe73:76ea/64 
+veth-h-jp@if1368 UP             10.99.1.1/30 169.254.115.46/16 fe80::c8ab:53ff:fe61:add8/64 
+veth-h-us@if1371 UP             10.99.2.1/30 169.254.103.98/16 fe80::82a:12ff:fee2:c60d/64 
+veth-h-dip@if1374 UP             10.99.0.1/30 169.254.15.253/16 fe80::ac4d:b1ff:fe8a:850e/64 
+
+[ip route]
+default via 192.168.1.1 dev enp67s0f0 proto dhcp src 192.168.1.23 metric 1004 
+10.89.0.0/24 dev podman1 proto kernel scope link src 10.89.0.1 
+10.89.1.0/24 dev podman2 proto kernel scope link src 10.89.1.1 
+10.99.0.0/30 dev veth-h-dip proto kernel scope link src 10.99.0.1 
+10.99.1.0/30 dev veth-h-jp proto kernel scope link src 10.99.1.1 
+10.99.2.0/30 dev veth-h-us proto kernel scope link src 10.99.2.1 
+169.254.0.0/16 dev veth0 scope link src 169.254.86.194 metric 1040 
+169.254.0.0/16 dev veth1 scope link src 169.254.45.218 metric 1041 
+169.254.0.0/16 dev veth2 scope link src 169.254.76.149 metric 1042 
+169.254.0.0/16 dev veth3 scope link src 169.254.8.234 metric 1043 
+169.254.0.0/16 dev veth4 scope link src 169.254.188.254 metric 2283 
+169.254.0.0/16 dev veth5 scope link src 169.254.235.173 metric 2284 
+169.254.0.0/16 dev veth-h-jp scope link src 169.254.115.46 metric 2369 
+169.254.0.0/16 dev veth-h-us scope link src 169.254.103.98 metric 2372 
+169.254.0.0/16 dev veth-h-dip scope link src 169.254.15.253 metric 2375 
+192.168.1.0/24 dev enp67s0f0 proto dhcp scope link src 192.168.1.23 metric 1004 
+192.168.122.0/24 dev virbr0 proto kernel scope link src 192.168.122.1 
+
+[listening sockets without process names]
+Netid State  Recv-Q Send-Q                          Local Address:Port  Peer Address:Port
+udp   UNCONN 0      0                                     0.0.0.0:41641      0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:47998      0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:47999      0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:48000      0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:48604      0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:50001      0.0.0.0:*
+udp   UNCONN 0      0                                192.168.1.23:51789      0.0.0.0:*
+udp   UNCONN 0      0                                   10.89.1.1:53         0.0.0.0:*
+udp   UNCONN 0      0                               192.168.122.1:53         0.0.0.0:*
+udp   UNCONN 0      0                                   10.89.0.1:53         0.0.0.0:*
+udp   UNCONN 0      0                              0.0.0.0%virbr0:67         0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:68         0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                 224.0.0.251:5353       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:5353       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:6771       0.0.0.0:*
+udp   UNCONN 0      0                        169.254.15.253%veth0:9040       0.0.0.0:*
+udp   UNCONN 0      0                        10.99.0.1%veth-h-dip:9040       0.0.0.0:*
+udp   UNCONN 0      0                        169.254.103.98%veth0:9040       0.0.0.0:*
+udp   UNCONN 0      0                         10.99.2.1%veth-h-us:9040       0.0.0.0:*
+udp   UNCONN 0      0                        169.254.115.46%veth0:9040       0.0.0.0:*
+udp   UNCONN 0      0                         10.99.1.1%veth-h-jp:9040       0.0.0.0:*
+udp   UNCONN 0      0                        192.168.122.1%virbr0:9040       0.0.0.0:*
+udp   UNCONN 0      0                       169.254.235.173%veth0:9040       0.0.0.0:*
+udp   UNCONN 0      0                       169.254.188.254%veth0:9040       0.0.0.0:*
+udp   UNCONN 0      0                           10.89.1.1%podman2:9040       0.0.0.0:*
+udp   UNCONN 0      0                         169.254.8.234%veth0:9040       0.0.0.0:*
+udp   UNCONN 0      0                        169.254.76.149%veth0:9040       0.0.0.0:*
+udp   UNCONN 0      0                        169.254.45.218%veth0:9040       0.0.0.0:*
+udp   UNCONN 0      0                        169.254.86.194%veth0:9040       0.0.0.0:*
+udp   UNCONN 0      0                           10.89.0.1%podman1:9040       0.0.0.0:*
+udp   UNCONN 0      0                      192.168.1.23%enp67s0f0:9040       0.0.0.0:*
+udp   UNCONN 0      0                   100.120.148.20%tailscale0:9040       0.0.0.0:*
+udp   UNCONN 0      0                                127.0.0.1%lo:9040       0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:27036      0.0.0.0:*
+udp   UNCONN 0      0                                     0.0.0.0:39112      0.0.0.0:*
+udp   UNCONN 0      0                                        [::]:41641         [::]:*
+udp   UNCONN 0      0                                           *:43771            *:*
+udp   UNCONN 0      0                                        [::]:48604         [::]:*
+udp   UNCONN 0      0                                        [::]:50001         [::]:*
+udp   UNCONN 0      0                                           *:56461            *:*
+udp   UNCONN 0      0                                        [::]:5353          [::]:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0                                           *:6771             *:*
+udp   UNCONN 0      0      [fe80::ac4d:b1ff:fe8a:850e]%veth-h-dip:9040          [::]:*
+udp   UNCONN 0      0        [fe80::82a:12ff:fee2:c60d]%veth-h-us:9040          [::]:*
+udp   UNCONN 0      0       [fe80::c8ab:53ff:fe61:add8]%veth-h-jp:9040          [::]:*
+udp   UNCONN 0      0             [fe80::fc54:ff:fe73:76ea]%vnet7:9040          [::]:*
+udp   UNCONN 0      0           [fe80::7008:44ff:fed5:ff4b]%veth5:9040          [::]:*
+udp   UNCONN 0      0           [fe80::900e:70ff:fe2b:6549]%veth5:9040          [::]:*
+udp   UNCONN 0      0           [fe80::28a3:f9ff:fe33:cb59]%veth4:9040          [::]:*
+udp   UNCONN 0      0            [fe80::4eb:acff:fe1a:9c23]%veth4:9040          [::]:*
+udp   UNCONN 0      0          [fe80::689e:2ff:fe0a:1dee]%podman2:9040          [::]:*
+udp   UNCONN 0      0           [fe80::4077:acff:fec2:b916]%veth3:9040          [::]:*
+udp   UNCONN 0      0           [fe80::74f8:bcff:fe0f:566c]%veth3:9040          [::]:*
+udp   UNCONN 0      0           [fe80::e0a0:e5ff:fe8f:69fd]%veth2:9040          [::]:*
+udp   UNCONN 0      0           [fe80::fc46:22ff:febc:5262]%veth2:9040          [::]:*
+udp   UNCONN 0      0            [fe80::a030:1ff:fe49:1c6a]%veth1:9040          [::]:*
+udp   UNCONN 0      0           [fe80::c469:b7ff:fe66:b786]%veth1:9040          [::]:*
+udp   UNCONN 0      0           [fe80::1c34:74ff:fe6d:366f]%veth0:9040          [::]:*
+udp   UNCONN 0      0           [fe80::90fb:b5ff:fe35:3a3c]%veth0:9040          [::]:*
+udp   UNCONN 0      0          [fe80::826:24ff:feb4:a12a]%podman1:9040          [::]:*
+udp   UNCONN 0      0       [fe80::b62e:99ff:fef9:181a]%enp67s0f0:9040          [::]:*
+udp   UNCONN 0      0      [fe80::df24:f6b8:fc96:7c7c]%tailscale0:9040          [::]:*
+udp   UNCONN 0      0      [fd7a:115c:a1e0::3639:9415]%tailscale0:9040          [::]:*
+udp   UNCONN 0      0                                    [::1]%lo:9040          [::]:*
+udp   UNCONN 0      0                                           *:34931            *:*
+udp   UNCONN 0      0                                           *:36726            *:*
+udp   UNCONN 0      0                                        [::]:39112         [::]:*
+tcp   LISTEN 0      512                                 127.0.0.1:44237      0.0.0.0:*
+tcp   LISTEN 0      4096                                10.89.1.1:53         0.0.0.0:*
+tcp   LISTEN 0      32                              192.168.122.1:53         0.0.0.0:*
+tcp   LISTEN 0      4096                                127.0.0.1:47811      0.0.0.0:*
+tcp   LISTEN 0      4096                                127.0.0.1:47810      0.0.0.0:*
+tcp   LISTEN 0      30                  100.120.148.20%tailscale0:9040       0.0.0.0:*
+tcp   LISTEN 0      128                                 127.0.0.1:45745      0.0.0.0:*
+tcp   LISTEN 0      30                          10.89.1.1%podman2:9040       0.0.0.0:*
+tcp   LISTEN 0      30                       192.168.122.1%virbr0:9040       0.0.0.0:*
+tcp   LISTEN 0      128                                 127.0.0.1:34527      0.0.0.0:*
+tcp   LISTEN 0      30                       169.254.76.149%veth0:9040       0.0.0.0:*
+tcp   LISTEN 0      128                                   0.0.0.0:22         0.0.0.0:*
+tcp   LISTEN 0      10                                    0.0.0.0:6742       0.0.0.0:*
+tcp   LISTEN 0      128                                   0.0.0.0:27036      0.0.0.0:*
+tcp   LISTEN 0      30                          10.89.0.1%podman1:9040       0.0.0.0:*
+tcp   LISTEN 0      30                       169.254.86.194%veth0:9040       0.0.0.0:*
+tcp   LISTEN 0      30                        169.254.8.234%veth0:9040       0.0.0.0:*
+tcp   LISTEN 0      30                       169.254.15.253%veth0:9040       0.0.0.0:*
+tcp   LISTEN 0      4096                                10.89.0.1:53         0.0.0.0:*
+tcp   LISTEN 0      128                                 127.0.0.1:57343      0.0.0.0:*
+tcp   LISTEN 0      30                       169.254.115.46%veth0:9040       0.0.0.0:*
+tcp   LISTEN 0      30                     192.168.1.23%enp67s0f0:9040       0.0.0.0:*
+tcp   LISTEN 0      30                               127.0.0.1%lo:9040       0.0.0.0:*
+tcp   LISTEN 0      4096                                127.0.0.1:9000       0.0.0.0:*
+tcp   LISTEN 0      4096                                127.0.0.1:9183       0.0.0.0:*
+tcp   LISTEN 0      5                                   127.0.0.1:9182       0.0.0.0:*
+tcp   LISTEN 0      5                                   127.0.0.1:9181       0.0.0.0:*
+tcp   LISTEN 0      5                                   127.0.0.1:9180       0.0.0.0:*
+tcp   LISTEN 0      4096                                127.0.0.1:9190       0.0.0.0:*
+tcp   LISTEN 0      128                                 127.0.0.1:8200       0.0.0.0:*
+tcp   LISTEN 0      30                       169.254.45.218%veth0:9040       0.0.0.0:*
+tcp   LISTEN 0      4096                                  0.0.0.0:48010      0.0.0.0:*
+tcp   LISTEN 0      4096                                  0.0.0.0:47984      0.0.0.0:*
+tcp   LISTEN 0      4096                                  0.0.0.0:47990      0.0.0.0:*
+tcp   LISTEN 0      4096                                  0.0.0.0:47989      0.0.0.0:*
+tcp   LISTEN 0      128                                   0.0.0.0:47800      0.0.0.0:*
+tcp   LISTEN 0      30                       169.254.103.98%veth0:9040       0.0.0.0:*
+tcp   LISTEN 0      4096                                127.0.0.1:5900       0.0.0.0:*
+tcp   LISTEN 0      512                                 127.0.0.1:4096       0.0.0.0:*
+tcp   LISTEN 0      4096                                127.0.0.1:4226       0.0.0.0:*
+tcp   LISTEN 0      30                      169.254.235.173%veth0:9040       0.0.0.0:*
+tcp   LISTEN 0      128                                 127.0.0.1:27060      0.0.0.0:*
+tcp   LISTEN 0      4096                           100.120.148.20:64409      0.0.0.0:*
+tcp   LISTEN 0      30                       10.99.0.1%veth-h-dip:9040       0.0.0.0:*
+tcp   LISTEN 0      4096                                127.0.0.1:20241      0.0.0.0:*
+tcp   LISTEN 0      30                        10.99.1.1%veth-h-jp:9040       0.0.0.0:*
+tcp   LISTEN 0      30                        10.99.2.1%veth-h-us:9040       0.0.0.0:*
+tcp   LISTEN 0      30                      169.254.188.254%veth0:9040       0.0.0.0:*
+tcp   LISTEN 0      30          [fe80::74f8:bcff:fe0f:566c]%veth3:9040          [::]:*
+tcp   LISTEN 0      30          [fe80::e0a0:e5ff:fe8f:69fd]%veth2:9040          [::]:*
+tcp   LISTEN 0      4096                                        *:3922             *:*
+tcp   LISTEN 0      30         [fe80::689e:2ff:fe0a:1dee]%podman2:9040          [::]:*
+tcp   LISTEN 0      30          [fe80::4077:acff:fec2:b916]%veth3:9040          [::]:*
+tcp   LISTEN 0      30          [fe80::1c34:74ff:fe6d:366f]%veth0:9040          [::]:*
+tcp   LISTEN 0      128                                      [::]:22            [::]:*
+tcp   LISTEN 0      4096                                        *:7132             *:*
+tcp   LISTEN 0      30                                   [::1]%lo:9040          [::]:*
+tcp   LISTEN 0      4096                                        *:6700             *:*
+tcp   LISTEN 0      4096              [fd7a:115c:a1e0::3639:9415]:44280         [::]:*
+tcp   LISTEN 0      4096                                        *:4900             *:*
+tcp   LISTEN 0      4096                                        *:4800             *:*
+tcp   LISTEN 0      4096                                        *:4810             *:*
+tcp   LISTEN 0      4096                                        *:4700             *:*
+tcp   LISTEN 0      4096                                        *:4243             *:*
+tcp   LISTEN 0      30      [fe80::b62e:99ff:fef9:181a]%enp67s0f0:9040          [::]:*
+tcp   LISTEN 0      30           [fe80::a030:1ff:fe49:1c6a]%veth1:9040          [::]:*
+tcp   LISTEN 0      4096                                        *:19900            *:*
+tcp   LISTEN 0      4096                                        *:19780            *:*
+tcp   LISTEN 0      30      [fe80::c8ab:53ff:fe61:add8]%veth-h-jp:9040          [::]:*
+tcp   LISTEN 0      30         [fe80::826:24ff:feb4:a12a]%podman1:9040          [::]:*
+tcp   LISTEN 0      30       [fe80::82a:12ff:fee2:c60d]%veth-h-us:9040          [::]:*
+tcp   LISTEN 0      30          [fe80::28a3:f9ff:fe33:cb59]%veth4:9040          [::]:*
+tcp   LISTEN 0      30          [fe80::7008:44ff:fed5:ff4b]%veth5:9040          [::]:*
+tcp   LISTEN 0      30     [fe80::ac4d:b1ff:fe8a:850e]%veth-h-dip:9040          [::]:*
+tcp   LISTEN 0      30          [fe80::fc46:22ff:febc:5262]%veth2:9040          [::]:*
+tcp   LISTEN 0      30     [fe80::df24:f6b8:fc96:7c7c]%tailscale0:9040          [::]:*
+tcp   LISTEN 0      30     [fd7a:115c:a1e0::3639:9415]%tailscale0:9040          [::]:*
+tcp   LISTEN 0      30          [fe80::900e:70ff:fe2b:6549]%veth5:9040          [::]:*
+tcp   LISTEN 0      30          [fe80::c469:b7ff:fe66:b786]%veth1:9040          [::]:*
+tcp   LISTEN 0      30            [fe80::fc54:ff:fe73:76ea]%vnet7:9040          [::]:*
+tcp   LISTEN 0      30          [fe80::90fb:b5ff:fe35:3a3c]%veth0:9040          [::]:*
+tcp   LISTEN 0      30           [fe80::4eb:acff:fe1a:9c23]%veth4:9040          [::]:*
+
+[firewall services]
+inactive
+inactive
+inactive
+Unit nftables.service could not be found.
+Unit firewalld.service could not be found.
+Unit iptables.service could not be found.
+
+[nft ruleset]
+nft command unavailable
+
+[iptables rules]
+iptables v1.8.13 (nf_tables): Could not fetch rule set generation id: Permission denied (you must be root)

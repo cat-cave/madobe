@@ -1,0 +1,44 @@
+node: m3-linux-video-smoke-host-preflight
+worktree: /home/trevor/projects/madobe/.qd/worktrees/m3-linux-video-smoke-host-preflight
+branch: spec/m3-linux-video-smoke-host-preflight
+commit: f17c0c960f92bf11715fe2759e9e33bd6c05bee3
+captured_at_utc: 2026-07-04T01:41:49Z
+
+[uname]
+Linux workstation 7.1.0-cachyos #1-NixOS SMP PREEMPT_DYNAMIC Tue Jan  1 00:00:00 UTC 1980 x86_64 GNU/Linux
+
+[os-release]
+ANSI_COLOR="0;38;2;126;186;228"
+BUG_REPORT_URL="https://github.com/NixOS/nixpkgs/issues"
+BUILD_ID="26.05.20260611.a037402"
+CPE_NAME="cpe:/o:nixos:nixos:26.05"
+DEFAULT_HOSTNAME=nixos
+DOCUMENTATION_URL="https://nixos.org/learn.html"
+HOME_URL="https://nixos.org/"
+ID=nixos
+ID_LIKE=""
+IMAGE_ID=""
+IMAGE_VERSION=""
+LOGO="nix-snowflake"
+NAME=NixOS
+PRETTY_NAME="NixOS 26.05 (Yarara)"
+SUPPORT_END="2026-12-31"
+SUPPORT_URL="https://nixos.org/community.html"
+VARIANT=""
+VARIANT_ID=""
+VENDOR_NAME=NixOS
+VENDOR_URL="https://nixos.org/"
+VERSION="26.05 (Yarara)"
+VERSION_CODENAME=yarara
+VERSION_ID="26.05"
+
+[nix]
+/run/current-system/sw/bin/nix
+nix (Nix) 2.34.7
+
+[rust]
+
+[session-env]
+PATH=/home/trevor/.codex/tmp/arg0/codex-arg0nYPANr:/nix/store/4w7fshi3jlwjxsij52q4yyl4sfxvfl92-ripgrep-15.1.0/bin:/nix/store/g7svy17fhkg2cq3q4lfzzc0mmsl3d8hq-bubblewrap-0.11.2/bin:/home/trevor/.local/share/aoe-acp/bin:/home/trevor/.local/share/pnpm/bin:/run/wrappers/bin:/home/trevor/.nix-profile/bin:/nix/profile/bin:/home/trevor/.local/state/nix/profile/bin:/etc/profiles/per-user/trevor/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_SESSION_TYPE=tty

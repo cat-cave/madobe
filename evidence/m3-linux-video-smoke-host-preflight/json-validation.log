@@ -1,0 +1,3 @@
+$ nix develop -c jq empty evidence/m3-linux-video-smoke-host-preflight/host-preflight-summary.json reports/qd/m3-linux-video-smoke-host-preflight/completion.json
+madobe dev shell: use 'just --list' to see commands
+exit_status=0

@@ -1,0 +1,76 @@
+Node: m3-linux-video-smoke-host-preflight
+Worktree: /home/trevor/projects/madobe/.qd/worktrees/m3-linux-video-smoke-host-preflight
+Branch: spec/m3-linux-video-smoke-host-preflight
+
+1. pwd; git status --short --branch
+   Status: passed
+   Evidence: initial worktree was on spec/m3-linux-video-smoke-host-preflight
+   and clean before implementation.
+
+2. rg-based repository inspection for qd schema examples and host/video command
+   shape.
+   Status: passed
+   Evidence: existing qd completion reports and Linux runbook were inspected.
+
+3. Captured host environment.
+   Command: uname, /etc/os-release, nix --version, rust/cargo availability, and
+   session variables.
+   Status: passed
+   Evidence: evidence/m3-linux-video-smoke-host-preflight/host-env.txt
+
+4. Captured GPU and driver state.
+   Command: nvidia-smi, lspci if available, /dev/dri listing, and kernel module
+   listing.
+   Status: passed with unavailable NVIDIA userspace probe recorded.
+   Evidence: evidence/m3-linux-video-smoke-host-preflight/gpu-driver.txt
+
+5. Captured Hyprland availability.
+   Command: hyprctl version, hyprctl -j monitors, hyprctl -j workspaces, and
+   runtime socket listing.
+   Status: passed with live Hyprland instance unavailable from this shell.
+   Evidence: evidence/m3-linux-video-smoke-host-preflight/hyprland-availability.txt
+
+6. Captured PipeWire availability.
+   Command: systemctl --user state/status for pipewire, pipewire-pulse, and
+   wireplumber; wpctl status; pw-dump summary.
+   Status: passed
+   Evidence: evidence/m3-linux-video-smoke-host-preflight/pipewire-availability.txt
+
+7. Captured network and firewall state.
+   Command: hostname, hostname -I, ip addr, ip route, ss -ltnu, systemctl
+   firewall service status, nft/iptables rule probes if available.
+   Status: passed with nft/iptables commands unavailable in this environment.
+   Evidence: evidence/m3-linux-video-smoke-host-preflight/network-firewall.txt
+
+8. Captured sample hash and metadata.
+   Command: sha256sum, stat, file if available, and ffprobe for
+   evidence/m2-nvenc-encode-sample/sample-av1.ivf.
+   Status: passed with file command unavailable.
+   Evidence: evidence/m3-linux-video-smoke-host-preflight/sample-hash.txt
+
+9. nix develop -c cargo run -q -p madobectl -- hello
+   Status: passed
+   Evidence: evidence/m3-linux-video-smoke-host-preflight/nix-command-validation.log
+
+10. nix develop -c cargo run -q -p madobectl -- display status
+    Status: command runnable from Nix; compositor unavailable in this shell.
+    Evidence: evidence/m3-linux-video-smoke-host-preflight/nix-command-validation.log
+
+11. hyprctl -j monitors; nix develop -c cargo run -q -p madobectl -- display
+    create --id madobe-qd-m3-linux-video-smoke-host-preflight; hyprctl -j
+    monitors; nix develop -c cargo run -q -p madobectl -- display remove --id
+    madobe-qd-m3-linux-video-smoke-host-preflight; hyprctl -j monitors
+    Status: start/stop attempt captured; compositor unavailable in this shell.
+    Evidence: evidence/m3-linux-video-smoke-host-preflight/start-stop.log
+
+12. nix develop -c just check
+    Status: passed after regenerating network evidence without process names
+    that tripped typos on raw host process labels.
+    Evidence: evidence/m3-linux-video-smoke-host-preflight/just-check.log
+
+13. JSON validation for host-preflight summary and completion report.
+    Command: nix develop -c jq empty
+    evidence/m3-linux-video-smoke-host-preflight/host-preflight-summary.json
+    reports/qd/m3-linux-video-smoke-host-preflight/completion.json
+    Status: passed
+    Evidence: evidence/m3-linux-video-smoke-host-preflight/json-validation.log.

@@ -1,0 +1,12 @@
+node: m3-linux-video-smoke-host-preflight
+captured_at_utc: 2026-07-04T01:43:19Z
+
+$ nix develop -c cargo run -q -p madobectl -- hello
+madobe dev shell: use 'just --list' to see commands
+madobe 0.1.0 protocol=1 event=madobe.bootstrap ts=0 status=ok
+exit_status=0
+
+$ nix develop -c cargo run -q -p madobectl -- display status
+madobe dev shell: use 'just --list' to see commands
+compositor List failed: Unavailable { reason: "" }
+exit_status=2

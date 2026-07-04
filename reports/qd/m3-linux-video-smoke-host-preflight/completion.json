@@ -1,0 +1,104 @@
+{
+  "nodeId": "m3-linux-video-smoke-host-preflight",
+  "summary": "Recorded the Linux host-side preflight for the later cross-device video smoke: Nix-runnable host commands, host environment, GPU/driver state, Hyprland and PipeWire availability, host IP/network/firewall state, AV1 sample hash/source, and start/stop command evidence. The live Hyprland lifecycle was unavailable from this shell and is recorded as such; no Mac decode, render, presentation, or latency claim is made.",
+  "changedFiles": [
+    "docs/LINUX_VIDEO_SMOKE_HOST_PREFLIGHT.md",
+    "evidence/m3-linux-video-smoke-host-preflight/commands.log",
+    "evidence/m3-linux-video-smoke-host-preflight/gpu-driver.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/host-env.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/host-preflight-summary.json",
+    "evidence/m3-linux-video-smoke-host-preflight/hyprland-availability.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/json-validation.log",
+    "evidence/m3-linux-video-smoke-host-preflight/just-check.log",
+    "evidence/m3-linux-video-smoke-host-preflight/network-firewall.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/nix-command-validation.log",
+    "evidence/m3-linux-video-smoke-host-preflight/notes.md",
+    "evidence/m3-linux-video-smoke-host-preflight/pipewire-availability.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/sample-hash.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/start-stop.log",
+    "reports/qd/m3-linux-video-smoke-host-preflight/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Linux host command is documented and runnable from Nix.",
+      "status": "passed",
+      "evidence": "docs/LINUX_VIDEO_SMOKE_HOST_PREFLIGHT.md and evidence/m3-linux-video-smoke-host-preflight/nix-command-validation.log"
+    },
+    {
+      "criterion": "Host environment, GPU/driver, Hyprland/PipeWire availability, host IP or port, and firewall state are recorded under evidence/m3-linux-video-smoke-host-preflight.",
+      "status": "passed",
+      "evidence": "evidence/m3-linux-video-smoke-host-preflight/host-env.txt; gpu-driver.txt; hyprland-availability.txt; pipewire-availability.txt; network-firewall.txt; host-preflight-summary.json"
+    },
+    {
+      "criterion": "Sample artifact hash and expected stream/sample source are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m3-linux-video-smoke-host-preflight/sample-hash.txt records source evidence/m2-nvenc-encode-sample/sample-av1.ivf and SHA-256 51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875."
+    },
+    {
+      "criterion": "Start/stop logs are captured without requiring Mac decode/render.",
+      "status": "passed",
+      "evidence": "evidence/m3-linux-video-smoke-host-preflight/start-stop.log captures the node-scoped create/remove attempt and records compositor unavailable from this shell."
+    },
+    {
+      "criterion": "Evidence explicitly excludes Mac decode, Metal render, Mac presentation, and latency claims.",
+      "status": "passed",
+      "evidence": "evidence/m3-linux-video-smoke-host-preflight/notes.md and host-preflight-summary.json list explicit excluded claims."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "host environment, GPU, Hyprland, PipeWire, network, firewall, and sample hash capture commands",
+      "status": "passed",
+      "evidence": "evidence/m3-linux-video-smoke-host-preflight/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo run -q -p madobectl -- hello",
+      "status": "passed",
+      "evidence": "evidence/m3-linux-video-smoke-host-preflight/nix-command-validation.log"
+    },
+    {
+      "command": "nix develop -c cargo run -q -p madobectl -- display status",
+      "status": "failed",
+      "evidence": "Command was runnable from Nix but returned compositor unavailable in this shell; see evidence/m3-linux-video-smoke-host-preflight/nix-command-validation.log."
+    },
+    {
+      "command": "nix develop -c cargo run -q -p madobectl -- display create/remove --id madobe-qd-m3-linux-video-smoke-host-preflight",
+      "status": "failed",
+      "evidence": "Start/stop attempt captured; live Hyprland instance unavailable from this shell. See evidence/m3-linux-video-smoke-host-preflight/start-stop.log."
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m3-linux-video-smoke-host-preflight/just-check.log"
+    },
+    {
+      "command": "nix develop -c jq empty evidence/m3-linux-video-smoke-host-preflight/host-preflight-summary.json reports/qd/m3-linux-video-smoke-host-preflight/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m3-linux-video-smoke-host-preflight/json-validation.log"
+    }
+  ],
+  "evidence": [
+    "docs/LINUX_VIDEO_SMOKE_HOST_PREFLIGHT.md",
+    "evidence/m3-linux-video-smoke-host-preflight/commands.log",
+    "evidence/m3-linux-video-smoke-host-preflight/gpu-driver.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/host-env.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/host-preflight-summary.json",
+    "evidence/m3-linux-video-smoke-host-preflight/hyprland-availability.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/json-validation.log",
+    "evidence/m3-linux-video-smoke-host-preflight/just-check.log",
+    "evidence/m3-linux-video-smoke-host-preflight/network-firewall.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/nix-command-validation.log",
+    "evidence/m3-linux-video-smoke-host-preflight/notes.md",
+    "evidence/m3-linux-video-smoke-host-preflight/pipewire-availability.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/sample-hash.txt",
+    "evidence/m3-linux-video-smoke-host-preflight/start-stop.log"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "Host preflight evidence was captured on the Linux host. PipeWire services were active and network/firewall state was recorded. Live Hyprland display lifecycle was attempted and recorded as unavailable from this shell because HYPRLAND_INSTANCE_SIGNATURE was unset; no Mac-side validation was attempted or claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,304 @@
+node: m3-linux-video-smoke-host-preflight
+captured_at_utc: 2026-07-04T01:44:32Z
+
+[pipewire commands]
+/run/current-system/sw/bin/pipewire
+/run/current-system/sw/bin/pw-dump
+/run/current-system/sw/bin/wpctl
+/run/current-system/sw/bin/wireplumber
+
+[user service states]
+active
+active
+active
+
+[user service status]
+● pipewire.service - PipeWire Multimedia Service
+     Loaded: loaded (/etc/systemd/user/pipewire.service; linked-runtime; preset: ignored)
+    Drop-In: /nix/store/dm93dh91w8z48mcza99rn4l2aps7wnlf-user-units/pipewire.service.d
+             └─overrides.conf
+     Active: active (running) since Mon 2026-06-22 08:40:16 CDT; 1 week 4 days ago
+ Invocation: 2ff0663f4c5443b98d1dd3fbf4c8c220
+TriggeredBy: ● pipewire.socket
+   Main PID: 839414 (pipewire)
+      Tasks: 4 (limit: 309083)
+     Memory: 32.4M (peak: 47.2M)
+        CPU: 40min 21.354s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/session.slice/pipewire.service
+             └─839414 /nix/store/m2kqwy3rb25dy5zi5sjl4f6raryb67y9-pipewire-1.6.5/bin/pipewire
+
+Jun 22 08:40:16 workstation systemd[2454]: Started PipeWire Multimedia Service.
+Jun 22 08:40:16 workstation pipewire[839414]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Jun 22 08:40:16 workstation pipewire[839414]: mod.rt: RTKit does not give us MaxRealtimePriority, using 1
+Jun 22 08:40:16 workstation pipewire[839414]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Jun 22 08:40:16 workstation pipewire[839414]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Jun 22 08:40:16 workstation pipewire[839414]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Jun 22 08:40:16 workstation pipewire[839414]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Jun 22 22:59:04 workstation pipewire[839414]: spa.alsa: front:3p: snd_pcm_drop: No such device
+Jun 22 22:59:04 workstation pipewire[839414]: spa.alsa: front:3p: close failed: No such device
+
+● pipewire-pulse.service - PipeWire PulseAudio
+     Loaded: loaded (/etc/systemd/user/pipewire-pulse.service; linked-runtime; preset: ignored)
+    Drop-In: /nix/store/dm93dh91w8z48mcza99rn4l2aps7wnlf-user-units/pipewire-pulse.service.d
+             └─overrides.conf
+     Active: active (running) since Mon 2026-06-22 08:40:16 CDT; 1 week 4 days ago
+ Invocation: 863830d81d9e4289aae9c05975190e82
+TriggeredBy: ● pipewire-pulse.socket
+   Main PID: 839453 (pipewire-pulse)
+      Tasks: 3 (limit: 309083)
+     Memory: 26.6M (peak: 34.6M)
+        CPU: 1h 14min 54.629s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/session.slice/pipewire-pulse.service
+             └─839453 /nix/store/m2kqwy3rb25dy5zi5sjl4f6raryb67y9-pipewire-1.6.5/bin/pipewire-pulse
+
+Jul 03 16:52:43 workstation pipewire-pulse[839453]: mod.protocol-pulse: setsockopt(SO_PRIORITY) failed: Bad file descriptor
+Jul 03 16:52:43 workstation pipewire-pulse[839453]: mod.protocol-pulse: client 0x642ad6feaa10: no peercred: Bad file descriptor
+Jul 03 17:12:04 workstation pipewire-pulse[839453]: mod.protocol-pulse: setsockopt(SO_PRIORITY) failed: Bad file descriptor
+Jul 03 17:12:04 workstation pipewire-pulse[839453]: mod.protocol-pulse: client 0x642ad6feaa10: no peercred: Bad file descriptor
+Jul 03 17:48:42 workstation pipewire-pulse[839453]: mod.protocol-pulse: setsockopt(SO_PRIORITY) failed: Bad file descriptor
+Jul 03 17:48:42 workstation pipewire-pulse[839453]: mod.protocol-pulse: client 0x642ad6feaa10: no peercred: Bad file descriptor
+Jul 03 18:08:18 workstation pipewire-pulse[839453]: mod.protocol-pulse: setsockopt(SO_PRIORITY) failed: Bad file descriptor
+Jul 03 18:08:18 workstation pipewire-pulse[839453]: mod.protocol-pulse: client 0x642ad6feaa10: no peercred: Bad file descriptor
+Jul 03 18:28:43 workstation pipewire-pulse[839453]: mod.protocol-pulse: setsockopt(SO_PRIORITY) failed: Bad file descriptor
+Jul 03 18:28:43 workstation pipewire-pulse[839453]: mod.protocol-pulse: client 0x642ad6feaa10: no peercred: Bad file descriptor
+
+● wireplumber.service - Multimedia Service Session Manager
+     Loaded: loaded (/etc/systemd/user/wireplumber.service; enabled; preset: ignored)
+    Drop-In: /nix/store/dm93dh91w8z48mcza99rn4l2aps7wnlf-user-units/wireplumber.service.d
+             └─overrides.conf
+     Active: active (running) since Mon 2026-06-22 08:40:16 CDT; 1 week 4 days ago
+ Invocation: 6163b4351cbc4f3ba956aaf59a66ba81
+   Main PID: 839417 (wireplumber)
+      Tasks: 9 (limit: 309083)
+     Memory: 10.7M (peak: 17.4M)
+        CPU: 9.634s
+     CGroup: /user.slice/user-1000.slice/user@1000.service/session.slice/wireplumber.service
+             └─839417 /nix/store/l1sd2044g0lyqijyqi9hdbccjg37glqa-wireplumber-0.5.14/bin/wireplumber
+
+Jun 22 08:40:16 workstation wireplumber[839417]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Jun 22 08:40:16 workstation wireplumber[839417]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Jun 22 08:40:16 workstation wireplumber[839417]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Jun 22 08:40:16 workstation wireplumber[839417]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Jun 22 08:40:17 workstation wireplumber[839417]: wp-device: SPA handle 'api.alsa.acp.device' could not be loaded; is it installed?
+Jun 22 08:40:17 workstation wireplumber[839417]: s-monitors: Failed to create 'api.alsa.acp.device' device
+Jun 22 08:40:17 workstation wireplumber[839417]: spa.bluez5: BlueZ system service is not available
+Jun 22 08:40:17 workstation wireplumber[839417]: [14:01:37.834152225] [839417]  INFO IPAManager ipa_manager.cpp:147 libcamera is not installed. Adding '/nix/store/src/ipa' to the IPA search path
+Jun 22 08:40:17 workstation wireplumber[839417]: [14:01:37.834401185] [839417]  INFO Camera camera_manager.cpp:340 libcamera v0.7.0
+Jun 22 08:40:17 workstation wireplumber[839417]: wp-event-dispatcher: <WpAsyncEventHook:0x5fa8892f85c0> failed: failed to activate item: Object activation aborted: proxy destroyed
+
+[wpctl status]
+PipeWire 'pipewire-0' [1.6.5, trevor@workstation, cookie:2370429564]
+ └─ Clients:
+        34. .xdg-desktop-portal-wrapped         [1.6.5, trevor@workstation, pid:839380]
+        35. WirePlumber                         [1.6.5, trevor@workstation, pid:839417]
+        43. WirePlumber [export]                [1.6.5, trevor@workstation, pid:839417]
+        44. .xdg-desktop-portal-hyprland-wrapped [1.6.5, trevor@workstation, pid:839425]
+        45. pipewire                            [1.6.5, trevor@workstation, pid:839453]
+        46. waybar                              [1.6.5, trevor@workstation, pid:3865259]
+        48. waybar                              [1.6.5, trevor@workstation, pid:3865259]
+        69. sunshine                            [1.6.5, trevor@workstation, pid:855505]
+       113. Firefox                             [1.6.5, trevor@workstation, pid:983983]
+       115. pipewire                            [1.6.5, trevor@workstation, pid:839453]
+       121. libcanberra                         [1.6.5, trevor@workstation, pid:1228535]
+       122. Firefox                             [1.6.5, trevor@workstation, pid:983983]
+       124. sunshine                            [1.6.5, trevor@workstation, pid:855505]
+       125. wpctl                               [1.6.5, trevor@workstation, pid:2984864]
+       131.                                     [1.6.5, trevor@workstation, pid:1228535]
+       137. pipewire                            [1.6.5, trevor@workstation, pid:839453]
+       153. Steam Voice Settings                [1.6.5, trevor@workstation, pid:1193496]
+       154. Steam                               [1.6.5, trevor@workstation, pid:1193496]
+       155. Chromium input                      [1.6.5, trevor@workstation, pid:1212350]
+       161. pipewire                            [1.6.5, trevor@workstation, pid:839453]
+
+Audio
+ ├─ Devices:
+ │      50. USB Audio                           [alsa]
+ │      51. AD102 High Definition Audio Controller [alsa]
+ │  
+ ├─ Sinks:
+ │      47. USB Audio S/PDIF Out                [vol: 0.40]
+ │      60. USB Audio Front Headphones          [vol: 1.00]
+ │      61. USB Audio Speakers                  [vol: 0.40]
+ │      65. AD102 High Definition Audio Controller Digital Stereo (HDMI) [vol: 0.40]
+ │  *  135. sink-sunshine-stereo                [vol: 1.00]
+ │     144. sink-sunshine-surround51            [vol: 1.00]
+ │     150. sink-sunshine-surround71            [vol: 1.00]
+ │  
+ ├─ Sources:
+ │  *   58. USB Audio Microphone                [vol: 1.00]
+ │      59. USB Audio Line In                   [vol: 1.00]
+ │      64. USB Audio Front Microphone          [vol: 1.00]
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+       120. sunshine                                                    
+            110. monitor_FR     
+            126. monitor_FL     
+            147. input_FR        < sink-sunshine-stereo:monitor_FR	[active]
+            173. input_FL        < sink-sunshine-stereo:monitor_FL	[active]
+
+Video
+ ├─ Devices:
+ │  
+ ├─ Sinks:
+ │  
+ ├─ Sources:
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+
+Settings
+ └─ Default Configured Devices:
+         0. Audio/Sink    sink-sunshine-stereo
+
+[pw-dump summary names]
+0	PipeWire:Interface:Core	pipewire
+1	PipeWire:Interface:Module	-
+3	PipeWire:Interface:SecurityContext	-
+2	PipeWire:Interface:Module	-
+5	PipeWire:Interface:Profiler	-
+4	PipeWire:Interface:Module	-
+6	PipeWire:Interface:Module	-
+7	PipeWire:Interface:Factory	-
+8	PipeWire:Interface:Module	-
+9	PipeWire:Interface:Factory	-
+10	PipeWire:Interface:Module	-
+11	PipeWire:Interface:Factory	-
+12	PipeWire:Interface:Module	-
+13	PipeWire:Interface:Factory	-
+14	PipeWire:Interface:Module	-
+15	PipeWire:Interface:Factory	-
+16	PipeWire:Interface:Module	-
+17	PipeWire:Interface:Module	-
+18	PipeWire:Interface:Module	-
+19	PipeWire:Interface:Factory	-
+20	PipeWire:Interface:Module	-
+21	PipeWire:Interface:Factory	-
+22	PipeWire:Interface:Module	-
+23	PipeWire:Interface:Factory	-
+24	PipeWire:Interface:Factory	-
+25	PipeWire:Interface:Factory	-
+26	PipeWire:Interface:Factory	-
+27	PipeWire:Interface:Factory	-
+28	PipeWire:Interface:Factory	-
+29	PipeWire:Interface:Module	-
+30	PipeWire:Interface:Module	-
+31	PipeWire:Interface:Node	Dummy-Driver
+32	PipeWire:Interface:Node	Freewheel-Driver
+33	PipeWire:Interface:Metadata	-
+34	PipeWire:Interface:Client	.xdg-desktop-portal-wrapped
+35	PipeWire:Interface:Client	WirePlumber
+36	PipeWire:Interface:Metadata	-
+38	PipeWire:Interface:Metadata	-
+40	PipeWire:Interface:Metadata	-
+43	PipeWire:Interface:Client	WirePlumber [export]
+44	PipeWire:Interface:Client	.xdg-desktop-portal-hyprland-wrapped
+45	PipeWire:Interface:Client	pipewire
+50	PipeWire:Interface:Device	Audio/Device
+51	PipeWire:Interface:Device	Audio/Device
+52	PipeWire:Interface:Node	Midi-Bridge
+53	PipeWire:Interface:Port	-
+54	PipeWire:Interface:Port	-
+55	PipeWire:Interface:Node	bluez_midi.server
+56	PipeWire:Interface:Port	-
+57	PipeWire:Interface:Port	-
+47	PipeWire:Interface:Node	alsa_output.usb-Generic_USB_Audio-00.HiFi__SPDIF__sink
+61	PipeWire:Interface:Node	alsa_output.usb-Generic_USB_Audio-00.HiFi__Speaker__sink
+60	PipeWire:Interface:Node	alsa_output.usb-Generic_USB_Audio-00.HiFi__Headphones__sink
+59	PipeWire:Interface:Node	alsa_input.usb-Generic_USB_Audio-00.HiFi__Line__source
+58	PipeWire:Interface:Node	alsa_input.usb-Generic_USB_Audio-00.HiFi__Mic1__source
+64	PipeWire:Interface:Node	alsa_input.usb-Generic_USB_Audio-00.HiFi__Mic2__source
+72	PipeWire:Interface:Port	-
+73	PipeWire:Interface:Port	-
+74	PipeWire:Interface:Port	-
+75	PipeWire:Interface:Port	-
+76	PipeWire:Interface:Port	-
+77	PipeWire:Interface:Port	-
+78	PipeWire:Interface:Port	-
+79	PipeWire:Interface:Port	-
+80	PipeWire:Interface:Port	-
+81	PipeWire:Interface:Port	-
+82	PipeWire:Interface:Port	-
+83	PipeWire:Interface:Port	-
+84	PipeWire:Interface:Port	-
+85	PipeWire:Interface:Port	-
+86	PipeWire:Interface:Port	-
+87	PipeWire:Interface:Port	-
+88	PipeWire:Interface:Port	-
+89	PipeWire:Interface:Port	-
+90	PipeWire:Interface:Port	-
+91	PipeWire:Interface:Port	-
+92	PipeWire:Interface:Port	-
+93	PipeWire:Interface:Port	-
+94	PipeWire:Interface:Port	-
+95	PipeWire:Interface:Port	-
+96	PipeWire:Interface:Port	-
+97	PipeWire:Interface:Port	-
+98	PipeWire:Interface:Port	-
+99	PipeWire:Interface:Port	-
+100	PipeWire:Interface:Port	-
+101	PipeWire:Interface:Port	-
+153	PipeWire:Interface:Client	Steam Voice Settings
+154	PipeWire:Interface:Client	Steam
+155	PipeWire:Interface:Client	Chromium input
+65	PipeWire:Interface:Node	alsa_output.pci-0000_4b_00.1.hdmi-stereo
+102	PipeWire:Interface:Port	-
+103	PipeWire:Interface:Port	-
+104	PipeWire:Interface:Port	-
+105	PipeWire:Interface:Port	-
+121	PipeWire:Interface:Client	libcanberra
+131	PipeWire:Interface:Client	
+46	PipeWire:Interface:Client	waybar
+48	PipeWire:Interface:Client	waybar
+124	PipeWire:Interface:Client	sunshine
+161	PipeWire:Interface:Client	pipewire
+135	PipeWire:Interface:Node	sink-sunshine-stereo
+137	PipeWire:Interface:Client	pipewire
+144	PipeWire:Interface:Node	sink-sunshine-surround51
+71	PipeWire:Interface:Port	-
+166	PipeWire:Interface:Port	-
+130	PipeWire:Interface:Port	-
+140	PipeWire:Interface:Port	-
+115	PipeWire:Interface:Client	pipewire
+150	PipeWire:Interface:Node	sink-sunshine-surround71
+145	PipeWire:Interface:Port	-
+108	PipeWire:Interface:Port	-
+49	PipeWire:Interface:Port	-
+138	PipeWire:Interface:Port	-
+142	PipeWire:Interface:Port	-
+133	PipeWire:Interface:Port	-
+175	PipeWire:Interface:Port	-
+123	PipeWire:Interface:Port	-
+152	PipeWire:Interface:Port	-
+109	PipeWire:Interface:Port	-
+63	PipeWire:Interface:Port	-
+146	PipeWire:Interface:Port	-
+69	PipeWire:Interface:Client	sunshine
+106	PipeWire:Interface:Port	-
+136	PipeWire:Interface:Port	-
+127	PipeWire:Interface:Port	-
+116	PipeWire:Interface:Port	-
+132	PipeWire:Interface:Port	-
+114	PipeWire:Interface:Port	-
+111	PipeWire:Interface:Port	-
+176	PipeWire:Interface:Port	-
+157	PipeWire:Interface:Port	-
+171	PipeWire:Interface:Port	-
+178	PipeWire:Interface:Port	-
+151	PipeWire:Interface:Port	-
+117	PipeWire:Interface:Port	-
+141	PipeWire:Interface:Port	-
+107	PipeWire:Interface:Port	-
+112	PipeWire:Interface:Port	-
+120	PipeWire:Interface:Node	sunshine
+173	PipeWire:Interface:Port	-
+147	PipeWire:Interface:Port	-
+126	PipeWire:Interface:Port	-
+110	PipeWire:Interface:Port	-
+149	PipeWire:Interface:Link	-
+67	PipeWire:Interface:Link	-
+113	PipeWire:Interface:Client	Firefox
+122	PipeWire:Interface:Client	Firefox
+125	PipeWire:Interface:Client	pw-dump
