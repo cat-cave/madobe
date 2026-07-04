@@ -1,0 +1,78 @@
+m4-pr-template-qd-evidence-contract validation log
+
+Script started on 2026-07-04 14:51:00-05:00 [COMMAND="nix develop -c markdownlint-cli2 .github/PULL_REQUEST_TEMPLATE.md docs/QD_WORKFLOW.md" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract' is dirty
+error:
+       … while fetching the input 'git+file:///home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract'
+
+       error: executing SQLite statement 'pragma synchronous = off': unable to open database file, unable to open database file (in '/home/trevor/.cache/nix/fetcher-cache-v4.sqlite')
+
+Script done on 2026-07-04 14:51:00-05:00 [COMMAND_EXIT_CODE="1"]
+Script started on 2026-07-04 14:51:10-05:00 [COMMAND="nix develop -c markdownlint-cli2 .github/PULL_REQUEST_TEMPLATE.md docs/QD_WORKFLOW.md" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: .github/PULL_REQUEST_TEMPLATE.md docs/QD_WORKFLOW.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 89 file(s)
+Summary: 0 error(s)
+
+Script done on 2026-07-04 14:51:14-05:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-07-04 14:51:21-05:00 [COMMAND="nix develop -c just check" <not executed on terminal>]
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+[1mcargo fmt --all -- --check[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi[0m
+[1mcommand -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }[0m
+[32m INFO[0m [1mtaplo[0m:[1mformat_files[0m:[1mload_config[0m: found configuration file [3mpath[0m[2m=[0m"/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/taplo.toml"
+[32m INFO[0m [1mtaplo[0m:[1mformat_files[0m:[1mcollect_files[0m: found files [3mtotal[0m[2m=[0m22 [3mexcluded[0m[2m=[0m1 [3mfiles[0m[2m=[0m["/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/typos.toml"] [2m[3mcwd[0m[2m=[0m"/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract"[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi[0m
+[1mcommand -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }[0m
+[1mcargo check --workspace --all-targets --all-features[0m
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/compositor)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/protocol)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/telemetry)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/transport)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/apps/hostd)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/hyprland)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.84s
+[1mcargo clippy --workspace --all-targets --all-features -- -D warnings[0m
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/compositor)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/protocol)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/telemetry)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/transport)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/crates/hyprland)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/apps/hostd)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-pr-template-qd-evidence-contract/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.77s
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi[0m
+[1mcommand -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi[0m
+[1mcommand -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }[0m
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi[0m
+[1mcommand -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }[0m
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 89 file(s)
+Summary: 0 error(s)
+[1mif [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi[0m
+[1mcommand -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }[0m
+[1mjust lint-lines[0m
+[1mmax=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"[0m
+
+Script done on 2026-07-04 14:51:28-05:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-07-04 14:51:32-05:00 [COMMAND="git diff --check" <not executed on terminal>]
+
+Script done on 2026-07-04 14:51:32-05:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-07-04 14:51:59-05:00 [COMMAND="git diff --check" <not executed on terminal>]
+
+Script done on 2026-07-04 14:51:59-05:00 [COMMAND_EXIT_CODE="0"]
+Script started on 2026-07-04 14:51:59-05:00 [COMMAND="jq empty reports/qd/m4-pr-template-qd-evidence-contract/completion.json" <not executed on terminal>]
+
+Script done on 2026-07-04 14:51:59-05:00 [COMMAND_EXIT_CODE="0"]
