@@ -1,0 +1,105 @@
+Command: cargo fmt --check
+Status: failed
+Notes: Host shell did not have cargo on PATH. Switched to project Nix shell.
+
+Command: cargo test -p madobe-hyprland --all-features
+Status: failed
+Notes: Host shell did not have cargo on PATH. Switched to project Nix shell.
+
+Command: nix develop -c cargo fmt --check
+Status: failed in sandbox
+Notes: Nix needed user cache access outside the workspace:
+/home/trevor/.cache/nix/fetcher-cache-v4.sqlite.
+
+Command: nix develop -c cargo fmt --check
+Status: passed
+Notes: Reran with sandbox escalation for Nix cache access after formatting
+parser.rs.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Reran with sandbox escalation for Nix cache access. Hyprland tests
+passed, including 5 new parser unit tests.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/model/parser.rs --timeout 120 --jobs 2 --all-features --output evidence/m4-hyprland-parser-mutation-hardening/parser-mutants
+Status: failed
+Notes: Targeted parser mutation run found 79 mutants. Baseline passed.
+Result: 35 caught, 43 unviable, 1 timeout. The timeout was
+Parser::next_byte with cursor increment mutated from += to *=.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/model/parser.rs --timeout 120 --jobs 2 --all-features --output evidence/m4-hyprland-parser-mutation-hardening/parser-mutants-rerun
+Status: passed
+Notes: Targeted parser mutation run after changing next_byte cursor progress.
+Result: 77 mutants tested in 25s: 34 caught, 43 unviable.
+
+Command: nix develop -c just check
+Status: failed
+Notes: The check reached clippy. Clippy rejected a collapsible if in
+parse_number and a manual ASCII digit check in consume_digits.
+
+Command: nix develop -c cargo fmt --check
+Status: passed
+Notes: Formatting passed after clippy-driven parser edits.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Hyprland tests passed after clippy-driven parser edits.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/model/parser.rs --timeout 120 --jobs 2 --all-features --output evidence/m4-hyprland-parser-mutation-hardening/parser-mutants-final
+Status: passed
+Notes: Final targeted parser mutation run. Result: 78 mutants tested in 25s:
+35 caught, 43 unviable. No missed mutants and no timeouts.
+
+Command: nix develop -c just check
+Status: failed
+Notes: Code checks passed, but lint-lines rejected the large
+cargo-mutants JSON output files under evidence. Removed only those generated
+mutation output directories and kept the summaries in this log.
+
+Command: rm -rf evidence/m4-hyprland-parser-mutation-hardening/parser-mutants evidence/m4-hyprland-parser-mutation-hardening/parser-mutants-rerun evidence/m4-hyprland-parser-mutation-hardening/parser-mutants-final
+Status: passed
+Notes: Removed generated cargo-mutants output directories so lint-lines does
+not scan thousands-line JSON files under evidence.
+
+Command: main baseline supplied by qd node
+Status: recorded
+Notes: Full workspace mutation baseline from main was:
+751 mutants tested in 8m: 105 missed, 302 caught, 340 unviable, 4 timeouts.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final required check passed with evidence files present. The gate ran
+cargo fmt, taplo, shfmt, cargo check, cargo clippy, typos, markdownlint-cli2,
+actionlint, and just lint-lines. Markdownlint reported 75 files and 0 errors.
+
+Command: nix develop -c cargo test -p madobe-hyprland --all-features
+Status: passed
+Notes: Orchestrator rerun. Hyprland package tests passed, including the 5 new
+parser unit tests.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Orchestrator rerun. Full repository check passed from the node worktree.
+
+Command: nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/model/parser.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-parser-mutants-orchestrator
+Status: passed
+Notes: Orchestrator rerun. Result: 78 mutants tested in 26s: 35 caught, 43
+unviable. No missed mutants and no timeouts.
+
+Command: qd gate m4-hyprland-parser-mutation-hardening --phase ci
+Status: failed
+Notes: Orchestrator sequencing check. qd policy rejected the gate before audit
+with auditRequired, so audit is being recorded before rerunning the gate.
+
+Command: qd audit start m4-hyprland-parser-mutation-hardening
+Status: passed
+Notes: Orchestrator opened qd audit state.
+
+Command: qd audit pass m4-hyprland-parser-mutation-hardening --from-report reports/qd/m4-hyprland-parser-mutation-hardening/audit.json
+Status: passed
+Notes: Orchestrator passed audit with no findings.
+
+Command: qd gate m4-hyprland-parser-mutation-hardening --phase ci
+Status: passed
+Notes: Orchestrator rerun after audit. qd CI gate passed; merge gate remains
+correctly blocked until CI evidence is recorded.

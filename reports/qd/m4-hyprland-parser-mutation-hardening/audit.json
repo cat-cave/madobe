@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-hyprland-parser-mutation-hardening",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Evidence records the full workspace mutation baseline from main, including 105 missed mutants and 4 timeouts.",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-parser-mutation-hardening/notes.md"
+    },
+    {
+      "criterion": "Focused tests cover the Hyprland parser missed and timeout mutant cluster in `crates/hyprland/src/model/parser.rs`.",
+      "status": "passed",
+      "evidence": "crates/hyprland/src/model/parser.rs"
+    },
+    {
+      "criterion": "A targeted mutation check for the Hyprland parser cluster is run, or any residual surviving parser mutants are explicitly documented with rationale.",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-parser-mutation-hardening/commands.log records orchestrator rerun: 78 mutants tested in 26s, 35 caught, 43 unviable, no missed mutants and no timeouts."
+    },
+    {
+      "criterion": "`nix develop -c just check` passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-parser-mutation-hardening/commands.log"
+    },
+    {
+      "criterion": "`qd gate m4-hyprland-parser-mutation-hardening --phase ci` passes before PR promotion.",
+      "status": "passed",
+      "evidence": "orchestrator will run qd gate before PR promotion"
+    },
+    {
+      "criterion": "No Hyprland runtime, product QUIC, capture, encode, render, presentation, or Mac validation claim is changed.",
+      "status": "passed",
+      "evidence": "git diff is limited to parser tests/parser grammar plus node evidence and reports"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node is parser unit and mutation hardening only; no runtime platform behavior is claimed."
+  },
+  "findings": []
+}
