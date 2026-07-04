@@ -122,16 +122,33 @@ Use this shape for `result.json`:
   "metrics": {
     "frames_sent": 0,
     "frames_decoded": 0,
+    "frames_rendered": 0,
     "frames_presented": 0,
     "median_glass_to_glass_ms": null,
     "p95_glass_to_glass_ms": null
   },
-  "artifacts": [],
+  "artifacts": [
+    {
+      "path": "evidence/m3-cross-device-video-smoke/commands.log",
+      "kind": "commands_log"
+    }
+  ],
   "notes": ""
 }
 ```
 
-Null is acceptable for metrics the current milestone cannot measure yet. Do not invent numbers.
+Null is acceptable for latency metrics the current milestone cannot measure yet. Do not invent numbers.
+
+Artifact `kind` values that support metric claims are:
+
+- `decode_evidence` for nonzero `frames_decoded`
+- `render_evidence` for nonzero `frames_rendered`
+- `presentation_evidence` for nonzero `frames_presented`
+- `latency_evidence` for non-null `median_glass_to_glass_ms` or `p95_glass_to_glass_ms`
+
+Other useful kinds are `commands_log`, `linux_host_log`, `mac_client_log`, `notes`, and `other`. A checked schema
+fixture lives at `crates/protocol/fixtures/m3-cross-device-video-smoke/result.json`; it records only schema
+compatibility and does not claim live cross-device decode, render, presentation, or latency behavior.
 
 ## Failure Handling
 

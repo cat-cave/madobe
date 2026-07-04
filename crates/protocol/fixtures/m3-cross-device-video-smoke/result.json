@@ -1,0 +1,28 @@
+{
+  "node_id": "m3-cross-device-video-smoke",
+  "branch": "spec/m3-cross-device-result-schema-fixture",
+  "linux_commit": "f17c0c960f92bf11715fe2759e9e33bd6c05bee3",
+  "macos_commit": "f17c0c960f92bf11715fe2759e9e33bd6c05bee3",
+  "started_at": "2026-07-03T00:00:00Z",
+  "ended_at": "2026-07-03T00:00:00Z",
+  "passed": false,
+  "metrics": {
+    "frames_sent": 0,
+    "frames_decoded": 0,
+    "frames_rendered": 0,
+    "frames_presented": 0,
+    "median_glass_to_glass_ms": null,
+    "p95_glass_to_glass_ms": null
+  },
+  "artifacts": [
+    {
+      "path": "evidence/m3-cross-device-video-smoke/commands.log",
+      "kind": "commands_log"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/notes.md",
+      "kind": "notes"
+    }
+  ],
+  "notes": "Schema fixture only; no live cross-device decode, render, presentation, or latency behavior is claimed."
+}

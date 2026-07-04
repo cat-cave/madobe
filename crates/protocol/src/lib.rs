@@ -1,6 +1,13 @@
 #![doc = "Protocol identity and wire metadata types for the madobe workspace."]
 #![forbid(unsafe_code)]
 
+mod cross_device;
+
+pub use cross_device::{
+    CrossDeviceEvidenceClaim, CrossDeviceResultArtifact, CrossDeviceResultArtifactKind,
+    CrossDeviceResultValidationError, CrossDeviceVideoSmokeMetrics, CrossDeviceVideoSmokeResult,
+};
+
 /// Human-readable product name shared by M0 components.
 pub const PRODUCT_NAME: &str = "madobe";
 

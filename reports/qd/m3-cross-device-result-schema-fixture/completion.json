@@ -1,0 +1,85 @@
+{
+  "nodeId": "m3-cross-device-result-schema-fixture",
+  "summary": "Added a checked m3-cross-device-video-smoke/result.json fixture, protocol result model, and validation tests that require evidence for decode, render, presentation, and latency metric claims before live cross-device smoke runs.",
+  "changedFiles": [
+    "crates/protocol/src/lib.rs",
+    "crates/protocol/src/cross_device.rs",
+    "crates/protocol/fixtures/m3-cross-device-video-smoke/result.json",
+    "docs/CROSS_DEVICE_VALIDATION.md",
+    "evidence/m3-cross-device-result-schema-fixture/commands.log",
+    "evidence/m3-cross-device-result-schema-fixture/just-check.log",
+    "evidence/m3-cross-device-result-schema-fixture/notes.md",
+    "evidence/m3-cross-device-result-schema-fixture/protocol-tests.log",
+    "evidence/m3-cross-device-result-schema-fixture/validation-output.txt",
+    "reports/qd/m3-cross-device-result-schema-fixture/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Result fixture covers node_id, branch, Linux and macOS commits, start/end timestamps, pass/fail state, metrics, artifacts, and notes.",
+      "status": "passed",
+      "evidence": "crates/protocol/fixtures/m3-cross-device-video-smoke/result.json"
+    },
+    {
+      "criterion": "Latency metrics are nullable when not measured.",
+      "status": "passed",
+      "evidence": "crates/protocol/fixtures/m3-cross-device-video-smoke/result.json"
+    },
+    {
+      "criterion": "Validation rejects invented decode, render, presentation, or latency values without matching evidence.",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-result-schema-fixture/protocol-tests.log"
+    },
+    {
+      "criterion": "Tests or command evidence prove the fixture validates successfully.",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-result-schema-fixture/protocol-tests.log"
+    },
+    {
+      "criterion": "No live cross-device behavior claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-result-schema-fixture/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "cargo fmt --all",
+      "status": "failed",
+      "evidence": "evidence/m3-cross-device-result-schema-fixture/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo fmt --all",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-result-schema-fixture/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-protocol --all-features",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-result-schema-fixture/protocol-tests.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-result-schema-fixture/just-check.log"
+    },
+    {
+      "command": "nix develop -c jq empty crates/protocol/fixtures/m3-cross-device-video-smoke/result.json reports/qd/m3-cross-device-result-schema-fixture/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m3-cross-device-result-schema-fixture/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m3-cross-device-result-schema-fixture/commands.log",
+    "evidence/m3-cross-device-result-schema-fixture/just-check.log",
+    "evidence/m3-cross-device-result-schema-fixture/notes.md",
+    "evidence/m3-cross-device-result-schema-fixture/protocol-tests.log",
+    "evidence/m3-cross-device-result-schema-fixture/validation-output.txt"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Schema-fixture node only; no live cross-device decode, render, presentation, or latency behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

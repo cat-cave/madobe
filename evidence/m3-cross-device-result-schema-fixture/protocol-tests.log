@@ -1,0 +1,24 @@
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m3-cross-device-result-schema-fixture' is dirty
+madobe dev shell: use 'just --list' to see commands
+   Compiling madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m3-cross-device-result-schema-fixture/crates/protocol)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.66s
+     Running unittests src/lib.rs (target/debug/deps/madobe_protocol-ec85cc91a76fbd20)
+
+running 8 tests
+test cross_device::tests::fixture_covers_required_fields_without_live_claims ... ok
+test cross_device::tests::accepts_metric_claims_with_matching_evidence ... ok
+test cross_device::tests::rejects_invalid_latency_order ... ok
+test cross_device::tests::fixture_round_trips_semantically ... ok
+test tests::golden_video_frame_fixture_covers_expected_metadata ... ok
+test tests::hello_carries_stable_identity ... ok
+test cross_device::tests::rejects_decode_render_presentation_and_latency_without_evidence ... ok
+test tests::golden_video_frame_fixture_round_trips_semantically ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests madobe_protocol
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

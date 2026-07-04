@@ -1,0 +1,34 @@
+2026-07-03T00:00:00-05:00 pwd
+status: passed
+output: /home/trevor/projects/madobe/.qd/worktrees/m3-cross-device-result-schema-fixture
+
+2026-07-03T00:00:00-05:00 git status --short --branch
+status: passed
+output: ## spec/m3-cross-device-result-schema-fixture
+
+2026-07-03T00:00:00-05:00 cargo fmt --all
+status: blocked
+output: zsh:1: command not found: cargo
+
+2026-07-03T00:00:00-05:00 nix develop -c cargo fmt --all
+status: passed
+note: initial sandbox run was blocked by Nix daemon socket permissions; rerun with elevated sandbox permissions.
+
+2026-07-03T00:00:00-05:00 nix develop -c cargo test -p madobe-protocol --all-features
+status: passed
+evidence: evidence/m3-cross-device-result-schema-fixture/protocol-tests.log
+
+2026-07-03T00:00:00-05:00 nix develop -c just check
+status: passed
+evidence: evidence/m3-cross-device-result-schema-fixture/just-check.log
+
+2026-07-03T00:00:00-05:00 nix develop -c python -m json.tool crates/protocol/fixtures/m3-cross-device-video-smoke/result.json
+status: blocked
+output: exec: python: not found
+
+2026-07-03T00:00:00-05:00 nix develop -c python3 -m json.tool crates/protocol/fixtures/m3-cross-device-video-smoke/result.json
+status: blocked
+output: exec: python3: not found
+
+2026-07-03T00:00:00-05:00 nix develop -c jq empty crates/protocol/fixtures/m3-cross-device-video-smoke/result.json reports/qd/m3-cross-device-result-schema-fixture/completion.json
+status: passed
