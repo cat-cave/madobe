@@ -1257,6 +1257,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m3-lan-video-smoke-harness",
+      "title": "Add a LAN video smoke harness",
+      "kind": "feature",
+      "milestone": "M3-mac-video-endpoint",
+      "status": "ready",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "medium",
+      "owner": null,
+      "branch": null,
+      "spec": "Add a dependency-free validation harness that can send the checked-in AV1 sample metadata and payload over a local TCP/LAN connection and receive/validate it on either Linux or macOS. The harness is for M3 cross-device smoke evidence only and is not the product QUIC transport.",
+      "acceptance": "A CLI or test helper can run as a sender using evidence/m2-nvenc-encode-sample/sample-av1.ivf\nA CLI or test helper can run as a receiver and validate frame metadata, payload byte count, and payload SHA-256\nA localhost integration test proves the sender/receiver exchange without requiring macOS hardware\nEvidence records commands, sample hash, sender log, receiver log, and a result/timeline artifact\nDocs explain the harness is not QUIC, not VideoToolbox decode, not Metal render, not presentation, and not latency proof",
+      "validation": null,
+      "context": "platform:both\nowner:linux-orchestrator-or-platform-neutral\nvalidation:cross-device-prep\nnonclaim:not-product-quic",
+      "created_at": "2026-07-04T02:46:00.954Z",
+      "updated_at": "2026-07-04T02:46:00.954Z",
+      "claimed_at": null,
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -1505,6 +1535,12 @@
       "to_node": "m3-cross-device-video-smoke",
       "type": "requires",
       "created_at": "2026-07-04T01:34:05.905Z"
+    },
+    {
+      "from_node": "m3-lan-video-smoke-harness",
+      "to_node": "m3-cross-device-video-smoke",
+      "type": "requires",
+      "created_at": "2026-07-04T02:46:11.735Z"
     }
   ],
   "findings": [
