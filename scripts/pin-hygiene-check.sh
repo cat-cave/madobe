@@ -73,23 +73,40 @@ check_mise_tools() {
   done <"$file"
 }
 
-is_bad_action_ref() {
+is_allowed_action_ref() {
   local ref=$1
+  local semver_ref_regex='^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?(\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$'
+  local sha_ref_regex='^[0-9A-Fa-f]{40}$'
 
-  case "$ref" in
-  main | master | latest)
-    return 0
-    ;;
-  esac
+  [[ $ref =~ $semver_ref_regex ]] && return 0
+  [[ $ref =~ $sha_ref_regex ]]
+}
 
-  [[ $ref =~ ^v[0-9]+$ ]]
+check_action_ref() {
+  local location=$1
+  local uses_value=$2
+  local ref
+
+  if [[ $uses_value != *@* ]]; then
+    report_error "$location" "pin external action ref for $uses_value"
+    return
+  fi
+
+  ref=${uses_value##*@}
+  if [[ -z $ref ]]; then
+    report_error "$location" "pin external action ref for $uses_value"
+    return
+  fi
+
+  if ! is_allowed_action_ref "$ref"; then
+    report_error "$location" "pin external action $uses_value to a full semver tag or commit SHA"
+  fi
 }
 
 check_workflow_file() {
   local file=$1
   local line
   local line_no=0
-  local ref
   local uses_value
 
   while IFS= read -r line || [[ -n $line ]]; do
@@ -106,20 +123,7 @@ check_workflow_file() {
     [[ $uses_value == ./* ]] && continue
     [[ $uses_value == docker://* ]] && continue
 
-    if [[ $uses_value != *@* ]]; then
-      report_error "$file:$line_no" "pin external action ref for $uses_value"
-      continue
-    fi
-
-    ref=${uses_value##*@}
-    if [[ -z $ref ]]; then
-      report_error "$file:$line_no" "pin external action ref for $uses_value"
-      continue
-    fi
-
-    if is_bad_action_ref "$ref"; then
-      report_error "$file:$line_no" "pin external action $uses_value to a full tag or commit SHA"
-    fi
+    check_action_ref "$file:$line_no" "$uses_value"
   done <"$file"
 }
 
