@@ -1,0 +1,51 @@
+{
+  "nodeId": "m4-pin-hygiene-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": ".mise.toml rejects latest/stable tool selectors.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "criterion": "GitHub workflow uses refs reject main/master/latest and major-only @vN tags for external actions.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "criterion": "Full semver action tags and SHA refs are accepted.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "criterion": "Local actions are ignored/accepted.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "criterion": "just pin-hygiene-check and just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/commands.log"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/notes.md"
+    },
+    {
+      "criterion": "No product runtime, cross-device, or related claims are made.",
+      "status": "passed",
+      "evidence": "evidence/m4-pin-hygiene-check/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository hygiene gate only; no product runtime validation required."
+  },
+  "findings": []
+}

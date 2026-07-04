@@ -1,0 +1,34 @@
+Command: nix develop -c just pin-hygiene-check
+madobe dev shell: use 'just --list' to see commands
+pin hygiene check: passed
+Status: passed
+
+Command: nix develop -c shellcheck scripts/pin-hygiene-check.sh
+madobe dev shell: use 'just --list' to see commands
+Status: passed
+
+Command: temporary negative smoke: .mise.toml rust = latest
+Status: passed; rejected latest as expected
+
+Command: temporary negative smoke: .mise.toml just = stable
+Status: passed; rejected stable as expected
+
+Command: temporary negative smoke: workflow action @v4
+Status: passed; rejected major-only action ref as expected
+
+Command: temporary positive smoke: workflow SHA ref and local action
+pin hygiene check: passed
+Status: passed
+
+Command: nix develop -c just check
+madobe dev shell: use 'just --list' to see commands
+qd report check: validated 69 completion report(s) and 69 audit report(s)
+pin hygiene check: passed
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 99 file(s)
+Summary: 0 error(s)
+Status: passed
+
+Command: git diff --check
+Status: passed
