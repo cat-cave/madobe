@@ -1,0 +1,94 @@
+{
+  "nodeId": "m4-action-ref-strict-pin-check",
+  "summary": "Tightened the pin hygiene check so external GitHub Actions uses refs must be full semver tags or 40-character commit SHAs, while local and docker actions remain accepted.",
+  "changedFiles": [
+    "scripts/pin-hygiene-check.sh",
+    "evidence/m4-action-ref-strict-pin-check/commands.log",
+    "evidence/m4-action-ref-strict-pin-check/notes.md",
+    "reports/qd/m4-action-ref-strict-pin-check/completion.json",
+    "reports/qd/m4-action-ref-strict-pin-check/audit.json"
+  ],
+  "commits": [
+    "1d4dd25e1a7bc56c7d60ac1eacd2e3030d1de5ee"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Current workflow refs pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log records `nix develop -c just pin-hygiene-check` passing with the repository workflows."
+    },
+    {
+      "criterion": "Local and docker actions remain accepted.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log records a temporary positive smoke test with `uses: ./actions/local` and `uses: docker://alpine:3.20` passing."
+    },
+    {
+      "criterion": "Branch-ish refs and partial semver refs such as @v4 and @v4.2 are rejected.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log records temporary negative smoke tests for `@v4`, `@v4.2`, and `@main` failing as expected."
+    },
+    {
+      "criterion": "Full semver action tags and 40-character SHA refs are accepted.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log records temporary positive smoke tests for current full semver refs and a 40-character SHA ref passing."
+    },
+    {
+      "criterion": "just pin-hygiene-check and just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/notes.md"
+    },
+    {
+      "criterion": "No product runtime, cross-device, or related claims are made.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just pin-hygiene-check",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/pin-hygiene-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "command": "temporary negative smoke tests for @v4, @v4.2, and @main",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "command": "temporary positive smoke tests for full semver refs, a SHA ref, local action, and docker action",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-action-ref-strict-pin-check/commands.log",
+    "evidence/m4-action-ref-strict-pin-check/notes.md"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository hygiene gate only; no product runtime validation required."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

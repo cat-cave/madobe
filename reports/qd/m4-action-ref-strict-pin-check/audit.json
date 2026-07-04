@@ -1,0 +1,51 @@
+{
+  "nodeId": "m4-action-ref-strict-pin-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Current workflow refs pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "criterion": "Local and docker actions remain accepted.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "criterion": "Branch-ish refs and partial semver refs such as @v4 and @v4.2 are rejected.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "criterion": "Full semver action tags and 40-character SHA refs are accepted.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "criterion": "just pin-hygiene-check and just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/commands.log"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/notes.md"
+    },
+    {
+      "criterion": "No product runtime, cross-device, or related claims are made.",
+      "status": "passed",
+      "evidence": "evidence/m4-action-ref-strict-pin-check/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository hygiene gate only; no product runtime validation required."
+  },
+  "findings": []
+}
