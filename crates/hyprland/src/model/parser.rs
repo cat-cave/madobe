@@ -307,23 +307,30 @@ impl<'a> Parser<'a> {
     fn parse_number(&mut self) -> Result<String> {
         let start = self.cursor;
         self.consume_if(b'-');
-        self.consume_digits();
-        if self.consume_if(b'.') {
-            self.consume_digits();
+        match self.next_byte() {
+            Some(b'0') => {
+                if matches!(self.peek_byte(), Some(b'0'..=b'9')) {
+                    return Err(self.error("leading zero in number"));
+                }
+            }
+            Some(b'1'..=b'9') => _ = self.consume_digits(),
+            Some(_) | None => return Err(self.error("expected number digit")),
+        }
+
+        if self.consume_if(b'.') && !self.consume_digits() {
+            return Err(self.error("expected fractional digit"));
         }
         if self.consume_if(b'e') || self.consume_if(b'E') {
             let _ = self.consume_if(b'+') || self.consume_if(b'-');
-            self.consume_digits();
+            if !self.consume_digits() {
+                return Err(self.error("expected exponent digit"));
+            }
         }
 
-        if self.cursor == start {
-            Err(self.error("expected number"))
-        } else {
-            let bytes = &self.bytes[start..self.cursor];
-            std::str::from_utf8(bytes)
-                .map(str::to_owned)
-                .map_err(|error| self.error(&format!("invalid number: {error}")))
-        }
+        let bytes = &self.bytes[start..self.cursor];
+        std::str::from_utf8(bytes)
+            .map(str::to_owned)
+            .map_err(|error| self.error(&format!("invalid number: {error}")))
     }
 
     fn parse_literal(&mut self, literal: &[u8], value: JsonValue) -> Result<JsonValue> {
@@ -334,15 +341,19 @@ impl<'a> Parser<'a> {
     }
 
     fn skip_whitespace(&mut self) {
-        while matches!(self.peek_byte(), Some(b' ' | b'\n' | b'\r' | b'\t')) {
-            self.cursor += 1;
-        }
+        self.cursor += self.bytes[self.cursor..]
+            .iter()
+            .take_while(|&&byte| matches!(byte, b' ' | b'\n' | b'\r' | b'\t'))
+            .count();
     }
 
-    fn consume_digits(&mut self) {
-        while matches!(self.peek_byte(), Some(b'0'..=b'9')) {
-            self.cursor += 1;
-        }
+    fn consume_digits(&mut self) -> bool {
+        let count = self.bytes[self.cursor..]
+            .iter()
+            .take_while(|&&byte| byte.is_ascii_digit())
+            .count();
+        self.cursor += count;
+        count > 0
     }
 
     fn expect_byte(&mut self, expected: u8) -> Result<()> {
@@ -364,7 +375,7 @@ impl<'a> Parser<'a> {
 
     fn next_byte(&mut self) -> Option<u8> {
         let byte = self.peek_byte()?;
-        self.cursor += 1;
+        self.cursor = self.cursor.saturating_add(1);
         Some(byte)
     }
 
@@ -391,4 +402,97 @@ fn invalid_json(context: CommandContext, message: &str) -> HyprlandError {
             message: message.to_owned(),
         },
     )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{JsonValue, Parser, parse_root};
+    use crate::{CommandContext, HyprlandErrorKind};
+
+    #[test]
+    fn rejects_unescaped_string_control_characters() {
+        for payload in [
+            "\"bad\u{0}string\"",
+            "\"bad\u{1f}string\"",
+            "\"bad\nstring\"",
+        ] {
+            assert_invalid_json(payload, "control character in string");
+        }
+    }
+
+    #[test]
+    fn decodes_string_escapes_and_unicode_hex() {
+        assert_eq!(
+            parse_value(r#""quote\" slash\/ backslash\\ newline\n tab\t""#),
+            JsonValue::String("quote\" slash/ backslash\\ newline\n tab\t".to_owned())
+        );
+        assert_eq!(
+            parse_value(r#""\u0048\u0079\u0070\u0072\u0031""#),
+            JsonValue::String("Hypr1".to_owned())
+        );
+
+        for payload in [r#""\u12""#, r#""\u12xz""#] {
+            assert_invalid_json(payload, "unicode escape");
+        }
+    }
+
+    #[test]
+    fn enforces_json_number_boundaries() {
+        for payload in [
+            "0", "-0", "42", "-42", "3.14", "-3.14", "6e7", "6E-7", "6e+7",
+        ] {
+            assert_eq!(
+                parse_value(payload),
+                JsonValue::Number(payload.to_owned()),
+                "{payload}"
+            );
+        }
+
+        for payload in ["-", "-.", "01", "-01", "1.", "1e", "1e+", "1e-"] {
+            assert_invalid_json(payload, "");
+        }
+    }
+
+    #[test]
+    fn root_parser_rejects_trailing_non_whitespace() {
+        assert_eq!(parse_value(" [] \n\t"), JsonValue::Array(Vec::new()));
+        assert_invalid_json("[] []", "trailing characters");
+    }
+
+    #[test]
+    fn cursor_helpers_advance_to_completion() {
+        let mut parser = Parser::new(" \n\t123x", context());
+        parser.skip_whitespace();
+        assert_eq!(parser.cursor, 3);
+        assert!(parser.consume_digits());
+        assert_eq!(parser.cursor, 6);
+        assert!(!parser.consume_digits());
+        assert_eq!(parser.next_byte(), Some(b'x'));
+        assert!(parser.is_finished());
+        assert_eq!(parser.next_byte(), None);
+        assert!(parser.is_finished());
+    }
+
+    fn parse_value(payload: &str) -> JsonValue {
+        match parse_root(payload, context()) {
+            Ok(value) => value,
+            Err(error) => panic!("{error:?}"),
+        }
+    }
+
+    fn assert_invalid_json(payload: &str, message_part: &str) {
+        let error = match parse_root(payload, context()) {
+            Ok(value) => panic!("expected invalid JSON for {payload:?}, got {value:?}"),
+            Err(error) => error,
+        };
+        assert!(matches!(
+            error.kind(),
+            HyprlandErrorKind::InvalidJson { message }
+                if message.contains(message_part)
+        ));
+    }
+
+    fn context() -> CommandContext {
+        CommandContext::parser("test")
+    }
 }

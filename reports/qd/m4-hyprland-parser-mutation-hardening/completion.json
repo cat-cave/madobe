@@ -1,0 +1,67 @@
+{
+  "nodeId": "m4-hyprland-parser-mutation-hardening",
+  "summary": "Hardened the Hyprland JSON parser mutation surface by adding focused parser tests, tightening JSON number grammar, and reshaping cursor progress helpers to eliminate the parser timeout cluster.",
+  "changedFiles": [
+    "crates/hyprland/src/model/parser.rs",
+    "evidence/m4-hyprland-parser-mutation-hardening/commands.log",
+    "evidence/m4-hyprland-parser-mutation-hardening/notes.md",
+    "reports/qd/m4-hyprland-parser-mutation-hardening/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Evidence records the full workspace mutation baseline from main, including 105 missed mutants and 4 timeouts.",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-parser-mutation-hardening/notes.md records: 751 mutants tested in 8m: 105 missed, 302 caught, 340 unviable, 4 timeouts."
+    },
+    {
+      "criterion": "Focused tests cover the Hyprland parser missed and timeout mutant cluster in crates/hyprland/src/model/parser.rs.",
+      "status": "passed",
+      "evidence": "Added parser unit tests for string control characters, Unicode escapes, number grammar boundaries, trailing input, cursor progress, and is_finished behavior."
+    },
+    {
+      "criterion": "Run a targeted mutation check for the parser cluster if feasible, or document residual parser survivors.",
+      "status": "passed",
+      "evidence": "Final targeted run: cargo mutants -p madobe-hyprland --file crates/hyprland/src/model/parser.rs --timeout 120 --jobs 2 --all-features. Result: 78 mutants tested in 25s: 35 caught, 43 unviable."
+    },
+    {
+      "criterion": "nix develop -c just check passes.",
+      "status": "passed",
+      "evidence": "Final run passed after removing generated cargo-mutants output directories that violated lint-lines."
+    },
+    {
+      "criterion": "Produce commands.log, notes.md, and completion.json.",
+      "status": "passed",
+      "evidence": "Created evidence/m4-hyprland-parser-mutation-hardening/commands.log, evidence/m4-hyprland-parser-mutation-hardening/notes.md, and reports/qd/m4-hyprland-parser-mutation-hardening/completion.json."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo test -p madobe-hyprland --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-parser-mutation-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo mutants -p madobe-hyprland --file crates/hyprland/src/model/parser.rs --timeout 120 --jobs 2 --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-parser-mutation-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-hyprland-parser-mutation-hardening/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-hyprland-parser-mutation-hardening/commands.log",
+    "evidence/m4-hyprland-parser-mutation-hardening/notes.md",
+    "reports/qd/m4-hyprland-parser-mutation-hardening/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node hardens parser unit and mutation coverage only."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
