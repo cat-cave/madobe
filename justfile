@@ -14,6 +14,7 @@ fmt:
   if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
 
 check: fmt
+  just qd-reports-check
   cargo check --workspace --all-targets --all-features
   cargo clippy --workspace --all-targets --all-features -- -D warnings
   if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
@@ -24,6 +25,9 @@ check: fmt
 
 direct-capture-preflight:
   bash nix/direct-capture-preflight.sh
+
+qd-reports-check:
+  bash scripts/qd-reports-check.sh
 
 test:
   if command -v cargo-nextest >/dev/null 2>&1; then cargo nextest run --workspace --all-features; else cargo test --workspace --all-features; fi
@@ -53,7 +57,7 @@ ci-local:
   just coverage
 
 macos-bootstrap:
-  if [ "$(uname -s)" != Darwin ]; then echo "macOS bootstrap skipped outside Darwin"; else if ! command -v mise >/dev/null 2>&1; then command -v brew >/dev/null 2>&1 || { echo "Homebrew missing; install mise, tuist, swiftformat, and swiftlint manually"; exit 127; }; brew install mise; fi; brew list swiftformat >/dev/null 2>&1 || brew install swiftformat; brew list swiftlint >/dev/null 2>&1 || brew install swiftlint; mise install; fi
+  if [ "$(uname -s)" != Darwin ]; then echo "macOS bootstrap skipped outside Darwin"; else if ! command -v mise >/dev/null 2>&1; then command -v brew >/dev/null 2>&1 || { echo "Homebrew missing; install jq, mise, tuist, swiftformat, and swiftlint manually"; exit 127; }; brew install mise; fi; brew list jq >/dev/null 2>&1 || brew install jq; brew list swiftformat >/dev/null 2>&1 || brew install swiftformat; brew list swiftlint >/dev/null 2>&1 || brew install swiftlint; mise install; fi
 
 macos-check: check macos-swiftformat macos-swiftlint apple-generate apple-test
 

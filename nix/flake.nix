@@ -21,6 +21,7 @@ let
     gnugrep
     gnused
     just
+    jq
     llvmPackages.llvm
     nixpkgs-fmt
     pkg-config
