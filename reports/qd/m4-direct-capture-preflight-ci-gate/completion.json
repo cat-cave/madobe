@@ -1,0 +1,76 @@
+{
+  "nodeId": "m4-direct-capture-preflight-ci-gate",
+  "summary": "Added the direct capture helper build preflight to hosted Linux CI so the Wayland/GBM/libdrm build surface is checked by the Linux Nix validation path without making macOS CI responsible for Linux-only dependencies.",
+  "changedFiles": [
+    ".github/workflows/ci.yml",
+    "docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md",
+    "evidence/m4-direct-capture-preflight-ci-gate/commands.log",
+    "evidence/m4-direct-capture-preflight-ci-gate/notes.md",
+    "reports/qd/m4-direct-capture-preflight-ci-gate/audit.json",
+    "reports/qd/m4-direct-capture-preflight-ci-gate/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Linux CI runs `nix develop -c just direct-capture-preflight` or an equivalent Linux-only gate.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml runs `nix develop -c just direct-capture-preflight` in the Linux job after `nix flake check`."
+    },
+    {
+      "criterion": "macOS CI is not made responsible for Linux/Nix direct-capture dependencies.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml leaves the macOS job unchanged; docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md records that macOS CI does not run this preflight."
+    },
+    {
+      "criterion": "Evidence records local `nix develop -c just direct-capture-preflight`, `nix flake check`, and `nix develop -c just check`.",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-preflight-ci-gate/commands.log records all three commands passing."
+    },
+    {
+      "criterion": "No runtime capture, product QUIC, portal, capture-to-NVENC, zero-copy, cross-device, decode, render, presentation, or latency claim is made.",
+      "status": "passed",
+      "evidence": "docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md and evidence/m4-direct-capture-preflight-ci-gate/notes.md state the build-only boundary and excluded claims."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just direct-capture-preflight",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-preflight-ci-gate/commands.log"
+    },
+    {
+      "command": "nix flake check",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-preflight-ci-gate/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-preflight-ci-gate/commands.log"
+    },
+    {
+      "command": "jq empty reports/qd/m4-direct-capture-preflight-ci-gate/completion.json",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-preflight-ci-gate/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-direct-capture-preflight-ci-gate/commands.log"
+    }
+  ],
+  "evidence": [
+    "docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md",
+    "evidence/m4-direct-capture-preflight-ci-gate/commands.log",
+    "evidence/m4-direct-capture-preflight-ci-gate/notes.md",
+    "reports/qd/m4-direct-capture-preflight-ci-gate/audit.json",
+    "reports/qd/m4-direct-capture-preflight-ci-gate/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node is a hosted Linux CI build/preflight gate. Runtime capture and hardware/media-path behavior are out of scope."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

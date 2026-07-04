@@ -12,6 +12,10 @@ Run from the repo root inside the Linux Nix shell:
 nix develop -c just direct-capture-preflight
 ```
 
+Hosted Linux CI runs the same command after `nix flake check` and before the
+repo-wide `just check`/test/security gates. The macOS CI job does not run this
+preflight and remains responsible only for the native macOS check surface.
+
 The target runs `nix/direct-capture-preflight.sh`, which:
 
 - requires `cc`, `pkg-config`, and `wayland-scanner`;

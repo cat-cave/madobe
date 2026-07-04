@@ -1,0 +1,95 @@
+node=m4-direct-capture-preflight-ci-gate
+started=2026-07-04T12:48:32-05:00
+worktree=/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate
+
+$ nix develop -c just direct-capture-preflight
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash nix/direct-capture-preflight.sh
+direct capture build preflight ok
+wayland-client 1.25.0
+wayland-protocols 1.48
+gbm 26.0.3
+libdrm 2.4.133
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-foreign-toplevel-list/ext-foreign-toplevel-list-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-image-capture-source/ext-image-capture-source-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/staging/ext-image-copy-capture/ext-image-copy-capture-v1.xml
+generated //nix/store/gb7p46pjggn89knd03w4i60c0byyfbry-wayland-protocols-1.48/share/wayland-protocols/stable/linux-dmabuf/linux-dmabuf-v1.xml
+exit=0
+
+$ nix flake check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate' is dirty
+evaluating flake...
+checking flake output 'devShells'...
+checking derivation devShells.x86_64-linux.default...
+derivation evaluated to /nix/store/s9p9pg5xjpl6qklxk2ibxy8392h9zgrw-nix-shell.drv
+checking flake output 'formatter'...
+checking derivation formatter.x86_64-linux...
+derivation evaluated to /nix/store/r7kfcmaqwqnziqi0i0lp4fhpfck8kycl-nixpkgs-fmt-1.3.0.drv
+checking flake output 'checks'...
+checking derivation checks.x86_64-linux.rust...
+derivation evaluated to /nix/store/i8wic07vi5ymn286p1v34mgcrlhdqr76-madobe-rust-check.drv
+running 0 flake checks...
+all checks passed!
+warning: The check omitted these incompatible systems: aarch64-darwin, aarch64-linux, x86_64-darwin
+Use '--all-systems' to check all.
+exit=0
+
+$ nix develop -c just check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-direct-capture-preflight-ci-gate"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+cargo check --workspace --all-targets --all-features
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.08s
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 82 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+exit=0
+
+$ jq empty reports/qd/m4-direct-capture-preflight-ci-gate/completion.json
+exit=0
+
+$ git diff --check
+exit=0
+finished=2026-07-04T12:48:38-05:00
+
+orchestrator_verification=2026-07-04T12:50:00-05:00
+
+$ nix develop -c just direct-capture-preflight
+exit=0
+summary=direct capture build preflight ok; wayland-client 1.25.0; wayland-protocols 1.48; gbm 26.0.3; libdrm 2.4.133
+
+$ nix flake check
+exit=0
+summary=all checks passed
+
+$ nix develop -c just check
+exit=0
+summary=cargo fmt, taplo, shfmt, cargo check, cargo clippy, typos, markdownlint-cli2, actionlint, and lint-lines passed
+
+$ jq empty reports/qd/m4-direct-capture-preflight-ci-gate/completion.json reports/qd/m4-direct-capture-preflight-ci-gate/audit.json
+exit=0
+
+$ git diff --check
+exit=0
+
+$ nix develop -c just check
+exit=0
+summary=final report-normalization check passed
