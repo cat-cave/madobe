@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-encode-nv-sys-argument-mutation-hardening",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Evidence records the relevant workspace mutation baseline cluster for encode-nv-sys argument helpers.",
+      "status": "passed",
+      "evidence": "evidence/m4-encode-nv-sys-argument-mutation-hardening/notes.md"
+    },
+    {
+      "criterion": "Focused tests cover NvencPreset::ffmpeg_name, NvencTune::ffmpeg_name, and shell_arg validation behavior.",
+      "status": "passed",
+      "evidence": "crates/encode-nv-sys/src/lib.rs"
+    },
+    {
+      "criterion": "`nix develop -c cargo test -p madobe-encode-nv-sys --all-features` passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-encode-nv-sys-argument-mutation-hardening/commands.log"
+    },
+    {
+      "criterion": "`nix develop -c just check` passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-encode-nv-sys-argument-mutation-hardening/commands.log"
+    },
+    {
+      "criterion": "Targeted mutation check is clean for encode-nv-sys argument helpers.",
+      "status": "passed",
+      "evidence": "17 mutants tested in 5s: 9 caught, 8 unviable, no missed mutants and no timeouts."
+    },
+    {
+      "criterion": "No transport, product QUIC, capture, compositor, Apple, Nix, or supply-chain claim is changed.",
+      "status": "passed",
+      "evidence": "git diff is limited to crates/encode-nv-sys/src/lib.rs plus node evidence and reports"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node hardens encode-nv-sys argument helper unit coverage only."
+  },
+  "findings": []
+}

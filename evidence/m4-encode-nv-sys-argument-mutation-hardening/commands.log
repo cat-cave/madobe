@@ -1,0 +1,48 @@
+Command: nix develop -c cargo fmt --check
+Status: failed
+Notes: Formatting check found rustfmt changes needed in
+crates/encode-nv-sys/src/lib.rs after adding focused tests.
+
+Command: nix develop -c cargo test -p madobe-encode-nv-sys --all-features
+Status: passed
+Notes: Initial package test run passed with 5 encode-nv-sys tests, including
+the new preset, tune, and shell_arg tests.
+
+Command: nix develop -c cargo fmt
+Status: passed
+Notes: Applied rustfmt to crates/encode-nv-sys/src/lib.rs.
+
+Command: nix develop -c cargo test -p madobe-encode-nv-sys --all-features
+Status: passed
+Notes: Final required package test passed. Result: 5 passed, 0 failed.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Final repository check passed. The check ran cargo fmt, taplo, shfmt,
+cargo check, cargo clippy, typos, markdownlint-cli2, actionlint, and
+just lint-lines.
+
+Command: main baseline supplied by qd node
+Status: recorded
+Notes: Relevant encode-nv-sys argument-helper mutation baseline cluster from
+main:
+- crates/encode-nv-sys/src/lib.rs: NvencPreset::ffmpeg_name survived
+  replacement with empty/xyzzy strings.
+- crates/encode-nv-sys/src/lib.rs: NvencTune::ffmpeg_name survived
+  replacement with empty/xyzzy strings.
+- crates/encode-nv-sys/src/lib.rs: shell_arg survived || to && mutation.
+
+Command: nix develop -c cargo test -p madobe-encode-nv-sys --all-features
+Status: passed
+Notes: Orchestrator rerun. encode-nv-sys package tests passed: 5 passed, 0
+failed.
+
+Command: nix develop -c cargo mutants -p madobe-encode-nv-sys --file crates/encode-nv-sys/src/lib.rs --timeout 120 --jobs 2 --all-features --output /tmp/madobe-encode-nv-sys-mutants-orchestrator
+Status: passed
+Notes: Orchestrator targeted mutation rerun. Result: 17 mutants tested in 5s:
+9 caught, 8 unviable. No missed mutants and no timeouts.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Orchestrator rerun. Full repository check passed from the node
+worktree.

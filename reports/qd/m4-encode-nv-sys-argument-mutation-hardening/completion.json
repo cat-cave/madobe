@@ -1,0 +1,67 @@
+{
+  "nodeId": "m4-encode-nv-sys-argument-mutation-hardening",
+  "summary": "Hardened encode-nv-sys NVENC argument helper coverage with focused tests for preset and tune ffmpeg names plus direct shell argument validation behavior.",
+  "changedFiles": [
+    "crates/encode-nv-sys/src/lib.rs",
+    "evidence/m4-encode-nv-sys-argument-mutation-hardening/commands.log",
+    "evidence/m4-encode-nv-sys-argument-mutation-hardening/notes.md",
+    "reports/qd/m4-encode-nv-sys-argument-mutation-hardening/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Evidence records the relevant workspace mutation baseline cluster for encode-nv-sys argument helpers.",
+      "status": "passed",
+      "evidence": "evidence/m4-encode-nv-sys-argument-mutation-hardening/notes.md records the NvencPreset::ffmpeg_name, NvencTune::ffmpeg_name, and shell_arg survivors supplied by the qd node."
+    },
+    {
+      "criterion": "Focused tests cover NvencPreset::ffmpeg_name, NvencTune::ffmpeg_name, and shell_arg validation behavior.",
+      "status": "passed",
+      "evidence": "crates/encode-nv-sys/src/lib.rs includes exact-token tests for p4 and ll, plus shell_arg tests for safe tokens, empty strings, whitespace, and single-quote escaping."
+    },
+    {
+      "criterion": "nix develop -c cargo test -p madobe-encode-nv-sys --all-features passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-encode-nv-sys-argument-mutation-hardening/commands.log records the final run: 5 passed, 0 failed."
+    },
+    {
+      "criterion": "nix develop -c just check passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-encode-nv-sys-argument-mutation-hardening/commands.log records the final repository check passed."
+    },
+    {
+      "criterion": "Targeted mutation check is clean for encode-nv-sys argument helpers.",
+      "status": "passed",
+      "evidence": "Orchestrator targeted run passed: 17 mutants tested in 5s, 9 caught, 8 unviable, no missed mutants and no timeouts."
+    },
+    {
+      "criterion": "Produce commands.log, notes.md, and completion.json.",
+      "status": "passed",
+      "evidence": "Created evidence/m4-encode-nv-sys-argument-mutation-hardening/commands.log, evidence/m4-encode-nv-sys-argument-mutation-hardening/notes.md, and reports/qd/m4-encode-nv-sys-argument-mutation-hardening/completion.json."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo test -p madobe-encode-nv-sys --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-encode-nv-sys-argument-mutation-hardening/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-encode-nv-sys-argument-mutation-hardening/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-encode-nv-sys-argument-mutation-hardening/commands.log",
+    "evidence/m4-encode-nv-sys-argument-mutation-hardening/notes.md",
+    "reports/qd/m4-encode-nv-sys-argument-mutation-hardening/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node hardens encode-nv-sys argument helper unit coverage only."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
