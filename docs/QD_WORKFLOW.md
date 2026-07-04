@@ -224,9 +224,13 @@ PR descriptions should include:
 
 - qd node id
 - acceptance criteria
+- validation commands
 - evidence paths or artifact links
-- qd completion report
+- qd completion and audit report paths
+- platform validation status
+- cross-device and opposite-platform validation status when relevant
 - residual risks
+- DAG or topology changes
 
 No contributor should pick unclaimed work from memory or chat. If new work appears during implementation, add or propose a qd node and edge instead of silently expanding scope.
 

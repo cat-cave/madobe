@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-pr-template-qd-evidence-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "PR template captures qd node id, acceptance criteria, validation commands, evidence paths, completion and audit report paths, platform validation status, residual risks, and DAG or topology changes.",
+      "status": "passed",
+      "evidence": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "criterion": "Cross-device and opposite-platform validation fields are clearly marked as applicable only when relevant.",
+      "status": "passed",
+      "evidence": ".github/PULL_REQUEST_TEMPLATE.md"
+    },
+    {
+      "criterion": "Existing qd workflow docs remain aligned with the template.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md"
+    },
+    {
+      "criterion": "Markdown lint and repo hygiene checks pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-pr-template-qd-evidence-contract/commands.log"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-pr-template-qd-evidence-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Documentation and PR-template update only; markdownlint, `just check`, and diff hygiene passed."
+  },
+  "findings": []
+}
