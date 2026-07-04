@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-nightly-supply-chain-regression-gate",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Nightly deep checks run `nix develop -c just security` before long-running coverage or mutation steps.",
+      "status": "passed",
+      "evidence": ".github/workflows/nightly.yml"
+    },
+    {
+      "criterion": "PR and main CI behavior remains unchanged.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml was inspected and not modified."
+    },
+    {
+      "criterion": "Workflow syntax validates with actionlint.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-supply-chain-regression-gate/commands.log"
+    },
+    {
+      "criterion": "Evidence records focused security, workflow lint, and repo check commands.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-supply-chain-regression-gate/commands.log"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-supply-chain-regression-gate/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Scheduled workflow ordering change only; `nix develop -c just security`, `nix develop -c actionlint .github/workflows/*.yml`, and `nix develop -c just check` passed."
+  },
+  "findings": []
+}

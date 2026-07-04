@@ -18,6 +18,7 @@ jobs:
       - uses: cachix/install-nix-action@v31.10.6
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - run: nix develop -c just security
       - run: nix develop -c just coverage
       - run: nix develop -c just mutants
       - run: nix develop -c lychee .
