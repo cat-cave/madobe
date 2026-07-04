@@ -14,6 +14,10 @@ The encoded artifact is intentionally tiny: 84 bytes. `ffprobe-sample-av1.txt` i
 IVF container, `sample-av1-header.txt` starts with `DKIF` and codec tag `AV01`, and `artifact-sha256.txt` records the
 artifact hash.
 
+The encoded sample's `ffprobe` metadata reports `pixelFormat=yuv420p`, `colorRange=tv`, and unknown `colorSpace`,
+`colorTransfer`, and `colorPrimaries`. This encode sample does not validate HDR handling, color-management behavior,
+wide-gamut preservation, or end-to-end color accuracy.
+
 The grim PNG and raw RGB artifacts (`captured-sample.png` and `captured-sample.rgb`) are materialized diagnostic
 sample inputs for this encode proof. They do not prove no CPU readback, zero-copy capture, or direct capture-to-NVENC
 DMA-BUF transfer.

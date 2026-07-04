@@ -1,0 +1,30 @@
+$ jq -e . evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json
+Status: passed.
+Evidence: evidence/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/json-validation.log
+
+$ jq -e type evidence/m2-video-path-validation/bundle-manifest.json reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json
+Status: passed.
+Output:
+"object"
+"object"
+
+$ jq -e '<machine-checkable HDR/color boundary predicate>' evidence/m2-video-path-validation/bundle-manifest.json
+Status: passed.
+Output:
+true
+
+$ git diff --check
+Status: passed.
+Output: no whitespace errors.
+
+$ just lint-lines
+Status: passed.
+Output: no file exceeded the repository line-count limit.
+
+$ qd gate m2-video-path-validation-does-not-validate-hdr-or-color-manageme --phase ci
+Status: passed.
+Evidence: evidence/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/qd-gate-ci.json
+
+$ nix develop -c just verify
+Status: passed.
+Evidence: evidence/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/just-verify.log
