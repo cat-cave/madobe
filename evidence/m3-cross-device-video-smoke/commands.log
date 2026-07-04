@@ -1,0 +1,41 @@
+# m3-cross-device-video-smoke commands
+
+## Linux orchestration setup
+
+1. `git pull --rebase --autostash`
+   - status: passed on main before claim.
+2. `qd sync --from roadmap/qd-export.json --expect-clean`
+   - status: passed on main before claim.
+3. `qd doctor --strict`
+   - status: passed on main before claim.
+4. `qd claim m3-cross-device-video-smoke --agent trevor-linux-orchestrator --branch spec/m3-cross-device-video-smoke`
+   - status: passed.
+5. `qd worktree create m3-cross-device-video-smoke --branch spec/m3-cross-device-video-smoke`
+   - status: passed.
+6. `git -C .qd/worktrees/m3-cross-device-video-smoke merge --ff-only main`
+   - status: passed.
+7. `git -C .qd/worktrees/m3-cross-device-video-smoke push -u origin spec/m3-cross-device-video-smoke`
+   - status: passed.
+8. Linux preflight commands recorded in `linux/preflight.log`.
+   - status: passed after escalation for real network/GPU inspection.
+
+## Pending live commands
+
+Mac receiver command, to be run by the Mac orchestrator after syncing this branch:
+
+```sh
+cargo run -q -p madobectl -- \
+  video-smoke receive \
+  --bind 0.0.0.0:47044 \
+  --evidence-dir evidence/m3-cross-device-video-smoke/macos
+```
+
+Linux sender command, to be run after Mac posts its reachable receiver address:
+
+```sh
+cargo run -q -p madobectl -- \
+  video-smoke send \
+  --addr <mac-receiver-ip>:47044 \
+  --sample evidence/m2-nvenc-encode-sample/sample-av1.ivf \
+  --evidence-dir evidence/m3-cross-device-video-smoke/linux
+```
