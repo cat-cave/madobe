@@ -147,3 +147,17 @@ Validation boundary:
 - The receiver peer `192.168.1.23` is distinct from the Mac receiver address `192.168.1.15`.
 - This proves TCP LAN sample transfer and receiver-side sample validation for this attempt.
 - It still does not claim product QUIC, VideoToolbox decode, Metal render, presentation, or latency.
+
+## Mac aggregate evidence support
+
+After confirming there was no separate claimable Mac node, the Mac orchestrator
+added the runbook-level aggregate evidence files so the Linux-owned validation
+node has the required top-level artifact shape:
+
+- `result.json`
+- `linux-host.log`
+- `mac-client.log`
+
+The aggregate keeps the same validation boundary as the side-specific logs: TCP
+LAN sample transfer passed, with no product QUIC, VideoToolbox decode, Metal
+render, presentation, or latency claim.

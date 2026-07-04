@@ -32,3 +32,7 @@ Live run status:
 - The completed live attempt proves TCP LAN sample transfer and byte/hash
   validation only. It does not prove product QUIC, VideoToolbox decode, Metal
   render, presentation, or latency.
+- Top-level `result.json`, `linux-host.log`, and `mac-client.log` aggregate the
+  side-specific evidence in the shape required by `docs/CROSS_DEVICE_VALIDATION.md`.
+  The aggregate records `frames_sent: 1`; decode, render, and presentation remain
+  `0`, and latency metrics remain `null`.

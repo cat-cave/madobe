@@ -20,6 +20,14 @@
       "kind": "commands_log"
     },
     {
+      "path": "evidence/m3-cross-device-video-smoke/linux-host.log",
+      "kind": "linux_host_log"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/mac-client.log",
+      "kind": "mac_client_log"
+    },
+    {
       "path": "evidence/m3-cross-device-video-smoke/linux/preflight.log",
       "kind": "linux_host_log"
     },
@@ -29,6 +37,10 @@
     },
     {
       "path": "evidence/m3-cross-device-video-smoke/linux/sender-cli.out",
+      "kind": "other"
+    },
+    {
+      "path": "evidence/m3-cross-device-video-smoke/linux/sender-cli.err",
       "kind": "other"
     },
     {
@@ -56,5 +68,5 @@
       "kind": "notes"
     }
   ],
-  "notes": "Live Linux-to-Mac TCP LAN sample transfer passed using the checked-in 84-byte AV1 IVF sample. The receiver observed peer 192.168.1.23:46968, distinct from the Mac receiver address 192.168.1.15:47044, and validated metadata, byte count, and SHA-256. This result does not claim product QUIC, VideoToolbox decode, Metal render, presentation, or latency."
+  "notes": "Live Linux-to-Mac TCP LAN sample transfer passed using the checked-in 84-byte AV1 IVF sample. The receiver observed peer 192.168.1.23:46968, distinct from the Mac receiver address 192.168.1.15:47044, and validated metadata, byte count, and SHA-256. This result records zero decode/render/presentation frames and null latency metrics; it does not claim product QUIC, VideoToolbox decode, Metal render, presentation, or latency."
 }

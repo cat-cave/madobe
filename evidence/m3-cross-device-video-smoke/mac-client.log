@@ -1,0 +1,20 @@
+m3-cross-device-video-smoke macOS client summary
+branch=spec/m3-cross-device-video-smoke
+macos_evidence_commit=c3b1f3cbe766c2b0efda3100b7b9ff0f3b78885a
+receiver_command_source=evidence/m3-cross-device-video-smoke/commands.log
+transport=tcp
+product_quic=false
+local_addr=0.0.0.0:47044
+reachable_addr=192.168.1.15:47044
+peer_addr=192.168.1.23:46968
+frame_id=1
+codec=av1
+dimensions=160x90
+payload_bytes=84
+sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875
+metadata_valid=true
+payload_byte_count_valid=true
+payload_sha256_valid=true
+passed=true
+source_artifacts=evidence/m3-cross-device-video-smoke/macos/mac-client-linux-attempt.log,evidence/m3-cross-device-video-smoke/macos/linux-attempt/receiver.log,evidence/m3-cross-device-video-smoke/macos/linux-attempt/result.json,evidence/m3-cross-device-video-smoke/macos/linux-attempt/receiver-timeline.json
+validation_boundary=Mac receiver validated the Linux-originated sample bytes and hash; this does not claim product QUIC, VideoToolbox decode, Metal render, presentation, or latency.
