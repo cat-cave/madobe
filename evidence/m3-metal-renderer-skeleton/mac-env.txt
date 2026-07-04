@@ -1,0 +1,29 @@
+timestamp_utc: 2026-07-04T03:13:56Z
+
+## sw_vers
+ProductName:		macOS
+ProductVersion:		26.5.1
+BuildVersion:		25F80
+
+## uname
+Darwin Trevors-MacBook-Pro.local 25.5.0 Darwin Kernel Version 25.5.0: Mon Apr 27 20:39:29 PDT 2026; root:xnu-12377.121.6~2/RELEASE_ARM64_T8142 arm64
+
+## hardware
+Mac17,2
+
+## xcodebuild
+Xcode 26.2
+Build version 17C52
+
+## swift
+Apple Swift version 6.2.3 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+Target: arm64-apple-macosx26.0
+
+## tuist
+4.200.5
+
+## swiftformat
+0.61.1
+
+## swiftlint
+0.65.0

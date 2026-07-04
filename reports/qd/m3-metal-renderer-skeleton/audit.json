@@ -1,0 +1,41 @@
+{
+  "nodeId": "m3-metal-renderer-skeleton",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Renderer path builds and tests on macOS",
+      "status": "passed",
+      "evidence": "xcodebuild.log records the focused passing Metal render tests; macos-check.log records the final full macOS gate."
+    },
+    {
+      "criterion": "A visible frame or test pattern is presented",
+      "status": "passed",
+      "evidence": "MetalTestPatternView is an MTKView-backed renderer and MadobeMacApp wires it into ContentView."
+    },
+    {
+      "criterion": "Render timing report is produced",
+      "status": "passed",
+      "evidence": "render-report.json includes commandBufferStatus completed, sampledPixelBGRA8 [0,0,255,255], and renderDurationNanoseconds."
+    },
+    {
+      "criterion": "Screenshot evidence is saved when practical",
+      "status": "passed",
+      "evidence": "notes.md documents why GUI screenshot capture was not practical for this noninteractive run and records the practical visual/render evidence used instead."
+    },
+    {
+      "criterion": "No streaming latency claim is made until cross-device validation",
+      "status": "passed",
+      "evidence": "notes.md states this node makes no live streaming, cross-device validation, or latency claim."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "passed",
+    "evidence": "evidence/m3-metal-renderer-skeleton/render-report.json"
+  },
+  "findings": []
+}
