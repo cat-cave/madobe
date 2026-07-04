@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-madobectl-usage-surface-hardening",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Top-level `madobectl` usage includes the `video-smoke` command entry point without running sender or receiver logic.",
+      "status": "passed",
+      "evidence": "apps/cli/src/lib.rs"
+    },
+    {
+      "criterion": "Parser and usage tests cover unknown top-level commands and the video-smoke usage surface.",
+      "status": "passed",
+      "evidence": "apps/cli/src/lib.rs and crates/transport/src/video_smoke/cli.rs"
+    },
+    {
+      "criterion": "Existing display and hello behavior remains unchanged.",
+      "status": "passed",
+      "evidence": "evidence/m4-madobectl-usage-surface-hardening/commands.log"
+    },
+    {
+      "criterion": "Rust and repo hygiene checks pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-madobectl-usage-surface-hardening/commands.log"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-madobectl-usage-surface-hardening/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "CLI usage text and usage-error tests only; targeted Rust tests and `just check` passed."
+  },
+  "findings": []
+}

@@ -15,7 +15,9 @@ usage: madobectl hello
        madobectl display park [--id <madobe-output-id>]
        madobectl display remove [--id <madobe-output-id>]
        madobectl display bind --id <madobe-output-id> --session <session-id> --workspace <workspace-id>
-       madobectl display smoke [--id <madobe-output-id>]";
+       madobectl display smoke [--id <madobe-output-id>]
+       madobectl video-smoke send --addr <host:port> [--sample <path>] [--evidence-dir <dir>]
+       madobectl video-smoke receive --bind <host:port> [--evidence-dir <dir>]";
 
 /// Runs an adapter-independent CLI command and returns process output.
 ///
@@ -309,6 +311,18 @@ mod tests {
         };
 
         assert!(error.to_string().contains("madobectl display status"));
+    }
+
+    #[test]
+    fn top_level_usage_lists_video_smoke_entry_points() {
+        let error = match run(["video-smoke"]) {
+            Ok(output) => panic!("expected usage error, got {output}"),
+            Err(error) => error,
+        };
+        let usage = error.to_string();
+
+        assert!(usage.contains("madobectl video-smoke send --addr <host:port>"));
+        assert!(usage.contains("madobectl video-smoke receive --bind <host:port>"));
     }
 
     #[derive(Default)]

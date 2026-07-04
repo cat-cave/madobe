@@ -136,3 +136,33 @@ fn value_after(args: &[String], index: usize, flag: &'static str) -> Result<Stri
 fn required(value: Option<String>, flag: &'static str) -> Result<String, SmokeError> {
     value.ok_or_else(|| SmokeError::usage(format!("{flag} is required\n{USAGE}")))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::run_cli;
+    use crate::video_smoke::SmokeErrorKind;
+
+    #[test]
+    fn unknown_video_smoke_command_returns_usage_without_running_network() {
+        let error = match run_cli(["status"]) {
+            Ok(output) => panic!("expected usage error, got {output}"),
+            Err(error) => error,
+        };
+
+        assert!(matches!(error.kind(), SmokeErrorKind::Usage { .. }));
+        assert!(error.to_string().contains("madobectl video-smoke send"));
+        assert!(error.to_string().contains("madobectl video-smoke receive"));
+    }
+
+    #[test]
+    fn missing_required_video_smoke_flag_returns_usage_without_running_network() {
+        let error = match run_cli(["send"]) {
+            Ok(output) => panic!("expected usage error, got {output}"),
+            Err(error) => error,
+        };
+
+        assert!(matches!(error.kind(), SmokeErrorKind::Usage { .. }));
+        assert!(error.to_string().contains("--addr is required"));
+        assert!(error.to_string().contains("madobectl video-smoke send"));
+    }
+}
