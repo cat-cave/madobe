@@ -7,7 +7,9 @@
     "reports/qd/m4-qd-audit-schema-contract/completion.json",
     "scripts/qd-reports-check.sh"
   ],
-  "commits": [],
+  "commits": [
+    "0f332b4d305c2e2ca051a51d3f22018ec4c4848b"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-reports-check.sh rejects audit reports missing boolean verificationEvidence.diffReviewed, completionReportReviewed, or verificationEvidenceReviewed.",
