@@ -1,0 +1,121 @@
+{
+  "nodeId": "m4-product-quic-explicit-artifact-existence-contract",
+  "summary": "Added explicit product QUIC result artifact existence and non-empty core evidence validation while preserving schema-only default fixture mode.",
+  "changedFiles": [
+    "scripts/product-quic-result-check.sh",
+    "justfile",
+    "docs/CROSS_DEVICE_VALIDATION.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/notes.md",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-result-check.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-positive.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-missing-artifact.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-empty-core-artifact.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/shellcheck.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/just-check.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/qd-reports-check.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/git-diff-check.log",
+    "reports/qd/m4-product-quic-explicit-artifact-existence-contract/completion.json",
+    "reports/qd/m4-product-quic-explicit-artifact-existence-contract/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "No-arg just product-quic-result-check still validates the golden fixture and negative schema fixtures without requiring live evidence files.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Explicit product QUIC result files fail when any listed artifacts[].path is missing.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-missing-artifact.log"
+    },
+    {
+      "criterion": "Explicit mode fails when core product QUIC evidence artifacts commands_log, sender_log, receiver_log, payload_validation_evidence, or notes exist but are empty.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-empty-core-artifact.log"
+    },
+    {
+      "criterion": "Negative self-tests cover missing artifact and empty core artifact cases.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Cross-device runbook documents explicit product QUIC artifact existence and non-empty core evidence validation.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    },
+    {
+      "criterion": "The just command surface forwards explicit result paths for product QUIC and generic cross-device checks.",
+      "status": "passed",
+      "evidence": "justfile, evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-positive.log, and evidence/m4-product-quic-explicit-artifact-existence-contract/just-check.log"
+    },
+    {
+      "criterion": "No live product QUIC, Mac decode/render/presentation, latency, workflow_dispatch, credential, or product runtime change is made or claimed.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just product-quic-result-check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-result-check.log"
+    },
+    {
+      "command": "nix develop -c just product-quic-result-check target/product-quic-explicit-evidence-positive/result.json",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-positive.log"
+    },
+    {
+      "command": "nix develop -c just product-quic-result-check target/product-quic-explicit-evidence-missing/result.json",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-missing-artifact.log"
+    },
+    {
+      "command": "nix develop -c just product-quic-result-check target/product-quic-explicit-evidence-empty/result.json",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-empty-core-artifact.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/result-check-common.sh scripts/product-quic-result-check.sh scripts/cross-device-result-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/shellcheck.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/just-check.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/qd-reports-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/notes.md",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-result-check.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-positive.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-missing-artifact.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-empty-core-artifact.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/shellcheck.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/just-check.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/qd-reports-check.log",
+    "evidence/m4-product-quic-explicit-artifact-existence-contract/git-diff-check.log",
+    "reports/qd/m4-product-quic-explicit-artifact-existence-contract/completion.json",
+    "reports/qd/m4-product-quic-explicit-artifact-existence-contract/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Evidence-tooling hardening only; no live product QUIC or cross-device validation is required or claimed for this node."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-product-quic-explicit-artifact-existence-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Default fixture mode remains schema-only and does not require live evidence artifact files.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Explicit product QUIC result mode rejects missing artifact paths.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-missing-artifact.log"
+    },
+    {
+      "criterion": "Explicit product QUIC result mode rejects empty core evidence artifacts.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-empty-core-artifact.log"
+    },
+    {
+      "criterion": "The runbook documents explicit product QUIC artifact existence and non-empty core evidence checks.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    },
+    {
+      "criterion": "The just command surface supports explicit result paths.",
+      "status": "passed",
+      "evidence": "justfile and evidence/m4-product-quic-explicit-artifact-existence-contract/product-quic-explicit-positive.log"
+    },
+    {
+      "criterion": "No live product runtime or platform validation claim is introduced.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-explicit-artifact-existence-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Evidence-tooling hardening only; no live product QUIC or cross-device validation is required or claimed for this node."
+  },
+  "findings": []
+}

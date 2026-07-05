@@ -35,11 +35,11 @@ direct-capture-preflight:
 qd-reports-check:
   bash scripts/qd-reports-check.sh
 
-cross-device-result-check:
-  bash scripts/cross-device-result-check.sh
+cross-device-result-check *files:
+  bash scripts/cross-device-result-check.sh {{files}}
 
-product-quic-result-check:
-  bash scripts/product-quic-result-check.sh
+product-quic-result-check *files:
+  bash scripts/product-quic-result-check.sh {{files}}
 
 pin-hygiene-check:
   bash scripts/pin-hygiene-check.sh

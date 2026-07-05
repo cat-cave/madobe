@@ -1,0 +1,6 @@
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-explicit-artifact-existence-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/product-quic-result-check.sh target/product-quic-explicit-evidence-missing/result.json
+product quic result check: target/product-quic-explicit-evidence-missing/result.json: artifact path does not exist: target/product-quic-explicit-evidence-missing/missing-receiver.log
+error: recipe `product-quic-result-check` failed on line 42 with exit code 1
+missing artifact rejected as expected
