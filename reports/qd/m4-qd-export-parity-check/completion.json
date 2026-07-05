@@ -22,7 +22,8 @@
     "reports/qd/m4-qd-export-parity-check/completion.json"
   ],
   "commits": [
-    "1da2b7d3b89bbfec26adc0cc384cc80508b6ce9c"
+    "1da2b7d3b89bbfec26adc0cc384cc80508b6ce9c",
+    "129c1efdf9436f1e3b0595e796898d31bf830760"
   ],
   "acceptanceEvidence": [
     {
