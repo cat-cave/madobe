@@ -1,0 +1,165 @@
+# Command Log
+
+Validation commands and results are recorded here during node implementation.
+
+## nix develop -c lychee .
+2026-07-05T06:09:01-05:00
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks' is dirty
+madobe dev shell: use 'just --list' to see commands
+🔍 80 Total (in 1s 149ms) 🔗 51 Unique ✅ 57 OK 🚫 0 Errors 👻 23 Excluded 🔀 7 Redirects
+
+Hint: Followed 7 redirects. You might want to consider replacing redirecting URLs with the resolved URLs. Use verbose mode (`-v`/`-vv`) to see redirection details.
+status: passed
+
+## nix develop -c zizmor .github/workflows
+2026-07-05T06:09:17-05:00
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks' is dirty
+madobe dev shell: use 'just --list' to see commands
+ INFO zizmor: 🌈 zizmor v1.25.2
+ INFO audit: zizmor: 🌈 completed .github/workflows/ci.yml
+ INFO audit: zizmor: 🌈 completed .github/workflows/nightly.yml
+No findings to report. Good job! (4 suppressed)
+status: passed
+
+## nix develop -c deadnix --fail .
+2026-07-05T06:09:20-05:00
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks' is dirty
+madobe dev shell: use 'just --list' to see commands
+status: passed
+
+## nix develop -c statix check .
+2026-07-05T06:09:21-05:00
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks' is dirty
+madobe dev shell: use 'just --list' to see commands
+status: passed
+
+## nix develop -c just workflow-contract-check
+2026-07-05T06:09:22-05:00
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+status: passed
+
+## nix develop -c just pin-hygiene-check
+2026-07-05T06:09:23-05:00
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+status: passed
+
+## nix develop -c just qd-reports-check
+2026-07-05T06:09:34-05:00
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: reports/qd/m4-nightly-post-mutants-deep-checks/completion.json: commandsRun must be a non-empty array of command objects with non-blank command, status, and evidence
+qd report check: reports/qd/m4-nightly-post-mutants-deep-checks/audit.json: acceptanceReviewed.status must be passed, failed, or not_required
+qd report check: reports/qd/m4-nightly-post-mutants-deep-checks/audit.json: verificationEvidence diffReviewed, completionReportReviewed, and verificationEvidenceReviewed must all be true
+qd report check: failed with 3 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+status: failed (0)
+
+## nix develop -c just check
+2026-07-05T06:09:52-05:00
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: reports/qd/m4-nightly-post-mutants-deep-checks/completion.json: commandsRun must be a non-empty array of command objects with non-blank command, status, and evidence
+qd report check: reports/qd/m4-nightly-post-mutants-deep-checks/audit.json: acceptanceReviewed.status must be passed, failed, or not_required
+qd report check: reports/qd/m4-nightly-post-mutants-deep-checks/audit.json: verificationEvidence diffReviewed, completionReportReviewed, and verificationEvidenceReviewed must all be true
+qd report check: failed with 3 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+error: recipe `check` failed on line 17 with exit code 1
+status: failed (0)
+
+## git diff --check
+2026-07-05T06:10:13-05:00
+status: passed
+
+## nix develop -c just qd-reports-check
+2026-07-05T06:10:58-05:00
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 100 completion report(s) and 100 audit report(s)
+status: passed
+
+## nix develop -c just check
+2026-07-05T06:11:16-05:00
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 100 completion report(s) and 100 audit report(s)
+just pin-hygiene-check
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+just pr-template-check
+bash scripts/pr-template-check.sh
+pr template check: passed
+just workflow-contract-check
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+just dependabot-contract-check
+bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+cargo check --workspace --all-targets --all-features
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/compositor)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/telemetry)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/protocol)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/transport)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/apps/hostd)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/hyprland)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.89s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/compositor)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/telemetry)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/protocol)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/transport)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/crates/hyprland)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/apps/hostd)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-post-mutants-deep-checks/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.81s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 110 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+status: passed
+
+## git diff --check
+2026-07-05T06:11:39-05:00
+status: passed

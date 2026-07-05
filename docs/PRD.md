@@ -546,13 +546,13 @@ Daily usability gates for the first release:
 
 ## Source Anchors
 
-- Hyprland `hyprctl` output creation, monitor config, IPC, and NVIDIA notes: <https://wiki.hypr.land/Configuring/Using-hyprctl/>, <https://wiki.hypr.land/Configuring/Monitors/>, <https://wiki.hypr.land/IPC/>, <https://wiki.hypr.land/Nvidia/>
+- Hyprland `hyprctl` output creation, monitor config, IPC, and NVIDIA notes: <https://wiki.hypr.land/0.49.0/Configuring/Using-hyprctl/>, <https://wiki.hypr.land/0.49.0/Configuring/Monitors/>, <https://wiki.hypr.land/IPC/>, <https://wiki.hypr.land/Nvidia/>
 - XDG ScreenCast and RemoteDesktop portals: <https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.ScreenCast.html>, <https://flatpak.github.io/xdg-desktop-portal/docs/doc-org.freedesktop.portal.RemoteDesktop.html>
-- PipeWire DMA-BUF negotiation: <https://docs.pipewire.org/page_dma_buf.html>
+- PipeWire DMA-BUF buffer data type and negotiation metadata: <https://docs.pipewire.org/group__spa__buffer.html>
 - Kernel and NVIDIA Wayland constraints: <https://www.kernel.org/>, <https://www.kernel.org/category/releases.html>, <https://download.nvidia.com/XFree86/Linux-x86_64/575.64.05/README/wayland-issues.html>
 - Wayland capture/sync/color/pacing protocols: <https://wayland.app/protocols/wlr-screencopy-unstable-v1>, <https://wayland.app/protocols/ext-image-copy-capture-v1>, <https://wayland.app/protocols/linux-drm-syncobj-v1>, <https://wayland.app/protocols/color-management-v1>, <https://wayland.app/protocols/presentation-time>
 - NVIDIA Video Codec SDK and support matrix: <https://developer.nvidia.com/video-codec-sdk>, <https://docs.nvidia.com/video-technologies/video-codec-sdk/13.0/nvenc-video-encoder-api-prog-guide/index.html>, <https://developer.nvidia.com/video-encode-decode-support-matrix>
 - QUIC and `quinn`: <https://docs.rs/quinn/latest/quinn/>, <https://www.rfc-editor.org/rfc/rfc9000.html>, <https://www.rfc-editor.org/rfc/rfc9221.html>, <https://www.rfc-editor.org/rfc/rfc9002.html>
 - Tailscale connection behavior: <https://tailscale.com/docs/reference/connection-types>, <https://tailscale.com/docs/reference/faq/firewall-ports>
-- Apple client anchors: <https://developer.apple.com/documentation/videotoolbox>, <https://developer.apple.com/documentation/metal>, <https://developer.apple.com/documentation/gamecontroller>, <https://developer.apple.com/documentation/appkit/nspasteboard>, <https://developer.apple.com/newsroom/2023/10/apple-unveils-m3-m3-pro-and-m3-max-the-most-advanced-chips-for-a-personal-computer/>, <https://www.apple.com/newsroom/2024/05/apple-introduces-m4-chip/>
+- Apple client anchors: <https://developer.apple.com/documentation/videotoolbox>, <https://developer.apple.com/documentation/metal>, <https://developer.apple.com/documentation/gamecontroller>, <https://developer.apple.com/documentation/appkit/nspasteboard>, <https://www.apple.com/newsroom/2023/10/apple-unveils-m3-m3-pro-and-m3-max-the-most-advanced-chips-for-a-personal-computer/>, <https://www.apple.com/newsroom/2024/05/apple-introduces-m4-chip/>
 - Existing projects to study, not inherit: <https://github.com/LizardByte/Sunshine>, <https://github.com/moonlight-stream/moonlight-ios>, <https://github.com/games-on-whales/wolf>

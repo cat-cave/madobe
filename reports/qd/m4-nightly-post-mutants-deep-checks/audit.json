@@ -1,0 +1,31 @@
+{
+  "nodeId": "m4-nightly-post-mutants-deep-checks",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Pre-fix failures are recorded.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/pre-fix-failures.md"
+    },
+    {
+      "criterion": "Nightly deep-check failures are fixed locally under Nix.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/commands.log"
+    },
+    {
+      "criterion": "Reports are drafted with commits left for the orchestrator.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-nightly-post-mutants-deep-checks/completion.json has commits: []"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository hygiene and documentation maintenance only; no product runtime validation is required."
+  },
+  "findings": []
+}

@@ -1,0 +1,106 @@
+{
+  "nodeId": "m4-nightly-post-mutants-deep-checks",
+  "summary": "Fixed nightly deep-check failures by replacing dead documentation links with live canonical URLs, pinning workflow actions to full commit SHAs, disabling persisted checkout credentials, aligning local workflow/pin policy checks with SHA-pinned actions, and applying the minimal statix Nix lint fix.",
+  "changedFiles": [
+    ".github/workflows/ci.yml",
+    ".github/workflows/nightly.yml",
+    "scripts/pin-hygiene-check.sh",
+    "scripts/workflow-contract-check.sh",
+    "nix/flake.nix",
+    "docs/PRD.md",
+    "evidence/m4-nightly-post-mutants-deep-checks/action-ref-resolution.md",
+    "evidence/m4-nightly-post-mutants-deep-checks/commands.log",
+    "evidence/m4-nightly-post-mutants-deep-checks/pre-fix-failures.md",
+    "reports/qd/m4-nightly-post-mutants-deep-checks/audit.json",
+    "reports/qd/m4-nightly-post-mutants-deep-checks/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Record pre-fix failures in evidence.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/pre-fix-failures.md"
+    },
+    {
+      "criterion": "GitHub Actions are pinned to full 40-character commit SHAs and checkout steps disable persisted credentials.",
+      "status": "passed",
+      "evidence": ".github/workflows/ci.yml, .github/workflows/nightly.yml, and evidence/m4-nightly-post-mutants-deep-checks/action-ref-resolution.md"
+    },
+    {
+      "criterion": "Repository workflow and pin policy checks accept and guard SHA-pinned Actions plus checkout credential policy.",
+      "status": "passed",
+      "evidence": "scripts/pin-hygiene-check.sh and scripts/workflow-contract-check.sh"
+    },
+    {
+      "criterion": "Dead documentation links are replaced with live canonical URLs without lychee exclusions.",
+      "status": "passed",
+      "evidence": "docs/PRD.md"
+    },
+    {
+      "criterion": "Statix lint is fixed with the minimal Nix change.",
+      "status": "passed",
+      "evidence": "nix/flake.nix"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c lychee .",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/commands.log"
+    },
+    {
+      "command": "nix develop -c zizmor .github/workflows",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/commands.log"
+    },
+    {
+      "command": "nix develop -c deadnix --fail .",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/commands.log"
+    },
+    {
+      "command": "nix develop -c statix check .",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/commands.log"
+    },
+    {
+      "command": "nix develop -c just workflow-contract-check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/commands.log"
+    },
+    {
+      "command": "nix develop -c just pin-hygiene-check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-post-mutants-deep-checks/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-nightly-post-mutants-deep-checks/action-ref-resolution.md",
+    "evidence/m4-nightly-post-mutants-deep-checks/commands.log",
+    "evidence/m4-nightly-post-mutants-deep-checks/pre-fix-failures.md",
+    "reports/qd/m4-nightly-post-mutants-deep-checks/audit.json",
+    "reports/qd/m4-nightly-post-mutants-deep-checks/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository hygiene and documentation maintenance only; no product runtime validation is required."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

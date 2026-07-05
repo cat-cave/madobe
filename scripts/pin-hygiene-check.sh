@@ -75,10 +75,8 @@ check_mise_tools() {
 
 is_allowed_action_ref() {
   local ref=$1
-  local semver_ref_regex='^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?(\+[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$'
   local sha_ref_regex='^[0-9A-Fa-f]{40}$'
 
-  [[ $ref =~ $semver_ref_regex ]] && return 0
   [[ $ref =~ $sha_ref_regex ]]
 }
 
@@ -99,7 +97,7 @@ check_action_ref() {
   fi
 
   if ! is_allowed_action_ref "$ref"; then
-    report_error "$location" "pin external action $uses_value to a full semver tag or commit SHA"
+    report_error "$location" "pin external action $uses_value to a full 40-character commit SHA"
   fi
 }
 
