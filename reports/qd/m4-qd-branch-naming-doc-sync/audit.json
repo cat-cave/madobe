@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-qd-branch-naming-doc-sync",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The qd workflow documents spec/<node-id> as the current default branch convention.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md"
+    },
+    {
+      "criterion": "The general orchestration runbook tells agents to inspect both current spec/ and historical qd/ branches.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md"
+    },
+    {
+      "criterion": "The implementor prompt uses spec/<node-id> instead of qd/<node-id>-short-topic.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md"
+    },
+    {
+      "criterion": "Scope excludes qd behavior changes, historical evidence/report/branch rewrites, product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, and credential-dependent claims.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-branch-naming-doc-sync/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a qd workflow documentation alignment node and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "findings": []
+}

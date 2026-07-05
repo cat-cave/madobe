@@ -1,0 +1,14 @@
+docs/ORCHESTRATION.md:35:- `reports/qd/<node-id>/`: completion, audit, blocker, and DAG-change notes.
+docs/ORCHESTRATION.md:101:Then read the latest coordination issue comments and open PRs whose branch carries a qd node id. Current branches use
+docs/ORCHESTRATION.md:102:`spec/<node-id>`; older historical branches may still use `qd/<node-id>`.
+docs/ORCHESTRATION.md:173:Use a qd worktree and branch spec/<node-id>, unless the qd node already records a different branch.
+docs/ORCHESTRATION.md:174:Do not edit qd graph topology. If the node is wrong, write reports/qd/<node-id>/dag-notes.md.
+docs/ORCHESTRATION.md:175:If blocked, write reports/qd/<node-id>/blocker.md with commands and logs.
+docs/ORCHESTRATION.md:184:reports/qd/<node-id>/completion.json
+docs/ORCHESTRATION.md:231:reports/qd/<node-id>/blocker.md
+docs/QD_WORKFLOW.md:54:`reports/qd/<node-id>/completion.json`, not paths under `.qd/worktrees/`. If the implementation lives in a qd
+docs/QD_WORKFLOW.md:218:Use a branch name that carries the exact qd node id. The current default is:
+docs/QD_WORKFLOW.md:221:spec/<node-id>
+docs/QD_WORKFLOW.md:225:records, but new work should prefer the `spec/<node-id>` form so qd worktrees, GitHub PRs, and coordination comments
+docs/QD_WORKFLOW.md:282:reports/qd/<node-id>/
+docs/QD_WORKFLOW.md:308:Blocker reports are first-class qd evidence. Each `reports/qd/<node-id>/blocker.md` path must match an existing node

@@ -98,7 +98,8 @@ qd doctor --strict
 qd ready --json
 ```
 
-Then read the latest coordination issue comments and open PRs with `qd/` branches.
+Then read the latest coordination issue comments and open PRs whose branch carries a qd node id. Current branches use
+`spec/<node-id>`; older historical branches may still use `qd/<node-id>`.
 
 ## qd Lifecycle
 
@@ -169,7 +170,7 @@ Prompt implementors like this:
 ```text
 You are an implementor, not the orchestrator.
 Complete qd node <node-id> only.
-Use a qd worktree and branch qd/<node-id>-<short-topic>.
+Use a qd worktree and branch spec/<node-id>, unless the qd node already records a different branch.
 Do not edit qd graph topology. If the node is wrong, write reports/qd/<node-id>/dag-notes.md.
 If blocked, write reports/qd/<node-id>/blocker.md with commands and logs.
 Run the node acceptance checks and record evidence under evidence/<node-id>/.
