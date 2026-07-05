@@ -96,7 +96,83 @@ validate_completion() {
   expect_jq "$file" '.realWorldValidation | type == "object" and (.required | type == "boolean") and (.evidence | type == "string")' "realWorldValidation must include required boolean and evidence string"
   expect_jq "$file" '.unverifiedItems | type == "array" and length == 0' "unverifiedItems must be present and empty"
   expect_jq "$file" '.dagChangesNeeded | type == "array"' "dagChangesNeeded must be an array"
+  validate_completion_changed_files "$file"
   validate_completion_evidence_paths "$file"
+}
+
+validate_completion_changed_files() {
+  local file=$1
+  local entry
+  local path
+
+  if ! jq -e '.changedFiles | type == "array" and all(.[]; type == "string")' "$file" >/dev/null; then
+    return
+  fi
+
+  while IFS= read -r entry; do
+    if [[ $entry == deleted:* ]]; then
+      path=${entry#deleted:}
+      validate_deleted_changed_file "$file" "$entry" "$path"
+    else
+      validate_plain_changed_file "$file" "$entry"
+    fi
+  done < <(jq -r '.changedFiles[]' "$file")
+}
+
+validate_plain_changed_file() {
+  local file=$1
+  local path=$2
+
+  if ! validate_repo_relative_changed_file_path "$file" "$path" "changedFiles path"; then
+    return
+  fi
+
+  if [[ ! -e $path ]]; then
+    report_error "$file" "changedFiles path does not exist: $path"
+  fi
+}
+
+validate_deleted_changed_file() {
+  local file=$1
+  local entry=$2
+  local path=$3
+
+  if ! validate_repo_relative_changed_file_path "$file" "$path" "deleted changedFiles path"; then
+    return
+  fi
+
+  if [[ -e $path ]]; then
+    report_error "$file" "deleted changedFiles path still exists: $entry"
+  fi
+}
+
+validate_repo_relative_changed_file_path() {
+  local file=$1
+  local path=$2
+  local label=$3
+
+  if [[ -z $path ]]; then
+    report_error "$file" "$label must not be empty"
+    return 1
+  fi
+
+  if [[ $path = /* ]]; then
+    report_error "$file" "$label must be repo-relative: $path"
+    return 1
+  fi
+
+  if path_has_traversal "$path"; then
+    report_error "$file" "$label must not contain '..' traversal: $path"
+    return 1
+  fi
+
+  return 0
+}
+
+path_has_traversal() {
+  local path=$1
+
+  [[ $path == .. || $path == ../* || $path == */.. || $path == */../* ]]
 }
 
 validate_completion_evidence_paths() {

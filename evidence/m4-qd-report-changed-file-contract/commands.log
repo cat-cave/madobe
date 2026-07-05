@@ -1,0 +1,54 @@
+$ bash scripts/qd-reports-check.sh
+qd report check: validated 76 completion report(s) and 76 audit report(s)
+
+$ temporary-copy plain missing changedFiles negative smoke test
+Fixture location: /tmp/qd-changed-files-smoke.KKfqXx
+Fixture mutation: reports/qd/m4-qd-report-changed-file-contract/completion.json changedFiles[0] = "missing/plain-path.txt"
+qd report check: reports/qd/m4-qd-report-changed-file-contract/completion.json: changedFiles path does not exist: missing/plain-path.txt
+qd report check: failed with 1 error(s)
+negative smoke test failed as expected with exit code 1
+
+$ just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 76 completion report(s) and 76 audit report(s)
+
+$ just check
+cargo fmt --all -- --check
+bash: line 1: cargo: command not found
+error: recipe `fmt` failed on line 12 with exit code 127
+bare just check failed because cargo is not on PATH in this shell
+
+$ nix develop -c just check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-report-changed-file-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+taplo fmt --check
+shfmt -d
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 76 completion report(s) and 76 audit report(s)
+just pin-hygiene-check
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+just pr-template-check
+bash scripts/pr-template-check.sh
+pr template check: passed
+just workflow-contract-check
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+just dependabot-contract-check
+bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+cargo check --workspace --all-targets --all-features
+Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.89s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.77s
+shellcheck
+typos
+markdownlint-cli2 "**/*.md"
+Summary: 0 error(s)
+actionlint .github/workflows/*.yml
+just lint-lines
+nix develop -c just check passed
+
+$ git diff --check

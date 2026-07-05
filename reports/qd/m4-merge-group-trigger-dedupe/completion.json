@@ -2,7 +2,7 @@
   "nodeId": "m4-merge-group-trigger-dedupe",
   "summary": "Removed the redundant merge queue wrapper workflow so `.github/workflows/ci.yml` is the single authoritative `merge_group` entry point while preserving pull request and push-to-main CI triggers.",
   "changedFiles": [
-    ".github/workflows/merge-queue.yml",
+    "deleted:.github/workflows/merge-queue.yml",
     "evidence/m4-merge-group-trigger-dedupe/commands.log",
     "evidence/m4-merge-group-trigger-dedupe/notes.md",
     "reports/qd/m4-merge-group-trigger-dedupe/completion.json"
