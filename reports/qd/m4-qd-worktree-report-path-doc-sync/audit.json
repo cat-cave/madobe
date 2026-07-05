@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-qd-worktree-report-path-doc-sync",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The qd workflow documents repo-relative report path recording for qd worktree branches.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md"
+    },
+    {
+      "criterion": "The general orchestration runbook tells agents not to record .qd/worktrees paths in qd runs.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md"
+    },
+    {
+      "criterion": "The documentation describes exporting qd state from the qd root into the worktree roadmap file after qd state recording.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and docs/ORCHESTRATION.md"
+    },
+    {
+      "criterion": "Scope excludes qd behavior changes, historical report rewrites, product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, and credential-dependent claims.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-worktree-report-path-doc-sync/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a qd workflow documentation alignment node and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "findings": []
+}

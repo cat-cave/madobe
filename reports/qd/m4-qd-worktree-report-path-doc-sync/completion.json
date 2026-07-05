@@ -1,0 +1,91 @@
+{
+  "nodeId": "m4-qd-worktree-report-path-doc-sync",
+  "summary": "Documented the safe qd worktree report-path recording pattern so qd runs keep repo-relative report paths instead of recording .qd/worktrees paths.",
+  "changedFiles": [
+    "docs/ORCHESTRATION.md",
+    "docs/QD_WORKFLOW.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-qd-worktree-report-path-doc-sync/commands.log",
+    "evidence/m4-qd-worktree-report-path-doc-sync/git-diff-check.log",
+    "evidence/m4-qd-worktree-report-path-doc-sync/nix-just-check.log",
+    "evidence/m4-qd-worktree-report-path-doc-sync/notes.md",
+    "evidence/m4-qd-worktree-report-path-doc-sync/qd-reports-check.log",
+    "evidence/m4-qd-worktree-report-path-doc-sync/report-path-doc-check.log",
+    "reports/qd/m4-qd-worktree-report-path-doc-sync/completion.json",
+    "reports/qd/m4-qd-worktree-report-path-doc-sync/audit.json"
+  ],
+  "commits": [
+    "d274eb90474056de961d04c54064afa0a706ccb8"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents that qd complete, audit pass, verification sign-off, and CI evidence paths must remain repo-relative and must not point into .qd/worktrees.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and evidence/m4-qd-worktree-report-path-doc-sync/report-path-doc-check.log"
+    },
+    {
+      "criterion": "Docs describe the safe worktree pattern: record qd state from a checkout where reports/evidence are visible at repo-relative paths, then export qd state from the qd root into the worktree roadmap file.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md, docs/ORCHESTRATION.md, and evidence/m4-qd-worktree-report-path-doc-sync/report-path-doc-check.log"
+    },
+    {
+      "criterion": "No qd behavior changes and no historical evidence or report rewrites.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-worktree-report-path-doc-sync/notes.md"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded under evidence/m4-qd-worktree-report-path-doc-sync and reports/qd/m4-qd-worktree-report-path-doc-sync.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-worktree-report-path-doc-sync/notes.md and reports/qd/m4-qd-worktree-report-path-doc-sync/completion.json"
+    },
+    {
+      "criterion": "git diff --check, just qd-reports-check, and nix develop -c just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-worktree-report-path-doc-sync/git-diff-check.log, evidence/m4-qd-worktree-report-path-doc-sync/qd-reports-check.log, and evidence/m4-qd-worktree-report-path-doc-sync/nix-just-check.log"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-worktree-report-path-doc-sync/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "rg -n \"worktree branch|repo-relative|\\.qd/worktrees|qd complete --from-report|qd audit pass --from-report|qd verification sign-off|qd ci record-pass\" docs/QD_WORKFLOW.md docs/ORCHESTRATION.md",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-worktree-report-path-doc-sync/report-path-doc-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-worktree-report-path-doc-sync/git-diff-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-worktree-report-path-doc-sync/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-worktree-report-path-doc-sync/nix-just-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-worktree-report-path-doc-sync/commands.log",
+    "evidence/m4-qd-worktree-report-path-doc-sync/git-diff-check.log",
+    "evidence/m4-qd-worktree-report-path-doc-sync/nix-just-check.log",
+    "evidence/m4-qd-worktree-report-path-doc-sync/notes.md",
+    "evidence/m4-qd-worktree-report-path-doc-sync/qd-reports-check.log",
+    "evidence/m4-qd-worktree-report-path-doc-sync/report-path-doc-check.log",
+    "reports/qd/m4-qd-worktree-report-path-doc-sync/completion.json",
+    "reports/qd/m4-qd-worktree-report-path-doc-sync/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a qd workflow documentation alignment node and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

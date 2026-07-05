@@ -1,0 +1,6 @@
+2026-07-05 node validation:
+- rg -n "worktree branch|repo-relative|\\.qd/worktrees|qd complete --from-report|qd audit pass --from-report|qd verification sign-off|qd ci record-pass" docs/QD_WORKFLOW.md docs/ORCHESTRATION.md
+- git diff --check
+- just qd-reports-check
+- nix develop -c just check
+

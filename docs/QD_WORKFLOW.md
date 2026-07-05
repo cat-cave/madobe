@@ -48,6 +48,14 @@ qd export --out .qd/worktrees/<node-id>/roadmap/qd-export.json --deterministic
 
 Do not run `qd export` from a qd worktree that lacks the qd database or migrations.
 
+When recording qd state for a worktree branch, keep qd run report paths repo-relative. Commands such as
+`qd complete --from-report`, `qd audit pass --from-report`, `qd verification sign-off --evidence`, and
+`qd ci record-pass --log-path` resolve paths from the qd root. Record paths like
+`reports/qd/<node-id>/completion.json`, not paths under `.qd/worktrees/`. If the implementation lives in a qd
+worktree, use a checkout where the branch reports and evidence are visible at their repo-relative paths, or
+temporarily materialize those files in the qd root, record qd state, export the roadmap into the worktree, and clean
+the root checkout before continuing.
+
 If two branches modify the roadmap, resolve the JSON as source, then run:
 
 ```sh
