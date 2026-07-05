@@ -18,7 +18,9 @@
     "reports/qd/m4-product-quic-evidence-dir-artifact-contract/completion.json",
     "reports/qd/m4-product-quic-evidence-dir-artifact-contract/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "f0f63b282595e4e65b2c1f6ef24201b19715d056"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "product-quic-result-check rejects sender_log artifacts outside sender.evidenceDir.",
