@@ -1,0 +1,102 @@
+{
+  "nodeId": "m4-result-checker-shared-shell-helpers",
+  "summary": "Extracted shared shell helper logic for product QUIC and generic cross-device result checkers while preserving schema-specific validation and negative fixtures.",
+  "changedFiles": [
+    "scripts/result-check-common.sh",
+    "scripts/product-quic-result-check.sh",
+    "scripts/cross-device-result-check.sh",
+    "roadmap/qd-export.json",
+    "evidence/m4-result-checker-shared-shell-helpers/notes.md",
+    "evidence/m4-result-checker-shared-shell-helpers/product-quic-result-check.log",
+    "evidence/m4-result-checker-shared-shell-helpers/cross-device-result-check.log",
+    "evidence/m4-result-checker-shared-shell-helpers/cross-device-explicit-result-check.log",
+    "evidence/m4-result-checker-shared-shell-helpers/shellcheck.log",
+    "evidence/m4-result-checker-shared-shell-helpers/just-check.log",
+    "evidence/m4-result-checker-shared-shell-helpers/git-diff-check.log",
+    "reports/qd/m4-result-checker-shared-shell-helpers/completion.json",
+    "reports/qd/m4-result-checker-shared-shell-helpers/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "A shared result-check helper script exists under scripts/.",
+      "status": "passed",
+      "evidence": "scripts/result-check-common.sh"
+    },
+    {
+      "criterion": "product-quic-result-check.sh and cross-device-result-check.sh source the shared helper.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and scripts/cross-device-result-check.sh"
+    },
+    {
+      "criterion": "Both result checkers keep their schema-specific validation and negative fixtures.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh, scripts/cross-device-result-check.sh, evidence/m4-result-checker-shared-shell-helpers/product-quic-result-check.log, and evidence/m4-result-checker-shared-shell-helpers/cross-device-result-check.log"
+    },
+    {
+      "criterion": "just product-quic-result-check and just cross-device-result-check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-result-checker-shared-shell-helpers/product-quic-result-check.log and evidence/m4-result-checker-shared-shell-helpers/cross-device-result-check.log"
+    },
+    {
+      "criterion": "just check, shellcheck, qd-reports-check, and git diff --check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-result-checker-shared-shell-helpers/just-check.log, evidence/m4-result-checker-shared-shell-helpers/shellcheck.log, and evidence/m4-result-checker-shared-shell-helpers/git-diff-check.log"
+    },
+    {
+      "criterion": "No product runtime, Mac hardware, live cross-device, workflow_dispatch, or credential-dependent behavior is changed or claimed.",
+      "status": "passed",
+      "evidence": "evidence/m4-result-checker-shared-shell-helpers/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just product-quic-result-check",
+      "status": "passed",
+      "evidence": "evidence/m4-result-checker-shared-shell-helpers/product-quic-result-check.log"
+    },
+    {
+      "command": "nix develop -c just cross-device-result-check",
+      "status": "passed",
+      "evidence": "evidence/m4-result-checker-shared-shell-helpers/cross-device-result-check.log"
+    },
+    {
+      "command": "bash scripts/cross-device-result-check.sh evidence/m3-cross-device-video-smoke/result.json",
+      "status": "passed",
+      "evidence": "evidence/m4-result-checker-shared-shell-helpers/cross-device-explicit-result-check.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/result-check-common.sh scripts/product-quic-result-check.sh scripts/cross-device-result-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-result-checker-shared-shell-helpers/shellcheck.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-result-checker-shared-shell-helpers/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-result-checker-shared-shell-helpers/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-result-checker-shared-shell-helpers/notes.md",
+    "evidence/m4-result-checker-shared-shell-helpers/product-quic-result-check.log",
+    "evidence/m4-result-checker-shared-shell-helpers/cross-device-result-check.log",
+    "evidence/m4-result-checker-shared-shell-helpers/cross-device-explicit-result-check.log",
+    "evidence/m4-result-checker-shared-shell-helpers/shellcheck.log",
+    "evidence/m4-result-checker-shared-shell-helpers/just-check.log",
+    "evidence/m4-result-checker-shared-shell-helpers/git-diff-check.log",
+    "reports/qd/m4-result-checker-shared-shell-helpers/completion.json",
+    "reports/qd/m4-result-checker-shared-shell-helpers/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repo-quality shell helper consolidation only; no live cross-device validation is required or claimed for this node."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

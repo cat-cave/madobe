@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck disable=SC1091
+source "$script_dir/result-check-common.sh"
+
 default_fixture="crates/protocol/fixtures/m4-product-quic-smoke/result.json"
+check_name="product quic result check"
 
 main() {
-  command -v jq >/dev/null 2>&1 || {
-    printf 'product quic result check: required tool missing: jq\n' >&2
-    exit 127
-  }
+  result_check_require_jq "$check_name"
+  result_check_cd_repo_root
 
   if [[ $# -eq 0 ]]; then
     validate_file "$default_fixture"
@@ -28,11 +31,11 @@ validate_file() {
   local errors=0
 
   if [[ ! -f $file ]]; then
-    printf 'product quic result check: %s: file missing\n' "$file" >&2
+    printf '%s: %s: file missing\n' "$check_name" "$file" >&2
     return 1
   fi
   if ! jq empty "$file" >/dev/null; then
-    printf 'product quic result check: %s: invalid JSON\n' "$file" >&2
+    printf '%s: %s: invalid JSON\n' "$check_name" "$file" >&2
     return 1
   fi
 
@@ -46,8 +49,8 @@ validate_file() {
   require_jq "$file" '.receiver.platform | type == "string" and length > 0' 'receiver.platform must be set'
   require_jq "$file" '.sender.evidenceDir | type == "string" and length > 0' 'sender.evidenceDir must be set'
   require_jq "$file" '.receiver.evidenceDir | type == "string" and length > 0' 'receiver.evidenceDir must be set'
-  require_jq "$file" '.sender.evidenceDir | is_product_quic_repo_relative_reference' 'sender.evidenceDir must be repo-relative and traversal-free'
-  require_jq "$file" '.receiver.evidenceDir | is_product_quic_repo_relative_reference' 'receiver.evidenceDir must be repo-relative and traversal-free'
+  require_jq "$file" '.sender.evidenceDir | is_madobe_repo_relative_reference' 'sender.evidenceDir must be repo-relative and traversal-free'
+  require_jq "$file" '.receiver.evidenceDir | is_madobe_repo_relative_reference' 'receiver.evidenceDir must be repo-relative and traversal-free'
   require_jq "$file" '.payload.payloadBytes | type == "number" and . > 0' 'payload.payloadBytes must be positive'
   require_jq "$file" '.payload.sha256 | type == "string" and test("^[0-9a-f]{64}$")' 'payload.sha256 must be lowercase SHA-256 hex'
   require_jq "$file" '.payload.byteCountValidated == true' 'payload byte count must be validated'
@@ -62,7 +65,7 @@ validate_file() {
   require_jq "$file" '.downstreamClaims.latencyMs == null or ((.downstreamClaims.latencyMs | type) == "number" and .downstreamClaims.latencyMs >= 0)' 'downstreamClaims.latencyMs must be null or non-negative'
   require_jq "$file" '.artifacts | type == "array" and length > 0' 'artifacts must be a non-empty array'
   require_jq "$file" 'all(.artifacts[]; (.path | type == "string" and length > 0) and (.kind | type == "string" and length > 0))' 'artifacts must include non-empty path and kind'
-  require_jq "$file" 'all(.artifacts[]; .path | is_product_quic_repo_relative_reference)' 'artifact paths must be repo-relative and traversal-free'
+  require_jq "$file" 'all(.artifacts[]; .path | is_madobe_repo_relative_reference)' 'artifact paths must be repo-relative and traversal-free'
   require_jq "$file" 'all(.artifacts[]; .kind | is_product_quic_artifact_kind)' 'artifact kinds must use the product QUIC vocabulary'
   require_jq "$file" '.notes | type == "string" and length > 0' 'notes must be a non-empty string'
   require_jq "$file" '(has("framesSent") or has("framesReceived") or has("validated") or has("nonClaims")) | not' 'obsolete flat product QUIC schema fields are forbidden'
@@ -82,21 +85,13 @@ require_jq() {
   local message=$3
 
   if ! jq -e "$product_quic_jq_prelude $filter" "$file" >/dev/null; then
-    printf 'product quic result check: %s: %s\n' "$file" "$message" >&2
+    printf '%s: %s: %s\n' "$check_name" "$file" "$message" >&2
     errors=$((errors + 1))
   fi
 }
 
-# shellcheck disable=SC2016 # jq variables are expanded by jq, not the shell.
-product_quic_jq_prelude='
-def is_product_quic_repo_relative_reference:
-  type == "string"
-  and length > 0
-  and (startswith("/") | not)
-  and (test("^[A-Za-z]:[\\\\/]") | not)
-  and (contains("\\") | not)
-  and ((split("/") | index("..")) == null);
-
+# shellcheck disable=SC2016,SC2154 # jq expands jq variables; helper defines common prelude.
+product_quic_jq_prelude="${result_check_common_jq_prelude}"'
 def product_quic_artifact_kinds:
   [
     "commands_log",
@@ -151,7 +146,7 @@ expect_invalid() {
   local context=$2
 
   if validate_file "$file" >/dev/null 2>&1; then
-    printf 'product quic result check: negative fixture unexpectedly passed: %s\n' "$context" >&2
+    printf '%s: negative fixture unexpectedly passed: %s\n' "$check_name" "$context" >&2
     return 1
   fi
 }
