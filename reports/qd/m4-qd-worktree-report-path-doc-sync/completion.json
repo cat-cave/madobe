@@ -14,7 +14,9 @@
     "reports/qd/m4-qd-worktree-report-path-doc-sync/completion.json",
     "reports/qd/m4-qd-worktree-report-path-doc-sync/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "d274eb90474056de961d04c54064afa0a706ccb8"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "docs/QD_WORKFLOW.md documents that qd complete, audit pass, verification sign-off, and CI evidence paths must remain repo-relative and must not point into .qd/worktrees.",
@@ -87,4 +89,3 @@
   "unverifiedItems": [],
   "dagChangesNeeded": []
 }
-
