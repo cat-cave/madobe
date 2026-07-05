@@ -18,7 +18,9 @@
     "reports/qd/m3-quic-transport-skeleton/audit.json",
     "reports/qd/m3-quic-transport-skeleton/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "cc56d9e1efaa6e65febd53d128fde63e41644b54"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Loopback sender and receiver tests pass.",

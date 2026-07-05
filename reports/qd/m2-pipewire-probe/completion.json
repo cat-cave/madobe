@@ -40,7 +40,9 @@
     "reports/qd/m2-pipewire-probe/blocker.md",
     "reports/qd/m2-pipewire-probe/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "5a87330faa50cf56caa6c0192ff8b31ed0629924"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "PipeWire and portal versions are recorded.",

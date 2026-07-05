@@ -11,7 +11,9 @@
     "evidence/m3-videotoolbox-capability-probe/xcodebuild.log",
     "roadmap/qd-export.json"
   ],
-  "commits": [],
+  "commits": [
+    "ae1677782ed2ee07886115319e5fc5ee81ed073c"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "A deterministic Swift or XCTest probe records kCMVideoCodecType_AV1 / av01 VideoToolbox hardware decode support, or the exact unsupported condition.",

@@ -14,7 +14,9 @@
     "reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json",
     "reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "142e57b4bcab104aa1367f0bd7ea726813a559b7"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "The HDR/color boundary is explicit and machine-checkable.",

@@ -9,7 +9,9 @@
     "reports/qd/m4-direct-capture-preflight-ci-gate/audit.json",
     "reports/qd/m4-direct-capture-preflight-ci-gate/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "67952d03192e46117534b7422cc9551b9f5a4ac6"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Linux CI runs `nix develop -c just direct-capture-preflight` or an equivalent Linux-only gate.",

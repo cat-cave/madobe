@@ -7,7 +7,9 @@
     "evidence/m4-hyprland-model-accessor-mutation-hardening/notes.md",
     "reports/qd/m4-hyprland-model-accessor-mutation-hardening/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "e12b5e0c34bd6dc30a194d5f1573423273d5cfb1"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Evidence records the relevant workspace mutation baseline cluster for Hyprland model accessors.",

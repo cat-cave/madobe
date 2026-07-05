@@ -18,7 +18,9 @@
     "reports/qd/m2-portal-manual-consent-frame-proof/completion.json",
     "reports/qd/m2-portal-manual-consent-frame-proof/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "bbc849618354dc38ada0da36f19a52d7dd1d37d3"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Uses a node-scoped madobe output and disposable workspace with cleanup evidence.",

@@ -43,7 +43,9 @@
     "reports/qd/m2-nvenc-encode-sample/audit.json",
     "reports/qd/m2-nvenc-encode-sample/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "1525e4d2be972fa26c671e0dbe232598214b29a4"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Unsafe FFI, if needed, is isolated to an encode-nv-sys boundary.",

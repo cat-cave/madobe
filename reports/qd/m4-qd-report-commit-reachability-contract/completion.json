@@ -29,7 +29,9 @@
     "scripts/qd-reports-check.sh",
     "scripts/workflow-contract-check.sh"
   ],
-  "commits": [],
+  "commits": [
+    "50b06b61eb3a2bb5b5a11de3b68f8bddbb1d67be"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "reports/qd/m4-dependabot-contract-check/completion.json replaces the unreachable commit SHA with the reachable PR #80 squash merge commit.",

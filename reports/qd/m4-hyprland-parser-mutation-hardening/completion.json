@@ -7,7 +7,9 @@
     "evidence/m4-hyprland-parser-mutation-hardening/notes.md",
     "reports/qd/m4-hyprland-parser-mutation-hardening/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "d4cca326106801d215f92bcaa0946545f6163b2e"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Evidence records the full workspace mutation baseline from main, including 105 missed mutants and 4 timeouts.",

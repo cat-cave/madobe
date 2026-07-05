@@ -9,7 +9,9 @@
     "reports/qd/m4-dependency-pin-refresh/audit.json",
     "reports/qd/m4-dependency-pin-refresh/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "cbba43ad71695d0d7ced8229a98abce636dbf859"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Run nix flake update and refresh nixpkgs without changing flake input policy.",

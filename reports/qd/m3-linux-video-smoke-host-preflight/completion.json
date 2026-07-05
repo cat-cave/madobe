@@ -18,7 +18,9 @@
     "evidence/m3-linux-video-smoke-host-preflight/start-stop.log",
     "reports/qd/m3-linux-video-smoke-host-preflight/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "d01156fe6b69963ddb1b42e3776cce0b93fa6c66"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Linux host command is documented and runnable from Nix.",

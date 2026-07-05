@@ -14,7 +14,9 @@
     "reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json",
     "reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "0578e9fbf8694d73064d4475e725d8d834d0e0c2"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Streaming latency and performance boundary is explicit and machine-checkable.",

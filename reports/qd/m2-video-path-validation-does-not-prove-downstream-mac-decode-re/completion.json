@@ -14,7 +14,9 @@
     "reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/completion.json",
     "reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "96c9db991bd0419de6974958303dd679251d550e"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Downstream Mac decode/render boundary is explicit and machine-checkable.",

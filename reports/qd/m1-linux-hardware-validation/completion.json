@@ -6,7 +6,9 @@
     "reports/qd/m1-linux-hardware-validation/audit.json",
     "reports/qd/m1-linux-hardware-validation/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "1cb4535e9778cb6aed5ac099cf91914c03f5ceeb"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Remote output lifecycle succeeds on hardware.",

@@ -8,7 +8,9 @@
     "reports/qd/m4-macos-ci-brew-tap-hygiene/audit.json",
     "reports/qd/m4-macos-ci-brew-tap-hygiene/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "ff33895fbe10acde6e51a2c9529d67b436228798"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "macOS CI removes the hosted-runner aws/tap before installing swiftformat and swiftlint.",

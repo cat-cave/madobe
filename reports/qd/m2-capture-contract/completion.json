@@ -15,7 +15,9 @@
     "reports/qd/m2-capture-contract/audit.json",
     "reports/qd/m2-capture-contract/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "5ba1be7ab1631b1260e7434b22774f333072c3a9"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Capture metadata types compile under workspace lints.",

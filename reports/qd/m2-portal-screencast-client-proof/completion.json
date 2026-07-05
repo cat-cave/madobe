@@ -16,7 +16,9 @@
     "reports/qd/m2-portal-screencast-client-proof/completion.json",
     "reports/qd/m2-portal-screencast-client-proof/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "5336cf612c0fd51a8925558878589c8e5eb7eaf5"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Uses the node-scoped madobe output and disposable workspace setup with cleanup evidence.",

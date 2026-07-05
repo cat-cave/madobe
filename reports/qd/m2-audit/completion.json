@@ -11,7 +11,9 @@
     "reports/qd/m2-audit/audit.json",
     "reports/qd/m2-capture-one-frame/blocker.md"
   ],
-  "commits": [],
+  "commits": [
+    "2f62dbc006eff0da33b571e181ec7382eef9289d"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Capture evidence is reviewed",

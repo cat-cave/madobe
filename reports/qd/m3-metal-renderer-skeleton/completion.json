@@ -17,7 +17,9 @@
     "reports/qd/m3-metal-renderer-skeleton/completion.json",
     "roadmap/qd-export.json"
   ],
-  "commits": [],
+  "commits": [
+    "32df934261749189d3bef328dcf7930d0b3be71c"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Renderer path builds and tests on macOS",

@@ -11,7 +11,9 @@
     "reports/qd/m2-video-path-validation/audit.json",
     "reports/qd/m2-video-path-validation/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "9e9ab6e77f3574cd3d79becdbbd5b30b33d27e23"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Evidence bundle includes capture metadata, encoded sample, hashes, logs, and notes.",

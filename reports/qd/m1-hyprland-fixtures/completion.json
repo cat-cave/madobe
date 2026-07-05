@@ -11,7 +11,9 @@
     "evidence/m1-hyprland-fixtures/notes.md",
     "reports/qd/m1-hyprland-fixtures/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "7c854f7ad8e0dac17717a58298206114c57b3cd1"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Fixtures are captured from the reference Linux host.",

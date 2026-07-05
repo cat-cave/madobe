@@ -7,7 +7,9 @@
     "evidence/m4-merge-group-trigger-dedupe/notes.md",
     "reports/qd/m4-merge-group-trigger-dedupe/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "6feb3c74aa9ee8ac25c31d38d5ac7cc01a75380f"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "There is one authoritative merge-queue entry point.",

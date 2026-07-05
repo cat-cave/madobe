@@ -8,7 +8,9 @@
     "evidence/m4-pr-template-qd-evidence-contract/notes.md",
     "reports/qd/m4-pr-template-qd-evidence-contract/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "2da751d5c60d93f982d20e9e8d1295ca7b27bf98"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "PR template captures qd node id, acceptance criteria, validation commands, evidence paths, completion and audit report paths, platform validation status, residual risks, and DAG or topology changes.",

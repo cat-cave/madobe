@@ -11,7 +11,9 @@
     "evidence/m3-mac-video-receive-queue/xcodebuild.log",
     "roadmap/qd-export.json"
   ],
-  "commits": [],
+  "commits": [
+    "d11fc863bff8aa74ec943f5dfa507d78fd3d3c65"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Swift client core validates incoming encoded frame metadata against payload byte count and SHA-256 payload hash.",

@@ -12,7 +12,9 @@
     "reports/qd/m4-nightly-coverage-baseline-ratchet/audit.json",
     "reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "41cd7308d5f1c9284bbfe041072d53e0e9be2b13"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Record evidence for the failing 95% policy.",

@@ -18,7 +18,9 @@
     "reports/qd/m1-hyprland-command-layer/audit.json",
     "reports/qd/m1-hyprland-command-layer/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "dd2cde21a9f1a787683d83bc44f8949f5319b217"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Command executor is injectable for tests.",
