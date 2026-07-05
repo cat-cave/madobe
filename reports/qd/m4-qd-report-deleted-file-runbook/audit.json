@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-qd-report-deleted-file-runbook",
+  "acceptanceReviewed": [
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents that plain completion report changedFiles[] entries mean existing repo-relative paths.",
+      "status": "passed",
+      "evidence": "The QD_WORKFLOW completion readiness bullets now describe plain changedFiles[] entries as existing repo-relative paths."
+    },
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents that deleted files must be represented as deleted:<repo-relative-path>.",
+      "status": "passed",
+      "evidence": "The QD_WORKFLOW completion readiness bullets now require deleted:<repo-relative-path> for deleted files."
+    },
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents deleted marker validity constraints.",
+      "status": "passed",
+      "evidence": "The QD_WORKFLOW rule requires non-empty repo-relative deleted marker paths, rejects absolute and '..' traversal paths, and requires the referenced path to be absent."
+    },
+    {
+      "criterion": "docs/ORCHESTRATION.md points orchestrators at the changedFiles[] rule before qd complete --from-report.",
+      "status": "passed",
+      "evidence": "The ORCHESTRATION completion report rules now direct orchestrators to verify the QD_WORKFLOW changedFiles[] path contract before completing from a report."
+    },
+    {
+      "criterion": "Node evidence and qd-compatible completion/audit reports are recorded under the node-scoped evidence and reports directories.",
+      "status": "passed",
+      "evidence": "Node-scoped evidence and qd reports are present under evidence/m4-qd-report-deleted-file-runbook and reports/qd/m4-qd-report-deleted-file-runbook."
+    },
+    {
+      "criterion": "No product runtime, platform, capture, encode, transport, decode, render, or latency claim is made.",
+      "status": "passed",
+      "evidence": "The change is limited to qd/orchestration documentation and node evidence/report files."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Documentation-only qd runbook update."
+  },
+  "findings": []
+}

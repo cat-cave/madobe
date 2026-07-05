@@ -282,6 +282,10 @@ Before using `qd complete --from-report`, make the completion report final enoug
 - `unverifiedItems` must be empty. Unresolved required validation should become a blocker, a split follow-up node, or
   stay out of `qd complete` until it is resolved.
 - `realWorldValidation.status` must be `passed` or `not_required`.
+- `changedFiles[]` plain entries must be existing repo-relative paths. If the node deleted a file, record it as
+  `deleted:<repo-relative-path>` instead of a plain missing path. Deleted markers must include a non-empty
+  repo-relative path, must not be absolute, must not use `..` traversal, and must point at a path that is absent in the
+  checkout being validated.
 - If hosted CI is the required real-world validation, record the pass with `qd ci record-pass` before merge and cite
   the hosted CI run in qd CI evidence and PR logs.
 
