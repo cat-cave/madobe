@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-qd-finding-schema-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects findings[] entries whose node_id is blank, missing, or does not match a node in roadmap/qd-export.json.",
+      "status": "passed",
+      "evidence": "validate_roadmap_finding_node_ids builds a node id index from roadmap/qd-export.json and reports blank, missing, or unknown finding node IDs. The temporary-copy negative smoke logs record blank and unknown node_id rejections."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects unknown findings[].severity values outside P0, P1, P2, P3.",
+      "status": "passed",
+      "evidence": "validate_roadmap_record_values rejects any finding severity outside P0, P1, P2, and P3. The temporary-copy severity smoke log records severity=P4 failing as expected."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects unknown findings[].status values outside open, resolved, promoted.",
+      "status": "passed",
+      "evidence": "validate_roadmap_record_values rejects any finding status outside open, resolved, and promoted. The temporary-copy status smoke log records status=deferred failing as expected."
+    },
+    {
+      "criterion": "Current reports/export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-schema-contract/qd-reports-check.log records just qd-reports-check passing with current reports and roadmap export."
+    },
+    {
+      "criterion": "Required evidence logs are recorded under evidence/m4-qd-finding-schema-contract.",
+      "status": "passed",
+      "evidence": "The evidence directory contains qd-reports-check.log, just-check.log, four negative smoke logs, and git-diff-check.log."
+    },
+    {
+      "criterion": "Completion and audit reports use the matching nodeId and leave commits[] empty.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-qd-finding-schema-contract/completion.json and audit.json use nodeId=m4-qd-finding-schema-contract; completion commits[] is empty for pre-merge local reporting."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}

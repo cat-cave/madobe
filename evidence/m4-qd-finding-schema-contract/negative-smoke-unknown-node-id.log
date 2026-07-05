@@ -1,0 +1,5 @@
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.Oa8djpbSHO/qd-export-unknown-finding-node-id.json bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.Oa8djpbSHO/qd-export-unknown-finding-node-id.json: findings[0].node_id must be a non-blank existing node id: m4-qd-finding-schema-contract-missing-node
+qd report check: failed with 1 error(s)
+exit_code=1
+EXPECTED FAILURE: unknown finding node_id was rejected

@@ -1,0 +1,5 @@
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.253gj4vta7/qd-export-unknown-finding-severity.json bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.253gj4vta7/qd-export-unknown-finding-severity.json: findings[0].severity must be one of P0, P1, P2, P3: P4
+qd report check: failed with 1 error(s)
+exit_code=1
+EXPECTED FAILURE: unknown finding severity was rejected

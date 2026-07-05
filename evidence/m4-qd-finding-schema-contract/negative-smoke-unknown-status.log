@@ -1,0 +1,5 @@
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.G0FjsVSrJG/qd-export-unknown-finding-status.json bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.G0FjsVSrJG/qd-export-unknown-finding-status.json: findings[0].status must be one of open, resolved, promoted: deferred
+qd report check: failed with 1 error(s)
+exit_code=1
+EXPECTED FAILURE: unknown finding status was rejected

@@ -1,0 +1,3 @@
+$ git diff --check
+exit_code=0
+SUCCESS: git diff --check produced no output

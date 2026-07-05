@@ -344,41 +344,26 @@ validate_roadmap_run_node_ids() {
   )
 }
 
-validate_roadmap_run_kinds() {
+validate_roadmap_record_values() {
+  local collection=$1
+  local field=$2
+  local allowed_json=$3
+  local allowed_label=$4
   local index
-  local kind
+  local value
 
-  while IFS=$'\t' read -r index kind; do
-    report_error "$roadmap_export" "runs[$index].kind must be one of implement, audit, ci, merge: $kind"
+  while IFS=$'\t' read -r index value; do
+    report_error "$roadmap_export" "${collection}[$index].$field must be one of $allowed_label: $value"
   done < <(
-    jq -r '
-      (.runs // [])
+    jq -r --arg collection "$collection" --arg field "$field" --argjson allowed "$allowed_json" '
+      (.[$collection] // [])
       | to_entries[]
+      | (.value[$field]) as $value
       | select(
-          (.value.kind | type != "string")
-          or ((.value.kind == "implement" or .value.kind == "audit" or .value.kind == "ci" or .value.kind == "merge") | not)
+          ($value | type != "string")
+          or (($allowed | index($value)) | not)
         )
-      | [.key, (.value.kind | tostring)]
-      | @tsv
-    ' "$roadmap_export"
-  )
-}
-
-validate_roadmap_run_statuses() {
-  local index
-  local status
-
-  while IFS=$'\t' read -r index status; do
-    report_error "$roadmap_export" "runs[$index].status must be one of completed, failed, passed, recorded: $status"
-  done < <(
-    jq -r '
-      (.runs // [])
-      | to_entries[]
-      | select(
-          (.value.status | type != "string")
-          or ((.value.status == "completed" or .value.status == "failed" or .value.status == "passed" or .value.status == "recorded") | not)
-        )
-      | [.key, (.value.status | tostring)]
+      | [.key, ($value | tostring)]
       | @tsv
     ' "$roadmap_export"
   )
@@ -386,8 +371,39 @@ validate_roadmap_run_statuses() {
 
 validate_roadmap_runs() {
   validate_roadmap_run_node_ids
-  validate_roadmap_run_kinds
-  validate_roadmap_run_statuses
+  validate_roadmap_record_values runs kind '["implement","audit","ci","merge"]' "implement, audit, ci, merge"
+  validate_roadmap_record_values runs status '["completed","failed","passed","recorded"]' "completed, failed, passed, recorded"
+}
+
+validate_roadmap_finding_node_ids() {
+  local index
+  local node_id
+
+  while IFS=$'\t' read -r index node_id; do
+    report_error "$roadmap_export" "findings[$index].node_id must be a non-blank existing node id: $node_id"
+  done < <(
+    jq -r '
+      ([.nodes[].id] | INDEX(.)) as $node_ids
+      | (.findings // [])
+      | to_entries[]
+      | .key as $index
+      | (.value.node_id // null) as $raw_node_id
+      | if ($raw_node_id | type) != "string" then
+          [$index, ($raw_node_id | tostring)]
+        else
+          ($raw_node_id | gsub("^[[:space:]]+|[[:space:]]+$"; "")) as $node_id
+          | select(($node_id | length) == 0 or ($node_ids[$node_id] | not))
+          | [$index, (if ($node_id | length) == 0 then "<blank>" else $node_id end)]
+        end
+      | @tsv
+    ' "$roadmap_export"
+  )
+}
+
+validate_roadmap_findings() {
+  validate_roadmap_finding_node_ids
+  validate_roadmap_record_values findings severity '["P0","P1","P2","P3"]' "P0, P1, P2, P3"
+  validate_roadmap_record_values findings status '["open","resolved","promoted"]' "open, resolved, promoted"
 }
 
 node_exists_in_roadmap() {
@@ -462,6 +478,7 @@ main() {
 
   if [[ $roadmap_valid -eq 1 ]]; then
     validate_roadmap_runs
+    validate_roadmap_findings
     validate_roadmap_run_report_paths
     validate_report_directory_coverage
     validate_done_node_report_coverage
