@@ -1,0 +1,94 @@
+{
+  "nodeId": "m4-qd-report-commit-reachability-contract",
+  "summary": "Normalized stale qd completion report commit SHAs to durable commits reachable from HEAD, tightened qd report validation for non-empty commits[] entries, and made CI checkouts fetch full history so the contract holds on hosted runners.",
+  "changedFiles": [
+    ".github/workflows/ci.yml",
+    "evidence/m4-qd-report-commit-reachability-contract/commands.log",
+    "reports/qd/m0-ci-green/completion.json",
+    "reports/qd/m3-cross-device-video-smoke/completion.json",
+    "reports/qd/m4-action-ref-strict-pin-check/completion.json",
+    "reports/qd/m4-ci-job-timeouts/completion.json",
+    "reports/qd/m4-contributing-platform-command-split/completion.json",
+    "reports/qd/m4-dependabot-contract-check/completion.json",
+    "reports/qd/m4-macos-ci-jq-tooling/completion.json",
+    "reports/qd/m4-mise-tool-pin-refresh/completion.json",
+    "reports/qd/m4-pin-hygiene-check/completion.json",
+    "reports/qd/m4-pr-template-contract-check/completion.json",
+    "reports/qd/m4-qd-audit-schema-contract/completion.json",
+    "reports/qd/m4-qd-report-changed-file-contract/completion.json",
+    "reports/qd/m4-qd-report-commit-reachability-contract/audit.json",
+    "reports/qd/m4-qd-report-commit-reachability-contract/completion.json",
+    "reports/qd/m4-qd-report-commit-sha-contract/completion.json",
+    "reports/qd/m4-qd-report-coverage-check/completion.json",
+    "reports/qd/m4-qd-report-deleted-file-runbook/completion.json",
+    "reports/qd/m4-qd-report-nonblank-content-contract/completion.json",
+    "reports/qd/m4-qd-report-required-content-contract/completion.json",
+    "reports/qd/m4-qd-report-shape-check/completion.json",
+    "reports/qd/m4-qd-report-status-vocabulary-check/completion.json",
+    "reports/qd/m4-workflow-contract-check/completion.json",
+    "scripts/qd-reports-check.sh",
+    "scripts/workflow-contract-check.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "reports/qd/m4-dependabot-contract-check/completion.json replaces the unreachable commit SHA with the reachable PR #80 squash merge commit.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-dependabot-contract-check/completion.json now records ce06158edb9393b8c2400ec944a44d61d56e1d59 in commits[], and other stale historical report SHAs exposed by hosted CI were normalized to durable squash merge commits."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects non-empty commits[] entries that are not commits present in the current git repository.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates commit object presence with git cat-file -e \"$sha^{commit}\" and requires each commit to be reachable from HEAD after preserving the 40-character lowercase hex shape check; evidence/m4-qd-report-commit-reachability-contract/commands.log records unreachable-object and non-ancestor smoke tests failing as expected."
+    },
+    {
+      "criterion": "Existing qd reports pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-commit-reachability-contract/commands.log records nix develop -c just qd-reports-check passing after durable SHA normalization."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, just check, and a temporary-copy negative smoke test for an unreachable full-length SHA.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-commit-reachability-contract/commands.log records the required Linux validation commands plus fake-SHA and valid-object/non-ancestor negative smoke tests."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "realWorldValidation.required is false because this is repository qd report metadata validation only."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy unreachable full-length SHA and non-ancestor SHA negative smoke tests",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-commit-reachability-contract/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-commit-reachability-contract/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-commit-reachability-contract/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-commit-reachability-contract/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-commit-reachability-contract/commands.log",
+    "reports/qd/m4-qd-report-commit-reachability-contract/audit.json",
+    "reports/qd/m4-qd-report-commit-reachability-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd completion-report metadata validation only; Linux validation passed and macOS validation is not required."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

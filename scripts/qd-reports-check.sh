@@ -91,6 +91,7 @@ validate_completion() {
   expect_jq "$file" '.summary | nonblank' "summary must be a non-blank string"
   expect_jq "$file" '.changedFiles | type == "array" and length > 0 and all(.[]; nonblank)' "changedFiles must be a non-empty array of non-blank strings"
   expect_jq "$file" '.commits | type == "array" and all(.[]; type == "string" and test("^[0-9a-f]{40}$"))' "commits must be an array of 40-character lowercase hexadecimal SHAs"
+  validate_completion_commit_objects "$file"
   expect_jq "$file" '.acceptanceEvidence | type == "array" and length > 0 and all(.[]; type == "object" and (.criterion | nonblank) and (.status | nonblank) and (.evidence | nonblank))' "acceptanceEvidence must be a non-empty array of evidence objects with non-blank criterion, status, and evidence"
   expect_jq "$file" '.commandsRun | type == "array" and length > 0 and all(.[]; type == "object" and (.command | nonblank) and (.status | nonblank) and (.evidence | nonblank))' "commandsRun must be a non-empty array of command objects with non-blank command, status, and evidence"
   expect_jq "$file" '.evidence | type == "array" and length > 0 and all(.[]; nonblank)' "evidence must be a non-empty array of non-blank strings"
@@ -99,6 +100,25 @@ validate_completion() {
   expect_jq "$file" '.dagChangesNeeded | type == "array"' "dagChangesNeeded must be an array"
   validate_completion_changed_files "$file"
   validate_completion_evidence_paths "$file"
+}
+
+validate_completion_commit_objects() {
+  local file=$1
+  local sha
+
+  if ! jq -e '.commits | type == "array" and all(.[]; type == "string" and test("^[0-9a-f]{40}$"))' "$file" >/dev/null; then
+    return
+  fi
+
+  while IFS= read -r sha; do
+    if ! git cat-file -e "$sha^{commit}" 2>/dev/null; then
+      report_error "$file" "commits[] SHA is not present as a commit in the current git repository: $sha"
+      continue
+    fi
+    if ! git merge-base --is-ancestor "$sha" HEAD 2>/dev/null; then
+      report_error "$file" "commits[] SHA is not reachable from HEAD: $sha"
+    fi
+  done < <(jq -r '.commits[]' "$file")
 }
 
 validate_completion_changed_files() {
