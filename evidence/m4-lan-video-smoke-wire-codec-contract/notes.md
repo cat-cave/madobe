@@ -12,4 +12,3 @@ wire input or invalid metadata hash text.
 This does not claim product QUIC, artifact-content validation, VideoToolbox
 decode, Metal render, presentation, latency measurement, workflow dispatch,
 credentials, or cross-device validation.
-

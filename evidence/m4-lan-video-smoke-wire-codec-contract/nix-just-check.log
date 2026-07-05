@@ -9,7 +9,7 @@ if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "
 command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
 just qd-reports-check
 bash scripts/qd-reports-check.sh
-qd report check: validated 114 completion report(s), 114 audit report(s), and 6 blocker report(s)
+qd report check: validated 115 completion report(s), 115 audit report(s), and 6 blocker report(s)
 just qd-ready-queue-check
 bash scripts/qd-ready-queue-check.sh
 qd ready queue check
@@ -52,29 +52,9 @@ just dependabot-contract-check
 bash scripts/dependabot-contract-check.sh
 dependabot contract check: passed
 cargo check --workspace --all-targets --all-features
-    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/compositor)
-    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/protocol)
-    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/telemetry)
-    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/encode-nv-sys)
-    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/capture)
-    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/encode)
-    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/transport)
-    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/hyprland)
-    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/apps/hostd)
-    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/apps/cli)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.75s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.14s
 cargo clippy --workspace --all-targets --all-features -- -D warnings
-    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/compositor)
-    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/telemetry)
-    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/protocol)
-    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/encode-nv-sys)
-    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/capture)
-    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/encode)
-    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/hyprland)
-    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/apps/hostd)
-    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/crates/transport)
-    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-wire-codec-contract/apps/cli)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.86s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
 if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
 command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
 if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
@@ -83,7 +63,7 @@ if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1;
 command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
 markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
 Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
-Linting: 124 file(s)
+Linting: 125 file(s)
 Summary: 0 error(s)
 if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
 command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
