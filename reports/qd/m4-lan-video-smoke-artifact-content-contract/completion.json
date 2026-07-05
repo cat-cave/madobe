@@ -14,7 +14,7 @@
     "reports/qd/m4-lan-video-smoke-artifact-content-contract/audit.json"
   ],
   "commits": [
-    "1d7077a938b05abadf4ed149b54514859b090f92"
+    "bdb7c7765580a9545b204e19582f2bddc1c46e79"
   ],
   "acceptanceEvidence": [
     {
@@ -84,4 +84,3 @@
   "unverifiedItems": [],
   "dagChangesNeeded": []
 }
-
