@@ -1,0 +1,46 @@
+Node: m4-nightly-full-workflow-dispatch
+Worktree: /home/trevor/projects/madobe/.qd/worktrees/m4-nightly-full-workflow-dispatch
+Branch: spec/m4-nightly-full-workflow-dispatch
+
+2026-07-05T11:32:31Z
+$ date -u +%Y-%m-%dT%H:%M:%SZ
+2026-07-05T11:32:31Z
+
+$ gh api repos/cat-cave/madobe/commits/main --jq .sha
+32ef3b6798991be6f719e460812677e349644c24
+
+$ gh workflow run nightly.yml --repo cat-cave/madobe --ref main
+could not create workflow dispatch event: HTTP 403: Resource not accessible by integration (https://api.github.com/repos/cat-cave/madobe/actions/workflows/306353539/dispatches)
+exit code: 1
+
+$ gh auth status
+github.com
+  Logged in to github.com account trevor-workstation[bot] (/home/trevor/.config/gh/hosts.yml)
+  Active account: true
+  Git operations protocol: https
+  Token: ghs_************************************
+
+$ gh run list --repo cat-cave/madobe --workflow nightly.yml --branch main --event workflow_dispatch --limit 10 --json databaseId,displayTitle,headSha,createdAt,status,conclusion,url,workflowName,event,headBranch
+[]
+
+Dispatch result:
+- No hosted nightly run was created.
+- No run id, workflow URL, job summaries, logs, or conclusion are available to watch.
+- Blocker: the active gh credential can read repository state but lacks permission to create workflow_dispatch events.
+
+$ nix develop -c just qd-reports-check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-nightly-full-workflow-dispatch' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 100 completion report(s) and 100 audit report(s)
+exit code: 0
+
+$ git diff --check
+exit code: 0
+
+$ nix develop -c just check
+qd report check: validated 101 completion report(s) and 101 audit report(s)
+markdownlint-cli2 "**/*.md": Summary: 0 error(s)
+cargo check --workspace --all-targets --all-features: passed
+cargo clippy --workspace --all-targets --all-features -- -D warnings: passed
+exit code: 0
