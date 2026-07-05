@@ -14,7 +14,9 @@
     "roadmap/qd-export.json",
     "scripts/qd-report-check/roadmap.sh"
   ],
-  "commits": [],
+  "commits": [
+    "eed78e9deffbb27ddaafd50749acc811d49c8c0a"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check/roadmap.sh requires schema_version == 2.",
