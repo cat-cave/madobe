@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-lan-video-smoke-cli-flag-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "CLI parser rejects missing and flag-like values for all value-taking LAN video smoke flags.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/cli.rs and evidence/m4-lan-video-smoke-cli-flag-contract/focused-cli-tests.log"
+    },
+    {
+      "criterion": "Flag-like values fail as typed usage errors before network, sample, or artifact behavior can run.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/cli.rs and evidence/m4-lan-video-smoke-cli-flag-contract/focused-cli-tests.log"
+    },
+    {
+      "criterion": "Usage output remains shared across send and receive entry points.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/cli.rs and evidence/m4-lan-video-smoke-cli-flag-contract/focused-cli-tests.log"
+    },
+    {
+      "criterion": "Scope excludes product QUIC, decode/render/presentation, artifact content, latency, workflow dispatch, credentials, Mac hardware, cross-device validation, and live LAN claims.",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-cli-flag-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "CLI parser contract tests use dependency-free Rust argument parsing and do not require sockets, live LAN validation, Mac hardware, product QUIC, decode, render, presentation, latency measurement, workflow dispatch, credentials, or cross-device validation."
+  },
+  "findings": []
+}
