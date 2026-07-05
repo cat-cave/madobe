@@ -1,0 +1,4 @@
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.VoDYqCJ8KO/qd-export-unknown-edge-type.json bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.VoDYqCJ8KO/qd-export-unknown-edge-type.json: edges[0].type must be one of requires: blocks
+qd report check: failed with 1 error(s)
+negative-smoke: success - checker rejected unknown edges[].type=blocks

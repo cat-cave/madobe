@@ -1,0 +1,111 @@
+{
+  "nodeId": "m4-qd-edge-schema-contract",
+  "summary": "Tightened the qd report checker so roadmap edge records must reference known nodes, avoid self-edges and duplicate triples, and use the accepted edge type vocabulary.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "evidence/m4-qd-edge-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-edge-schema-contract/just-check.log",
+    "evidence/m4-qd-edge-schema-contract/negative-smoke-duplicate-edge.log",
+    "evidence/m4-qd-edge-schema-contract/negative-smoke-self-edge.log",
+    "evidence/m4-qd-edge-schema-contract/negative-smoke-unknown-edge-endpoint.log",
+    "evidence/m4-qd-edge-schema-contract/negative-smoke-unknown-edge-type.log",
+    "evidence/m4-qd-edge-schema-contract/qd-reports-check.log",
+    "reports/qd/m4-qd-edge-schema-contract/audit.json",
+    "reports/qd/m4-qd-edge-schema-contract/completion.json",
+    "roadmap/qd-export.json",
+    "scripts/qd-report-check/roadmap.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects edges[] entries whose from_node or to_node does not match a node in roadmap/qd-export.json.",
+      "status": "passed",
+      "evidence": "validate_roadmap_edge_node_ids builds a node id index from roadmap/qd-export.json and reports non-blank missing or unknown edge endpoints; evidence/m4-qd-edge-schema-contract/negative-smoke-unknown-edge-endpoint.log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects self-edges.",
+      "status": "passed",
+      "evidence": "validate_roadmap_edge_self_edges rejects an edge whose normalized from_node equals to_node; evidence/m4-qd-edge-schema-contract/negative-smoke-self-edge.log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects duplicate edge triples.",
+      "status": "passed",
+      "evidence": "validate_roadmap_edge_duplicates groups by from_node, to_node, and type and reports later duplicates; evidence/m4-qd-edge-schema-contract/negative-smoke-duplicate-edge.log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects unknown edges[].type values outside requires.",
+      "status": "passed",
+      "evidence": "validate_roadmap_record_values validates edges[].type against requires; evidence/m4-qd-edge-schema-contract/negative-smoke-unknown-edge-type.log records type=blocks failing as expected."
+    },
+    {
+      "criterion": "Current reports/export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-edge-schema-contract/qd-reports-check.log records just qd-reports-check passing with the stricter edge contract."
+    },
+    {
+      "criterion": "Evidence under evidence/m4-qd-edge-schema-contract includes qd-reports-check.log, just-check.log, four negative smoke logs, and git-diff-check.log.",
+      "status": "passed",
+      "evidence": "The evidence directory contains the requested positive validation logs, temporary-copy negative smoke logs, and git diff --check log."
+    },
+    {
+      "criterion": "Add reports/qd/m4-qd-edge-schema-contract/completion.json and audit.json with matching nodeId and empty commits[].",
+      "status": "passed",
+      "evidence": "reports/qd/m4-qd-edge-schema-contract/completion.json and reports/qd/m4-qd-edge-schema-contract/audit.json both use nodeId=m4-qd-edge-schema-contract; completion commits[] is empty."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy unknown edge endpoint smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-edge-schema-contract/negative-smoke-unknown-edge-endpoint.log"
+    },
+    {
+      "command": "temporary-copy self-edge smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-edge-schema-contract/negative-smoke-self-edge.log"
+    },
+    {
+      "command": "temporary-copy duplicate edge smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-edge-schema-contract/negative-smoke-duplicate-edge.log"
+    },
+    {
+      "command": "temporary-copy unknown edge type smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-edge-schema-contract/negative-smoke-unknown-edge-type.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-edge-schema-contract/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-edge-schema-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-edge-schema-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-edge-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-edge-schema-contract/just-check.log",
+    "evidence/m4-qd-edge-schema-contract/negative-smoke-duplicate-edge.log",
+    "evidence/m4-qd-edge-schema-contract/negative-smoke-self-edge.log",
+    "evidence/m4-qd-edge-schema-contract/negative-smoke-unknown-edge-endpoint.log",
+    "evidence/m4-qd-edge-schema-contract/negative-smoke-unknown-edge-type.log",
+    "evidence/m4-qd-edge-schema-contract/qd-reports-check.log",
+    "reports/qd/m4-qd-edge-schema-contract/audit.json",
+    "reports/qd/m4-qd-edge-schema-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, macOS, hardware, capture, transport, decode, render, or latency behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
