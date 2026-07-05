@@ -1,0 +1,2 @@
+scripts/qd-report-check/roadmap.sh:137:  validate_roadmap_record_values runs kind '["implement","audit","ci","merge","verification"]' "implement, audit, ci, merge, verification"
+docs/QD_WORKFLOW.md:282:`runs[].node_id` references a real node. Run records must use the known `kind` vocabulary (`implement`, `audit`,

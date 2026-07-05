@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-qd-run-kind-verification-doc-sync",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The documented runs[].kind vocabulary includes implement, audit, ci, merge, and verification.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md"
+    },
+    {
+      "criterion": "The documented vocabulary matches scripts/qd-report-check/roadmap.sh.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/roadmap.sh and evidence/m4-qd-run-kind-verification-doc-sync/run-kind-doc-check.log"
+    },
+    {
+      "criterion": "The documentation explains verification run records as qd verification sign-off records.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md"
+    },
+    {
+      "criterion": "Scope excludes checker behavior changes, historical report rewrites, product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, and credential-dependent claims.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-kind-verification-doc-sync/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a qd workflow documentation alignment node and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "findings": []
+}

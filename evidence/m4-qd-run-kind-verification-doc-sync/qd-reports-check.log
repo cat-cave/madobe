@@ -1,0 +1,2 @@
+bash scripts/qd-reports-check.sh
+qd report check: validated 119 completion report(s), 119 audit report(s), and 6 blocker report(s)
