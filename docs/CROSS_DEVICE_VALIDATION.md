@@ -305,7 +305,33 @@ machine. `just check` runs that default validation in local and CI quality gates
 When a result path is provided, product QUIC validation runs in explicit mode. Explicit mode verifies that every
 listed `artifacts[].path` exists relative to the repo root. If an artifact is present with kind `commands_log`,
 `sender_log`, `receiver_log`, `payload_validation_evidence`, or `notes`, the referenced file must also be non-empty.
-This existence and non-empty check uses generated negative self-tests, so it does not require live product QUIC,
+For `sender_log` and `receiver_log`, explicit mode also requires stable `key=value` evidence tokens.
+
+`sender_log` must include:
+
+- `payload_bytes=<payload.payloadBytes>`
+- `payload_sha256=<payload.sha256>`
+- `receiver_certificate_path=<path>`
+- `receiver_certificate_sha256=<certificateFingerprintSha256>`
+- `receiver_certificate_trusted=true`
+
+`receiver_log` must include:
+
+- `transport=quic`
+- `product_quic=true`
+- `payload_byte_count_validated=true`
+- `payload_bytes=<payload.payloadBytes>`
+- `payload_sha256_validated=true`
+- `payload_sha256=<payload.sha256>`
+- `receiver_ack=true`
+- `receiver_ack_payload_bytes=<payload.payloadBytes>`
+- `receiver_ack_sha256=<payload.sha256>`
+- `downstream_decoded=false`
+- `downstream_rendered=false`
+- `downstream_presented=false`
+- `downstream_latency_ms=null`
+
+The existence, non-empty, and log-content checks use generated self-tests, so they do not require live product QUIC,
 Mac decode, render, presentation, latency, workflow dispatch, or credentials.
 
 ## Failure Handling

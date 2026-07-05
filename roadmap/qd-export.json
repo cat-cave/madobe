@@ -3502,6 +3502,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-product-quic-log-content-contract",
+      "title": "Validate product QUIC smoke log evidence content",
+      "kind": "infra",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "medium",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-product-quic-log-content-contract",
+      "spec": "Extend explicit product QUIC result checking so result.json evidence is not accepted merely because core artifacts exist and are non-empty. In explicit mode, validate referenced sender_log and receiver_log contents against stable key=value evidence tokens for product QUIC identity, QUIC transport, payload byte-count validation, SHA-256 validation, receiver acknowledgement, sender certificate trust path/hash evidence, and explicit decode/render/presentation/latency non-claims.",
+      "acceptance": "No-argument just product-quic-result-check still validates the checked-in schema fixture and negative fixtures without requiring live artifacts\nExplicit-mode validation rejects a receiver_log that omits transport=quic, product_quic=true, payload byte-count validation, payload SHA-256 validation, receiver ack, or downstream non-claim tokens\nExplicit-mode validation rejects a sender_log that omits payload bytes/hash or trusted receiver certificate path/hash evidence\nGenerated positive explicit fixture with local temp artifacts passes without Mac hardware or live networking\nGenerated negative explicit fixtures cover missing sender and receiver log tokens\nNo live product QUIC, VideoToolbox, Metal, presentation, latency, workflow dispatch, or cross-device claim is made",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nvalidation:evidence-tooling",
+      "created_at": "2026-07-05T16:17:07.713Z",
+      "updated_at": "2026-07-05T16:17:13.826Z",
+      "claimed_at": "2026-07-05T16:17:13.826Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -3810,6 +3840,12 @@
       "to_node": "m4-qd-ready-queue-visibility",
       "type": "requires",
       "created_at": "2026-07-05T15:48:13.025Z"
+    },
+    {
+      "from_node": "m4-product-quic-explicit-artifact-existence-contract",
+      "to_node": "m4-product-quic-log-content-contract",
+      "type": "requires",
+      "created_at": "2026-07-05T16:17:13.637Z"
     }
   ],
   "findings": [

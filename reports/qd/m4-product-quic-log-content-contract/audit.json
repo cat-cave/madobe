@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-product-quic-log-content-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "No-argument product QUIC validation remains schema-only for the checked-in fixture.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Explicit receiver_log token omissions are rejected.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/missing-receiver-token.log"
+    },
+    {
+      "criterion": "Explicit sender_log token omissions are rejected.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/missing-sender-token.log"
+    },
+    {
+      "criterion": "Generated explicit positive fixture passes locally.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/explicit-positive.log"
+    },
+    {
+      "criterion": "Runbook documents stable log token requirements.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    },
+    {
+      "criterion": "No live cross-device or downstream media claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository evidence-checker hardening only; generated local artifacts validate the contract."
+  },
+  "findings": []
+}

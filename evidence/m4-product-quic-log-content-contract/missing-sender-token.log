@@ -1,0 +1,4 @@
+$ just product-quic-result-check target/m4-product-quic-log-content-contract.VMRmIz/result-missing-sender-token.json
+bash scripts/product-quic-result-check.sh target/m4-product-quic-log-content-contract.VMRmIz/result-missing-sender-token.json
+product quic result check: target/m4-product-quic-log-content-contract.VMRmIz/result-missing-sender-token.json: sender_log missing stable log token receiver_certificate_sha256=9b44d90fb42f6c3ff8510ce40bbfcb1cf8712a2d18a3552955aa1b889ad2c6f3 in target/m4-product-quic-log-content-contract.VMRmIz/sender-missing-cert-hash.log
+error: recipe `product-quic-result-check` failed on line 49 with exit code 1

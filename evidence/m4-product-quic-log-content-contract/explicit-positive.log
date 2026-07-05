@@ -1,0 +1,3 @@
+$ just product-quic-result-check target/m4-product-quic-log-content-contract.VMRmIz/result-positive.json
+bash scripts/product-quic-result-check.sh target/m4-product-quic-log-content-contract.VMRmIz/result-positive.json
+product quic result check: validated 1 file(s)

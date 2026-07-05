@@ -1,0 +1,120 @@
+{
+  "nodeId": "m4-product-quic-log-content-contract",
+  "summary": "Tightened explicit product QUIC result validation so sender_log and receiver_log artifacts must carry stable key=value evidence tokens, with generated positive and negative self-tests and runbook documentation.",
+  "changedFiles": [
+    "scripts/product-quic-result-check.sh",
+    "docs/CROSS_DEVICE_VALIDATION.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-product-quic-log-content-contract/commands.log",
+    "evidence/m4-product-quic-log-content-contract/explicit-positive.log",
+    "evidence/m4-product-quic-log-content-contract/git-diff-check.log",
+    "evidence/m4-product-quic-log-content-contract/missing-receiver-token.log",
+    "evidence/m4-product-quic-log-content-contract/missing-sender-token.log",
+    "evidence/m4-product-quic-log-content-contract/nix-just-check.log",
+    "evidence/m4-product-quic-log-content-contract/notes.md",
+    "evidence/m4-product-quic-log-content-contract/product-quic-result-check.log",
+    "evidence/m4-product-quic-log-content-contract/qd-reports-check.log",
+    "evidence/m4-product-quic-log-content-contract/shellcheck.log",
+    "reports/qd/m4-product-quic-log-content-contract/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "No-argument just product-quic-result-check still validates the checked-in schema fixture and negative fixtures without requiring live artifacts.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Explicit-mode validation rejects a receiver_log that omits transport=quic, product_quic=true, payload byte-count validation, payload SHA-256 validation, receiver ack, or downstream non-claim tokens.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-log-content-contract/missing-receiver-token.log"
+    },
+    {
+      "criterion": "Explicit-mode validation rejects a sender_log that omits payload bytes/hash or trusted receiver certificate path/hash evidence.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-log-content-contract/missing-sender-token.log"
+    },
+    {
+      "criterion": "Generated positive explicit fixture with local temp artifacts passes without Mac hardware or live networking.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/explicit-positive.log"
+    },
+    {
+      "criterion": "Generated negative explicit fixtures cover missing sender and receiver log tokens.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/missing-sender-token.log and evidence/m4-product-quic-log-content-contract/missing-receiver-token.log"
+    },
+    {
+      "criterion": "No live product QUIC, VideoToolbox, Metal, presentation, latency, workflow dispatch, or cross-device claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/notes.md"
+    },
+    {
+      "criterion": "The Linux Nix check gate passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/nix-just-check.log"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just product-quic-result-check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/product-quic-result-check.log"
+    },
+    {
+      "command": "just product-quic-result-check <generated-positive-result>",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/explicit-positive.log"
+    },
+    {
+      "command": "just product-quic-result-check <generated-missing-sender-token-result>",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/missing-sender-token.log"
+    },
+    {
+      "command": "just product-quic-result-check <generated-missing-receiver-token-result>",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/missing-receiver-token.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/product-quic-result-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/shellcheck.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/qd-reports-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/git-diff-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-log-content-contract/nix-just-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-product-quic-log-content-contract/commands.log",
+    "evidence/m4-product-quic-log-content-contract/explicit-positive.log",
+    "evidence/m4-product-quic-log-content-contract/git-diff-check.log",
+    "evidence/m4-product-quic-log-content-contract/missing-receiver-token.log",
+    "evidence/m4-product-quic-log-content-contract/missing-sender-token.log",
+    "evidence/m4-product-quic-log-content-contract/nix-just-check.log",
+    "evidence/m4-product-quic-log-content-contract/notes.md",
+    "evidence/m4-product-quic-log-content-contract/product-quic-result-check.log",
+    "evidence/m4-product-quic-log-content-contract/qd-reports-check.log",
+    "evidence/m4-product-quic-log-content-contract/shellcheck.log",
+    "reports/qd/m4-product-quic-log-content-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Evidence-tooling hardening only; generated local artifacts cover the explicit-mode contract without live product or platform hardware."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
