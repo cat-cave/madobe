@@ -1,4 +1,4 @@
 bash scripts/qd-reports-check.sh
-qd report check: /tmp/qd-node-risk.jxmrPW.json: nodes[91].risk must be one of low, medium, high: critical
+qd report check: /tmp/qd-node-risk.zuwfd0.json: nodes[91].risk must be one of low, medium, high: critical
 qd report check: failed with 1 error(s)
 error: recipe `qd-reports-check` failed on line 34 with exit code 1

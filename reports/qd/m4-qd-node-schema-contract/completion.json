@@ -14,7 +14,9 @@
     "roadmap/qd-export.json",
     "scripts/qd-report-check/roadmap.sh"
   ],
-  "commits": [],
+  "commits": [
+    "89fd1a024e74f4b81257b46cad8260d7fde6fb36"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check/roadmap.sh rejects unknown nodes[].status values outside blocked, claimed, done, mergeable, ready, and review.",
