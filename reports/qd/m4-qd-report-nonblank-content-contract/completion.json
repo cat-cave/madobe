@@ -9,7 +9,9 @@
     "reports/qd/m4-qd-report-nonblank-content-contract/audit.json",
     "reports/qd/m4-qd-report-nonblank-content-contract/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "dd1857ae7307284102c797adfc75dffaac949c5f"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-reports-check.sh uses a reusable jq predicate for required non-blank report text fields.",
