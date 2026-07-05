@@ -2,7 +2,7 @@
 set -euo pipefail
 
 error_count=0
-roadmap_export=roadmap/qd-export.json
+roadmap_export=${QD_REPORTS_ROADMAP_EXPORT:-roadmap/qd-export.json}
 jq_report_predicates='def nonblank: type == "string" and (gsub("^[[:space:]]+|[[:space:]]+$"; "") | length > 0);'
 
 report_error() {
@@ -322,6 +322,74 @@ validate_roadmap_run_report_paths() {
   )
 }
 
+validate_roadmap_run_node_ids() {
+  local index
+  local node_id
+
+  while IFS=$'\t' read -r index node_id; do
+    report_error "$roadmap_export" "runs[$index].node_id must match an existing node id: $node_id"
+  done < <(
+    jq -r '
+      ([.nodes[].id] | INDEX(.)) as $node_ids
+      | (.runs // [])
+      | to_entries[]
+      | select(.value.node_id? | type == "string")
+      | .key as $index
+      | (.value.node_id | gsub("^[[:space:]]+|[[:space:]]+$"; "")) as $node_id
+      | select(($node_id | length) > 0)
+      | select($node_ids[$node_id] | not)
+      | [$index, $node_id]
+      | @tsv
+    ' "$roadmap_export"
+  )
+}
+
+validate_roadmap_run_kinds() {
+  local index
+  local kind
+
+  while IFS=$'\t' read -r index kind; do
+    report_error "$roadmap_export" "runs[$index].kind must be one of implement, audit, ci, merge: $kind"
+  done < <(
+    jq -r '
+      (.runs // [])
+      | to_entries[]
+      | select(
+          (.value.kind | type != "string")
+          or ((.value.kind == "implement" or .value.kind == "audit" or .value.kind == "ci" or .value.kind == "merge") | not)
+        )
+      | [.key, (.value.kind | tostring)]
+      | @tsv
+    ' "$roadmap_export"
+  )
+}
+
+validate_roadmap_run_statuses() {
+  local index
+  local status
+
+  while IFS=$'\t' read -r index status; do
+    report_error "$roadmap_export" "runs[$index].status must be one of completed, failed, passed, recorded: $status"
+  done < <(
+    jq -r '
+      (.runs // [])
+      | to_entries[]
+      | select(
+          (.value.status | type != "string")
+          or ((.value.status == "completed" or .value.status == "failed" or .value.status == "passed" or .value.status == "recorded") | not)
+        )
+      | [.key, (.value.status | tostring)]
+      | @tsv
+    ' "$roadmap_export"
+  )
+}
+
+validate_roadmap_runs() {
+  validate_roadmap_run_node_ids
+  validate_roadmap_run_kinds
+  validate_roadmap_run_statuses
+}
+
 node_exists_in_roadmap() {
   local node_id=$1
 
@@ -393,6 +461,7 @@ main() {
   fi
 
   if [[ $roadmap_valid -eq 1 ]]; then
+    validate_roadmap_runs
     validate_roadmap_run_report_paths
     validate_report_directory_coverage
     validate_done_node_report_coverage

@@ -1,0 +1,99 @@
+{
+  "nodeId": "m4-qd-run-schema-contract",
+  "summary": "Tightened the qd report checker so committed qd run records must reference known nodes and use the accepted run kind and status vocabularies.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "evidence/m4-qd-run-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-run-schema-contract/just-check.log",
+    "evidence/m4-qd-run-schema-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-run-schema-contract/negative-smoke-unknown-kind.log",
+    "evidence/m4-qd-run-schema-contract/negative-smoke-unknown-node-id.log",
+    "evidence/m4-qd-run-schema-contract/negative-smoke-unknown-status.log",
+    "reports/qd/m4-qd-run-schema-contract/audit.json",
+    "reports/qd/m4-qd-run-schema-contract/completion.json",
+    "roadmap/qd-export.json",
+    "scripts/qd-reports-check.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects roadmap/qd-export.json runs[] entries whose node_id is non-empty but does not match a node in the export.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates non-empty string runs[].node_id values against the export node id set; evidence/m4-qd-run-schema-contract/negative-smoke-unknown-node-id.log records a temporary export copy failing with the expected unknown-node error."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects unknown runs[].kind values outside implement, audit, ci, and merge.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates runs[].kind values against implement, audit, ci, and merge; evidence/m4-qd-run-schema-contract/negative-smoke-unknown-kind.log records a temporary export copy failing with kind=blocker."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects unknown runs[].status values outside completed, failed, passed, and recorded.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates runs[].status values against completed, failed, passed, and recorded; evidence/m4-qd-run-schema-contract/negative-smoke-unknown-status.log records a temporary export copy failing with status=blocked."
+    },
+    {
+      "criterion": "Current reports/export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-schema-contract/just-qd-reports-check.log records nix develop -c just qd-reports-check passing with the new reports included."
+    },
+    {
+      "criterion": "Record evidence under evidence/m4-qd-run-schema-contract including just qd-reports-check, nix develop -c just check if available, negative smokes, and git diff --check.",
+      "status": "passed",
+      "evidence": "The evidence directory contains separate logs for qd-reports-check, just check, three temporary-copy negative smokes, and git diff --check."
+    },
+    {
+      "criterion": "Add reports/qd/m4-qd-run-schema-contract/completion.json and audit.json with nodeId matching the directory and commits[] empty until after merge unless qd tooling requires otherwise.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-qd-run-schema-contract/completion.json and reports/qd/m4-qd-run-schema-contract/audit.json both use nodeId=m4-qd-run-schema-contract; completion commits[] is empty."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy unknown run node_id smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-schema-contract/negative-smoke-unknown-node-id.log"
+    },
+    {
+      "command": "temporary-copy unknown run kind smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-schema-contract/negative-smoke-unknown-kind.log"
+    },
+    {
+      "command": "temporary-copy unknown run status smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-schema-contract/negative-smoke-unknown-status.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-schema-contract/just-qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-schema-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-schema-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-run-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-run-schema-contract/just-check.log",
+    "evidence/m4-qd-run-schema-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-run-schema-contract/negative-smoke-unknown-kind.log",
+    "evidence/m4-qd-run-schema-contract/negative-smoke-unknown-node-id.log",
+    "evidence/m4-qd-run-schema-contract/negative-smoke-unknown-status.log",
+    "reports/qd/m4-qd-run-schema-contract/audit.json",
+    "reports/qd/m4-qd-run-schema-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, macOS, hardware, capture, transport, decode, render, or latency behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
