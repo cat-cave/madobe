@@ -137,6 +137,9 @@ Completion report rules for `qd complete --from-report`:
 - Verify the completion report `changedFiles[]` path contract in `docs/QD_WORKFLOW.md` before completing: plain entries
   are existing repo-relative paths, and deleted files use `deleted:<repo-relative-path>` markers that are non-empty,
   non-absolute, traversal-free, and absent from the checkout.
+- Keep qd run report paths repo-relative. When a node is implemented in `.qd/worktrees/<node-id>`, do not record
+  `.qd/worktrees/...` paths in qd runs. Make the branch reports and evidence visible at `reports/...` and
+  `evidence/...` from the qd root, record qd state, then export the roadmap back into the worktree branch.
 - If hosted CI is the required validation, record it through `qd ci record-pass` before merge and link the CI evidence
   in qd and the PR.
 

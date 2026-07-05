@@ -3772,6 +3772,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-qd-worktree-report-path-doc-sync",
+      "title": "Document qd worktree report path recording",
+      "kind": "docs",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "low",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-qd-worktree-report-path-doc-sync",
+      "spec": "Document the safe qd worktree report-path pattern so qd state recordings keep report_path values repo-relative even when implementation files live in .qd/worktrees.",
+      "acceptance": "docs/QD_WORKFLOW.md documents that qd complete, audit pass, verification sign-off, and ci record evidence paths must remain repo-relative and must not point into .qd/worktrees\nDocs describe a safe worktree pattern: record qd state from a checkout where reports/evidence are visible at repo-relative paths, then export qd state from the qd root into the worktree roadmap file\nNo qd behavior changes and no historical evidence or report rewrites\nEvidence and qd reports are recorded under evidence/m4-qd-worktree-report-path-doc-sync and reports/qd/m4-qd-worktree-report-path-doc-sync\ngit diff --check, just qd-reports-check, and nix develop -c just check pass\nNo product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made",
+      "validation": null,
+      "context": "platform:both\nowner:linux-orchestrator\nvalidation:repo-quality-docs",
+      "created_at": "2026-07-05T20:03:10.843Z",
+      "updated_at": "2026-07-05T20:03:35.475Z",
+      "claimed_at": "2026-07-05T20:03:18.365Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -4134,6 +4164,12 @@
       "to_node": "m4-qd-run-kind-verification-doc-sync",
       "type": "requires",
       "created_at": "2026-07-05T19:39:44.719Z"
+    },
+    {
+      "from_node": "m4-qd-run-kind-verification-doc-sync",
+      "to_node": "m4-qd-worktree-report-path-doc-sync",
+      "type": "requires",
+      "created_at": "2026-07-05T20:03:14.298Z"
     }
   ],
   "findings": [

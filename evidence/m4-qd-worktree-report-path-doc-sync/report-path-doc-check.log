@@ -1,0 +1,24 @@
+docs/ORCHESTRATION.md:132:Completion report rules for `qd complete --from-report`:
+docs/ORCHESTRATION.md:138:  are existing repo-relative paths, and deleted files use `deleted:<repo-relative-path>` markers that are non-empty,
+docs/ORCHESTRATION.md:140:- Keep qd run report paths repo-relative. When a node is implemented in `.qd/worktrees/<node-id>`, do not record
+docs/ORCHESTRATION.md:141:  `.qd/worktrees/...` paths in qd runs. Make the branch reports and evidence visible at `reports/...` and
+docs/ORCHESTRATION.md:142:  `evidence/...` from the qd root, record qd state, then export the roadmap back into the worktree branch.
+docs/ORCHESTRATION.md:143:- If hosted CI is the required validation, record it through `qd ci record-pass` before merge and link the CI evidence
+docs/ORCHESTRATION.md:205:For qd worktree branches, export from the main checkout or qd root that has the qd database and migrations, targeting
+docs/ORCHESTRATION.md:209:qd export --out .qd/worktrees/<node-id>/roadmap/qd-export.json --deterministic
+docs/ORCHESTRATION.md:235:repo-relative path under `evidence/<node-id>/`. If the node later becomes `done`, keep the old blocker only as
+docs/QD_WORKFLOW.md:22:- `.qd/worktrees/`
+docs/QD_WORKFLOW.md:42:When exporting qd state for a qd worktree branch, run `qd export` from the main checkout or qd root that has the qd
+docs/QD_WORKFLOW.md:46:qd export --out .qd/worktrees/<node-id>/roadmap/qd-export.json --deterministic
+docs/QD_WORKFLOW.md:51:When recording qd state for a worktree branch, keep qd run report paths repo-relative. Commands such as
+docs/QD_WORKFLOW.md:52:`qd complete --from-report`, `qd audit pass --from-report`, `qd verification sign-off --evidence`, and
+docs/QD_WORKFLOW.md:53:`qd ci record-pass --log-path` resolve paths from the qd root. Record paths like
+docs/QD_WORKFLOW.md:54:`reports/qd/<node-id>/completion.json`, not paths under `.qd/worktrees/`. If the implementation lives in a qd
+docs/QD_WORKFLOW.md:55:worktree, use a checkout where the branch reports and evidence are visible at their repo-relative paths, or
+docs/QD_WORKFLOW.md:292:Verification run records are created by `qd verification sign-off` after the node has human or machine sign-off
+docs/QD_WORKFLOW.md:307:one repo-relative evidence path under `evidence/<node-id>/` must exist. If the node is `done`, the blocker report must
+docs/QD_WORKFLOW.md:319:Before using `qd complete --from-report`, make the completion report final enough for qd to accept it:
+docs/QD_WORKFLOW.md:324:- `changedFiles[]` plain entries must be existing repo-relative paths. If the node deleted a file, record it as
+docs/QD_WORKFLOW.md:325:  `deleted:<repo-relative-path>` instead of a plain missing path. Deleted markers must include a non-empty
+docs/QD_WORKFLOW.md:326:  repo-relative path, must not be absolute, must not use `..` traversal, and must point at a path that is absent in the
+docs/QD_WORKFLOW.md:328:- If hosted CI is the required real-world validation, record the pass with `qd ci record-pass` before merge and cite
