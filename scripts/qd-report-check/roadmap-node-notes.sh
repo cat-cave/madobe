@@ -79,7 +79,7 @@ validate_roadmap_node_note_duplicate_ids() {
 
 validate_roadmap_node_notes() {
   validate_roadmap_node_note_node_ids
-  validate_roadmap_record_values node_notes kind '["blocker","retry"]' "blocker, retry"
+  validate_roadmap_record_values node_notes kind '["blocker","retry","note"]' "blocker, retry, note"
   validate_roadmap_node_note_required_strings id
   validate_roadmap_node_note_required_strings text
   validate_roadmap_node_note_duplicate_ids

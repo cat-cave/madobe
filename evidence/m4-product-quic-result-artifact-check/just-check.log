@@ -9,7 +9,7 @@ if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "
 command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
 just qd-reports-check
 bash scripts/qd-reports-check.sh
-qd report check: validated 104 completion report(s) and 104 audit report(s)
+qd report check: validated 105 completion report(s) and 105 audit report(s)
 just product-quic-result-check
 bash scripts/product-quic-result-check.sh
 product quic result check: validated crates/protocol/fixtures/m4-product-quic-smoke/result.json and negative fixtures
@@ -26,9 +26,9 @@ just dependabot-contract-check
 bash scripts/dependabot-contract-check.sh
 dependabot contract check: passed
 cargo check --workspace --all-targets --all-features
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
 cargo clippy --workspace --all-targets --all-features -- -D warnings
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.11s
 if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
 command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
 if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
@@ -37,7 +37,7 @@ if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1;
 command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
 markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
 Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
-Linting: 115 file(s)
+Linting: 116 file(s)
 Summary: 0 error(s)
 if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
 command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }

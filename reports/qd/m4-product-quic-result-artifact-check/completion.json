@@ -3,6 +3,8 @@
   "summary": "Added a dependency-free product QUIC result artifact checker, wired it into just check, and documented the command for real cross-device receiver artifacts.",
   "changedFiles": [
     "scripts/product-quic-result-check.sh",
+    "scripts/qd-report-check/roadmap.sh",
+    "scripts/qd-report-check/roadmap-node-notes.sh",
     "justfile",
     "docs/CROSS_DEVICE_VALIDATION.md",
     "roadmap/qd-export.json",
@@ -13,7 +15,9 @@
     "reports/qd/m4-product-quic-result-artifact-check/completion.json",
     "reports/qd/m4-product-quic-result-artifact-check/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "ccc0db9b068e298d9c5bdeff834410fd6a308b75"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Checker validates the checked-in product QUIC fixture.",

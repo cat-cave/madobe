@@ -134,7 +134,7 @@ validate_roadmap_nodes() {
 
 validate_roadmap_runs() {
   validate_roadmap_run_node_ids
-  validate_roadmap_record_values runs kind '["implement","audit","ci","merge"]' "implement, audit, ci, merge"
+  validate_roadmap_record_values runs kind '["implement","audit","ci","merge","verification"]' "implement, audit, ci, merge, verification"
   validate_roadmap_record_values runs status '["completed","failed","passed","recorded"]' "completed, failed, passed, recorded"
   validate_roadmap_run_content
 }
