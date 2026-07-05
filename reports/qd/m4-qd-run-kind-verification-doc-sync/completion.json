@@ -13,7 +13,9 @@
     "reports/qd/m4-qd-run-kind-verification-doc-sync/completion.json",
     "reports/qd/m4-qd-run-kind-verification-doc-sync/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "bd02ff224e102b50c807105e9892b577d98930c9"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "docs/QD_WORKFLOW.md documents runs[].kind as implement, audit, ci, merge, and verification.",
@@ -86,4 +88,3 @@
   "unverifiedItems": [],
   "dagChangesNeeded": []
 }
-
