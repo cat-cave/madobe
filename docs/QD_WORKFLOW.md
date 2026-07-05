@@ -280,7 +280,9 @@ Completion reports must include an empty `unverifiedItems` array. Plain repo-pat
 `evidence` arrays must exist; URLs and prose are ignored. The gate also reads `roadmap/qd-export.json` so every
 `done` node has both report files, every report directory maps to a real qd node, and every non-empty
 `runs[].node_id` references a real node. Run records must use the known `kind` vocabulary (`implement`, `audit`,
-`ci`, `merge`) and `status` vocabulary (`completed`, `failed`, `passed`, `recorded`). Finding records must have a
+`ci`, `merge`, `verification`) and `status` vocabulary (`completed`, `failed`, `passed`, `recorded`).
+Verification run records are created by `qd verification sign-off` after the node has human or machine sign-off
+evidence. Finding records must have a
 non-blank `node_id` that references a real node, `severity` must be one of `P0`, `P1`, `P2`, or `P3`, and `status`
 must be one of `open`, `resolved`, or `promoted`. Edge records must use existing `from_node` and `to_node` node IDs,
 must not point from a node to itself, must not duplicate a `from_node`/`to_node`/`type` triple, and must use the

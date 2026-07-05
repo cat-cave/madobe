@@ -1,0 +1,89 @@
+{
+  "nodeId": "m4-qd-run-kind-verification-doc-sync",
+  "summary": "Aligned qd workflow documentation with the committed roadmap run schema checker by documenting verification as an accepted runs[].kind value alongside implement, audit, ci, and merge.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-qd-run-kind-verification-doc-sync/commands.log",
+    "evidence/m4-qd-run-kind-verification-doc-sync/git-diff-check.log",
+    "evidence/m4-qd-run-kind-verification-doc-sync/nix-just-check.log",
+    "evidence/m4-qd-run-kind-verification-doc-sync/notes.md",
+    "evidence/m4-qd-run-kind-verification-doc-sync/qd-reports-check.log",
+    "evidence/m4-qd-run-kind-verification-doc-sync/run-kind-doc-check.log",
+    "reports/qd/m4-qd-run-kind-verification-doc-sync/completion.json",
+    "reports/qd/m4-qd-run-kind-verification-doc-sync/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents runs[].kind as implement, audit, ci, merge, and verification.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and evidence/m4-qd-run-kind-verification-doc-sync/run-kind-doc-check.log"
+    },
+    {
+      "criterion": "Docs remain aligned with scripts/qd-report-check/roadmap.sh.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/roadmap.sh and evidence/m4-qd-run-kind-verification-doc-sync/run-kind-doc-check.log"
+    },
+    {
+      "criterion": "No checker behavior changes and no historical evidence or report rewrites.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-kind-verification-doc-sync/notes.md"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded under evidence/m4-qd-run-kind-verification-doc-sync and reports/qd/m4-qd-run-kind-verification-doc-sync.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-kind-verification-doc-sync/notes.md and reports/qd/m4-qd-run-kind-verification-doc-sync/completion.json"
+    },
+    {
+      "criterion": "rg, git diff --check, just qd-reports-check, and nix develop -c just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-kind-verification-doc-sync/run-kind-doc-check.log, evidence/m4-qd-run-kind-verification-doc-sync/git-diff-check.log, evidence/m4-qd-run-kind-verification-doc-sync/qd-reports-check.log, and evidence/m4-qd-run-kind-verification-doc-sync/nix-just-check.log"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-kind-verification-doc-sync/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "rg -n \"Run records must use|validate_roadmap_record_values runs kind\" docs/QD_WORKFLOW.md scripts/qd-report-check/roadmap.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-kind-verification-doc-sync/run-kind-doc-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-kind-verification-doc-sync/git-diff-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-kind-verification-doc-sync/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-kind-verification-doc-sync/nix-just-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-run-kind-verification-doc-sync/commands.log",
+    "evidence/m4-qd-run-kind-verification-doc-sync/git-diff-check.log",
+    "evidence/m4-qd-run-kind-verification-doc-sync/nix-just-check.log",
+    "evidence/m4-qd-run-kind-verification-doc-sync/notes.md",
+    "evidence/m4-qd-run-kind-verification-doc-sync/qd-reports-check.log",
+    "evidence/m4-qd-run-kind-verification-doc-sync/run-kind-doc-check.log",
+    "reports/qd/m4-qd-run-kind-verification-doc-sync/completion.json",
+    "reports/qd/m4-qd-run-kind-verification-doc-sync/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a qd workflow documentation alignment node and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
+

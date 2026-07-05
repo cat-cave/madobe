@@ -1,0 +1,69 @@
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 119 completion report(s), 119 audit report(s), and 6 blocker report(s)
+just qd-ready-queue-check
+bash scripts/qd-ready-queue-check.sh
+qd ready queue check
+source: /home/trevor/projects/madobe/.qd/worktrees/m4-qd-run-kind-verification-doc-sync/roadmap/qd-export.json
+selection_source: qd ready --json is authoritative for assignment; raw export status is diagnostic
+raw_ready_count: 4
+assignable_ready_count: 0
+held_ready_count: 4
+
+Raw ready-status nodes:
+- m4-audit [ready] Audit M4 integrated video path
+- m4-cross-device-latency-instrumentation [ready] Measure cross-device frame latency
+- m4-received-sample-metal-presentation [ready] Render and present a received decoded sample with Metal
+- m4-received-sample-videotoolbox-decode [ready] Decode a received network sample with VideoToolbox
+
+Assignable ready nodes (all transitive requires prerequisites done):
+- none
+
+Held ready-status nodes:
+- m4-audit held by nearest non-done m4-cross-device-latency-instrumentation [ready] distance=1; nearest blocked m4-product-quic-cross-device-smoke [blocked] distance=1; blocked_by=external-dependency; blocked_reason=Waiting for Mac orchestrator to run product QUIC receiver on LAN and publish receiver certificate/artifacts for Linux sender validation; status_reason=[2026-07-04T05:31:21.804Z] Blocked by external-dependency: Waiting for Mac orchestrator to run product QUIC receiver on LAN and publish receiver certificate/artifacts for Linux sender validation Needed: Pull spec/m4-product-quic-cross-device-smoke, run madobectl product-quic-smoke receive on the Mac LAN address, and publish macos-receiver/server-cert.der plus receiver evidence
+- m4-cross-device-latency-instrumentation held by nearest non-done m4-received-sample-metal-presentation [ready] distance=1; blocker_reason=none
+- m4-received-sample-metal-presentation held by nearest non-done m4-received-sample-videotoolbox-decode [ready] distance=1; blocker_reason=none
+- m4-received-sample-videotoolbox-decode held by nearest non-done m4-product-quic-cross-device-smoke [blocked] distance=1; nearest blocked m4-product-quic-cross-device-smoke [blocked] distance=1; blocked_by=external-dependency; blocked_reason=Waiting for Mac orchestrator to run product QUIC receiver on LAN and publish receiver certificate/artifacts for Linux sender validation; status_reason=[2026-07-04T05:31:21.804Z] Blocked by external-dependency: Waiting for Mac orchestrator to run product QUIC receiver on LAN and publish receiver certificate/artifacts for Linux sender validation Needed: Pull spec/m4-product-quic-cross-device-smoke, run madobectl product-quic-smoke receive on the Mac LAN address, and publish macos-receiver/server-cert.der plus receiver evidence
+just cross-device-result-check
+bash scripts/cross-device-result-check.sh 
+cross-device result check: validated crates/protocol/fixtures/m3-cross-device-video-smoke/result.json and negative fixtures
+just product-quic-result-check
+bash scripts/product-quic-result-check.sh 
+product quic result check: validated crates/protocol/fixtures/m4-product-quic-smoke/result.json and negative fixtures
+just pin-hygiene-check
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+just pr-template-check
+bash scripts/pr-template-check.sh
+pr template check: passed
+just workflow-contract-check
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+just dependabot-contract-check
+bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+cargo check --workspace --all-targets --all-features
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.13s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 129 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"

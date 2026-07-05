@@ -1,0 +1,9 @@
+2026-07-05 Linux orchestrator baseline:
+- nix develop -c just verify
+
+2026-07-05 node validation:
+- rg -n "Run records must use|validate_roadmap_record_values runs kind" docs/QD_WORKFLOW.md scripts/qd-report-check/roadmap.sh
+- git diff --check
+- just qd-reports-check
+- nix develop -c just check
+
