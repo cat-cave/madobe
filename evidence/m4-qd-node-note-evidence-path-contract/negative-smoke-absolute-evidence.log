@@ -1,0 +1,4 @@
+Mutation: set node_notes[0].evidence to an absolute path
+qd report check: /tmp/tmp.Rf7Iwu21ZO: node_notes[0].evidence must be repo-relative or HTTP(S): /tmp/not-canonical/blocker.md
+qd report check: failed with 1 error(s)
+expected failure exit=1

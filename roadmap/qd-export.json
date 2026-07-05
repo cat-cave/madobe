@@ -3832,6 +3832,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-qd-node-note-evidence-path-contract",
+      "title": "Require canonical qd node-note evidence paths",
+      "kind": "infra",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "low",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-qd-node-note-evidence-path-contract",
+      "spec": "Normalize node_notes[].evidence values away from absolute qd worktree paths and enforce that optional node-note evidence is a durable HTTP(S) URL or existing repo-relative path.",
+      "acceptance": "Current absolute node_notes[].evidence blocker paths are rewritten to canonical reports/qd/<node-id>/blocker.md paths\nscripts/qd-report-check/roadmap-node-notes.sh rejects absolute node_notes[].evidence paths\nscripts/qd-report-check/roadmap-node-notes.sh rejects node_notes[].evidence paths containing .. traversal\nscripts/qd-report-check/roadmap-node-notes.sh rejects missing repo-relative node_notes[].evidence paths\nscripts/qd-report-check/roadmap-node-notes.sh rejects blank and non-string non-null node_notes[].evidence values\nHTTP(S) node_notes[].evidence URLs remain accepted\nExisting qd reports and roadmap export pass the stricter check\ndocs/QD_WORKFLOW.md documents the node_notes[].evidence contract\nEvidence and qd reports are recorded under evidence/m4-qd-node-note-evidence-path-contract and reports/qd/m4-qd-node-note-evidence-path-contract\nLinux validation evidence records just qd-reports-check, focused temporary negative smokes, git diff --check, and nix develop -c just check\nNo product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nvalidation:repo-metadata",
+      "created_at": "2026-07-05T20:56:51.495Z",
+      "updated_at": "2026-07-05T20:57:30.662Z",
+      "claimed_at": "2026-07-05T20:57:11.591Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -4206,6 +4236,12 @@
       "to_node": "m4-qd-branch-naming-doc-sync",
       "type": "requires",
       "created_at": "2026-07-05T20:30:15.401Z"
+    },
+    {
+      "from_node": "m4-qd-node-note-kind-doc-sync",
+      "to_node": "m4-qd-node-note-evidence-path-contract",
+      "type": "requires",
+      "created_at": "2026-07-05T20:57:00.439Z"
     }
   ],
   "findings": [
@@ -15904,7 +15940,7 @@
       "text": "Blocked by external-dependency: Portal ScreenCast selection for the madobe-owned Hyprland output is still not proven: CreateSession returned a request path, SelectSources failed with Access denied from the non-owning bus probe, and PipeWire dumps showed no video/portal/madobe stream node. Direct grim -o can target the named output when launched with the live Wayland socket, but it only yields PNG output and does not provide DMA-BUF format, modifier, timestamp, or sync metadata.\nNeeded: Implement or run a portal client that owns org.freedesktop.portal.Request.Response, receives user consent for the madobe output, opens the returned PipeWire remote, and records stream metadata; or implement an equivalent direct capture path exposing format, modifier, timestamp, and sync metadata.",
       "created_at": "2026-07-03T20:18:05.519Z",
       "kind": "blocker",
-      "evidence": "/home/trevor/projects/madobe/.qd/worktrees/m2-capture-stream-proof/reports/qd/m2-capture-stream-proof/blocker.md"
+      "evidence": "reports/qd/m2-capture-stream-proof/blocker.md"
     },
     {
       "id": "e88e9e42-d227-48ed-94ea-6e1625d3a2a4",
@@ -15912,7 +15948,7 @@
       "text": "Blocked by external-dependency: A real portal ScreenCast request client now receives CreateSession and extracts the session_handle, but SelectSources produced no response within the bounded 30-second wait. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video/portal/madobe stream metadata were obtained.\nNeeded: Determine why SelectSources does not complete for the node-scoped Hyprland output. Provide a visible user-consent/chooser flow with parent-window context or equivalent portal client behavior, then capture Start streams and OpenPipeWireRemote metadata; or use a direct capture API exposing format, modifier, timestamp, and sync metadata.",
       "created_at": "2026-07-03T20:48:56.340Z",
       "kind": "blocker",
-      "evidence": "/home/trevor/projects/madobe/.qd/worktrees/m2-portal-screencast-client-proof/reports/qd/m2-portal-screencast-client-proof/blocker.md"
+      "evidence": "reports/qd/m2-portal-screencast-client-proof/blocker.md"
     },
     {
       "id": "c31d310f-40e5-4ab5-87a7-74e8d5f0f10c",

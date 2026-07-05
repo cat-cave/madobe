@@ -77,10 +77,71 @@ validate_roadmap_node_note_duplicate_ids() {
   )
 }
 
+validate_roadmap_node_note_evidence_types() {
+  local index
+  local value
+
+  while IFS=$'\t' read -r index value; do
+    report_error "$roadmap_export" "node_notes[$index].evidence must be a string when present: $value"
+  done < <(
+    jq -r '
+      (.node_notes // [])
+      | to_entries[]
+      | .key as $index
+      | (.value.evidence // null) as $raw_evidence
+      | select($raw_evidence != null and ($raw_evidence | type) != "string")
+      | [$index, ($raw_evidence | tostring)]
+      | @tsv
+    ' "$roadmap_export"
+  )
+}
+
+validate_roadmap_node_note_evidence_paths() {
+  local index
+  local evidence
+
+  while IFS=$'\t' read -r index evidence; do
+    if [[ -z $evidence ]]; then
+      report_error "$roadmap_export" "node_notes[$index].evidence must be a non-blank string when present"
+      continue
+    fi
+
+    if [[ $evidence =~ ^https?:// ]]; then
+      continue
+    fi
+
+    if [[ $evidence = /* ]]; then
+      report_error "$roadmap_export" "node_notes[$index].evidence must be repo-relative or HTTP(S): $evidence"
+      continue
+    fi
+
+    if path_has_traversal "$evidence"; then
+      report_error "$roadmap_export" "node_notes[$index].evidence must not contain '..' traversal: $evidence"
+      continue
+    fi
+
+    if [[ ! -e $evidence ]]; then
+      report_error "$roadmap_export" "node_notes[$index].evidence does not exist: $evidence"
+    fi
+  done < <(
+    jq -r '
+      (.node_notes // [])
+      | to_entries[]
+      | .key as $index
+      | (.value.evidence // null) as $raw_evidence
+      | select($raw_evidence != null and ($raw_evidence | type) == "string")
+      | [$index, ($raw_evidence | gsub("^[[:space:]]+|[[:space:]]+$"; ""))]
+      | @tsv
+    ' "$roadmap_export"
+  )
+}
+
 validate_roadmap_node_notes() {
   validate_roadmap_node_note_node_ids
   validate_roadmap_record_values node_notes kind '["blocker","retry","note"]' "blocker, retry, note"
   validate_roadmap_node_note_required_strings id
   validate_roadmap_node_note_required_strings text
   validate_roadmap_node_note_duplicate_ids
+  validate_roadmap_node_note_evidence_types
+  validate_roadmap_node_note_evidence_paths
 }

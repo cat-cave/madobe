@@ -1,0 +1,10 @@
+m2-capture-one-frame	blocker	reports/qd/m2-pipewire-probe/blocker.md
+m2-capture-one-frame	blocker	reports/qd/m2-capture-stream-proof/blocker.md
+m2-capture-one-frame	blocker	reports/qd/m2-portal-screencast-client-proof/blocker.md
+m2-capture-one-frame	blocker	reports/qd/m2-portal-chooser-interaction-proof/blocker.md
+m2-capture-one-frame	retry	reports/qd/m2-direct-capture-api-spike/completion.json
+m2-capture-one-frame	blocker	reports/qd/m2-capture-one-frame/blocker.md
+m2-capture-one-frame	blocker	reports/qd/m2-capture-one-frame/blocker.md
+m2-capture-one-frame	retry	reports/qd/m2-native-dmabuf-allocation-proof/completion.json
+m4-product-quic-cross-device-smoke	blocker	https://github.com/cat-cave/madobe/issues/1#issuecomment-4880786404
+m4-nightly-full-workflow-dispatch	blocker	reports/qd/m4-nightly-full-workflow-dispatch/blocker.md

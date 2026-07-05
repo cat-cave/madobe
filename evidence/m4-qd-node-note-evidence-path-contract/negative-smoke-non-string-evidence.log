@@ -1,0 +1,4 @@
+Mutation: set node_notes[0].evidence to a number
+qd report check: /tmp/tmp.MjrLmMky9j: node_notes[0].evidence must be a string when present: 42
+qd report check: failed with 1 error(s)
+expected failure exit=1

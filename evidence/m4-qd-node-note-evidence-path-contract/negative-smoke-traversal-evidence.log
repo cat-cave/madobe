@@ -1,0 +1,4 @@
+Mutation: set node_notes[0].evidence to a traversal path
+qd report check: /tmp/tmp.Dk10Y7aS1f: node_notes[0].evidence must not contain '..' traversal: reports/qd/../secret.md
+qd report check: failed with 1 error(s)
+expected failure exit=1

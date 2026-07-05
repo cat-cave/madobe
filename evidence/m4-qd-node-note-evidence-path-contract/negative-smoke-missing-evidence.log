@@ -1,0 +1,4 @@
+Mutation: set node_notes[0].evidence to a missing repo-relative path
+qd report check: /tmp/tmp.mkIhmOPOR3: node_notes[0].evidence does not exist: reports/qd/missing-node/blocker.md
+qd report check: failed with 1 error(s)
+expected failure exit=1

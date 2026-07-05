@@ -300,6 +300,8 @@ must be one of `open`, `resolved`, or `promoted`. Edge records must use existing
 must not point from a node to itself, must not duplicate a `from_node`/`to_node`/`type` triple, and must use the
 known `type` vocabulary (`requires`). Node note records must reference existing non-blank node IDs, use the known
 `kind` vocabulary (`blocker`, `retry`, `note`), keep non-blank `id` and `text` values, and have unique note IDs.
+When `node_notes[].evidence` is present, it must be a non-blank HTTP(S) URL or an existing repo-relative path with no
+`..` traversal; do not record absolute local worktree paths in committed node-note evidence.
 Use `blocker` for durable missing-condition context, `retry` for a failed attempt that should be retried or
 superseded, and `note` for durable orchestration context such as verification sign-off details. This vocabulary is
 checked by `scripts/qd-report-check/roadmap-node-notes.sh`. The command is wired into `just check` so malformed qd

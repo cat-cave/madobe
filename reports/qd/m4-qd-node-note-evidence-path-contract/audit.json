@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-qd-node-note-evidence-path-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Absolute qd node-note evidence paths were normalized to repo-relative report paths.",
+      "status": "passed",
+      "evidence": "roadmap/qd-export.json and evidence/m4-qd-node-note-evidence-path-contract/node-note-evidence-list.log"
+    },
+    {
+      "criterion": "The qd report checker rejects absolute, traversal, missing, blank, and non-string non-null node_notes[].evidence values.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/roadmap-node-notes.sh and evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-absolute-evidence.log"
+    },
+    {
+      "criterion": "HTTP(S) node note evidence remains valid for durable GitHub references.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/node-note-evidence-list.log and evidence/m4-qd-node-note-evidence-path-contract/qd-reports-check.log"
+    },
+    {
+      "criterion": "QD_WORKFLOW documents the evidence contract and scope excludes product runtime or platform validation claims.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and evidence/m4-qd-node-note-evidence-path-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is qd roadmap/report hygiene and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "findings": []
+}
