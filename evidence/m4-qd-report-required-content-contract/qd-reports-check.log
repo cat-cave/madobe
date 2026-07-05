@@ -1,0 +1,5 @@
+$ nix develop -c just qd-reports-check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-report-required-content-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 78 completion report(s) and 78 audit report(s)

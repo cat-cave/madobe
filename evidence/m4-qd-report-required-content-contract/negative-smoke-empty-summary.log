@@ -1,0 +1,9 @@
+$ tmpdir=$(mktemp -d)
+tmpdir=/tmp/tmp.tiHsY63q6v
+$ symlink repo root entries except reports into temp workspace
+$ cp -R reports "/tmp/tmp.tiHsY63q6v/reports"
+$ jq '.summary = ""' "/tmp/tmp.tiHsY63q6v/reports/qd/m4-qd-report-shape-check/completion.json" > "/tmp/tmp.tiHsY63q6v/reports/qd/m4-qd-report-shape-check/completion.json.tmp"
+$ (cd "/tmp/tmp.tiHsY63q6v" && bash scripts/qd-reports-check.sh)
+qd report check: reports/qd/m4-qd-report-shape-check/completion.json: summary must be a non-empty string
+qd report check: failed with 1 error(s)
+expected failure exit status: 1
