@@ -16,7 +16,9 @@
     "scripts/qd-report-check/roadmap.sh",
     "scripts/qd-reports-check.sh"
   ],
-  "commits": [],
+  "commits": [
+    "90096a9f960f104e67affdf5a83633ca94d281c2"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "just qd-reports-check still uses scripts/qd-reports-check.sh as the entrypoint.",
