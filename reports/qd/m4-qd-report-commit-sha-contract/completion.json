@@ -10,7 +10,9 @@
     "reports/qd/m4-qd-report-commit-sha-contract/completion.json",
     "scripts/qd-reports-check.sh"
   ],
-  "commits": [],
+  "commits": [
+    "6b220583fc40aeccbd8946ea59384b857454dee2"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "The three legacy M0 completion reports use full commit SHAs.",
