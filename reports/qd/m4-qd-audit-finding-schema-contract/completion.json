@@ -19,7 +19,9 @@
     "roadmap/qd-export.json",
     "scripts/qd-report-check/audit.sh"
   ],
-  "commits": [],
+  "commits": [
+    "820d787751b1f6850272174c9b9a5ff4eca4f9d1"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check/audit.sh rejects findings[] items that are not objects with non-blank severity, title, evidence, observed, expected, and classification.",
