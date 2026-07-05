@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-qd-report-checker-modularization",
+  "acceptanceReviewed": [
+    {
+      "criterion": "just qd-reports-check still uses scripts/qd-reports-check.sh as the entrypoint.",
+      "status": "passed",
+      "evidence": "justfile recipe qd-reports-check still invokes bash scripts/qd-reports-check.sh, and the entrypoint sources the checker helper files before running validation."
+    },
+    {
+      "criterion": "Existing report, run, finding, path, commit, and coverage validations still run and current repo state passes.",
+      "status": "passed",
+      "evidence": "The refactor moved existing validation functions into domain helpers without weakening the jq expressions or shell checks. evidence/m4-qd-report-checker-modularization/qd-reports-check.log records the full report/export validation passing."
+    },
+    {
+      "criterion": "Split checker logic into clear sourced helper files with every checker source file under 500 lines.",
+      "status": "passed",
+      "evidence": "The helper split is common.sh, completion.sh, audit.sh, and roadmap.sh under scripts/qd-report-check/. evidence/m4-qd-report-checker-modularization/line-count-check.log records all checker source files below 500 lines."
+    },
+    {
+      "criterion": "Required evidence logs are recorded under evidence/m4-qd-report-checker-modularization.",
+      "status": "passed",
+      "evidence": "The evidence directory contains qd-reports-check.log, just-check.log, line-count-check.log, git-diff-check.log, and negative-smoke-unknown-run-kind.log."
+    },
+    {
+      "criterion": "Completion and audit reports use the matching nodeId and leave commits[] empty.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-qd-report-checker-modularization/completion.json and audit.json both use nodeId=m4-qd-report-checker-modularization; completion commits[] is empty for pre-merge local reporting."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}

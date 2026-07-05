@@ -1,0 +1,90 @@
+{
+  "nodeId": "m4-qd-report-checker-modularization",
+  "summary": "Refactored the qd report checker into a small entrypoint plus sourced helper files for common, completion, audit, and roadmap export validations while preserving existing validation behavior.",
+  "changedFiles": [
+    "evidence/m4-qd-report-checker-modularization/git-diff-check.log",
+    "evidence/m4-qd-report-checker-modularization/just-check.log",
+    "evidence/m4-qd-report-checker-modularization/line-count-check.log",
+    "evidence/m4-qd-report-checker-modularization/negative-smoke-unknown-run-kind.log",
+    "evidence/m4-qd-report-checker-modularization/qd-reports-check.log",
+    "reports/qd/m4-qd-report-checker-modularization/audit.json",
+    "reports/qd/m4-qd-report-checker-modularization/completion.json",
+    "roadmap/qd-export.json",
+    "scripts/qd-report-check/audit.sh",
+    "scripts/qd-report-check/common.sh",
+    "scripts/qd-report-check/completion.sh",
+    "scripts/qd-report-check/roadmap.sh",
+    "scripts/qd-reports-check.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "just qd-reports-check still uses scripts/qd-reports-check.sh as the entrypoint.",
+      "status": "passed",
+      "evidence": "justfile still invokes bash scripts/qd-reports-check.sh for the qd-reports-check recipe, and evidence/m4-qd-report-checker-modularization/qd-reports-check.log records that command passing."
+    },
+    {
+      "criterion": "Existing report, run, finding, path, commit, and coverage validations still run and current repo state passes.",
+      "status": "passed",
+      "evidence": "The sourced helper files preserve the existing validation functions by domain; evidence/m4-qd-report-checker-modularization/qd-reports-check.log records the current repository passing."
+    },
+    {
+      "criterion": "Split checker logic into clear sourced helper files; every hand-written checker source file must be under 500 lines.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh sources scripts/qd-report-check/common.sh, completion.sh, audit.sh, and roadmap.sh. evidence/m4-qd-report-checker-modularization/line-count-check.log records each checker source file below 500 lines."
+    },
+    {
+      "criterion": "Record qd-reports-check, just-check, line-count, git-diff-check, and negative-smoke evidence under the node evidence directory.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-checker-modularization contains qd-reports-check.log, just-check.log, line-count-check.log, git-diff-check.log, and negative-smoke-unknown-run-kind.log."
+    },
+    {
+      "criterion": "Add reports/qd/m4-qd-report-checker-modularization/completion.json and audit.json with matching nodeId and leave commits[] empty until after merge unless qd tooling requires otherwise.",
+      "status": "passed",
+      "evidence": "This completion report and reports/qd/m4-qd-report-checker-modularization/audit.json both use nodeId=m4-qd-report-checker-modularization; commits[] is empty."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-checker-modularization/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-checker-modularization/just-check.log"
+    },
+    {
+      "command": "wc -l scripts/qd-reports-check.sh scripts/qd-report-check/*.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-checker-modularization/line-count-check.log"
+    },
+    {
+      "command": "git diff --check HEAD",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-checker-modularization/git-diff-check.log"
+    },
+    {
+      "command": "temporary-copy unknown runs[].kind smoke through QD_REPORTS_ROADMAP_EXPORT",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-checker-modularization/negative-smoke-unknown-run-kind.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-checker-modularization/git-diff-check.log",
+    "evidence/m4-qd-report-checker-modularization/just-check.log",
+    "evidence/m4-qd-report-checker-modularization/line-count-check.log",
+    "evidence/m4-qd-report-checker-modularization/negative-smoke-unknown-run-kind.log",
+    "evidence/m4-qd-report-checker-modularization/qd-reports-check.log",
+    "reports/qd/m4-qd-report-checker-modularization/audit.json",
+    "reports/qd/m4-qd-report-checker-modularization/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, platform, capture, transport, decode, render, presentation, cross-device, or latency behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,10 @@
+$ wc -l scripts/qd-reports-check.sh scripts/qd-report-check/*.sh
+   64 scripts/qd-reports-check.sh
+   30 scripts/qd-report-check/audit.sh
+   85 scripts/qd-report-check/common.sh
+  164 scripts/qd-report-check/completion.sh
+  177 scripts/qd-report-check/roadmap.sh
+  520 total
+
+$ awk line-limit check (<500)
+line-count-check: success - all checker source files are under 500 lines
