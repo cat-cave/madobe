@@ -1,0 +1,11 @@
+smoke: negative-smoke-non-string-optional-text
+mutator: jq .findings[0].expected = 123 | .findings[1].suggested_fix = {"fix":"text"} roadmap/qd-export.json
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/m4-qd-finding-content-contract-negative-smoke-non-string-optional-text.json just qd-reports-check
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/m4-qd-finding-content-contract-negative-smoke-non-string-optional-text.json: findings[0].expected must be null or a string: 123
+qd report check: /tmp/m4-qd-finding-content-contract-negative-smoke-non-string-optional-text.json: findings[1].suggested_fix must be null or a string: {"fix":"text"}
+qd report check: failed with 2 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+result: expected failure (exit 1)

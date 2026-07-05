@@ -1,0 +1,10 @@
+smoke: negative-smoke-traversal-path
+mutator: jq .findings[0].path = "reports/../secret.rs" roadmap/qd-export.json
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/m4-qd-finding-content-contract-negative-smoke-traversal-path.json just qd-reports-check
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/m4-qd-finding-content-contract-negative-smoke-traversal-path.json: findings[0].path must not contain '..' traversal: reports/../secret.rs
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+result: expected failure (exit 1)
