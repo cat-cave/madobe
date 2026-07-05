@@ -17,7 +17,9 @@
     "reports/qd/m4-qd-finding-content-contract/completion.json",
     "scripts/qd-report-check/roadmap.sh"
   ],
-  "commits": [],
+  "commits": [
+    "a0275fd6b1b40d38d3e0a44dbd4901df24e5e4b6"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check/roadmap.sh rejects findings[] entries with malformed id values.",
