@@ -14,7 +14,9 @@
     "reports/qd/m4-qd-branch-naming-doc-sync/completion.json",
     "reports/qd/m4-qd-branch-naming-doc-sync/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "210baa2434a8240c169e1c53b0878566d89b20aa"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "docs/QD_WORKFLOW.md documents that qd worktree branches should carry the exact qd node id and default to spec/<node-id> unless the node already records a different branch.",
@@ -92,4 +94,3 @@
   "unverifiedItems": [],
   "dagChangesNeeded": []
 }
-
