@@ -9,7 +9,9 @@
     "reports/qd/m4-qd-report-changed-file-contract/completion.json",
     "scripts/qd-reports-check.sh"
   ],
-  "commits": [],
+  "commits": [
+    "9a766fb1378b0db121f1d0777fdc53ff3dfefe10"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "reports/qd/m4-merge-group-trigger-dedupe/completion.json marks the deleted workflow path explicitly as deleted:.github/workflows/merge-queue.yml",
