@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-product-quic-result-artifact-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The checker validates the checked-in product QUIC fixture and runs by default.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-check/product-quic-result-check.log"
+    },
+    {
+      "criterion": "The checker rejects obsolete flat product QUIC fields.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh"
+    },
+    {
+      "criterion": "The checker rejects unsupported downstream claims unless a matching evidence artifact kind exists.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh"
+    },
+    {
+      "criterion": "The checker is wired into just check.",
+      "status": "passed",
+      "evidence": "justfile and evidence/m4-product-quic-result-artifact-check/just-check.log"
+    },
+    {
+      "criterion": "The cross-device runbook documents how to validate a real receiver artifact.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Artifact-schema checker only; no live product QUIC or cross-device validation is required or claimed for this node."
+  },
+  "findings": []
+}
