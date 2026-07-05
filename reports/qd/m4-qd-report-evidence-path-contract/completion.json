@@ -1,0 +1,102 @@
+{
+  "nodeId": "m4-qd-report-evidence-path-contract",
+  "summary": "Tightened qd completion report evidence[] validation so entries must be HTTP(S) URLs or existing repo-relative paths, with absolute, traversal, and missing paths rejected.",
+  "changedFiles": [
+    "evidence/m4-qd-report-evidence-path-contract/git-diff-check.log",
+    "evidence/m4-qd-report-evidence-path-contract/just-check.log",
+    "evidence/m4-qd-report-evidence-path-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-report-evidence-path-contract/negative-smoke-absolute-evidence-path.log",
+    "evidence/m4-qd-report-evidence-path-contract/negative-smoke-missing-evidence-path.log",
+    "evidence/m4-qd-report-evidence-path-contract/negative-smoke-traversal-evidence-path.log",
+    "reports/qd/m4-qd-report-evidence-path-contract/audit.json",
+    "reports/qd/m4-qd-report-evidence-path-contract/completion.json",
+    "scripts/qd-report-check/completion.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check/completion.sh accepts completion evidence[] entries that are existing repo-relative paths or HTTP(S) URLs.",
+      "status": "passed",
+      "evidence": "validate_completion_evidence_paths now allows http:// and https:// entries and validates non-URL entries as repo-relative paths that exist; evidence/m4-qd-report-evidence-path-contract/just-qd-reports-check.log records the current report set passing."
+    },
+    {
+      "criterion": "scripts/qd-report-check/completion.sh rejects absolute evidence[] paths.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-evidence-path-contract/negative-smoke-absolute-evidence-path.log records a temporary copied completion report failing with the expected repo-relative evidence path error."
+    },
+    {
+      "criterion": "scripts/qd-report-check/completion.sh rejects evidence[] paths containing .. traversal.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-evidence-path-contract/negative-smoke-traversal-evidence-path.log records a temporary copied completion report failing with the expected traversal error."
+    },
+    {
+      "criterion": "scripts/qd-report-check/completion.sh rejects missing repo-relative evidence[] paths.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-evidence-path-contract/negative-smoke-missing-evidence-path.log records a temporary copied completion report failing with the expected missing path error."
+    },
+    {
+      "criterion": "Existing qd completion reports pass without weakening the contract.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-evidence-path-contract/just-qd-reports-check.log records just qd-reports-check passing with existing completion reports and the stricter evidence[] contract."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, git diff --check, and temporary-copy negative smokes for absolute, traversal, and missing evidence paths.",
+      "status": "passed",
+      "evidence": "The evidence directory contains logs for just qd-reports-check, nix develop -c just check, git diff --check, and the three temporary-copy negative smokes."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "realWorldValidation marks macOS-specific validation as not required; only Linux command evidence is claimed."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-evidence-path-contract/just-qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-evidence-path-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-evidence-path-contract/git-diff-check.log"
+    },
+    {
+      "command": "temporary-copy absolute evidence path smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-evidence-path-contract/negative-smoke-absolute-evidence-path.log"
+    },
+    {
+      "command": "temporary-copy traversal evidence path smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-evidence-path-contract/negative-smoke-traversal-evidence-path.log"
+    },
+    {
+      "command": "temporary-copy missing evidence path smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-evidence-path-contract/negative-smoke-missing-evidence-path.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-evidence-path-contract/git-diff-check.log",
+    "evidence/m4-qd-report-evidence-path-contract/just-check.log",
+    "evidence/m4-qd-report-evidence-path-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-report-evidence-path-contract/negative-smoke-absolute-evidence-path.log",
+    "evidence/m4-qd-report-evidence-path-contract/negative-smoke-missing-evidence-path.log",
+    "evidence/m4-qd-report-evidence-path-contract/negative-smoke-traversal-evidence-path.log",
+    "reports/qd/m4-qd-report-evidence-path-contract/audit.json",
+    "reports/qd/m4-qd-report-evidence-path-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

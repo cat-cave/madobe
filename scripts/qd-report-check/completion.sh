@@ -129,7 +129,10 @@ validate_completion_evidence_paths() {
   local path
 
   while IFS= read -r path; do
-    if is_ignored_evidence_text "$path"; then
+    if [[ $path =~ ^https?:// ]]; then
+      continue
+    fi
+    if ! validate_repo_relative_evidence_path "$file" "$path"; then
       continue
     fi
     if [[ ! -e $path ]]; then
@@ -138,27 +141,24 @@ validate_completion_evidence_paths() {
   done < <(jq -r '.evidence[]' "$file")
 }
 
-is_ignored_evidence_text() {
-  local value=$1
+validate_repo_relative_evidence_path() {
+  local file=$1
+  local path=$2
 
-  [[ -z $value ]] && return 0
-  [[ $value =~ ^https?:// ]] && return 0
-  [[ $value =~ ^[A-Za-z][A-Za-z0-9+.-]*: ]] && return 0
-  [[ $value = /* ]] && return 0
-  [[ $value =~ [[:space:]] ]] && return 0
-  [[ $value == *'`'* ]] && return 0
-  [[ $value == *\'* ]] && return 0
-  [[ $value == *\"* ]] && return 0
-  [[ $value == *\;* ]] && return 0
-  [[ $value == *\,* ]] && return 0
-  [[ $value == *\(* ]] && return 0
-  [[ $value == *\)* ]] && return 0
-  [[ $value == *:* ]] && return 0
+  if [[ -z $path ]]; then
+    report_error "$file" "evidence path must not be empty"
+    return 1
+  fi
 
-  [[ $value == ./* ]] && return 1
-  [[ $value == ../* ]] && return 1
-  [[ $value == */* ]] && return 1
-  [[ $value == *.* ]] && return 1
+  if [[ $path = /* ]]; then
+    report_error "$file" "evidence path must be repo-relative: $path"
+    return 1
+  fi
+
+  if path_has_traversal "$path"; then
+    report_error "$file" "evidence path must not contain '..' traversal: $path"
+    return 1
+  fi
 
   return 0
 }
