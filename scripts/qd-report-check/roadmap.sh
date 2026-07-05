@@ -10,6 +10,8 @@ source "$(CDPATH='' cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/roadmap-fi
 source "$(CDPATH='' cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/roadmap-node-notes.sh"
 # shellcheck source=scripts/qd-report-check/roadmap-registries.sh
 source "$(CDPATH='' cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/roadmap-registries.sh"
+# shellcheck source=scripts/qd-report-check/roadmap-runs.sh
+source "$(CDPATH='' cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)/roadmap-runs.sh"
 
 validate_roadmap_export() {
   if [[ ! -f $roadmap_export ]]; then
@@ -134,6 +136,7 @@ validate_roadmap_runs() {
   validate_roadmap_run_node_ids
   validate_roadmap_record_values runs kind '["implement","audit","ci","merge"]' "implement, audit, ci, merge"
   validate_roadmap_record_values runs status '["completed","failed","passed","recorded"]' "completed, failed, passed, recorded"
+  validate_roadmap_run_content
 }
 
 node_exists_in_roadmap() {

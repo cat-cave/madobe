@@ -1,0 +1,150 @@
+{
+  "nodeId": "m4-qd-run-content-contract",
+  "summary": "Tightened qd roadmap run validation so committed run records must keep UUID-shaped ids, timestamp-shaped lifecycle fields, typed optional metadata, valid optional git_sha and exit_code values, and safe existing repo-relative log paths.",
+  "changedFiles": [
+    "evidence/m4-qd-run-content-contract/git-diff-check.log",
+    "evidence/m4-qd-run-content-contract/just-check.log",
+    "evidence/m4-qd-run-content-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-run-content-contract/line-counts.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-absolute-log-path.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-bad-exit-code.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-bad-git-sha.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-bad-timestamp.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-malformed-id.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-missing-log-path.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-non-string-optional-metadata.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-traversal-log-path.log",
+    "reports/qd/m4-qd-run-content-contract/audit.json",
+    "reports/qd/m4-qd-run-content-contract/completion.json",
+    "scripts/qd-report-check/roadmap-runs.sh",
+    "scripts/qd-report-check/roadmap.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check validates runs[] id values as lowercase UUID-shaped strings.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-malformed-id.log records the expected rejection for an uppercase UUID value."
+    },
+    {
+      "criterion": "scripts/qd-report-check validates started_at and finished_at timestamp/nullability shape.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-bad-timestamp.log records the expected rejection for a malformed started_at value."
+    },
+    {
+      "criterion": "scripts/qd-report-check rejects non-string optional command, provider, external_id, url, rationale, superseded_by, audit_kind, worktree_path, agent, summary, and log_path fields when present.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-non-string-optional-metadata.log records the expected rejection for object-valued provider metadata."
+    },
+    {
+      "criterion": "scripts/qd-report-check rejects malformed optional git_sha and non-integer optional exit_code values.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-bad-git-sha.log and evidence/m4-qd-run-content-contract/negative-smoke-bad-exit-code.log record the expected rejections."
+    },
+    {
+      "criterion": "scripts/qd-report-check rejects absolute, traversal, or missing optional log_path values when present.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-absolute-log-path.log, negative-smoke-traversal-log-path.log, and negative-smoke-missing-log-path.log record the expected log_path rejections."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/just-qd-reports-check.log records qd report validation passing with the stricter run checker."
+    },
+    {
+      "criterion": "Linux validation evidence records qd-reports-check, nix develop -c just check, git diff --check, and focused negative smokes for malformed roadmap runs.",
+      "status": "passed",
+      "evidence": "The evidence directory contains positive validation logs, line-count evidence, and focused temporary-copy negative smoke logs for malformed roadmap runs."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "This node only changes repository qd metadata validation; realWorldValidation is marked not_required."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy malformed run id smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-malformed-id.log"
+    },
+    {
+      "command": "temporary-copy malformed run timestamp smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-bad-timestamp.log"
+    },
+    {
+      "command": "temporary-copy non-string optional run metadata smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-non-string-optional-metadata.log"
+    },
+    {
+      "command": "temporary-copy bad run git_sha smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-bad-git-sha.log"
+    },
+    {
+      "command": "temporary-copy bad run exit_code smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-bad-exit-code.log"
+    },
+    {
+      "command": "temporary-copy absolute run log_path smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-absolute-log-path.log"
+    },
+    {
+      "command": "temporary-copy traversal run log_path smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-traversal-log-path.log"
+    },
+    {
+      "command": "temporary-copy missing run log_path smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/negative-smoke-missing-log-path.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/just-qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/git-diff-check.log"
+    },
+    {
+      "command": "wc -l scripts/qd-report-check/*.sh scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/line-counts.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-run-content-contract/git-diff-check.log",
+    "evidence/m4-qd-run-content-contract/just-check.log",
+    "evidence/m4-qd-run-content-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-run-content-contract/line-counts.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-absolute-log-path.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-bad-exit-code.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-bad-git-sha.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-bad-timestamp.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-malformed-id.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-missing-log-path.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-non-string-optional-metadata.log",
+    "evidence/m4-qd-run-content-contract/negative-smoke-traversal-log-path.log",
+    "reports/qd/m4-qd-run-content-contract/audit.json",
+    "reports/qd/m4-qd-run-content-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd run ledger validation only; no product runtime, platform, media, cross-device, or macOS-specific behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,56 @@
+{
+  "nodeId": "m4-qd-run-content-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-report-check validates runs[] id values as lowercase UUID-shaped strings.",
+      "status": "passed",
+      "evidence": "validate_roadmap_run_content checks run ids with a lowercase UUID-shaped regex; negative-smoke-malformed-id.log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check validates started_at and finished_at timestamp/nullability shape.",
+      "status": "passed",
+      "evidence": "The timestamp check accepts null finished_at and rejects malformed timestamp strings; negative-smoke-bad-timestamp.log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check rejects non-string optional command, provider, external_id, url, rationale, superseded_by, audit_kind, worktree_path, agent, summary, and log_path fields when present.",
+      "status": "passed",
+      "evidence": "The optional metadata type check covers the listed string fields; negative-smoke-non-string-optional-metadata.log records an object-valued provider rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check rejects malformed optional git_sha and non-integer optional exit_code values.",
+      "status": "passed",
+      "evidence": "The git_sha and exit_code checks reject malformed values; negative-smoke-bad-git-sha.log and negative-smoke-bad-exit-code.log record expected failures."
+    },
+    {
+      "criterion": "scripts/qd-report-check rejects absolute, traversal, or missing optional log_path values when present.",
+      "status": "passed",
+      "evidence": "The log_path check mirrors report_path safety and existence behavior; absolute, traversal, and missing path smoke logs record expected failures."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-content-contract/just-qd-reports-check.log records qd report validation passing with the stricter checker."
+    },
+    {
+      "criterion": "Linux validation evidence records qd-reports-check, nix develop -c just check, git diff --check, and focused negative smokes for malformed roadmap runs.",
+      "status": "passed",
+      "evidence": "The evidence directory contains the requested positive logs and focused negative smoke logs."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "The completion report marks realWorldValidation not_required and limits the node to repository qd run ledger validation."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd run ledger validation only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}

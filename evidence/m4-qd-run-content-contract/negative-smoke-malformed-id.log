@@ -1,0 +1,4 @@
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/m4-qd-run-content-contract-malformed-id.json bash scripts/qd-reports-check.sh
+qd report check: /tmp/m4-qd-run-content-contract-malformed-id.json: runs[0].id must be a lowercase UUID-shaped string: 777B9DA3-88E8-481C-85A0-217E96CF7C1B
+qd report check: failed with 1 error(s)
+exit_code=1
