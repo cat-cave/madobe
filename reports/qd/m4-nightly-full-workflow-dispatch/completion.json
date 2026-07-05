@@ -1,0 +1,100 @@
+{
+  "nodeId": "m4-nightly-full-workflow-dispatch",
+  "summary": "Attempted to dispatch the hosted nightly workflow from main, but GitHub rejected the workflow_dispatch request with HTTP 403 for the active gh credential, so no nightly run was created or watched.",
+  "changedFiles": [
+    "evidence/m4-nightly-full-workflow-dispatch/commands.log",
+    "evidence/m4-nightly-full-workflow-dispatch/nightly-run.md",
+    "reports/qd/m4-nightly-full-workflow-dispatch/blocker.md",
+    "reports/qd/m4-nightly-full-workflow-dispatch/completion.json",
+    "reports/qd/m4-nightly-full-workflow-dispatch/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Read docs/ORCHESTRATION.md and docs/LINUX_ORCHESTRATOR.md for conventions.",
+      "status": "passed",
+      "evidence": "Both runbooks were read before dispatch; see evidence/m4-nightly-full-workflow-dispatch/commands.log for node context."
+    },
+    {
+      "criterion": "Dispatch the hosted GitHub Actions nightly workflow from main using gh workflow run nightly.yml --repo cat-cave/madobe --ref main.",
+      "status": "failed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log records HTTP 403: Resource not accessible by integration from the dispatch API."
+    },
+    {
+      "criterion": "Identify the triggered run, watch it to completion, and inspect logs if anything fails.",
+      "status": "failed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/nightly-run.md records that no run id or run URL exists because dispatch failed before run creation."
+    },
+    {
+      "criterion": "Create evidence under evidence/m4-nightly-full-workflow-dispatch/ with commands.log and nightly-run.md.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log and evidence/m4-nightly-full-workflow-dispatch/nightly-run.md"
+    },
+    {
+      "criterion": "Create qd completion and audit reports with commits left empty for orchestrator patching.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-nightly-full-workflow-dispatch/completion.json and reports/qd/m4-nightly-full-workflow-dispatch/audit.json"
+    },
+    {
+      "criterion": "Run nix develop -c just qd-reports-check and git diff --check.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log records both validation commands passing."
+    },
+    {
+      "criterion": "Run the full Linux check after fixing PR markdownlint feedback.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log records nix develop -c just check passing."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "gh api repos/cat-cave/madobe/commits/main --jq .sha",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log"
+    },
+    {
+      "command": "gh workflow run nightly.yml --repo cat-cave/madobe --ref main",
+      "status": "failed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log"
+    },
+    {
+      "command": "gh auth status",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log"
+    },
+    {
+      "command": "gh run list --repo cat-cave/madobe --workflow nightly.yml --branch main --event workflow_dispatch --limit 10 --json databaseId,displayTitle,headSha,createdAt,status,conclusion,url,workflowName,event,headBranch",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-nightly-full-workflow-dispatch/commands.log",
+    "evidence/m4-nightly-full-workflow-dispatch/nightly-run.md",
+    "reports/qd/m4-nightly-full-workflow-dispatch/blocker.md",
+    "reports/qd/m4-nightly-full-workflow-dispatch/audit.json",
+    "reports/qd/m4-nightly-full-workflow-dispatch/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": true,
+    "status": "not_required",
+    "evidence": "Hosted nightly validation is required by the node but was not reached because GitHub rejected workflow dispatch with HTTP 403 for the active gh credential; this report does not claim nightly success."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

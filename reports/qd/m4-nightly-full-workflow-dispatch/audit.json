@@ -1,0 +1,52 @@
+{
+  "nodeId": "m4-nightly-full-workflow-dispatch",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Runbook conventions were read before work.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md and docs/LINUX_ORCHESTRATOR.md were read at the start of the node."
+    },
+    {
+      "criterion": "Hosted nightly workflow dispatch from main was attempted with the required gh command.",
+      "status": "failed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log records the exact command and HTTP 403 response."
+    },
+    {
+      "criterion": "Triggered run was identified and watched to completion.",
+      "status": "failed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/nightly-run.md records no run id or URL because no run was created."
+    },
+    {
+      "criterion": "Failure evidence and unblock recommendation are recorded without claiming success.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-nightly-full-workflow-dispatch/blocker.md"
+    },
+    {
+      "criterion": "Required evidence and qd report files are present.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/ and reports/qd/m4-nightly-full-workflow-dispatch/"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": true,
+    "status": "not_required",
+    "evidence": "Hosted nightly validation is required but blocked before run creation by GitHub credential authorization; no nightly success is claimed."
+  },
+  "findings": [
+    {
+      "severity": "P1",
+      "title": "Active gh credential cannot dispatch nightly workflow",
+      "evidence": "evidence/m4-nightly-full-workflow-dispatch/commands.log",
+      "observed": "GitHub returned HTTP 403 Resource not accessible by integration for the workflow dispatch endpoint.",
+      "expected": "The active gh credential can create workflow_dispatch events for cat-cave/madobe so nightly.yml can be run from main.",
+      "classification": "credential",
+      "path": "reports/qd/m4-nightly-full-workflow-dispatch/blocker.md",
+      "line": 1
+    }
+  ]
+}
