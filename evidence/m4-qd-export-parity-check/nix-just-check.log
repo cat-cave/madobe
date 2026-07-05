@@ -50,29 +50,9 @@ just dependabot-contract-check
 bash scripts/dependabot-contract-check.sh
 dependabot contract check: passed
 cargo check --workspace --all-targets --all-features
-    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/compositor)
-    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/telemetry)
-    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/protocol)
-    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/encode-nv-sys)
-    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/capture)
-    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/encode)
-    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/hyprland)
-    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/apps/hostd)
-    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/transport)
-    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/apps/cli)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.90s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.16s
 cargo clippy --workspace --all-targets --all-features -- -D warnings
-    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/compositor)
-    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/protocol)
-    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/telemetry)
-    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/encode-nv-sys)
-    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/capture)
-    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/encode)
-    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/transport)
-    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/apps/hostd)
-    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/crates/hyprland)
-    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/apps/cli)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.84s
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.09s
 if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
 command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
 if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi

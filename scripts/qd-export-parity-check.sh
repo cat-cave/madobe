@@ -58,14 +58,13 @@ if [[ ! -f $expected ]]; then
 fi
 
 tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/madobe-qd-export-parity.XXXXXX")
-cleanup() {
+trap '
   if [[ $keep_temp -eq 0 ]]; then
     rm -rf "$tmp_dir"
   else
-    printf 'qd export parity check: kept temp dir: %s\n' "$tmp_dir" >&2
+    printf "qd export parity check: kept temp dir: %s\n" "$tmp_dir" >&2
   fi
-}
-trap cleanup EXIT
+' EXIT
 
 actual=$tmp_dir/qd-export.actual.json
 
