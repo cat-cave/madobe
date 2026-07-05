@@ -16,7 +16,9 @@
     "reports/qd/m4-result-checker-shared-shell-helpers/completion.json",
     "reports/qd/m4-result-checker-shared-shell-helpers/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "3086029e4aa840ca9906a403da6e5fd08e23c1f3"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "A shared result-check helper script exists under scripts/.",
