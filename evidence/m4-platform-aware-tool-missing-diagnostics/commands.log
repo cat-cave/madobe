@@ -1,0 +1,40 @@
+Node: m4-platform-aware-tool-missing-diagnostics
+Worktree: /home/trevor/projects/madobe/.qd/worktrees/m4-platform-aware-tool-missing-diagnostics
+Branch: spec/m4-platform-aware-tool-missing-diagnostics
+
+Commands run:
+
+1. qd node add --from-json /tmp/madobe-qdn-node.*.json
+2. qd edge add m4-contributing-platform-command-split m4-platform-aware-tool-missing-diagnostics --type requires
+3. qd edge add m4-linux-hygiene-tooling-hardening m4-platform-aware-tool-missing-diagnostics --type requires
+4. qd claim m4-platform-aware-tool-missing-diagnostics --agent trevor-linux-orchestrator --branch spec/m4-platform-aware-tool-missing-diagnostics
+5. qd worktree create m4-platform-aware-tool-missing-diagnostics --branch spec/m4-platform-aware-tool-missing-diagnostics
+6. qd export --out .qd/worktrees/m4-platform-aware-tool-missing-diagnostics/roadmap/qd-export.json --deterministic
+7. just require-tool madobe-definitely-missing-tool
+8. sed -n '7,15p' justfile
+9. git diff --check
+10. nix develop -c just fmt
+11. nix develop -c just check
+12. just qd-reports-check
+13. qd complete m4-platform-aware-tool-missing-diagnostics --from-report /home/trevor/projects/madobe/.qd/worktrees/m4-platform-aware-tool-missing-diagnostics/reports/qd/m4-platform-aware-tool-missing-diagnostics/completion.json
+14. qd audit pass m4-platform-aware-tool-missing-diagnostics --run-id 080216ec-c26f-4835-bc41-206f739e4833 --from-report /home/trevor/projects/madobe/.qd/worktrees/m4-platform-aware-tool-missing-diagnostics/reports/qd/m4-platform-aware-tool-missing-diagnostics/audit.json
+15. qd sync --from /tmp/madobe-qdn-export.<normalized>.json
+16. qd export --out .qd/worktrees/m4-platform-aware-tool-missing-diagnostics/roadmap/qd-export.json --deterministic
+17. qd gate m4-platform-aware-tool-missing-diagnostics --phase ci
+
+Validation outputs:
+
+- evidence/m4-platform-aware-tool-missing-diagnostics/missing-tool-smoke-linux.log
+- evidence/m4-platform-aware-tool-missing-diagnostics/require-tool-helper-snippet.log
+- evidence/m4-platform-aware-tool-missing-diagnostics/git-diff-check.log
+- evidence/m4-platform-aware-tool-missing-diagnostics/nix-just-fmt.log
+- evidence/m4-platform-aware-tool-missing-diagnostics/nix-just-check.log
+- evidence/m4-platform-aware-tool-missing-diagnostics/qd-reports-check.log
+
+qd lifecycle note:
+
+The first qd completion/audit attempt used absolute worktree report paths, which
+the roadmap run-path checker rejects. I repaired the qd cache with qdcli by
+syncing from a normalized qd export that used repo-relative report paths and a
+node timestamp change to force `qd sync` to replace the local cache. No sqlite
+or direct qd database editing was used.

@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-platform-aware-tool-missing-diagnostics",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The helper emits platform-aware missing-tool guidance and suppresses full command echo.",
+      "status": "passed",
+      "evidence": "justfile and evidence/m4-platform-aware-tool-missing-diagnostics/require-tool-helper-snippet.log"
+    },
+    {
+      "criterion": "Linux missing-tool smoke fails with the expected Nix guidance.",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/missing-tool-smoke-linux.log"
+    },
+    {
+      "criterion": "macOS branch uses native toolchain guidance without a Nix recommendation.",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/require-tool-helper-snippet.log"
+    },
+    {
+      "criterion": "Repository validation passes and scope excludes product behavior.",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/git-diff-check.log, nix-just-fmt.log, nix-just-check.log, qd-reports-check.log, and notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "No hardware, product runtime, or cross-device behavior changed."
+  },
+  "findings": []
+}

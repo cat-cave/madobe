@@ -6,7 +6,13 @@ default:
   just --list
 
 require-tool tool:
-  command -v "{{tool}}" >/dev/null 2>&1 || { echo "required tool missing: {{tool}}; run inside nix develop"; exit 127; }
+  @if command -v "{{tool}}" >/dev/null 2>&1; then exit 0; fi; \
+  if [ "$(uname -s)" = Darwin ]; then \
+    echo "required tool missing: {{tool}}; run just macos-bootstrap for baseline tools or install {{tool}} in the native macOS PATH"; \
+  else \
+    echo "required tool missing: {{tool}}; run inside nix develop"; \
+  fi; \
+  exit 127
 
 fmt:
   cargo fmt --all -- --check
@@ -71,11 +77,11 @@ test:
 verify: check test security
 
 coverage:
-  command -v cargo-llvm-cov >/dev/null 2>&1 || { echo "cargo-llvm-cov missing; run inside nix develop"; exit 127; }
+  just require-tool cargo-llvm-cov
   cargo llvm-cov nextest --workspace --all-features --ignore-filename-regex 'apps/.*/src/main\.rs' --fail-under-lines {{coverage_line_floor}} --lcov --output-path lcov.info
 
 mutants:
-  command -v cargo-mutants >/dev/null 2>&1 || { echo "cargo-mutants missing; run inside nix develop"; exit 127; }
+  just require-tool cargo-mutants
   output_dir="$(mktemp -d "${TMPDIR:-/tmp}/madobe-mutants-smoke.XXXXXX")"; \
   trap 'rm -rf "$output_dir"' EXIT; \
   cargo mutants -p madobe-compositor --file crates/compositor/src/ids.rs --timeout 120 --jobs 2 --all-features --output "$output_dir/compositor-ids"; \
@@ -83,15 +89,20 @@ mutants:
   cargo mutants -p madobe-encode-nv-sys --file crates/encode-nv-sys/src/lib.rs --timeout 120 --jobs 2 --all-features --output "$output_dir/encode-nv-sys"
 
 mutants-full:
-  command -v cargo-mutants >/dev/null 2>&1 || { echo "cargo-mutants missing; run inside nix develop"; exit 127; }
+  just require-tool cargo-mutants
   cargo mutants --workspace --timeout 120 --jobs 2
 
 security:
-  if command -v cargo-deny >/dev/null 2>&1; then cargo deny check; else echo "cargo-deny missing; run inside nix develop"; exit 127; fi
-  if command -v cargo-vet >/dev/null 2>&1; then cargo vet; else echo "cargo-vet missing; run inside nix develop"; exit 127; fi
-  if command -v cargo-audit >/dev/null 2>&1; then cargo audit; else echo "cargo-audit missing; run inside nix develop"; exit 127; fi
-  if command -v cargo-machete >/dev/null 2>&1; then cargo machete --skip-target-dir; else echo "cargo-machete missing; run inside nix develop"; exit 127; fi
-  if command -v cargo-semver-checks >/dev/null 2>&1; then cargo semver-checks check-release --workspace --baseline-root .; else echo "cargo-semver-checks missing; run inside nix develop"; exit 127; fi
+  just require-tool cargo-deny
+  cargo deny check
+  just require-tool cargo-vet
+  cargo vet
+  just require-tool cargo-audit
+  cargo audit
+  just require-tool cargo-machete
+  cargo machete --skip-target-dir
+  just require-tool cargo-semver-checks
+  cargo semver-checks check-release --workspace --baseline-root .
 
 ci-local:
   just direct-capture-preflight

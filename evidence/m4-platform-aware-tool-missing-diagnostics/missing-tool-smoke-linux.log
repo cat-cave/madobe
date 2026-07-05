@@ -1,0 +1,4 @@
+$ just require-tool madobe-definitely-missing-tool
+required tool missing: madobe-definitely-missing-tool; run inside nix develop
+error: recipe `require-tool` failed on line 15 with exit code 127
+exit=127
