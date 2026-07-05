@@ -1,0 +1,96 @@
+{
+  "nodeId": "m4-lan-video-smoke-wire-codec-contract",
+  "summary": "Added platform-neutral Rust tests for the LAN video smoke wire codec, covering stable header bytes, exact in-memory round trips, invalid metadata hash rejection, malformed header rejection, and truncated I/O errors.",
+  "changedFiles": [
+    "crates/transport/src/video_smoke/wire.rs",
+    "roadmap/qd-export.json",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/commands.log",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/focused-wire-tests.log",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/git-diff-check.log",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/nix-just-check.log",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/notes.md",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/transport-tests.log",
+    "reports/qd/m4-lan-video-smoke-wire-codec-contract/completion.json",
+    "reports/qd/m4-lan-video-smoke-wire-codec-contract/audit.json"
+  ],
+  "commits": [
+    "e5413c39460fc8ae94ed4dce2f701a0734c0b1cd"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Tests prove write_sample/read_sample round trip exact metadata and payload through in-memory buffers.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/wire.rs and evidence/m4-lan-video-smoke-wire-codec-contract/focused-wire-tests.log"
+    },
+    {
+      "criterion": "Tests prove the stable header contract: magic MDBSMK01, version 1, AV1 codec id, SHA-256 hash id, fixed header length, big-endian metadata fields, and lowercase 64-character SHA-256 hash bytes.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/wire.rs and evidence/m4-lan-video-smoke-wire-codec-contract/focused-wire-tests.log"
+    },
+    {
+      "criterion": "Tests cover typed failure behavior for invalid magic, unsupported version, unsupported codec, unsupported hash algorithm, invalid hash length or casing, truncated header, and truncated payload.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/wire.rs and evidence/m4-lan-video-smoke-wire-codec-contract/focused-wire-tests.log"
+    },
+    {
+      "criterion": "Focused cargo test -p madobe-transport video_smoke::wire --all-features passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-wire-codec-contract/focused-wire-tests.log"
+    },
+    {
+      "criterion": "nix develop -c just check passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-wire-codec-contract/nix-just-check.log"
+    },
+    {
+      "criterion": "No product QUIC, decode, render, presentation, latency, artifact-content, cross-device validation, sockets, Mac hardware, workflow dispatch, or live credentials are required or claimed.",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-wire-codec-contract/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo test -p madobe-transport video_smoke::wire --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-wire-codec-contract/focused-wire-tests.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-transport --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-wire-codec-contract/transport-tests.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-wire-codec-contract/git-diff-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-wire-codec-contract/nix-just-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-wire-codec-contract/qd-reports-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-lan-video-smoke-wire-codec-contract/commands.log",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/focused-wire-tests.log",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/git-diff-check.log",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/nix-just-check.log",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/notes.md",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/qd-reports-check.log",
+    "evidence/m4-lan-video-smoke-wire-codec-contract/transport-tests.log",
+    "reports/qd/m4-lan-video-smoke-wire-codec-contract/completion.json",
+    "reports/qd/m4-lan-video-smoke-wire-codec-contract/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Wire codec contract tests use in-memory Rust buffers only and do not require sockets, live LAN validation, Mac hardware, product QUIC, decode, render, presentation, latency measurement, workflow dispatch, credentials, or cross-device validation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
