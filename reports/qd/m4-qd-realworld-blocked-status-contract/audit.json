@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-qd-realworld-blocked-status-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Runbook conventions were read before implementation.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md and docs/LINUX_ORCHESTRATOR.md were read before edits."
+    },
+    {
+      "criterion": "realWorldValidation.status accepts exactly passed, not_required, or blocked.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/common.sh contains the shared status predicate and error message for passed, not_required, or blocked."
+    },
+    {
+      "criterion": "Unknown realWorldValidation.status values are rejected.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-realworld-blocked-status-contract/commands.log records the /tmp unexpected_status probe producing validator_error_count=1."
+    },
+    {
+      "criterion": "The existing m4-nightly-full-workflow-dispatch completion and audit reports use blocked for their required but credential-blocked real-world validation.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-nightly-full-workflow-dispatch/completion.json and reports/qd/m4-nightly-full-workflow-dispatch/audit.json both set realWorldValidation.status to blocked."
+    },
+    {
+      "criterion": "Repository validation commands passed.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-realworld-blocked-status-contract/commands.log records nix develop -c just qd-reports-check, nix develop -c just check, and git diff --check passing."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report metadata validation only; Linux validation passed and macOS validation is not required."
+  },
+  "findings": []
+}

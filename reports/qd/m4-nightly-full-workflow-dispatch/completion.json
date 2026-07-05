@@ -92,7 +92,7 @@
   ],
   "realWorldValidation": {
     "required": true,
-    "status": "not_required",
+    "status": "blocked",
     "evidence": "Hosted nightly validation is required by the node but was not reached because GitHub rejected workflow dispatch with HTTP 403 for the active gh credential; this report does not claim nightly success."
   },
   "unverifiedItems": [],

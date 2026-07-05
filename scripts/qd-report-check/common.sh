@@ -41,8 +41,8 @@ validate_real_world_status() {
 
   expect_jq \
     "$file" \
-    '(.realWorldValidation.status | type == "string") and (.realWorldValidation.status == "passed" or .realWorldValidation.status == "not_required")' \
-    "realWorldValidation.status must be passed or not_required"
+    '(.realWorldValidation.status | type == "string") and (.realWorldValidation.status == "passed" or .realWorldValidation.status == "not_required" or .realWorldValidation.status == "blocked")' \
+    "realWorldValidation.status must be passed, not_required, or blocked"
 }
 
 validate_node_id() {

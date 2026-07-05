@@ -1,0 +1,76 @@
+{
+  "nodeId": "m4-qd-realworld-blocked-status-contract",
+  "summary": "Updated qd report validation so realWorldValidation.status accepts blocked in addition to passed and not_required, normalized the blocked nightly workflow reports to use that status, and recorded positive and negative contract evidence.",
+  "changedFiles": [
+    "scripts/qd-report-check/common.sh",
+    "reports/qd/m4-nightly-full-workflow-dispatch/completion.json",
+    "reports/qd/m4-nightly-full-workflow-dispatch/audit.json",
+    "evidence/m4-qd-realworld-blocked-status-contract/commands.log",
+    "evidence/m4-qd-realworld-blocked-status-contract/notes.md",
+    "reports/qd/m4-qd-realworld-blocked-status-contract/completion.json",
+    "reports/qd/m4-qd-realworld-blocked-status-contract/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Read docs/ORCHESTRATION.md and docs/LINUX_ORCHESTRATOR.md before implementation.",
+      "status": "passed",
+      "evidence": "Both runbooks were read before edits; evidence/m4-qd-realworld-blocked-status-contract/commands.log records validation work for the scoped node."
+    },
+    {
+      "criterion": "Update qd report validation so realWorldValidation.status accepts exactly passed, not_required, or blocked and rejects unknown values.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/common.sh now allows passed, not_required, or blocked. evidence/m4-qd-realworld-blocked-status-contract/commands.log records blocked accepted by qd-reports-check and unexpected_status rejected by the shared validator."
+    },
+    {
+      "criterion": "Update the m4-nightly-full-workflow-dispatch completion and audit reports so realWorldValidation.status is blocked instead of not_required.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-nightly-full-workflow-dispatch/completion.json and reports/qd/m4-nightly-full-workflow-dispatch/audit.json now use realWorldValidation.status blocked."
+    },
+    {
+      "criterion": "Record focused positive and negative validation evidence under evidence/m4-qd-realworld-blocked-status-contract/.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-realworld-blocked-status-contract/commands.log records nix develop -c just qd-reports-check passing with a blocked report, and records a /tmp unknown-status probe rejected by the validator."
+    },
+    {
+      "criterion": "Run nix develop -c just check and git diff --check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-realworld-blocked-status-contract/commands.log records nix develop -c just check and git diff --check passing."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-realworld-blocked-status-contract/commands.log"
+    },
+    {
+      "command": "temporary /tmp unknown realWorldValidation.status probe using validate_real_world_status",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-realworld-blocked-status-contract/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-realworld-blocked-status-contract/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-realworld-blocked-status-contract/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-realworld-blocked-status-contract/commands.log",
+    "evidence/m4-qd-realworld-blocked-status-contract/notes.md",
+    "reports/qd/m4-qd-realworld-blocked-status-contract/audit.json",
+    "reports/qd/m4-qd-realworld-blocked-status-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report metadata validation only; no product runtime behavior is changed or claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
