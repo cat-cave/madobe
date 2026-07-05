@@ -6,7 +6,15 @@ use std::path::{Path, PathBuf};
 use crate::product_quic_smoke::{
     NODE_ID, ProductQuicError, ProductQuicReceiveSummary, ProductQuicSendSummary,
 };
+use crate::sha256;
 use crate::video_smoke::CHECKED_IN_AV1_SAMPLE;
+
+const PRODUCT_QUIC_BRANCH: &str = "spec/m4-product-quic-cross-device-smoke";
+const PRODUCT_QUIC_EVIDENCE_ROOT: &str = "evidence/m4-product-quic-cross-device-smoke";
+const PRODUCT_QUIC_SENDER_EVIDENCE_DIR: &str =
+    "evidence/m4-product-quic-cross-device-smoke/linux-sender";
+const PRODUCT_QUIC_RECEIVER_EVIDENCE_DIR: &str =
+    "evidence/m4-product-quic-cross-device-smoke/macos-receiver";
 
 /// Optional artifact target for product QUIC smoke sender and receiver runs.
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -48,6 +56,10 @@ impl ProductQuicArtifactSet {
         };
         create_dir(dir)?;
         write_bytes(dir.join("server-cert.der"), cert_der)?;
+        write_file(
+            dir.join("server-cert.sha256"),
+            &format!("{}\n", sha256::digest_hex(cert_der)),
+        )?;
         write_file(
             dir.join("receiver-listening.log"),
             &format!(
@@ -190,31 +202,54 @@ fn result_json(summary: &ProductQuicReceiveSummary) -> String {
         concat!(
             "{{\n",
             "  \"nodeId\": \"{node_id}\",\n",
+            "  \"branch\": \"{branch}\",\n",
             "  \"transport\": \"quic\",\n",
             "  \"productQuic\": true,\n",
-            "  \"sample\": \"{sample}\",\n",
-            "  \"passed\": {passed},\n",
-            "  \"framesSent\": 1,\n",
-            "  \"framesReceived\": 1,\n",
-            "  \"payloadBytes\": {payload_bytes},\n",
-            "  \"sha256\": \"{sha256}\",\n",
-            "  \"validated\": {{\n",
-            "    \"payloadByteCount\": true,\n",
-            "    \"payloadSha256\": true\n",
+            "  \"sender\": {{\n",
+            "    \"role\": \"sender\",\n",
+            "    \"platform\": \"linux\",\n",
+            "    \"evidenceDir\": \"{sender_evidence_dir}\"\n",
             "  }},\n",
-            "  \"nonClaims\": [\n",
-            "    \"not VideoToolbox decode\",\n",
-            "    \"not Metal render\",\n",
-            "    \"not presentation\",\n",
-            "    \"not latency proof\"\n",
-            "  ]\n",
+            "  \"receiver\": {{\n",
+            "    \"role\": \"receiver\",\n",
+            "    \"platform\": \"macos\",\n",
+            "    \"evidenceDir\": \"{receiver_evidence_dir}\"\n",
+            "  }},\n",
+            "  \"payload\": {{\n",
+            "    \"payloadBytes\": {payload_bytes},\n",
+            "    \"sha256\": \"{sha256}\",\n",
+            "    \"byteCountValidated\": true,\n",
+            "    \"sha256Validated\": true\n",
+            "  }},\n",
+            "  \"receiverAck\": {{\n",
+            "    \"received\": {passed},\n",
+            "    \"payloadBytes\": {payload_bytes},\n",
+            "    \"sha256\": \"{sha256}\"\n",
+            "  }},\n",
+            "  \"certificateFingerprintSha256\": null,\n",
+            "  \"downstreamClaims\": {{\n",
+            "    \"decoded\": false,\n",
+            "    \"rendered\": false,\n",
+            "    \"presented\": false,\n",
+            "    \"latencyMs\": null\n",
+            "  }},\n",
+            "  \"artifacts\": [\n",
+            "    {{ \"path\": \"{evidence_root}/commands.log\", \"kind\": \"commands_log\" }},\n",
+            "    {{ \"path\": \"{sender_evidence_dir}/sender.log\", \"kind\": \"sender_log\" }},\n",
+            "    {{ \"path\": \"{receiver_evidence_dir}/receiver.log\", \"kind\": \"receiver_log\" }},\n",
+            "    {{ \"path\": \"{receiver_evidence_dir}/result.json\", \"kind\": \"payload_validation_evidence\" }}\n",
+            "  ],\n",
+            "  \"notes\": \"Live product QUIC payload validation only. No decode, render, presentation, or latency behavior is claimed.\"\n",
             "}}\n",
         ),
         node_id = NODE_ID,
-        sample = CHECKED_IN_AV1_SAMPLE,
+        branch = PRODUCT_QUIC_BRANCH,
         passed = summary.passed,
         payload_bytes = summary.payload_bytes,
         sha256 = summary.payload_sha256,
+        evidence_root = PRODUCT_QUIC_EVIDENCE_ROOT,
+        sender_evidence_dir = PRODUCT_QUIC_SENDER_EVIDENCE_DIR,
+        receiver_evidence_dir = PRODUCT_QUIC_RECEIVER_EVIDENCE_DIR,
     )
 }
 
