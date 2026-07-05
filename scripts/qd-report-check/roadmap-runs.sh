@@ -83,6 +83,23 @@ validate_roadmap_run_content() {
   )
 
   while IFS=$'\t' read -r index value; do
+    report_error "$roadmap_export" "runs[$index].summary merge squash commit must use a full 40-character lowercase hex SHA: $value"
+  done < <(
+    jq -r '
+      (.runs // [])
+      | to_entries[]
+      | .key as $index
+      | .value.summary as $summary
+      | select(($summary | type) == "string")
+      | ($summary | gsub("^[[:space:]]+|[[:space:]]+$"; "")) as $value
+      | select($value | startswith("Merge recorded with squash at commit "))
+      | select(($value | test("^Merge recorded with squash at commit [0-9a-f]{40}$")) | not)
+      | [$index, $value]
+      | @tsv
+    ' "$roadmap_export"
+  )
+
+  while IFS=$'\t' read -r index value; do
     report_error "$roadmap_export" "runs[$index].exit_code must be null or an integer number: $value"
   done < <(
     jq -r '

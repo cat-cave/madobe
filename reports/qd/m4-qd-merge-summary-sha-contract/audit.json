@@ -1,0 +1,31 @@
+{
+  "nodeId": "m4-qd-merge-summary-sha-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Short qd merge summaries are normalized to full SHAs.",
+      "status": "passed",
+      "evidence": "roadmap/qd-export.json and evidence/m4-qd-merge-summary-sha-contract/merge-summary-normalization.log"
+    },
+    {
+      "criterion": "The checker rejects short squash merge summary SHAs.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/roadmap-runs.sh and evidence/m4-qd-merge-summary-sha-contract/negative-smoke-short-merge-summary.log"
+    },
+    {
+      "criterion": "Repository checks pass and scope stays within qd ledger hygiene.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-merge-summary-sha-contract/git-diff-check.log, qd-reports-check.log, nix-just-check.log, and notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "No product runtime, hardware, cross-device, workflow dispatch, or credential-dependent behavior changed."
+  },
+  "findings": []
+}
