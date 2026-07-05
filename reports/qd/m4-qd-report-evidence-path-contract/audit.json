@@ -1,0 +1,51 @@
+{
+  "nodeId": "m4-qd-report-evidence-path-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-report-check/completion.sh accepts completion evidence[] entries that are existing repo-relative paths or HTTP(S) URLs.",
+      "status": "passed",
+      "evidence": "validate_completion_evidence_paths allows HTTP(S) entries and checks repo-relative evidence paths for existence. just qd-reports-check passes with existing report URLs and repo-relative evidence paths."
+    },
+    {
+      "criterion": "scripts/qd-report-check/completion.sh rejects absolute evidence[] paths.",
+      "status": "passed",
+      "evidence": "The absolute-path temporary-copy negative smoke records the expected repo-relative path rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/completion.sh rejects evidence[] paths containing .. traversal.",
+      "status": "passed",
+      "evidence": "The traversal temporary-copy negative smoke records the expected '..' traversal rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/completion.sh rejects missing repo-relative evidence[] paths.",
+      "status": "passed",
+      "evidence": "The missing-path temporary-copy negative smoke records the expected missing evidence path rejection."
+    },
+    {
+      "criterion": "Existing qd completion reports pass without weakening the contract.",
+      "status": "passed",
+      "evidence": "just qd-reports-check passes under the stricter evidence[] path contract."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, git diff --check, and temporary-copy negative smokes for absolute, traversal, and missing evidence paths.",
+      "status": "passed",
+      "evidence": "The node evidence directory contains all required positive and negative Linux validation logs."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "The completion report marks real-world validation as not required and makes no macOS-specific validation claim."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}
