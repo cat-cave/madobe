@@ -12,7 +12,9 @@
     "reports/qd/m4-qd-report-required-content-contract/audit.json",
     "reports/qd/m4-qd-report-required-content-contract/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "80a48f7bd24eab14ad37438c1ffee9c1816b8cc7"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Completion reports require non-empty summary, non-empty changedFiles[], non-empty acceptanceEvidence[], non-empty commandsRun[], non-empty evidence[], and non-empty realWorldValidation.evidence.",
