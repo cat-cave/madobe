@@ -1,0 +1,442 @@
+## 2026-07-04T18:55:57-05:00
+$ bash scripts/qd-reports-check.sh
+qd report check: validated 73 completion report(s) and 73 audit report(s)
+exit status: 0
+
+## 2026-07-04T18:56:19-05:00
+$ negative smoke: copied reports tree with verificationEvidence.diffReviewed set to a string
+qd report check: reports/qd/m0-ci-green/completion.json: evidence path does not exist: evidence/m0-ci-green/notes.md
+qd report check: reports/qd/m0-mac-bootstrap-verify/completion.json: evidence path does not exist: evidence/m0-mac-bootstrap-verify/commands.log
+qd report check: reports/qd/m0-mac-bootstrap-verify/completion.json: evidence path does not exist: evidence/m0-mac-bootstrap-verify/mac-env.txt
+qd report check: reports/qd/m0-mac-bootstrap-verify/completion.json: evidence path does not exist: evidence/m0-mac-bootstrap-verify/macos-bootstrap.log
+qd report check: reports/qd/m0-mac-bootstrap-verify/completion.json: evidence path does not exist: evidence/m0-mac-bootstrap-verify/macos-check.log
+qd report check: reports/qd/m0-mac-bootstrap-verify/completion.json: evidence path does not exist: evidence/m0-mac-bootstrap-verify/tuist-generate.log
+qd report check: reports/qd/m0-mac-bootstrap-verify/completion.json: evidence path does not exist: evidence/m0-mac-bootstrap-verify/xcodebuild.log
+qd report check: reports/qd/m0-mac-bootstrap-verify/completion.json: evidence path does not exist: evidence/m0-mac-bootstrap-verify/core-simulator-warning.txt
+qd report check: reports/qd/m0-qd-orchestration-smoke/completion.json: evidence path does not exist: evidence/m0-qd-orchestration-smoke/notes.md
+qd report check: reports/qd/m1-audit/completion.json: evidence path does not exist: evidence/m1-audit/commands.log
+qd report check: reports/qd/m1-audit/completion.json: evidence path does not exist: evidence/m1-audit/notes.md
+qd report check: reports/qd/m1-audit/completion.json: evidence path does not exist: evidence/m1-audit/qd-status.json
+qd report check: reports/qd/m1-audit/completion.json: evidence path does not exist: evidence/m1-audit/qd-ready.json
+qd report check: reports/qd/m1-audit/completion.json: evidence path does not exist: evidence/m1-audit/open-findings.txt
+qd report check: reports/qd/m1-audit/completion.json: evidence path does not exist: evidence/m1-audit/cli-hello-after-boundary-cleanup.out
+qd report check: reports/qd/m1-audit/completion.json: evidence path does not exist: evidence/m1-audit/cli-status-after-boundary-cleanup.out
+qd report check: reports/qd/m1-compositor-contract/completion.json: evidence path does not exist: evidence/m1-compositor-contract/commands.log
+qd report check: reports/qd/m1-compositor-contract/completion.json: evidence path does not exist: evidence/m1-compositor-contract/notes.md
+qd report check: reports/qd/m1-hostd-control-cli/completion.json: evidence path does not exist: evidence/m1-hostd-control-cli/commands.log
+qd report check: reports/qd/m1-hostd-control-cli/completion.json: evidence path does not exist: evidence/m1-hostd-control-cli/notes.md
+qd report check: reports/qd/m1-hyprland-command-layer/completion.json: evidence path does not exist: evidence/m1-hyprland-command-layer/commands.log
+qd report check: reports/qd/m1-hyprland-command-layer/completion.json: evidence path does not exist: evidence/m1-hyprland-command-layer/notes.md
+qd report check: reports/qd/m1-hyprland-fixtures/completion.json: evidence path does not exist: fixtures/hyprland/
+qd report check: reports/qd/m1-hyprland-fixtures/completion.json: evidence path does not exist: evidence/m1-hyprland-fixtures/commands.log
+qd report check: reports/qd/m1-hyprland-fixtures/completion.json: evidence path does not exist: evidence/m1-hyprland-fixtures/host-env.txt
+qd report check: reports/qd/m1-hyprland-fixtures/completion.json: evidence path does not exist: evidence/m1-hyprland-fixtures/notes.md
+qd report check: reports/qd/m1-linux-hardware-validation/completion.json: evidence path does not exist: evidence/m1-linux-hardware-validation/commands.log
+qd report check: reports/qd/m1-linux-hardware-validation/completion.json: evidence path does not exist: evidence/m1-linux-hardware-validation/host-env.txt
+qd report check: reports/qd/m1-linux-hardware-validation/completion.json: evidence path does not exist: evidence/m1-linux-hardware-validation/host.log
+qd report check: reports/qd/m1-linux-hardware-validation/completion.json: evidence path does not exist: evidence/m1-linux-hardware-validation/notes.md
+qd report check: reports/qd/m1-linux-hardware-validation/completion.json: evidence path does not exist: evidence/m1-linux-hardware-validation/validation-summary.json
+qd report check: reports/qd/m1-linux-hardware-validation/completion.json: evidence path does not exist: evidence/m1-linux-hardware-validation/just-verify.log
+qd report check: reports/qd/m1-linux-hardware-validation/completion.json: evidence path does not exist: evidence/m1-linux-hardware-validation/json-validation.log
+qd report check: reports/qd/m1-linux-hardware-validation/completion.json: evidence path does not exist: evidence/m1-linux-hardware-validation/redaction-scan.log
+qd report check: reports/qd/m1-remote-output-lifecycle/completion.json: evidence path does not exist: evidence/m1-remote-output-lifecycle/commands.log
+qd report check: reports/qd/m1-remote-output-lifecycle/completion.json: evidence path does not exist: evidence/m1-remote-output-lifecycle/host-env.txt
+qd report check: reports/qd/m1-remote-output-lifecycle/completion.json: evidence path does not exist: evidence/m1-remote-output-lifecycle/hyprland-monitors-before.json
+qd report check: reports/qd/m1-remote-output-lifecycle/completion.json: evidence path does not exist: evidence/m1-remote-output-lifecycle/hyprland-workspaces-before.json
+qd report check: reports/qd/m1-remote-output-lifecycle/completion.json: evidence path does not exist: evidence/m1-remote-output-lifecycle/hyprland-monitors-after-create.json
+qd report check: reports/qd/m1-remote-output-lifecycle/completion.json: evidence path does not exist: evidence/m1-remote-output-lifecycle/hyprland-monitors-after-park.json
+qd report check: reports/qd/m1-remote-output-lifecycle/completion.json: evidence path does not exist: evidence/m1-remote-output-lifecycle/hyprland-monitors-after-remove.json
+qd report check: reports/qd/m1-remote-output-lifecycle/completion.json: evidence path does not exist: evidence/m1-remote-output-lifecycle/notes.md
+qd report check: reports/qd/m1-workspace-session-binding-validation/completion.json: evidence path does not exist: evidence/m1-workspace-session-binding-validation/commands.log
+qd report check: reports/qd/m1-workspace-session-binding-validation/completion.json: evidence path does not exist: evidence/m1-workspace-session-binding-validation/notes.md
+qd report check: reports/qd/m1-workspace-session-binding-validation/completion.json: evidence path does not exist: evidence/m1-workspace-session-binding-validation/validation-summary.json
+qd report check: reports/qd/m1-workspace-session-binding-validation/completion.json: evidence path does not exist: evidence/m1-workspace-session-binding-validation/hyprland-monitors-before.json
+qd report check: reports/qd/m1-workspace-session-binding-validation/completion.json: evidence path does not exist: evidence/m1-workspace-session-binding-validation/hyprland-monitors-during-bound.json
+qd report check: reports/qd/m1-workspace-session-binding-validation/completion.json: evidence path does not exist: evidence/m1-workspace-session-binding-validation/hyprland-monitors-after.json
+qd report check: reports/qd/m1-workspace-session-binding-validation/completion.json: evidence path does not exist: evidence/m1-workspace-session-binding-validation/hyprland-workspaces-before.json
+qd report check: reports/qd/m1-workspace-session-binding-validation/completion.json: evidence path does not exist: evidence/m1-workspace-session-binding-validation/hyprland-workspaces-during-bound.json
+qd report check: reports/qd/m1-workspace-session-binding-validation/completion.json: evidence path does not exist: evidence/m1-workspace-session-binding-validation/hyprland-workspaces-after.json
+qd report check: reports/qd/m2-audit/completion.json: evidence path does not exist: evidence/m2-audit/commands.log
+qd report check: reports/qd/m2-audit/completion.json: evidence path does not exist: evidence/m2-audit/notes.md
+qd report check: reports/qd/m2-capture-contract/completion.json: evidence path does not exist: evidence/m2-capture-contract/commands.log
+qd report check: reports/qd/m2-capture-contract/completion.json: evidence path does not exist: evidence/m2-capture-contract/just-check.log
+qd report check: reports/qd/m2-capture-contract/completion.json: evidence path does not exist: evidence/m2-capture-contract/just-test.log
+qd report check: reports/qd/m2-capture-contract/completion.json: evidence path does not exist: evidence/m2-capture-contract/notes.md
+qd report check: reports/qd/m2-capture-one-frame/completion.json: evidence path does not exist: evidence/m2-capture-one-frame/notes.md
+qd report check: reports/qd/m2-capture-one-frame/completion.json: evidence path does not exist: evidence/m2-capture-one-frame/validation-summary.json
+qd report check: reports/qd/m2-capture-one-frame/completion.json: evidence path does not exist: evidence/m2-capture-one-frame/direct-capture-frame.json
+qd report check: reports/qd/m2-capture-stream-proof/completion.json: evidence path does not exist: evidence/m2-capture-stream-proof/commands.log
+qd report check: reports/qd/m2-capture-stream-proof/completion.json: evidence path does not exist: evidence/m2-capture-stream-proof/notes.md
+qd report check: reports/qd/m2-capture-stream-proof/completion.json: evidence path does not exist: evidence/m2-capture-stream-proof/validation-summary.json
+qd report check: reports/qd/m2-direct-capture-api-spike/completion.json: evidence path does not exist: evidence/m2-direct-capture-api-spike/notes.md
+qd report check: reports/qd/m2-direct-capture-api-spike/completion.json: evidence path does not exist: evidence/m2-direct-capture-api-spike/validation-summary.json
+qd report check: reports/qd/m2-direct-capture-api-spike/completion.json: evidence path does not exist: evidence/m2-direct-capture-api-spike/tools-and-protocols.md
+qd report check: reports/qd/m2-native-dmabuf-allocation-proof/completion.json: evidence path does not exist: evidence/m2-native-dmabuf-allocation-proof/notes.md
+qd report check: reports/qd/m2-native-dmabuf-allocation-proof/completion.json: evidence path does not exist: evidence/m2-native-dmabuf-allocation-proof/validation-summary.json
+qd report check: reports/qd/m2-native-dmabuf-allocation-proof/completion.json: evidence path does not exist: evidence/m2-native-dmabuf-allocation-proof/native-dmabuf-capture.json
+qd report check: reports/qd/m2-nvenc-encode-sample/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/notes.md
+qd report check: reports/qd/m2-nvenc-encode-sample/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/validation-summary.json
+qd report check: reports/qd/m2-nvenc-encode-sample/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/sample-av1.ivf
+qd report check: reports/qd/m2-nvenc-encode-sample/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/ffprobe-sample-av1.txt
+qd report check: reports/qd/m2-pipewire-probe/completion.json: evidence path does not exist: evidence/m2-pipewire-probe/commands.log
+qd report check: reports/qd/m2-pipewire-probe/completion.json: evidence path does not exist: evidence/m2-pipewire-probe/host-env.txt
+qd report check: reports/qd/m2-pipewire-probe/completion.json: evidence path does not exist: evidence/m2-pipewire-probe/notes.md
+qd report check: reports/qd/m2-pipewire-probe/completion.json: evidence path does not exist: evidence/m2-pipewire-probe/pipewire-capture-node-query.txt
+qd report check: reports/qd/m2-pipewire-probe/completion.json: evidence path does not exist: evidence/m2-pipewire-probe/portal-introspection.txt
+qd report check: reports/qd/m2-portal-chooser-interaction-proof/completion.json: evidence path does not exist: evidence/m2-portal-chooser-interaction-proof/commands.log
+qd report check: reports/qd/m2-portal-chooser-interaction-proof/completion.json: evidence path does not exist: evidence/m2-portal-chooser-interaction-proof/notes.md
+qd report check: reports/qd/m2-portal-chooser-interaction-proof/completion.json: evidence path does not exist: evidence/m2-portal-chooser-interaction-proof/validation-summary.json
+qd report check: reports/qd/m2-portal-manual-consent-frame-proof/completion.json: evidence path does not exist: evidence/m2-portal-manual-consent-frame-proof/notes.md
+qd report check: reports/qd/m2-portal-manual-consent-frame-proof/completion.json: evidence path does not exist: evidence/m2-portal-manual-consent-frame-proof/validation-summary.json
+qd report check: reports/qd/m2-portal-manual-consent-frame-proof/completion.json: evidence path does not exist: evidence/m2-portal-manual-consent-frame-proof/portal-client.txt
+qd report check: reports/qd/m2-portal-manual-consent-frame-proof/completion.json: evidence path does not exist: evidence/m2-portal-manual-consent-frame-proof/pipewire-during-open-remote-summary.json
+qd report check: reports/qd/m2-portal-screencast-client-proof/completion.json: evidence path does not exist: evidence/m2-portal-screencast-client-proof/commands.log
+qd report check: reports/qd/m2-portal-screencast-client-proof/completion.json: evidence path does not exist: evidence/m2-portal-screencast-client-proof/notes.md
+qd report check: reports/qd/m2-portal-screencast-client-proof/completion.json: evidence path does not exist: evidence/m2-portal-screencast-client-proof/validation-summary.json
+qd report check: reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json: evidence path does not exist: evidence/m2-video-path-validation/bundle-manifest.json
+qd report check: reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json: evidence path does not exist: evidence/m2-video-path-validation/notes.md
+qd report check: reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/notes.md
+qd report check: reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/commands.log
+qd report check: reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/report.md
+qd report check: reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/json-validation.log
+qd report check: reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/qd-gate-ci.json
+qd report check: reports/qd/m2-video-path-validation-does-not-measure-streaming-latency-or-p/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-measure-streaming-latency-or-p/just-verify.log
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json: evidence path does not exist: evidence/m2-video-path-validation/bundle-manifest.json
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json: evidence path does not exist: evidence/m2-video-path-validation/notes.md
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/notes.md
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/commands.log
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/report.md
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/json-validation.log
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/qd-gate-ci.json
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/just-verify.log
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/completion.json: evidence path does not exist: evidence/m2-video-path-validation/bundle-manifest.json
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/completion.json: evidence path does not exist: evidence/m2-video-path-validation/notes.md
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/notes.md
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/commands.log
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/report.md
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/json-validation.log
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/qd-gate-ci.json
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-downstream-mac-decode-re/just-verify.log
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/notes.md
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/json-validation.log
+qd report check: reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/report.md
+qd report check: reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json: evidence path does not exist: evidence/m2-video-path-validation/bundle-manifest.json
+qd report check: reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json: evidence path does not exist: evidence/m2-video-path-validation/notes.md
+qd report check: reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/notes.md
+qd report check: reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/commands.log
+qd report check: reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/report.md
+qd report check: reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/json-validation.log
+qd report check: reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/qd-gate-ci.json
+qd report check: reports/qd/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/completion.json: evidence path does not exist: evidence/m2-video-path-validation-does-not-validate-hdr-or-color-manageme/just-verify.log
+qd report check: reports/qd/m2-video-path-validation/completion.json: evidence path does not exist: evidence/m2-video-path-validation/bundle-manifest.json
+qd report check: reports/qd/m2-video-path-validation/completion.json: evidence path does not exist: evidence/m2-video-path-validation/json-validation.log
+qd report check: reports/qd/m2-video-path-validation/completion.json: evidence path does not exist: evidence/m2-video-path-validation/just-verify.log
+qd report check: reports/qd/m2-video-path-validation/completion.json: evidence path does not exist: evidence/m2-video-path-validation/notes.md
+qd report check: reports/qd/m2-video-path-validation/completion.json: evidence path does not exist: evidence/m2-video-path-validation/commands.log
+qd report check: reports/qd/m2-video-path-validation/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/sample-av1.ivf
+qd report check: reports/qd/m2-video-path-validation/completion.json: evidence path does not exist: evidence/m2-nvenc-encode-sample/ffprobe-sample-av1.txt
+qd report check: reports/qd/m3-audit/completion.json: evidence path does not exist: evidence/m3-audit/commands.log
+qd report check: reports/qd/m3-audit/completion.json: evidence path does not exist: evidence/m3-audit/notes.md
+qd report check: reports/qd/m3-cross-device-result-schema-fixture/completion.json: evidence path does not exist: evidence/m3-cross-device-result-schema-fixture/commands.log
+qd report check: reports/qd/m3-cross-device-result-schema-fixture/completion.json: evidence path does not exist: evidence/m3-cross-device-result-schema-fixture/just-check.log
+qd report check: reports/qd/m3-cross-device-result-schema-fixture/completion.json: evidence path does not exist: evidence/m3-cross-device-result-schema-fixture/notes.md
+qd report check: reports/qd/m3-cross-device-result-schema-fixture/completion.json: evidence path does not exist: evidence/m3-cross-device-result-schema-fixture/protocol-tests.log
+qd report check: reports/qd/m3-cross-device-result-schema-fixture/completion.json: evidence path does not exist: evidence/m3-cross-device-result-schema-fixture/validation-output.txt
+qd report check: reports/qd/m3-cross-device-video-smoke/completion.json: evidence path does not exist: evidence/m3-cross-device-video-smoke/commands.log
+qd report check: reports/qd/m3-cross-device-video-smoke/completion.json: evidence path does not exist: evidence/m3-cross-device-video-smoke/notes.md
+qd report check: reports/qd/m3-cross-device-video-smoke/completion.json: evidence path does not exist: evidence/m3-cross-device-video-smoke/result.json
+qd report check: reports/qd/m3-cross-device-video-smoke/completion.json: evidence path does not exist: evidence/m3-cross-device-video-smoke/linux/sender.log
+qd report check: reports/qd/m3-cross-device-video-smoke/completion.json: evidence path does not exist: evidence/m3-cross-device-video-smoke/macos/linux-attempt/receiver.log
+qd report check: reports/qd/m3-cross-device-video-smoke/completion.json: evidence path does not exist: evidence/m3-cross-device-video-smoke/macos/linux-attempt/result.json
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: docs/LAN_VIDEO_SMOKE_HARNESS.md
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/commands.log
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/just-check.log
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/just-verify.log
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/json-validation.log
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/notes.md
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/receiver-cli.out
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/receiver-listening.log
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/receiver-timeline.json
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/receiver.log
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/result.json
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/sample-hash.txt
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/sender-cli.out
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/sender-timeline.json
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/sender.log
+qd report check: reports/qd/m3-lan-video-smoke-harness/completion.json: evidence path does not exist: evidence/m3-lan-video-smoke-harness/transport-tests.log
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: docs/LINUX_VIDEO_SMOKE_HOST_PREFLIGHT.md
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/commands.log
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/gpu-driver.txt
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/host-env.txt
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/host-preflight-summary.json
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/hyprland-availability.txt
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/json-validation.log
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/just-check.log
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/network-firewall.txt
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/nix-command-validation.log
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/notes.md
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/pipewire-availability.txt
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/sample-hash.txt
+qd report check: reports/qd/m3-linux-video-smoke-host-preflight/completion.json: evidence path does not exist: evidence/m3-linux-video-smoke-host-preflight/start-stop.log
+qd report check: reports/qd/m3-mac-video-receive-queue/completion.json: evidence path does not exist: evidence/m3-mac-video-receive-queue/client-receive-timeline.json
+qd report check: reports/qd/m3-mac-video-receive-queue/completion.json: evidence path does not exist: evidence/m3-mac-video-receive-queue/commands.log
+qd report check: reports/qd/m3-mac-video-receive-queue/completion.json: evidence path does not exist: evidence/m3-mac-video-receive-queue/mac-env.txt
+qd report check: reports/qd/m3-mac-video-receive-queue/completion.json: evidence path does not exist: evidence/m3-mac-video-receive-queue/notes.md
+qd report check: reports/qd/m3-mac-video-receive-queue/completion.json: evidence path does not exist: evidence/m3-mac-video-receive-queue/xcodebuild.log
+qd report check: reports/qd/m3-metal-renderer-skeleton/completion.json: evidence path does not exist: evidence/m3-metal-renderer-skeleton/commands.log
+qd report check: reports/qd/m3-metal-renderer-skeleton/completion.json: evidence path does not exist: evidence/m3-metal-renderer-skeleton/mac-env.txt
+qd report check: reports/qd/m3-metal-renderer-skeleton/completion.json: evidence path does not exist: evidence/m3-metal-renderer-skeleton/macos-check.log
+qd report check: reports/qd/m3-metal-renderer-skeleton/completion.json: evidence path does not exist: evidence/m3-metal-renderer-skeleton/notes.md
+qd report check: reports/qd/m3-metal-renderer-skeleton/completion.json: evidence path does not exist: evidence/m3-metal-renderer-skeleton/render-report.json
+qd report check: reports/qd/m3-metal-renderer-skeleton/completion.json: evidence path does not exist: evidence/m3-metal-renderer-skeleton/tuist-generate.log
+qd report check: reports/qd/m3-metal-renderer-skeleton/completion.json: evidence path does not exist: evidence/m3-metal-renderer-skeleton/xcodebuild.log
+qd report check: reports/qd/m3-quic-transport-skeleton/completion.json: evidence path does not exist: evidence/m3-quic-transport-skeleton/commands.log
+qd report check: reports/qd/m3-quic-transport-skeleton/completion.json: evidence path does not exist: evidence/m3-quic-transport-skeleton/host-env.txt
+qd report check: reports/qd/m3-quic-transport-skeleton/completion.json: evidence path does not exist: evidence/m3-quic-transport-skeleton/just-check.log
+qd report check: reports/qd/m3-quic-transport-skeleton/completion.json: evidence path does not exist: evidence/m3-quic-transport-skeleton/just-test.log
+qd report check: reports/qd/m3-quic-transport-skeleton/completion.json: evidence path does not exist: evidence/m3-quic-transport-skeleton/notes.md
+qd report check: reports/qd/m3-quic-transport-skeleton/completion.json: evidence path does not exist: evidence/m3-quic-transport-skeleton/report-json-check.log
+qd report check: reports/qd/m3-quic-transport-skeleton/completion.json: evidence path does not exist: evidence/m3-quic-transport-skeleton/transport-clippy.log
+qd report check: reports/qd/m3-quic-transport-skeleton/completion.json: evidence path does not exist: evidence/m3-quic-transport-skeleton/transport-tests.log
+qd report check: reports/qd/m3-swift-protocol-mirror/completion.json: evidence path does not exist: evidence/m3-swift-protocol-mirror/commands.log
+qd report check: reports/qd/m3-swift-protocol-mirror/completion.json: evidence path does not exist: evidence/m3-swift-protocol-mirror/just-macos-check.log
+qd report check: reports/qd/m3-swift-protocol-mirror/completion.json: evidence path does not exist: evidence/m3-swift-protocol-mirror/mac-env.txt
+qd report check: reports/qd/m3-swift-protocol-mirror/completion.json: evidence path does not exist: evidence/m3-swift-protocol-mirror/notes.md
+qd report check: reports/qd/m3-swift-protocol-mirror/completion.json: evidence path does not exist: evidence/m3-swift-protocol-mirror/xcodebuild.log
+qd report check: reports/qd/m3-video-protocol/completion.json: evidence path does not exist: evidence/m3-video-protocol/commands.log
+qd report check: reports/qd/m3-video-protocol/completion.json: evidence path does not exist: evidence/m3-video-protocol/just-check.log
+qd report check: reports/qd/m3-video-protocol/completion.json: evidence path does not exist: evidence/m3-video-protocol/mac-env.txt
+qd report check: reports/qd/m3-video-protocol/completion.json: evidence path does not exist: evidence/m3-video-protocol/notes.md
+qd report check: reports/qd/m3-video-protocol/completion.json: evidence path does not exist: evidence/m3-video-protocol/protocol-tests.log
+qd report check: reports/qd/m3-videotoolbox-capability-probe/completion.json: evidence path does not exist: evidence/m3-videotoolbox-capability-probe/capability-report.json
+qd report check: reports/qd/m3-videotoolbox-capability-probe/completion.json: evidence path does not exist: evidence/m3-videotoolbox-capability-probe/commands.log
+qd report check: reports/qd/m3-videotoolbox-capability-probe/completion.json: evidence path does not exist: evidence/m3-videotoolbox-capability-probe/mac-env.txt
+qd report check: reports/qd/m3-videotoolbox-capability-probe/completion.json: evidence path does not exist: evidence/m3-videotoolbox-capability-probe/notes.md
+qd report check: reports/qd/m3-videotoolbox-capability-probe/completion.json: evidence path does not exist: evidence/m3-videotoolbox-capability-probe/xcodebuild.log
+qd report check: reports/qd/m3-videotoolbox-decode-sample/completion.json: evidence path does not exist: evidence/m3-videotoolbox-decode-sample/commands.log
+qd report check: reports/qd/m3-videotoolbox-decode-sample/completion.json: evidence path does not exist: evidence/m3-videotoolbox-decode-sample/decode-report.json
+qd report check: reports/qd/m3-videotoolbox-decode-sample/completion.json: evidence path does not exist: evidence/m3-videotoolbox-decode-sample/mac-env.txt
+qd report check: reports/qd/m3-videotoolbox-decode-sample/completion.json: evidence path does not exist: evidence/m3-videotoolbox-decode-sample/macos-check.log
+qd report check: reports/qd/m3-videotoolbox-decode-sample/completion.json: evidence path does not exist: evidence/m3-videotoolbox-decode-sample/notes.md
+qd report check: reports/qd/m3-videotoolbox-decode-sample/completion.json: evidence path does not exist: evidence/m3-videotoolbox-decode-sample/sample-input-hash.txt
+qd report check: reports/qd/m3-videotoolbox-decode-sample/completion.json: evidence path does not exist: evidence/m3-videotoolbox-decode-sample/xcodebuild.log
+qd report check: reports/qd/m4-action-ref-strict-pin-check/completion.json: evidence path does not exist: evidence/m4-action-ref-strict-pin-check/commands.log
+qd report check: reports/qd/m4-action-ref-strict-pin-check/completion.json: evidence path does not exist: evidence/m4-action-ref-strict-pin-check/notes.md
+qd report check: reports/qd/m4-ci-job-timeouts/completion.json: evidence path does not exist: evidence/m4-ci-job-timeouts/commands.log
+qd report check: reports/qd/m4-ci-job-timeouts/completion.json: evidence path does not exist: evidence/m4-ci-job-timeouts/notes.md
+qd report check: reports/qd/m4-compositor-identity-mutation-hardening/completion.json: evidence path does not exist: evidence/m4-compositor-identity-mutation-hardening/commands.log
+qd report check: reports/qd/m4-compositor-identity-mutation-hardening/completion.json: evidence path does not exist: evidence/m4-compositor-identity-mutation-hardening/notes.md
+qd report check: reports/qd/m4-contributing-platform-command-split/completion.json: evidence path does not exist: evidence/m4-contributing-platform-command-split/commands.log
+qd report check: reports/qd/m4-contributing-platform-command-split/completion.json: evidence path does not exist: evidence/m4-contributing-platform-command-split/notes.md
+qd report check: reports/qd/m4-dependabot-contract-check/completion.json: evidence path does not exist: evidence/m4-dependabot-contract-check/commands.log
+qd report check: reports/qd/m4-dependabot-contract-check/completion.json: evidence path does not exist: evidence/m4-dependabot-contract-check/notes.md
+qd report check: reports/qd/m4-dependency-pin-refresh/completion.json: evidence path does not exist: evidence/m4-dependency-pin-refresh/commands.log
+qd report check: reports/qd/m4-dependency-pin-refresh/completion.json: evidence path does not exist: evidence/m4-dependency-pin-refresh/notes.md
+qd report check: reports/qd/m4-direct-capture-helper-reproducibility/completion.json: evidence path does not exist: docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md
+qd report check: reports/qd/m4-direct-capture-helper-reproducibility/completion.json: evidence path does not exist: evidence/m4-direct-capture-helper-reproducibility/commands.log
+qd report check: reports/qd/m4-direct-capture-helper-reproducibility/completion.json: evidence path does not exist: evidence/m4-direct-capture-helper-reproducibility/notes.md
+qd report check: reports/qd/m4-direct-capture-local-ci-parity/completion.json: evidence path does not exist: evidence/m4-direct-capture-local-ci-parity/commands.log
+qd report check: reports/qd/m4-direct-capture-local-ci-parity/completion.json: evidence path does not exist: evidence/m4-direct-capture-local-ci-parity/notes.md
+qd report check: reports/qd/m4-direct-capture-preflight-ci-gate/completion.json: evidence path does not exist: docs/DIRECT_CAPTURE_HELPER_PREFLIGHT.md
+qd report check: reports/qd/m4-direct-capture-preflight-ci-gate/completion.json: evidence path does not exist: evidence/m4-direct-capture-preflight-ci-gate/commands.log
+qd report check: reports/qd/m4-direct-capture-preflight-ci-gate/completion.json: evidence path does not exist: evidence/m4-direct-capture-preflight-ci-gate/notes.md
+qd report check: reports/qd/m4-encode-nv-sys-argument-mutation-hardening/completion.json: evidence path does not exist: evidence/m4-encode-nv-sys-argument-mutation-hardening/commands.log
+qd report check: reports/qd/m4-encode-nv-sys-argument-mutation-hardening/completion.json: evidence path does not exist: evidence/m4-encode-nv-sys-argument-mutation-hardening/notes.md
+qd report check: reports/qd/m4-hyprland-model-accessor-mutation-hardening/completion.json: evidence path does not exist: evidence/m4-hyprland-model-accessor-mutation-hardening/commands.log
+qd report check: reports/qd/m4-hyprland-model-accessor-mutation-hardening/completion.json: evidence path does not exist: evidence/m4-hyprland-model-accessor-mutation-hardening/notes.md
+qd report check: reports/qd/m4-hyprland-parser-mutation-hardening/completion.json: evidence path does not exist: evidence/m4-hyprland-parser-mutation-hardening/commands.log
+qd report check: reports/qd/m4-hyprland-parser-mutation-hardening/completion.json: evidence path does not exist: evidence/m4-hyprland-parser-mutation-hardening/notes.md
+qd report check: reports/qd/m4-hyprland-rule-mutation-hardening/completion.json: evidence path does not exist: evidence/m4-hyprland-rule-mutation-hardening/commands.log
+qd report check: reports/qd/m4-hyprland-rule-mutation-hardening/completion.json: evidence path does not exist: evidence/m4-hyprland-rule-mutation-hardening/notes.md
+qd report check: reports/qd/m4-linux-hygiene-tooling-hardening/completion.json: evidence path does not exist: evidence/m4-linux-hygiene-tooling-hardening/commands.log
+qd report check: reports/qd/m4-linux-hygiene-tooling-hardening/completion.json: evidence path does not exist: evidence/m4-linux-hygiene-tooling-hardening/notes.md
+qd report check: reports/qd/m4-macos-ci-brew-tap-hygiene/completion.json: evidence path does not exist: evidence/m4-macos-ci-brew-tap-hygiene/commands.log
+qd report check: reports/qd/m4-macos-ci-brew-tap-hygiene/completion.json: evidence path does not exist: evidence/m4-macos-ci-brew-tap-hygiene/notes.md
+qd report check: reports/qd/m4-macos-ci-jq-tooling/completion.json: evidence path does not exist: evidence/m4-macos-ci-jq-tooling/commands.log
+qd report check: reports/qd/m4-macos-ci-jq-tooling/completion.json: evidence path does not exist: evidence/m4-macos-ci-jq-tooling/notes.md
+qd report check: reports/qd/m4-madobectl-usage-surface-hardening/completion.json: evidence path does not exist: evidence/m4-madobectl-usage-surface-hardening/commands.log
+qd report check: reports/qd/m4-madobectl-usage-surface-hardening/completion.json: evidence path does not exist: evidence/m4-madobectl-usage-surface-hardening/notes.md
+qd report check: reports/qd/m4-merge-group-trigger-dedupe/completion.json: evidence path does not exist: evidence/m4-merge-group-trigger-dedupe/commands.log
+qd report check: reports/qd/m4-merge-group-trigger-dedupe/completion.json: evidence path does not exist: evidence/m4-merge-group-trigger-dedupe/notes.md
+qd report check: reports/qd/m4-metal-evidence-wording-polish/completion.json: evidence path does not exist: evidence/m4-metal-evidence-wording-polish/commands.log
+qd report check: reports/qd/m4-metal-evidence-wording-polish/completion.json: evidence path does not exist: evidence/m4-metal-evidence-wording-polish/macos-check.log
+qd report check: reports/qd/m4-metal-evidence-wording-polish/completion.json: evidence path does not exist: evidence/m4-metal-evidence-wording-polish/notes.md
+qd report check: reports/qd/m4-metal-evidence-wording-polish/completion.json: evidence path does not exist: evidence/m4-metal-evidence-wording-polish/render-report.json
+qd report check: reports/qd/m4-metal-evidence-wording-polish/completion.json: evidence path does not exist: evidence/m4-metal-evidence-wording-polish/tuist-generate.log
+qd report check: reports/qd/m4-metal-evidence-wording-polish/completion.json: evidence path does not exist: evidence/m4-metal-evidence-wording-polish/xcodebuild-metal-probe.log
+qd report check: reports/qd/m4-mise-tool-pin-refresh/completion.json: evidence path does not exist: evidence/m4-mise-tool-pin-refresh/commands.log
+qd report check: reports/qd/m4-mise-tool-pin-refresh/completion.json: evidence path does not exist: evidence/m4-mise-tool-pin-refresh/notes.md
+qd report check: reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json: evidence path does not exist: evidence/m4-nightly-coverage-baseline-ratchet/commands.log
+qd report check: reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json: evidence path does not exist: evidence/m4-nightly-coverage-baseline-ratchet/coverage-95-failure.log
+qd report check: reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json: evidence path does not exist: evidence/m4-nightly-coverage-baseline-ratchet/coverage-summary.txt
+qd report check: reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json: evidence path does not exist: evidence/m4-nightly-coverage-baseline-ratchet/just-coverage.log
+qd report check: reports/qd/m4-nightly-coverage-baseline-ratchet/completion.json: evidence path does not exist: evidence/m4-nightly-coverage-baseline-ratchet/notes.md
+qd report check: reports/qd/m4-nightly-supply-chain-regression-gate/completion.json: evidence path does not exist: evidence/m4-nightly-supply-chain-regression-gate/commands.log
+qd report check: reports/qd/m4-nightly-supply-chain-regression-gate/completion.json: evidence path does not exist: evidence/m4-nightly-supply-chain-regression-gate/notes.md
+qd report check: reports/qd/m4-pin-hygiene-check/completion.json: evidence path does not exist: evidence/m4-pin-hygiene-check/commands.log
+qd report check: reports/qd/m4-pin-hygiene-check/completion.json: evidence path does not exist: evidence/m4-pin-hygiene-check/notes.md
+qd report check: reports/qd/m4-pr-template-contract-check/completion.json: evidence path does not exist: evidence/m4-pr-template-contract-check/commands.log
+qd report check: reports/qd/m4-pr-template-contract-check/completion.json: evidence path does not exist: evidence/m4-pr-template-contract-check/notes.md
+qd report check: reports/qd/m4-pr-template-qd-evidence-contract/completion.json: evidence path does not exist: evidence/m4-pr-template-qd-evidence-contract/commands.log
+qd report check: reports/qd/m4-pr-template-qd-evidence-contract/completion.json: evidence path does not exist: evidence/m4-pr-template-qd-evidence-contract/notes.md
+qd report check: reports/qd/m4-qd-report-coverage-check/completion.json: evidence path does not exist: evidence/m4-qd-report-coverage-check/commands.log
+qd report check: reports/qd/m4-qd-report-coverage-check/completion.json: evidence path does not exist: evidence/m4-qd-report-coverage-check/notes.md
+qd report check: reports/qd/m4-qd-report-runbook-hardening/completion.json: evidence path does not exist: evidence/m4-qd-report-runbook-hardening/commands.log
+qd report check: reports/qd/m4-qd-report-runbook-hardening/completion.json: evidence path does not exist: evidence/m4-qd-report-runbook-hardening/notes.md
+qd report check: reports/qd/m4-qd-report-shape-check/completion.json: evidence path does not exist: evidence/m4-qd-report-shape-check/commands.log
+qd report check: reports/qd/m4-qd-report-shape-check/completion.json: evidence path does not exist: evidence/m4-qd-report-shape-check/notes.md
+qd report check: reports/qd/m4-qd-report-status-vocabulary-check/completion.json: evidence path does not exist: evidence/m4-qd-report-status-vocabulary-check/commands.log
+qd report check: reports/qd/m4-qd-report-status-vocabulary-check/completion.json: evidence path does not exist: evidence/m4-qd-report-status-vocabulary-check/notes.md
+qd report check: reports/qd/m4-shellcheck-hygiene-gate/completion.json: evidence path does not exist: evidence/m4-shellcheck-hygiene-gate/commands.log
+qd report check: reports/qd/m4-shellcheck-hygiene-gate/completion.json: evidence path does not exist: evidence/m4-shellcheck-hygiene-gate/notes.md
+qd report check: reports/qd/m4-workflow-contract-check/completion.json: evidence path does not exist: evidence/m4-workflow-contract-check/commands.log
+qd report check: reports/qd/m4-workflow-contract-check/completion.json: evidence path does not exist: evidence/m4-workflow-contract-check/notes.md
+qd report check: reports/qd/m4-qd-report-shape-check/audit.json: verificationEvidence must include boolean diffReviewed, completionReportReviewed, and verificationEvidenceReviewed
+qd report check: failed with 287 error(s)
+exit status: 1
+tempdir: /tmp/m4-qd-audit-schema-contract.opXtFW
+
+## 2026-07-04T18:56:46-05:00
+$ negative smoke: temp workspace with repo evidence symlinked and verificationEvidence.diffReviewed set to a string
+qd report check: reports/qd/m4-qd-report-shape-check/audit.json: verificationEvidence must include boolean diffReviewed, completionReportReviewed, and verificationEvidenceReviewed
+qd report check: failed with 1 error(s)
+exit status: 1
+tempdir: /tmp/m4-qd-audit-schema-contract.clean.rkpCmN
+
+## 2026-07-04T18:57:05-05:00
+$ nix develop -c just qd-reports-check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 73 completion report(s) and 73 audit report(s)
+exit status: 0
+
+## 2026-07-04T18:57:26-05:00
+$ nix develop -c just check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 73 completion report(s) and 73 audit report(s)
+just pin-hygiene-check
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+just pr-template-check
+bash scripts/pr-template-check.sh
+pr template check: passed
+just workflow-contract-check
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+just dependabot-contract-check
+bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+cargo check --workspace --all-targets --all-features
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/compositor)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/telemetry)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/protocol)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/transport)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/apps/hostd)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/hyprland)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.01s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/compositor)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/telemetry)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/protocol)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/encode)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/transport)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/apps/hostd)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/hyprland)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.85s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 103 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+exit status: 0
+
+## 2026-07-04T18:58:31-05:00
+$ bash scripts/qd-reports-check.sh after adding this node reports
+qd report check: validated 74 completion report(s) and 74 audit report(s)
+exit status: 0
+
+## 2026-07-04T18:58:49-05:00
+$ nix develop -c just qd-reports-check after adding this node reports
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 74 completion report(s) and 74 audit report(s)
+exit status: 0
+
+## 2026-07-04T18:59:02-05:00
+$ git diff --check
+exit status: 0
+
+## 2026-07-04T18:59:25-05:00
+$ nix develop -c just check after adding this node reports
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-qd-audit-schema-contract"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 74 completion report(s) and 74 audit report(s)
+just pin-hygiene-check
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+just pr-template-check
+bash scripts/pr-template-check.sh
+pr template check: passed
+just workflow-contract-check
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+just dependabot-contract-check
+bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+cargo check --workspace --all-targets --all-features
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.14s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 103 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+exit status: 0
+

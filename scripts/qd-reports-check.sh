@@ -150,6 +150,7 @@ validate_audit() {
   expect_jq "$file" '.nodeId | type == "string" and length > 0' "nodeId must be a non-empty string"
   expect_jq "$file" '.acceptanceReviewed | type == "array" and all(.[]; type == "object" and (.criterion | type == "string") and (.status | type == "string") and (.evidence | type == "string"))' "acceptanceReviewed must be an array of review objects"
   expect_jq "$file" '.verificationEvidence | type == "object"' "verificationEvidence must be an object"
+  expect_jq "$file" '.verificationEvidence | (.diffReviewed | type == "boolean") and (.completionReportReviewed | type == "boolean") and (.verificationEvidenceReviewed | type == "boolean")' "verificationEvidence must include boolean diffReviewed, completionReportReviewed, and verificationEvidenceReviewed"
   expect_jq "$file" '.realWorldValidation | type == "object" and (.required | type == "boolean") and (.evidence | type == "string")' "realWorldValidation must include required boolean and evidence string"
   expect_jq "$file" '.findings | type == "array"' "findings must be an array"
 }
