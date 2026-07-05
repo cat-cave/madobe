@@ -1,0 +1,131 @@
+{
+  "nodeId": "m4-qd-finding-check-modularize",
+  "summary": "Moved qd roadmap finding validation into a dedicated sourced helper while preserving the public validate_roadmap_findings entry point and existing validation behavior.",
+  "changedFiles": [
+    "evidence/m4-qd-finding-check-modularize/git-diff-check.log",
+    "evidence/m4-qd-finding-check-modularize/just-check.log",
+    "evidence/m4-qd-finding-check-modularize/line-count-check.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-line.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-path.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-severity-status.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-timestamp.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-malformed-id-content.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-unknown-node-id.log",
+    "evidence/m4-qd-finding-check-modularize/qd-reports-check.log",
+    "reports/qd/m4-qd-finding-check-modularize/audit.json",
+    "reports/qd/m4-qd-finding-check-modularize/completion.json",
+    "scripts/qd-report-check/roadmap-findings.sh",
+    "scripts/qd-report-check/roadmap.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh sources a dedicated finding validation helper.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/roadmap.sh now sources scripts/qd-report-check/roadmap-findings.sh using the existing shellcheck source-comment pattern."
+    },
+    {
+      "criterion": "validate_roadmap_findings remains the public function called by the qd report checker.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/roadmap-findings.sh defines validate_roadmap_findings, and validate_roadmap_export continues to call validate_roadmap_findings through the existing qd report-check flow."
+    },
+    {
+      "criterion": "The moved checker still rejects malformed finding node ids, severity/status values, content fields, optional paths, lines, and timestamps.",
+      "status": "passed",
+      "evidence": "Focused temporary-copy smoke logs under evidence/m4-qd-finding-check-modularize/ record expected rejections for unknown node_id, bad severity/status, malformed id/content, bad path, bad line, and bad timestamp."
+    },
+    {
+      "criterion": "All qd report-check helper files remain below the configured line budget.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/line-count-check.log records scripts/qd-report-check/*.sh and scripts/qd-reports-check.sh below the 350-line budget."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/qd-reports-check.log records nix develop -c just qd-reports-check passing."
+    },
+    {
+      "criterion": "Linux validation evidence records qd-reports-check, nix develop -c just check, git diff --check, line-count evidence, and focused negative smokes for moved finding validation.",
+      "status": "passed",
+      "evidence": "The evidence directory contains qd-reports-check.log, just-check.log, git-diff-check.log, line-count-check.log, and the focused negative smoke logs."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "Only Linux repository validation is claimed; realWorldValidation is not_required."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy unknown finding node_id smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/negative-smoke-unknown-node-id.log"
+    },
+    {
+      "command": "temporary-copy bad finding severity/status smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-severity-status.log"
+    },
+    {
+      "command": "temporary-copy malformed finding id/content smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/negative-smoke-malformed-id-content.log"
+    },
+    {
+      "command": "temporary-copy bad finding path smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-path.log"
+    },
+    {
+      "command": "temporary-copy bad finding line smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-line.log"
+    },
+    {
+      "command": "temporary-copy bad finding timestamp smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-timestamp.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/git-diff-check.log"
+    },
+    {
+      "command": "wc -l scripts/qd-report-check/*.sh scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/line-count-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-finding-check-modularize/git-diff-check.log",
+    "evidence/m4-qd-finding-check-modularize/just-check.log",
+    "evidence/m4-qd-finding-check-modularize/line-count-check.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-line.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-path.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-severity-status.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-bad-timestamp.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-malformed-id-content.log",
+    "evidence/m4-qd-finding-check-modularize/negative-smoke-unknown-node-id.log",
+    "evidence/m4-qd-finding-check-modularize/qd-reports-check.log",
+    "reports/qd/m4-qd-finding-check-modularize/audit.json",
+    "reports/qd/m4-qd-finding-check-modularize/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report-check modularization only; no product runtime, platform, media, cross-device, or macOS-specific behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,4 @@
+command: temporary-copy roadmap finding validation smoke (negative-smoke-bad-path)
+qd report check: /tmp/tmp.VFAkWFRVmg: findings[0].path must not contain '..' traversal: ../outside
+observed expected validation failure count: 1
+status: 0

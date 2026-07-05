@@ -1,0 +1,4 @@
+command: temporary-copy roadmap finding validation smoke (negative-smoke-unknown-node-id)
+qd report check: /tmp/tmp.J5YykGr9oE: findings[0].node_id must be a non-blank existing node id: missing-node
+observed expected validation failure count: 1
+status: 0

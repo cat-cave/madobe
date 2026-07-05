@@ -1,0 +1,5 @@
+command: temporary-copy roadmap finding validation smoke (negative-smoke-bad-severity-status)
+qd report check: /tmp/tmp.sfUbzHYvcG: findings[0].severity must be one of P0, P1, P2, P3: P9
+qd report check: /tmp/tmp.sfUbzHYvcG: findings[0].status must be one of open, resolved, promoted: closed
+observed expected validation failure count: 2
+status: 0

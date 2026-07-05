@@ -1,0 +1,6 @@
+command: temporary-copy roadmap finding validation smoke (negative-smoke-malformed-id-content)
+qd report check: /tmp/tmp.FVY6tvOHap: findings[0].id must be a lowercase UUID-shaped string: BAD-ID
+qd report check: /tmp/tmp.FVY6tvOHap: findings[0].title must be a non-blank string:    
+qd report check: /tmp/tmp.FVY6tvOHap: findings[0].evidence must be a non-blank string: 
+observed expected validation failure count: 3
+status: 0
