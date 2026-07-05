@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-cross-device-log-content-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Default cross-device result checking remains schema-only for checked-in fixtures and generated negative fixtures.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/cross-device-result-check.log"
+    },
+    {
+      "criterion": "Explicit mode accepts the checked-in M3 result and its existing preflight plus evidence log mix.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/explicit-m3-result.log"
+    },
+    {
+      "criterion": "Positive frame-send claims require stable Linux sender log tokens.",
+      "status": "passed",
+      "evidence": "scripts/cross-device-result-check.sh and evidence/m4-cross-device-log-content-contract/missing-linux-token.log"
+    },
+    {
+      "criterion": "Passed results require stable Mac receiver validation log tokens.",
+      "status": "passed",
+      "evidence": "scripts/cross-device-result-check.sh and evidence/m4-cross-device-log-content-contract/missing-mac-token.log"
+    },
+    {
+      "criterion": "The runbook documents the generic log-content contract without claiming live validation.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md and evidence/m4-cross-device-log-content-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Evidence-tooling hardening only; generated local artifacts and checked-in M3 evidence cover the explicit-mode contract without live Mac hardware, LAN validation, product QUIC, workflow_dispatch, credentials, or PR #49 changes."
+  },
+  "findings": []
+}

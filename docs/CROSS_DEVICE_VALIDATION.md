@@ -228,6 +228,28 @@ components are rejected; artifact `kind` must use the generic cross-device vocab
 also verify that referenced artifacts exist and that core evidence artifacts such as command logs, host logs, client
 logs, and notes are non-empty.
 
+When explicit generic cross-device validation is used for a positive send or receive claim, core logs must carry
+stable `key=value` evidence tokens rather than only existing. If `metrics.frames_sent > 0`, at least one
+`linux_host_log` artifact must show the Linux sender evidence:
+
+- `transport=tcp`
+- `product_quic=false`
+- `payload_bytes=<non-empty value>`
+- `sha256=<non-empty value>`
+- `result=sent`
+
+If `passed == true`, at least one `mac_client_log` artifact must show the Mac receiver validation evidence:
+
+- `payload_bytes=<non-empty value>`
+- `sha256=<non-empty value>`
+- `payload_byte_count_valid=true`
+- `payload_sha256_valid=true`
+- `passed=true` or `status=passed`
+
+Preflight and environment logs may still use `linux_host_log` or `mac_client_log`; explicit validation looks for at
+least one matching evidence log for the corresponding claim so schema-only fixtures and preflight-only artifact sets
+are not overconstrained.
+
 For product QUIC smoke, use the checked Rust contract and golden fixture:
 
 - model: `crates/protocol/src/product_quic.rs`

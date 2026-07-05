@@ -1,0 +1,3 @@
+$ nix develop -c shellcheck scripts/cross-device-result-check.sh
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-cross-device-log-content-contract' is dirty
+madobe dev shell: use 'just --list' to see commands

@@ -1,0 +1,5 @@
+$ just cross-device-result-check target/m4-cross-device-log-content-contract.urB6WC/result-missing-linux-token.json
+bash scripts/cross-device-result-check.sh target/m4-cross-device-log-content-contract.urB6WC/result-missing-linux-token.json
+cross-device result check: target/m4-cross-device-log-content-contract.urB6WC/result-missing-linux-token.json: explicit result must include a linux_host_log artifact with stable Linux send evidence tokens
+error: recipe `cross-device-result-check` failed on line 46 with exit code 1
+expected failure: missing Linux host log token rejected

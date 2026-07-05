@@ -1,0 +1,9 @@
+$ just cross-device-result-check
+$ just cross-device-result-check evidence/m3-cross-device-video-smoke/result.json
+$ just cross-device-result-check <generated-positive-result>
+$ just cross-device-result-check <generated-missing-linux-token-result>
+$ just cross-device-result-check <generated-missing-mac-token-result>
+$ nix develop -c shellcheck scripts/cross-device-result-check.sh
+$ just qd-reports-check
+$ git diff --check
+$ nix develop -c just check
