@@ -19,7 +19,9 @@
     "reports/qd/m4-qd-node-note-evidence-path-contract/audit.json",
     "reports/qd/m4-qd-node-note-evidence-path-contract/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "31c026e964c03e5529808d2f8e169f54d6f4cf5e"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Current absolute node_notes[].evidence blocker paths are rewritten to canonical reports/qd/<node-id>/blocker.md paths.",
