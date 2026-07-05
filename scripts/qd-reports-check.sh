@@ -89,7 +89,7 @@ validate_completion() {
   expect_jq "$file" '.nodeId | type == "string" and length > 0' "nodeId must be a non-empty string"
   expect_jq "$file" '.summary | type == "string"' "summary must be a string"
   expect_jq "$file" '.changedFiles | type == "array" and all(.[]; type == "string")' "changedFiles must be an array of strings"
-  expect_jq "$file" '.commits | type == "array" and all(.[]; type == "string")' "commits must be an array of strings"
+  expect_jq "$file" '.commits | type == "array" and all(.[]; type == "string" and test("^[0-9a-f]{40}$"))' "commits must be an array of 40-character lowercase hexadecimal SHAs"
   expect_jq "$file" '.acceptanceEvidence | type == "array" and all(.[]; type == "object" and (.criterion | type == "string") and (.status | type == "string") and (.evidence | type == "string"))' "acceptanceEvidence must be an array of evidence objects"
   expect_jq "$file" '.commandsRun | type == "array" and all(.[]; type == "object" and (.command | type == "string") and (.status | type == "string") and (.evidence | type == "string"))' "commandsRun must be an array of command objects"
   expect_jq "$file" '.evidence | type == "array" and all(.[]; type == "string")' "evidence must be an array of strings"
