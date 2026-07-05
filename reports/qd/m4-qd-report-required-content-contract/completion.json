@@ -1,0 +1,89 @@
+{
+  "nodeId": "m4-qd-report-required-content-contract",
+  "summary": "Tightened qd report validation so required completion and audit report content fields must contain non-empty strings or required arrays, then recorded negative and full-repo validation evidence for the stricter contract.",
+  "changedFiles": [
+    "scripts/qd-reports-check.sh",
+    "evidence/m4-qd-report-required-content-contract/commands.log",
+    "evidence/m4-qd-report-required-content-contract/git-diff-check.log",
+    "evidence/m4-qd-report-required-content-contract/just-check.log",
+    "evidence/m4-qd-report-required-content-contract/negative-smoke-empty-summary.log",
+    "evidence/m4-qd-report-required-content-contract/notes.md",
+    "evidence/m4-qd-report-required-content-contract/qd-reports-check.log",
+    "reports/qd/m4-qd-report-required-content-contract/audit.json",
+    "reports/qd/m4-qd-report-required-content-contract/completion.json"
+  ],
+  "commits": [
+    "80a48f7bd24eab14ad37438c1ffee9c1816b8cc7"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Completion reports require non-empty summary, non-empty changedFiles[], non-empty acceptanceEvidence[], non-empty commandsRun[], non-empty evidence[], and non-empty realWorldValidation.evidence.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh now requires length > 0 for those completion report fields; evidence/m4-qd-report-required-content-contract/negative-smoke-empty-summary.log confirms an empty summary is rejected."
+    },
+    {
+      "criterion": "Completion acceptanceEvidence[] objects require non-empty criterion, status, and evidence; commandsRun[] objects require non-empty command, status, and evidence.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh now validates non-empty nested strings for completion acceptance evidence and command objects."
+    },
+    {
+      "criterion": "Audit reports require non-empty acceptanceReviewed[], non-empty realWorldValidation.evidence, and non-empty criterion, status, and evidence inside acceptanceReviewed[].",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh now validates non-empty audit review arrays, non-empty real-world evidence, and non-empty nested audit review strings."
+    },
+    {
+      "criterion": "Existing qd reports pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-required-content-contract/qd-reports-check.log records `nix develop -c just qd-reports-check` passing with this node's reports included."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, just check, and a temporary-copy negative smoke test for at least one empty required content field.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-required-content-contract/negative-smoke-empty-summary.log, evidence/m4-qd-report-required-content-contract/qd-reports-check.log, and evidence/m4-qd-report-required-content-contract/just-check.log record the required validation."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-required-content-contract/notes.md records the repository-metadata-only validation boundary."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy negative smoke test with completion summary set to an empty string",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-required-content-contract/negative-smoke-empty-summary.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-required-content-contract/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-required-content-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-required-content-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-required-content-contract/commands.log",
+    "evidence/m4-qd-report-required-content-contract/git-diff-check.log",
+    "evidence/m4-qd-report-required-content-contract/just-check.log",
+    "evidence/m4-qd-report-required-content-contract/negative-smoke-empty-summary.log",
+    "evidence/m4-qd-report-required-content-contract/notes.md",
+    "evidence/m4-qd-report-required-content-contract/qd-reports-check.log",
+    "reports/qd/m4-qd-report-required-content-contract/audit.json",
+    "reports/qd/m4-qd-report-required-content-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report metadata validation only; no product runtime behavior is changed or claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

@@ -1,0 +1,6 @@
+# m4-qd-report-required-content-contract command index
+
+- temporary-copy negative smoke test with completion summary set to an empty string: passed; see `negative-smoke-empty-summary.log`.
+- `nix develop -c just qd-reports-check`: passed; see `qd-reports-check.log`.
+- `nix develop -c just check`: passed; see `just-check.log`.
+- `git diff --check`: passed; see `git-diff-check.log`.
