@@ -1,0 +1,107 @@
+{
+  "nodeId": "m4-platform-aware-tool-missing-diagnostics",
+  "summary": "Centralized missing-tool diagnostics in the Just helper so Linux keeps Nix guidance while macOS receives native bootstrap or PATH guidance, and routed coverage, mutation, and security tool checks through that helper.",
+  "changedFiles": [
+    "justfile",
+    "roadmap/qd-export.json",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/commands.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/notes.md",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/missing-tool-smoke-linux.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/require-tool-helper-snippet.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/git-diff-check.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/nix-just-fmt.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/nix-just-check.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/qd-reports-check.log",
+    "reports/qd/m4-platform-aware-tool-missing-diagnostics/completion.json",
+    "reports/qd/m4-platform-aware-tool-missing-diagnostics/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "The generic just missing-tool helper emits platform-aware guidance instead of always saying to run inside Nix.",
+      "status": "passed",
+      "evidence": "justfile now branches on `uname -s`; evidence/m4-platform-aware-tool-missing-diagnostics/require-tool-helper-snippet.log records the helper body."
+    },
+    {
+      "criterion": "Linux diagnostics continue to point required repo hygiene and security tools at nix develop.",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/missing-tool-smoke-linux.log records `required tool missing: madobe-definitely-missing-tool; run inside nix develop` with exit 127."
+    },
+    {
+      "criterion": "macOS diagnostics do not suggest installing or using Nix and direct users toward just macos-bootstrap or native PATH setup.",
+      "status": "passed",
+      "evidence": "The Darwin branch in evidence/m4-platform-aware-tool-missing-diagnostics/require-tool-helper-snippet.log emits native macOS guidance, and the helper uses `@` to prevent echoing the Linux fallback branch."
+    },
+    {
+      "criterion": "A targeted smoke test records the Linux message for a definitely missing tool.",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/missing-tool-smoke-linux.log"
+    },
+    {
+      "criterion": "just fmt and just check pass on Linux.",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/nix-just-fmt.log and evidence/m4-platform-aware-tool-missing-diagnostics/nix-just-check.log"
+    },
+    {
+      "criterion": "Evidence records validation and qd reports.",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/qd-reports-check.log and reports/qd/m4-platform-aware-tool-missing-diagnostics/"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made.",
+      "status": "passed",
+      "evidence": "Only justfile diagnostics, qd export metadata, evidence, and reports changed."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just require-tool madobe-definitely-missing-tool",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/missing-tool-smoke-linux.log"
+    },
+    {
+      "command": "sed -n '7,15p' justfile",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/require-tool-helper-snippet.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/git-diff-check.log"
+    },
+    {
+      "command": "nix develop -c just fmt",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/nix-just-fmt.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/nix-just-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-platform-aware-tool-missing-diagnostics/qd-reports-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-platform-aware-tool-missing-diagnostics/commands.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/notes.md",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/missing-tool-smoke-linux.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/require-tool-helper-snippet.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/git-diff-check.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/nix-just-fmt.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/nix-just-check.log",
+    "evidence/m4-platform-aware-tool-missing-diagnostics/qd-reports-check.log",
+    "reports/qd/m4-platform-aware-tool-missing-diagnostics/completion.json",
+    "reports/qd/m4-platform-aware-tool-missing-diagnostics/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node changes static Just diagnostics only and requires no external hardware or cross-device validation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

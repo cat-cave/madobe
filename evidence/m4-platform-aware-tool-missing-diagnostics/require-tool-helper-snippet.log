@@ -1,0 +1,10 @@
+$ sed -n 7,15p justfile
+
+require-tool tool:
+  @if command -v "{{tool}}" >/dev/null 2>&1; then exit 0; fi; \
+  if [ "$(uname -s)" = Darwin ]; then \
+    echo "required tool missing: {{tool}}; run just macos-bootstrap for baseline tools or install {{tool}} in the native macOS PATH"; \
+  else \
+    echo "required tool missing: {{tool}}; run inside nix develop"; \
+  fi; \
+  exit 127

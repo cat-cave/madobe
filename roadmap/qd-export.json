@@ -3892,6 +3892,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-platform-aware-tool-missing-diagnostics",
+      "title": "Make missing-tool diagnostics platform-aware",
+      "kind": "feature",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P3",
+      "estimate_points": 1,
+      "risk": "low",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-platform-aware-tool-missing-diagnostics",
+      "spec": "Tighten shared justfile diagnostics so missing repo tools point Linux users at nix develop and macOS users at native macOS bootstrap or PATH setup, without changing the platform command boundary or product behavior.",
+      "acceptance": "The generic just missing-tool helper emits platform-aware guidance instead of always saying to run inside Nix\nLinux diagnostics continue to point required repo hygiene and security tools at nix develop\nmacOS diagnostics do not suggest installing or using Nix and direct users toward just macos-bootstrap or native PATH setup\nA targeted smoke test records the Linux message for a definitely missing tool\njust fmt and just check pass on Linux\nEvidence records validation and qd reports\nNo product runtime, capture, encode, transport, decode, render, presentation, cross-device, or latency claim is made",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nvalidation:repo-quality\nsource:platform-command-boundary-polish",
+      "created_at": "2026-07-05T21:57:07.299Z",
+      "updated_at": "2026-07-05T21:57:56.989Z",
+      "claimed_at": "2026-07-05T21:57:07.552Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -4278,6 +4308,18 @@
       "to_node": "m4-qd-export-parity-check",
       "type": "requires",
       "created_at": "2026-07-05T21:27:19.430Z"
+    },
+    {
+      "from_node": "m4-contributing-platform-command-split",
+      "to_node": "m4-platform-aware-tool-missing-diagnostics",
+      "type": "requires",
+      "created_at": "2026-07-05T21:57:07.385Z"
+    },
+    {
+      "from_node": "m4-linux-hygiene-tooling-hardening",
+      "to_node": "m4-platform-aware-tool-missing-diagnostics",
+      "type": "requires",
+      "created_at": "2026-07-05T21:57:07.465Z"
     }
   ],
   "findings": [
