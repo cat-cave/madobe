@@ -10,7 +10,9 @@
     "reports/qd/m4-qd-realworld-blocked-status-contract/completion.json",
     "reports/qd/m4-qd-realworld-blocked-status-contract/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "2c2c4fcd4ad6d3dd4ba77b2f7389034c32b7f45c"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Read docs/ORCHESTRATION.md and docs/LINUX_ORCHESTRATOR.md before implementation.",
