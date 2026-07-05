@@ -12,7 +12,9 @@
     "reports/qd/m4-qd-report-evidence-path-contract/completion.json",
     "scripts/qd-report-check/completion.sh"
   ],
-  "commits": [],
+  "commits": [
+    "a72b96b15ab064f5930ea568dc630833ea2ecab3"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check/completion.sh accepts completion evidence[] entries that are existing repo-relative paths or HTTP(S) URLs.",
