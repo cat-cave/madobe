@@ -15,7 +15,9 @@
     "reports/qd/m4-product-quic-result-artifact-reference-contract/completion.json",
     "reports/qd/m4-product-quic-result-artifact-reference-contract/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "22bcd0f3a0ba818e97247ee0915ea0036b7329f1"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "product-quic-result-check rejects absolute and traversal paths in sender.evidenceDir, receiver.evidenceDir, and artifacts[].path.",
