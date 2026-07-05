@@ -1,0 +1,18 @@
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-result-artifact-reference-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.14s
+     Running unittests src/lib.rs (target/debug/deps/madobe_protocol-ec85cc91a76fbd20)
+
+running 9 tests
+test product_quic::tests::product_quic_fixture_covers_required_contract_without_live_claims ... ok
+test product_quic::tests::product_quic_fixture_round_trips_semantically ... ok
+test product_quic::tests::product_quic_rejects_absolute_artifact_path ... ok
+test product_quic::tests::product_quic_rejects_false_product_identity ... ok
+test product_quic::tests::product_quic_rejects_missing_payload_validation ... ok
+test product_quic::tests::product_quic_rejects_missing_product_identity ... ok
+test product_quic::tests::product_quic_rejects_traversal_artifact_path ... ok
+test product_quic::tests::product_quic_rejects_traversal_endpoint_evidence_dir ... ok
+test product_quic::tests::product_quic_rejects_unsupported_downstream_claims_without_evidence ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.00s
+

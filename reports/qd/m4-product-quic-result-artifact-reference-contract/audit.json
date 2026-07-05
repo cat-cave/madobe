@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-product-quic-result-artifact-reference-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The shell checker rejects absolute and traversal endpoint and artifact references.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh"
+    },
+    {
+      "criterion": "The shell checker rejects unknown product QUIC artifact kinds.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh"
+    },
+    {
+      "criterion": "Negative self-tests cover the required invalid references and unknown kind cases.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-reference-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Rust validation rejects invalid endpoint evidence directories and artifact paths while preserving the typed artifact-kind vocabulary.",
+      "status": "passed",
+      "evidence": "crates/protocol/src/product_quic.rs and evidence/m4-product-quic-result-artifact-reference-contract/product-quic-tests.log"
+    },
+    {
+      "criterion": "The runbook documents repo-relative, traversal-free, known-kind references for product QUIC evidence.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    },
+    {
+      "criterion": "No live product QUIC, Mac decode/render, latency, workflow dispatch, or credential-dependent claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-reference-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Artifact-schema hardening only; no live product QUIC or cross-device validation is required or claimed for this node."
+  },
+  "findings": []
+}

@@ -274,6 +274,10 @@ The golden fixture uses this shape:
 The product QUIC result proves transport and payload validation only. Downstream decode, render, presentation, and
 latency nodes need their own evidence.
 
+`sender.evidenceDir`, `receiver.evidenceDir`, and every artifact `path` must be repo-relative forward-slash
+references. Absolute paths, backslashes, Windows drive prefixes, and `..` traversal components are rejected; artifact
+`kind` must use the vocabulary modeled in `crates/protocol/src/product_quic.rs`.
+
 Validate product QUIC result artifacts before using them as qd evidence:
 
 ```sh
