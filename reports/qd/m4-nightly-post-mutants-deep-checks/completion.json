@@ -14,7 +14,9 @@
     "reports/qd/m4-nightly-post-mutants-deep-checks/audit.json",
     "reports/qd/m4-nightly-post-mutants-deep-checks/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "0bc042e28c5199bf883c3005abd185afe7c2f164"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Record pre-fix failures in evidence.",
