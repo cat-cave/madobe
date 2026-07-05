@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-product-quic-evidence-dir-artifact-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Shell product QUIC result checker rejects sender_log outside sender.evidenceDir and receiver_log or payload_validation_evidence outside receiver.evidenceDir.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-evidence-dir-artifact-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Path binding is boundary-aware and rejects sibling endpoint-directory prefixes.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh, crates/protocol/src/product_quic.rs, and evidence/m4-product-quic-evidence-dir-artifact-contract/protocol-product-quic-tests.log"
+    },
+    {
+      "criterion": "Rust ProductQuicSmokeResult::validate mirrors the shell endpoint artifact directory contract.",
+      "status": "passed",
+      "evidence": "crates/protocol/src/product_quic.rs, crates/protocol/src/product_quic/tests.rs, and evidence/m4-product-quic-evidence-dir-artifact-contract/protocol-product-quic-tests.log"
+    },
+    {
+      "criterion": "Cross-device validation docs document the endpoint-directory binding rule.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    },
+    {
+      "criterion": "Scope excludes live product QUIC, UDP/LAN, Mac hardware, certificate handoff, decode, render, presentation, latency, workflow dispatch, and credential-dependent claims.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-evidence-dir-artifact-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a product QUIC result-schema and evidence-hygiene contract node. It uses local fixture/checker validation and Rust unit tests only; it does not run live product QUIC, UDP/LAN connectivity, Mac hardware, certificate handoff, decode, render, presentation, latency, workflow dispatch, or credential-dependent validation."
+  },
+  "findings": []
+}

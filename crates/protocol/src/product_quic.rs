@@ -201,6 +201,8 @@ pub enum ProductQuicResultValidationError {
     InvalidEndpointRole(&'static str),
     /// Result file reference was absolute or could traverse outside the repository.
     InvalidReference(&'static str),
+    /// Role-specific artifact was outside its endpoint evidence directory.
+    ArtifactOutsideEndpointEvidenceDir(&'static str),
     /// Payload byte count was empty.
     EmptyPayload,
     /// Payload SHA-256 digest was missing or not lowercase hex.
@@ -263,24 +265,7 @@ impl ProductQuicSmokeResult {
             ));
         }
 
-        for (field_name, value) in [
-            ("sender.evidence_dir", self.sender.evidence_dir.as_str()),
-            ("receiver.evidence_dir", self.receiver.evidence_dir.as_str()),
-        ] {
-            if !value.is_empty() && !is_repo_relative_reference(value) {
-                errors.push(ProductQuicResultValidationError::InvalidReference(
-                    field_name,
-                ));
-            }
-        }
-
-        for artifact in &self.artifacts {
-            if !is_repo_relative_reference(artifact.path.as_str()) {
-                errors.push(ProductQuicResultValidationError::InvalidReference(
-                    "artifacts[].path",
-                ));
-            }
-        }
+        self.validate_references(&mut errors);
 
         if self.payload.payload_bytes == 0 {
             errors.push(ProductQuicResultValidationError::EmptyPayload);
@@ -348,6 +333,88 @@ impl ProductQuicSmokeResult {
     fn has_artifact_kind(&self, kind: ProductQuicResultArtifactKind) -> bool {
         self.artifacts.iter().any(|artifact| artifact.kind == kind)
     }
+
+    fn validate_references(&self, errors: &mut Vec<ProductQuicResultValidationError>) {
+        for (field_name, value) in [
+            ("sender.evidence_dir", self.sender.evidence_dir.as_str()),
+            ("receiver.evidence_dir", self.receiver.evidence_dir.as_str()),
+        ] {
+            if !value.is_empty() && !is_repo_relative_reference(value) {
+                errors.push(ProductQuicResultValidationError::InvalidReference(
+                    field_name,
+                ));
+            }
+        }
+
+        for artifact in &self.artifacts {
+            self.validate_artifact_reference(artifact, errors);
+        }
+    }
+
+    fn validate_artifact_reference(
+        &self,
+        artifact: &ProductQuicResultArtifact,
+        errors: &mut Vec<ProductQuicResultValidationError>,
+    ) {
+        if !is_repo_relative_reference(artifact.path.as_str()) {
+            errors.push(ProductQuicResultValidationError::InvalidReference(
+                "artifacts[].path",
+            ));
+        }
+
+        match artifact.kind {
+            ProductQuicResultArtifactKind::SenderLog => {
+                self.validate_sender_artifact_path(artifact, errors);
+            }
+            ProductQuicResultArtifactKind::ReceiverLog
+            | ProductQuicResultArtifactKind::PayloadValidationEvidence => {
+                self.validate_receiver_artifact_path(artifact, errors);
+            }
+            ProductQuicResultArtifactKind::CommandsLog
+            | ProductQuicResultArtifactKind::DecodeEvidence
+            | ProductQuicResultArtifactKind::RenderEvidence
+            | ProductQuicResultArtifactKind::PresentationEvidence
+            | ProductQuicResultArtifactKind::LatencyEvidence
+            | ProductQuicResultArtifactKind::Notes
+            | ProductQuicResultArtifactKind::Other => {}
+        }
+    }
+
+    fn validate_sender_artifact_path(
+        &self,
+        artifact: &ProductQuicResultArtifact,
+        errors: &mut Vec<ProductQuicResultValidationError>,
+    ) {
+        if is_repo_relative_reference(self.sender.evidence_dir.as_str())
+            && !is_artifact_under_evidence_dir(
+                artifact.path.as_str(),
+                self.sender.evidence_dir.as_str(),
+            )
+        {
+            errors.push(
+                ProductQuicResultValidationError::ArtifactOutsideEndpointEvidenceDir("sender_log"),
+            );
+        }
+    }
+
+    fn validate_receiver_artifact_path(
+        &self,
+        artifact: &ProductQuicResultArtifact,
+        errors: &mut Vec<ProductQuicResultValidationError>,
+    ) {
+        if is_repo_relative_reference(self.receiver.evidence_dir.as_str())
+            && !is_artifact_under_evidence_dir(
+                artifact.path.as_str(),
+                self.receiver.evidence_dir.as_str(),
+            )
+        {
+            errors.push(
+                ProductQuicResultValidationError::ArtifactOutsideEndpointEvidenceDir(
+                    artifact.kind.wire_name(),
+                ),
+            );
+        }
+    }
 }
 
 fn is_sha256_hex(value: &str) -> bool {
@@ -363,6 +430,11 @@ fn is_repo_relative_reference(value: &str) -> bool {
         && !has_windows_absolute_prefix(value)
         && !value.contains('\\')
         && !value.split('/').any(|component| component == "..")
+}
+
+fn is_artifact_under_evidence_dir(path: &str, evidence_dir: &str) -> bool {
+    path.strip_prefix(evidence_dir)
+        .is_some_and(|suffix| suffix.starts_with('/'))
 }
 
 fn has_windows_absolute_prefix(value: &str) -> bool {

@@ -1,0 +1,6 @@
+just product-quic-result-check
+nix develop -c cargo test -p madobe-protocol product_quic
+nix develop -c shellcheck scripts/product-quic-result-check.sh scripts/result-check-common.sh
+git diff --check
+just qd-reports-check
+nix develop -c just check

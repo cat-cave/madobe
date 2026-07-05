@@ -3712,6 +3712,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-product-quic-evidence-dir-artifact-contract",
+      "title": "Bind product QUIC artifacts to endpoint evidence directories",
+      "kind": "infra",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P2",
+      "estimate_points": 2,
+      "risk": "low",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-product-quic-evidence-dir-artifact-contract",
+      "spec": "Tighten product QUIC result validation so role-specific artifacts are bound to their endpoint evidence directories, preventing sender or receiver evidence from pointing at the wrong role directory while keeping the checked-in fixture schema-only.",
+      "acceptance": "product-quic-result-check rejects sender_log artifacts outside sender.evidenceDir\nproduct-quic-result-check rejects receiver_log and payload_validation_evidence artifacts outside receiver.evidenceDir\nPrefix checks are path-boundary aware so sibling paths such as linux-sender-extra/sender.log do not satisfy linux-sender\nNo-arg just product-quic-result-check remains schema-only for the checked-in fixture\nGenerated self-tests cover misplaced role artifacts\nRust ProductQuicSmokeResult::validate mirrors the endpoint artifact directory contract\ndocs/CROSS_DEVICE_VALIDATION.md documents the endpoint-directory binding rule\njust product-quic-result-check, cargo test -p madobe-protocol product_quic, git diff --check, just qd-reports-check, and nix develop -c just check pass\nNo live product QUIC, UDP/LAN, Mac hardware, certificate handoff, decode, render, presentation, latency, workflow dispatch, or credential-dependent claim is made",
+      "validation": null,
+      "context": "platform:both\nowner:linux-orchestrator\nvalidation:repo-quality-product-quic",
+      "created_at": "2026-07-05T19:06:56.185Z",
+      "updated_at": "2026-07-05T19:07:06.412Z",
+      "claimed_at": "2026-07-05T19:07:06.412Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -4062,6 +4092,12 @@
       "to_node": "m4-qd-node-note-kind-doc-sync",
       "type": "requires",
       "created_at": "2026-07-05T18:45:20.812Z"
+    },
+    {
+      "from_node": "m4-product-quic-log-content-contract",
+      "to_node": "m4-product-quic-evidence-dir-artifact-contract",
+      "type": "requires",
+      "created_at": "2026-07-05T19:07:02.456Z"
     }
   ],
   "findings": [

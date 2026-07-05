@@ -329,6 +329,11 @@ listed `artifacts[].path` exists relative to the repo root. If an artifact is pr
 `sender_log`, `receiver_log`, `payload_validation_evidence`, or `notes`, the referenced file must also be non-empty.
 For `sender_log` and `receiver_log`, explicit mode also requires stable `key=value` evidence tokens.
 
+Role-specific artifacts must live under the endpoint directory that owns them. `sender_log` paths must be under
+`sender.evidenceDir`; `receiver_log` and `payload_validation_evidence` paths must be under `receiver.evidenceDir`.
+These checks are path-boundary aware: a sibling path such as `linux-sender-extra/sender.log` does not satisfy
+`sender.evidenceDir: linux-sender`.
+
 `sender_log` must include:
 
 - `payload_bytes=<payload.payloadBytes>`
