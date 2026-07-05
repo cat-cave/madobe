@@ -1,0 +1,53 @@
+{
+  "nodeId": "m4-product-quic-cross-device-smoke",
+  "branch": "spec/m4-product-quic-result-schema",
+  "transport": "quic",
+  "productQuic": true,
+  "sender": {
+    "role": "sender",
+    "platform": "linux",
+    "evidenceDir": "evidence/m4-product-quic-cross-device-smoke/linux-sender"
+  },
+  "receiver": {
+    "role": "receiver",
+    "platform": "macos",
+    "evidenceDir": "evidence/m4-product-quic-cross-device-smoke/macos-receiver"
+  },
+  "payload": {
+    "payloadBytes": 84,
+    "sha256": "3d746c6c4b5f7bd72d35f4ab673f33f3e5f9a0c9f6f8b27f35fb6fbb1c3e8d2a",
+    "byteCountValidated": true,
+    "sha256Validated": true
+  },
+  "receiverAck": {
+    "received": true,
+    "payloadBytes": 84,
+    "sha256": "3d746c6c4b5f7bd72d35f4ab673f33f3e5f9a0c9f6f8b27f35fb6fbb1c3e8d2a"
+  },
+  "certificateFingerprintSha256": "9b44d90fb42f6c3ff8510ce40bbfcb1cf8712a2d18a3552955aa1b889ad2c6f3",
+  "downstreamClaims": {
+    "decoded": false,
+    "rendered": false,
+    "presented": false,
+    "latencyMs": null
+  },
+  "artifacts": [
+    {
+      "path": "evidence/m4-product-quic-cross-device-smoke/commands.log",
+      "kind": "commands_log"
+    },
+    {
+      "path": "evidence/m4-product-quic-cross-device-smoke/linux-sender/sender.log",
+      "kind": "sender_log"
+    },
+    {
+      "path": "evidence/m4-product-quic-cross-device-smoke/macos-receiver/receiver.log",
+      "kind": "receiver_log"
+    },
+    {
+      "path": "evidence/m4-product-quic-cross-device-smoke/macos-receiver/result.json",
+      "kind": "payload_validation_evidence"
+    }
+  ],
+  "notes": "Contract fixture only; no live product QUIC, cross-device, decode, render, presentation, or latency behavior is claimed."
+}

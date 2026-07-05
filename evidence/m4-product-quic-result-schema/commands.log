@@ -1,0 +1,26 @@
+node=m4-product-quic-result-schema
+worktree=/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-result-schema
+
+1. cargo fmt -p madobe-protocol
+   Status: failed
+   Evidence: command failed because `cargo` is not available outside the Nix dev shell.
+
+2. nix develop -c cargo fmt -p madobe-protocol
+   Status: passed
+   Evidence: formatting completed successfully after rerunning with dev-shell access.
+
+3. nix develop -c cargo test -p madobe-protocol product_quic -- --nocapture
+   Status: passed
+   Evidence: evidence/m4-product-quic-result-schema/product-quic-tests.log
+
+4. nix develop -c just qd-reports-check
+   Status: passed
+   Evidence: evidence/m4-product-quic-result-schema/qd-reports-check.log
+
+5. nix develop -c just check
+   Status: passed
+   Evidence: evidence/m4-product-quic-result-schema/just-check.log
+
+6. git diff --check
+   Status: passed
+   Evidence: evidence/m4-product-quic-result-schema/git-diff-check.log

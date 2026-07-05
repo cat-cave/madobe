@@ -2,10 +2,17 @@
 #![forbid(unsafe_code)]
 
 mod cross_device;
+mod product_quic;
 
 pub use cross_device::{
     CrossDeviceEvidenceClaim, CrossDeviceResultArtifact, CrossDeviceResultArtifactKind,
     CrossDeviceResultValidationError, CrossDeviceVideoSmokeMetrics, CrossDeviceVideoSmokeResult,
+};
+pub use product_quic::{
+    ProductQuicDownstreamClaim, ProductQuicEndpointRole, ProductQuicPayloadValidation,
+    ProductQuicReceiverAck, ProductQuicResultArtifact, ProductQuicResultArtifactKind,
+    ProductQuicResultValidationError, ProductQuicSmokeEndpoint, ProductQuicSmokeResult,
+    ProductQuicTransport,
 };
 
 /// Human-readable product name shared by M0 components.
