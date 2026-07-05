@@ -1,0 +1,78 @@
+{
+  "nodeId": "m4-qd-node-note-kind-doc-sync",
+  "summary": "Aligned qd workflow documentation with the committed node-note schema checker by documenting blocker, retry, and note as the accepted node_notes[].kind vocabulary and describing their orchestration use.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-qd-node-note-kind-doc-sync/commands.log",
+    "evidence/m4-qd-node-note-kind-doc-sync/git-diff-check.log",
+    "evidence/m4-qd-node-note-kind-doc-sync/nix-just-check.log",
+    "evidence/m4-qd-node-note-kind-doc-sync/notes.md",
+    "evidence/m4-qd-node-note-kind-doc-sync/qd-reports-check.log",
+    "reports/qd/m4-qd-node-note-kind-doc-sync/completion.json",
+    "reports/qd/m4-qd-node-note-kind-doc-sync/audit.json"
+  ],
+  "commits": [
+    "821d8cf42e6fbf8b89b7aa609d69dd8fb7ea218d"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents node_notes[].kind as blocker, retry, and note.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and evidence/m4-qd-node-note-kind-doc-sync/notes.md"
+    },
+    {
+      "criterion": "Docs explain the intended orchestration use for blocker, retry, and note node-note records.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and evidence/m4-qd-node-note-kind-doc-sync/notes.md"
+    },
+    {
+      "criterion": "Docs remain aligned with scripts/qd-report-check/roadmap-node-notes.sh.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/roadmap-node-notes.sh and evidence/m4-qd-node-note-kind-doc-sync/notes.md"
+    },
+    {
+      "criterion": "just qd-reports-check, git diff --check, and nix develop -c just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-kind-doc-sync/git-diff-check.log, evidence/m4-qd-node-note-kind-doc-sync/qd-reports-check.log, and evidence/m4-qd-node-note-kind-doc-sync/nix-just-check.log"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-kind-doc-sync/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-kind-doc-sync/git-diff-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-kind-doc-sync/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-kind-doc-sync/nix-just-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-node-note-kind-doc-sync/commands.log",
+    "evidence/m4-qd-node-note-kind-doc-sync/git-diff-check.log",
+    "evidence/m4-qd-node-note-kind-doc-sync/nix-just-check.log",
+    "evidence/m4-qd-node-note-kind-doc-sync/notes.md",
+    "evidence/m4-qd-node-note-kind-doc-sync/qd-reports-check.log",
+    "reports/qd/m4-qd-node-note-kind-doc-sync/completion.json",
+    "reports/qd/m4-qd-node-note-kind-doc-sync/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a qd workflow documentation alignment node and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

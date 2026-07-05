@@ -285,8 +285,11 @@ non-blank `node_id` that references a real node, `severity` must be one of `P0`,
 must be one of `open`, `resolved`, or `promoted`. Edge records must use existing `from_node` and `to_node` node IDs,
 must not point from a node to itself, must not duplicate a `from_node`/`to_node`/`type` triple, and must use the
 known `type` vocabulary (`requires`). Node note records must reference existing non-blank node IDs, use the known
-`kind` vocabulary (`blocker`, `retry`), keep non-blank `id` and `text` values, and have unique note IDs. The command
-is wired into `just check` so malformed qd evidence records are caught before merge.
+`kind` vocabulary (`blocker`, `retry`, `note`), keep non-blank `id` and `text` values, and have unique note IDs.
+Use `blocker` for durable missing-condition context, `retry` for a failed attempt that should be retried or
+superseded, and `note` for durable orchestration context such as verification sign-off details. This vocabulary is
+checked by `scripts/qd-report-check/roadmap-node-notes.sh`. The command is wired into `just check` so malformed qd
+evidence records are caught before merge.
 
 Blocker reports are first-class qd evidence. Each `reports/qd/<node-id>/blocker.md` path must match an existing node
 in `roadmap/qd-export.json`. If the node is still `blocked`, the report must mention the node id and include labeled
