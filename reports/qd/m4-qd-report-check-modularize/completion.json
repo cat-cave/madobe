@@ -17,7 +17,9 @@
     "scripts/qd-report-check/roadmap-registries.sh",
     "scripts/qd-report-check/roadmap.sh"
   ],
-  "commits": [],
+  "commits": [
+    "8cdaea49ebde553763f5081de538105054a3b76f"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check/roadmap.sh is reduced below 350 lines by moving focused validation helpers into sourced files.",
