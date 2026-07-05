@@ -1,0 +1,80 @@
+{
+  "nodeId": "m4-qd-report-changed-file-contract",
+  "summary": "Normalized deleted qd changed-file evidence and tightened qd report validation so completion changedFiles[] distinguishes existing repo paths from explicit deleted-file markers.",
+  "changedFiles": [
+    "evidence/m4-qd-report-changed-file-contract/commands.log",
+    "evidence/m4-qd-report-changed-file-contract/notes.md",
+    "reports/qd/m4-merge-group-trigger-dedupe/completion.json",
+    "reports/qd/m4-qd-report-changed-file-contract/audit.json",
+    "reports/qd/m4-qd-report-changed-file-contract/completion.json",
+    "scripts/qd-reports-check.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "reports/qd/m4-merge-group-trigger-dedupe/completion.json marks the deleted workflow path explicitly as deleted:.github/workflows/merge-queue.yml",
+      "status": "passed",
+      "evidence": "The historical completion report now lists deleted:.github/workflows/merge-queue.yml in changedFiles[]."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects plain changedFiles[] paths that do not exist in the checkout.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-changed-file-contract/commands.log records a temporary-copy negative smoke test where a plain missing changedFiles path failed as expected."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh accepts deleted:<repo-relative-path> only when the referenced path does not exist and the marker has a non-empty repo-relative path.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates deleted: entries for non-empty repo-relative paths, rejects absolute and '..' traversal paths, and reports an error if the referenced path exists."
+    },
+    {
+      "criterion": "Existing qd reports pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-changed-file-contract/commands.log records just qd-reports-check passing."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, just check, and a negative smoke test for a missing plain changed file.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-changed-file-contract/commands.log records the required validation commands and smoke test. The repository check gate passed through the Nix toolchain with nix develop -c just check."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "realWorldValidation.required is false because this is repository qd report metadata validation only."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy plain missing changedFiles negative smoke test",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-changed-file-contract/commands.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-changed-file-contract/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-changed-file-contract/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-changed-file-contract/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-changed-file-contract/commands.log",
+    "evidence/m4-qd-report-changed-file-contract/notes.md",
+    "reports/qd/m4-qd-report-changed-file-contract/audit.json",
+    "reports/qd/m4-qd-report-changed-file-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report metadata validation only; Linux validation passed and macOS validation is not required."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
