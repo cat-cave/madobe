@@ -1,0 +1,4 @@
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.pzQiYD2996/qd-export-duplicate-edge.json bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.pzQiYD2996/qd-export-duplicate-edge.json: edges[50] duplicates edge triple: m0-github-live -> m0-coordination-issue (requires)
+qd report check: failed with 1 error(s)
+negative-smoke: success - checker rejected duplicate edge triple

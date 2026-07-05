@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-qd-edge-schema-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects edges[] entries whose from_node or to_node does not match a node in roadmap/qd-export.json.",
+      "status": "passed",
+      "evidence": "The checker now validates both edge endpoint fields against the roadmap node id set; the unknown endpoint smoke log records the expected file-scoped rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects self-edges.",
+      "status": "passed",
+      "evidence": "The self-edge validator compares normalized string endpoints; the self-edge smoke log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects duplicate edge triples.",
+      "status": "passed",
+      "evidence": "The duplicate validator groups edge records by from_node, to_node, and type and reports duplicate entries; the duplicate edge smoke log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects unknown edges[].type values outside requires.",
+      "status": "passed",
+      "evidence": "The existing roadmap value vocabulary helper now validates edges[].type against requires; the unknown type smoke log records the expected rejection."
+    },
+    {
+      "criterion": "Current reports/export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-edge-schema-contract/qd-reports-check.log records just qd-reports-check passing with the stricter edge contract."
+    },
+    {
+      "criterion": "Required evidence logs and reports are present.",
+      "status": "passed",
+      "evidence": "The evidence directory contains qd-reports-check.log, just-check.log, four temporary-copy negative smoke logs, and git-diff-check.log; report JSON files use the matching nodeId."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}

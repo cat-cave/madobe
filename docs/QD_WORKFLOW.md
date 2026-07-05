@@ -276,8 +276,10 @@ Completion reports must include an empty `unverifiedItems` array. Plain repo-pat
 `runs[].node_id` references a real node. Run records must use the known `kind` vocabulary (`implement`, `audit`,
 `ci`, `merge`) and `status` vocabulary (`completed`, `failed`, `passed`, `recorded`). Finding records must have a
 non-blank `node_id` that references a real node, `severity` must be one of `P0`, `P1`, `P2`, or `P3`, and `status`
-must be one of `open`, `resolved`, or `promoted`. The command is wired into `just check` so malformed qd evidence
-records are caught before merge.
+must be one of `open`, `resolved`, or `promoted`. Edge records must use existing `from_node` and `to_node` node IDs,
+must not point from a node to itself, must not duplicate a `from_node`/`to_node`/`type` triple, and must use the
+known `type` vocabulary (`requires`). The command is wired into `just check` so malformed qd evidence records are
+caught before merge.
 
 Do not manufacture evidence for unavailable hardware. If the node depends on hardware, compositor, driver, network, credential, or macOS access that is unavailable, block the node with the correct typed blocker and record the exact missing condition.
 

@@ -1,0 +1,44 @@
+$ nix develop -c just check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-qd-edge-schema-contract"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 86 completion report(s) and 86 audit report(s)
+just pin-hygiene-check
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+just pr-template-check
+bash scripts/pr-template-check.sh
+pr template check: passed
+just workflow-contract-check
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+just dependabot-contract-check
+bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+cargo check --workspace --all-targets --all-features
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.11s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 107 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+just-check: success

@@ -1,0 +1,4 @@
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.Si6sNjh61I/qd-export-self-edge.json bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.Si6sNjh61I/qd-export-self-edge.json: edges[0] must not be a self-edge: m0-github-live -> m0-github-live
+qd report check: failed with 1 error(s)
+negative-smoke: success - checker rejected self-edge in edges[0]
