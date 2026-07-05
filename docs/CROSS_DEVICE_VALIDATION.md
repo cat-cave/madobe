@@ -215,29 +215,59 @@ Other useful kinds are `commands_log`, `linux_host_log`, `mac_client_log`, `note
 fixture lives at `crates/protocol/fixtures/m3-cross-device-video-smoke/result.json`; it records only schema
 compatibility and does not claim live cross-device decode, render, presentation, or latency behavior.
 
-For product QUIC smoke, the receiver result should use this minimum shape:
+For product QUIC smoke, use the checked Rust contract and golden fixture:
+
+- model: `crates/protocol/src/product_quic.rs`
+- fixture: `crates/protocol/fixtures/m4-product-quic-smoke/result.json`
+
+The product QUIC result contract requires `transport=quic`, `productQuic=true`, sender and receiver endpoint
+roles, payload byte count, SHA-256 payload validation, receiver acknowledgement, and optional certificate
+fingerprint SHA-256. Downstream decode, render, presentation, and latency fields are explicit non-claims unless
+the result also includes matching downstream evidence artifacts.
+
+The golden fixture uses this shape:
 
 ```json
 {
   "nodeId": "m4-product-quic-cross-device-smoke",
+  "branch": "spec/m4-product-quic-result-schema",
   "transport": "quic",
   "productQuic": true,
-  "sample": "crates/transport/fixtures/checked-in-av1.ivf",
-  "passed": true,
-  "framesSent": 1,
-  "framesReceived": 1,
-  "payloadBytes": 84,
-  "sha256": "",
-  "validated": {
-    "payloadByteCount": true,
-    "payloadSha256": true
+  "sender": {
+    "role": "sender",
+    "platform": "linux",
+    "evidenceDir": "evidence/m4-product-quic-cross-device-smoke/linux-sender"
   },
-  "nonClaims": [
-    "not VideoToolbox decode",
-    "not Metal render",
-    "not presentation",
-    "not latency proof"
-  ]
+  "receiver": {
+    "role": "receiver",
+    "platform": "macos",
+    "evidenceDir": "evidence/m4-product-quic-cross-device-smoke/macos-receiver"
+  },
+  "payload": {
+    "payloadBytes": 84,
+    "sha256": "3d746c6c4b5f7bd72d35f4ab673f33f3e5f9a0c9f6f8b27f35fb6fbb1c3e8d2a",
+    "byteCountValidated": true,
+    "sha256Validated": true
+  },
+  "receiverAck": {
+    "received": true,
+    "payloadBytes": 84,
+    "sha256": "3d746c6c4b5f7bd72d35f4ab673f33f3e5f9a0c9f6f8b27f35fb6fbb1c3e8d2a"
+  },
+  "certificateFingerprintSha256": "9b44d90fb42f6c3ff8510ce40bbfcb1cf8712a2d18a3552955aa1b889ad2c6f3",
+  "downstreamClaims": {
+    "decoded": false,
+    "rendered": false,
+    "presented": false,
+    "latencyMs": null
+  },
+  "artifacts": [
+    {
+      "path": "evidence/m4-product-quic-cross-device-smoke/commands.log",
+      "kind": "commands_log"
+    }
+  ],
+  "notes": "Contract fixture only; no live product QUIC, cross-device, decode, render, presentation, or latency behavior is claimed."
 }
 ```
 

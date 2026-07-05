@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-product-quic-result-schema",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The product QUIC model covers required transport, identity, role, payload validation, receiver ack, optional certificate fingerprint, and downstream non-claim fields.",
+      "status": "passed",
+      "evidence": "crates/protocol/src/product_quic.rs"
+    },
+    {
+      "criterion": "The golden fixture is checked and byte-stable through Rust tests.",
+      "status": "passed",
+      "evidence": "crates/protocol/fixtures/m4-product-quic-smoke/result.json and evidence/m4-product-quic-result-schema/product-quic-tests.log"
+    },
+    {
+      "criterion": "Negative tests reject false or missing product QUIC identity, missing payload validation, and downstream claims without matching evidence.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-schema/product-quic-tests.log"
+    },
+    {
+      "criterion": "The cross-device runbook references the checked schema and fixture as the product QUIC result contract.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    },
+    {
+      "criterion": "No live product QUIC, cross-device, decode, render, presentation, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-schema/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Schema and fixture contract only; no live product QUIC or cross-device validation is required or claimed for this node."
+  },
+  "findings": []
+}

@@ -1,0 +1,99 @@
+{
+  "nodeId": "m4-product-quic-result-schema",
+  "summary": "Added a typed product QUIC smoke result contract, a checked golden fixture, focused Rust validation tests, and runbook references for the product QUIC result schema.",
+  "changedFiles": [
+    "crates/protocol/src/lib.rs",
+    "crates/protocol/src/product_quic.rs",
+    "crates/protocol/src/product_quic/tests.rs",
+    "crates/protocol/fixtures/m4-product-quic-smoke/result.json",
+    "docs/CROSS_DEVICE_VALIDATION.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-product-quic-result-schema/commands.log",
+    "evidence/m4-product-quic-result-schema/notes.md",
+    "evidence/m4-product-quic-result-schema/product-quic-tests.log",
+    "reports/qd/m4-product-quic-result-schema/audit.json",
+    "reports/qd/m4-product-quic-result-schema/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "crates/protocol contains a typed product QUIC smoke result model covering transport, product identity, sender/receiver roles, payload byte count, SHA-256 validation, receiver ack, optional certificate fingerprint, and explicit downstream non-claims.",
+      "status": "passed",
+      "evidence": "crates/protocol/src/product_quic.rs"
+    },
+    {
+      "criterion": "A golden product QUIC result fixture is checked into crates/protocol.",
+      "status": "passed",
+      "evidence": "crates/protocol/fixtures/m4-product-quic-smoke/result.json"
+    },
+    {
+      "criterion": "Rust tests accept the fixture and reject false or missing product QUIC identity, missing payload validation, and unsupported downstream claims without matching evidence.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-schema/product-quic-tests.log"
+    },
+    {
+      "criterion": "docs/CROSS_DEVICE_VALIDATION.md references the checked fixture/schema as the product QUIC result contract.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded under the node-specific paths.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-schema/ and reports/qd/m4-product-quic-result-schema/"
+    },
+    {
+      "criterion": "No live product QUIC, cross-device, decode, render, presentation, or latency claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-schema/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "cargo fmt -p madobe-protocol",
+      "status": "failed",
+      "evidence": "evidence/m4-product-quic-result-schema/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo fmt -p madobe-protocol",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-schema/commands.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-protocol product_quic -- --nocapture",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-schema/product-quic-tests.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-schema/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-schema/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-schema/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-product-quic-result-schema/commands.log",
+    "evidence/m4-product-quic-result-schema/notes.md",
+    "evidence/m4-product-quic-result-schema/product-quic-tests.log",
+    "evidence/m4-product-quic-result-schema/qd-reports-check.log",
+    "evidence/m4-product-quic-result-schema/just-check.log",
+    "evidence/m4-product-quic-result-schema/git-diff-check.log",
+    "reports/qd/m4-product-quic-result-schema/audit.json",
+    "reports/qd/m4-product-quic-result-schema/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Schema and fixture contract only; no live product QUIC or cross-device validation is required or claimed for this node."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
