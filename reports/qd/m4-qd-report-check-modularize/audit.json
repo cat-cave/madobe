@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-qd-report-check-modularize",
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh is reduced below 350 lines by moving focused validation helpers into sourced files.",
+      "status": "passed",
+      "evidence": "roadmap.sh now sources roadmap-edges.sh, roadmap-node-notes.sh, and roadmap-registries.sh. evidence/m4-qd-report-check-modularize/line-count-check.log records roadmap.sh at 204 lines."
+    },
+    {
+      "criterion": "No qd report-check shell file exceeds 350 lines after the split.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/line-count-check.log records every checker shell file below 350 lines."
+    },
+    {
+      "criterion": "just qd-reports-check behavior remains unchanged for the current roadmap export and report set.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/qd-reports-check.log records the current roadmap export and report set passing after the split."
+    },
+    {
+      "criterion": "Existing registry, node, edge, export envelope, and node-note schema validations remain covered by the checker.",
+      "status": "passed",
+      "evidence": "The moved helper files preserve the original function names, predicates, and error messages. The targeted smoke logs prove the moved registry, node milestone, edge endpoint, and node-note target validations still reject malformed exports."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, git diff --check, and targeted malformed-roadmap smoke tests.",
+      "status": "passed",
+      "evidence": "Required command and smoke-test logs are present under evidence/m4-qd-report-check-modularize/."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "The completion report and evidence only claim repository validation on Linux; realWorldValidation is not_required."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}

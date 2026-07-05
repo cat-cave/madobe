@@ -1,0 +1,114 @@
+{
+  "nodeId": "m4-qd-report-check-modularize",
+  "summary": "Reduced roadmap qd report-check validation below the line cap by moving registry, edge, and node-note helpers into focused sourced modules while preserving existing validation behavior.",
+  "changedFiles": [
+    "evidence/m4-qd-report-check-modularize/git-diff-check.log",
+    "evidence/m4-qd-report-check-modularize/just-check.log",
+    "evidence/m4-qd-report-check-modularize/line-count-check.log",
+    "evidence/m4-qd-report-check-modularize/negative-smoke-invalid-edge-endpoint.log",
+    "evidence/m4-qd-report-check-modularize/negative-smoke-invalid-node-note-target.log",
+    "evidence/m4-qd-report-check-modularize/negative-smoke-non-array-registry-collection.log",
+    "evidence/m4-qd-report-check-modularize/negative-smoke-unknown-node-milestone.log",
+    "evidence/m4-qd-report-check-modularize/qd-reports-check.log",
+    "reports/qd/m4-qd-report-check-modularize/audit.json",
+    "reports/qd/m4-qd-report-check-modularize/completion.json",
+    "scripts/qd-report-check/roadmap-edges.sh",
+    "scripts/qd-report-check/roadmap-node-notes.sh",
+    "scripts/qd-report-check/roadmap-registries.sh",
+    "scripts/qd-report-check/roadmap.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh is reduced below 350 lines by moving focused validation helpers into sourced files.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/line-count-check.log records roadmap.sh at 204 lines, with registry, edge, and node-note helpers moved into focused sourced files under scripts/qd-report-check/."
+    },
+    {
+      "criterion": "No qd report-check shell file exceeds 350 lines after the split.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/line-count-check.log records all scripts/qd-report-check/*.sh files and scripts/qd-reports-check.sh below 350 lines."
+    },
+    {
+      "criterion": "just qd-reports-check behavior remains unchanged for the current roadmap export and report set.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/qd-reports-check.log records just qd-reports-check passing after the mechanical split."
+    },
+    {
+      "criterion": "Existing registry, node, edge, export envelope, and node-note schema validations remain covered by the checker.",
+      "status": "passed",
+      "evidence": "The split preserves existing function names and jq predicates. Negative smoke logs under evidence/m4-qd-report-check-modularize show rejection of a non-array registry collection, unknown node milestone, invalid edge endpoint, and invalid node-note target."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, git diff --check, and targeted malformed-roadmap smoke tests.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize contains qd-reports-check.log, just-check.log, git-diff-check.log, and the four negative-smoke logs."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "Only Linux repository validation commands were run; realWorldValidation is marked not_required and no macOS validation is claimed."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/git-diff-check.log"
+    },
+    {
+      "command": "wc -l scripts/qd-report-check/*.sh scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/line-count-check.log"
+    },
+    {
+      "command": "QD_REPORTS_ROADMAP_EXPORT=<temporary malformed export> just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/negative-smoke-non-array-registry-collection.log"
+    },
+    {
+      "command": "QD_REPORTS_ROADMAP_EXPORT=<temporary malformed export> just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/negative-smoke-unknown-node-milestone.log"
+    },
+    {
+      "command": "QD_REPORTS_ROADMAP_EXPORT=<temporary malformed export> just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/negative-smoke-invalid-edge-endpoint.log"
+    },
+    {
+      "command": "QD_REPORTS_ROADMAP_EXPORT=<temporary malformed export> just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-modularize/negative-smoke-invalid-node-note-target.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-check-modularize/git-diff-check.log",
+    "evidence/m4-qd-report-check-modularize/just-check.log",
+    "evidence/m4-qd-report-check-modularize/line-count-check.log",
+    "evidence/m4-qd-report-check-modularize/negative-smoke-invalid-edge-endpoint.log",
+    "evidence/m4-qd-report-check-modularize/negative-smoke-invalid-node-note-target.log",
+    "evidence/m4-qd-report-check-modularize/negative-smoke-non-array-registry-collection.log",
+    "evidence/m4-qd-report-check-modularize/negative-smoke-unknown-node-milestone.log",
+    "evidence/m4-qd-report-check-modularize/qd-reports-check.log",
+    "reports/qd/m4-qd-report-check-modularize/audit.json",
+    "reports/qd/m4-qd-report-check-modularize/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, platform, capture, transport, decode, render, presentation, cross-device, latency, or macOS-specific behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

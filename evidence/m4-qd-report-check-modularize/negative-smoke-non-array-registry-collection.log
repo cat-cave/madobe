@@ -1,0 +1,7 @@
+mutation: .registries.milestones = {}
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/qd-roadmap-non-array-registry.te4WKY.json just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/qd-roadmap-non-array-registry.te4WKY.json: must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, array registry collections, and array top-level collections
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+exit_status=1
