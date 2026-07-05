@@ -18,7 +18,9 @@
     "evidence/m4-qd-ready-queue-visibility/shellcheck.log",
     "reports/qd/m4-qd-ready-queue-visibility/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "7d01a666d4815f46a50a50e187eaab052add5ca7"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "just qd-ready-queue-check exists and runs with Bash/JQ only.",
