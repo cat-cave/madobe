@@ -1,0 +1,11 @@
+Commands planned and run for m4-qd-export-parity-check:
+
+- qd sync --from .qd/worktrees/m4-qd-export-parity-check/roadmap/qd-export.json --expect-clean
+- bash scripts/qd-export-parity-check.sh --qd-root . --expected .qd/worktrees/m4-qd-export-parity-check/roadmap/qd-export.json
+- just qd-export-parity-check --qd-root /home/trevor/projects/madobe --expected /home/trevor/projects/madobe/.qd/worktrees/m4-qd-export-parity-check/roadmap/qd-export.json
+- Temporary negative smoke: mutate node_notes[0].text in an expected export while leaving nodes unchanged and expect scripts/qd-export-parity-check.sh to fail.
+- Temporary negative smoke: mutate runs[0].summary in an expected export while leaving nodes unchanged and expect scripts/qd-export-parity-check.sh to fail.
+- qd sync --from <node_notes-mutated-export> --dry-run to document that qd's current sync summary can report no node drift for node-note-only changes.
+- git diff --check
+- just qd-reports-check
+- nix develop -c just check

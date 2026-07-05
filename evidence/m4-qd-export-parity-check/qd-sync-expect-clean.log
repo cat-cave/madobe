@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "replaced": false,
+  "action": "none",
+  "path": ".qd/worktrees/m4-qd-export-parity-check/roadmap/qd-export.json",
+  "nodes": 128,
+  "edges": 64,
+  "findings": 7,
+  "runs": 531,
+  "nodeNotes": 28,
+  "summary": "no drift",
+  "diff": {
+    "ok": true,
+    "liveOnlyNodes": [],
+    "exportOnlyNodes": [],
+    "changedNodes": [],
+    "liveNodeCount": 128,
+    "exportNodeCount": 128
+  }
+}

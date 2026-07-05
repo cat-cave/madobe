@@ -3862,6 +3862,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-qd-export-parity-check",
+      "title": "Add qd export parity check",
+      "kind": "infra",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "low",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-qd-export-parity-check",
+      "spec": "Add a repo-local orchestrator check that compares live qd export output with committed roadmap/qd-export.json so non-node drift such as runs, findings, node_notes, edges, registries, assignments, or waves cannot be missed when qd sync's summary is node-only.",
+      "acceptance": "Add a just qd-export-parity-check command backed by a script that exports live qd state to a temporary file and compares it byte-for-byte with the committed deterministic export\nThe checker passes when live qd state and roadmap/qd-export.json are identical after qd sync --from roadmap/qd-export.json --expect-clean\nThe checker fails on a temporary export whose node_notes differ while nodes are unchanged\nThe checker fails on a temporary export whose runs differ while nodes are unchanged\nDocs explain that qd sync --expect-clean remains required but orchestrators should run just qd-export-parity-check when validating local qd cache parity before exporting or after suspicious drift\nEvidence and qd reports are recorded under evidence/m4-qd-export-parity-check and reports/qd/m4-qd-export-parity-check\nLinux validation evidence records qd sync --expect-clean, just qd-export-parity-check, focused temporary negative smokes, git diff --check, just qd-reports-check, and nix develop -c just check\nNo product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nvalidation:repo-metadata",
+      "created_at": "2026-07-05T21:27:19.343Z",
+      "updated_at": "2026-07-05T21:27:44.363Z",
+      "claimed_at": "2026-07-05T21:27:19.518Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -4242,6 +4272,12 @@
       "to_node": "m4-qd-node-note-evidence-path-contract",
       "type": "requires",
       "created_at": "2026-07-05T20:57:00.439Z"
+    },
+    {
+      "from_node": "m4-qd-worktree-report-path-doc-sync",
+      "to_node": "m4-qd-export-parity-check",
+      "type": "requires",
+      "created_at": "2026-07-05T21:27:19.430Z"
     }
   ],
   "findings": [

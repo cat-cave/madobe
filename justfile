@@ -42,6 +42,9 @@ qd-ready-queue-check:
 qd-ready-queue-cycle-smoke:
   bash scripts/qd-ready-queue-check.sh --cycle-smoke
 
+qd-export-parity-check *args:
+  bash scripts/qd-export-parity-check.sh {{args}}
+
 cross-device-result-check *files:
   bash scripts/cross-device-result-check.sh {{files}}
 
