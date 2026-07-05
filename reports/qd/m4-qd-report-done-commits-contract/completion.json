@@ -65,7 +65,9 @@
     "reports/qd/m4-shellcheck-hygiene-gate/completion.json",
     "scripts/qd-reports-check.sh"
   ],
-  "commits": [],
+  "commits": [
+    "70ad992cfc53249705d811b6c020c4c5a5fd83ec"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Done-node completion reports with empty commits[] are backfilled with their durable qd merge commit when one exists in roadmap/qd-export.json.",
