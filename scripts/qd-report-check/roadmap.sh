@@ -11,8 +11,16 @@ validate_roadmap_export() {
 
   json_ok "$roadmap_export" || return 1
 
-  if ! jq -e 'type == "object" and (.nodes | type == "array") and ((has("edges") | not) or (.edges | type == "array"))' "$roadmap_export" >/dev/null; then
-    report_error "$roadmap_export" "must be an object with a nodes array and optional edges array"
+  if ! jq -e '
+    . as $export
+    |
+    type == "object"
+    and .schema_version == 2
+    and .exported_at == "1970-01-01T00:00:00.000Z"
+    and (.registries | type == "object")
+    and all(["nodes", "edges", "runs", "findings", "node_notes", "assignments", "waves", "wave_memberships"][]; ($export[.] | type) == "array")
+  ' "$roadmap_export" >/dev/null; then
+    report_error "$roadmap_export" "must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, and array top-level collections"
     return 1
   fi
 

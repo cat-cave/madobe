@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-qd-export-envelope-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh requires schema_version == 2.",
+      "status": "passed",
+      "evidence": "The validator checks .schema_version == 2 before continuing with node and edge validation; the bad schema_version smoke log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh requires exported_at == 1970-01-01T00:00:00.000Z.",
+      "status": "passed",
+      "evidence": "The validator checks the deterministic epoch exported_at value; the bad exported_at smoke log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh requires registries to be an object.",
+      "status": "passed",
+      "evidence": "The validator checks .registries object type; the non-object registries smoke log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh requires the required top-level collections to be arrays.",
+      "status": "passed",
+      "evidence": "The validator checks nodes, edges, runs, findings, node_notes, assignments, waves, and wave_memberships as arrays; the collection smoke log records one expected rejection per field."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-envelope-contract/qd-reports-check.log records just qd-reports-check passing."
+    },
+    {
+      "criterion": "Required validation evidence is recorded.",
+      "status": "passed",
+      "evidence": "The evidence directory contains qd-reports-check.log, just-check.log, git-diff-check.log, and the requested temporary-copy negative smoke logs."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}
