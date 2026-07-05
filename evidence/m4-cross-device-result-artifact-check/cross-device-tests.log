@@ -1,0 +1,15 @@
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-cross-device-result-artifact-check' is dirty
+madobe dev shell: use 'just --list' to see commands
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running unittests src/lib.rs (target/debug/deps/madobe_protocol-ec85cc91a76fbd20)
+
+running 6 tests
+test cross_device::tests::accepts_metric_claims_with_matching_evidence ... ok
+test cross_device::tests::fixture_round_trips_semantically ... ok
+test cross_device::tests::fixture_covers_required_fields_without_live_claims ... ok
+test cross_device::tests::rejects_decode_render_presentation_and_latency_without_evidence ... ok
+test cross_device::tests::rejects_invalid_latency_order ... ok
+test cross_device::tests::rejects_invalid_artifact_references ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 12 filtered out; finished in 0.00s
+

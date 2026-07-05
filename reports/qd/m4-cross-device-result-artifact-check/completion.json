@@ -1,0 +1,102 @@
+{
+  "nodeId": "m4-cross-device-result-artifact-check",
+  "summary": "Added a generic cross-device result artifact checker and Rust reference hygiene for M3/M4 cross-device result files, wired the checker into just check, and documented the command for future evidence artifacts.",
+  "changedFiles": [
+    "scripts/cross-device-result-check.sh",
+    "justfile",
+    "docs/CROSS_DEVICE_VALIDATION.md",
+    "crates/protocol/src/cross_device.rs",
+    "crates/protocol/src/cross_device/tests.rs",
+    "roadmap/qd-export.json",
+    "evidence/m4-cross-device-result-artifact-check/notes.md",
+    "evidence/m4-cross-device-result-artifact-check/cross-device-result-check.log",
+    "evidence/m4-cross-device-result-artifact-check/cross-device-explicit-result-check.log",
+    "evidence/m4-cross-device-result-artifact-check/cross-device-tests.log",
+    "evidence/m4-cross-device-result-artifact-check/just-check.log",
+    "evidence/m4-cross-device-result-artifact-check/git-diff-check.log",
+    "reports/qd/m4-cross-device-result-artifact-check/completion.json",
+    "reports/qd/m4-cross-device-result-artifact-check/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "The generic checker validates the checked-in M3 cross-device result fixture and negative fixtures.",
+      "status": "passed",
+      "evidence": "scripts/cross-device-result-check.sh and evidence/m4-cross-device-result-artifact-check/cross-device-result-check.log"
+    },
+    {
+      "criterion": "Unsupported decode, render, presentation, and latency metric claims require matching evidence artifact kinds.",
+      "status": "passed",
+      "evidence": "scripts/cross-device-result-check.sh and crates/protocol/src/cross_device/tests.rs"
+    },
+    {
+      "criterion": "p95 latency below median is rejected.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-result-artifact-check/cross-device-result-check.log and evidence/m4-cross-device-result-artifact-check/cross-device-tests.log"
+    },
+    {
+      "criterion": "Absolute, traversal, backslash, Windows-drive, blank, and unknown-kind artifact references are rejected.",
+      "status": "passed",
+      "evidence": "scripts/cross-device-result-check.sh and crates/protocol/src/cross_device.rs"
+    },
+    {
+      "criterion": "just check runs the generic checker before Rust workspace checks.",
+      "status": "passed",
+      "evidence": "justfile and evidence/m4-cross-device-result-artifact-check/just-check.log"
+    },
+    {
+      "criterion": "The cross-device validation runbook documents the checker command and artifact-reference rules.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    },
+    {
+      "criterion": "No live product QUIC, decode/render/presentation/latency, macOS validation, workflow dispatch, or credential-dependent claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-result-artifact-check/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just cross-device-result-check",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-result-artifact-check/cross-device-result-check.log"
+    },
+    {
+      "command": "bash scripts/cross-device-result-check.sh evidence/m3-cross-device-video-smoke/result.json",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-result-artifact-check/cross-device-explicit-result-check.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-protocol cross_device -- --nocapture",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-result-artifact-check/cross-device-tests.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-result-artifact-check/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-result-artifact-check/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-cross-device-result-artifact-check/notes.md",
+    "evidence/m4-cross-device-result-artifact-check/cross-device-result-check.log",
+    "evidence/m4-cross-device-result-artifact-check/cross-device-explicit-result-check.log",
+    "evidence/m4-cross-device-result-artifact-check/cross-device-tests.log",
+    "evidence/m4-cross-device-result-artifact-check/just-check.log",
+    "evidence/m4-cross-device-result-artifact-check/git-diff-check.log",
+    "reports/qd/m4-cross-device-result-artifact-check/completion.json",
+    "reports/qd/m4-cross-device-result-artifact-check/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Artifact-schema and evidence hygiene only; no live cross-device validation is required or claimed for this node."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
