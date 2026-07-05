@@ -11,7 +11,9 @@
     "roadmap/qd-export.json",
     "scripts/qd-reports-check.sh"
   ],
-  "commits": [],
+  "commits": [
+    "d6a41dbebea6c455426e84f6098c4df0f47c5015"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Historical qd run report_path values pointing into .qd/worktrees, /home worktrees, or /Users worktrees are normalized to canonical reports/qd/<node-id>/<report>.json paths when that report exists.",
