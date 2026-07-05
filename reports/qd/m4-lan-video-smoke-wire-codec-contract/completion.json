@@ -13,7 +13,9 @@
     "reports/qd/m4-lan-video-smoke-wire-codec-contract/completion.json",
     "reports/qd/m4-lan-video-smoke-wire-codec-contract/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "e5413c39460fc8ae94ed4dce2f701a0734c0b1cd"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Tests prove write_sample/read_sample round trip exact metadata and payload through in-memory buffers.",
@@ -92,4 +94,3 @@
   "unverifiedItems": [],
   "dagChangesNeeded": []
 }
-
