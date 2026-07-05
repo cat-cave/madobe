@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-qd-node-note-schema-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects node_notes[] entries whose node_id is blank or does not match a node in roadmap/qd-export.json.",
+      "status": "passed",
+      "evidence": "The new node note node-id validator trims node_id values, rejects blank values, and indexes roadmap nodes before accepting references. The unknown-node temporary-copy smoke records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects unknown node_notes[].kind values outside blocker and retry.",
+      "status": "passed",
+      "evidence": "The validator uses the existing validate_roadmap_record_values helper for node_notes[].kind with the blocker/retry vocabulary. The unknown-kind smoke records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects blank node_notes[].id or node_notes[].text values.",
+      "status": "passed",
+      "evidence": "The required-string helper trims id and text fields and rejects non-string or blank values. The blank-note-content smoke records whitespace-only text failing."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects duplicate node_notes[].id values.",
+      "status": "passed",
+      "evidence": "The duplicate-id validator groups trimmed note ids and reports repeated ids after the first instance. The duplicate-id smoke records the expected rejection."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-schema-contract/just-qd-reports-check.log records the stricter checker passing against the current export and reports."
+    },
+    {
+      "criterion": "Required evidence logs and qd reports are present.",
+      "status": "passed",
+      "evidence": "The completion report lists the direct qd report check, full Nix check, git diff check, and all four negative smoke logs; this audit report verifies those paths exist and are scoped to this node."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}

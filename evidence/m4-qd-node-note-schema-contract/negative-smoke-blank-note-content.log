@@ -1,0 +1,6 @@
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.AyoKQyu5fj just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.AyoKQyu5fj: node_notes[0].text must be a non-blank string: <blank>
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure exit: 1
