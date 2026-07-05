@@ -15,7 +15,9 @@
     "roadmap/qd-export.json",
     "scripts/qd-report-check/roadmap.sh"
   ],
-  "commits": [],
+  "commits": [
+    "8fc22905c71b4ce5b8d12588ab032463de96980f"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check/roadmap.sh rejects node_notes[] entries whose node_id is blank or does not match a node in roadmap/qd-export.json.",
