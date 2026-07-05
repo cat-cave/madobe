@@ -1,0 +1,4 @@
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/qd-node-priority.PVWJ6F.json: nodes[91].priority must be one of P0, P1, P2, P3: P9
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1

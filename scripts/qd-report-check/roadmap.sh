@@ -26,6 +26,7 @@ validate_roadmap_export() {
     return 1
   fi
 
+  validate_roadmap_nodes
   validate_roadmap_edges
 }
 
@@ -101,6 +102,13 @@ validate_roadmap_record_values() {
       | @tsv
     ' "$roadmap_export"
   )
+}
+
+validate_roadmap_nodes() {
+  validate_roadmap_record_values nodes status '["blocked","claimed","done","mergeable","ready","review"]' "blocked, claimed, done, mergeable, ready, review"
+  validate_roadmap_record_values nodes priority '["P0","P1","P2","P3"]' "P0, P1, P2, P3"
+  validate_roadmap_record_values nodes risk '["low","medium","high"]' "low, medium, high"
+  validate_roadmap_record_values nodes kind '["feature","infra","docs","audit-fix"]' "feature, infra, docs, audit-fix"
 }
 
 validate_roadmap_runs() {

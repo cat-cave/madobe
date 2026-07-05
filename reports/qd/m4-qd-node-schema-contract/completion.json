@@ -1,0 +1,112 @@
+{
+  "nodeId": "m4-qd-node-schema-contract",
+  "summary": "Tightened qd roadmap validation so node records must use explicit status, priority, risk, and kind vocabularies.",
+  "changedFiles": [
+    "evidence/m4-qd-node-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-node-schema-contract/just-check.log",
+    "evidence/m4-qd-node-schema-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-kind.log",
+    "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-priority.log",
+    "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-risk.log",
+    "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-status.log",
+    "reports/qd/m4-qd-node-schema-contract/audit.json",
+    "reports/qd/m4-qd-node-schema-contract/completion.json",
+    "roadmap/qd-export.json",
+    "scripts/qd-report-check/roadmap.sh"
+  ],
+  "commits": [
+    "89fd1a024e74f4b81257b46cad8260d7fde6fb36"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects unknown nodes[].status values outside blocked, claimed, done, mergeable, ready, and review.",
+      "status": "passed",
+      "evidence": "validate_roadmap_nodes constrains nodes[].status to the accepted qd node states; evidence/m4-qd-node-schema-contract/negative-smoke-unknown-status.log records a temporary export copy failing with status=unknown-status."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects unknown nodes[].priority values outside P0, P1, P2, and P3.",
+      "status": "passed",
+      "evidence": "validate_roadmap_nodes constrains nodes[].priority to P0, P1, P2, and P3; evidence/m4-qd-node-schema-contract/negative-smoke-unknown-priority.log records a temporary export copy failing with priority=P9."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects unknown nodes[].risk values outside low, medium, and high.",
+      "status": "passed",
+      "evidence": "validate_roadmap_nodes constrains nodes[].risk to low, medium, and high; evidence/m4-qd-node-schema-contract/negative-smoke-unknown-risk.log records a temporary export copy failing with risk=critical."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects unknown nodes[].kind values outside feature, infra, docs, and audit-fix.",
+      "status": "passed",
+      "evidence": "validate_roadmap_nodes constrains nodes[].kind to feature, infra, docs, and audit-fix; evidence/m4-qd-node-schema-contract/negative-smoke-unknown-kind.log records a temporary export copy failing with kind=task."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-schema-contract/just-qd-reports-check.log records just qd-reports-check passing with the stricter node checks."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, and temporary-copy negative smoke tests for unknown node status, priority, risk, and kind.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-schema-contract contains just-qd-reports-check.log, just-check.log, git-diff-check.log, and four temporary-copy negative smoke logs."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "This is repository qd metadata validation only; realWorldValidation is marked not_required."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-schema-contract/just-qd-reports-check.log"
+    },
+    {
+      "command": "temporary-copy unknown node status smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-status.log"
+    },
+    {
+      "command": "temporary-copy unknown node priority smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-priority.log"
+    },
+    {
+      "command": "temporary-copy unknown node risk smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-risk.log"
+    },
+    {
+      "command": "temporary-copy unknown node kind smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-kind.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-schema-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-schema-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-node-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-node-schema-contract/just-check.log",
+    "evidence/m4-qd-node-schema-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-kind.log",
+    "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-priority.log",
+    "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-risk.log",
+    "evidence/m4-qd-node-schema-contract/negative-smoke-unknown-status.log",
+    "reports/qd/m4-qd-node-schema-contract/audit.json",
+    "reports/qd/m4-qd-node-schema-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, macOS, hardware, capture, encode, transport, decode, render, presentation, or latency behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
