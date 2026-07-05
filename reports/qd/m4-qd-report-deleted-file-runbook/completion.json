@@ -9,7 +9,9 @@
     "reports/qd/m4-qd-report-deleted-file-runbook/audit.json",
     "reports/qd/m4-qd-report-deleted-file-runbook/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "2c2f015d1a38aa1b91910485703b3e3214398a1e"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "docs/QD_WORKFLOW.md documents that plain completion report changedFiles[] entries mean existing repo-relative paths.",
