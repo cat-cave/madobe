@@ -127,6 +127,11 @@ qd worktree create <node-id>
 qd export --out roadmap/qd-export.json --deterministic
 ```
 
+When validating that the local qd cache and committed export are identical, especially after suspicious sync output or
+after exporting qd state into a worktree branch, run `just qd-export-parity-check`. For a worktree branch export, run
+it from the qd root with `--expected .qd/worktrees/<node-id>/roadmap/qd-export.json`; it compares a fresh
+deterministic qd export byte-for-byte and catches non-node drift such as runs or node notes.
+
 If command names differ on the installed qdcli, run the relevant `qd <command> --help` and update this runbook in
 the same PR.
 

@@ -63,6 +63,23 @@ qd sync --from roadmap/qd-export.json --expect-clean --write-diff /tmp/qd-sync-d
 qd graph
 ```
 
+`qd sync --expect-clean` is still the required startup guard, but its drift summary is optimized for node assignment
+state. When validating local qd cache parity before exporting, after a suspicious sync result, or after replaying qd
+state for a worktree branch, run:
+
+```sh
+just qd-export-parity-check
+```
+
+For a qd worktree branch, run the command from the qd root and point it at the branch export:
+
+```sh
+just qd-export-parity-check --qd-root . --expected .qd/worktrees/<node-id>/roadmap/qd-export.json
+```
+
+This compares a fresh deterministic live qd export with the expected committed export byte-for-byte, so non-node
+drift in runs, findings, node notes, edges, registries, assignments, or waves is visible before the branch is merged.
+
 ## Method Gate
 
 qd blocks mutating commands until the strict method is acknowledged locally. Each machine or agent should do this once:

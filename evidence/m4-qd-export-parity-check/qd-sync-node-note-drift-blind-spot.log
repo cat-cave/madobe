@@ -1,0 +1,22 @@
+Mutation: qd sync dry-run with node_notes-only drift
+{
+  "ok": true,
+  "dryRun": true,
+  "wouldReplace": false,
+  "action": "none",
+  "path": "../../../../tmp/tmp.M4TYUiIT7L",
+  "nodes": 128,
+  "edges": 64,
+  "findings": 7,
+  "runs": 531,
+  "nodeNotes": 28,
+  "summary": "no drift",
+  "diff": {
+    "ok": true,
+    "liveOnlyNodes": [],
+    "exportOnlyNodes": [],
+    "changedNodes": [],
+    "liveNodeCount": 128,
+    "exportNodeCount": 128
+  }
+}

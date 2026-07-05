@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-qd-export-parity-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The new just command is backed by a script that compares live deterministic qd export output with an expected export byte-for-byte.",
+      "status": "passed",
+      "evidence": "justfile, scripts/qd-export-parity-check.sh, and evidence/m4-qd-export-parity-check/just-qd-export-parity-check.log"
+    },
+    {
+      "criterion": "The checker catches node_notes and runs drift even when node records are unchanged.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-parity-check/negative-smoke-node-notes-drift.log and evidence/m4-qd-export-parity-check/negative-smoke-runs-drift.log"
+    },
+    {
+      "criterion": "The runbooks explain when to use the parity check alongside qd sync.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and docs/ORCHESTRATION.md"
+    },
+    {
+      "criterion": "Scope excludes product runtime and platform validation claims.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-parity-check/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is qd roadmap/export hygiene and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "findings": []
+}

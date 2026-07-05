@@ -1,0 +1,14 @@
+Mutation: append text to runs[0].summary while nodes remain unchanged
+qd export parity check: live qd export differs from /tmp/tmp.VBrtg7WVWG
+--- /tmp/tmp.VBrtg7WVWG	2026-07-05 16:30:35.409977374 -0500
++++ /tmp/madobe-qd-export-parity.jGzMM1/qd-export.actual.json	2026-07-05 16:30:35.517983057 -0500
+@@ -4407,7 +4407,7 @@
+       "agent": null,
+       "started_at": "2026-07-03T01:51:36.703Z",
+       "finished_at": "2026-07-03T01:51:36.703Z",
+-      "summary": "Created and pinned the GitHub orchestrator coordination issue, added coordination labels, and posted the initial Linux orchestrator status. parity drift",
++      "summary": "Created and pinned the GitHub orchestrator coordination issue, added coordination labels, and posted the initial Linux orchestrator status.",
+       "log_path": null
+     },
+     {
+expected failure exit=1
