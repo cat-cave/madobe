@@ -1,0 +1,79 @@
+{
+  "nodeId": "m4-qd-run-report-path-contract",
+  "summary": "Normalized historical qd run report_path values out of worktree and absolute worktree locations into canonical reports/qd/<node-id>/<report>.json paths, and tightened qd report validation so non-empty run report paths must be repo-relative, traversal-free, and present in the checkout.",
+  "changedFiles": [
+    "evidence/m4-qd-run-report-path-contract/git-diff-check.log",
+    "evidence/m4-qd-run-report-path-contract/just-check.log",
+    "evidence/m4-qd-run-report-path-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-run-report-path-contract/negative-smoke-stale-absolute-report-path.log",
+    "reports/qd/m4-qd-run-report-path-contract/audit.json",
+    "reports/qd/m4-qd-run-report-path-contract/completion.json",
+    "roadmap/qd-export.json",
+    "scripts/qd-reports-check.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Historical qd run report_path values pointing into .qd/worktrees, /home worktrees, or /Users worktrees are normalized to canonical reports/qd/<node-id>/<report>.json paths when that report exists.",
+      "status": "passed",
+      "evidence": "Normalized 127 existing worktree-backed run report paths in roadmap/qd-export.json to canonical reports/qd/<node-id>/completion.json or reports/qd/<node-id>/audit.json based on run kind. A post-normalization scan found 0 remaining non-empty run report paths containing .qd/worktrees, starting with /home/, or starting with /Users/."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects non-empty roadmap/qd-export.json run report_path values that are absolute, contain traversal, or do not exist.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh now validates non-empty string .runs[].report_path values and reports errors for absolute paths, '..' traversal via path_has_traversal, and paths missing from the checkout. evidence/m4-qd-run-report-path-contract/negative-smoke-stale-absolute-report-path.log records a stale absolute worktree path failing as expected."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check after normalization.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-report-path-contract/just-qd-reports-check.log records nix develop -c just qd-reports-check passing after normalization."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, just check, and a temporary-copy negative smoke test for a stale absolute or worktree run report path.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-report-path-contract/negative-smoke-stale-absolute-report-path.log records the temporary mutation failure; evidence/m4-qd-run-report-path-contract/just-qd-reports-check.log and evidence/m4-qd-run-report-path-contract/just-check.log record the requested Linux validations."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "realWorldValidation.required is false because the change is repository metadata and Linux shell validation only."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary stale absolute worktree run report_path negative smoke test",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-report-path-contract/negative-smoke-stale-absolute-report-path.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-report-path-contract/just-qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-report-path-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-run-report-path-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-run-report-path-contract/git-diff-check.log",
+    "evidence/m4-qd-run-report-path-contract/just-check.log",
+    "evidence/m4-qd-run-report-path-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-run-report-path-contract/negative-smoke-stale-absolute-report-path.log",
+    "reports/qd/m4-qd-run-report-path-contract/audit.json",
+    "reports/qd/m4-qd-run-report-path-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Linux repository validation passed; no macOS-specific validation is required or claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

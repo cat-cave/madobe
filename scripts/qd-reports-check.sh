@@ -295,6 +295,33 @@ validate_roadmap_export() {
   fi
 }
 
+validate_roadmap_run_report_paths() {
+  local path
+
+  while IFS= read -r path; do
+    if [[ $path = /* ]]; then
+      report_error "$roadmap_export" "runs[].report_path must be repo-relative: $path"
+      continue
+    fi
+
+    if path_has_traversal "$path"; then
+      report_error "$roadmap_export" "runs[].report_path must not contain '..' traversal: $path"
+      continue
+    fi
+
+    if [[ ! -e $path ]]; then
+      report_error "$roadmap_export" "runs[].report_path does not exist: $path"
+    fi
+  done < <(
+    jq -r '
+      .runs[]?
+      | .report_path?
+      | select(type == "string")
+      | select((gsub("^[[:space:]]+|[[:space:]]+$"; "") | length) > 0)
+    ' "$roadmap_export"
+  )
+}
+
 node_exists_in_roadmap() {
   local node_id=$1
 
@@ -366,6 +393,7 @@ main() {
   fi
 
   if [[ $roadmap_valid -eq 1 ]]; then
+    validate_roadmap_run_report_paths
     validate_report_directory_coverage
     validate_done_node_report_coverage
   fi
