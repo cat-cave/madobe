@@ -1,0 +1,3 @@
+git diff --check
+just qd-reports-check
+nix develop -c just check

@@ -3682,6 +3682,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-qd-node-note-kind-doc-sync",
+      "title": "Document qd node note kind vocabulary",
+      "kind": "docs",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "low",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-qd-node-note-kind-doc-sync",
+      "spec": "Align qd workflow documentation with the committed node note schema checker by documenting the accepted node_notes[].kind vocabulary and intended orchestration use for blocker, retry, and note records.",
+      "acceptance": "docs/QD_WORKFLOW.md documents node_notes[].kind as blocker, retry, and note\nDocs explain the intended orchestration use for blocker, retry, and note node-note records\nDocs remain aligned with scripts/qd-report-check/roadmap-node-notes.sh\nEvidence and qd reports are recorded under evidence/m4-qd-node-note-kind-doc-sync and reports/qd/m4-qd-node-note-kind-doc-sync\njust qd-reports-check, git diff --check, and nix develop -c just check pass\nNo product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made",
+      "validation": null,
+      "context": "platform:both\nowner:linux-orchestrator\nvalidation:repo-quality-docs",
+      "created_at": "2026-07-05T18:45:17.124Z",
+      "updated_at": "2026-07-05T18:45:30.270Z",
+      "claimed_at": "2026-07-05T18:45:30.270Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -4026,6 +4056,12 @@
       "to_node": "m4-lan-video-smoke-cli-flag-contract",
       "type": "requires",
       "created_at": "2026-07-05T18:21:05.656Z"
+    },
+    {
+      "from_node": "m4-qd-node-note-schema-contract",
+      "to_node": "m4-qd-node-note-kind-doc-sync",
+      "type": "requires",
+      "created_at": "2026-07-05T18:45:20.812Z"
     }
   ],
   "findings": [

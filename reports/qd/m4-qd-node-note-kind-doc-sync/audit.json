@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-qd-node-note-kind-doc-sync",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The documented node_notes[].kind vocabulary includes blocker, retry, and note.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md"
+    },
+    {
+      "criterion": "The documentation explains intended orchestration use for all three node-note kinds.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and evidence/m4-qd-node-note-kind-doc-sync/notes.md"
+    },
+    {
+      "criterion": "The documented vocabulary matches scripts/qd-report-check/roadmap-node-notes.sh.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/roadmap-node-notes.sh"
+    },
+    {
+      "criterion": "Scope excludes product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, and credential-dependent claims.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-kind-doc-sync/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a qd workflow documentation alignment node and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "findings": []
+}
