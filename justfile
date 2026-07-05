@@ -58,6 +58,14 @@ coverage:
 
 mutants:
   command -v cargo-mutants >/dev/null 2>&1 || { echo "cargo-mutants missing; run inside nix develop"; exit 127; }
+  output_dir="$(mktemp -d "${TMPDIR:-/tmp}/madobe-mutants-smoke.XXXXXX")"; \
+  trap 'rm -rf "$output_dir"' EXIT; \
+  cargo mutants -p madobe-compositor --file crates/compositor/src/ids.rs --timeout 120 --jobs 2 --all-features --output "$output_dir/compositor-ids"; \
+  cargo mutants -p madobe-compositor --file crates/compositor/src/status.rs --timeout 120 --jobs 2 --all-features --output "$output_dir/compositor-status"; \
+  cargo mutants -p madobe-encode-nv-sys --file crates/encode-nv-sys/src/lib.rs --timeout 120 --jobs 2 --all-features --output "$output_dir/encode-nv-sys"
+
+mutants-full:
+  command -v cargo-mutants >/dev/null 2>&1 || { echo "cargo-mutants missing; run inside nix develop"; exit 127; }
   cargo mutants --workspace --timeout 120 --jobs 2
 
 security:

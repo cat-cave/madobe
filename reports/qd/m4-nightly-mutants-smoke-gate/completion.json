@@ -1,0 +1,85 @@
+{
+  "nodeId": "m4-nightly-mutants-smoke-gate",
+  "summary": "Changed the nightly mutation command into a curated passing cargo-mutants smoke gate while preserving the previous full workspace sweep as an explicit exploratory command.",
+  "changedFiles": [
+    "justfile",
+    "docs/ENGINEERING.md",
+    "evidence/m4-nightly-mutants-smoke-gate/commands.log",
+    "evidence/m4-nightly-mutants-smoke-gate/notes.md",
+    "reports/qd/m4-nightly-mutants-smoke-gate/completion.json",
+    "reports/qd/m4-nightly-mutants-smoke-gate/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Evidence records the failed nightly root cause from GitHub Actions run 28737770881.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-mutants-smoke-gate/notes.md records the supplied failed nightly summary: 759 mutants tested in 5m, 67 missed, 349 caught, 342 unviable, 1 timeout."
+    },
+    {
+      "criterion": "`just mutants` runs a curated mutation smoke gate that passes on current Linux/Nix.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-mutants-smoke-gate/commands.log records `nix develop -c just mutants` passing with 48 targeted mutants, no missed mutants, and no timeouts."
+    },
+    {
+      "criterion": "A separate full exploratory workspace mutation command remains available for manual baseline discovery.",
+      "status": "passed",
+      "evidence": "justfile defines `mutants-full` with the previous `cargo mutants --workspace --timeout 120 --jobs 2` command, and docs/ENGINEERING.md documents it as exploratory."
+    },
+    {
+      "criterion": "The nightly workflow continues to call `nix develop -c just mutants`.",
+      "status": "passed",
+      "evidence": "No nightly workflow change was needed; scripts/workflow-contract-check.sh still requires `run: nix develop -c just mutants`."
+    },
+    {
+      "criterion": "Workflow contract, qd reports, and Linux check gates pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-mutants-smoke-gate/commands.log records the required validation commands."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, or macOS-specific behavior is changed.",
+      "status": "passed",
+      "evidence": "Diff is limited to justfile, docs/ENGINEERING.md, and this node's evidence/reports."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just mutants",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-mutants-smoke-gate/commands.log"
+    },
+    {
+      "command": "nix develop -c just workflow-contract-check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-mutants-smoke-gate/commands.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-mutants-smoke-gate/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-mutants-smoke-gate/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-nightly-mutants-smoke-gate/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-nightly-mutants-smoke-gate/commands.log",
+    "evidence/m4-nightly-mutants-smoke-gate/notes.md",
+    "reports/qd/m4-nightly-mutants-smoke-gate/completion.json",
+    "reports/qd/m4-nightly-mutants-smoke-gate/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node changes the mutation test command surface and documentation only."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
