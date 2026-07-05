@@ -1,0 +1,6 @@
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.VeNGcvzTJm just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.VeNGcvzTJm: node_notes[1].id duplicates note id: 11020366-dc21-44ff-a163-e13d12ba61e4
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure exit: 1

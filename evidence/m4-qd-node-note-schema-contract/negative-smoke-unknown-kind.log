@@ -1,0 +1,6 @@
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.Cg01sG41gD just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.Cg01sG41gD: node_notes[0].kind must be one of blocker, retry: unknown
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure exit: 1

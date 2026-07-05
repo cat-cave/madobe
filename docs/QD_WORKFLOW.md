@@ -278,8 +278,9 @@ Completion reports must include an empty `unverifiedItems` array. Plain repo-pat
 non-blank `node_id` that references a real node, `severity` must be one of `P0`, `P1`, `P2`, or `P3`, and `status`
 must be one of `open`, `resolved`, or `promoted`. Edge records must use existing `from_node` and `to_node` node IDs,
 must not point from a node to itself, must not duplicate a `from_node`/`to_node`/`type` triple, and must use the
-known `type` vocabulary (`requires`). The command is wired into `just check` so malformed qd evidence records are
-caught before merge.
+known `type` vocabulary (`requires`). Node note records must reference existing non-blank node IDs, use the known
+`kind` vocabulary (`blocker`, `retry`), keep non-blank `id` and `text` values, and have unique note IDs. The command
+is wired into `just check` so malformed qd evidence records are caught before merge.
 
 Do not manufacture evidence for unavailable hardware. If the node depends on hardware, compositor, driver, network, credential, or macOS access that is unavailable, block the node with the correct typed blocker and record the exact missing condition.
 

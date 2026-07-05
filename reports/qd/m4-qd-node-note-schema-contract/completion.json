@@ -1,0 +1,106 @@
+{
+  "nodeId": "m4-qd-node-note-schema-contract",
+  "summary": "Tightened qd roadmap validation so node_notes records must reference existing nodes, use the accepted note kind vocabulary, keep non-blank id and text values, and avoid duplicate note ids.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "evidence/m4-qd-node-note-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-node-note-schema-contract/just-check.log",
+    "evidence/m4-qd-node-note-schema-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-node-note-schema-contract/negative-smoke-blank-note-content.log",
+    "evidence/m4-qd-node-note-schema-contract/negative-smoke-duplicate-note-id.log",
+    "evidence/m4-qd-node-note-schema-contract/negative-smoke-unknown-kind.log",
+    "evidence/m4-qd-node-note-schema-contract/negative-smoke-unknown-node-id.log",
+    "reports/qd/m4-qd-node-note-schema-contract/audit.json",
+    "reports/qd/m4-qd-node-note-schema-contract/completion.json",
+    "roadmap/qd-export.json",
+    "scripts/qd-report-check/roadmap.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects node_notes[] entries whose node_id is blank or does not match a node in roadmap/qd-export.json.",
+      "status": "passed",
+      "evidence": "validate_roadmap_node_note_node_ids checks trimmed node_notes[].node_id values against the export node id set; evidence/m4-qd-node-note-schema-contract/negative-smoke-unknown-node-id.log records a temporary-copy export failing with an unknown node id."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects unknown node_notes[].kind values outside blocker and retry.",
+      "status": "passed",
+      "evidence": "validate_roadmap_node_notes validates node_notes kind values with the shared vocabulary helper; evidence/m4-qd-node-note-schema-contract/negative-smoke-unknown-kind.log records kind=unknown failing."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects blank node_notes[].id or node_notes[].text values.",
+      "status": "passed",
+      "evidence": "validate_roadmap_node_note_required_strings trims id and text before accepting them; evidence/m4-qd-node-note-schema-contract/negative-smoke-blank-note-content.log records whitespace-only text failing."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects duplicate node_notes[].id values.",
+      "status": "passed",
+      "evidence": "validate_roadmap_node_note_duplicate_ids groups trimmed note ids and rejects repeated values; evidence/m4-qd-node-note-schema-contract/negative-smoke-duplicate-note-id.log records a temporary duplicate id failing."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-schema-contract/just-qd-reports-check.log records just qd-reports-check passing."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, git diff --check, and temporary-copy negative smoke tests for unknown node_id, unknown kind, blank note content, and duplicate note id.",
+      "status": "passed",
+      "evidence": "The evidence directory contains logs for direct qd report validation, the full Nix check, git diff whitespace checking, and all four temporary-copy negative smokes."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy unknown node_notes node_id smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-schema-contract/negative-smoke-unknown-node-id.log"
+    },
+    {
+      "command": "temporary-copy unknown node_notes kind smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-schema-contract/negative-smoke-unknown-kind.log"
+    },
+    {
+      "command": "temporary-copy blank node_notes text smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-schema-contract/negative-smoke-blank-note-content.log"
+    },
+    {
+      "command": "temporary-copy duplicate node_notes id smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-schema-contract/negative-smoke-duplicate-note-id.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-schema-contract/just-qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-schema-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-schema-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-node-note-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-node-note-schema-contract/just-check.log",
+    "evidence/m4-qd-node-note-schema-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-node-note-schema-contract/negative-smoke-blank-note-content.log",
+    "evidence/m4-qd-node-note-schema-contract/negative-smoke-duplicate-note-id.log",
+    "evidence/m4-qd-node-note-schema-contract/negative-smoke-unknown-kind.log",
+    "evidence/m4-qd-node-note-schema-contract/negative-smoke-unknown-node-id.log",
+    "reports/qd/m4-qd-node-note-schema-contract/audit.json",
+    "reports/qd/m4-qd-node-note-schema-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, macOS, hardware, capture, transport, decode, render, presentation, cross-device, or latency behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
