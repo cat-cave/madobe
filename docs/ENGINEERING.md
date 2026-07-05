@@ -88,6 +88,7 @@ just verify
 just coverage
 just ci-local
 just mutants
+just mutants-full
 just hardware
 ```
 
@@ -227,7 +228,12 @@ Coverage targets:
 Use `cargo-mutants` as a ratchet:
 
 - Required for `protocol`, permission policy, telemetry math, frame scheduling, reconnect/session state.
-- Nightly full run.
+- `just mutants` is the scheduled nightly mutation smoke gate. It runs a
+  curated set of targeted checks that are expected to pass on the current
+  Linux/Nix toolchain.
+- `just mutants-full` is the explicit full workspace exploratory sweep for
+  manual baseline discovery. It may reveal surviving mutants or timeouts until
+  the baseline is ratcheted.
 - PR targeted run for touched high-risk crates once runtime is acceptable.
 - Surviving mutants must become tests, documented equivalences, or explicit design decisions.
 

@@ -1,0 +1,33 @@
+Command: nix develop -c just mutants
+Status: passed
+Notes: Curated nightly smoke gate passed. Result:
+- compositor ids.rs: 12 mutants tested in 4s, 7 caught, 5 unviable.
+- compositor status.rs: 19 mutants tested in 5s, 3 caught, 16 unviable.
+- encode-nv-sys lib.rs: 17 mutants tested in 5s, 9 caught, 8 unviable.
+There were no missed mutants and no timeouts.
+
+Command: just --list
+Status: passed
+Notes: Confirmed both mutants and mutants-full are listed in the just command
+surface.
+
+Command: nix develop -c just workflow-contract-check
+Status: passed
+Notes: Workflow contract check passed. The nightly workflow contract still
+requires `run: nix develop -c just mutants`.
+
+Command: nix develop -c just qd-reports-check
+Status: passed
+Notes: qd report check validated 99 completion report(s) and 99 audit
+report(s), including this node's draft completion and audit reports.
+
+Command: nix develop -c just check
+Status: passed
+Notes: Full Linux hygiene gate passed. The run included cargo fmt, taplo,
+shfmt, qd-reports-check, pin-hygiene-check, pr-template-check,
+workflow-contract-check, dependabot-contract-check, cargo check, cargo clippy,
+shellcheck, typos, markdownlint-cli2, actionlint, and lint-lines.
+
+Command: git diff --check
+Status: passed
+Notes: No whitespace errors were reported.
