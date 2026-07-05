@@ -2,6 +2,9 @@
 
 `m2-capture-stream-proof` improved the evidence but does not unblock `m2-capture-one-frame`.
 
+Historical: this file records the capture-stream blocker context from the completed node and must not be read as an
+active blocker for `m2-capture-stream-proof`.
+
 The reference Linux host can create and clean up a node-scoped Hyprland headless output named
 `madobe-qd-m2-capture-stream-proof`, and a direct wlroots screenshot client can target that output by name when
 launched with the live Wayland socket:

@@ -1,0 +1,112 @@
+{
+  "nodeId": "m4-qd-blocker-report-contract",
+  "summary": "Implemented first-class blocker.md validation in just qd-reports-check, documented the contract, normalized existing done-node blocker files as historical, and captured focused negative smokes for malformed blocker reports.",
+  "changedFiles": [
+    "scripts/qd-reports-check.sh",
+    "scripts/qd-report-check/blocker.sh",
+    "docs/QD_WORKFLOW.md",
+    "docs/ORCHESTRATION.md",
+    "reports/qd/m2-capture-stream-proof/blocker.md",
+    "reports/qd/m2-pipewire-probe/blocker.md",
+    "reports/qd/m2-portal-chooser-interaction-proof/blocker.md",
+    "reports/qd/m2-portal-screencast-client-proof/blocker.md",
+    "evidence/m4-qd-blocker-report-contract/blocker-negative-smokes.log",
+    "evidence/m4-qd-blocker-report-contract/commands.log",
+    "evidence/m4-qd-blocker-report-contract/git-diff-check.log",
+    "evidence/m4-qd-blocker-report-contract/nix-just-check.log",
+    "evidence/m4-qd-blocker-report-contract/qd-reports-check.log",
+    "evidence/m4-qd-blocker-report-contract/shellcheck.log",
+    "reports/qd/m4-qd-blocker-report-contract/completion.json",
+    "reports/qd/m4-qd-blocker-report-contract/audit.json",
+    "roadmap/qd-export.json"
+  ],
+  "commits": [
+    "20973206e558c4026904461061d9d3871fee9cbc"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "just qd-reports-check validates every reports/qd/<node-id>/blocker.md file.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/blocker.sh is wired from scripts/qd-reports-check.sh and evidence/m4-qd-blocker-report-contract/qd-reports-check.log records just qd-reports-check passing with blocker report count."
+    },
+    {
+      "criterion": "Blocker report paths must map to an existing qd node id in roadmap/qd-export.json.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/blocker.sh validates the parent directory node id against roadmap/qd-export.json; blocker-negative-smokes.log records the unknown-node rejection."
+    },
+    {
+      "criterion": "Active blocker reports for blocked nodes must include node id, platform, failed command or operation, missing condition, evidence path, and unblock path.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/blocker.sh validates active blocked-node Markdown labels and existing evidence/<node-id>/ paths; blocker-negative-smokes.log records missing-command rejection."
+    },
+    {
+      "criterion": "Blocker reports for done nodes must explicitly mark themselves superseded or historical so stale blockers cannot look current.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/blocker.sh requires Superseded: or Historical: for done-node blockers; existing done-node blocker files were minimally normalized."
+    },
+    {
+      "criterion": "Focused negative smokes prove malformed blocker reports are rejected.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-blocker-report-contract/blocker-negative-smokes.log"
+    },
+    {
+      "criterion": "Existing blocker reports pass after minimal wording normalization.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-blocker-report-contract/qd-reports-check.log records just qd-reports-check passing after the blocker contract was added."
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or live credentials are required.",
+      "status": "passed",
+      "evidence": "This infra-only checker change used qd metadata, shell validation, markdown reports, and local repository checks only."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "qd node show m4-qd-blocker-report-contract --full",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-blocker-report-contract/commands.log"
+    },
+    {
+      "command": "focused blocker negative smokes",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-blocker-report-contract/blocker-negative-smokes.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-blocker-report-contract/qd-reports-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-blocker-report-contract/git-diff-check.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/qd-reports-check.sh scripts/qd-report-check/blocker.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-blocker-report-contract/shellcheck.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-blocker-report-contract/nix-just-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-blocker-report-contract/blocker-negative-smokes.log",
+    "evidence/m4-qd-blocker-report-contract/commands.log",
+    "evidence/m4-qd-blocker-report-contract/git-diff-check.log",
+    "evidence/m4-qd-blocker-report-contract/nix-just-check.log",
+    "evidence/m4-qd-blocker-report-contract/qd-reports-check.log",
+    "evidence/m4-qd-blocker-report-contract/shellcheck.log",
+    "reports/qd/m4-qd-blocker-report-contract/completion.json",
+    "reports/qd/m4-qd-blocker-report-contract/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "The node changes only qd report checking, docs, and markdown evidence contracts; no product runtime or external credential validation is required."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

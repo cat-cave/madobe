@@ -1,5 +1,8 @@
 # m2-portal-chooser-interaction-proof Blocker
 
+Historical: this file records the portal chooser blocker context from the completed node and must not be read as an
+active blocker for `m2-portal-chooser-interaction-proof`.
+
 The chooser interaction proof confirms that the portal UI appears, but it does not clear the M2 capture blocker.
 
 The helper successfully received the `CreateSession` response and extracted a `session_handle`. It then called

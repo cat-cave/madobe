@@ -10,6 +10,8 @@ source "$script_dir/qd-report-check/common.sh"
 source "$script_dir/qd-report-check/completion.sh"
 # shellcheck source=scripts/qd-report-check/audit.sh
 source "$script_dir/qd-report-check/audit.sh"
+# shellcheck source=scripts/qd-report-check/blocker.sh
+source "$script_dir/qd-report-check/blocker.sh"
 # shellcheck source=scripts/qd-report-check/line-budget.sh
 source "$script_dir/qd-report-check/line-budget.sh"
 # shellcheck source=scripts/qd-report-check/roadmap.sh
@@ -18,6 +20,7 @@ source "$script_dir/qd-report-check/roadmap.sh"
 main() {
   local completion_count=0
   local audit_count=0
+  local blocker_count=0
   local file
   local roadmap_valid=0
 
@@ -42,6 +45,11 @@ main() {
     validate_audit "$file"
   done < <(find reports/qd -mindepth 2 -maxdepth 2 -type f -name audit.json -print0 | sort -z)
 
+  while IFS= read -r -d '' file; do
+    blocker_count=$((blocker_count + 1))
+    validate_blocker "$file"
+  done < <(find reports/qd -mindepth 2 -maxdepth 2 -type f -name blocker.md -print0 | sort -z)
+
   if [[ $completion_count -eq 0 ]]; then
     report_error reports/qd "no completion reports found"
   fi
@@ -62,7 +70,7 @@ main() {
     exit 1
   fi
 
-  printf 'qd report check: validated %d completion report(s) and %d audit report(s)\n' "$completion_count" "$audit_count"
+  printf 'qd report check: validated %d completion report(s), %d audit report(s), and %d blocker report(s)\n' "$completion_count" "$audit_count" "$blocker_count"
 }
 
 main "$@"

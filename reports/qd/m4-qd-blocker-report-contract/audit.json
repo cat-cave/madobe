@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-qd-blocker-report-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Blocker reports are validated by just qd-reports-check.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh sources scripts/qd-report-check/blocker.sh and iterates reports/qd/*/blocker.md."
+    },
+    {
+      "criterion": "Blocker report node ids map to roadmap/qd-export.json.",
+      "status": "passed",
+      "evidence": "validate_blocker_node_exists rejects a blocker path whose parent directory is not a qd node id."
+    },
+    {
+      "criterion": "Active blocked-node blockers include required actionable fields.",
+      "status": "passed",
+      "evidence": "validate_active_blocker requires labeled platform, command or operation, missing condition, evidence, unblock path, and existing evidence/<node-id>/ paths."
+    },
+    {
+      "criterion": "Done-node blockers are marked historical or superseded.",
+      "status": "passed",
+      "evidence": "validate_historical_blocker requires Superseded: or Historical:, and existing done-node blockers now include those markers."
+    },
+    {
+      "criterion": "Malformed blocker reports are rejected by focused negative smokes.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-blocker-report-contract/blocker-negative-smokes.log"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This qd checker contract does not require product runtime, hardware, workflow dispatch, or live credentials."
+  },
+  "findings": []
+}

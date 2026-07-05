@@ -1,0 +1,6 @@
+qd report check: reports/qd/missing-node/blocker.md: blocker report directory must match a node id in /tmp/tmp.KrLaemfYJI/export.json
+PASS unknown-node: rejected with 1 error(s)
+qd report check: reports/qd/blocked-node/blocker.md: active blocker must include failed command or operation
+PASS missing-command: rejected with 1 error(s)
+qd report check: reports/qd/done-node/blocker.md: done-node blocker must be explicitly marked Superseded: or Historical:
+PASS done-without-historical: rejected with 1 error(s)
