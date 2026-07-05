@@ -1,0 +1,56 @@
+{
+  "nodeId": "m4-qd-finding-content-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects findings[] entries with malformed id values.",
+      "status": "passed",
+      "evidence": "validate_roadmap_finding_content requires lowercase UUID-shaped finding ids; negative-smoke-malformed-id.log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects findings[] entries with blank title or evidence values.",
+      "status": "passed",
+      "evidence": "The checker requires non-blank title and evidence strings; negative-smoke-blank-title-evidence.log records the expected rejections."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects absolute or traversal findings[].path values when path is present.",
+      "status": "passed",
+      "evidence": "The path check rejects absolute paths and '..' traversal, and negative-smoke-absolute-path.log plus negative-smoke-traversal-path.log record expected failures."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects non-positive or non-integer findings[].line values when line is present.",
+      "status": "passed",
+      "evidence": "The line check accepts only positive integer values; negative-smoke-bad-line.log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects malformed created_at or resolved_at values and non-string optional text fields.",
+      "status": "passed",
+      "evidence": "The timestamp and optional text checks reject malformed values; negative-smoke-bad-timestamp.log and negative-smoke-non-string-optional-text.log record expected failures."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/just-qd-reports-check.log records qd report validation passing with this node's completion and audit reports included."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, git diff --check, and temporary-copy negative smokes for malformed roadmap findings.",
+      "status": "passed",
+      "evidence": "The evidence directory contains the requested positive validation logs and negative smoke logs for malformed finding id, content, path, line, timestamp, and optional text cases."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "The completion report marks realWorldValidation not_required and limits the node to repository qd metadata validation."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}

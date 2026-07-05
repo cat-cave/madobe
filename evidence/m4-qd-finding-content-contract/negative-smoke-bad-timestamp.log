@@ -1,0 +1,11 @@
+smoke: negative-smoke-bad-timestamp
+mutator: jq .findings[0].created_at = "2026/07/05" | .findings[1].resolved_at = "yesterday" roadmap/qd-export.json
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/m4-qd-finding-content-contract-negative-smoke-bad-timestamp.json just qd-reports-check
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/m4-qd-finding-content-contract-negative-smoke-bad-timestamp.json: findings[0].created_at must be an ISO-like timestamp string: 2026/07/05
+qd report check: /tmp/m4-qd-finding-content-contract-negative-smoke-bad-timestamp.json: findings[1].resolved_at must be an ISO-like timestamp string: yesterday
+qd report check: failed with 2 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+result: expected failure (exit 1)

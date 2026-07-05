@@ -1,0 +1,142 @@
+{
+  "nodeId": "m4-qd-finding-content-contract",
+  "summary": "Tightened qd roadmap finding validation so committed findings must have UUID-shaped identifiers, non-blank content, typed optional fields, timestamp-shaped lifecycle fields, and safe optional repo-relative source paths.",
+  "changedFiles": [
+    "evidence/m4-qd-finding-content-contract/git-diff-check.log",
+    "evidence/m4-qd-finding-content-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-absolute-path.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-bad-line.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-bad-timestamp.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-blank-title-evidence.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-malformed-id.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-non-string-optional-text.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-non-string-path.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-traversal-path.log",
+    "evidence/m4-qd-finding-content-contract/nix-develop-just-check.log",
+    "reports/qd/m4-qd-finding-content-contract/audit.json",
+    "reports/qd/m4-qd-finding-content-contract/completion.json",
+    "scripts/qd-report-check/roadmap.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects findings[] entries with malformed id values.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-malformed-id.log records the expected rejection for a non-UUID finding id."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects findings[] entries with blank title or evidence values.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-blank-title-evidence.log records the expected rejection for blank title and evidence fields."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects absolute or traversal findings[].path values when path is present.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-absolute-path.log and evidence/m4-qd-finding-content-contract/negative-smoke-traversal-path.log record the expected path rejections."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects non-positive or non-integer findings[].line values when line is present.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-bad-line.log records the expected rejection for line 0."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects malformed created_at or resolved_at values and non-string optional text fields.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-bad-timestamp.log and evidence/m4-qd-finding-content-contract/negative-smoke-non-string-optional-text.log record the expected rejections."
+    },
+    {
+      "criterion": "Optional finding path fields remain typed.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-non-string-path.log records the expected rejection for an object-valued path."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/just-qd-reports-check.log records qd report validation passing with the stricter checker."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, git diff --check, and temporary-copy negative smokes.",
+      "status": "passed",
+      "evidence": "The evidence directory contains the requested positive logs plus temporary-copy negative smoke logs for malformed roadmap findings."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy malformed finding id smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-malformed-id.log"
+    },
+    {
+      "command": "temporary-copy blank finding title/evidence smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-blank-title-evidence.log"
+    },
+    {
+      "command": "temporary-copy absolute finding path smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-absolute-path.log"
+    },
+    {
+      "command": "temporary-copy traversal finding path smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-traversal-path.log"
+    },
+    {
+      "command": "temporary-copy non-string finding path smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-non-string-path.log"
+    },
+    {
+      "command": "temporary-copy bad finding line smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-bad-line.log"
+    },
+    {
+      "command": "temporary-copy bad finding timestamp smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-bad-timestamp.log"
+    },
+    {
+      "command": "temporary-copy non-string optional finding text smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/negative-smoke-non-string-optional-text.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/just-qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/nix-develop-just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-content-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-finding-content-contract/git-diff-check.log",
+    "evidence/m4-qd-finding-content-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-absolute-path.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-bad-line.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-bad-timestamp.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-blank-title-evidence.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-malformed-id.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-non-string-optional-text.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-non-string-path.log",
+    "evidence/m4-qd-finding-content-contract/negative-smoke-traversal-path.log",
+    "evidence/m4-qd-finding-content-contract/nix-develop-just-check.log",
+    "reports/qd/m4-qd-finding-content-contract/audit.json",
+    "reports/qd/m4-qd-finding-content-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, macOS, hardware, capture, transport, decode, render, or latency behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

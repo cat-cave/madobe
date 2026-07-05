@@ -1,0 +1,11 @@
+smoke: negative-smoke-blank-title-evidence
+mutator: jq .findings[0].title = "   " | .findings[1].evidence = "" roadmap/qd-export.json
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/m4-qd-finding-content-contract-negative-smoke-blank-title-evidence.json just qd-reports-check
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/m4-qd-finding-content-contract-negative-smoke-blank-title-evidence.json: findings[0].title must be a non-blank string:    
+qd report check: /tmp/m4-qd-finding-content-contract-negative-smoke-blank-title-evidence.json: findings[1].evidence must be a non-blank string: 
+qd report check: failed with 2 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+result: expected failure (exit 1)

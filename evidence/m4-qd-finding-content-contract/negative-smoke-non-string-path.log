@@ -1,0 +1,10 @@
+smoke: non-string finding path
+mutator: jq .findings[0].path = {path: src/lib.rs} roadmap/qd-export.json
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/m4-qd-finding-content-contract-non-string-path.h6BfdA.json just qd-reports-check
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/m4-qd-finding-content-contract-non-string-path.h6BfdA.json: findings[0].path must be null or a string: {"path":"src/lib.rs"}
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+result: expected failure (exit 1)

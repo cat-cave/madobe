@@ -1,0 +1,10 @@
+smoke: negative-smoke-malformed-id
+mutator: jq .findings[0].id = "BAD-ID" roadmap/qd-export.json
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/m4-qd-finding-content-contract-negative-smoke-malformed-id.json just qd-reports-check
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/m4-qd-finding-content-contract-negative-smoke-malformed-id.json: findings[0].id must be a lowercase UUID-shaped string: BAD-ID
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+result: expected failure (exit 1)

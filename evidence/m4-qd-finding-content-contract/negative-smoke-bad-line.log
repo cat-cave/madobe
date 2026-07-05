@@ -1,0 +1,10 @@
+smoke: negative-smoke-bad-line
+mutator: jq .findings[0].line = 0 | .findings[1].line = 1.5 roadmap/qd-export.json
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/m4-qd-finding-content-contract-negative-smoke-bad-line.json just qd-reports-check
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/m4-qd-finding-content-contract-negative-smoke-bad-line.json: findings[0].line must be a positive integer when present: 0
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+result: expected failure (exit 1)
