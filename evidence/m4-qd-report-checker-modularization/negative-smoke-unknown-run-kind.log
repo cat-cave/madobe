@@ -1,0 +1,5 @@
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.agmIrehrfW/qd-export-unknown-run-kind.json bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.agmIrehrfW/qd-export-unknown-run-kind.json: runs[0].kind must be one of implement, audit, ci, merge: blocker
+qd report check: failed with 1 error(s)
+exit status: 1
+negative-smoke: success - checker rejected unknown runs[].kind=blocker

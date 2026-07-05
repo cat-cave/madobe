@@ -1,0 +1,1 @@
+git diff --check HEAD: success (no output)
