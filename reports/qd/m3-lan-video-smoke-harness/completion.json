@@ -9,7 +9,7 @@
     "crates/transport/src/video_smoke/artifacts.rs",
     "crates/transport/src/video_smoke/cli.rs",
     "crates/transport/src/video_smoke/mod.rs",
-    "crates/transport/src/video_smoke/sha256.rs",
+    "crates/transport/src/sha256.rs",
     "crates/transport/src/video_smoke/wire.rs",
     "crates/transport/tests/lan_video_smoke.rs",
     "docs/LAN_VIDEO_SMOKE_HARNESS.md",
