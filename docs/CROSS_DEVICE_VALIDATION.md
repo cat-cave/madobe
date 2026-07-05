@@ -298,8 +298,15 @@ just product-quic-result-check evidence/m4-product-quic-cross-device-smoke/macos
 ```
 
 With no arguments, the same command validates the checked-in golden fixture and negative fixtures for obsolete
-flat schema fields and unsupported downstream claims. `just check` runs that default validation in local and CI
-quality gates.
+flat schema fields, unsupported downstream claims, and explicit-result artifact failures. The no-argument form is
+schema-only for the golden fixture: it does not require checked-in fixture artifact paths to exist on the local
+machine. `just check` runs that default validation in local and CI quality gates.
+
+When a result path is provided, product QUIC validation runs in explicit mode. Explicit mode verifies that every
+listed `artifacts[].path` exists relative to the repo root. If an artifact is present with kind `commands_log`,
+`sender_log`, `receiver_log`, `payload_validation_evidence`, or `notes`, the referenced file must also be non-empty.
+This existence and non-empty check uses generated negative self-tests, so it does not require live product QUIC,
+Mac decode, render, presentation, latency, workflow dispatch, or credentials.
 
 ## Failure Handling
 

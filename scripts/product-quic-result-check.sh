@@ -13,7 +13,7 @@ main() {
   result_check_cd_repo_root
 
   if [[ $# -eq 0 ]]; then
-    validate_file "$default_fixture"
+    validate_file "$default_fixture" fixture
     run_self_tests
     printf 'product quic result check: validated %s and negative fixtures\n' "$default_fixture"
     return
@@ -21,13 +21,14 @@ main() {
 
   local file
   for file in "$@"; do
-    validate_file "$file"
+    validate_file "$file" explicit
   done
   printf 'product quic result check: validated %d file(s)\n' "$#"
 }
 
 validate_file() {
   local file=$1
+  local mode=${2:-explicit}
   local errors=0
 
   if [[ ! -f $file ]]; then
@@ -74,6 +75,14 @@ validate_file() {
   require_jq "$file" '(.downstreamClaims.presented != true) or any(.artifacts[]?; .kind == "presentation_evidence")' 'presented claim requires presentation_evidence artifact'
   require_jq "$file" '(.downstreamClaims.latencyMs == null) or any(.artifacts[]?; .kind == "latency_evidence")' 'latency claim requires latency_evidence artifact'
 
+  if [[ $mode == explicit ]]; then
+    result_check_validate_existing_artifacts \
+      "$check_name" \
+      "$file" \
+      "commands_log,sender_log,receiver_log,payload_validation_evidence,notes" ||
+      errors=$((errors + 1))
+  fi
+
   if [[ $errors -ne 0 ]]; then
     return 1
   fi
@@ -115,6 +124,10 @@ def is_product_quic_artifact_kind:
 run_self_tests() {
   local tmpdir
   tmpdir=$(mktemp -d "${TMPDIR:-/tmp}/madobe-product-quic-result-check.XXXXXX")
+  mkdir -p target
+
+  local repo_tmpdir
+  repo_tmpdir=$(mktemp -d "target/madobe-product-quic-result-check.XXXXXX")
 
   local obsolete="$tmpdir/obsolete-flat-result.json"
   local unsupported_claim="$tmpdir/unsupported-claim-result.json"
@@ -122,6 +135,44 @@ run_self_tests() {
   local traversal_artifact="$tmpdir/traversal-artifact-result.json"
   local traversal_evidence_dir="$tmpdir/traversal-evidence-dir-result.json"
   local unknown_artifact_kind="$tmpdir/unknown-artifact-kind-result.json"
+  local missing_artifact="$tmpdir/missing-artifact-result.json"
+  local empty_core_artifact="$tmpdir/empty-core-artifact-result.json"
+
+  local commands_log="$repo_tmpdir/commands.log"
+  local sender_log="$repo_tmpdir/sender.log"
+  local receiver_log="$repo_tmpdir/receiver.log"
+  local payload_validation="$repo_tmpdir/payload-validation.json"
+  local notes_artifact="$repo_tmpdir/notes.md"
+  printf 'product QUIC commands\n' >"$commands_log"
+  printf 'sender log\n' >"$sender_log"
+  printf 'receiver log\n' >"$receiver_log"
+  printf '{"validated":true}\n' >"$payload_validation"
+  printf 'notes\n' >"$notes_artifact"
+
+  jq \
+    --arg commands_log "$commands_log" \
+    --arg sender_log "$sender_log" \
+    --arg receiver_log "$receiver_log" \
+    --arg payload_validation "$payload_validation" \
+    --arg notes_artifact "$notes_artifact" \
+    '.artifacts = [
+      {"path": $commands_log, "kind": "commands_log"},
+      {"path": $sender_log, "kind": "sender_log"},
+      {"path": $receiver_log, "kind": "receiver_log"},
+      {"path": $payload_validation, "kind": "payload_validation_evidence"},
+      {"path": $notes_artifact, "kind": "notes"}
+    ]' \
+    "$default_fixture" >"$empty_core_artifact"
+  : >"$sender_log"
+
+  jq \
+    --arg commands_log "$commands_log" \
+    --arg missing_artifact "$repo_tmpdir/missing-receiver.log" \
+    '.artifacts = [
+      {"path": $commands_log, "kind": "commands_log"},
+      {"path": $missing_artifact, "kind": "receiver_log"}
+    ]' \
+    "$default_fixture" >"$missing_artifact"
 
   jq '. + {framesSent: 1, validated: {payloadSha256: true}}' "$default_fixture" >"$obsolete"
   jq '.downstreamClaims.decoded = true' "$default_fixture" >"$unsupported_claim"
@@ -137,15 +188,19 @@ run_self_tests() {
   expect_invalid "$traversal_artifact" 'traversal artifact path' || self_test_status=1
   expect_invalid "$traversal_evidence_dir" 'traversal endpoint evidence dir' || self_test_status=1
   expect_invalid "$unknown_artifact_kind" 'unknown artifact kind' || self_test_status=1
+  expect_invalid "$missing_artifact" 'missing explicit artifact' explicit || self_test_status=1
+  expect_invalid "$empty_core_artifact" 'empty explicit core artifact' explicit || self_test_status=1
   rm -rf "$tmpdir"
+  rm -rf "$repo_tmpdir"
   return "$self_test_status"
 }
 
 expect_invalid() {
   local file=$1
   local context=$2
+  local mode=${3:-fixture}
 
-  if validate_file "$file" >/dev/null 2>&1; then
+  if validate_file "$file" "$mode" >/dev/null 2>&1; then
     printf '%s: negative fixture unexpectedly passed: %s\n' "$check_name" "$context" >&2
     return 1
   fi
