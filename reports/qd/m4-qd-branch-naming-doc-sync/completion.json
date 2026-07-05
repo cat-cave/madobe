@@ -1,0 +1,95 @@
+{
+  "nodeId": "m4-qd-branch-naming-doc-sync",
+  "summary": "Aligned qd playbook branch naming guidance with the current spec/<node-id> convention while preserving awareness of historical qd/ branches.",
+  "changedFiles": [
+    "docs/ORCHESTRATION.md",
+    "docs/QD_WORKFLOW.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-qd-branch-naming-doc-sync/branch-naming-doc-check.log",
+    "evidence/m4-qd-branch-naming-doc-sync/commands.log",
+    "evidence/m4-qd-branch-naming-doc-sync/git-diff-check.log",
+    "evidence/m4-qd-branch-naming-doc-sync/nix-just-check.log",
+    "evidence/m4-qd-branch-naming-doc-sync/notes.md",
+    "evidence/m4-qd-branch-naming-doc-sync/qd-reports-check.log",
+    "reports/qd/m4-qd-branch-naming-doc-sync/completion.json",
+    "reports/qd/m4-qd-branch-naming-doc-sync/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents that qd worktree branches should carry the exact qd node id and default to spec/<node-id> unless the node already records a different branch.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md and evidence/m4-qd-branch-naming-doc-sync/branch-naming-doc-check.log"
+    },
+    {
+      "criterion": "docs/ORCHESTRATION.md tells orchestrators to inspect open PRs with current spec/ and historical qd/ branch prefixes.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md and evidence/m4-qd-branch-naming-doc-sync/branch-naming-doc-check.log"
+    },
+    {
+      "criterion": "docs/ORCHESTRATION.md implementor prompt uses spec/<node-id> rather than qd/<node-id>-short-topic.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md and evidence/m4-qd-branch-naming-doc-sync/branch-naming-doc-check.log"
+    },
+    {
+      "criterion": "No qd behavior changes and no historical evidence, report, or branch rewrites.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-branch-naming-doc-sync/notes.md"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded under evidence/m4-qd-branch-naming-doc-sync and reports/qd/m4-qd-branch-naming-doc-sync.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-branch-naming-doc-sync/notes.md and reports/qd/m4-qd-branch-naming-doc-sync/completion.json"
+    },
+    {
+      "criterion": "git diff --check, just qd-reports-check, and nix develop -c just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-branch-naming-doc-sync/git-diff-check.log, evidence/m4-qd-branch-naming-doc-sync/qd-reports-check.log, and evidence/m4-qd-branch-naming-doc-sync/nix-just-check.log"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-branch-naming-doc-sync/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "rg -n \"spec/<node-id>|qd/<node-id>|open PRs whose branch|branch name that carries|Use a qd worktree and branch\" docs/QD_WORKFLOW.md docs/ORCHESTRATION.md",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-branch-naming-doc-sync/branch-naming-doc-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-branch-naming-doc-sync/git-diff-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-branch-naming-doc-sync/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-branch-naming-doc-sync/nix-just-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-branch-naming-doc-sync/branch-naming-doc-check.log",
+    "evidence/m4-qd-branch-naming-doc-sync/commands.log",
+    "evidence/m4-qd-branch-naming-doc-sync/git-diff-check.log",
+    "evidence/m4-qd-branch-naming-doc-sync/nix-just-check.log",
+    "evidence/m4-qd-branch-naming-doc-sync/notes.md",
+    "evidence/m4-qd-branch-naming-doc-sync/qd-reports-check.log",
+    "reports/qd/m4-qd-branch-naming-doc-sync/completion.json",
+    "reports/qd/m4-qd-branch-naming-doc-sync/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a qd workflow documentation alignment node and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
+

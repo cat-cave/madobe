@@ -215,11 +215,15 @@ Claim before starting work:
 qd claim <node-id> --agent trevor-linux
 ```
 
-Use a branch name that carries the qd node:
+Use a branch name that carries the exact qd node id. The current default is:
 
 ```text
-qd/<node-id>-short-topic
+spec/<node-id>
 ```
+
+If a node already records a different branch name, use that exact branch. Historical `qd/` branches can remain in old
+records, but new work should prefer the `spec/<node-id>` form so qd worktrees, GitHub PRs, and coordination comments
+line up without extra short-topic variants.
 
 For risky or concurrent work, use qd worktrees:
 
