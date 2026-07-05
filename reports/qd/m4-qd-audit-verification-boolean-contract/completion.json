@@ -13,7 +13,9 @@
     "reports/qd/m4-qd-audit-verification-boolean-contract/completion.json",
     "scripts/qd-report-check/audit.sh"
   ],
-  "commits": [],
+  "commits": [
+    "293561c33fe7e79b15a8dd563cf792402024e2fd"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check rejects audit reports with verificationEvidence.diffReviewed set to false.",
