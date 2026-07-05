@@ -1,0 +1,6 @@
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.yV3fNz3HlG/qd-export-non-object-registries.json just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.yV3fNz3HlG/qd-export-non-object-registries.json: must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, and array top-level collections
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure for non-object registries

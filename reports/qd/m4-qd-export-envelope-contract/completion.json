@@ -1,0 +1,110 @@
+{
+  "nodeId": "m4-qd-export-envelope-contract",
+  "summary": "Tightened qd roadmap validation so the committed qd export must keep the deterministic top-level envelope and required collection types.",
+  "changedFiles": [
+    "evidence/m4-qd-export-envelope-contract/git-diff-check.log",
+    "evidence/m4-qd-export-envelope-contract/just-check.log",
+    "evidence/m4-qd-export-envelope-contract/negative-smoke-bad-exported-at.log",
+    "evidence/m4-qd-export-envelope-contract/negative-smoke-bad-schema-version.log",
+    "evidence/m4-qd-export-envelope-contract/negative-smoke-non-array-top-level-collections.log",
+    "evidence/m4-qd-export-envelope-contract/negative-smoke-non-object-registries.log",
+    "evidence/m4-qd-export-envelope-contract/qd-reports-check.log",
+    "reports/qd/m4-qd-export-envelope-contract/audit.json",
+    "reports/qd/m4-qd-export-envelope-contract/completion.json",
+    "roadmap/qd-export.json",
+    "scripts/qd-report-check/roadmap.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh requires schema_version == 2.",
+      "status": "passed",
+      "evidence": "The roadmap export validator now requires .schema_version == 2; evidence/m4-qd-export-envelope-contract/negative-smoke-bad-schema-version.log records a temporary-copy rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh requires exported_at == 1970-01-01T00:00:00.000Z for deterministic committed exports.",
+      "status": "passed",
+      "evidence": "The roadmap export validator now requires the deterministic epoch exported_at value; evidence/m4-qd-export-envelope-contract/negative-smoke-bad-exported-at.log records a temporary-copy rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh requires registries to be an object.",
+      "status": "passed",
+      "evidence": "The roadmap export validator now requires .registries to have object type; evidence/m4-qd-export-envelope-contract/negative-smoke-non-object-registries.log records a temporary-copy rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh requires nodes, edges, runs, findings, node_notes, assignments, waves, and wave_memberships to be arrays.",
+      "status": "passed",
+      "evidence": "The roadmap export validator now checks all required top-level collection fields as arrays; evidence/m4-qd-export-envelope-contract/negative-smoke-non-array-top-level-collections.log records a rejection for each required collection."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-envelope-contract/qd-reports-check.log records just qd-reports-check passing with the stricter envelope validation."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, and temporary-copy negative smoke tests.",
+      "status": "passed",
+      "evidence": "The evidence directory contains qd-reports-check.log, just-check.log, git-diff-check.log, and the four requested temporary-copy negative smoke logs."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "This node only changes repository qd metadata validation; realWorldValidation is marked not_required."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy bad schema_version smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-envelope-contract/negative-smoke-bad-schema-version.log"
+    },
+    {
+      "command": "temporary-copy bad exported_at smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-envelope-contract/negative-smoke-bad-exported-at.log"
+    },
+    {
+      "command": "temporary-copy non-object registries smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-envelope-contract/negative-smoke-non-object-registries.log"
+    },
+    {
+      "command": "temporary-copy non-array top-level collections smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-envelope-contract/negative-smoke-non-array-top-level-collections.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-envelope-contract/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-envelope-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-export-envelope-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-export-envelope-contract/git-diff-check.log",
+    "evidence/m4-qd-export-envelope-contract/just-check.log",
+    "evidence/m4-qd-export-envelope-contract/negative-smoke-bad-exported-at.log",
+    "evidence/m4-qd-export-envelope-contract/negative-smoke-bad-schema-version.log",
+    "evidence/m4-qd-export-envelope-contract/negative-smoke-non-array-top-level-collections.log",
+    "evidence/m4-qd-export-envelope-contract/negative-smoke-non-object-registries.log",
+    "evidence/m4-qd-export-envelope-contract/qd-reports-check.log",
+    "reports/qd/m4-qd-export-envelope-contract/audit.json",
+    "reports/qd/m4-qd-export-envelope-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd export validation only; no product runtime, macOS, hardware, capture, encode, transport, decode, render, or latency behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

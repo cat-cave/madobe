@@ -1,0 +1,56 @@
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.GbGy44n2hO/qd-export-non-array-nodes.json just qd-reports-check # nodes is object
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.GbGy44n2hO/qd-export-non-array-nodes.json: must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, and array top-level collections
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure for non-array nodes
+
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.s1tvfANUuE/qd-export-non-array-edges.json just qd-reports-check # edges is object
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.s1tvfANUuE/qd-export-non-array-edges.json: must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, and array top-level collections
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure for non-array edges
+
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.uXJZTYbvW0/qd-export-non-array-runs.json just qd-reports-check # runs is object
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.uXJZTYbvW0/qd-export-non-array-runs.json: must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, and array top-level collections
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure for non-array runs
+
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.FdESSSiGvX/qd-export-non-array-findings.json just qd-reports-check # findings is object
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.FdESSSiGvX/qd-export-non-array-findings.json: must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, and array top-level collections
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure for non-array findings
+
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.1TTA9WmpVH/qd-export-non-array-node_notes.json just qd-reports-check # node_notes is object
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.1TTA9WmpVH/qd-export-non-array-node_notes.json: must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, and array top-level collections
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure for non-array node_notes
+
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.KjVOUQmCt5/qd-export-non-array-assignments.json just qd-reports-check # assignments is object
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.KjVOUQmCt5/qd-export-non-array-assignments.json: must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, and array top-level collections
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure for non-array assignments
+
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.bNgi9T60uP/qd-export-non-array-waves.json just qd-reports-check # waves is object
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.bNgi9T60uP/qd-export-non-array-waves.json: must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, and array top-level collections
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure for non-array waves
+
+$ QD_REPORTS_ROADMAP_EXPORT=/tmp/tmp.kSHeun6oJT/qd-export-non-array-wave_memberships.json just qd-reports-check # wave_memberships is object
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.kSHeun6oJT/qd-export-non-array-wave_memberships.json: must use deterministic qd export envelope: schema_version 2, epoch exported_at, object registries, and array top-level collections
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+expected failure for non-array wave_memberships
+
