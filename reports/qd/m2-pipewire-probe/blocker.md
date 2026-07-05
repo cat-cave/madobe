@@ -1,5 +1,8 @@
 # m2-pipewire-probe Capability Limit
 
+Historical: this file records the PipeWire/XDPH capability limit from the completed node and must not be read as an
+active blocker for `m2-pipewire-probe`.
+
 Named remote output capture through PipeWire/XDPH was not proven.
 
 Evidence:

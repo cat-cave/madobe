@@ -215,8 +215,8 @@ Only one orchestrator should make topology changes at a time unless the edits ar
 Block instead of weakening acceptance criteria. A blocker should record:
 
 - node id
-- exact command or operation that failed
 - platform
+- exact command or operation that failed
 - missing hardware, credential, dependency, API behavior, or remote validation
 - evidence path
 - proposed unblock path
@@ -226,6 +226,11 @@ Use qd's blocker/status mechanism when available, and always write:
 ```text
 reports/qd/<node-id>/blocker.md
 ```
+
+Active blocker reports for nodes that remain `blocked` must use labeled Markdown fields for `Platform:`, `Command:` or
+`Operation:`, `Missing condition:`, `Evidence:`, and `Unblock path:`. Evidence entries must include an existing
+repo-relative path under `evidence/<node-id>/`. If the node later becomes `done`, keep the old blocker only as
+context and mark the file `Superseded:` or `Historical:` near the top.
 
 Post cross-machine blockers to the coordination issue with the `blocked` and platform labels on the PR or issue.
 

@@ -272,10 +272,10 @@ reports/qd/<node-id>/
   audit.json
 ```
 
-`just qd-reports-check` validates committed report shape for `reports/qd/*/completion.json` and
-`reports/qd/*/audit.json`. The gate requires parseable JSON, required top-level fields with expected types, a
-`nodeId` matching the containing directory, and `realWorldValidation.status` set to `passed`, `not_required`, or
-`blocked`.
+`just qd-reports-check` validates committed report shape for `reports/qd/*/completion.json`,
+`reports/qd/*/audit.json`, and `reports/qd/*/blocker.md`. The JSON report gate requires parseable JSON, required
+top-level fields with expected types, a `nodeId` matching the containing directory, and
+`realWorldValidation.status` set to `passed`, `not_required`, or `blocked`.
 Completion reports must include an empty `unverifiedItems` array. Plain repo-path strings in completion
 `evidence` arrays must exist; URLs and prose are ignored. The gate also reads `roadmap/qd-export.json` so every
 `done` node has both report files, every report directory maps to a real qd node, and every non-empty
@@ -287,6 +287,12 @@ must not point from a node to itself, must not duplicate a `from_node`/`to_node`
 known `type` vocabulary (`requires`). Node note records must reference existing non-blank node IDs, use the known
 `kind` vocabulary (`blocker`, `retry`), keep non-blank `id` and `text` values, and have unique note IDs. The command
 is wired into `just check` so malformed qd evidence records are caught before merge.
+
+Blocker reports are first-class qd evidence. Each `reports/qd/<node-id>/blocker.md` path must match an existing node
+in `roadmap/qd-export.json`. If the node is still `blocked`, the report must mention the node id and include labeled
+Markdown for `Platform:`, `Command:` or `Operation:`, `Missing condition:`, `Evidence:`, and `Unblock path:`. At least
+one repo-relative evidence path under `evidence/<node-id>/` must exist. If the node is `done`, the blocker report must
+explicitly mark itself `Superseded:` or `Historical:` so stale blocker context cannot look current.
 
 Do not manufacture evidence for unavailable hardware. If the node depends on hardware, compositor, driver, network, credential, or macOS access that is unavailable, block the node with the correct typed blocker and record the exact missing condition.
 

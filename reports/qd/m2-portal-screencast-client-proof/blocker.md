@@ -1,5 +1,8 @@
 # m2-portal-screencast-client-proof Blocker
 
+Historical: this file records the portal screencast client blocker context from the completed node and must not be read
+as an active blocker for `m2-portal-screencast-client-proof`.
+
 The portal client proof narrows, but does not clear, the M2 capture blocker.
 
 The patched GLib/GDBus helper successfully owned the portal request lifecycle for `CreateSession`, received a response,
