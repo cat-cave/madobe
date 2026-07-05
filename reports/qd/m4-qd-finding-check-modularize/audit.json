@@ -1,0 +1,51 @@
+{
+  "nodeId": "m4-qd-finding-check-modularize",
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh sources a dedicated finding validation helper.",
+      "status": "passed",
+      "evidence": "roadmap.sh now sources scripts/qd-report-check/roadmap-findings.sh using the same shellcheck source-comment pattern as the other roadmap helpers."
+    },
+    {
+      "criterion": "validate_roadmap_findings remains the public function called by validate_roadmap_export.",
+      "status": "passed",
+      "evidence": "validate_roadmap_findings is defined in roadmap-findings.sh, and validate_roadmap_export still invokes it without changing the public checker flow."
+    },
+    {
+      "criterion": "The moved checker still rejects malformed finding node ids, severity/status values, content fields, optional paths, lines, and timestamps.",
+      "status": "passed",
+      "evidence": "Focused negative smoke logs cover unknown node_id, bad severity/status, malformed id/content, bad path, bad line, and bad timestamp cases."
+    },
+    {
+      "criterion": "All qd report-check helper files remain below the configured line budget.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/line-count-check.log records roadmap.sh at 175 lines and roadmap-findings.sh at 173 lines."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-check-modularize/qd-reports-check.log records qd report validation passing with this node's completion report included."
+    },
+    {
+      "criterion": "Linux validation evidence records qd-reports-check, nix develop -c just check, git diff --check, line-count evidence, and focused negative smokes for moved finding validation.",
+      "status": "passed",
+      "evidence": "The evidence directory contains qd-reports-check.log, just-check.log, git-diff-check.log, line-count-check.log, and the focused negative smoke logs."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "The completion report marks realWorldValidation not_required and limits the node to repository qd report-check modularization."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report-check modularization only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}

@@ -1,0 +1,5 @@
+command: temporary-copy roadmap finding validation smoke (negative-smoke-bad-timestamp)
+qd report check: /tmp/tmp.Nm2BcpfZdj: findings[0].created_at must be an ISO-like timestamp string: not-a-timestamp
+qd report check: /tmp/tmp.Nm2BcpfZdj: findings[0].resolved_at must be an ISO-like timestamp string: yesterday
+observed expected validation failure count: 2
+status: 0
