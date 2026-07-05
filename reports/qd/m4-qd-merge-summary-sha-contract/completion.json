@@ -15,7 +15,9 @@
     "reports/qd/m4-qd-merge-summary-sha-contract/completion.json",
     "reports/qd/m4-qd-merge-summary-sha-contract/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "f941297545341a921660f0892777017e2c762b96"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Historical qd runs whose summary is `Merge recorded with squash at commit <short-sha>` are normalized to full reachable 40-character commit SHAs.",
