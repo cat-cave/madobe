@@ -1,0 +1,473 @@
+node=m4-product-quic-handoff-runbook
+worktree=/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook
+
+$ nix develop -c just qd-reports-check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 103 completion report(s) and 103 audit report(s)
+
+$ nix develop -c just check
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 103 completion report(s) and 103 audit report(s)
+just pin-hygiene-check
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+just pr-template-check
+bash scripts/pr-template-check.sh
+pr template check: passed
+just workflow-contract-check
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+just dependabot-contract-check
+bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+cargo check --workspace --all-targets --all-features
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/compositor)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/telemetry)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/protocol)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/encode)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/hyprland)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/apps/hostd)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/transport)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.82s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Checking madobe-compositor v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/compositor)
+    Checking madobe-telemetry v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/telemetry)
+    Checking madobe-protocol v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/protocol)
+    Checking madobe-encode-nv-sys v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/encode-nv-sys)
+    Checking madobe-capture v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/capture)
+    Checking madobe-encode v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/encode)
+    Checking madobe-hyprland v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/hyprland)
+    Checking hostd v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/apps/hostd)
+    Checking madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/transport)
+    Checking madobectl v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/apps/cli)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.83s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 114 file(s)
+Summary: 1 error(s)
+evidence/m4-product-quic-handoff-runbook/notes.md:12 error MD012/no-multiple-blanks Multiple consecutive blank lines [Expected: 1; Actual: 2]
+error: recipe `check` failed on line 26 with exit code 1
+
+$ nix develop -c just check # retry after markdownlint evidence note fix
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 103 completion report(s) and 103 audit report(s)
+just pin-hygiene-check
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+just pr-template-check
+bash scripts/pr-template-check.sh
+pr template check: passed
+just workflow-contract-check
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+just dependabot-contract-check
+bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+cargo check --workspace --all-targets --all-features
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.15s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.11s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 114 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+
+$ git diff --check
+
+$ qd gate m4-product-quic-handoff-runbook --phase ci
+DB schema is older than this qd binary (no schema_migrations table found). Run qd migrate.
+
+$ qd gate m4-product-quic-handoff-runbook --phase ci # from main qd root
+{
+  "ok": false,
+  "blocking": [],
+  "runningAudits": [],
+  "blockedDependencies": [],
+  "explanations": [],
+  "structuralOk": true,
+  "phase": "ci",
+  "policy": {
+    "ci": {
+      "ok": false,
+      "phase": "ci",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": [
+        {
+          "code": "auditRequired",
+          "phase": "ci",
+          "node_id": "m4-product-quic-handoff-runbook",
+          "message": "Node m4-product-quic-handoff-runbook needs a passed audit before ci.",
+          "evidence": {
+            "latestAudit": null
+          }
+        }
+      ]
+    },
+    "merge": {
+      "ok": false,
+      "phase": "merge",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": [
+        {
+          "code": "auditRequired",
+          "phase": "merge",
+          "node_id": "m4-product-quic-handoff-runbook",
+          "message": "Node m4-product-quic-handoff-runbook needs a passed audit before merge.",
+          "evidence": {
+            "latestAudit": null
+          }
+        },
+        {
+          "code": "ciRequired",
+          "phase": "merge",
+          "node_id": "m4-product-quic-handoff-runbook",
+          "message": "Node m4-product-quic-handoff-runbook needs a latest passed CI run before merge.",
+          "evidence": {
+            "latestCi": null
+          }
+        }
+      ]
+    },
+    "selected": {
+      "ok": false,
+      "phase": "ci",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": [
+        {
+          "code": "auditRequired",
+          "phase": "ci",
+          "node_id": "m4-product-quic-handoff-runbook",
+          "message": "Node m4-product-quic-handoff-runbook needs a passed audit before ci.",
+          "evidence": {
+            "latestAudit": null
+          }
+        }
+      ]
+    }
+  },
+  "checks": {
+    "latestCheck": null,
+    "latestCi": null,
+    "undisposedP2P3": []
+  },
+  "next": "qd ci run m4-product-quic-handoff-runbook"
+}
+
+$ qd complete m4-product-quic-handoff-runbook --from-report reports/qd/m4-product-quic-handoff-runbook/completion.json # from main qd root with worktree report
+{
+  "id": "m4-product-quic-handoff-runbook",
+  "title": "Harden product QUIC cross-device handoff runbook",
+  "kind": "feature",
+  "milestone": "M4-integrated-video-path",
+  "status": "review",
+  "priority": "P2",
+  "estimate_points": 1,
+  "risk": "low",
+  "owner": "trevor-linux-orchestrator",
+  "branch": "spec/m4-product-quic-handoff-runbook",
+  "spec": "Tighten the cross-device product QUIC handoff documentation so Linux and Mac orchestrators can resume the blocked product QUIC smoke without ad hoc coordination.",
+  "acceptance": "docs/CROSS_DEVICE_VALIDATION.md documents the exact product QUIC receiver and sender sequence, including artifact paths, certificate exchange, validation boundaries, and failure handling\ndocs/LINUX_ORCHESTRATOR.md documents the Linux sender responsibilities for product QUIC handoff, including evidence collection and issue #1 update expectations\ndocs/MACOS_ORCHESTRATOR.md documents the Mac receiver responsibilities for product QUIC handoff without requiring Nix\nThe runbooks include issue #1 coordination templates for Mac receiver-ready, Linux sender-complete, and blocker updates\nEvidence and qd reports are recorded under evidence/m4-product-quic-handoff-runbook and reports/qd/m4-product-quic-handoff-runbook\nNo product runtime, decode, render, presentation, or latency claim is made",
+  "validation": null,
+  "context": "platform:both\nowner:linux-orchestrator\nvalidation:repo-quality\nsource:m4-product-quic-cross-device-smoke-blocker",
+  "created_at": "2026-07-05T12:27:21.843Z",
+  "updated_at": "2026-07-05T12:34:52.415Z",
+  "claimed_at": "2026-07-05T12:27:31.493Z",
+  "done_at": null,
+  "group_name": null,
+  "status_reason": null,
+  "check_command": null,
+  "ci_command": null,
+  "blocked_by": null,
+  "blocked_reason": null,
+  "blocked_owner": null,
+  "projects": [],
+  "verification": [],
+  "audit_focus": []
+}
+
+$ qd audit pass m4-product-quic-handoff-runbook --from-report reports/qd/m4-product-quic-handoff-runbook/audit.json # from main qd root with worktree report
+No running audit found for m4-product-quic-handoff-runbook; pass --run-id for a specific audit
+
+$ qd audit start m4-product-quic-handoff-runbook
+{
+  "id": "2d0e04ea-a50a-47a5-8973-3b603a99d42b",
+  "node_id": "m4-product-quic-handoff-runbook",
+  "kind": "audit",
+  "status": "running",
+  "command": null,
+  "provider": null,
+  "exit_code": null,
+  "git_sha": null,
+  "external_id": null,
+  "url": null,
+  "rationale": null,
+  "superseded_by": null,
+  "report_path": null,
+  "audit_kind": "general",
+  "worktree_path": null,
+  "agent": null,
+  "started_at": "2026-07-05T12:35:31.566Z",
+  "finished_at": null,
+  "summary": null,
+  "log_path": null
+}
+
+$ qd audit pass m4-product-quic-handoff-runbook --from-report reports/qd/m4-product-quic-handoff-runbook/audit.json # from main qd root with worktree report
+{
+  "ok": true,
+  "nodeId": "m4-product-quic-handoff-runbook",
+  "imported": {
+    "nodeId": "m4-product-quic-handoff-runbook",
+    "importedFindings": 0,
+    "findings": []
+  },
+  "promoted": [],
+  "remaining": 0
+}
+
+$ qd gate m4-product-quic-handoff-runbook --phase ci # after qd audit pass
+{
+  "ok": true,
+  "blocking": [],
+  "runningAudits": [],
+  "blockedDependencies": [],
+  "explanations": [],
+  "structuralOk": true,
+  "phase": "ci",
+  "policy": {
+    "ci": {
+      "ok": true,
+      "phase": "ci",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": []
+    },
+    "merge": {
+      "ok": false,
+      "phase": "merge",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": [
+        {
+          "code": "ciRequired",
+          "phase": "merge",
+          "node_id": "m4-product-quic-handoff-runbook",
+          "message": "Node m4-product-quic-handoff-runbook needs a latest passed CI run before merge.",
+          "evidence": {
+            "latestCi": null
+          }
+        }
+      ]
+    },
+    "selected": {
+      "ok": true,
+      "phase": "ci",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": []
+    }
+  },
+  "checks": {
+    "latestCheck": null,
+    "latestCi": null,
+    "undisposedP2P3": []
+  },
+  "next": "qd ci run m4-product-quic-handoff-runbook"
+}
+
+$ nix develop -c just qd-reports-check # final after qd export
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: roadmap/qd-export.json: runs[].report_path must be repo-relative: /home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/reports/qd/m4-product-quic-handoff-runbook/completion.json
+qd report check: roadmap/qd-export.json: runs[].report_path must be repo-relative: /home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/reports/qd/m4-product-quic-handoff-runbook/audit.json
+qd report check: failed with 2 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+$ nix develop -c just qd-reports-check # after correcting run report paths in export
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 103 completion report(s) and 103 audit report(s)
+
+$ nix develop -c just check # final after corrected export
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook' is dirty
+madobe dev shell: use 'just --list' to see commands
+cargo fmt --all -- --check
+if [ "$(uname -s)" = Darwin ] && ! command -v taplo >/dev/null 2>&1; then echo "taplo skipped outside Linux/Nix"; else just require-tool taplo; taplo fmt --check; fi
+command -v "taplo" >/dev/null 2>&1 || { echo "required tool missing: taplo; run inside nix develop"; exit 127; }
+ INFO taplo:format_files:load_config: found configuration file path="/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/taplo.toml"
+ INFO taplo:format_files:collect_files: found files total=22 excluded=1 files=["/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/.config/nextest.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/.mise.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/apps/cli/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/apps/hostd/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/clippy.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/capture/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/compositor/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/encode/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/encode-nv-sys/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/hyprland/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/protocol/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/telemetry/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/crates/transport/Cargo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/deny.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/lychee.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/rustfmt.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/supply-chain/audits.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/supply-chain/config.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/taplo.toml", "/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook/typos.toml"] cwd="/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook"
+if [ "$(uname -s)" = Darwin ] && ! command -v shfmt >/dev/null 2>&1; then echo "shfmt skipped outside Linux/Nix"; else just require-tool shfmt; find . -path './.git' -prune -o -path './target' -prune -o -name '*.sh' -print0 | xargs -0 -r shfmt -d; fi
+command -v "shfmt" >/dev/null 2>&1 || { echo "required tool missing: shfmt; run inside nix develop"; exit 127; }
+just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 103 completion report(s) and 103 audit report(s)
+just pin-hygiene-check
+bash scripts/pin-hygiene-check.sh
+pin hygiene check: passed
+just pr-template-check
+bash scripts/pr-template-check.sh
+pr template check: passed
+just workflow-contract-check
+bash scripts/workflow-contract-check.sh
+workflow contract check: passed
+just dependabot-contract-check
+bash scripts/dependabot-contract-check.sh
+dependabot contract check: passed
+cargo check --workspace --all-targets --all-features
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.12s
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
+if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
+command -v "shellcheck" >/dev/null 2>&1 || { echo "required tool missing: shellcheck; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v typos >/dev/null 2>&1; then echo "typos skipped outside Linux/Nix"; else just require-tool typos; typos; fi
+command -v "typos" >/dev/null 2>&1 || { echo "required tool missing: typos; run inside nix develop"; exit 127; }
+if [ "$(uname -s)" = Darwin ] && ! command -v markdownlint-cli2 >/dev/null 2>&1; then echo "markdownlint-cli2 skipped outside Linux/Nix"; else just require-tool markdownlint-cli2; markdownlint-cli2 "**/*.md"; fi
+command -v "markdownlint-cli2" >/dev/null 2>&1 || { echo "required tool missing: markdownlint-cli2; run inside nix develop"; exit 127; }
+markdownlint-cli2 v0.22.1 (markdownlint v0.40.0)
+Finding: **/*.md **/*.md !.qd/** !target/** !LICENSE-*
+Linting: 114 file(s)
+Summary: 0 error(s)
+if [ "$(uname -s)" = Darwin ] && ! command -v actionlint >/dev/null 2>&1; then echo "actionlint skipped outside Linux/Nix"; else just require-tool actionlint; actionlint .github/workflows/*.yml; fi
+command -v "actionlint" >/dev/null 2>&1 || { echo "required tool missing: actionlint; run inside nix develop"; exit 127; }
+just lint-lines
+max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
+
+$ git diff --check # final after corrected export
+
+$ qd ci record-pass m4-product-quic-handoff-runbook --summary "PR #110 hosted CI passed on Linux and macOS" --url https://github.com/cat-cave/madobe/actions/runs/28741101457
+{
+  "id": "m4-product-quic-handoff-runbook",
+  "title": "Harden product QUIC cross-device handoff runbook",
+  "kind": "feature",
+  "milestone": "M4-integrated-video-path",
+  "status": "mergeable",
+  "priority": "P2",
+  "estimate_points": 1,
+  "risk": "low",
+  "owner": "trevor-linux-orchestrator",
+  "branch": "spec/m4-product-quic-handoff-runbook",
+  "spec": "Tighten the cross-device product QUIC handoff documentation so Linux and Mac orchestrators can resume the blocked product QUIC smoke without ad hoc coordination.",
+  "acceptance": "docs/CROSS_DEVICE_VALIDATION.md documents the exact product QUIC receiver and sender sequence, including artifact paths, certificate exchange, validation boundaries, and failure handling\ndocs/LINUX_ORCHESTRATOR.md documents the Linux sender responsibilities for product QUIC handoff, including evidence collection and issue #1 update expectations\ndocs/MACOS_ORCHESTRATOR.md documents the Mac receiver responsibilities for product QUIC handoff without requiring Nix\nThe runbooks include issue #1 coordination templates for Mac receiver-ready, Linux sender-complete, and blocker updates\nEvidence and qd reports are recorded under evidence/m4-product-quic-handoff-runbook and reports/qd/m4-product-quic-handoff-runbook\nNo product runtime, decode, render, presentation, or latency claim is made",
+  "validation": null,
+  "context": "platform:both\nowner:linux-orchestrator\nvalidation:repo-quality\nsource:m4-product-quic-cross-device-smoke-blocker",
+  "created_at": "2026-07-05T12:27:21.843Z",
+  "updated_at": "2026-07-05T12:42:54.203Z",
+  "claimed_at": "2026-07-05T12:27:31.493Z",
+  "done_at": null,
+  "group_name": null,
+  "status_reason": null,
+  "check_command": null,
+  "ci_command": null,
+  "blocked_by": null,
+  "blocked_reason": null,
+  "blocked_owner": null,
+  "projects": [],
+  "verification": [],
+  "audit_focus": []
+}
+
+$ qd gate m4-product-quic-handoff-runbook --phase merge
+{
+  "ok": true,
+  "blocking": [],
+  "runningAudits": [],
+  "blockedDependencies": [],
+  "explanations": [],
+  "structuralOk": true,
+  "phase": "merge",
+  "policy": {
+    "ci": {
+      "ok": true,
+      "phase": "ci",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": []
+    },
+    "merge": {
+      "ok": true,
+      "phase": "merge",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": []
+    },
+    "selected": {
+      "ok": true,
+      "phase": "merge",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": []
+    }
+  },
+  "checks": {
+    "latestCheck": null,
+    "latestCi": {
+      "id": "bdbc4eec-84dd-4a47-8e4c-91ef3cc79d3d",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "kind": "ci",
+      "status": "passed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": null,
+      "audit_kind": null,
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-05T12:42:54.203Z",
+      "finished_at": "2026-07-05T12:42:54.203Z",
+      "summary": "PR #110 hosted CI passed on Linux and macOS\nEvidence: url=https://github.com/cat-cave/madobe/actions/runs/28741101457",
+      "log_path": null
+    },
+    "undisposedP2P3": []
+  },
+  "next": null
+}
+
+$ nix develop -c just qd-reports-check # after qd ci record-pass export
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 103 completion report(s) and 103 audit report(s)
+
+$ git diff --check # after qd ci record-pass export

@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-product-quic-handoff-runbook",
+  "acceptanceReviewed": [
+    {
+      "criterion": "docs/CROSS_DEVICE_VALIDATION.md documents the product QUIC receiver-first sequence and evidence layout.",
+      "status": "passed",
+      "evidence": "The shared runbook now documents PRODUCT-QUIC-READY, receiver and sender commands, certificate exchange, product QUIC artifacts, result shape, and non-claims."
+    },
+    {
+      "criterion": "Linux sender duties are documented with evidence and issue update expectations.",
+      "status": "passed",
+      "evidence": "docs/LINUX_ORCHESTRATOR.md includes the sender command, receiver certificate dependency, evidence list, and PRODUCT-QUIC-SENDER-COMPLETE issue template."
+    },
+    {
+      "criterion": "Mac receiver duties are documented without Nix.",
+      "status": "passed",
+      "evidence": "docs/MACOS_ORCHESTRATOR.md uses native cargo/just commands and lists receiver artifacts including server-cert.der and server-cert.sha256."
+    },
+    {
+      "criterion": "qd completion behavior for cross-device nodes is explicit.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md now allows blocked real-world validation status and adds a cross-device completion checklist."
+    },
+    {
+      "criterion": "No runtime, decode, render, presentation, or latency claim is made.",
+      "status": "passed",
+      "evidence": "The diff is limited to documentation, roadmap export, and qd evidence/report files; the product QUIC run remains blocked pending Mac receiver evidence."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Documentation and orchestration hygiene only."
+  },
+  "findings": []
+}
