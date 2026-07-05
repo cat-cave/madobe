@@ -1,0 +1,7 @@
+$ QD_REPORT_CHECK_LINE_BUDGET_FILES=/tmp/tmp.Sylz7v26UP/oversized-checker.sh just qd-reports-check
+QD_REPORT_CHECK_LINE_BUDGET_FILES points the line-budget gate at a temporary checker file for this negative smoke.
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/tmp.Sylz7v26UP/oversized-checker.sh: has 351 lines; qd report-check line budget is 350
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+exit status: 1

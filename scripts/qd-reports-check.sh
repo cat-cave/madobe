@@ -10,6 +10,8 @@ source "$script_dir/qd-report-check/common.sh"
 source "$script_dir/qd-report-check/completion.sh"
 # shellcheck source=scripts/qd-report-check/audit.sh
 source "$script_dir/qd-report-check/audit.sh"
+# shellcheck source=scripts/qd-report-check/line-budget.sh
+source "$script_dir/qd-report-check/line-budget.sh"
 # shellcheck source=scripts/qd-report-check/roadmap.sh
 source "$script_dir/qd-report-check/roadmap.sh"
 
@@ -23,6 +25,8 @@ main() {
     printf 'qd report check: required tool missing: jq\n' >&2
     exit 127
   }
+
+  validate_qd_report_check_line_budget
 
   if validate_roadmap_export; then
     roadmap_valid=1

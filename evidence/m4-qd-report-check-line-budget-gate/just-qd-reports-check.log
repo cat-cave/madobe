@@ -1,0 +1,3 @@
+command: just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: validated 92 completion report(s) and 92 audit report(s)
