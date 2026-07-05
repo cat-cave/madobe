@@ -1,0 +1,6 @@
+negative smoke: bad-severity
+temporary audit report: /tmp/qd-audit-finding-schema.A9a1Gs/reports/qd/m4-qd-run-schema-contract/audit.json
+command: source scripts/qd-report-check/audit.sh; validate_audit temporary audit.json
+qd report check: /tmp/qd-audit-finding-schema.A9a1Gs/reports/qd/m4-qd-run-schema-contract/audit.json: findings[].severity must be one of P0, P1, P2, P3
+exit status: 1
+negative smoke rejected malformed audit finding as expected
