@@ -1,0 +1,6 @@
+Command: bash scripts/qd-reports-check.sh
+Mutation: set .runs[0].report_path to /home/trevor/projects/madobe/.qd/worktrees/stale-node/reports/qd/stale-node/completion.json
+Exit status: 1
+
+qd report check: roadmap/qd-export.json: runs[].report_path must be repo-relative: /home/trevor/projects/madobe/.qd/worktrees/stale-node/reports/qd/stale-node/completion.json
+qd report check: failed with 1 error(s)
