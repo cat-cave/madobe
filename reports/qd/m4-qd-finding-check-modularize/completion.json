@@ -17,7 +17,9 @@
     "scripts/qd-report-check/roadmap-findings.sh",
     "scripts/qd-report-check/roadmap.sh"
   ],
-  "commits": [],
+  "commits": [
+    "0032035f357bb025e2cf3ad86994d4666a479cac"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check/roadmap.sh sources a dedicated finding validation helper.",
