@@ -128,9 +128,17 @@ fn parse_receive(args: &[String]) -> Result<Command, SmokeError> {
 }
 
 fn value_after(args: &[String], index: usize, flag: &'static str) -> Result<String, SmokeError> {
-    args.get(index + 1)
-        .cloned()
-        .ok_or_else(|| SmokeError::usage(format!("{flag} requires a value\n{USAGE}")))
+    let value = args
+        .get(index + 1)
+        .ok_or_else(|| SmokeError::usage(format!("{flag} requires a value\n{USAGE}")))?;
+
+    if value.starts_with("--") {
+        return Err(SmokeError::usage(format!(
+            "{flag} requires a value, got flag {value}\n{USAGE}"
+        )));
+    }
+
+    Ok(value.clone())
 }
 
 fn required(value: Option<String>, flag: &'static str) -> Result<String, SmokeError> {
@@ -142,27 +150,85 @@ mod tests {
     use super::run_cli;
     use crate::video_smoke::SmokeErrorKind;
 
-    #[test]
-    fn unknown_video_smoke_command_returns_usage_without_running_network() {
-        let error = match run_cli(["status"]) {
+    fn assert_usage<const N: usize>(args: [&str; N], expected_message: &str) {
+        let error = match run_cli(args) {
             Ok(output) => panic!("expected usage error, got {output}"),
             Err(error) => error,
         };
 
         assert!(matches!(error.kind(), SmokeErrorKind::Usage { .. }));
+        assert!(error.to_string().contains(expected_message));
         assert!(error.to_string().contains("madobectl video-smoke send"));
         assert!(error.to_string().contains("madobectl video-smoke receive"));
     }
 
     #[test]
-    fn missing_required_video_smoke_flag_returns_usage_without_running_network() {
-        let error = match run_cli(["send"]) {
-            Ok(output) => panic!("expected usage error, got {output}"),
-            Err(error) => error,
-        };
+    fn unknown_video_smoke_command_returns_usage_without_running_network() {
+        assert_usage(["status"], "madobectl video-smoke send");
+    }
 
-        assert!(matches!(error.kind(), SmokeErrorKind::Usage { .. }));
-        assert!(error.to_string().contains("--addr is required"));
-        assert!(error.to_string().contains("madobectl video-smoke send"));
+    #[test]
+    fn missing_required_video_smoke_flag_returns_usage_without_running_network() {
+        assert_usage(["send"], "--addr is required");
+    }
+
+    #[test]
+    fn missing_value_for_video_smoke_flag_returns_usage_without_running_network() {
+        assert_usage(["send", "--addr"], "--addr requires a value");
+        assert_usage(
+            ["send", "--addr", "127.0.0.1:0", "--sample"],
+            "--sample requires a value",
+        );
+        assert_usage(
+            ["send", "--addr", "127.0.0.1:0", "--evidence-dir"],
+            "--evidence-dir requires a value",
+        );
+        assert_usage(["receive", "--bind"], "--bind requires a value");
+        assert_usage(
+            ["receive", "--bind", "127.0.0.1:0", "--evidence-dir"],
+            "--evidence-dir requires a value",
+        );
+    }
+
+    #[test]
+    fn flag_like_video_smoke_flag_value_returns_usage_without_running_network() {
+        assert_usage(
+            ["send", "--addr", "--sample"],
+            "--addr requires a value, got flag --sample",
+        );
+        assert_usage(
+            [
+                "send",
+                "--addr",
+                "127.0.0.1:0",
+                "--sample",
+                "--evidence-dir",
+            ],
+            "--sample requires a value, got flag --evidence-dir",
+        );
+        assert_usage(
+            [
+                "send",
+                "--addr",
+                "127.0.0.1:0",
+                "--evidence-dir",
+                "--sample",
+            ],
+            "--evidence-dir requires a value, got flag --sample",
+        );
+        assert_usage(
+            ["receive", "--bind", "--evidence-dir"],
+            "--bind requires a value, got flag --evidence-dir",
+        );
+        assert_usage(
+            [
+                "receive",
+                "--bind",
+                "127.0.0.1:0",
+                "--evidence-dir",
+                "--bind",
+            ],
+            "--evidence-dir requires a value, got flag --bind",
+        );
     }
 }

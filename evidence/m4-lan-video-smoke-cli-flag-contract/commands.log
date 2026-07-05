@@ -1,0 +1,6 @@
+nix develop -c cargo fmt --all
+nix develop -c cargo test -p madobe-transport video_smoke::cli --all-features
+nix develop -c cargo test -p madobe-transport --all-features
+git diff --check
+nix develop -c just check
+just qd-reports-check

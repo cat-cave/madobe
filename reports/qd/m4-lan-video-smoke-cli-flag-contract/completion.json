@@ -1,0 +1,97 @@
+{
+  "nodeId": "m4-lan-video-smoke-cli-flag-contract",
+  "summary": "Hardened the LAN video smoke CLI parser so value-taking flags reject missing and flag-like values as typed usage errors before network, sample, or artifact work can run.",
+  "changedFiles": [
+    "crates/transport/src/video_smoke/cli.rs",
+    "roadmap/qd-export.json",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/commands.log",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/focused-cli-tests.log",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/git-diff-check.log",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/nix-just-check.log",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/notes.md",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/qd-reports-check.log",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/transport-tests.log",
+    "reports/qd/m4-lan-video-smoke-cli-flag-contract/completion.json",
+    "reports/qd/m4-lan-video-smoke-cli-flag-contract/audit.json"
+  ],
+  "commits": [
+    "98ae77e9a54607918e63f813829e5d9c4b4e991b"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "run_cli rejects missing values and flag-looking values for --addr, --bind, --sample, and --evidence-dir as SmokeErrorKind::Usage.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/cli.rs and evidence/m4-lan-video-smoke-cli-flag-contract/focused-cli-tests.log"
+    },
+    {
+      "criterion": "Cases like send --addr --sample and receive --bind --evidence-dir fail before DNS, bind, connect, sample, or artifact work.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/cli.rs and evidence/m4-lan-video-smoke-cli-flag-contract/focused-cli-tests.log"
+    },
+    {
+      "criterion": "Usage output includes both send and receive entry points.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/cli.rs and evidence/m4-lan-video-smoke-cli-flag-contract/focused-cli-tests.log"
+    },
+    {
+      "criterion": "Focused cargo test -p madobe-transport video_smoke::cli --all-features passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-cli-flag-contract/focused-cli-tests.log"
+    },
+    {
+      "criterion": "nix develop -c just check passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-cli-flag-contract/nix-just-check.log"
+    },
+    {
+      "criterion": "No product QUIC, decode, render, presentation, latency, artifact-content, cross-device validation, sockets, Mac hardware, workflow dispatch, or live credentials are required or claimed.",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-cli-flag-contract/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo test -p madobe-transport video_smoke::cli --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-cli-flag-contract/focused-cli-tests.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-transport --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-cli-flag-contract/transport-tests.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-cli-flag-contract/git-diff-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-cli-flag-contract/nix-just-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-cli-flag-contract/qd-reports-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-lan-video-smoke-cli-flag-contract/commands.log",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/focused-cli-tests.log",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/git-diff-check.log",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/nix-just-check.log",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/notes.md",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/qd-reports-check.log",
+    "evidence/m4-lan-video-smoke-cli-flag-contract/transport-tests.log",
+    "reports/qd/m4-lan-video-smoke-cli-flag-contract/completion.json",
+    "reports/qd/m4-lan-video-smoke-cli-flag-contract/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "CLI parser contract tests use dependency-free Rust argument parsing and do not require sockets, live LAN validation, Mac hardware, product QUIC, decode, render, presentation, latency measurement, workflow dispatch, credentials, or cross-device validation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
