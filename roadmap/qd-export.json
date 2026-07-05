@@ -3532,6 +3532,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-cross-device-log-content-contract",
+      "title": "Validate generic cross-device smoke log evidence content",
+      "kind": "infra",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "medium",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-cross-device-log-content-contract",
+      "spec": "Extend explicit generic cross-device result checking so result.json evidence is not accepted merely because linux_host_log and mac_client_log artifacts exist and are non-empty. For nonzero live generic TCP smoke results, validate referenced logs for stable key=value tokens proving TCP transport, product QUIC non-claim, payload byte/hash evidence, sent status, receiver validation, and pass status where claimed.",
+      "acceptance": "No-argument just cross-device-result-check still validates the checked-in schema fixture and generated negative fixtures without requiring live artifacts\nExplicit mode accepts evidence/m3-cross-device-video-smoke/result.json\nExplicit mode rejects generated results whose referenced Linux host log omits transport=tcp, product_quic=false, payload_bytes, sha256, or result=sent tokens when frames_sent is positive\nExplicit mode rejects generated results whose referenced Mac client log omits payload bytes, sha256, payload byte-count validation, payload SHA-256 validation, or pass-status tokens when passed is true\nCross-device validation docs describe the stable generic log token requirements\nNo Mac hardware, live LAN run, product QUIC smoke, workflow_dispatch, credentials, or PR 49 changes are required or claimed",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nvalidation:evidence-tooling",
+      "created_at": "2026-07-05T16:40:27.915Z",
+      "updated_at": "2026-07-05T16:40:28.112Z",
+      "claimed_at": "2026-07-05T16:40:28.112Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -3846,6 +3876,12 @@
       "to_node": "m4-product-quic-log-content-contract",
       "type": "requires",
       "created_at": "2026-07-05T16:17:13.637Z"
+    },
+    {
+      "from_node": "m4-cross-device-result-artifact-check",
+      "to_node": "m4-cross-device-log-content-contract",
+      "type": "requires",
+      "created_at": "2026-07-05T16:40:28.009Z"
     }
   ],
   "findings": [

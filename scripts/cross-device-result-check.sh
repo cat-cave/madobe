@@ -71,6 +71,8 @@ validate_file() {
       "$file" \
       "commands_log,linux_host_log,mac_client_log,notes" ||
       errors=$((errors + 1))
+    validate_explicit_log_content "$file" ||
+      errors=$((errors + 1))
   fi
 
   if [[ $errors -ne 0 ]]; then
@@ -87,6 +89,95 @@ require_jq() {
     printf '%s: %s: %s\n' "$check_name" "$file" "$message" >&2
     errors=$((errors + 1))
   fi
+}
+
+log_has_fixed_token() {
+  local log_file=$1
+  local token=$2
+
+  grep -Fq -- "$token" "$log_file"
+}
+
+log_has_key_value_token() {
+  local log_file=$1
+  local key=$2
+
+  grep -Eq "(^|[[:space:]])${key}=[^[:space:]]+" "$log_file"
+}
+
+log_has_pass_token() {
+  local log_file=$1
+
+  log_has_fixed_token "$log_file" "passed=true" ||
+    log_has_fixed_token "$log_file" "status=passed"
+}
+
+linux_host_log_has_required_tokens() {
+  local log_file=$1
+
+  log_has_fixed_token "$log_file" "transport=tcp" &&
+    log_has_fixed_token "$log_file" "product_quic=false" &&
+    log_has_key_value_token "$log_file" "payload_bytes" &&
+    log_has_key_value_token "$log_file" "sha256" &&
+    log_has_fixed_token "$log_file" "result=sent"
+}
+
+mac_client_log_has_required_tokens() {
+  local log_file=$1
+
+  log_has_key_value_token "$log_file" "payload_bytes" &&
+    log_has_key_value_token "$log_file" "sha256" &&
+    log_has_fixed_token "$log_file" "payload_byte_count_valid=true" &&
+    log_has_fixed_token "$log_file" "payload_sha256_valid=true" &&
+    log_has_pass_token "$log_file"
+}
+
+require_matching_log_for_kind() {
+  local file=$1
+  local kind=$2
+  local context=$3
+  local matcher=$4
+  local path
+
+  while IFS= read -r path; do
+    if [[ -f $path ]] && "$matcher" "$path"; then
+      return 0
+    fi
+  done < <(jq -r --arg kind "$kind" '.artifacts[]? | select(.kind == $kind) | .path' "$file")
+
+  printf '%s: %s: explicit result must include a %s artifact with stable %s evidence tokens\n' \
+    "$check_name" "$file" "$kind" "$context" >&2
+  return 1
+}
+
+validate_explicit_log_content() {
+  local file=$1
+  local log_errors=0
+  local frames_sent
+  local passed
+
+  frames_sent=$(jq -r '.metrics.frames_sent' "$file")
+  passed=$(jq -r '.passed' "$file")
+
+  if ((frames_sent > 0)); then
+    require_matching_log_for_kind \
+      "$file" \
+      linux_host_log \
+      'Linux send' \
+      linux_host_log_has_required_tokens ||
+      log_errors=$((log_errors + 1))
+  fi
+
+  if [[ $passed == true ]]; then
+    require_matching_log_for_kind \
+      "$file" \
+      mac_client_log \
+      'Mac receive validation' \
+      mac_client_log_has_required_tokens ||
+      log_errors=$((log_errors + 1))
+  fi
+
+  [[ $log_errors -eq 0 ]]
 }
 
 # shellcheck disable=SC2016,SC2154 # jq expands jq variables; helper defines common prelude.
@@ -113,6 +204,10 @@ def is_cross_device_artifact_kind:
 run_self_tests() {
   local tmpdir
   tmpdir=$(mktemp -d "${TMPDIR:-/tmp}/madobe-cross-device-result-check.XXXXXX")
+  mkdir -p target
+
+  local repo_tmpdir
+  repo_tmpdir=$(mktemp -d "target/madobe-cross-device-result-check.XXXXXX")
 
   local decoded_claim="$tmpdir/decoded-claim-result.json"
   local rendered_claim="$tmpdir/rendered-claim-result.json"
@@ -125,6 +220,71 @@ run_self_tests() {
   local windows_drive_artifact="$tmpdir/windows-drive-artifact-result.json"
   local blank_artifact="$tmpdir/blank-artifact-result.json"
   local unknown_artifact_kind="$tmpdir/unknown-artifact-kind-result.json"
+  local explicit_positive="$tmpdir/explicit-positive-result.json"
+  local missing_linux_log_token="$tmpdir/missing-linux-log-token-result.json"
+  local missing_mac_log_token="$tmpdir/missing-mac-log-token-result.json"
+  local zero_frames_fixture="$tmpdir/zero-frames-result.json"
+
+  local commands_log="$repo_tmpdir/commands.log"
+  local linux_log="$repo_tmpdir/linux-host.log"
+  local mac_log="$repo_tmpdir/mac-client.log"
+  local bad_linux_log="$repo_tmpdir/bad-linux-host.log"
+  local bad_mac_log="$repo_tmpdir/bad-mac-client.log"
+  local notes_artifact="$repo_tmpdir/notes.md"
+  printf 'cross-device commands\n' >"$commands_log"
+  cat >"$linux_log" <<'LINUX_LOG'
+lan-video-smoke sender
+transport=tcp
+product_quic=false
+payload_bytes=84
+sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875
+result=sent
+LINUX_LOG
+  cat >"$mac_log" <<'MAC_LOG'
+lan-video-smoke receiver
+payload_bytes=84
+sha256=51945e4cd903e28019fbbfbe74572b5d836f6ef1184cb782b142aba1d5201875
+payload_byte_count_valid=true
+payload_sha256_valid=true
+passed=true
+MAC_LOG
+  grep -Fv 'transport=tcp' "$linux_log" >"$bad_linux_log"
+  grep -Fv 'payload_sha256_valid=true' "$mac_log" >"$bad_mac_log"
+  printf 'notes\n' >"$notes_artifact"
+
+  jq \
+    --arg commands_log "$commands_log" \
+    --arg linux_log "$linux_log" \
+    --arg mac_log "$mac_log" \
+    --arg notes_artifact "$notes_artifact" \
+    '.metrics.frames_sent = 1
+      | .passed = true
+      | .artifacts = [
+        {"path": $commands_log, "kind": "commands_log"},
+        {"path": $linux_log, "kind": "linux_host_log"},
+        {"path": $mac_log, "kind": "mac_client_log"},
+        {"path": $notes_artifact, "kind": "notes"}
+      ]' \
+    "$default_fixture" >"$explicit_positive"
+
+  jq \
+    --arg bad_linux_log "$bad_linux_log" \
+    '.artifacts |= map(if .kind == "linux_host_log" then .path = $bad_linux_log else . end)' \
+    "$explicit_positive" >"$missing_linux_log_token"
+  jq \
+    --arg bad_mac_log "$bad_mac_log" \
+    '.artifacts |= map(if .kind == "mac_client_log" then .path = $bad_mac_log else . end)' \
+    "$explicit_positive" >"$missing_mac_log_token"
+  jq \
+    --arg commands_log "$commands_log" \
+    --arg notes_artifact "$notes_artifact" \
+    '.metrics.frames_sent = 0
+      | .passed = false
+      | .artifacts = [
+        {"path": $commands_log, "kind": "commands_log"},
+        {"path": $notes_artifact, "kind": "notes"}
+      ]' \
+    "$default_fixture" >"$zero_frames_fixture"
 
   jq '.metrics.frames_decoded = 1' "$default_fixture" >"$decoded_claim"
   jq '.metrics.frames_rendered = 1' "$default_fixture" >"$rendered_claim"
@@ -150,16 +310,33 @@ run_self_tests() {
   expect_invalid "$windows_drive_artifact" 'Windows drive artifact path' || self_test_status=1
   expect_invalid "$blank_artifact" 'blank artifact path' || self_test_status=1
   expect_invalid "$unknown_artifact_kind" 'unknown artifact kind' || self_test_status=1
+  expect_invalid "$missing_linux_log_token" 'missing Linux host log token' explicit || self_test_status=1
+  expect_invalid "$missing_mac_log_token" 'missing Mac client log token' explicit || self_test_status=1
+  expect_valid "$explicit_positive" 'positive explicit log content' explicit || self_test_status=1
+  expect_valid "$zero_frames_fixture" 'schema-only explicit zero-frame result' explicit || self_test_status=1
   rm -rf "$tmpdir"
+  rm -rf "$repo_tmpdir"
   return "$self_test_status"
 }
 
 expect_invalid() {
   local file=$1
   local context=$2
+  local mode=${3:-fixture}
 
-  if validate_file "$file" fixture >/dev/null 2>&1; then
+  if validate_file "$file" "$mode" >/dev/null 2>&1; then
     printf '%s: negative fixture unexpectedly passed: %s\n' "$check_name" "$context" >&2
+    return 1
+  fi
+}
+
+expect_valid() {
+  local file=$1
+  local context=$2
+  local mode=${3:-fixture}
+
+  if ! validate_file "$file" "$mode" >/dev/null 2>&1; then
+    printf '%s: positive fixture unexpectedly failed: %s\n' "$check_name" "$context" >&2
     return 1
   fi
 }

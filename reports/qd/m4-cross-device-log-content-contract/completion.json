@@ -1,0 +1,128 @@
+{
+  "nodeId": "m4-cross-device-log-content-contract",
+  "summary": "Tightened explicit generic cross-device result validation so claimed Linux sender and Mac receiver logs must include stable key=value evidence tokens, with generated positive and negative self-tests and runbook documentation.",
+  "changedFiles": [
+    "scripts/cross-device-result-check.sh",
+    "docs/CROSS_DEVICE_VALIDATION.md",
+    "evidence/m4-cross-device-log-content-contract/commands.log",
+    "evidence/m4-cross-device-log-content-contract/cross-device-result-check.log",
+    "evidence/m4-cross-device-log-content-contract/explicit-m3-result.log",
+    "evidence/m4-cross-device-log-content-contract/explicit-positive.log",
+    "evidence/m4-cross-device-log-content-contract/git-diff-check.log",
+    "evidence/m4-cross-device-log-content-contract/missing-linux-token.log",
+    "evidence/m4-cross-device-log-content-contract/missing-mac-token.log",
+    "evidence/m4-cross-device-log-content-contract/nix-just-check.log",
+    "evidence/m4-cross-device-log-content-contract/notes.md",
+    "evidence/m4-cross-device-log-content-contract/qd-reports-check.log",
+    "evidence/m4-cross-device-log-content-contract/shellcheck.log",
+    "reports/qd/m4-cross-device-log-content-contract/completion.json",
+    "reports/qd/m4-cross-device-log-content-contract/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "No-argument just cross-device-result-check still validates the checked-in schema fixture and generated negative fixtures without requiring live artifacts.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/cross-device-result-check.log"
+    },
+    {
+      "criterion": "Explicit mode accepts evidence/m3-cross-device-video-smoke/result.json.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/explicit-m3-result.log"
+    },
+    {
+      "criterion": "Explicit mode rejects generated results whose referenced Linux host log omits a required stable send token when frames_sent is positive.",
+      "status": "passed",
+      "evidence": "scripts/cross-device-result-check.sh and evidence/m4-cross-device-log-content-contract/missing-linux-token.log"
+    },
+    {
+      "criterion": "Explicit mode rejects generated results whose referenced Mac client log omits a required receive-validation or pass-status token when passed is true.",
+      "status": "passed",
+      "evidence": "scripts/cross-device-result-check.sh and evidence/m4-cross-device-log-content-contract/missing-mac-token.log"
+    },
+    {
+      "criterion": "A generated positive explicit result with local artifacts passes without live hardware or networking.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/explicit-positive.log"
+    },
+    {
+      "criterion": "docs/CROSS_DEVICE_VALIDATION.md documents stable generic cross-device log token requirements.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    },
+    {
+      "criterion": "No Mac hardware, live LAN run, product QUIC smoke, workflow_dispatch, credentials, or PR #49 changes are required or claimed.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just cross-device-result-check",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/cross-device-result-check.log"
+    },
+    {
+      "command": "just cross-device-result-check evidence/m3-cross-device-video-smoke/result.json",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/explicit-m3-result.log"
+    },
+    {
+      "command": "just cross-device-result-check <generated-positive-result>",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/explicit-positive.log"
+    },
+    {
+      "command": "just cross-device-result-check <generated-missing-linux-token-result>",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/missing-linux-token.log"
+    },
+    {
+      "command": "just cross-device-result-check <generated-missing-mac-token-result>",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/missing-mac-token.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/cross-device-result-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/shellcheck.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/qd-reports-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/git-diff-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-log-content-contract/nix-just-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-cross-device-log-content-contract/commands.log",
+    "evidence/m4-cross-device-log-content-contract/cross-device-result-check.log",
+    "evidence/m4-cross-device-log-content-contract/explicit-m3-result.log",
+    "evidence/m4-cross-device-log-content-contract/explicit-positive.log",
+    "evidence/m4-cross-device-log-content-contract/git-diff-check.log",
+    "evidence/m4-cross-device-log-content-contract/missing-linux-token.log",
+    "evidence/m4-cross-device-log-content-contract/missing-mac-token.log",
+    "evidence/m4-cross-device-log-content-contract/nix-just-check.log",
+    "evidence/m4-cross-device-log-content-contract/notes.md",
+    "evidence/m4-cross-device-log-content-contract/qd-reports-check.log",
+    "evidence/m4-cross-device-log-content-contract/shellcheck.log",
+    "reports/qd/m4-cross-device-log-content-contract/completion.json",
+    "reports/qd/m4-cross-device-log-content-contract/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Evidence-tooling hardening only; generated local artifacts and checked-in M3 evidence cover the explicit-mode contract without live Mac hardware, LAN validation, product QUIC, workflow_dispatch, credentials, or PR #49 changes."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

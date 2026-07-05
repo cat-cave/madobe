@@ -1,0 +1,3 @@
+$ just cross-device-result-check
+bash scripts/cross-device-result-check.sh 
+cross-device result check: validated crates/protocol/fixtures/m3-cross-device-video-smoke/result.json and negative fixtures
