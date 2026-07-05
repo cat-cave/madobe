@@ -3472,6 +3472,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-qd-ready-queue-visibility",
+      "title": "Surface dependency-held qd ready nodes",
+      "kind": "infra",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "low",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-qd-ready-queue-visibility",
+      "spec": "Add a Linux-local qd roadmap availability check that reads roadmap/qd-export.json and deterministically reports raw ready-status nodes, actually assignable ready nodes whose transitive requires prerequisites are done, and ready-status nodes held by non-done prerequisites with the nearest blocked prerequisite and blocker reason when present. The check must reject requires cycles as hard failures and must not mutate qd state.",
+      "acceptance": "just qd-ready-queue-check exists and runs with Bash/JQ only\nCurrent repo output explains why qd status reports raw ready-status nodes while qd ready --json is empty\nThe report identifies the M4 dependency-held chain rooted at blocked m4-product-quic-cross-device-smoke\nA temp-copy negative smoke proves requires cycles are rejected\nDocs clarify that orchestrators choose work from strict qd ready --json, not raw exported ready status\nNo product runtime, Mac hardware, workflow dispatch, cross-device validation, or PR #49 change is required",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nvalidation:orchestration-tooling",
+      "created_at": "2026-07-05T15:48:06.476Z",
+      "updated_at": "2026-07-05T15:48:13.147Z",
+      "claimed_at": "2026-07-05T15:48:13.147Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -3774,6 +3804,12 @@
       "to_node": "m4-audit",
       "type": "requires",
       "created_at": "2026-07-04T04:39:30.505Z"
+    },
+    {
+      "from_node": "m4-product-quic-explicit-artifact-existence-contract",
+      "to_node": "m4-qd-ready-queue-visibility",
+      "type": "requires",
+      "created_at": "2026-07-05T15:48:13.025Z"
     }
   ],
   "findings": [

@@ -196,6 +196,11 @@ qd ready --json
 qd node show <node-id> --full
 ```
 
+Use `qd ready --json` as the strict assignment source. Raw `status == "ready"` entries in
+`roadmap/qd-export.json` are not sufficient for work selection because they may still have non-done transitive
+`requires` prerequisites. If the export looks ready but qd has no assignable work, run `just qd-ready-queue-check`
+to list raw ready nodes, assignable ready nodes, and held ready-status nodes with their nearest blocker.
+
 Claim before starting work:
 
 ```sh
@@ -384,12 +389,14 @@ git pull --rebase
 qd sync --from roadmap/qd-export.json --expect-clean
 qd status --json
 qd ready --json
+just qd-ready-queue-check
 qd critical-path
 ```
 
 Rules:
 
 - Claim before coding.
+- Treat `qd ready --json` as authoritative for assignment; use the ready-queue check only as an export diagnostic.
 - One node, one branch, one PR unless explicitly split.
 - Split nodes when acceptance criteria span unrelated hardware surfaces.
 - Add edges when a hidden dependency appears.

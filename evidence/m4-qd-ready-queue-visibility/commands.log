@@ -1,0 +1,7 @@
+just qd-ready-queue-check
+just qd-ready-queue-cycle-smoke
+qd ready --json
+git diff --check
+just qd-reports-check
+nix develop -c just check
+nix develop -c shellcheck scripts/qd-ready-queue-check.sh

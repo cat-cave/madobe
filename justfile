@@ -15,6 +15,7 @@ fmt:
 
 check: fmt
   just qd-reports-check
+  just qd-ready-queue-check
   just cross-device-result-check
   just product-quic-result-check
   just pin-hygiene-check
@@ -34,6 +35,12 @@ direct-capture-preflight:
 
 qd-reports-check:
   bash scripts/qd-reports-check.sh
+
+qd-ready-queue-check:
+  bash scripts/qd-ready-queue-check.sh
+
+qd-ready-queue-cycle-smoke:
+  bash scripts/qd-ready-queue-check.sh --cycle-smoke
 
 cross-device-result-check *files:
   bash scripts/cross-device-result-check.sh {{files}}

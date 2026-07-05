@@ -1,0 +1,120 @@
+{
+  "nodeId": "m4-qd-ready-queue-visibility",
+  "summary": "Added a Linux-local qd ready-queue diagnostic that separates raw exported ready status from strictly assignable qd work, reports dependency-held ready nodes with nearest blockers, and rejects requires cycles with a temp-copy smoke mode.",
+  "changedFiles": [
+    "scripts/qd-ready-queue-check.sh",
+    "justfile",
+    "docs/ORCHESTRATION.md",
+    "docs/QD_WORKFLOW.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-qd-ready-queue-visibility/commands.log",
+    "evidence/m4-qd-ready-queue-visibility/git-diff-check.log",
+    "evidence/m4-qd-ready-queue-visibility/notes.md",
+    "evidence/m4-qd-ready-queue-visibility/nix-just-check.log",
+    "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-check.log",
+    "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-cycle-smoke.log",
+    "evidence/m4-qd-ready-queue-visibility/qd-ready-json.log",
+    "evidence/m4-qd-ready-queue-visibility/qd-reports-check.log",
+    "evidence/m4-qd-ready-queue-visibility/shellcheck.log",
+    "reports/qd/m4-qd-ready-queue-visibility/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "just qd-ready-queue-check exists and runs with Bash/JQ only.",
+      "status": "passed",
+      "evidence": "justfile, scripts/qd-ready-queue-check.sh, and evidence/m4-qd-ready-queue-visibility/qd-ready-queue-check.log"
+    },
+    {
+      "criterion": "Current repo output explains why raw ready-status nodes are not assignable while qd ready --json is empty.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-check.log shows raw_ready_count=4, assignable_ready_count=0, held_ready_count=4, and qd ready --json as the authoritative assignment source; evidence/m4-qd-ready-queue-visibility/qd-ready-json.log captures the strict empty queue."
+    },
+    {
+      "criterion": "The report identifies the M4 dependency-held chain rooted at blocked m4-product-quic-cross-device-smoke.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-check.log lists m4-product-quic-cross-device-smoke as the nearest blocked prerequisite and includes its blocker reason."
+    },
+    {
+      "criterion": "A temp-copy negative smoke proves requires cycles are rejected.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-cycle-smoke.log"
+    },
+    {
+      "criterion": "Docs clarify that orchestrators choose work from strict qd ready --json, not raw exported ready status.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md and docs/QD_WORKFLOW.md"
+    },
+    {
+      "criterion": "No product runtime, Mac hardware, workflow dispatch, cross-device validation, or PR #49 change is required or claimed.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/notes.md"
+    },
+    {
+      "criterion": "The repository check gate passes in the Linux Nix environment.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/nix-just-check.log"
+    },
+    {
+      "criterion": "The new Bash/JQ checker passes explicit shellcheck validation before it is tracked.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/shellcheck.log"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just qd-ready-queue-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-check.log"
+    },
+    {
+      "command": "just qd-ready-queue-cycle-smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-cycle-smoke.log"
+    },
+    {
+      "command": "qd ready --json",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/qd-ready-json.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/git-diff-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/nix-just-check.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/qd-ready-queue-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/shellcheck.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-ready-queue-visibility/commands.log",
+    "evidence/m4-qd-ready-queue-visibility/git-diff-check.log",
+    "evidence/m4-qd-ready-queue-visibility/notes.md",
+    "evidence/m4-qd-ready-queue-visibility/nix-just-check.log",
+    "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-check.log",
+    "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-cycle-smoke.log",
+    "evidence/m4-qd-ready-queue-visibility/qd-ready-json.log",
+    "evidence/m4-qd-ready-queue-visibility/qd-reports-check.log",
+    "evidence/m4-qd-ready-queue-visibility/shellcheck.log",
+    "reports/qd/m4-qd-ready-queue-visibility/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd orchestration tooling only; no product runtime, Mac hardware, workflow dispatch, cross-device validation, or PR #49 change was required or performed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
