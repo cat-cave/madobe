@@ -1,0 +1,3 @@
+bash scripts/qd-ready-queue-check.sh --cycle-smoke
+qd ready queue check cycle smoke: rejected temp-copy cycle at /tmp/madobe-qd-ready-cycle.uCyySl/qd-export-cyclic.json
+cycle smoke stderr: qd ready queue check: requires cycle detected: __qd_ready_cycle_a -> __qd_ready_cycle_b -> __qd_ready_cycle_a

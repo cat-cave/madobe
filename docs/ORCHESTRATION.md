@@ -145,6 +145,11 @@ resolved or explicitly split; it does not replace audit.
 
 ## Work Selection
 
+Choose implementor work from `qd ready --json`. The committed export's raw `status == "ready"` values are only a
+diagnostic view and can include nodes still held by transitive `requires` prerequisites. On Linux, run
+`just qd-ready-queue-check` when the export and strict ready queue appear to disagree; it reports raw ready nodes,
+strictly assignable nodes, and the nearest non-done or blocked prerequisite holding each raw ready node.
+
 Prefer multiple independent nodes in parallel. Good batches have low file overlap and clear ownership:
 
 - One platform validation node.

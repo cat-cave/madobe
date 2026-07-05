@@ -1,0 +1,22 @@
+bash scripts/qd-ready-queue-check.sh
+qd ready queue check
+source: /home/trevor/projects/madobe/.qd/worktrees/m4-qd-ready-queue-visibility/roadmap/qd-export.json
+selection_source: qd ready --json is authoritative for assignment; raw export status is diagnostic
+raw_ready_count: 4
+assignable_ready_count: 0
+held_ready_count: 4
+
+Raw ready-status nodes:
+- m4-audit [ready] Audit M4 integrated video path
+- m4-cross-device-latency-instrumentation [ready] Measure cross-device frame latency
+- m4-received-sample-metal-presentation [ready] Render and present a received decoded sample with Metal
+- m4-received-sample-videotoolbox-decode [ready] Decode a received network sample with VideoToolbox
+
+Assignable ready nodes (all transitive requires prerequisites done):
+- none
+
+Held ready-status nodes:
+- m4-audit held by nearest non-done m4-cross-device-latency-instrumentation [ready] distance=1; nearest blocked m4-product-quic-cross-device-smoke [blocked] distance=1; blocked_by=external-dependency; blocked_reason=Waiting for Mac orchestrator to run product QUIC receiver on LAN and publish receiver certificate/artifacts for Linux sender validation; status_reason=[2026-07-04T05:31:21.804Z] Blocked by external-dependency: Waiting for Mac orchestrator to run product QUIC receiver on LAN and publish receiver certificate/artifacts for Linux sender validation Needed: Pull spec/m4-product-quic-cross-device-smoke, run madobectl product-quic-smoke receive on the Mac LAN address, and publish macos-receiver/server-cert.der plus receiver evidence
+- m4-cross-device-latency-instrumentation held by nearest non-done m4-received-sample-metal-presentation [ready] distance=1; blocker_reason=none
+- m4-received-sample-metal-presentation held by nearest non-done m4-received-sample-videotoolbox-decode [ready] distance=1; blocker_reason=none
+- m4-received-sample-videotoolbox-decode held by nearest non-done m4-product-quic-cross-device-smoke [blocked] distance=1; nearest blocked m4-product-quic-cross-device-smoke [blocked] distance=1; blocked_by=external-dependency; blocked_reason=Waiting for Mac orchestrator to run product QUIC receiver on LAN and publish receiver certificate/artifacts for Linux sender validation; status_reason=[2026-07-04T05:31:21.804Z] Blocked by external-dependency: Waiting for Mac orchestrator to run product QUIC receiver on LAN and publish receiver certificate/artifacts for Linux sender validation Needed: Pull spec/m4-product-quic-cross-device-smoke, run madobectl product-quic-smoke receive on the Mac LAN address, and publish macos-receiver/server-cert.der plus receiver evidence

@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-qd-ready-queue-visibility",
+  "acceptanceReviewed": [
+    {
+      "criterion": "just qd-ready-queue-check exists and runs with Bash/JQ only.",
+      "status": "passed",
+      "evidence": "justfile, scripts/qd-ready-queue-check.sh, evidence/m4-qd-ready-queue-visibility/qd-ready-queue-check.log"
+    },
+    {
+      "criterion": "Current repo output explains why qd status reports raw ready-status nodes while qd ready --json is empty.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-check.log and evidence/m4-qd-ready-queue-visibility/qd-ready-json.log"
+    },
+    {
+      "criterion": "The report identifies the M4 dependency-held chain rooted at blocked m4-product-quic-cross-device-smoke.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-check.log"
+    },
+    {
+      "criterion": "A temp-copy negative smoke proves requires cycles are rejected.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/qd-ready-queue-cycle-smoke.log"
+    },
+    {
+      "criterion": "Docs clarify that orchestrators choose work from strict qd ready --json, not raw exported ready status.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md and docs/QD_WORKFLOW.md"
+    },
+    {
+      "criterion": "No product runtime, Mac hardware, workflow dispatch, cross-device validation, or PR #49 change is required.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-ready-queue-visibility/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd orchestration diagnostic only; no product runtime or platform hardware validation is required."
+  },
+  "findings": []
+}
