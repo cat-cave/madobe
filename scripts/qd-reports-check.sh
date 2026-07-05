@@ -113,6 +113,10 @@ validate_completion_commit_objects() {
   while IFS= read -r sha; do
     if ! git cat-file -e "$sha^{commit}" 2>/dev/null; then
       report_error "$file" "commits[] SHA is not present as a commit in the current git repository: $sha"
+      continue
+    fi
+    if ! git merge-base --is-ancestor "$sha" HEAD 2>/dev/null; then
+      report_error "$file" "commits[] SHA is not reachable from HEAD: $sha"
     fi
   done < <(jq -r '.commits[]' "$file")
 }

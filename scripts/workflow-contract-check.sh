@@ -149,6 +149,7 @@ check_ci_workflow() {
   require_all_jobs_have_timeout "$ci_file"
 
   require_text "$ci_file" "uses: actions/checkout@" "actions/checkout action"
+  require_text "$ci_file" "fetch-depth: 0" "full-history checkout"
   require_text "$ci_file" "uses: cachix/install-nix-action@" "cachix/install-nix-action action"
   require_text "$ci_file" "uses: jdx/mise-action@" "jdx/mise-action action"
   require_text "$ci_file" "rustup component add rustfmt clippy" "rustfmt and clippy component install"

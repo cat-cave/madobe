@@ -11,13 +11,13 @@
     "scripts/qd-reports-check.sh"
   ],
   "commits": [
-    "6b220583fc40aeccbd8946ea59384b857454dee2"
+    "3392eaa98aa70976a44669daf1a8927503c510e4"
   ],
   "acceptanceEvidence": [
     {
       "criterion": "The three legacy M0 completion reports use full commit SHAs.",
       "status": "passed",
-      "evidence": "reports/qd/m0-ci-green/completion.json uses 63b1c6b134522f935d22aee7e1b97982c4f29363; reports/qd/m0-coordination-issue/completion.json and reports/qd/m0-github-live/completion.json use 6e1c6c09f8330e02f5c022e093aff19934b089b3."
+      "evidence": "reports/qd/m0-ci-green/completion.json uses 01234ed463d562349d943aa0a3aefe5657689482; reports/qd/m0-coordination-issue/completion.json and reports/qd/m0-github-live/completion.json use 6e1c6c09f8330e02f5c022e093aff19934b089b3."
     },
     {
       "criterion": "scripts/qd-reports-check.sh rejects non-empty commits[] entries that are not 40-character lowercase hex SHAs.",

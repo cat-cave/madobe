@@ -19,8 +19,7 @@
     "reports/qd/m3-cross-device-video-smoke/audit.json"
   ],
   "commits": [
-    "05b41a532fd1ad0c6e9138c0bd4d46d2f9da5f74",
-    "c3b1f3cbe766c2b0efda3100b7b9ff0f3b78885a"
+    "3d81151b8131760f24b2fe9fa11d9d1bfa67e025"
   ],
   "acceptanceEvidence": [
     {
