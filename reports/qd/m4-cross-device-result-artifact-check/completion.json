@@ -17,7 +17,9 @@
     "reports/qd/m4-cross-device-result-artifact-check/completion.json",
     "reports/qd/m4-cross-device-result-artifact-check/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "a557ec6deecb924b6e122471897ccdc40283ca6d"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "The generic checker validates the checked-in M3 cross-device result fixture and negative fixtures.",
