@@ -12,7 +12,9 @@
     "reports/qd/m4-product-quic-handoff-runbook/audit.json",
     "reports/qd/m4-product-quic-handoff-runbook/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "ad45b67933eda62183a87f9fe513c68d580a4b36"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "docs/CROSS_DEVICE_VALIDATION.md documents the exact product QUIC receiver and sender sequence, including artifact paths, certificate exchange, validation boundaries, and failure handling.",
@@ -76,4 +78,3 @@
   "unverifiedItems": [],
   "dagChangesNeeded": []
 }
-
