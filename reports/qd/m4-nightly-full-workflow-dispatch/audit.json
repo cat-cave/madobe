@@ -34,7 +34,7 @@
   },
   "realWorldValidation": {
     "required": true,
-    "status": "not_required",
+    "status": "blocked",
     "evidence": "Hosted nightly validation is required but blocked before run creation by GitHub credential authorization; no nightly success is claimed."
   },
   "findings": [
