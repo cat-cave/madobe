@@ -1,0 +1,7 @@
+mutation: .nodes[0].milestone = not-a-registered-milestone
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/qd-roadmap-unknown-milestone.pVOb3m.json just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/qd-roadmap-unknown-milestone.pVOb3m.json: nodes[0].milestone must match a registered milestone name or null: not-a-registered-milestone
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+exit_status=1

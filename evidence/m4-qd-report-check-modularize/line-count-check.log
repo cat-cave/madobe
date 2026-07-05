@@ -1,0 +1,10 @@
+command: wc -l scripts/qd-report-check/*.sh scripts/qd-reports-check.sh
+   30 scripts/qd-report-check/audit.sh
+   85 scripts/qd-report-check/common.sh
+  164 scripts/qd-report-check/completion.sh
+   91 scripts/qd-report-check/roadmap-edges.sh
+   86 scripts/qd-report-check/roadmap-node-notes.sh
+  135 scripts/qd-report-check/roadmap-registries.sh
+  204 scripts/qd-report-check/roadmap.sh
+   64 scripts/qd-reports-check.sh
+  859 total

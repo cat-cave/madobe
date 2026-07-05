@@ -1,0 +1,7 @@
+mutation: .edges[0].from_node = missing-node-for-smoke
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/qd-roadmap-invalid-edge.Yp7L0H.json just qd-reports-check
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/qd-roadmap-invalid-edge.Yp7L0H.json: edges[0].from_node must be a non-blank existing node id: missing-node-for-smoke
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+exit_status=1
