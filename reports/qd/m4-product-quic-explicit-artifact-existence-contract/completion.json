@@ -18,7 +18,9 @@
     "reports/qd/m4-product-quic-explicit-artifact-existence-contract/completion.json",
     "reports/qd/m4-product-quic-explicit-artifact-existence-contract/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "3bae51e5548c13aef18514e81d25149b043f68e7"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "No-arg just product-quic-result-check still validates the golden fixture and negative schema fixtures without requiring live evidence files.",
