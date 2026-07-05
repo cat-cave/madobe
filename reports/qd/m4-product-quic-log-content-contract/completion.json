@@ -17,7 +17,9 @@
     "evidence/m4-product-quic-log-content-contract/shellcheck.log",
     "reports/qd/m4-product-quic-log-content-contract/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "0d4edfc293e10070e4101fc7de49b384f667ec0f"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "No-argument just product-quic-result-check still validates the checked-in schema fixture and negative fixtures without requiring live artifacts.",
