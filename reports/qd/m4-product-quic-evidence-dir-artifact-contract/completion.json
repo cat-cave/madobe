@@ -1,0 +1,122 @@
+{
+  "nodeId": "m4-product-quic-evidence-dir-artifact-contract",
+  "summary": "Bound product QUIC role-specific result artifacts to their owning endpoint evidence directories in the shell checker, Rust validator, tests, and cross-device validation docs.",
+  "changedFiles": [
+    "crates/protocol/src/product_quic.rs",
+    "crates/protocol/src/product_quic/tests.rs",
+    "docs/CROSS_DEVICE_VALIDATION.md",
+    "roadmap/qd-export.json",
+    "scripts/product-quic-result-check.sh",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/commands.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/git-diff-check.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/nix-just-check.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/notes.md",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/product-quic-result-check.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/protocol-product-quic-tests.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/qd-reports-check.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/shellcheck.log",
+    "reports/qd/m4-product-quic-evidence-dir-artifact-contract/completion.json",
+    "reports/qd/m4-product-quic-evidence-dir-artifact-contract/audit.json"
+  ],
+  "commits": [
+    "f0f63b282595e4e65b2c1f6ef24201b19715d056"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "product-quic-result-check rejects sender_log artifacts outside sender.evidenceDir.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-evidence-dir-artifact-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "product-quic-result-check rejects receiver_log and payload_validation_evidence artifacts outside receiver.evidenceDir.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-evidence-dir-artifact-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Prefix checks are path-boundary aware so sibling paths such as linux-sender-extra/sender.log do not satisfy linux-sender.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh, crates/protocol/src/product_quic.rs, and evidence/m4-product-quic-evidence-dir-artifact-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "No-arg just product-quic-result-check remains schema-only for the checked-in fixture.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-evidence-dir-artifact-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Generated self-tests cover misplaced role artifacts.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-evidence-dir-artifact-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Rust ProductQuicSmokeResult::validate mirrors the endpoint artifact directory contract.",
+      "status": "passed",
+      "evidence": "crates/protocol/src/product_quic.rs, crates/protocol/src/product_quic/tests.rs, and evidence/m4-product-quic-evidence-dir-artifact-contract/protocol-product-quic-tests.log"
+    },
+    {
+      "criterion": "docs/CROSS_DEVICE_VALIDATION.md documents the endpoint-directory binding rule.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md and evidence/m4-product-quic-evidence-dir-artifact-contract/notes.md"
+    },
+    {
+      "criterion": "just product-quic-result-check, cargo test -p madobe-protocol product_quic, git diff --check, just qd-reports-check, and nix develop -c just check pass.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-evidence-dir-artifact-contract/product-quic-result-check.log, evidence/m4-product-quic-evidence-dir-artifact-contract/protocol-product-quic-tests.log, evidence/m4-product-quic-evidence-dir-artifact-contract/git-diff-check.log, evidence/m4-product-quic-evidence-dir-artifact-contract/qd-reports-check.log, and evidence/m4-product-quic-evidence-dir-artifact-contract/nix-just-check.log"
+    },
+    {
+      "criterion": "No live product QUIC, UDP/LAN, Mac hardware, certificate handoff, decode, render, presentation, latency, workflow dispatch, or credential-dependent claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-evidence-dir-artifact-contract/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just product-quic-result-check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-evidence-dir-artifact-contract/product-quic-result-check.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-protocol product_quic",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-evidence-dir-artifact-contract/protocol-product-quic-tests.log"
+    },
+    {
+      "command": "nix develop -c shellcheck scripts/product-quic-result-check.sh scripts/result-check-common.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-evidence-dir-artifact-contract/shellcheck.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-evidence-dir-artifact-contract/git-diff-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-evidence-dir-artifact-contract/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-evidence-dir-artifact-contract/nix-just-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/commands.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/git-diff-check.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/nix-just-check.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/notes.md",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/product-quic-result-check.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/protocol-product-quic-tests.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/qd-reports-check.log",
+    "evidence/m4-product-quic-evidence-dir-artifact-contract/shellcheck.log",
+    "reports/qd/m4-product-quic-evidence-dir-artifact-contract/completion.json",
+    "reports/qd/m4-product-quic-evidence-dir-artifact-contract/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is a product QUIC result-schema and evidence-hygiene contract node. It uses local fixture/checker validation and Rust unit tests only; it does not run live product QUIC, UDP/LAN connectivity, Mac hardware, certificate handoff, decode, render, presentation, latency, workflow dispatch, or credential-dependent validation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

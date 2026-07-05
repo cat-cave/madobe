@@ -68,6 +68,10 @@ validate_file() {
   require_jq "$file" 'all(.artifacts[]; (.path | type == "string" and length > 0) and (.kind | type == "string" and length > 0))' 'artifacts must include non-empty path and kind'
   require_jq "$file" 'all(.artifacts[]; .path | is_madobe_repo_relative_reference)' 'artifact paths must be repo-relative and traversal-free'
   require_jq "$file" 'all(.artifacts[]; .kind | is_product_quic_artifact_kind)' 'artifact kinds must use the product QUIC vocabulary'
+  # shellcheck disable=SC2016 # $result is a jq variable, not a shell expansion.
+  require_jq "$file" '. as $result | all(.artifacts[]; (.kind != "sender_log") or (.path | is_product_quic_artifact_under($result.sender.evidenceDir)))' 'sender_log artifacts must be under sender.evidenceDir'
+  # shellcheck disable=SC2016 # $result is a jq variable, not a shell expansion.
+  require_jq "$file" '. as $result | all(.artifacts[]; (.kind != "receiver_log" and .kind != "payload_validation_evidence") or (.path | is_product_quic_artifact_under($result.receiver.evidenceDir)))' 'receiver_log and payload_validation_evidence artifacts must be under receiver.evidenceDir'
   require_jq "$file" '.notes | type == "string" and length > 0' 'notes must be a non-empty string'
   require_jq "$file" '(has("framesSent") or has("framesReceived") or has("validated") or has("nonClaims")) | not' 'obsolete flat product QUIC schema fields are forbidden'
   require_jq "$file" '(.downstreamClaims.decoded != true) or any(.artifacts[]?; .kind == "decode_evidence")' 'decoded claim requires decode_evidence artifact'
@@ -194,6 +198,11 @@ def is_product_quic_artifact_kind:
   . as $kind
   | product_quic_artifact_kinds
   | index($kind) != null;
+
+def is_product_quic_artifact_under($evidence_dir):
+  type == "string"
+  and ($evidence_dir | type) == "string"
+  and startswith($evidence_dir + "/");
 '
 
 run_self_tests() {
@@ -213,15 +222,23 @@ run_self_tests() {
   local missing_artifact="$tmpdir/missing-artifact-result.json"
   local empty_core_artifact="$tmpdir/empty-core-artifact-result.json"
   local explicit_positive="$tmpdir/explicit-positive-result.json"
+  local misplaced_sender_log="$tmpdir/misplaced-sender-log-result.json"
+  local misplaced_receiver_log="$tmpdir/misplaced-receiver-log-result.json"
+  local misplaced_payload_validation="$tmpdir/misplaced-payload-validation-result.json"
+  local sibling_sender_log="$tmpdir/sibling-sender-log-result.json"
   local missing_sender_log_token="$tmpdir/missing-sender-log-token-result.json"
   local missing_receiver_log_token="$tmpdir/missing-receiver-log-token-result.json"
 
+  local sender_dir="$repo_tmpdir/linux-sender"
+  local receiver_dir="$repo_tmpdir/macos-receiver"
+  mkdir -p "$sender_dir" "$receiver_dir"
+
   local commands_log="$repo_tmpdir/commands.log"
-  local sender_log="$repo_tmpdir/sender.log"
-  local receiver_log="$repo_tmpdir/receiver.log"
-  local bad_sender_log="$repo_tmpdir/bad-sender.log"
-  local bad_receiver_log="$repo_tmpdir/bad-receiver.log"
-  local payload_validation="$repo_tmpdir/payload-validation.json"
+  local sender_log="$sender_dir/sender.log"
+  local receiver_log="$receiver_dir/receiver.log"
+  local bad_sender_log="$sender_dir/bad-sender.log"
+  local bad_receiver_log="$receiver_dir/bad-receiver.log"
+  local payload_validation="$receiver_dir/payload-validation.json"
   local notes_artifact="$repo_tmpdir/notes.md"
   printf 'product QUIC commands\n' >"$commands_log"
   cat >"$sender_log" <<'SENDER_LOG'
@@ -259,7 +276,11 @@ RECEIVER_LOG
     --arg receiver_log "$receiver_log" \
     --arg payload_validation "$payload_validation" \
     --arg notes_artifact "$notes_artifact" \
-    '.artifacts = [
+    --arg sender_dir "$sender_dir" \
+    --arg receiver_dir "$receiver_dir" \
+    '.sender.evidenceDir = $sender_dir
+    | .receiver.evidenceDir = $receiver_dir
+    | .artifacts = [
       {"path": $commands_log, "kind": "commands_log"},
       {"path": $sender_log, "kind": "sender_log"},
       {"path": $receiver_log, "kind": "receiver_log"},
@@ -285,12 +306,33 @@ RECEIVER_LOG
 
   jq \
     --arg commands_log "$commands_log" \
-    --arg missing_artifact "$repo_tmpdir/missing-receiver.log" \
-    '.artifacts = [
+    --arg missing_artifact "$receiver_dir/missing-receiver.log" \
+    --arg sender_dir "$sender_dir" \
+    --arg receiver_dir "$receiver_dir" \
+    '.sender.evidenceDir = $sender_dir
+    | .receiver.evidenceDir = $receiver_dir
+    | .artifacts = [
       {"path": $commands_log, "kind": "commands_log"},
       {"path": $missing_artifact, "kind": "receiver_log"}
     ]' \
     "$default_fixture" >"$missing_artifact"
+
+  jq \
+    --arg receiver_log "$receiver_log" \
+    '.artifacts |= map(if .kind == "sender_log" then .path = $receiver_log else . end)' \
+    "$explicit_positive" >"$misplaced_sender_log"
+  jq \
+    --arg sender_log "$sender_log" \
+    '.artifacts |= map(if .kind == "receiver_log" then .path = $sender_log else . end)' \
+    "$explicit_positive" >"$misplaced_receiver_log"
+  jq \
+    --arg sender_log "$sender_log" \
+    '.artifacts |= map(if .kind == "payload_validation_evidence" then .path = $sender_log else . end)' \
+    "$explicit_positive" >"$misplaced_payload_validation"
+  jq \
+    --arg sibling_sender_log "$repo_tmpdir/linux-sender-extra/sender.log" \
+    '.artifacts |= map(if .kind == "sender_log" then .path = $sibling_sender_log else . end)' \
+    "$explicit_positive" >"$sibling_sender_log"
 
   jq '. + {framesSent: 1, validated: {payloadSha256: true}}' "$default_fixture" >"$obsolete"
   jq '.downstreamClaims.decoded = true' "$default_fixture" >"$unsupported_claim"
@@ -308,6 +350,10 @@ RECEIVER_LOG
   expect_invalid "$unknown_artifact_kind" 'unknown artifact kind' || self_test_status=1
   expect_invalid "$missing_artifact" 'missing explicit artifact' explicit || self_test_status=1
   expect_invalid "$empty_core_artifact" 'empty explicit core artifact' explicit || self_test_status=1
+  expect_invalid "$misplaced_sender_log" 'sender log outside sender evidence dir' explicit || self_test_status=1
+  expect_invalid "$misplaced_receiver_log" 'receiver log outside receiver evidence dir' explicit || self_test_status=1
+  expect_invalid "$misplaced_payload_validation" 'payload validation outside receiver evidence dir' explicit || self_test_status=1
+  expect_invalid "$sibling_sender_log" 'sibling sender evidence dir prefix' fixture || self_test_status=1
   cp "$bad_sender_log" "$sender_log"
   expect_invalid "$missing_sender_log_token" 'missing sender log token' explicit || self_test_status=1
   cp "$bad_receiver_log" "$receiver_log"

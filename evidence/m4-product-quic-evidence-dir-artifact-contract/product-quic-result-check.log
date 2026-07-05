@@ -1,0 +1,2 @@
+bash scripts/product-quic-result-check.sh 
+product quic result check: validated crates/protocol/fixtures/m4-product-quic-smoke/result.json and negative fixtures

@@ -228,6 +228,49 @@ fn product_quic_rejects_traversal_endpoint_evidence_dir() {
     );
 }
 
+#[test]
+fn product_quic_rejects_sender_log_outside_sender_evidence_dir() {
+    let mut result = golden_result();
+    result.artifacts[1].path =
+        "evidence/m4-product-quic-cross-device-smoke/macos-receiver/sender.log".to_owned();
+
+    assert_eq!(
+        result.validate(),
+        [ProductQuicResultValidationError::ArtifactOutsideEndpointEvidenceDir("sender_log")]
+    );
+}
+
+#[test]
+fn product_quic_rejects_receiver_artifacts_outside_receiver_evidence_dir() {
+    let mut result = golden_result();
+    result.artifacts[2].path =
+        "evidence/m4-product-quic-cross-device-smoke/linux-sender/receiver.log".to_owned();
+    result.artifacts[3].path =
+        "evidence/m4-product-quic-cross-device-smoke/linux-sender/result.json".to_owned();
+
+    assert_eq!(
+        result.validate(),
+        [
+            ProductQuicResultValidationError::ArtifactOutsideEndpointEvidenceDir("receiver_log"),
+            ProductQuicResultValidationError::ArtifactOutsideEndpointEvidenceDir(
+                "payload_validation_evidence"
+            )
+        ]
+    );
+}
+
+#[test]
+fn product_quic_rejects_sibling_prefix_endpoint_artifact_path() {
+    let mut result = golden_result();
+    result.artifacts[1].path =
+        "evidence/m4-product-quic-cross-device-smoke/linux-sender-extra/sender.log".to_owned();
+
+    assert_eq!(
+        result.validate(),
+        [ProductQuicResultValidationError::ArtifactOutsideEndpointEvidenceDir("sender_log")]
+    );
+}
+
 fn golden_result() -> ProductQuicSmokeResult {
     ProductQuicSmokeResult {
             node_id: "m4-product-quic-cross-device-smoke".to_owned(),
