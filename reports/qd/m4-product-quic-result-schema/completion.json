@@ -14,7 +14,9 @@
     "reports/qd/m4-product-quic-result-schema/audit.json",
     "reports/qd/m4-product-quic-result-schema/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "e3a21af515d89546e284a427dbe155fa782c637a"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "crates/protocol contains a typed product QUIC smoke result model covering transport, product identity, sender/receiver roles, payload byte count, SHA-256 validation, receiver ack, optional certificate fingerprint, and explicit downstream non-claims.",
