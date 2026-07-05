@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-lan-video-smoke-artifact-content-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "LAN video smoke logs retain stable TCP smoke identity and validation tokens.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/artifacts.rs and evidence/m4-lan-video-smoke-artifact-content-contract/focused-artifact-tests.log"
+    },
+    {
+      "criterion": "LAN video smoke result.json keeps productQuic false, transport tcp, payload/hash validation, and explicit nonClaims.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/artifacts.rs and evidence/m4-lan-video-smoke-artifact-content-contract/focused-artifact-tests.log"
+    },
+    {
+      "criterion": "Timeline artifacts are sequence-only and do not imply latency proof.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/artifacts.rs and evidence/m4-lan-video-smoke-artifact-content-contract/focused-artifact-tests.log"
+    },
+    {
+      "criterion": "The node scope excludes live LAN, product QUIC, decode/render/presentation, latency, workflow dispatch, credentials, and PR #49 changes.",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-artifact-content-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Artifact-writer contract tests use synthetic Rust summaries and do not require live LAN hardware, Mac validation, product QUIC, VideoToolbox, Metal, presentation, latency measurement, workflow_dispatch, credentials, or PR #49 changes."
+  },
+  "findings": []
+}

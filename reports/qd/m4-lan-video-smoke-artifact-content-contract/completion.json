@@ -1,0 +1,87 @@
+{
+  "nodeId": "m4-lan-video-smoke-artifact-content-contract",
+  "summary": "Added platform-neutral Rust tests for the LAN video smoke artifact writers so sender, receiver, listening, timeline, and result artifacts keep stable TCP smoke evidence tokens and explicit non-claims.",
+  "changedFiles": [
+    "crates/transport/src/video_smoke/artifacts.rs",
+    "roadmap/qd-export.json",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/commands.log",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/focused-artifact-tests.log",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/git-diff-check.log",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/nix-just-check.log",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/notes.md",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/transport-tests.log",
+    "reports/qd/m4-lan-video-smoke-artifact-content-contract/completion.json",
+    "reports/qd/m4-lan-video-smoke-artifact-content-contract/audit.json"
+  ],
+  "commits": [
+    "1d7077a938b05abadf4ed149b54514859b090f92"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Tests assert sender and receiver logs include stable LAN smoke tokens: node_id=m3-lan-video-smoke-harness, transport=tcp, product_quic=false, payload byte count, SHA-256, and receiver validation booleans.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/artifacts.rs and evidence/m4-lan-video-smoke-artifact-content-contract/focused-artifact-tests.log"
+    },
+    {
+      "criterion": "Tests assert result.json records productQuic false, transport tcp, passed true, payloadBytes 84, expected SHA-256, validation fields, and explicit nonClaims entries.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/artifacts.rs and evidence/m4-lan-video-smoke-artifact-content-contract/focused-artifact-tests.log"
+    },
+    {
+      "criterion": "Tests assert timeline artifacts use clock sequence-only and expected event names without latency implication.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/artifacts.rs and evidence/m4-lan-video-smoke-artifact-content-contract/focused-artifact-tests.log"
+    },
+    {
+      "criterion": "No live product QUIC, Mac decode/render/presentation, workflow_dispatch, credentials, or PR 49 changes are required or claimed.",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-artifact-content-contract/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c cargo test -p madobe-transport video_smoke::artifacts --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-artifact-content-contract/focused-artifact-tests.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-transport --all-features",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-artifact-content-contract/transport-tests.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-artifact-content-contract/git-diff-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-artifact-content-contract/nix-just-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-artifact-content-contract/qd-reports-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-lan-video-smoke-artifact-content-contract/commands.log",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/focused-artifact-tests.log",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/git-diff-check.log",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/nix-just-check.log",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/notes.md",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/qd-reports-check.log",
+    "evidence/m4-lan-video-smoke-artifact-content-contract/transport-tests.log",
+    "reports/qd/m4-lan-video-smoke-artifact-content-contract/completion.json",
+    "reports/qd/m4-lan-video-smoke-artifact-content-contract/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Artifact-writer contract tests use synthetic Rust summaries and do not require live LAN hardware, Mac validation, product QUIC, VideoToolbox, Metal, presentation, latency measurement, workflow_dispatch, credentials, or PR #49 changes."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
+

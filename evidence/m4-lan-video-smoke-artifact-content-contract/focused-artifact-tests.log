@@ -1,0 +1,24 @@
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-artifact-content-contract' is dirty
+madobe dev shell: use 'just --list' to see commands
+   Compiling madobe-transport v0.1.0 (/home/trevor/projects/madobe/.qd/worktrees/m4-lan-video-smoke-artifact-content-contract/crates/transport)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.68s
+     Running unittests src/lib.rs (target/debug/deps/madobe_transport-317cd3ddb725c9d7)
+
+running 2 tests
+test video_smoke::artifacts::tests::artifact_set_writes_stable_log_and_result_tokens ... ok
+test video_smoke::artifacts::tests::timelines_are_sequence_only_and_do_not_imply_latency ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+     Running tests/lan_video_smoke.rs (target/debug/deps/lan_video_smoke-8a01882a4cb36e56)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+     Running tests/loopback.rs (target/debug/deps/loopback-46a8421d40cb54de)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.00s
+
