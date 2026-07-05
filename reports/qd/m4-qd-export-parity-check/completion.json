@@ -21,7 +21,9 @@
     "reports/qd/m4-qd-export-parity-check/audit.json",
     "reports/qd/m4-qd-export-parity-check/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "1da2b7d3b89bbfec26adc0cc384cc80508b6ce9c"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Add a just qd-export-parity-check command backed by a script that exports live qd state to a temporary file and compares it byte-for-byte with the committed deterministic export.",
