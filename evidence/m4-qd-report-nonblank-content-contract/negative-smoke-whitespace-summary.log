@@ -1,0 +1,6 @@
+$ tmp=$(mktemp -d)
+tmp=/tmp/tmp.PQ6ltTeFu7
+$ (cd "$tmp" && bash scripts/qd-reports-check.sh)
+qd report check: reports/qd/smoke-node/completion.json: summary must be a non-blank string
+qd report check: failed with 1 error(s)
+expected failure exit status: 1

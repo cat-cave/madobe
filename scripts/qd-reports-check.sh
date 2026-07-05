@@ -3,6 +3,7 @@ set -euo pipefail
 
 error_count=0
 roadmap_export=roadmap/qd-export.json
+jq_report_predicates='def nonblank: type == "string" and (gsub("^[[:space:]]+|[[:space:]]+$"; "") | length > 0);'
 
 report_error() {
   printf 'qd report check: %s: %s\n' "$1" "$2" >&2
@@ -23,7 +24,7 @@ expect_jq() {
   local expression=$2
   local message=$3
 
-  if ! jq -e "$expression" "$file" >/dev/null; then
+  if ! jq -e "$jq_report_predicates $expression" "$file" >/dev/null; then
     report_error "$file" "$message"
   fi
 }
@@ -86,14 +87,14 @@ validate_completion() {
   validate_completion_status_values "$file"
 
   expect_jq "$file" 'type == "object"' "top level must be an object"
-  expect_jq "$file" '.nodeId | type == "string" and length > 0' "nodeId must be a non-empty string"
-  expect_jq "$file" '.summary | type == "string" and length > 0' "summary must be a non-empty string"
-  expect_jq "$file" '.changedFiles | type == "array" and length > 0 and all(.[]; type == "string" and length > 0)' "changedFiles must be a non-empty array of non-empty strings"
+  expect_jq "$file" '.nodeId | nonblank' "nodeId must be a non-blank string"
+  expect_jq "$file" '.summary | nonblank' "summary must be a non-blank string"
+  expect_jq "$file" '.changedFiles | type == "array" and length > 0 and all(.[]; nonblank)' "changedFiles must be a non-empty array of non-blank strings"
   expect_jq "$file" '.commits | type == "array" and all(.[]; type == "string" and test("^[0-9a-f]{40}$"))' "commits must be an array of 40-character lowercase hexadecimal SHAs"
-  expect_jq "$file" '.acceptanceEvidence | type == "array" and length > 0 and all(.[]; type == "object" and (.criterion | type == "string" and length > 0) and (.status | type == "string" and length > 0) and (.evidence | type == "string" and length > 0))' "acceptanceEvidence must be a non-empty array of evidence objects with non-empty criterion, status, and evidence"
-  expect_jq "$file" '.commandsRun | type == "array" and length > 0 and all(.[]; type == "object" and (.command | type == "string" and length > 0) and (.status | type == "string" and length > 0) and (.evidence | type == "string" and length > 0))' "commandsRun must be a non-empty array of command objects with non-empty command, status, and evidence"
-  expect_jq "$file" '.evidence | type == "array" and length > 0 and all(.[]; type == "string" and length > 0)' "evidence must be a non-empty array of non-empty strings"
-  expect_jq "$file" '.realWorldValidation | type == "object" and (.required | type == "boolean") and (.evidence | type == "string" and length > 0)' "realWorldValidation must include required boolean and non-empty evidence string"
+  expect_jq "$file" '.acceptanceEvidence | type == "array" and length > 0 and all(.[]; type == "object" and (.criterion | nonblank) and (.status | nonblank) and (.evidence | nonblank))' "acceptanceEvidence must be a non-empty array of evidence objects with non-blank criterion, status, and evidence"
+  expect_jq "$file" '.commandsRun | type == "array" and length > 0 and all(.[]; type == "object" and (.command | nonblank) and (.status | nonblank) and (.evidence | nonblank))' "commandsRun must be a non-empty array of command objects with non-blank command, status, and evidence"
+  expect_jq "$file" '.evidence | type == "array" and length > 0 and all(.[]; nonblank)' "evidence must be a non-empty array of non-blank strings"
+  expect_jq "$file" '.realWorldValidation | type == "object" and (.required | type == "boolean") and (.evidence | nonblank)' "realWorldValidation must include required boolean and non-blank evidence string"
   expect_jq "$file" '.unverifiedItems | type == "array" and length == 0' "unverifiedItems must be present and empty"
   expect_jq "$file" '.dagChangesNeeded | type == "array"' "dagChangesNeeded must be an array"
   validate_completion_changed_files "$file"
@@ -223,11 +224,11 @@ validate_audit() {
   validate_audit_status_values "$file"
 
   expect_jq "$file" 'type == "object"' "top level must be an object"
-  expect_jq "$file" '.nodeId | type == "string" and length > 0' "nodeId must be a non-empty string"
-  expect_jq "$file" '.acceptanceReviewed | type == "array" and length > 0 and all(.[]; type == "object" and (.criterion | type == "string" and length > 0) and (.status | type == "string" and length > 0) and (.evidence | type == "string" and length > 0))' "acceptanceReviewed must be a non-empty array of review objects with non-empty criterion, status, and evidence"
+  expect_jq "$file" '.nodeId | nonblank' "nodeId must be a non-blank string"
+  expect_jq "$file" '.acceptanceReviewed | type == "array" and length > 0 and all(.[]; type == "object" and (.criterion | nonblank) and (.status | nonblank) and (.evidence | nonblank))' "acceptanceReviewed must be a non-empty array of review objects with non-blank criterion, status, and evidence"
   expect_jq "$file" '.verificationEvidence | type == "object"' "verificationEvidence must be an object"
   expect_jq "$file" '.verificationEvidence | (.diffReviewed | type == "boolean") and (.completionReportReviewed | type == "boolean") and (.verificationEvidenceReviewed | type == "boolean")' "verificationEvidence must include boolean diffReviewed, completionReportReviewed, and verificationEvidenceReviewed"
-  expect_jq "$file" '.realWorldValidation | type == "object" and (.required | type == "boolean") and (.evidence | type == "string" and length > 0)' "realWorldValidation must include required boolean and non-empty evidence string"
+  expect_jq "$file" '.realWorldValidation | type == "object" and (.required | type == "boolean") and (.evidence | nonblank)' "realWorldValidation must include required boolean and non-blank evidence string"
   expect_jq "$file" '.findings | type == "array"' "findings must be an array"
 }
 
