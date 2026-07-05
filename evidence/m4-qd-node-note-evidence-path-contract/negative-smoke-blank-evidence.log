@@ -1,0 +1,4 @@
+Mutation: set node_notes[0].evidence to a blank string
+qd report check: /tmp/tmp.9FYCnSgio0: node_notes[0].evidence must be a non-blank string when present
+qd report check: failed with 1 error(s)
+expected failure exit=1

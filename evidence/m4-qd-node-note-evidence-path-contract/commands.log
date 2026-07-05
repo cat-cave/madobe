@@ -1,0 +1,11 @@
+Commands planned and run for m4-qd-node-note-evidence-path-contract:
+
+- jq -r '.node_notes[] | select(.evidence != null and .evidence != "") | [.node_id,.kind,.evidence] | @tsv' roadmap/qd-export.json | tee evidence/m4-qd-node-note-evidence-path-contract/node-note-evidence-list.log
+- Temporary negative smoke: set node_notes[0].evidence to /tmp/not-canonical/blocker.md and expect scripts/qd-reports-check.sh to fail.
+- Temporary negative smoke: set node_notes[0].evidence to reports/qd/../secret.md and expect scripts/qd-reports-check.sh to fail.
+- Temporary negative smoke: set node_notes[0].evidence to reports/qd/missing-node/blocker.md and expect scripts/qd-reports-check.sh to fail.
+- Temporary negative smoke: set node_notes[0].evidence to a blank string and expect scripts/qd-reports-check.sh to fail.
+- Temporary negative smoke: set node_notes[0].evidence to 42 and expect scripts/qd-reports-check.sh to fail.
+- git diff --check
+- just qd-reports-check
+- nix develop -c just check

@@ -1,0 +1,151 @@
+{
+  "nodeId": "m4-qd-node-note-evidence-path-contract",
+  "summary": "Normalized qd node-note evidence paths and enforced that committed node_notes[].evidence values are durable HTTP(S) URLs or existing repo-relative paths.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "roadmap/qd-export.json",
+    "scripts/qd-report-check/roadmap-node-notes.sh",
+    "evidence/m4-qd-node-note-evidence-path-contract/commands.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/git-diff-check.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/nix-just-check.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/node-note-evidence-list.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/notes.md",
+    "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-absolute-evidence.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-blank-evidence.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-missing-evidence.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-non-string-evidence.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-traversal-evidence.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/qd-reports-check.log",
+    "reports/qd/m4-qd-node-note-evidence-path-contract/audit.json",
+    "reports/qd/m4-qd-node-note-evidence-path-contract/completion.json"
+  ],
+  "commits": [
+    "31c026e964c03e5529808d2f8e169f54d6f4cf5e"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Current absolute node_notes[].evidence blocker paths are rewritten to canonical reports/qd/<node-id>/blocker.md paths.",
+      "status": "passed",
+      "evidence": "roadmap/qd-export.json and evidence/m4-qd-node-note-evidence-path-contract/node-note-evidence-list.log"
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap-node-notes.sh rejects absolute node_notes[].evidence paths.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-absolute-evidence.log"
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap-node-notes.sh rejects node_notes[].evidence paths containing .. traversal.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-traversal-evidence.log"
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap-node-notes.sh rejects missing repo-relative node_notes[].evidence paths.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-missing-evidence.log"
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap-node-notes.sh rejects blank and non-string non-null node_notes[].evidence values.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-blank-evidence.log and evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-non-string-evidence.log"
+    },
+    {
+      "criterion": "HTTP(S) node_notes[].evidence URLs remain accepted.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/node-note-evidence-list.log includes the existing GitHub issue URL; just qd-reports-check passes with that URL unchanged."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/qd-reports-check.log"
+    },
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents the node_notes[].evidence contract.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded under evidence/m4-qd-node-note-evidence-path-contract and reports/qd/m4-qd-node-note-evidence-path-contract.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/notes.md and reports/qd/m4-qd-node-note-evidence-path-contract/completion.json"
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, focused temporary negative smokes, git diff --check, and nix develop -c just check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/git-diff-check.log, evidence/m4-qd-node-note-evidence-path-contract/qd-reports-check.log, evidence/m4-qd-node-note-evidence-path-contract/nix-just-check.log, and evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-absolute-evidence.log"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "jq -r '.node_notes[] | select(.evidence != null and .evidence != \"\") | [.node_id,.kind,.evidence] | @tsv' roadmap/qd-export.json",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/node-note-evidence-list.log"
+    },
+    {
+      "command": "temporary negative smoke: absolute node_notes[0].evidence path",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-absolute-evidence.log"
+    },
+    {
+      "command": "temporary negative smoke: traversal node_notes[0].evidence path",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-traversal-evidence.log"
+    },
+    {
+      "command": "temporary negative smoke: missing repo-relative node_notes[0].evidence path",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-missing-evidence.log"
+    },
+    {
+      "command": "temporary negative smoke: blank node_notes[0].evidence string",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-blank-evidence.log"
+    },
+    {
+      "command": "temporary negative smoke: non-string node_notes[0].evidence value",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-non-string-evidence.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/git-diff-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-node-note-evidence-path-contract/nix-just-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-node-note-evidence-path-contract/commands.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/git-diff-check.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/nix-just-check.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/node-note-evidence-list.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/notes.md",
+    "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-absolute-evidence.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-blank-evidence.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-missing-evidence.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-non-string-evidence.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/negative-smoke-traversal-evidence.log",
+    "evidence/m4-qd-node-note-evidence-path-contract/qd-reports-check.log",
+    "reports/qd/m4-qd-node-note-evidence-path-contract/audit.json",
+    "reports/qd/m4-qd-node-note-evidence-path-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This is qd roadmap/report hygiene and does not require product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent validation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

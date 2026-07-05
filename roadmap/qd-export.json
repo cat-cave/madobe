@@ -3832,6 +3832,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-qd-node-note-evidence-path-contract",
+      "title": "Require canonical qd node-note evidence paths",
+      "kind": "infra",
+      "milestone": "M4-integrated-video-path",
+      "status": "mergeable",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "low",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-qd-node-note-evidence-path-contract",
+      "spec": "Normalize node_notes[].evidence values away from absolute qd worktree paths and enforce that optional node-note evidence is a durable HTTP(S) URL or existing repo-relative path.",
+      "acceptance": "Current absolute node_notes[].evidence blocker paths are rewritten to canonical reports/qd/<node-id>/blocker.md paths\nscripts/qd-report-check/roadmap-node-notes.sh rejects absolute node_notes[].evidence paths\nscripts/qd-report-check/roadmap-node-notes.sh rejects node_notes[].evidence paths containing .. traversal\nscripts/qd-report-check/roadmap-node-notes.sh rejects missing repo-relative node_notes[].evidence paths\nscripts/qd-report-check/roadmap-node-notes.sh rejects blank and non-string non-null node_notes[].evidence values\nHTTP(S) node_notes[].evidence URLs remain accepted\nExisting qd reports and roadmap export pass the stricter check\ndocs/QD_WORKFLOW.md documents the node_notes[].evidence contract\nEvidence and qd reports are recorded under evidence/m4-qd-node-note-evidence-path-contract and reports/qd/m4-qd-node-note-evidence-path-contract\nLinux validation evidence records just qd-reports-check, focused temporary negative smokes, git diff --check, and nix develop -c just check\nNo product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nvalidation:repo-metadata",
+      "created_at": "2026-07-05T20:56:51.495Z",
+      "updated_at": "2026-07-05T21:17:37.001Z",
+      "claimed_at": "2026-07-05T20:57:11.591Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": "[2026-07-05T21:08:38.266Z] Verification sign-off (manual): Linux qd report evidence contract checked with focused negative smokes, git diff --check, just qd-reports-check, and nix develop -c just check.\nEvidence: reports/qd/m4-qd-node-note-evidence-path-contract/audit.json",
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -4206,6 +4236,12 @@
       "to_node": "m4-qd-branch-naming-doc-sync",
       "type": "requires",
       "created_at": "2026-07-05T20:30:15.401Z"
+    },
+    {
+      "from_node": "m4-qd-node-note-kind-doc-sync",
+      "to_node": "m4-qd-node-note-evidence-path-contract",
+      "type": "requires",
+      "created_at": "2026-07-05T20:57:00.439Z"
     }
   ],
   "findings": [
@@ -15887,6 +15923,94 @@
       "finished_at": "2026-07-05T20:48:47.406Z",
       "summary": "Merge recorded with squash at commit 6463156983e07fb5d0ced601f8941225b1191454",
       "log_path": null
+    },
+    {
+      "id": "2f6ecaf5-0853-460b-8f4d-ee0d3d22c084",
+      "node_id": "m4-qd-node-note-evidence-path-contract",
+      "kind": "implement",
+      "status": "completed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": "reports/qd/m4-qd-node-note-evidence-path-contract/completion.json",
+      "audit_kind": null,
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-05T21:08:24.265Z",
+      "finished_at": "2026-07-05T21:08:24.265Z",
+      "summary": "Normalized qd node-note evidence paths and enforced that committed node_notes[].evidence values are durable HTTP(S) URLs or existing repo-relative paths.",
+      "log_path": null
+    },
+    {
+      "id": "d487a44e-8da4-4d16-8aac-8094ed43a677",
+      "node_id": "m4-qd-node-note-evidence-path-contract",
+      "kind": "audit",
+      "status": "passed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": "reports/qd/m4-qd-node-note-evidence-path-contract/audit.json",
+      "audit_kind": "general",
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-05T21:08:27.243Z",
+      "finished_at": "2026-07-05T21:08:34.014Z",
+      "summary": "Audit passed from reports/qd/m4-qd-node-note-evidence-path-contract/audit.json",
+      "log_path": null
+    },
+    {
+      "id": "2a904308-45aa-4158-9732-cc42a182fcc3",
+      "node_id": "m4-qd-node-note-evidence-path-contract",
+      "kind": "verification",
+      "status": "passed",
+      "command": "manual:Linux qd report evidence contract checked with focused negative smokes, git diff --check, just qd-reports-check, and nix develop -c just check.",
+      "provider": "sign-off",
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": "reports/qd/m4-qd-node-note-evidence-path-contract/audit.json",
+      "audit_kind": null,
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-05T21:08:38.272Z",
+      "finished_at": "2026-07-05T21:08:38.276Z",
+      "summary": "Linux qd report evidence contract checked with focused negative smokes, git diff --check, just qd-reports-check, and nix develop -c just check.",
+      "log_path": null
+    },
+    {
+      "id": "8bf098c5-dc3e-4ff7-8bdc-35167394814e",
+      "node_id": "m4-qd-node-note-evidence-path-contract",
+      "kind": "ci",
+      "status": "passed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": null,
+      "audit_kind": null,
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-05T21:17:37.001Z",
+      "finished_at": "2026-07-05T21:17:37.001Z",
+      "summary": "GitHub Actions PR #129 passed linux and macos on run 28755074149\nEvidence: url=https://github.com/cat-cave/madobe/actions/runs/28755074149",
+      "log_path": null
     }
   ],
   "node_notes": [
@@ -15904,7 +16028,7 @@
       "text": "Blocked by external-dependency: Portal ScreenCast selection for the madobe-owned Hyprland output is still not proven: CreateSession returned a request path, SelectSources failed with Access denied from the non-owning bus probe, and PipeWire dumps showed no video/portal/madobe stream node. Direct grim -o can target the named output when launched with the live Wayland socket, but it only yields PNG output and does not provide DMA-BUF format, modifier, timestamp, or sync metadata.\nNeeded: Implement or run a portal client that owns org.freedesktop.portal.Request.Response, receives user consent for the madobe output, opens the returned PipeWire remote, and records stream metadata; or implement an equivalent direct capture path exposing format, modifier, timestamp, and sync metadata.",
       "created_at": "2026-07-03T20:18:05.519Z",
       "kind": "blocker",
-      "evidence": "/home/trevor/projects/madobe/.qd/worktrees/m2-capture-stream-proof/reports/qd/m2-capture-stream-proof/blocker.md"
+      "evidence": "reports/qd/m2-capture-stream-proof/blocker.md"
     },
     {
       "id": "e88e9e42-d227-48ed-94ea-6e1625d3a2a4",
@@ -15912,7 +16036,7 @@
       "text": "Blocked by external-dependency: A real portal ScreenCast request client now receives CreateSession and extracts the session_handle, but SelectSources produced no response within the bounded 30-second wait. No Start response, stream ids, OpenPipeWireRemote fd, or PipeWire video/portal/madobe stream metadata were obtained.\nNeeded: Determine why SelectSources does not complete for the node-scoped Hyprland output. Provide a visible user-consent/chooser flow with parent-window context or equivalent portal client behavior, then capture Start streams and OpenPipeWireRemote metadata; or use a direct capture API exposing format, modifier, timestamp, and sync metadata.",
       "created_at": "2026-07-03T20:48:56.340Z",
       "kind": "blocker",
-      "evidence": "/home/trevor/projects/madobe/.qd/worktrees/m2-portal-screencast-client-proof/reports/qd/m2-portal-screencast-client-proof/blocker.md"
+      "evidence": "reports/qd/m2-portal-screencast-client-proof/blocker.md"
     },
     {
       "id": "c31d310f-40e5-4ab5-87a7-74e8d5f0f10c",
@@ -16103,6 +16227,14 @@
       "node_id": "m4-qd-branch-naming-doc-sync",
       "text": "Verification sign-off (manual): Reviewed docs diff, branch naming guidance, completion report, audit report, and evidence logs; local Linux/Nix checks passed.\nEvidence: reports/qd/m4-qd-branch-naming-doc-sync/audit.json",
       "created_at": "2026-07-05T20:36:43.924Z",
+      "kind": "note",
+      "evidence": null
+    },
+    {
+      "id": "2f4bca9a-d990-4c08-995c-86db6d4f2fe2",
+      "node_id": "m4-qd-node-note-evidence-path-contract",
+      "text": "Verification sign-off (manual): Linux qd report evidence contract checked with focused negative smokes, git diff --check, just qd-reports-check, and nix develop -c just check.\nEvidence: reports/qd/m4-qd-node-note-evidence-path-contract/audit.json",
+      "created_at": "2026-07-05T21:08:38.266Z",
       "kind": "note",
       "evidence": null
     }
