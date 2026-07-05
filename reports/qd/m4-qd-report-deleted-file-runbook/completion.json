@@ -1,0 +1,72 @@
+{
+  "nodeId": "m4-qd-report-deleted-file-runbook",
+  "summary": "Documented the qd completion report changedFiles[] deleted-file marker contract for implementors and orchestrators before qd complete --from-report.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "docs/ORCHESTRATION.md",
+    "evidence/m4-qd-report-deleted-file-runbook/commands.log",
+    "evidence/m4-qd-report-deleted-file-runbook/notes.md",
+    "reports/qd/m4-qd-report-deleted-file-runbook/audit.json",
+    "reports/qd/m4-qd-report-deleted-file-runbook/completion.json"
+  ],
+  "commits": [
+    "2c2f015d1a38aa1b91910485703b3e3214398a1e"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents that plain completion report changedFiles[] entries mean existing repo-relative paths.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md now states that changedFiles[] plain entries must be existing repo-relative paths."
+    },
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents that deleted files must be represented as deleted:<repo-relative-path>.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md now instructs operators to record deleted files as deleted:<repo-relative-path> instead of plain missing paths."
+    },
+    {
+      "criterion": "docs/QD_WORKFLOW.md documents deleted marker validity constraints.",
+      "status": "passed",
+      "evidence": "docs/QD_WORKFLOW.md now states that deleted markers require a non-empty repo-relative path, no absolute path, no '..' traversal, and an absent referenced path."
+    },
+    {
+      "criterion": "docs/ORCHESTRATION.md points orchestrators at the changedFiles[] rule before qd complete --from-report.",
+      "status": "passed",
+      "evidence": "docs/ORCHESTRATION.md now tells orchestrators to verify the QD_WORKFLOW changedFiles[] path contract before completing from a report."
+    },
+    {
+      "criterion": "Node evidence and qd-compatible completion/audit reports are recorded under the node-scoped evidence and reports directories.",
+      "status": "passed",
+      "evidence": "Created evidence/m4-qd-report-deleted-file-runbook/notes.md, commands.log, and reports/qd/m4-qd-report-deleted-file-runbook/{completion,audit}.json."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-deleted-file-runbook/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-deleted-file-runbook/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-deleted-file-runbook/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-deleted-file-runbook/commands.log",
+    "evidence/m4-qd-report-deleted-file-runbook/notes.md",
+    "reports/qd/m4-qd-report-deleted-file-runbook/audit.json",
+    "reports/qd/m4-qd-report-deleted-file-runbook/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Documentation-only qd runbook update; repository report and check gates are sufficient."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

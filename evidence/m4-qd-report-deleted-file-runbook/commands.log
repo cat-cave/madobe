@@ -1,0 +1,47 @@
+Command log for m4-qd-report-deleted-file-runbook
+
+$ sed -n '250,325p' docs/QD_WORKFLOW.md
+status: passed
+notes: inspected the existing qd completion-report readiness and report-shape documentation.
+
+$ sed -n '115,150p' docs/ORCHESTRATION.md
+status: passed
+notes: inspected orchestrator-facing completion report guidance.
+
+$ sed -n '1,120p' reports/qd/m4-qd-report-changed-file-contract/completion.json
+status: passed
+notes: reviewed the existing report for validator-level deleted changedFiles[] contract work.
+
+$ sed -n '1,100p' reports/qd/m4-qd-report-changed-file-contract/audit.json
+status: passed
+notes: reviewed the existing audit report shape and verificationEvidence booleans.
+
+Validation commands below were added after implementation.
+
+$ nix develop -c just qd-reports-check
+status: passed
+output:
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-qd-report-deleted-file-runbook' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 77 completion report(s) and 77 audit report(s)
+
+$ nix develop -c just check
+status: passed
+output summary:
+- cargo fmt --all -- --check passed
+- taplo fmt --check passed
+- shfmt -d passed
+- just qd-reports-check passed
+- pin hygiene, PR template, workflow contract, and dependabot contract checks passed
+- cargo check --workspace --all-targets --all-features passed
+- cargo clippy --workspace --all-targets --all-features -- -D warnings passed
+- shellcheck passed
+- typos passed
+- markdownlint-cli2 linted 105 Markdown files with 0 errors
+- actionlint passed
+- just lint-lines passed
+
+$ git diff --check
+status: passed
+output: no output

@@ -134,6 +134,9 @@ Completion report rules for `qd complete --from-report`:
 - Do not submit reports with unresolved `unverifiedItems`; required validation gaps should remain incomplete, become
   blockers, or be split into follow-up nodes.
 - Set `realWorldValidation.status` only to `passed` or `not_required` when completing.
+- Verify the completion report `changedFiles[]` path contract in `docs/QD_WORKFLOW.md` before completing: plain entries
+  are existing repo-relative paths, and deleted files use `deleted:<repo-relative-path>` markers that are non-empty,
+  non-absolute, traversal-free, and absent from the checkout.
 - If hosted CI is the required validation, record it through `qd ci record-pass` before merge and link the CI evidence
   in qd and the PR.
 
