@@ -1,0 +1,9 @@
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/qd-export-duplicate-rank.IB7BQN.json just qd-reports-check
+mutation: .registries.milestones[1].rank = .registries.milestones[0].rank
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/qd-export-duplicate-rank.IB7BQN.json: registries.milestones[1].rank duplicates milestone rank: 0
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+expected failure observed
