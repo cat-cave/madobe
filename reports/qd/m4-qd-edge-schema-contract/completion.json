@@ -15,7 +15,9 @@
     "roadmap/qd-export.json",
     "scripts/qd-report-check/roadmap.sh"
   ],
-  "commits": [],
+  "commits": [
+    "a041996ab769447f463d830e3f5ce604aa5e3cce"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check/roadmap.sh rejects edges[] entries whose from_node or to_node does not match a node in roadmap/qd-export.json.",
@@ -48,9 +50,9 @@
       "evidence": "The evidence directory contains the requested positive validation logs, temporary-copy negative smoke logs, and git diff --check log."
     },
     {
-      "criterion": "Add reports/qd/m4-qd-edge-schema-contract/completion.json and audit.json with matching nodeId and empty commits[].",
+      "criterion": "Add reports/qd/m4-qd-edge-schema-contract/completion.json and audit.json with matching nodeId and merge commit evidence.",
       "status": "passed",
-      "evidence": "reports/qd/m4-qd-edge-schema-contract/completion.json and reports/qd/m4-qd-edge-schema-contract/audit.json both use nodeId=m4-qd-edge-schema-contract; completion commits[] is empty."
+      "evidence": "reports/qd/m4-qd-edge-schema-contract/completion.json and reports/qd/m4-qd-edge-schema-contract/audit.json both use nodeId=m4-qd-edge-schema-contract; completion commits[] records merge commit a041996ab769447f463d830e3f5ce604aa5e3cce."
     }
   ],
   "commandsRun": [
