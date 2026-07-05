@@ -1,0 +1,80 @@
+{
+  "nodeId": "m4-product-quic-result-artifact-check",
+  "summary": "Added a dependency-free product QUIC result artifact checker, wired it into just check, and documented the command for real cross-device receiver artifacts.",
+  "changedFiles": [
+    "scripts/product-quic-result-check.sh",
+    "scripts/qd-report-check/roadmap.sh",
+    "scripts/qd-report-check/roadmap-node-notes.sh",
+    "justfile",
+    "docs/CROSS_DEVICE_VALIDATION.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-product-quic-result-artifact-check/notes.md",
+    "evidence/m4-product-quic-result-artifact-check/product-quic-result-check.log",
+    "evidence/m4-product-quic-result-artifact-check/just-check.log",
+    "evidence/m4-product-quic-result-artifact-check/git-diff-check.log",
+    "reports/qd/m4-product-quic-result-artifact-check/completion.json",
+    "reports/qd/m4-product-quic-result-artifact-check/audit.json"
+  ],
+  "commits": [
+    "ccc0db9b068e298d9c5bdeff834410fd6a308b75"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Checker validates the checked-in product QUIC fixture.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-check/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Checker rejects obsolete flat framesSent/validated schema.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh"
+    },
+    {
+      "criterion": "Checker rejects unsupported downstream claims without corresponding artifact roles.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh"
+    },
+    {
+      "criterion": "just check runs the checker.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-check/just-check.log"
+    },
+    {
+      "criterion": "Cross-device runbook documents the command for real receiver artifacts.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just product-quic-result-check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-check/product-quic-result-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-check/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-check/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-product-quic-result-artifact-check/notes.md",
+    "evidence/m4-product-quic-result-artifact-check/product-quic-result-check.log",
+    "evidence/m4-product-quic-result-artifact-check/just-check.log",
+    "evidence/m4-product-quic-result-artifact-check/git-diff-check.log",
+    "reports/qd/m4-product-quic-result-artifact-check/completion.json",
+    "reports/qd/m4-product-quic-result-artifact-check/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Artifact-schema checker only; no live product QUIC or cross-device validation is required or claimed for this node."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

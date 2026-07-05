@@ -274,6 +274,16 @@ The golden fixture uses this shape:
 The product QUIC result proves transport and payload validation only. Downstream decode, render, presentation, and
 latency nodes need their own evidence.
 
+Validate product QUIC result artifacts before using them as qd evidence:
+
+```sh
+just product-quic-result-check evidence/m4-product-quic-cross-device-smoke/macos-receiver/result.json
+```
+
+With no arguments, the same command validates the checked-in golden fixture and negative fixtures for obsolete
+flat schema fields and unsupported downstream claims. `just check` runs that default validation in local and CI
+quality gates.
+
 ## Failure Handling
 
 If validation fails, do not hide it in local logs. Record:
