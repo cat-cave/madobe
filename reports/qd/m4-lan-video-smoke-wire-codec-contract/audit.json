@@ -1,0 +1,36 @@
+{
+  "nodeId": "m4-lan-video-smoke-wire-codec-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "Wire codec round trips exact metadata and payload through in-memory buffers.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/wire.rs and evidence/m4-lan-video-smoke-wire-codec-contract/focused-wire-tests.log"
+    },
+    {
+      "criterion": "Stable wire header layout and byte order are asserted.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/wire.rs and evidence/m4-lan-video-smoke-wire-codec-contract/focused-wire-tests.log"
+    },
+    {
+      "criterion": "Malformed metadata and wire input produce typed failures.",
+      "status": "passed",
+      "evidence": "crates/transport/src/video_smoke/wire.rs and evidence/m4-lan-video-smoke-wire-codec-contract/focused-wire-tests.log"
+    },
+    {
+      "criterion": "Scope excludes live LAN, product QUIC, artifact content, decode/render/presentation, latency, workflow dispatch, credentials, and Mac hardware.",
+      "status": "passed",
+      "evidence": "evidence/m4-lan-video-smoke-wire-codec-contract/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Wire codec contract tests use in-memory Rust buffers only and do not require sockets, live LAN validation, Mac hardware, product QUIC, decode, render, presentation, latency measurement, workflow dispatch, credentials, or cross-device validation."
+  },
+  "findings": []
+}

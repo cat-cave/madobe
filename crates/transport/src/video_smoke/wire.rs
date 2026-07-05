@@ -163,3 +163,194 @@ const fn hex_digit(value: u8) -> char {
         _ => (b'a' + value - 10) as char,
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use std::error::Error;
+    use std::io::Cursor;
+
+    use madobe_protocol::{
+        EncodedVideoFrameMetadata, PayloadHash, PayloadHashAlgorithm, VideoCodec,
+    };
+
+    use super::{FIXED_HEADER_LEN, read_sample, write_sample};
+    use crate::VideoSample;
+    use crate::video_smoke::SmokeErrorKind;
+
+    const HASH_HEX: &str = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+    const PAYLOAD: &[u8] = b"wire-contract";
+
+    #[test]
+    fn write_sample_emits_stable_header_and_round_trips() -> Result<(), Box<dyn Error>> {
+        let sample = sample(HASH_HEX)?;
+        let mut wire_bytes = Vec::new();
+
+        write_sample(&mut wire_bytes, &sample)?;
+
+        assert_eq!(wire_bytes.len(), FIXED_HEADER_LEN + PAYLOAD.len());
+        assert_eq!(&wire_bytes[0..8], b"MDBSMK01");
+        assert_eq!(&wire_bytes[8..10], &1_u16.to_be_bytes());
+        assert_eq!(&wire_bytes[10..18], &7_u64.to_be_bytes());
+        assert_eq!(wire_bytes[18], 1);
+        assert_eq!(&wire_bytes[19..23], &640_u32.to_be_bytes());
+        assert_eq!(&wire_bytes[23..27], &360_u32.to_be_bytes());
+        assert_eq!(
+            &wire_bytes[27..35],
+            &1_720_000_000_000_000_111_u64.to_be_bytes()
+        );
+        assert_eq!(
+            &wire_bytes[35..43],
+            &1_720_000_000_001_000_222_u64.to_be_bytes()
+        );
+        assert_eq!(wire_bytes[43], 1);
+        assert_eq!(
+            &wire_bytes[44..48],
+            &u32::try_from(PAYLOAD.len())?.to_be_bytes()
+        );
+        assert_eq!(wire_bytes[48], 1);
+        assert_eq!(
+            &wire_bytes[49..81],
+            &[
+                0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab,
+                0xcd, 0xef, 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0x01, 0x23, 0x45, 0x67,
+                0x89, 0xab, 0xcd, 0xef,
+            ]
+        );
+        assert_eq!(&wire_bytes[FIXED_HEADER_LEN..], PAYLOAD);
+
+        let decoded = read_sample(&mut Cursor::new(wire_bytes))?;
+        assert_eq!(decoded, sample);
+
+        Ok(())
+    }
+
+    #[test]
+    fn write_sample_rejects_invalid_metadata_hash() -> Result<(), Box<dyn Error>> {
+        assert_wire_error_contains(
+            write_sample_to_vec(&sample("abc")?),
+            "sha256 metadata was not 64 hex characters",
+        );
+
+        let uppercase = HASH_HEX.to_uppercase();
+        assert_wire_error_contains(
+            write_sample_to_vec(&sample(&uppercase)?),
+            "sha256 metadata was not lowercase hex",
+        );
+
+        Ok(())
+    }
+
+    #[test]
+    fn read_sample_rejects_invalid_wire_header_fields() -> Result<(), Box<dyn Error>> {
+        let mut invalid_magic = encoded_sample()?;
+        invalid_magic[0] = b'X';
+        assert_wire_error_contains(
+            read_sample_from_slice(&invalid_magic),
+            "frame magic mismatch",
+        );
+
+        let mut unsupported_version = encoded_sample()?;
+        unsupported_version[9] = 2;
+        assert_wire_error_contains(
+            read_sample_from_slice(&unsupported_version),
+            "unsupported smoke wire version",
+        );
+
+        let mut unsupported_codec = encoded_sample()?;
+        unsupported_codec[18] = 2;
+        assert_wire_error_contains(
+            read_sample_from_slice(&unsupported_codec),
+            "unsupported smoke wire codec",
+        );
+
+        let mut unsupported_hash = encoded_sample()?;
+        unsupported_hash[48] = 2;
+        assert_wire_error_contains(
+            read_sample_from_slice(&unsupported_hash),
+            "unsupported smoke wire hash algorithm",
+        );
+
+        Ok(())
+    }
+
+    #[test]
+    fn read_sample_rejects_truncated_header_and_payload() -> Result<(), Box<dyn Error>> {
+        let wire_bytes = encoded_sample()?;
+
+        assert_io_error_operation(
+            read_sample_from_slice(&wire_bytes[..FIXED_HEADER_LEN - 1]),
+            "read frame header",
+        );
+        assert_io_error_operation(
+            read_sample_from_slice(&wire_bytes[..wire_bytes.len() - 1]),
+            "read frame payload",
+        );
+
+        Ok(())
+    }
+
+    fn encoded_sample() -> Result<Vec<u8>, Box<dyn Error>> {
+        write_sample_to_vec(&sample(HASH_HEX)?).map_err(Into::into)
+    }
+
+    fn write_sample_to_vec(
+        sample: &VideoSample,
+    ) -> Result<Vec<u8>, crate::video_smoke::SmokeError> {
+        let mut wire_bytes = Vec::new();
+        write_sample(&mut wire_bytes, sample)?;
+        Ok(wire_bytes)
+    }
+
+    fn read_sample_from_slice(bytes: &[u8]) -> Result<VideoSample, crate::video_smoke::SmokeError> {
+        read_sample(&mut Cursor::new(bytes))
+    }
+
+    fn sample(hash: &str) -> Result<VideoSample, Box<dyn Error>> {
+        Ok(VideoSample::new(
+            EncodedVideoFrameMetadata {
+                frame_id: 7,
+                codec: VideoCodec::Av1,
+                width: 640,
+                height: 360,
+                capture_timestamp_ns: 1_720_000_000_000_000_111,
+                encode_timestamp_ns: 1_720_000_000_001_000_222,
+                keyframe: true,
+                payload_bytes: u32::try_from(PAYLOAD.len())?,
+                payload_hash: PayloadHash {
+                    algorithm: PayloadHashAlgorithm::Sha256,
+                    value: hash.to_owned(),
+                },
+            },
+            PAYLOAD.to_vec(),
+        )?)
+    }
+
+    fn assert_wire_error_contains(
+        result: Result<impl Sized, crate::video_smoke::SmokeError>,
+        expected: &str,
+    ) {
+        let Err(error) = result else {
+            panic!("expected wire error containing {expected:?}");
+        };
+        let SmokeErrorKind::Wire { message } = error.kind() else {
+            panic!("expected wire error containing {expected:?}, got {error:?}");
+        };
+        assert!(
+            message.contains(expected),
+            "wire error message should contain {expected:?}: {message}"
+        );
+    }
+
+    fn assert_io_error_operation(
+        result: Result<impl Sized, crate::video_smoke::SmokeError>,
+        expected: &'static str,
+    ) {
+        let Err(error) = result else {
+            panic!("expected I/O error for {expected}");
+        };
+        let SmokeErrorKind::Io { operation, .. } = error.kind() else {
+            panic!("expected I/O error for {expected}, got {error:?}");
+        };
+        assert_eq!(*operation, expected);
+    }
+}

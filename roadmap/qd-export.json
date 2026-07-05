@@ -3622,6 +3622,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-lan-video-smoke-wire-codec-contract",
+      "title": "Harden LAN video smoke wire codec contract",
+      "kind": "infra",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P2",
+      "estimate_points": 1,
+      "risk": "low",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-lan-video-smoke-wire-codec-contract",
+      "spec": "Add platform-neutral Rust tests for the LAN video smoke private wire codec using in-memory buffers only. Cover the stable frame header contract, exact payload round trip, and typed failures for malformed headers or payloads without sockets, live LAN hardware, Mac validation, product QUIC, decode/render/presentation, latency, or checked-in sample dependencies.",
+      "acceptance": "Tests prove write_sample/read_sample round trip exact metadata and payload through in-memory buffers\nTests prove the stable header contract: magic MDBSMK01, version 1, AV1 codec id, SHA-256 hash id, fixed header length, big-endian metadata fields, and lowercase 64-character SHA-256 hash bytes\nTests cover typed failure behavior for invalid magic, unsupported version, unsupported codec, unsupported hash algorithm, invalid hash length or casing, truncated header, and truncated payload\nFocused cargo test -p madobe-transport video_smoke::wire --all-features passes\nnix develop -c just check passes\nNo product QUIC, decode, render, presentation, latency, artifact-content, cross-device validation, sockets, Mac hardware, workflow dispatch, or live credentials are required or claimed",
+      "validation": null,
+      "context": "platform:both\nowner:linux-orchestrator\nvalidation:rust-tests",
+      "created_at": "2026-07-05T17:56:11.220Z",
+      "updated_at": "2026-07-05T17:56:22.246Z",
+      "claimed_at": "2026-07-05T17:56:22.246Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -3954,6 +3984,12 @@
       "to_node": "m4-qd-blocker-report-contract",
       "type": "requires",
       "created_at": "2026-07-05T17:29:26.344Z"
+    },
+    {
+      "from_node": "m3-lan-video-smoke-harness",
+      "to_node": "m4-lan-video-smoke-wire-codec-contract",
+      "type": "requires",
+      "created_at": "2026-07-05T17:56:22.152Z"
     }
   ],
   "findings": [
