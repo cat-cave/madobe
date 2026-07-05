@@ -15,7 +15,9 @@
     "reports/qd/m4-platform-aware-tool-missing-diagnostics/completion.json",
     "reports/qd/m4-platform-aware-tool-missing-diagnostics/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "a5c0ab4bbe6f5ddc41468fab3cfdf039a7b49b43"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "The generic just missing-tool helper emits platform-aware guidance instead of always saying to run inside Nix.",
