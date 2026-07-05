@@ -12,7 +12,9 @@
     "reports/qd/m4-qd-node-note-kind-doc-sync/completion.json",
     "reports/qd/m4-qd-node-note-kind-doc-sync/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "821d8cf42e6fbf8b89b7aa609d69dd8fb7ea218d"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "docs/QD_WORKFLOW.md documents node_notes[].kind as blocker, retry, and note.",
