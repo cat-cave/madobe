@@ -18,7 +18,9 @@
     "reports/qd/m4-cross-device-log-content-contract/completion.json",
     "reports/qd/m4-cross-device-log-content-contract/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "5f1d4f9d89ab4476e6b3b0e7f75551fc7e985093"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "No-argument just cross-device-result-check still validates the checked-in schema fixture and generated negative fixtures without requiring live artifacts.",
