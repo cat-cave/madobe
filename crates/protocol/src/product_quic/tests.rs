@@ -184,6 +184,50 @@ fn product_quic_rejects_unsupported_downstream_claims_without_evidence() {
     );
 }
 
+#[test]
+fn product_quic_rejects_absolute_artifact_path() {
+    let mut result = golden_result();
+    result.artifacts[0].path = "/tmp/product-quic/commands.log".to_owned();
+
+    assert_eq!(
+        result.validate(),
+        [ProductQuicResultValidationError::InvalidReference(
+            "artifacts[].path"
+        )]
+    );
+}
+
+#[test]
+fn product_quic_rejects_traversal_artifact_path() {
+    let mut result = golden_result();
+    result.artifacts[0].path = "evidence/../secrets/commands.log".to_owned();
+
+    assert_eq!(
+        result.validate(),
+        [ProductQuicResultValidationError::InvalidReference(
+            "artifacts[].path"
+        )]
+    );
+}
+
+#[test]
+fn product_quic_rejects_traversal_endpoint_evidence_dir() {
+    let result = ProductQuicSmokeResult {
+        receiver: ProductQuicSmokeEndpoint {
+            evidence_dir: "evidence/../secrets".to_owned(),
+            ..golden_result().receiver
+        },
+        ..golden_result()
+    };
+
+    assert_eq!(
+        result.validate(),
+        [ProductQuicResultValidationError::InvalidReference(
+            "receiver.evidence_dir"
+        )]
+    );
+}
+
 fn golden_result() -> ProductQuicSmokeResult {
     ProductQuicSmokeResult {
             node_id: "m4-product-quic-cross-device-smoke".to_owned(),

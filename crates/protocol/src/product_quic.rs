@@ -199,6 +199,8 @@ pub enum ProductQuicResultValidationError {
     FalseProductQuicIdentity,
     /// Sender or receiver role did not match the required contract.
     InvalidEndpointRole(&'static str),
+    /// Result file reference was absolute or could traverse outside the repository.
+    InvalidReference(&'static str),
     /// Payload byte count was empty.
     EmptyPayload,
     /// Payload SHA-256 digest was missing or not lowercase hex.
@@ -259,6 +261,25 @@ impl ProductQuicSmokeResult {
             errors.push(ProductQuicResultValidationError::InvalidEndpointRole(
                 "receiver",
             ));
+        }
+
+        for (field_name, value) in [
+            ("sender.evidence_dir", self.sender.evidence_dir.as_str()),
+            ("receiver.evidence_dir", self.receiver.evidence_dir.as_str()),
+        ] {
+            if !value.is_empty() && !is_repo_relative_reference(value) {
+                errors.push(ProductQuicResultValidationError::InvalidReference(
+                    field_name,
+                ));
+            }
+        }
+
+        for artifact in &self.artifacts {
+            if !is_repo_relative_reference(artifact.path.as_str()) {
+                errors.push(ProductQuicResultValidationError::InvalidReference(
+                    "artifacts[].path",
+                ));
+            }
         }
 
         if self.payload.payload_bytes == 0 {
@@ -334,6 +355,22 @@ fn is_sha256_hex(value: &str) -> bool {
         && value
             .bytes()
             .all(|byte| byte.is_ascii_digit() || (b'a'..=b'f').contains(&byte))
+}
+
+fn is_repo_relative_reference(value: &str) -> bool {
+    !value.is_empty()
+        && !value.starts_with('/')
+        && !has_windows_absolute_prefix(value)
+        && !value.contains('\\')
+        && !value.split('/').any(|component| component == "..")
+}
+
+fn has_windows_absolute_prefix(value: &str) -> bool {
+    let bytes = value.as_bytes();
+    bytes.len() >= 3
+        && bytes[0].is_ascii_alphabetic()
+        && bytes[1] == b':'
+        && (bytes[2] == b'/' || bytes[2] == b'\\')
 }
 
 #[cfg(test)]

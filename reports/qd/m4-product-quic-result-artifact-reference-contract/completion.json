@@ -1,0 +1,91 @@
+{
+  "nodeId": "m4-product-quic-result-artifact-reference-contract",
+  "summary": "Hardened product QUIC result artifact references by rejecting absolute or traversal paths, unknown artifact kinds, and invalid endpoint evidence directories in both the shell checker and Rust validation model.",
+  "changedFiles": [
+    "scripts/product-quic-result-check.sh",
+    "crates/protocol/src/product_quic.rs",
+    "crates/protocol/src/product_quic/tests.rs",
+    "docs/CROSS_DEVICE_VALIDATION.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-product-quic-result-artifact-reference-contract/notes.md",
+    "evidence/m4-product-quic-result-artifact-reference-contract/product-quic-result-check.log",
+    "evidence/m4-product-quic-result-artifact-reference-contract/product-quic-tests.log",
+    "evidence/m4-product-quic-result-artifact-reference-contract/just-check.log",
+    "evidence/m4-product-quic-result-artifact-reference-contract/git-diff-check.log",
+    "reports/qd/m4-product-quic-result-artifact-reference-contract/completion.json",
+    "reports/qd/m4-product-quic-result-artifact-reference-contract/audit.json"
+  ],
+  "commits": [
+    "22bcd0f3a0ba818e97247ee0915ea0036b7329f1"
+  ],
+  "acceptanceEvidence": [
+    {
+      "criterion": "product-quic-result-check rejects absolute and traversal paths in sender.evidenceDir, receiver.evidenceDir, and artifacts[].path.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-result-artifact-reference-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "product-quic-result-check rejects unknown artifact kinds.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh and evidence/m4-product-quic-result-artifact-reference-contract/product-quic-result-check.log"
+    },
+    {
+      "criterion": "Negative self-tests cover absolute artifact path, traversal artifact path, traversal endpoint evidence dir, and unknown artifact kind.",
+      "status": "passed",
+      "evidence": "scripts/product-quic-result-check.sh"
+    },
+    {
+      "criterion": "Rust ProductQuicSmokeResult::validate mirrors reference hygiene where practical.",
+      "status": "passed",
+      "evidence": "crates/protocol/src/product_quic.rs and evidence/m4-product-quic-result-artifact-reference-contract/product-quic-tests.log"
+    },
+    {
+      "criterion": "The golden fixture still passes.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-reference-contract/product-quic-result-check.log and evidence/m4-product-quic-result-artifact-reference-contract/product-quic-tests.log"
+    },
+    {
+      "criterion": "No live product QUIC, Mac decode/render, latency, workflow dispatch, or credential-dependent claim is made.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-reference-contract/notes.md"
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just product-quic-result-check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-reference-contract/product-quic-result-check.log"
+    },
+    {
+      "command": "nix develop -c cargo test -p madobe-protocol product_quic -- --nocapture",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-reference-contract/product-quic-tests.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-reference-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-result-artifact-reference-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-product-quic-result-artifact-reference-contract/notes.md",
+    "evidence/m4-product-quic-result-artifact-reference-contract/product-quic-result-check.log",
+    "evidence/m4-product-quic-result-artifact-reference-contract/product-quic-tests.log",
+    "evidence/m4-product-quic-result-artifact-reference-contract/just-check.log",
+    "evidence/m4-product-quic-result-artifact-reference-contract/git-diff-check.log",
+    "reports/qd/m4-product-quic-result-artifact-reference-contract/completion.json",
+    "reports/qd/m4-product-quic-result-artifact-reference-contract/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Artifact-schema hardening only; no live product QUIC or cross-device validation is required or claimed for this node."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
