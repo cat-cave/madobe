@@ -35,7 +35,7 @@ validate_audit() {
   expect_jq "$file" '.nodeId | nonblank' "nodeId must be a non-blank string"
   expect_jq "$file" '.acceptanceReviewed | type == "array" and length > 0 and all(.[]; type == "object" and (.criterion | nonblank) and (.status | nonblank) and (.evidence | nonblank))' "acceptanceReviewed must be a non-empty array of review objects with non-blank criterion, status, and evidence"
   expect_jq "$file" '.verificationEvidence | type == "object"' "verificationEvidence must be an object"
-  expect_jq "$file" '.verificationEvidence | (.diffReviewed | type == "boolean") and (.completionReportReviewed | type == "boolean") and (.verificationEvidenceReviewed | type == "boolean")' "verificationEvidence must include boolean diffReviewed, completionReportReviewed, and verificationEvidenceReviewed"
+  expect_jq "$file" '.verificationEvidence | (.diffReviewed == true) and (.completionReportReviewed == true) and (.verificationEvidenceReviewed == true)' "verificationEvidence diffReviewed, completionReportReviewed, and verificationEvidenceReviewed must all be true"
   expect_jq "$file" '.realWorldValidation | type == "object" and (.required | type == "boolean") and (.evidence | nonblank)' "realWorldValidation must include required boolean and non-blank evidence string"
   validate_audit_findings "$file"
 }

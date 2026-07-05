@@ -1,0 +1,94 @@
+{
+  "nodeId": "m4-qd-audit-verification-boolean-contract",
+  "summary": "Tightened qd audit report validation so verificationEvidence.diffReviewed, verificationEvidence.completionReportReviewed, and verificationEvidence.verificationEvidenceReviewed must be true rather than merely boolean-shaped.",
+  "changedFiles": [
+    "evidence/m4-qd-audit-verification-boolean-contract/git-diff-check.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/just-check.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/line-counts.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/negative-smoke-completionReportReviewed-false.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/negative-smoke-diffReviewed-false.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/negative-smoke-verificationEvidenceReviewed-false.log",
+    "reports/qd/m4-qd-audit-verification-boolean-contract/audit.json",
+    "reports/qd/m4-qd-audit-verification-boolean-contract/completion.json",
+    "scripts/qd-report-check/audit.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check rejects audit reports with verificationEvidence.diffReviewed set to false.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/audit.sh now requires diffReviewed == true; evidence/m4-qd-audit-verification-boolean-contract/negative-smoke-diffReviewed-false.log records the focused rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check rejects audit reports with verificationEvidence.completionReportReviewed set to false.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/audit.sh now requires completionReportReviewed == true; evidence/m4-qd-audit-verification-boolean-contract/negative-smoke-completionReportReviewed-false.log records the focused rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check rejects audit reports with verificationEvidence.verificationEvidenceReviewed set to false.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/audit.sh now requires verificationEvidenceReviewed == true; evidence/m4-qd-audit-verification-boolean-contract/negative-smoke-verificationEvidenceReviewed-false.log records the focused rejection."
+    },
+    {
+      "criterion": "Existing committed audit reports pass the stricter contract.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-verification-boolean-contract/just-qd-reports-check.log records nix develop -c just qd-reports-check passing with the stricter true-only verificationEvidence contract."
+    },
+    {
+      "criterion": "Linux validation evidence records qd-reports-check, nix develop -c just check, git diff --check, and focused negative smokes for false verification flags.",
+      "status": "passed",
+      "evidence": "The evidence directory contains just-qd-reports-check.log, just-check.log, git-diff-check.log, line-counts.log, and one focused false-value negative smoke for each verificationEvidence flag."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "Repository qd metadata validation only; no macOS-specific product behavior is changed or claimed."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy audit false-value smokes",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-verification-boolean-contract/negative-smoke-diffReviewed-false.log"
+    },
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-verification-boolean-contract/just-qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-verification-boolean-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-verification-boolean-contract/git-diff-check.log"
+    },
+    {
+      "command": "wc -l scripts/qd-report-check/audit.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-verification-boolean-contract/line-counts.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-audit-verification-boolean-contract/git-diff-check.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/just-check.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/line-counts.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/negative-smoke-completionReportReviewed-false.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/negative-smoke-diffReviewed-false.log",
+    "evidence/m4-qd-audit-verification-boolean-contract/negative-smoke-verificationEvidenceReviewed-false.log",
+    "reports/qd/m4-qd-audit-verification-boolean-contract/audit.json",
+    "reports/qd/m4-qd-audit-verification-boolean-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report validation only; no product runtime, platform, capture, transport, decode, render, presentation, cross-device, latency, or macOS-specific behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

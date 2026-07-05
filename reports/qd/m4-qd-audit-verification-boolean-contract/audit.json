@@ -1,0 +1,47 @@
+{
+  "nodeId": "m4-qd-audit-verification-boolean-contract",
+  "commits": [],
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-report-check rejects audit reports with verificationEvidence.diffReviewed set to false.",
+      "status": "passed",
+      "evidence": "The checker requires verificationEvidence.diffReviewed to equal true, and the diffReviewed=false negative smoke records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check rejects audit reports with verificationEvidence.completionReportReviewed set to false.",
+      "status": "passed",
+      "evidence": "The checker requires verificationEvidence.completionReportReviewed to equal true, and the completionReportReviewed=false negative smoke records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check rejects audit reports with verificationEvidence.verificationEvidenceReviewed set to false.",
+      "status": "passed",
+      "evidence": "The checker requires verificationEvidence.verificationEvidenceReviewed to equal true, and the verificationEvidenceReviewed=false negative smoke records the expected rejection."
+    },
+    {
+      "criterion": "Existing committed audit reports pass the stricter contract.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-verification-boolean-contract/just-qd-reports-check.log records nix develop -c just qd-reports-check passing with the stricter true-only verificationEvidence contract."
+    },
+    {
+      "criterion": "Linux validation evidence records qd-reports-check, nix develop -c just check, git diff --check, and focused negative smokes for false verification flags.",
+      "status": "passed",
+      "evidence": "Evidence under evidence/m4-qd-audit-verification-boolean-contract/ records the qd report check, full check, git diff --check, checker line count, and one focused false-value negative smoke per verificationEvidence flag."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "This change is limited to qd report metadata validation and makes no macOS-specific product claim."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd report validation only; no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}

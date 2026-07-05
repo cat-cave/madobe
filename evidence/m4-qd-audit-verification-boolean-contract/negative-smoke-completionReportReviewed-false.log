@@ -1,0 +1,4 @@
+$ source scripts/qd-report-check/audit.sh; validate_audit /tmp/tmp.gjF91YLa54/m4-qd-audit-schema-contract/audit.json
+qd report check: /tmp/tmp.gjF91YLa54/m4-qd-audit-schema-contract/audit.json: verificationEvidence diffReviewed, completionReportReviewed, and verificationEvidenceReviewed must all be true
+negative smoke rejected as expected with 1 error(s)
+exit status: 0
