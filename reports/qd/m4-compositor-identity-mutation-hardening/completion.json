@@ -8,7 +8,9 @@
     "evidence/m4-compositor-identity-mutation-hardening/notes.md",
     "reports/qd/m4-compositor-identity-mutation-hardening/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "03e90ee8ad4fb6a351d02d65bff1bee97d265b1c"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Evidence records the relevant workspace mutation baseline cluster for compositor identity/status accessors.",

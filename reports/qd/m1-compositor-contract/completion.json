@@ -16,7 +16,9 @@
     "evidence/m1-compositor-contract/notes.md",
     "reports/qd/m1-compositor-contract/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "fc5503d15dcab2b2451cd61f4b0ba415ea5a4d41"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Adapter trait and typed errors compile under workspace lints",

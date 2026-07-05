@@ -16,7 +16,9 @@
     "reports/qd/m2-capture-one-frame/completion.json",
     "reports/qd/m2-capture-one-frame/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "2736d76f796792a3f780db074a0a61c713a20e71"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "One frame can be captured from the remote output.",

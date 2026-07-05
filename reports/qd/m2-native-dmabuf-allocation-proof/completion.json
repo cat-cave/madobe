@@ -28,7 +28,9 @@
     "reports/qd/m2-native-dmabuf-allocation-proof/audit.json",
     "reports/qd/m2-native-dmabuf-allocation-proof/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "5c138acbef03d8f0de9ce154e6d0eee7e649dc30"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Use a node-scoped generated Hyprland output with cleanup evidence.",

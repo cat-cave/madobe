@@ -7,7 +7,9 @@
     "evidence/m4-encode-nv-sys-argument-mutation-hardening/notes.md",
     "reports/qd/m4-encode-nv-sys-argument-mutation-hardening/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "180aa8a44196c41a6e3c823bbbbdced34b5ef747"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Evidence records the relevant workspace mutation baseline cluster for encode-nv-sys argument helpers.",

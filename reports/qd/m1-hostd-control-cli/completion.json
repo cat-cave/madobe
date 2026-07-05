@@ -13,7 +13,9 @@
     "reports/qd/m1-hostd-control-cli/audit.json",
     "reports/qd/m1-hostd-control-cli/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "17370e73e10bd1eb504c06a96a6b455defb94d44"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "madobectl exposes display status and lifecycle commands.",

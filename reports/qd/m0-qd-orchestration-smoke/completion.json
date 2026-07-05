@@ -6,7 +6,9 @@
     "reports/qd/m0-qd-orchestration-smoke/completion.json",
     "roadmap/qd-export.json"
   ],
-  "commits": [],
+  "commits": [
+    "cab4d926175dce7ea99fd767ec8e5b757e8cff82"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Linux orchestrator qd ready and status outputs are recorded.",

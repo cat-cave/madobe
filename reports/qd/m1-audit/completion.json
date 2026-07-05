@@ -18,7 +18,9 @@
     "reports/qd/m1-audit/audit.json",
     "reports/qd/m1-audit/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "266e6c06d8f0096d05465c5f2021b394e6a1be35"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "qd audit is started for M1 implementation nodes",

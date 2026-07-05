@@ -20,7 +20,9 @@
     "reports/qd/m1-remote-output-lifecycle/audit.json",
     "reports/qd/m1-remote-output-lifecycle/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "71a9910caeb7fab89ac77050b43a46216e9f75b1"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "A named remote output can be created on the Linux host.",

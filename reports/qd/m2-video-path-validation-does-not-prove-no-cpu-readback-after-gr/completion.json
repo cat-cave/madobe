@@ -9,7 +9,9 @@
     "reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/completion.json",
     "reports/qd/m2-video-path-validation-does-not-prove-no-cpu-readback-after-gr/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "50d762e6817e1e1c490bd5f56e85063f562c2877"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Finding is addressed and verified.",

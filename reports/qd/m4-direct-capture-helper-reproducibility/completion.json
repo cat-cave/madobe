@@ -12,7 +12,9 @@
     "reports/qd/m4-direct-capture-helper-reproducibility/audit.json",
     "reports/qd/m4-direct-capture-helper-reproducibility/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "f2d1d8f8c80b4425cd86f028e7c1569483af0da3"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Evidence records the M2 audit residual risk and the exact direct-capture helper reproducibility boundary.",

@@ -8,7 +8,9 @@
     "evidence/m4-linux-hygiene-tooling-hardening/notes.md",
     "reports/qd/m4-linux-hygiene-tooling-hardening/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "92cdb4b56f288d22f1f30e2484fdc88080afe7b1"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Linux nix develop -c just check fails with a clear missing-tool message if required repo hygiene tools are unavailable.",

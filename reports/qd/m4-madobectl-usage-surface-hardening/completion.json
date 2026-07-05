@@ -8,7 +8,9 @@
     "evidence/m4-madobectl-usage-surface-hardening/notes.md",
     "reports/qd/m4-madobectl-usage-surface-hardening/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "e7624ee11ab812b4251d09950c280e8711583fe9"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Top-level madobectl usage includes the video-smoke command entry point without running sender or receiver logic.",

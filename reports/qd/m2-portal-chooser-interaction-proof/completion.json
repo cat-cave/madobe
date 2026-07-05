@@ -24,7 +24,9 @@
     "reports/qd/m2-portal-chooser-interaction-proof/completion.json",
     "reports/qd/m2-portal-chooser-interaction-proof/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "3af08648c48fc8c2467a6aa1ca40c46ac6f0a5d1"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Use node-scoped madobe output/workspace setup and cleanup evidence.",

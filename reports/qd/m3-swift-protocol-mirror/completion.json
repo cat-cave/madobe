@@ -13,7 +13,9 @@
     "reports/qd/m3-swift-protocol-mirror/audit.json",
     "roadmap/qd-export.json"
   ],
-  "commits": [],
+  "commits": [
+    "a38be70fb90548992d845e78099f26881eb26f7a"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Swift tests read or mirror the golden fixture semantics.",

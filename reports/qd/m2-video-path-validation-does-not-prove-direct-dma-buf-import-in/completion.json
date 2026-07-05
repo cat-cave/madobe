@@ -14,7 +14,9 @@
     "reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/completion.json",
     "reports/qd/m2-video-path-validation-does-not-prove-direct-dma-buf-import-in/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "5ac3566efbc516045deaa140fc1c4d97de10fad7"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "The evidence boundary is explicit and machine-checkable.",

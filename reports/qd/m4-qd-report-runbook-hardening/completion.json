@@ -9,7 +9,9 @@
     "reports/qd/m4-qd-report-runbook-hardening/audit.json",
     "reports/qd/m4-qd-report-runbook-hardening/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "73236c16391d6bcab27b5f88729406551ca3ed9d"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Document that `qd complete --from-report` requires completion reports to have no `unverifiedItems`.",

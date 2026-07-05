@@ -16,7 +16,9 @@
     "roadmap/qd-export.json",
     "typos.toml"
   ],
-  "commits": [],
+  "commits": [
+    "78e8a0231b45d2ee906b93ff9baec5ff7002451c"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "MacBook can clone or pull cat-cave/madobe over HTTPS.",

@@ -13,7 +13,9 @@
     "reports/qd/m4-direct-capture-local-ci-parity/audit.json",
     "reports/qd/m4-direct-capture-local-ci-parity/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "a558cc19e1ab0c57707909fefa12d6a33c240598"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "A local Linux CI or PR-readiness command includes `nix develop -c just direct-capture-preflight` before broader checks.",

@@ -13,7 +13,9 @@
     "evidence/m3-cross-device-result-schema-fixture/validation-output.txt",
     "reports/qd/m3-cross-device-result-schema-fixture/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "c880d25fc6b59c4b64d0a1d0bdf1d8dd954fc9fe"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Result fixture covers node_id, branch, Linux and macOS commits, start/end timestamps, pass/fail state, metrics, artifacts, and notes.",

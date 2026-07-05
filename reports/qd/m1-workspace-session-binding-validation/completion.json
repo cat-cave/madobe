@@ -13,7 +13,9 @@
     "reports/qd/m1-workspace-session-binding-validation/completion.json",
     "reports/qd/m1-workspace-session-binding-validation/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "bfe2da169e5ed192fd062e124c085870270f4411"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "A node-scoped madobe remote output is created on Linux hardware",

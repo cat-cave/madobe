@@ -7,7 +7,9 @@
     "evidence/m4-hyprland-rule-mutation-hardening/notes.md",
     "reports/qd/m4-hyprland-rule-mutation-hardening/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "b59249c1252b4e089faf4b0d834a387ba3027e6f"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Evidence records the relevant workspace mutation baseline cluster for Hyprland monitor rule helpers.",

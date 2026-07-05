@@ -17,7 +17,9 @@
     "reports/qd/m3-videotoolbox-decode-sample/completion.json",
     "roadmap/qd-export.json"
   ],
-  "commits": [],
+  "commits": [
+    "8859b90a09770d714141296b61c2bdb0257c0cf6"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "VideoToolbox AV1 capability is recorded",

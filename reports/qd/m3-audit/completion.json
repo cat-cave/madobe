@@ -10,7 +10,9 @@
     "reports/qd/m3-audit/completion.json",
     "reports/qd/m3-audit/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "2f63cdcf01ab4ecc0e8e8d8a3d635df33b253fde"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Protocol and Swift fixture compatibility are reviewed.",

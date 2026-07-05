@@ -17,7 +17,9 @@
     "reports/qd/m4-metal-evidence-wording-polish/completion.json",
     "roadmap/qd-export.json"
   ],
-  "commits": [],
+  "commits": [
+    "9a0395dd37ca9af671f72bdb98df47202287af88"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Metal render report field names or notes distinguish offscreen render timing from display presentation",

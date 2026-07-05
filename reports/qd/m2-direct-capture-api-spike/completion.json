@@ -21,7 +21,9 @@
     "evidence/m2-direct-capture-api-spike/redaction-scan.log",
     "evidence/m2-direct-capture-api-spike/line-limit-check.log"
   ],
-  "commits": [],
+  "commits": [
+    "b9b0fcf0b07fa78e804d74f801784ff7ad718341"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Identifies candidate direct capture APIs or tools available on the reference Linux host.",

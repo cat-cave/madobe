@@ -7,7 +7,9 @@
     "evidence/m4-nightly-supply-chain-regression-gate/notes.md",
     "reports/qd/m4-nightly-supply-chain-regression-gate/completion.json"
   ],
-  "commits": [],
+  "commits": [
+    "43b48f2938f7a6fe4eaa11c8ad54af21f726168f"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Nightly deep checks run `nix develop -c just security` before long-running coverage or mutation steps.",

@@ -91,6 +91,7 @@ validate_completion() {
   expect_jq "$file" '.summary | nonblank' "summary must be a non-blank string"
   expect_jq "$file" '.changedFiles | type == "array" and length > 0 and all(.[]; nonblank)' "changedFiles must be a non-empty array of non-blank strings"
   expect_jq "$file" '.commits | type == "array" and all(.[]; type == "string" and test("^[0-9a-f]{40}$"))' "commits must be an array of 40-character lowercase hexadecimal SHAs"
+  validate_completion_done_node_commits "$file"
   validate_completion_commit_objects "$file"
   expect_jq "$file" '.acceptanceEvidence | type == "array" and length > 0 and all(.[]; type == "object" and (.criterion | nonblank) and (.status | nonblank) and (.evidence | nonblank))' "acceptanceEvidence must be a non-empty array of evidence objects with non-blank criterion, status, and evidence"
   expect_jq "$file" '.commandsRun | type == "array" and length > 0 and all(.[]; type == "object" and (.command | nonblank) and (.status | nonblank) and (.evidence | nonblank))' "commandsRun must be a non-empty array of command objects with non-blank command, status, and evidence"
@@ -100,6 +101,24 @@ validate_completion() {
   expect_jq "$file" '.dagChangesNeeded | type == "array"' "dagChangesNeeded must be an array"
   validate_completion_changed_files "$file"
   validate_completion_evidence_paths "$file"
+}
+
+validate_completion_done_node_commits() {
+  local file=$1
+  local node_id
+
+  if [[ ! -f $roadmap_export ]]; then
+    return
+  fi
+
+  if ! jq -e 'type == "object" and (.nodes | type == "array")' "$roadmap_export" >/dev/null 2>&1; then
+    return
+  fi
+
+  node_id=$(node_id_for_report "$file")
+  if jq -e --arg node_id "$node_id" 'any(.nodes[]; .id == $node_id and .status == "done")' "$roadmap_export" >/dev/null; then
+    expect_jq "$file" '.commits | type == "array" and length > 0' "commits must be non-empty when roadmap node status is done"
+  fi
 }
 
 validate_completion_commit_objects() {

@@ -17,7 +17,9 @@
     "reports/qd/m3-video-protocol/audit.json",
     "roadmap/qd-export.json"
   ],
-  "commits": [],
+  "commits": [
+    "bd30792dad4333b852a463a03609701aa1179a38"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Rust protocol types compile under workspace lints.",

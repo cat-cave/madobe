@@ -25,7 +25,9 @@
     "reports/qd/m2-capture-stream-proof/completion.json",
     "reports/qd/m2-capture-stream-proof/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "7003e37fe37597110fbbfbbc3571fd2078194bc7"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "A node-scoped madobe remote output is created on Linux hardware.",
