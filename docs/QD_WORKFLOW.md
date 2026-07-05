@@ -274,8 +274,10 @@ Completion reports must include an empty `unverifiedItems` array. Plain repo-pat
 `evidence` arrays must exist; URLs and prose are ignored. The gate also reads `roadmap/qd-export.json` so every
 `done` node has both report files, every report directory maps to a real qd node, and every non-empty
 `runs[].node_id` references a real node. Run records must use the known `kind` vocabulary (`implement`, `audit`,
-`ci`, `merge`) and `status` vocabulary (`completed`, `failed`, `passed`, `recorded`). The command is wired into
-`just check` so malformed qd evidence records are caught before merge.
+`ci`, `merge`) and `status` vocabulary (`completed`, `failed`, `passed`, `recorded`). Finding records must have a
+non-blank `node_id` that references a real node, `severity` must be one of `P0`, `P1`, `P2`, or `P3`, and `status`
+must be one of `open`, `resolved`, or `promoted`. The command is wired into `just check` so malformed qd evidence
+records are caught before merge.
 
 Do not manufacture evidence for unavailable hardware. If the node depends on hardware, compositor, driver, network, credential, or macOS access that is unavailable, block the node with the correct typed blocker and record the exact missing condition.
 

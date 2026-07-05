@@ -1,0 +1,106 @@
+{
+  "nodeId": "m4-qd-finding-schema-contract",
+  "summary": "Tightened qd report validation so roadmap finding records must reference known nodes and use the accepted finding severity and status vocabularies.",
+  "changedFiles": [
+    "docs/QD_WORKFLOW.md",
+    "evidence/m4-qd-finding-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-finding-schema-contract/just-check.log",
+    "evidence/m4-qd-finding-schema-contract/negative-smoke-blank-node-id.log",
+    "evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-node-id.log",
+    "evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-severity.log",
+    "evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-status.log",
+    "evidence/m4-qd-finding-schema-contract/qd-reports-check.log",
+    "reports/qd/m4-qd-finding-schema-contract/audit.json",
+    "reports/qd/m4-qd-finding-schema-contract/completion.json",
+    "roadmap/qd-export.json",
+    "scripts/qd-reports-check.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects findings[] entries whose node_id is blank, missing, or does not match a node in roadmap/qd-export.json.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates findings[].node_id values as non-blank strings in the roadmap node id set; evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-node-id.log and evidence/m4-qd-finding-schema-contract/negative-smoke-blank-node-id.log record the expected rejections."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects unknown findings[].severity values outside P0, P1, P2, P3.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates findings[].severity against P0, P1, P2, and P3; evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-severity.log records severity=P4 failing as expected."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects unknown findings[].status values outside open, resolved, promoted.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh validates findings[].status against open, resolved, and promoted; evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-status.log records status=deferred failing as expected."
+    },
+    {
+      "criterion": "Current reports/export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-schema-contract/qd-reports-check.log records just qd-reports-check passing with this node's reports included."
+    },
+    {
+      "criterion": "Record evidence under evidence/m4-qd-finding-schema-contract including just qd-reports-check, nix develop -c just check if available, negative smokes, and git diff --check.",
+      "status": "passed",
+      "evidence": "The evidence directory contains qd-reports-check.log, just-check.log, four temporary-copy negative smoke logs, and git-diff-check.log."
+    },
+    {
+      "criterion": "Add reports/qd/m4-qd-finding-schema-contract/completion.json and audit.json with nodeId matching the directory and commits[] empty until after merge unless qd tooling requires otherwise.",
+      "status": "passed",
+      "evidence": "reports/qd/m4-qd-finding-schema-contract/completion.json and reports/qd/m4-qd-finding-schema-contract/audit.json both use nodeId=m4-qd-finding-schema-contract; completion commits[] is empty."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "temporary-copy blank finding node_id smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-schema-contract/negative-smoke-blank-node-id.log"
+    },
+    {
+      "command": "temporary-copy unknown finding node_id smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-node-id.log"
+    },
+    {
+      "command": "temporary-copy unknown finding severity smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-severity.log"
+    },
+    {
+      "command": "temporary-copy unknown finding status smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-status.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-schema-contract/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-schema-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-finding-schema-contract/git-diff-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-finding-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-finding-schema-contract/just-check.log",
+    "evidence/m4-qd-finding-schema-contract/negative-smoke-blank-node-id.log",
+    "evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-node-id.log",
+    "evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-severity.log",
+    "evidence/m4-qd-finding-schema-contract/negative-smoke-unknown-status.log",
+    "evidence/m4-qd-finding-schema-contract/qd-reports-check.log",
+    "reports/qd/m4-qd-finding-schema-contract/audit.json",
+    "reports/qd/m4-qd-finding-schema-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, macOS, hardware, capture, transport, decode, render, or latency behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
