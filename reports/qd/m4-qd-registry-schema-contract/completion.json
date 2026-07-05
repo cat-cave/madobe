@@ -1,0 +1,124 @@
+{
+  "nodeId": "m4-qd-registry-schema-contract",
+  "summary": "Tightened qd roadmap validation so registries use stable milestone metadata and non-null node milestones reference registered milestone names.",
+  "changedFiles": [
+    "evidence/m4-qd-registry-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-registry-schema-contract/just-check.log",
+    "evidence/m4-qd-registry-schema-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-bad-created-at.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-bad-rank.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-duplicate-milestone.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-duplicate-rank.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-malformed-registry-collections.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-unknown-node-milestone.log",
+    "reports/qd/m4-qd-registry-schema-contract/audit.json",
+    "reports/qd/m4-qd-registry-schema-contract/completion.json",
+    "roadmap/qd-export.json",
+    "scripts/qd-report-check/roadmap.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects non-array registries.groups, registries.projects, or registries.milestones.",
+      "status": "passed",
+      "evidence": "The export envelope check now requires registries.groups, registries.projects, and registries.milestones to be arrays; evidence/m4-qd-registry-schema-contract/negative-smoke-malformed-registry-collections.log records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects blank or duplicate registries.milestones[].name values.",
+      "status": "passed",
+      "evidence": "validate_roadmap_milestone_names trims and rejects blank names, and validate_roadmap_milestone_duplicate_field rejects repeated names; evidence/m4-qd-registry-schema-contract/negative-smoke-duplicate-milestone.log records a duplicate name failing."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects duplicate or non-integer registries.milestones[].rank values.",
+      "status": "passed",
+      "evidence": "validate_roadmap_milestone_ranks rejects non-integer ranks, and validate_roadmap_milestone_duplicate_field rejects repeated ranks; evidence/m4-qd-registry-schema-contract/negative-smoke-bad-rank.log and negative-smoke-duplicate-rank.log record the expected failures."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects registries.milestones[].created_at values other than 1970-01-01T00:00:00.000Z.",
+      "status": "passed",
+      "evidence": "validate_roadmap_milestone_created_at requires deterministic epoch timestamps; evidence/m4-qd-registry-schema-contract/negative-smoke-bad-created-at.log records a changed timestamp failing."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects non-null nodes[].milestone values that do not match a registered milestone name.",
+      "status": "passed",
+      "evidence": "validate_roadmap_node_milestones indexes registered milestone names and rejects unknown non-null node milestones; evidence/m4-qd-registry-schema-contract/negative-smoke-unknown-node-milestone.log records the expected rejection."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-registry-schema-contract/just-qd-reports-check.log records just qd-reports-check passing."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, and temporary-copy negative smoke tests for malformed registry collections, duplicate milestone, bad rank, bad created_at, and unknown node milestone.",
+      "status": "passed",
+      "evidence": "The evidence directory contains direct qd report validation, the full Nix check, git diff checking, and the requested temporary-copy negative smoke logs."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "This node only changes repository qd metadata validation; realWorldValidation is marked not_required."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-registry-schema-contract/just-qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-registry-schema-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-registry-schema-contract/git-diff-check.log"
+    },
+    {
+      "command": "temporary-copy malformed registry collections smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-registry-schema-contract/negative-smoke-malformed-registry-collections.log"
+    },
+    {
+      "command": "temporary-copy duplicate milestone name smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-registry-schema-contract/negative-smoke-duplicate-milestone.log"
+    },
+    {
+      "command": "temporary-copy bad milestone rank smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-registry-schema-contract/negative-smoke-bad-rank.log"
+    },
+    {
+      "command": "temporary-copy bad milestone created_at smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-registry-schema-contract/negative-smoke-bad-created-at.log"
+    },
+    {
+      "command": "temporary-copy unknown node milestone smoke",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-registry-schema-contract/negative-smoke-unknown-node-milestone.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-registry-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-registry-schema-contract/just-check.log",
+    "evidence/m4-qd-registry-schema-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-bad-created-at.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-bad-rank.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-duplicate-milestone.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-duplicate-rank.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-malformed-registry-collections.log",
+    "evidence/m4-qd-registry-schema-contract/negative-smoke-unknown-node-milestone.log",
+    "reports/qd/m4-qd-registry-schema-contract/audit.json",
+    "reports/qd/m4-qd-registry-schema-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, macOS, hardware, capture, transport, decode, render, presentation, cross-device, or latency behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

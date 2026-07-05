@@ -1,0 +1,9 @@
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/qd-export-unknown-node-milestone.mR7eiX.json just qd-reports-check
+mutation: .nodes[0].milestone = "M9-missing"
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/qd-export-unknown-node-milestone.mR7eiX.json: nodes[0].milestone must match a registered milestone name or null: M9-missing
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+expected failure observed

@@ -1,0 +1,17 @@
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/qd-export-duplicate-milestone.113Mvx.json just qd-reports-check
+mutation: .registries.milestones[1].name = .registries.milestones[0].name
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/qd-export-duplicate-milestone.113Mvx.json: registries.milestones[1].name duplicates milestone name: M0-bootstrap
+qd report check: /tmp/qd-export-duplicate-milestone.113Mvx.json: nodes[5].milestone must match a registered milestone name or null: M1-remote-display-ownership
+qd report check: /tmp/qd-export-duplicate-milestone.113Mvx.json: nodes[6].milestone must match a registered milestone name or null: M1-remote-display-ownership
+qd report check: /tmp/qd-export-duplicate-milestone.113Mvx.json: nodes[7].milestone must match a registered milestone name or null: M1-remote-display-ownership
+qd report check: /tmp/qd-export-duplicate-milestone.113Mvx.json: nodes[8].milestone must match a registered milestone name or null: M1-remote-display-ownership
+qd report check: /tmp/qd-export-duplicate-milestone.113Mvx.json: nodes[9].milestone must match a registered milestone name or null: M1-remote-display-ownership
+qd report check: /tmp/qd-export-duplicate-milestone.113Mvx.json: nodes[10].milestone must match a registered milestone name or null: M1-remote-display-ownership
+qd report check: /tmp/qd-export-duplicate-milestone.113Mvx.json: nodes[11].milestone must match a registered milestone name or null: M1-remote-display-ownership
+qd report check: /tmp/qd-export-duplicate-milestone.113Mvx.json: nodes[25].milestone must match a registered milestone name or null: M1-remote-display-ownership
+qd report check: failed with 9 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+expected failure observed

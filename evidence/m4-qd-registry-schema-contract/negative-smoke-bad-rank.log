@@ -1,0 +1,9 @@
+command: QD_REPORTS_ROADMAP_EXPORT=/tmp/qd-export-bad-rank.l3jVvy.json just qd-reports-check
+mutation: .registries.milestones[0].rank = "first"
+
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/qd-export-bad-rank.l3jVvy.json: registries.milestones[0].rank must be an integer: first
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 34 with exit code 1
+
+expected failure observed

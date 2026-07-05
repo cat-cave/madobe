@@ -1,0 +1,51 @@
+{
+  "nodeId": "m4-qd-registry-schema-contract",
+  "acceptanceReviewed": [
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects non-array registries.groups, registries.projects, or registries.milestones.",
+      "status": "passed",
+      "evidence": "The export envelope validation now requires registry collections to be arrays, and the malformed registry collections smoke records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects blank or duplicate registries.milestones[].name values.",
+      "status": "passed",
+      "evidence": "Milestone names are trimmed and checked for nonblank values and duplicates; the duplicate milestone smoke records a repeated name failing."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects duplicate or non-integer registries.milestones[].rank values.",
+      "status": "passed",
+      "evidence": "Milestone ranks are checked for integer type and duplicate rank values; bad-rank and duplicate-rank smokes record the expected failures."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects registries.milestones[].created_at values other than 1970-01-01T00:00:00.000Z.",
+      "status": "passed",
+      "evidence": "Milestone created_at values are fixed to the deterministic export timestamp; the bad-created-at smoke records the expected rejection."
+    },
+    {
+      "criterion": "scripts/qd-report-check/roadmap.sh rejects non-null nodes[].milestone values that do not match a registered milestone name.",
+      "status": "passed",
+      "evidence": "Node milestones are checked against registered milestone names while null remains allowed; the unknown-node-milestone smoke records the expected rejection."
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass the stricter check.",
+      "status": "passed",
+      "evidence": "The qd report check evidence records the stricter checker passing against the current export and report set."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "The change is limited to repository qd metadata validation and does not claim product or platform runtime behavior."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; Linux command evidence is recorded and no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}
