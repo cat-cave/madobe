@@ -16,7 +16,9 @@
     "roadmap/qd-export.json",
     "scripts/qd-report-check/roadmap.sh"
   ],
-  "commits": [],
+  "commits": [
+    "6eaa537ae6d7df3e16955f91f4a7a066781d69ef"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check/roadmap.sh rejects non-array registries.groups, registries.projects, or registries.milestones.",
