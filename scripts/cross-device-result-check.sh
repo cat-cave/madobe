@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck disable=SC1091
+source "$script_dir/result-check-common.sh"
+
 default_fixture="crates/protocol/fixtures/m3-cross-device-video-smoke/result.json"
+check_name="cross-device result check"
 
 main() {
-  command -v jq >/dev/null 2>&1 || {
-    printf 'cross-device result check: required tool missing: jq\n' >&2
-    exit 127
-  }
-
-  local repo_root
-  repo_root=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
-  cd "$repo_root"
+  result_check_require_jq "$check_name"
+  result_check_cd_repo_root
 
   if [[ $# -eq 0 ]]; then
     validate_file "$default_fixture" fixture
@@ -33,11 +32,11 @@ validate_file() {
   local errors=0
 
   if [[ ! -f $file ]]; then
-    printf 'cross-device result check: %s: file missing\n' "$file" >&2
+    printf '%s: %s: file missing\n' "$check_name" "$file" >&2
     return 1
   fi
   if ! jq empty "$file" >/dev/null; then
-    printf 'cross-device result check: %s: invalid JSON\n' "$file" >&2
+    printf '%s: %s: invalid JSON\n' "$check_name" "$file" >&2
     return 1
   fi
 
@@ -49,15 +48,15 @@ validate_file() {
   require_jq "$file" '.ended_at | type == "string" and length > 0' 'ended_at must be a non-empty string'
   require_jq "$file" '.passed | type == "boolean"' 'passed must be boolean'
   require_jq "$file" '.metrics | type == "object"' 'metrics must be an object'
-  require_jq "$file" '.metrics.frames_sent | is_cross_device_nonnegative_integer' 'metrics.frames_sent must be a non-negative integer'
-  require_jq "$file" '.metrics.frames_decoded | is_cross_device_nonnegative_integer' 'metrics.frames_decoded must be a non-negative integer'
-  require_jq "$file" '.metrics.frames_rendered | is_cross_device_nonnegative_integer' 'metrics.frames_rendered must be a non-negative integer'
-  require_jq "$file" '.metrics.frames_presented | is_cross_device_nonnegative_integer' 'metrics.frames_presented must be a non-negative integer'
-  require_jq "$file" '.metrics.median_glass_to_glass_ms | is_cross_device_nullable_nonnegative_integer' 'metrics.median_glass_to_glass_ms must be null or a non-negative integer'
-  require_jq "$file" '.metrics.p95_glass_to_glass_ms | is_cross_device_nullable_nonnegative_integer' 'metrics.p95_glass_to_glass_ms must be null or a non-negative integer'
+  require_jq "$file" '.metrics.frames_sent | is_madobe_nonnegative_integer' 'metrics.frames_sent must be a non-negative integer'
+  require_jq "$file" '.metrics.frames_decoded | is_madobe_nonnegative_integer' 'metrics.frames_decoded must be a non-negative integer'
+  require_jq "$file" '.metrics.frames_rendered | is_madobe_nonnegative_integer' 'metrics.frames_rendered must be a non-negative integer'
+  require_jq "$file" '.metrics.frames_presented | is_madobe_nonnegative_integer' 'metrics.frames_presented must be a non-negative integer'
+  require_jq "$file" '.metrics.median_glass_to_glass_ms | is_madobe_nullable_nonnegative_integer' 'metrics.median_glass_to_glass_ms must be null or a non-negative integer'
+  require_jq "$file" '.metrics.p95_glass_to_glass_ms | is_madobe_nullable_nonnegative_integer' 'metrics.p95_glass_to_glass_ms must be null or a non-negative integer'
   require_jq "$file" '.artifacts | type == "array" and length > 0' 'artifacts must be a non-empty array'
   require_jq "$file" 'all(.artifacts[]; (.path | type == "string" and length > 0) and (.kind | type == "string" and length > 0))' 'artifacts must include non-empty path and kind'
-  require_jq "$file" 'all(.artifacts[]; .path | is_cross_device_repo_relative_reference)' 'artifact paths must be repo-relative, forward-slash, and traversal-free'
+  require_jq "$file" 'all(.artifacts[]; .path | is_madobe_repo_relative_reference)' 'artifact paths must be repo-relative, forward-slash, and traversal-free'
   require_jq "$file" 'all(.artifacts[]; .kind | is_cross_device_artifact_kind)' 'artifact kinds must use the generic cross-device vocabulary'
   require_jq "$file" '.notes | type == "string" and length > 0' 'notes must be a non-empty string'
   require_jq "$file" '(.metrics.frames_decoded == 0) or any(.artifacts[]?; .kind == "decode_evidence")' 'nonzero frames_decoded requires decode_evidence artifact'
@@ -67,7 +66,11 @@ validate_file() {
   require_jq "$file" '((.metrics.median_glass_to_glass_ms == null) or (.metrics.p95_glass_to_glass_ms == null) or (.metrics.p95_glass_to_glass_ms >= .metrics.median_glass_to_glass_ms))' 'p95 latency must be greater than or equal to median latency'
 
   if [[ $mode == explicit ]]; then
-    validate_explicit_artifacts "$file" || errors=$((errors + 1))
+    result_check_validate_existing_artifacts \
+      "$check_name" \
+      "$file" \
+      "commands_log,linux_host_log,mac_client_log,notes" ||
+      errors=$((errors + 1))
   fi
 
   if [[ $errors -ne 0 ]]; then
@@ -81,53 +84,13 @@ require_jq() {
   local message=$3
 
   if ! jq -e "$cross_device_jq_prelude $filter" "$file" >/dev/null; then
-    printf 'cross-device result check: %s: %s\n' "$file" "$message" >&2
+    printf '%s: %s: %s\n' "$check_name" "$file" "$message" >&2
     errors=$((errors + 1))
   fi
 }
 
-validate_explicit_artifacts() {
-  local file=$1
-  local artifact_errors=0
-  local path
-  local kind
-
-  while IFS=$'\t' read -r path kind; do
-    if [[ ! -e $path ]]; then
-      printf 'cross-device result check: %s: artifact path does not exist: %s\n' "$file" "$path" >&2
-      artifact_errors=$((artifact_errors + 1))
-      continue
-    fi
-
-    case "$kind" in
-    commands_log | linux_host_log | mac_client_log | notes)
-      if [[ ! -s $path ]]; then
-        printf 'cross-device result check: %s: core evidence artifact is empty: %s\n' "$file" "$path" >&2
-        artifact_errors=$((artifact_errors + 1))
-      fi
-      ;;
-    esac
-  done < <(jq -r '.artifacts[]? | [.path, .kind] | @tsv' "$file")
-
-  [[ $artifact_errors -eq 0 ]]
-}
-
-# shellcheck disable=SC2016 # jq variables are expanded by jq, not the shell.
-cross_device_jq_prelude='
-def is_cross_device_nonnegative_integer:
-  type == "number" and . >= 0 and floor == .;
-
-def is_cross_device_nullable_nonnegative_integer:
-  . == null or is_cross_device_nonnegative_integer;
-
-def is_cross_device_repo_relative_reference:
-  type == "string"
-  and length > 0
-  and (startswith("/") | not)
-  and (test("^[A-Za-z]:[\\\\/]") | not)
-  and (contains("\\") | not)
-  and ((split("/") | index("..")) == null);
-
+# shellcheck disable=SC2016,SC2154 # jq expands jq variables; helper defines common prelude.
+cross_device_jq_prelude="${result_check_common_jq_prelude}"'
 def cross_device_artifact_kinds:
   [
     "commands_log",
@@ -196,7 +159,7 @@ expect_invalid() {
   local context=$2
 
   if validate_file "$file" fixture >/dev/null 2>&1; then
-    printf 'cross-device result check: negative fixture unexpectedly passed: %s\n' "$context" >&2
+    printf '%s: negative fixture unexpectedly passed: %s\n' "$check_name" "$context" >&2
     return 1
   fi
 }
