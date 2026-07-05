@@ -1,0 +1,6 @@
+negative smoke: blank-required-content
+temporary audit report: /tmp/qd-audit-finding-schema.spk5fd/reports/qd/m4-qd-run-schema-contract/audit.json
+command: source scripts/qd-report-check/audit.sh; validate_audit temporary audit.json
+qd report check: /tmp/qd-audit-finding-schema.spk5fd/reports/qd/m4-qd-run-schema-contract/audit.json: findings must contain only objects with non-blank severity, title, evidence, observed, expected, and classification
+exit status: 1
+negative smoke rejected malformed audit finding as expected

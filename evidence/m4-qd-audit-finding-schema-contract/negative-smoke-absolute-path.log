@@ -1,0 +1,6 @@
+negative smoke: absolute-path
+temporary audit report: /tmp/qd-audit-finding-schema.cVxU1G/reports/qd/m4-qd-run-schema-contract/audit.json
+command: source scripts/qd-report-check/audit.sh; validate_audit temporary audit.json
+qd report check: /tmp/qd-audit-finding-schema.cVxU1G/reports/qd/m4-qd-run-schema-contract/audit.json: findings[].path must be null, blank, or a repo-relative path without '..' traversal
+exit status: 1
+negative smoke rejected malformed audit finding as expected

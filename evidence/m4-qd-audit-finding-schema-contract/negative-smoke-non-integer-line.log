@@ -1,0 +1,6 @@
+negative smoke: non-integer-line
+temporary audit report: /tmp/qd-audit-finding-schema.Uo6UJq/reports/qd/m4-qd-run-schema-contract/audit.json
+command: source scripts/qd-report-check/audit.sh; validate_audit temporary audit.json
+qd report check: /tmp/qd-audit-finding-schema.Uo6UJq/reports/qd/m4-qd-run-schema-contract/audit.json: findings[].line must be null or a positive integer
+exit status: 1
+negative smoke rejected malformed audit finding as expected

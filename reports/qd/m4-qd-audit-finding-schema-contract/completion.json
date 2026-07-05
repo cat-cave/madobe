@@ -1,0 +1,105 @@
+{
+  "nodeId": "m4-qd-audit-finding-schema-contract",
+  "summary": "Tightened qd audit report validation so findings[] entries must match the qd audit-report schema instead of accepting arbitrary array contents.",
+  "changedFiles": [
+    "evidence/m4-qd-audit-finding-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-audit-finding-schema-contract/just-check.log",
+    "evidence/m4-qd-audit-finding-schema-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-absolute-path.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-bad-classification.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-bad-line.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-bad-severity.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-blank-required-content.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-non-integer-line.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-non-object.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-non-string-path.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-traversal-path.log",
+    "reports/qd/m4-qd-audit-finding-schema-contract/audit.json",
+    "reports/qd/m4-qd-audit-finding-schema-contract/completion.json",
+    "roadmap/qd-export.json",
+    "scripts/qd-report-check/audit.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "scripts/qd-report-check/audit.sh rejects findings[] items that are not objects with non-blank severity, title, evidence, observed, expected, and classification.",
+      "status": "passed",
+      "evidence": "validate_audit_findings requires each finding to be an object with required non-blank fields; non-object and blank-required-content negative smokes record expected failures."
+    },
+    {
+      "criterion": "scripts/qd-report-check/audit.sh rejects findings[].severity and findings[].classification values outside qd vocabulary.",
+      "status": "passed",
+      "evidence": "Severity is constrained to P0 through P3 and classification is constrained to qd audit-report vocabulary; bad-severity and bad-classification negative smokes record expected failures."
+    },
+    {
+      "criterion": "scripts/qd-report-check/audit.sh rejects absolute or traversal findings[].path values when path is present.",
+      "status": "passed",
+      "evidence": "Optional finding paths must be blank, null, or repo-relative without traversal; absolute-path, traversal-path, and non-string-path negative smokes record expected failures."
+    },
+    {
+      "criterion": "scripts/qd-report-check/audit.sh rejects non-positive or non-integer findings[].line values when line is present.",
+      "status": "passed",
+      "evidence": "Optional finding lines must be positive integers; bad-line and non-integer-line negative smokes record expected failures."
+    },
+    {
+      "criterion": "Existing qd audit reports pass without weakening the contract.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-finding-schema-contract/just-qd-reports-check.log records the stricter checker passing against the current report set."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, git diff --check, and temporary-copy negative smokes for malformed audit findings.",
+      "status": "passed",
+      "evidence": "The evidence directory contains the required positive logs plus temporary-copy negative smokes for non-object, blank required content, bad severity, bad classification, bad path, and bad line cases."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "Repository qd metadata validation only; no product runtime or macOS-specific behavior is claimed."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-finding-schema-contract/just-qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-finding-schema-contract/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-finding-schema-contract/git-diff-check.log"
+    },
+    {
+      "command": "temporary-copy malformed audit finding smokes",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-non-object.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-audit-finding-schema-contract/git-diff-check.log",
+    "evidence/m4-qd-audit-finding-schema-contract/just-check.log",
+    "evidence/m4-qd-audit-finding-schema-contract/just-qd-reports-check.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-absolute-path.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-bad-classification.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-bad-line.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-bad-severity.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-blank-required-content.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-non-integer-line.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-non-object.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-non-string-path.log",
+    "evidence/m4-qd-audit-finding-schema-contract/negative-smoke-traversal-path.log",
+    "reports/qd/m4-qd-audit-finding-schema-contract/audit.json",
+    "reports/qd/m4-qd-audit-finding-schema-contract/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, platform, capture, transport, decode, render, presentation, cross-device, latency, or macOS-specific behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

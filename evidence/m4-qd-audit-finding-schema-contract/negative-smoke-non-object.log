@@ -1,0 +1,10 @@
+negative smoke: non-object
+temporary audit report: /tmp/qd-audit-finding-schema.paboZj/reports/qd/m4-qd-run-schema-contract/audit.json
+command: source scripts/qd-report-check/audit.sh; validate_audit temporary audit.json
+qd report check: /tmp/qd-audit-finding-schema.paboZj/reports/qd/m4-qd-run-schema-contract/audit.json: findings must contain only objects with non-blank severity, title, evidence, observed, expected, and classification
+qd report check: /tmp/qd-audit-finding-schema.paboZj/reports/qd/m4-qd-run-schema-contract/audit.json: findings[].severity must be one of P0, P1, P2, P3
+qd report check: /tmp/qd-audit-finding-schema.paboZj/reports/qd/m4-qd-run-schema-contract/audit.json: findings[].classification must be one of implementation, spec-gap, research-gap, environment, credential, provider, data, policy, regression
+qd report check: /tmp/qd-audit-finding-schema.paboZj/reports/qd/m4-qd-run-schema-contract/audit.json: findings[].path must be null, blank, or a repo-relative path without '..' traversal
+qd report check: /tmp/qd-audit-finding-schema.paboZj/reports/qd/m4-qd-run-schema-contract/audit.json: findings[].line must be null or a positive integer
+exit status: 5
+negative smoke rejected malformed audit finding as expected
