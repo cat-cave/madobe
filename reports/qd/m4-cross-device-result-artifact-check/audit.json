@@ -1,0 +1,46 @@
+{
+  "nodeId": "m4-cross-device-result-artifact-check",
+  "acceptanceReviewed": [
+    {
+      "criterion": "The checker validates the generic M3 fixture and its negative self-tests.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-result-artifact-check/cross-device-result-check.log"
+    },
+    {
+      "criterion": "The checker rejects unsupported metric claims without evidence artifact roles.",
+      "status": "passed",
+      "evidence": "scripts/cross-device-result-check.sh"
+    },
+    {
+      "criterion": "The Rust protocol validation mirrors artifact path hygiene and unsupported metric-claim checks.",
+      "status": "passed",
+      "evidence": "crates/protocol/src/cross_device.rs and crates/protocol/src/cross_device/tests.rs"
+    },
+    {
+      "criterion": "The explicit artifact mode validates referenced evidence paths for future result artifacts.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-result-artifact-check/cross-device-explicit-result-check.log"
+    },
+    {
+      "criterion": "The checker is included in the local and CI quality gate through just check.",
+      "status": "passed",
+      "evidence": "justfile and evidence/m4-cross-device-result-artifact-check/just-check.log"
+    },
+    {
+      "criterion": "No live cross-device or credential-dependent behavior is claimed.",
+      "status": "passed",
+      "evidence": "evidence/m4-cross-device-result-artifact-check/notes.md"
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Artifact-schema and evidence hygiene only; no live cross-device validation is required or claimed for this node."
+  },
+  "findings": []
+}

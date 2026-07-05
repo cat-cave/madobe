@@ -15,6 +15,7 @@ fmt:
 
 check: fmt
   just qd-reports-check
+  just cross-device-result-check
   just product-quic-result-check
   just pin-hygiene-check
   just pr-template-check
@@ -33,6 +34,9 @@ direct-capture-preflight:
 
 qd-reports-check:
   bash scripts/qd-reports-check.sh
+
+cross-device-result-check:
+  bash scripts/cross-device-result-check.sh
 
 product-quic-result-check:
   bash scripts/product-quic-result-check.sh

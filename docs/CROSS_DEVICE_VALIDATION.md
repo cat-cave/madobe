@@ -215,6 +215,19 @@ Other useful kinds are `commands_log`, `linux_host_log`, `mac_client_log`, `note
 fixture lives at `crates/protocol/fixtures/m3-cross-device-video-smoke/result.json`; it records only schema
 compatibility and does not claim live cross-device decode, render, presentation, or latency behavior.
 
+Validate generic cross-device result artifacts before using them as qd evidence:
+
+```sh
+just cross-device-result-check evidence/m3-cross-device-video-smoke/result.json
+```
+
+With no arguments, the same command validates the checked-in generic fixture and negative fixtures. `just check`
+runs that default validation in local and CI quality gates. Generic artifact `path` values must be repo-relative
+forward-slash references. Blank paths, absolute paths, backslashes, Windows drive prefixes, and `..` traversal
+components are rejected; artifact `kind` must use the generic cross-device vocabulary above. Explicit result files
+also verify that referenced artifacts exist and that core evidence artifacts such as command logs, host logs, client
+logs, and notes are non-empty.
+
 For product QUIC smoke, use the checked Rust contract and golden fixture:
 
 - model: `crates/protocol/src/product_quic.rs`

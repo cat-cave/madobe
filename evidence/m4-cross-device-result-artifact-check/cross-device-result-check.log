@@ -1,0 +1,4 @@
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-cross-device-result-artifact-check' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/cross-device-result-check.sh
+cross-device result check: validated crates/protocol/fixtures/m3-cross-device-video-smoke/result.json and negative fixtures
