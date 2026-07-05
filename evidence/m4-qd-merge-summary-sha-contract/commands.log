@@ -1,0 +1,35 @@
+Node: m4-qd-merge-summary-sha-contract
+Worktree: /home/trevor/projects/madobe/.qd/worktrees/m4-qd-merge-summary-sha-contract
+Branch: spec/m4-qd-merge-summary-sha-contract
+
+Commands run:
+
+1. qd node add --from-json /tmp/madobe-qdn-node.*.json
+2. qd edge add m4-qd-report-commit-reachability-contract m4-qd-merge-summary-sha-contract --type requires
+3. qd edge add m4-qd-run-content-contract m4-qd-merge-summary-sha-contract --type requires
+4. qd claim m4-qd-merge-summary-sha-contract --agent trevor-linux-orchestrator --branch spec/m4-qd-merge-summary-sha-contract
+5. qd worktree create m4-qd-merge-summary-sha-contract --branch spec/m4-qd-merge-summary-sha-contract
+6. jq short merge summary normalization checks
+7. QD_REPORTS_ROADMAP_EXPORT=<temporary-export> just qd-reports-check
+8. git diff --check
+9. just qd-reports-check
+10. nix develop -c just check
+11. qd sync --from <temporary-normalized-export>
+12. qd export --out .qd/worktrees/m4-qd-merge-summary-sha-contract/roadmap/qd-export.json --deterministic
+13. just qd-export-parity-check --expected .qd/worktrees/m4-qd-merge-summary-sha-contract/roadmap/qd-export.json
+
+Validation outputs:
+
+- evidence/m4-qd-merge-summary-sha-contract/merge-summary-normalization.log
+- evidence/m4-qd-merge-summary-sha-contract/negative-smoke-short-merge-summary.log
+- evidence/m4-qd-merge-summary-sha-contract/git-diff-check.log
+- evidence/m4-qd-merge-summary-sha-contract/qd-reports-check.log
+- evidence/m4-qd-merge-summary-sha-contract/nix-just-check.log
+- evidence/m4-qd-merge-summary-sha-contract/qd-export-parity-check.log
+
+Implementation note:
+
+The historical short summaries were normalized in `roadmap/qd-export.json` in
+the branch worktree. The orchestrator synced the qd cache from the normalized
+export with qdcli before recording qd completion/audit state, so the committed
+export and local qd cache remain aligned without direct qd database edits.

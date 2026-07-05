@@ -3922,6 +3922,36 @@
       "projects": [],
       "verification": [],
       "audit_focus": []
+    },
+    {
+      "id": "m4-qd-merge-summary-sha-contract",
+      "title": "Require full SHAs in qd merge summaries",
+      "kind": "feature",
+      "milestone": "M4-integrated-video-path",
+      "status": "claimed",
+      "priority": "P3",
+      "estimate_points": 1,
+      "risk": "low",
+      "owner": "trevor-linux-orchestrator",
+      "branch": "spec/m4-qd-merge-summary-sha-contract",
+      "spec": "Normalize qd merge-run summaries to use full 40-character squash commit SHAs and tighten qd report validation so future merge summaries do not record short SHAs.",
+      "acceptance": "Historical qd runs whose summary is `Merge recorded with squash at commit <short-sha>` are normalized to full reachable 40-character commit SHAs\nscripts/qd-reports-check.sh rejects qd merge-run summaries that record short squash commit SHAs\nExisting qd reports and roadmap export pass after normalization\nLinux validation evidence records just qd-reports-check, git diff --check, nix develop -c just check, and a focused negative smoke for a short merge summary\nEvidence and qd reports are recorded under the node directories\nNo product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made",
+      "validation": null,
+      "context": "platform:linux\nowner:linux-orchestrator\nvalidation:repo-quality\nsource:qd-ledger-hygiene",
+      "created_at": "2026-07-05T22:26:35.860Z",
+      "updated_at": "2026-07-05T23:10:00.000Z",
+      "claimed_at": "2026-07-05T22:26:36.138Z",
+      "done_at": null,
+      "group_name": null,
+      "status_reason": null,
+      "check_command": null,
+      "ci_command": null,
+      "blocked_by": null,
+      "blocked_reason": null,
+      "blocked_owner": null,
+      "projects": [],
+      "verification": [],
+      "audit_focus": []
     }
   ],
   "edges": [
@@ -4320,6 +4350,18 @@
       "to_node": "m4-platform-aware-tool-missing-diagnostics",
       "type": "requires",
       "created_at": "2026-07-05T21:57:07.465Z"
+    },
+    {
+      "from_node": "m4-qd-report-commit-reachability-contract",
+      "to_node": "m4-qd-merge-summary-sha-contract",
+      "type": "requires",
+      "created_at": "2026-07-05T22:26:35.965Z"
+    },
+    {
+      "from_node": "m4-qd-run-content-contract",
+      "to_node": "m4-qd-merge-summary-sha-contract",
+      "type": "requires",
+      "created_at": "2026-07-05T22:26:36.055Z"
     }
   ],
   "findings": [
@@ -4559,7 +4601,7 @@
       "agent": null,
       "started_at": "2026-07-03T01:53:57.517Z",
       "finished_at": "2026-07-03T01:53:57.517Z",
-      "summary": "Merge recorded with squash at commit 6e1c6c0",
+      "summary": "Merge recorded with squash at commit 6e1c6c09f8330e02f5c022e093aff19934b089b3",
       "log_path": null
     },
     {
@@ -4603,7 +4645,7 @@
       "agent": null,
       "started_at": "2026-07-03T01:53:57.795Z",
       "finished_at": "2026-07-03T01:53:57.795Z",
-      "summary": "Merge recorded with squash at commit 6e1c6c0",
+      "summary": "Merge recorded with squash at commit 6e1c6c09f8330e02f5c022e093aff19934b089b3",
       "log_path": null
     },
     {
@@ -6033,7 +6075,7 @@
       "agent": null,
       "started_at": "2026-07-03T19:21:47.456Z",
       "finished_at": "2026-07-03T19:21:47.456Z",
-      "summary": "Merge recorded with squash at commit 266e6c0",
+      "summary": "Merge recorded with squash at commit 266e6c06d8f0096d05465c5f2021b394e6a1be35",
       "log_path": null
     },
     {
@@ -9245,7 +9287,7 @@
       "agent": null,
       "started_at": "2026-07-04T18:17:13.779Z",
       "finished_at": "2026-07-04T18:17:13.779Z",
-      "summary": "Merge recorded with squash at commit a558cc1",
+      "summary": "Merge recorded with squash at commit a558cc19e1ab0c57707909fefa12d6a33c240598",
       "log_path": null
     },
     {
@@ -9355,7 +9397,7 @@
       "agent": null,
       "started_at": "2026-07-04T18:35:50.998Z",
       "finished_at": "2026-07-04T18:35:50.998Z",
-      "summary": "Merge recorded with squash at commit ff33895",
+      "summary": "Merge recorded with squash at commit ff33895fbe10acde6e51a2c9529d67b436228798",
       "log_path": null
     },
     {
@@ -9465,7 +9507,7 @@
       "agent": null,
       "started_at": "2026-07-04T18:48:24.284Z",
       "finished_at": "2026-07-04T18:48:24.284Z",
-      "summary": "Merge recorded with squash at commit 73236c1",
+      "summary": "Merge recorded with squash at commit 73236c16391d6bcab27b5f88729406551ca3ed9d",
       "log_path": null
     },
     {
@@ -9575,7 +9617,7 @@
       "agent": null,
       "started_at": "2026-07-04T19:05:14.525Z",
       "finished_at": "2026-07-04T19:05:14.525Z",
-      "summary": "Merge recorded with squash at commit cbba43a",
+      "summary": "Merge recorded with squash at commit cbba43ad71695d0d7ced8229a98abce636dbf859",
       "log_path": null
     },
     {
@@ -10213,7 +10255,7 @@
       "agent": null,
       "started_at": "2026-07-04T20:53:49.025Z",
       "finished_at": "2026-07-04T20:53:49.025Z",
-      "summary": "Merge recorded with squash at commit 6dfaab5",
+      "summary": "Merge recorded with squash at commit 6dfaab506575fae6a40f363415a09bdbea502383",
       "log_path": null
     },
     {
@@ -13931,7 +13973,7 @@
       "agent": null,
       "started_at": "2026-07-05T12:47:02.173Z",
       "finished_at": "2026-07-05T12:47:02.173Z",
-      "summary": "Merge recorded with squash at commit ad45b67d",
+      "summary": "Merge recorded with squash at commit ad45b67933eda62183a87f9fe513c68d580a4b36",
       "log_path": null
     },
     {

@@ -1,0 +1,102 @@
+{
+  "nodeId": "m4-qd-merge-summary-sha-contract",
+  "summary": "Normalized qd merge-run summaries to full squash commit SHAs and tightened qd report validation so future squash-merge summaries cannot use short SHAs.",
+  "changedFiles": [
+    "roadmap/qd-export.json",
+    "scripts/qd-report-check/roadmap-runs.sh",
+    "evidence/m4-qd-merge-summary-sha-contract/commands.log",
+    "evidence/m4-qd-merge-summary-sha-contract/notes.md",
+    "evidence/m4-qd-merge-summary-sha-contract/merge-summary-normalization.log",
+    "evidence/m4-qd-merge-summary-sha-contract/negative-smoke-short-merge-summary.log",
+    "evidence/m4-qd-merge-summary-sha-contract/git-diff-check.log",
+    "evidence/m4-qd-merge-summary-sha-contract/qd-reports-check.log",
+    "evidence/m4-qd-merge-summary-sha-contract/nix-just-check.log",
+    "evidence/m4-qd-merge-summary-sha-contract/qd-export-parity-check.log",
+    "reports/qd/m4-qd-merge-summary-sha-contract/completion.json",
+    "reports/qd/m4-qd-merge-summary-sha-contract/audit.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "Historical qd runs whose summary is `Merge recorded with squash at commit <short-sha>` are normalized to full reachable 40-character commit SHAs.",
+      "status": "passed",
+      "evidence": "roadmap/qd-export.json and evidence/m4-qd-merge-summary-sha-contract/merge-summary-normalization.log record zero remaining short merge summaries."
+    },
+    {
+      "criterion": "scripts/qd-reports-check.sh rejects qd merge-run summaries that record short squash commit SHAs.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/roadmap-runs.sh and evidence/m4-qd-merge-summary-sha-contract/negative-smoke-short-merge-summary.log"
+    },
+    {
+      "criterion": "Existing qd reports and roadmap export pass after normalization.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-merge-summary-sha-contract/qd-reports-check.log and qd-export-parity-check.log"
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, git diff --check, nix develop -c just check, and a focused negative smoke for a short merge summary.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-merge-summary-sha-contract/negative-smoke-short-merge-summary.log, git-diff-check.log, qd-reports-check.log, and nix-just-check.log"
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded under the node directories.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-merge-summary-sha-contract/ and reports/qd/m4-qd-merge-summary-sha-contract/"
+    },
+    {
+      "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or credential-dependent claim is made.",
+      "status": "passed",
+      "evidence": "Only qd report-checker code, qd export ledger data, evidence, and reports changed."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "jq short merge summary count and normalized merge summaries",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-merge-summary-sha-contract/merge-summary-normalization.log"
+    },
+    {
+      "command": "QD_REPORTS_ROADMAP_EXPORT=<temporary-export> just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-merge-summary-sha-contract/negative-smoke-short-merge-summary.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-merge-summary-sha-contract/git-diff-check.log"
+    },
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-merge-summary-sha-contract/qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-merge-summary-sha-contract/nix-just-check.log"
+    },
+    {
+      "command": "just qd-export-parity-check --expected .qd/worktrees/m4-qd-merge-summary-sha-contract/roadmap/qd-export.json",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-merge-summary-sha-contract/qd-export-parity-check.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-merge-summary-sha-contract/commands.log",
+    "evidence/m4-qd-merge-summary-sha-contract/notes.md",
+    "evidence/m4-qd-merge-summary-sha-contract/merge-summary-normalization.log",
+    "evidence/m4-qd-merge-summary-sha-contract/negative-smoke-short-merge-summary.log",
+    "evidence/m4-qd-merge-summary-sha-contract/git-diff-check.log",
+    "evidence/m4-qd-merge-summary-sha-contract/qd-reports-check.log",
+    "evidence/m4-qd-merge-summary-sha-contract/nix-just-check.log",
+    "evidence/m4-qd-merge-summary-sha-contract/qd-export-parity-check.log",
+    "reports/qd/m4-qd-merge-summary-sha-contract/completion.json",
+    "reports/qd/m4-qd-merge-summary-sha-contract/audit.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "This node changes qd ledger/report-check hygiene only and requires no hardware, product runtime, cross-device, workflow dispatch, or credential-dependent validation."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}

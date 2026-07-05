@@ -1,0 +1,7 @@
+$ temporary-copy single short merge summary smoke
+temporary_export=/tmp/qd-short-merge-summary.Sslpvs.json
+bash scripts/qd-reports-check.sh
+qd report check: /tmp/qd-short-merge-summary.Sslpvs.json: runs[5].summary merge squash commit must use a full 40-character lowercase hex SHA: Merge recorded with squash at commit 6e1c6c0
+qd report check: failed with 1 error(s)
+error: recipe `qd-reports-check` failed on line 43 with exit code 1
+exit=1
