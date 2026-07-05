@@ -19,7 +19,9 @@
     "scripts/qd-report-check/roadmap-runs.sh",
     "scripts/qd-report-check/roadmap.sh"
   ],
-  "commits": [],
+  "commits": [
+    "b86ed6c36e328bb180b2d5fd11e92fa894b26510"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "scripts/qd-report-check validates runs[] id values as lowercase UUID-shaped strings.",
