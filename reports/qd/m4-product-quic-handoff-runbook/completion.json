@@ -1,0 +1,79 @@
+{
+  "nodeId": "m4-product-quic-handoff-runbook",
+  "summary": "Hardened the cross-device runbooks for the blocked product QUIC smoke by documenting the receiver-first certificate handoff, canonical sender and receiver artifact layout, issue #1 coordination templates, platform-specific Linux and macOS duties, and qd completion rules for cross-device evidence.",
+  "changedFiles": [
+    "docs/CROSS_DEVICE_VALIDATION.md",
+    "docs/LINUX_ORCHESTRATOR.md",
+    "docs/MACOS_ORCHESTRATOR.md",
+    "docs/QD_WORKFLOW.md",
+    "roadmap/qd-export.json",
+    "evidence/m4-product-quic-handoff-runbook/commands.log",
+    "evidence/m4-product-quic-handoff-runbook/notes.md",
+    "reports/qd/m4-product-quic-handoff-runbook/audit.json",
+    "reports/qd/m4-product-quic-handoff-runbook/completion.json"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "docs/CROSS_DEVICE_VALIDATION.md documents the exact product QUIC receiver and sender sequence, including artifact paths, certificate exchange, validation boundaries, and failure handling.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md now has a receiver-first PRODUCT-QUIC-READY handshake, receive/send command shapes, certificate exchange guidance, product QUIC artifact layout, product QUIC result shape, and explicit non-claims."
+    },
+    {
+      "criterion": "docs/LINUX_ORCHESTRATOR.md documents the Linux sender responsibilities for product QUIC handoff, including evidence collection and issue #1 update expectations.",
+      "status": "passed",
+      "evidence": "docs/LINUX_ORCHESTRATOR.md now has the product QUIC sender command, required sender evidence, and PRODUCT-QUIC-SENDER-COMPLETE issue template."
+    },
+    {
+      "criterion": "docs/MACOS_ORCHESTRATOR.md documents the Mac receiver responsibilities for product QUIC handoff without requiring Nix.",
+      "status": "passed",
+      "evidence": "docs/MACOS_ORCHESTRATOR.md now has the native cargo receiver command, required receiver evidence, and PRODUCT-QUIC-READY issue template."
+    },
+    {
+      "criterion": "The runbooks include issue #1 coordination templates for Mac receiver-ready, Linux sender-complete, and blocker updates.",
+      "status": "passed",
+      "evidence": "docs/CROSS_DEVICE_VALIDATION.md contains the shared PRODUCT-QUIC-READY template, while the platform runbooks contain receiver-ready and sender-complete templates tied to issue #1 coordination."
+    },
+    {
+      "criterion": "Evidence and qd reports are recorded under evidence/m4-product-quic-handoff-runbook and reports/qd/m4-product-quic-handoff-runbook.",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-handoff-runbook/commands.log, evidence/m4-product-quic-handoff-runbook/notes.md, reports/qd/m4-product-quic-handoff-runbook/audit.json, and reports/qd/m4-product-quic-handoff-runbook/completion.json are present."
+    },
+    {
+      "criterion": "No product runtime, decode, render, presentation, or latency claim is made.",
+      "status": "passed",
+      "evidence": "The changed documentation explicitly labels product QUIC as transport and payload validation only, and evidence/m4-product-quic-handoff-runbook/notes.md records the documentation-only boundary."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "nix develop -c just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-handoff-runbook/commands.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-handoff-runbook/commands.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-product-quic-handoff-runbook/commands.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-product-quic-handoff-runbook/commands.log",
+    "evidence/m4-product-quic-handoff-runbook/notes.md",
+    "reports/qd/m4-product-quic-handoff-runbook/audit.json",
+    "reports/qd/m4-product-quic-handoff-runbook/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Documentation and orchestration hygiene only; no product runtime validation is required for this node."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
+

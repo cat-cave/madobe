@@ -175,6 +175,45 @@ For cross-device nodes, Linux provides:
 
 Use `docs/CROSS_DEVICE_VALIDATION.md` for the live test protocol.
 
+For `m4-product-quic-cross-device-smoke`, Linux is the sender after the Mac receiver posts its ready state:
+
+```sh
+nix develop -c cargo run -q -p madobectl -- product-quic-smoke send \
+  --addr <mac-lan-ip:udp-port> \
+  --server-name <mac-lan-ip> \
+  --server-cert-der evidence/m4-product-quic-cross-device-smoke/macos-receiver/server-cert.der \
+  --evidence-dir evidence/m4-product-quic-cross-device-smoke/linux-sender
+```
+
+Before running the sender, verify both machines are on the same PR branch or merged commit and record:
+
+- the Mac receiver comment URL
+- the receiver certificate SHA-256
+- Linux source IP, route, and firewall notes
+- sender stdout/stderr and typed transport errors
+- `linux-sender/sender.log` and `linux-sender/sender-timeline.json`
+
+Post this issue comment when the sender completes:
+
+```md
+## PRODUCT-QUIC-SENDER-COMPLETE linux <timestamp>
+
+Node: m4-product-quic-cross-device-smoke
+Branch/PR:
+Linux commit:
+Mac receiver comment:
+Receiver cert sha256:
+Sender command:
+Sender evidence: evidence/m4-product-quic-cross-device-smoke/linux-sender/
+Result:
+- status:
+- payload bytes:
+- sha256:
+- ack:
+Non-claims: decode/render/presentation/latency not validated by this run
+Next qd action:
+```
+
 ## GitHub Coordination
 
 Ask the Mac orchestrator for validation with a coordination issue comment:

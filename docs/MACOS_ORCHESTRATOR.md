@@ -142,6 +142,44 @@ For cross-device nodes, macOS provides:
 
 Use `docs/CROSS_DEVICE_VALIDATION.md` for live tests.
 
+For `m4-product-quic-cross-device-smoke`, macOS is the receiver and does not use Nix:
+
+```sh
+cargo run -q -p madobectl -- product-quic-smoke receive \
+  --bind <mac-lan-ip:udp-port> \
+  --cert-san <mac-lan-ip> \
+  --evidence-dir evidence/m4-product-quic-cross-device-smoke/macos-receiver
+```
+
+Run this from the product QUIC PR branch or merged commit after `just check` and the normal macOS toolchain
+preflight. Keep the receiver running until the Linux sender reports completion or failure. Record:
+
+- Mac LAN IP, network interface, and UDP firewall state
+- receiver stdout/stderr
+- `macos-receiver/server-cert.der`
+- `macos-receiver/server-cert.sha256`
+- `macos-receiver/receiver-listening.log`
+- `macos-receiver/receiver.log`, `receiver-timeline.json`, and `result.json`
+
+Post this issue comment when the receiver is ready:
+
+```md
+## PRODUCT-QUIC-READY macos <timestamp>
+
+Node: m4-product-quic-cross-device-smoke
+Branch/PR:
+Mac commit:
+Bind:
+LAN address:
+UDP port/firewall:
+Receiver command:
+Receiver evidence: evidence/m4-product-quic-cross-device-smoke/macos-receiver/
+Server cert: evidence/m4-product-quic-cross-device-smoke/macos-receiver/server-cert.der
+Server cert sha256:
+Ready line:
+Expected Linux sender command:
+```
+
 ## GitHub Coordination
 
 Ask Linux for host validation with a coordination issue comment:

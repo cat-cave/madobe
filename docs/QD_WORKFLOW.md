@@ -269,7 +269,8 @@ reports/qd/<node-id>/
 
 `just qd-reports-check` validates committed report shape for `reports/qd/*/completion.json` and
 `reports/qd/*/audit.json`. The gate requires parseable JSON, required top-level fields with expected types, a
-`nodeId` matching the containing directory, and `realWorldValidation.status` set to `passed` or `not_required`.
+`nodeId` matching the containing directory, and `realWorldValidation.status` set to `passed`, `not_required`, or
+`blocked`.
 Completion reports must include an empty `unverifiedItems` array. Plain repo-path strings in completion
 `evidence` arrays must exist; URLs and prose are ignored. The gate also reads `roadmap/qd-export.json` so every
 `done` node has both report files, every report directory maps to a real qd node, and every non-empty
@@ -283,6 +284,13 @@ known `type` vocabulary (`requires`). Node note records must reference existing 
 is wired into `just check` so malformed qd evidence records are caught before merge.
 
 Do not manufacture evidence for unavailable hardware. If the node depends on hardware, compositor, driver, network, credential, or macOS access that is unavailable, block the node with the correct typed blocker and record the exact missing condition.
+
+For cross-device completion:
+
+- do not run `qd complete` until both platform evidence directories are present or the node has a typed blocker
+- link both platform artifact directories in the completion report
+- keep PR bodies explicit about cross-device status and non-claims
+- record unresolved other-platform work as a blocker or a split qd node, not as a vague unverified item
 
 Before using `qd complete --from-report`, make the completion report final enough for qd to accept it:
 

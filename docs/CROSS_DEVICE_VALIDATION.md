@@ -71,6 +71,53 @@ Start order:
 
 The orchestrator that owns the validation node updates the comment as the test progresses.
 
+For product QUIC smoke nodes, use a receiver-first handshake because the Mac receiver creates the pinned
+certificate before the Linux sender can connect:
+
+```md
+## PRODUCT-QUIC-READY <node-id> <timestamp>
+
+Branch/PR:
+Commit:
+
+Mac receiver:
+- bind:
+- LAN address:
+- UDP port/firewall:
+- command:
+- evidence dir: evidence/<node-id>/macos-receiver/
+- server cert: evidence/<node-id>/macos-receiver/server-cert.der
+- server cert sha256:
+- ready line:
+
+Linux sender:
+- command:
+- evidence dir: evidence/<node-id>/linux-sender/
+- expected success line:
+
+Validation boundary:
+- claims: product QUIC transport, byte count, SHA-256, receiver ack
+- non-claims: VideoToolbox decode, Metal render, presentation, latency
+```
+
+Use this command shape on the product QUIC branch or merged commit:
+
+```sh
+madobectl product-quic-smoke receive \
+  --bind <mac-lan-ip:udp-port> \
+  --cert-san <mac-lan-ip> \
+  --evidence-dir evidence/<node-id>/macos-receiver
+
+madobectl product-quic-smoke send \
+  --addr <mac-lan-ip:udp-port> \
+  --server-name <mac-lan-ip> \
+  --server-cert-der evidence/<node-id>/macos-receiver/server-cert.der \
+  --evidence-dir evidence/<node-id>/linux-sender
+```
+
+If the certificate has to cross machines through GitHub, commit or attach only the node-scoped
+`server-cert.der` and its SHA-256. Do not reuse it for later runs.
+
 ## Required Evidence
 
 Every cross-device validation produces:
@@ -105,6 +152,24 @@ Visual tests should include screenshots:
 screenshots/linux/
 screenshots/macos/
 ```
+
+Product QUIC smoke tests use platform subdirectories:
+
+```text
+evidence/<node-id>/macos-receiver/server-cert.der
+evidence/<node-id>/macos-receiver/server-cert.sha256
+evidence/<node-id>/macos-receiver/receiver-listening.log
+evidence/<node-id>/macos-receiver/receiver.log
+evidence/<node-id>/macos-receiver/receiver-timeline.json
+evidence/<node-id>/macos-receiver/result.json
+evidence/<node-id>/linux-sender/sender.log
+evidence/<node-id>/linux-sender/sender-timeline.json
+evidence/<node-id>/linux-sender/network-notes.md
+```
+
+The receiver log must show `transport=quic`, `product_quic=true`, payload byte-count validation, payload SHA-256
+validation, and the explicit decode/render/presentation/latency non-claim. Sender evidence must include the
+trusted certificate path or hash and the typed transport error if the run fails before the receiver ack.
 
 ## Result Schema
 
@@ -149,6 +214,35 @@ Artifact `kind` values that support metric claims are:
 Other useful kinds are `commands_log`, `linux_host_log`, `mac_client_log`, `notes`, and `other`. A checked schema
 fixture lives at `crates/protocol/fixtures/m3-cross-device-video-smoke/result.json`; it records only schema
 compatibility and does not claim live cross-device decode, render, presentation, or latency behavior.
+
+For product QUIC smoke, the receiver result should use this minimum shape:
+
+```json
+{
+  "nodeId": "m4-product-quic-cross-device-smoke",
+  "transport": "quic",
+  "productQuic": true,
+  "sample": "crates/transport/fixtures/checked-in-av1.ivf",
+  "passed": true,
+  "framesSent": 1,
+  "framesReceived": 1,
+  "payloadBytes": 84,
+  "sha256": "",
+  "validated": {
+    "payloadByteCount": true,
+    "payloadSha256": true
+  },
+  "nonClaims": [
+    "not VideoToolbox decode",
+    "not Metal render",
+    "not presentation",
+    "not latency proof"
+  ]
+}
+```
+
+The product QUIC result proves transport and payload validation only. Downstream decode, render, presentation, and
+latency nodes need their own evidence.
 
 ## Failure Handling
 
