@@ -1,0 +1,41 @@
+{
+  "nodeId": "m4-qd-report-check-line-budget-gate",
+  "acceptanceReviewed": [
+    {
+      "criterion": "A qd report-check line-budget script or check rejects scripts/qd-report-check/*.sh and scripts/qd-reports-check.sh files over 350 lines.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/line-budget.sh enforces the 350-line default budget for scripts/qd-reports-check.sh and scripts/qd-report-check/*.sh. evidence/m4-qd-report-check-line-budget-gate/negative-smoke-oversized-checker.log proves an oversized temporary checker file is rejected."
+    },
+    {
+      "criterion": "The new line-budget check runs in the normal just check path on Linux and macOS-capable environments.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh calls the new validation function, and justfile already runs just qd-reports-check inside check. evidence/m4-qd-report-check-line-budget-gate/just-check.log records the integrated Linux path passing."
+    },
+    {
+      "criterion": "Current qd report-check files pass the new budget without changing validation behavior.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-line-budget-gate/line-budget-check.log records every current qd report-check shell file below 350 lines, and evidence/m4-qd-report-check-line-budget-gate/just-qd-reports-check.log records qd report validation passing."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, git diff --check, and a temporary oversized checker-file negative smoke.",
+      "status": "passed",
+      "evidence": "Required logs are present under evidence/m4-qd-report-check-line-budget-gate/."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "The completion report claims Linux command validation only and marks realWorldValidation not_required."
+    }
+  ],
+  "verificationEvidence": {
+    "diffReviewed": true,
+    "completionReportReviewed": true,
+    "verificationEvidenceReviewed": true
+  },
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no macOS-specific validation is required or claimed."
+  },
+  "findings": []
+}

@@ -1,0 +1,86 @@
+{
+  "nodeId": "m4-qd-report-check-line-budget-gate",
+  "summary": "Added a qd report-check line-budget gate that rejects scripts/qd-report-check/*.sh and scripts/qd-reports-check.sh files over 350 lines while keeping the check in the normal just qd-reports-check and just check paths.",
+  "changedFiles": [
+    "evidence/m4-qd-report-check-line-budget-gate/git-diff-check.log",
+    "evidence/m4-qd-report-check-line-budget-gate/just-check.log",
+    "evidence/m4-qd-report-check-line-budget-gate/just-qd-reports-check.log",
+    "evidence/m4-qd-report-check-line-budget-gate/line-budget-check.log",
+    "evidence/m4-qd-report-check-line-budget-gate/negative-smoke-oversized-checker.log",
+    "reports/qd/m4-qd-report-check-line-budget-gate/audit.json",
+    "reports/qd/m4-qd-report-check-line-budget-gate/completion.json",
+    "scripts/qd-report-check/line-budget.sh",
+    "scripts/qd-reports-check.sh"
+  ],
+  "commits": [],
+  "acceptanceEvidence": [
+    {
+      "criterion": "A qd report-check line-budget script or check rejects scripts/qd-report-check/*.sh and scripts/qd-reports-check.sh files over 350 lines.",
+      "status": "passed",
+      "evidence": "scripts/qd-report-check/line-budget.sh checks scripts/qd-reports-check.sh plus scripts/qd-report-check/*.sh against the default 350-line budget. evidence/m4-qd-report-check-line-budget-gate/negative-smoke-oversized-checker.log records rejection of a temporary oversized checker file through QD_REPORT_CHECK_LINE_BUDGET_FILES."
+    },
+    {
+      "criterion": "The new line-budget check runs in the normal just check path on Linux and macOS-capable environments.",
+      "status": "passed",
+      "evidence": "scripts/qd-reports-check.sh sources line-budget.sh and calls validate_qd_report_check_line_budget before report validation. justfile already runs just qd-reports-check from check, so evidence/m4-qd-report-check-line-budget-gate/just-check.log covers the normal path."
+    },
+    {
+      "criterion": "Current qd report-check files pass the new budget without changing validation behavior.",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-line-budget-gate/line-budget-check.log records all current qd report-check shell files below 350 lines, and evidence/m4-qd-report-check-line-budget-gate/just-qd-reports-check.log records the existing qd report validation passing."
+    },
+    {
+      "criterion": "Linux validation evidence records just qd-reports-check, nix develop -c just check, git diff --check, and a temporary oversized checker-file negative smoke.",
+      "status": "passed",
+      "evidence": "Evidence logs under evidence/m4-qd-report-check-line-budget-gate/ record just qd-reports-check, nix develop -c just check, git diff --check, current line-budget counts, and the temporary oversized checker negative smoke."
+    },
+    {
+      "criterion": "No macOS-specific validation is claimed or required.",
+      "status": "passed",
+      "evidence": "Only Linux validation commands are claimed. The shell implementation uses portable Bash, find, sort, and wc primitives suitable for Linux and macOS-capable environments."
+    }
+  ],
+  "commandsRun": [
+    {
+      "command": "just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-line-budget-gate/just-qd-reports-check.log"
+    },
+    {
+      "command": "nix develop -c just check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-line-budget-gate/just-check.log"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-line-budget-gate/git-diff-check.log"
+    },
+    {
+      "command": "wc -l scripts/qd-report-check/*.sh scripts/qd-reports-check.sh",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-line-budget-gate/line-budget-check.log"
+    },
+    {
+      "command": "QD_REPORT_CHECK_LINE_BUDGET_FILES=<temporary oversized checker> just qd-reports-check",
+      "status": "passed",
+      "evidence": "evidence/m4-qd-report-check-line-budget-gate/negative-smoke-oversized-checker.log"
+    }
+  ],
+  "evidence": [
+    "evidence/m4-qd-report-check-line-budget-gate/git-diff-check.log",
+    "evidence/m4-qd-report-check-line-budget-gate/just-check.log",
+    "evidence/m4-qd-report-check-line-budget-gate/just-qd-reports-check.log",
+    "evidence/m4-qd-report-check-line-budget-gate/line-budget-check.log",
+    "evidence/m4-qd-report-check-line-budget-gate/negative-smoke-oversized-checker.log",
+    "reports/qd/m4-qd-report-check-line-budget-gate/audit.json",
+    "reports/qd/m4-qd-report-check-line-budget-gate/completion.json"
+  ],
+  "realWorldValidation": {
+    "required": false,
+    "status": "not_required",
+    "evidence": "Repository qd metadata validation only; no product runtime, platform, capture, transport, decode, render, presentation, cross-device, latency, or macOS-specific behavior is claimed."
+  },
+  "unverifiedItems": [],
+  "dagChangesNeeded": []
+}
