@@ -20,7 +20,9 @@
     "reports/qd/m4-qd-blocker-report-contract/audit.json",
     "roadmap/qd-export.json"
   ],
-  "commits": [],
+  "commits": [
+    "20973206e558c4026904461061d9d3871fee9cbc"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "just qd-reports-check validates every reports/qd/<node-id>/blocker.md file.",
@@ -54,7 +56,7 @@
     },
     {
       "criterion": "No product runtime, capture, encode, transport, decode, render, presentation, cross-device, latency, Mac hardware, workflow dispatch, or live credentials are required.",
-      "status": "not_required",
+      "status": "passed",
       "evidence": "This infra-only checker change used qd metadata, shell validation, markdown reports, and local repository checks only."
     }
   ],
