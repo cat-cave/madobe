@@ -81,6 +81,8 @@ validate_file() {
       "$file" \
       "commands_log,sender_log,receiver_log,payload_validation_evidence,notes" ||
       errors=$((errors + 1))
+    validate_explicit_log_content "$file" ||
+      errors=$((errors + 1))
   fi
 
   if [[ $errors -ne 0 ]]; then
@@ -97,6 +99,79 @@ require_jq() {
     printf '%s: %s: %s\n' "$check_name" "$file" "$message" >&2
     errors=$((errors + 1))
   fi
+}
+
+artifact_path_for_kind() {
+  local file=$1
+  local kind=$2
+
+  jq -r --arg kind "$kind" '[.artifacts[]? | select(.kind == $kind) | .path] | first // ""' "$file"
+}
+
+require_log_token() {
+  local result_file=$1
+  local log_file=$2
+  local token=$3
+  local context=$4
+
+  if ! grep -Fq -- "$token" "$log_file"; then
+    printf '%s: %s: %s missing stable log token %s in %s\n' \
+      "$check_name" "$result_file" "$context" "$token" "$log_file" >&2
+    return 1
+  fi
+}
+
+validate_explicit_log_content() {
+  local file=$1
+  local log_errors=0
+  local sender_log
+  local receiver_log
+  local payload_bytes
+  local payload_sha256
+  local cert_sha256
+
+  sender_log=$(artifact_path_for_kind "$file" sender_log)
+  receiver_log=$(artifact_path_for_kind "$file" receiver_log)
+  payload_bytes=$(jq -r '.payload.payloadBytes' "$file")
+  payload_sha256=$(jq -r '.payload.sha256' "$file")
+  cert_sha256=$(jq -r '.certificateFingerprintSha256 // ""' "$file")
+
+  if [[ -z $sender_log ]]; then
+    printf '%s: %s: explicit result must include a sender_log artifact\n' "$check_name" "$file" >&2
+    log_errors=$((log_errors + 1))
+  elif [[ -f $sender_log ]]; then
+    require_log_token "$file" "$sender_log" "payload_bytes=$payload_bytes" sender_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$sender_log" "payload_sha256=$payload_sha256" sender_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$sender_log" "receiver_certificate_path=" sender_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$sender_log" "receiver_certificate_trusted=true" sender_log || log_errors=$((log_errors + 1))
+    if [[ -z $cert_sha256 ]]; then
+      printf '%s: %s: explicit sender certificate evidence requires certificateFingerprintSha256\n' "$check_name" "$file" >&2
+      log_errors=$((log_errors + 1))
+    else
+      require_log_token "$file" "$sender_log" "receiver_certificate_sha256=$cert_sha256" sender_log || log_errors=$((log_errors + 1))
+    fi
+  fi
+
+  if [[ -z $receiver_log ]]; then
+    printf '%s: %s: explicit result must include a receiver_log artifact\n' "$check_name" "$file" >&2
+    log_errors=$((log_errors + 1))
+  elif [[ -f $receiver_log ]]; then
+    require_log_token "$file" "$receiver_log" "transport=quic" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "product_quic=true" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "payload_byte_count_validated=true" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "payload_bytes=$payload_bytes" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "payload_sha256_validated=true" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "payload_sha256=$payload_sha256" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "receiver_ack=true" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "receiver_ack_payload_bytes=$payload_bytes" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "receiver_ack_sha256=$payload_sha256" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "downstream_decoded=false" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "downstream_rendered=false" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "downstream_presented=false" receiver_log || log_errors=$((log_errors + 1))
+    require_log_token "$file" "$receiver_log" "downstream_latency_ms=null" receiver_log || log_errors=$((log_errors + 1))
+  fi
+
+  [[ $log_errors -eq 0 ]]
 }
 
 # shellcheck disable=SC2016,SC2154 # jq expands jq variables; helper defines common prelude.
@@ -137,15 +212,44 @@ run_self_tests() {
   local unknown_artifact_kind="$tmpdir/unknown-artifact-kind-result.json"
   local missing_artifact="$tmpdir/missing-artifact-result.json"
   local empty_core_artifact="$tmpdir/empty-core-artifact-result.json"
+  local explicit_positive="$tmpdir/explicit-positive-result.json"
+  local missing_sender_log_token="$tmpdir/missing-sender-log-token-result.json"
+  local missing_receiver_log_token="$tmpdir/missing-receiver-log-token-result.json"
 
   local commands_log="$repo_tmpdir/commands.log"
   local sender_log="$repo_tmpdir/sender.log"
   local receiver_log="$repo_tmpdir/receiver.log"
+  local bad_sender_log="$repo_tmpdir/bad-sender.log"
+  local bad_receiver_log="$repo_tmpdir/bad-receiver.log"
   local payload_validation="$repo_tmpdir/payload-validation.json"
   local notes_artifact="$repo_tmpdir/notes.md"
   printf 'product QUIC commands\n' >"$commands_log"
-  printf 'sender log\n' >"$sender_log"
-  printf 'receiver log\n' >"$receiver_log"
+  cat >"$sender_log" <<'SENDER_LOG'
+role=sender
+payload_bytes=84
+payload_sha256=3d746c6c4b5f7bd72d35f4ab673f33f3e5f9a0c9f6f8b27f35fb6fbb1c3e8d2a
+receiver_certificate_path=evidence/m4-product-quic-cross-device-smoke/macos-receiver/server-cert.der
+receiver_certificate_sha256=9b44d90fb42f6c3ff8510ce40bbfcb1cf8712a2d18a3552955aa1b889ad2c6f3
+receiver_certificate_trusted=true
+SENDER_LOG
+  cat >"$receiver_log" <<'RECEIVER_LOG'
+role=receiver
+transport=quic
+product_quic=true
+payload_byte_count_validated=true
+payload_bytes=84
+payload_sha256_validated=true
+payload_sha256=3d746c6c4b5f7bd72d35f4ab673f33f3e5f9a0c9f6f8b27f35fb6fbb1c3e8d2a
+receiver_ack=true
+receiver_ack_payload_bytes=84
+receiver_ack_sha256=3d746c6c4b5f7bd72d35f4ab673f33f3e5f9a0c9f6f8b27f35fb6fbb1c3e8d2a
+downstream_decoded=false
+downstream_rendered=false
+downstream_presented=false
+downstream_latency_ms=null
+RECEIVER_LOG
+  grep -Fv 'receiver_certificate_sha256=' "$sender_log" >"$bad_sender_log"
+  grep -Fv 'transport=quic' "$receiver_log" >"$bad_receiver_log"
   printf '{"validated":true}\n' >"$payload_validation"
   printf 'notes\n' >"$notes_artifact"
 
@@ -162,7 +266,21 @@ run_self_tests() {
       {"path": $payload_validation, "kind": "payload_validation_evidence"},
       {"path": $notes_artifact, "kind": "notes"}
     ]' \
-    "$default_fixture" >"$empty_core_artifact"
+    "$default_fixture" >"$explicit_positive"
+
+  cp "$explicit_positive" "$empty_core_artifact"
+  : >"$sender_log"
+  cp "$bad_sender_log" "$sender_log"
+  jq \
+    --arg sender_log "$bad_sender_log" \
+    '.artifacts |= map(if .kind == "sender_log" then .path = $sender_log else . end)' \
+    "$explicit_positive" >"$missing_sender_log_token"
+  cp "$bad_receiver_log" "$receiver_log"
+  jq \
+    --arg receiver_log "$bad_receiver_log" \
+    '.artifacts |= map(if .kind == "receiver_log" then .path = $receiver_log else . end)' \
+    "$explicit_positive" >"$missing_receiver_log_token"
+  cp "$bad_sender_log" "$sender_log"
   : >"$sender_log"
 
   jq \
@@ -190,6 +308,36 @@ run_self_tests() {
   expect_invalid "$unknown_artifact_kind" 'unknown artifact kind' || self_test_status=1
   expect_invalid "$missing_artifact" 'missing explicit artifact' explicit || self_test_status=1
   expect_invalid "$empty_core_artifact" 'empty explicit core artifact' explicit || self_test_status=1
+  cp "$bad_sender_log" "$sender_log"
+  expect_invalid "$missing_sender_log_token" 'missing sender log token' explicit || self_test_status=1
+  cp "$bad_receiver_log" "$receiver_log"
+  expect_invalid "$missing_receiver_log_token" 'missing receiver log token' explicit || self_test_status=1
+  cp "$bad_sender_log" "$sender_log"
+  cat >"$sender_log" <<'SENDER_LOG'
+role=sender
+payload_bytes=84
+payload_sha256=3d746c6c4b5f7bd72d35f4ab673f33f3e5f9a0c9f6f8b27f35fb6fbb1c3e8d2a
+receiver_certificate_path=evidence/m4-product-quic-cross-device-smoke/macos-receiver/server-cert.der
+receiver_certificate_sha256=9b44d90fb42f6c3ff8510ce40bbfcb1cf8712a2d18a3552955aa1b889ad2c6f3
+receiver_certificate_trusted=true
+SENDER_LOG
+  cat >"$receiver_log" <<'RECEIVER_LOG'
+role=receiver
+transport=quic
+product_quic=true
+payload_byte_count_validated=true
+payload_bytes=84
+payload_sha256_validated=true
+payload_sha256=3d746c6c4b5f7bd72d35f4ab673f33f3e5f9a0c9f6f8b27f35fb6fbb1c3e8d2a
+receiver_ack=true
+receiver_ack_payload_bytes=84
+receiver_ack_sha256=3d746c6c4b5f7bd72d35f4ab673f33f3e5f9a0c9f6f8b27f35fb6fbb1c3e8d2a
+downstream_decoded=false
+downstream_rendered=false
+downstream_presented=false
+downstream_latency_ms=null
+RECEIVER_LOG
+  expect_valid "$explicit_positive" 'positive explicit log content' explicit || self_test_status=1
   rm -rf "$tmpdir"
   rm -rf "$repo_tmpdir"
   return "$self_test_status"
@@ -202,6 +350,17 @@ expect_invalid() {
 
   if validate_file "$file" "$mode" >/dev/null 2>&1; then
     printf '%s: negative fixture unexpectedly passed: %s\n' "$check_name" "$context" >&2
+    return 1
+  fi
+}
+
+expect_valid() {
+  local file=$1
+  local context=$2
+  local mode=${3:-fixture}
+
+  if ! validate_file "$file" "$mode" >/dev/null 2>&1; then
+    printf '%s: positive fixture unexpectedly failed: %s\n' "$check_name" "$context" >&2
     return 1
   fi
 }

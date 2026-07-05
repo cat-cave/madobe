@@ -1,0 +1,4 @@
+$ just product-quic-result-check target/m4-product-quic-log-content-contract.VMRmIz/result-missing-receiver-token.json
+bash scripts/product-quic-result-check.sh target/m4-product-quic-log-content-contract.VMRmIz/result-missing-receiver-token.json
+product quic result check: target/m4-product-quic-log-content-contract.VMRmIz/result-missing-receiver-token.json: receiver_log missing stable log token transport=quic in target/m4-product-quic-log-content-contract.VMRmIz/receiver-missing-transport.log
+error: recipe `product-quic-result-check` failed on line 49 with exit code 1

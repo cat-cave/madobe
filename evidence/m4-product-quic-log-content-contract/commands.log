@@ -1,0 +1,8 @@
+$ just product-quic-result-check
+$ just product-quic-result-check <generated-positive-result>
+$ just product-quic-result-check <generated-missing-sender-token-result>
+$ just product-quic-result-check <generated-missing-receiver-token-result>
+$ nix develop -c shellcheck scripts/product-quic-result-check.sh
+$ just qd-reports-check
+$ git diff --check
+$ nix develop -c just check
