@@ -373,3 +373,101 @@ just lint-lines
 max=500; status=0; while IFS= read -r -d '' file; do lines="$(wc -l < "$file")"; if [ "$lines" -gt "$max" ]; then printf '%s has %s lines; max is %s\n' "$file" "$lines" "$max"; status=1; fi; done < <(find . -path './.git' -prune -o -path './.qd/qd.db*' -prune -o -path './.qd/worktrees' -prune -o -path './target' -prune -o -path './apple/*.xcodeproj' -prune -o -path './apple/*.xcworkspace' -prune -o -path './docs/PRD.md' -prune -o -path './roadmap/qd-export.json' -prune -o -name 'Cargo.lock' -prune -o -name 'LICENSE-*' -prune -o -type f \( -name '*.rs' -o -name '*.swift' -o -name '*.toml' -o -name '*.md' -o -name '*.yml' -o -name '*.yaml' -o -name '*.json' -o -name '*.nix' -o -name 'justfile' -o -name '*.sh' \) -print0); exit "$status"
 
 $ git diff --check # final after corrected export
+
+$ qd ci record-pass m4-product-quic-handoff-runbook --summary "PR #110 hosted CI passed on Linux and macOS" --url https://github.com/cat-cave/madobe/actions/runs/28741101457
+{
+  "id": "m4-product-quic-handoff-runbook",
+  "title": "Harden product QUIC cross-device handoff runbook",
+  "kind": "feature",
+  "milestone": "M4-integrated-video-path",
+  "status": "mergeable",
+  "priority": "P2",
+  "estimate_points": 1,
+  "risk": "low",
+  "owner": "trevor-linux-orchestrator",
+  "branch": "spec/m4-product-quic-handoff-runbook",
+  "spec": "Tighten the cross-device product QUIC handoff documentation so Linux and Mac orchestrators can resume the blocked product QUIC smoke without ad hoc coordination.",
+  "acceptance": "docs/CROSS_DEVICE_VALIDATION.md documents the exact product QUIC receiver and sender sequence, including artifact paths, certificate exchange, validation boundaries, and failure handling\ndocs/LINUX_ORCHESTRATOR.md documents the Linux sender responsibilities for product QUIC handoff, including evidence collection and issue #1 update expectations\ndocs/MACOS_ORCHESTRATOR.md documents the Mac receiver responsibilities for product QUIC handoff without requiring Nix\nThe runbooks include issue #1 coordination templates for Mac receiver-ready, Linux sender-complete, and blocker updates\nEvidence and qd reports are recorded under evidence/m4-product-quic-handoff-runbook and reports/qd/m4-product-quic-handoff-runbook\nNo product runtime, decode, render, presentation, or latency claim is made",
+  "validation": null,
+  "context": "platform:both\nowner:linux-orchestrator\nvalidation:repo-quality\nsource:m4-product-quic-cross-device-smoke-blocker",
+  "created_at": "2026-07-05T12:27:21.843Z",
+  "updated_at": "2026-07-05T12:42:54.203Z",
+  "claimed_at": "2026-07-05T12:27:31.493Z",
+  "done_at": null,
+  "group_name": null,
+  "status_reason": null,
+  "check_command": null,
+  "ci_command": null,
+  "blocked_by": null,
+  "blocked_reason": null,
+  "blocked_owner": null,
+  "projects": [],
+  "verification": [],
+  "audit_focus": []
+}
+
+$ qd gate m4-product-quic-handoff-runbook --phase merge
+{
+  "ok": true,
+  "blocking": [],
+  "runningAudits": [],
+  "blockedDependencies": [],
+  "explanations": [],
+  "structuralOk": true,
+  "phase": "merge",
+  "policy": {
+    "ci": {
+      "ok": true,
+      "phase": "ci",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": []
+    },
+    "merge": {
+      "ok": true,
+      "phase": "merge",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": []
+    },
+    "selected": {
+      "ok": true,
+      "phase": "merge",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "violations": []
+    }
+  },
+  "checks": {
+    "latestCheck": null,
+    "latestCi": {
+      "id": "bdbc4eec-84dd-4a47-8e4c-91ef3cc79d3d",
+      "node_id": "m4-product-quic-handoff-runbook",
+      "kind": "ci",
+      "status": "passed",
+      "command": null,
+      "provider": null,
+      "exit_code": null,
+      "git_sha": null,
+      "external_id": null,
+      "url": null,
+      "rationale": null,
+      "superseded_by": null,
+      "report_path": null,
+      "audit_kind": null,
+      "worktree_path": null,
+      "agent": null,
+      "started_at": "2026-07-05T12:42:54.203Z",
+      "finished_at": "2026-07-05T12:42:54.203Z",
+      "summary": "PR #110 hosted CI passed on Linux and macOS\nEvidence: url=https://github.com/cat-cave/madobe/actions/runs/28741101457",
+      "log_path": null
+    },
+    "undisposedP2P3": []
+  },
+  "next": null
+}
+
+$ nix develop -c just qd-reports-check # after qd ci record-pass export
+warning: Git tree '/home/trevor/projects/madobe/.qd/worktrees/m4-product-quic-handoff-runbook' is dirty
+madobe dev shell: use 'just --list' to see commands
+bash scripts/qd-reports-check.sh
+qd report check: validated 103 completion report(s) and 103 audit report(s)
+
+$ git diff --check # after qd ci record-pass export
