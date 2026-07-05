@@ -132,6 +132,88 @@ require_all_jobs_have_timeout() {
   fi
 }
 
+require_external_actions_pinned_to_sha() {
+  local file=$1
+
+  if ! awk '
+    function trim(value) {
+      sub(/^[[:space:]]+/, "", value)
+      sub(/[[:space:]]+$/, "", value)
+      return value
+    }
+    function strip_quotes(value) {
+      if (length(value) >= 2) {
+        first = substr(value, 1, 1)
+        last = substr(value, length(value), 1)
+        if (first == last && (first == "\"" || first == "'\''")) {
+          return substr(value, 2, length(value) - 2)
+        }
+      }
+      return value
+    }
+    {
+      line = $0
+      sub(/[[:space:]]+#.*/, "", line)
+      if (line ~ /^[[:space:]-]*uses:[[:space:]]*.+$/) {
+        uses_value = line
+        sub(/^[[:space:]-]*uses:[[:space:]]*/, "", uses_value)
+        uses_value = strip_quotes(trim(uses_value))
+        if (uses_value ~ /^\.?\.?\// || uses_value ~ /^docker:\/\//) {
+          next
+        }
+        if (uses_value !~ /@[0-9A-Fa-f]{40}$/) {
+          print FILENAME ":" FNR ": " uses_value
+          failed = 1
+        }
+      }
+    }
+    END {
+      exit failed ? 1 : 0
+    }
+  ' "$file"; then
+    report_error "$file" "external actions must be pinned to full 40-character commit SHAs"
+  fi
+}
+
+require_checkout_persist_credentials_false() {
+  local file=$1
+  local missing_locations
+
+  missing_locations=$(
+    awk '
+      function flush_checkout() {
+        if (checkout_line != 0 && persist_false == 0) {
+          print FILENAME ":" checkout_line
+        }
+      }
+      /^[[:space:]-]*uses:[[:space:]]*actions\/checkout@/ {
+        flush_checkout()
+        checkout_line = FNR
+        persist_false = 0
+        next
+      }
+      checkout_line != 0 && /^[[:space:]-]*uses:[[:space:]]*/ {
+        flush_checkout()
+        checkout_line = 0
+        persist_false = 0
+        next
+      }
+      checkout_line != 0 && /^[[:space:]]*persist-credentials:[[:space:]]*false[[:space:]]*$/ {
+        persist_false = 1
+      }
+      END {
+        flush_checkout()
+      }
+    ' "$file"
+  )
+
+  if [[ -n $missing_locations ]]; then
+    while IFS= read -r location; do
+      report_error "$location" "actions/checkout must set persist-credentials: false"
+    done <<<"$missing_locations"
+  fi
+}
+
 check_ci_workflow() {
   require_file "$ci_file" || return
 
@@ -147,6 +229,8 @@ check_ci_workflow() {
   require_job_pattern "$ci_file" "linux" '^[[:space:]]+runs-on:[[:space:]]+ubuntu-' "Linux runner"
   require_job_pattern "$ci_file" "macos" '^[[:space:]]+runs-on:[[:space:]]+macos-' "macOS runner"
   require_all_jobs_have_timeout "$ci_file"
+  require_external_actions_pinned_to_sha "$ci_file"
+  require_checkout_persist_credentials_false "$ci_file"
 
   require_text "$ci_file" "uses: actions/checkout@" "actions/checkout action"
   require_text "$ci_file" "fetch-depth: 0" "full-history checkout"
@@ -174,6 +258,8 @@ check_nightly_workflow() {
 
   require_pattern "$nightly_file" '^  deep-checks:[[:space:]]*$' "deep-checks job"
   require_all_jobs_have_timeout "$nightly_file"
+  require_external_actions_pinned_to_sha "$nightly_file"
+  require_checkout_persist_credentials_false "$nightly_file"
 
   require_text "$nightly_file" "run: nix develop -c just security" "just security command"
   require_text "$nightly_file" "run: nix develop -c just coverage" "just coverage command"

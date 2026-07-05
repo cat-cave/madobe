@@ -3,7 +3,7 @@
 flake-utils.lib.eachDefaultSystem (system:
 let
   pkgs = import nixpkgs { inherit system; };
-  lib = pkgs.lib;
+  inherit (pkgs) lib;
   optionalPackage = name: lib.optionals (lib.hasAttr name pkgs) [ (lib.getAttr name pkgs) ];
   rustTools = with pkgs; [
     cargo
