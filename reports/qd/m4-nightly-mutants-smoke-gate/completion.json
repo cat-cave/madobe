@@ -9,7 +9,9 @@
     "reports/qd/m4-nightly-mutants-smoke-gate/completion.json",
     "reports/qd/m4-nightly-mutants-smoke-gate/audit.json"
   ],
-  "commits": [],
+  "commits": [
+    "34536bf8157436d7f320e720ac0bfe9692bc4106"
+  ],
   "acceptanceEvidence": [
     {
       "criterion": "Evidence records the failed nightly root cause from GitHub Actions run 28737770881.",
