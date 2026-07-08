@@ -1,0 +1,13 @@
+{
+  "nodeId": "m4-product-quic-cross-device-smoke",
+  "side": "receiver",
+  "transport": "quic",
+  "productQuic": true,
+  "clock": "sequence-only",
+  "events": [
+    { "sequence": 0, "event": "listening", "detail": "127.0.0.1:47142" },
+    { "sequence": 1, "event": "handshake_complete", "detail": "127.0.0.1:56976" },
+    { "sequence": 2, "event": "frame_received", "detail": "checked-in-av1-sample" },
+    { "sequence": 3, "event": "validated", "detail": "payload_bytes,sha256" }
+  ]
+}

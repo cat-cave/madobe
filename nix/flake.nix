@@ -67,15 +67,22 @@ in
 
   formatter = pkgs.nixpkgs-fmt;
 
-  checks.rust = pkgs.runCommand "madobe-rust-check"
-    {
-      nativeBuildInputs = rustTools;
-      src = self;
-    } ''
-    cp -R "$src" source
-    chmod -R u+w source
-    cd source
-    cargo check --workspace --all-targets --all-features
-    touch "$out"
-  '';
+  checks.rust = pkgs.rustPlatform.buildRustPackage {
+    pname = "madobe-rust-check";
+    version = "0.1.0";
+    src = self;
+    cargoLock.lockFile = "${self}/Cargo.lock";
+    doCheck = false;
+    buildPhase = ''
+      runHook preBuild
+      cargo check --workspace --all-targets --all-features --frozen --offline
+      runHook postBuild
+    '';
+    installPhase = ''
+      runHook preInstall
+      mkdir -p "$out"
+      touch "$out/checked"
+      runHook postInstall
+    '';
+  };
 })

@@ -1,0 +1,5 @@
+event=listening
+transport=quic
+product_quic=true
+bind=127.0.0.1:47142
+server_cert_der=server-cert.der
