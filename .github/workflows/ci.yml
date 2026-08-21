@@ -43,7 +43,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       # jdx/mise-action v4.2.0
-      - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d
+      - uses: jdx/mise-action@3c2e0cf82a5b2e5249f0d3635a4d83d0ae861518
       - run: rustup component add rustfmt clippy
       - name: Remove hosted CI runner aws/tap
         run: |
