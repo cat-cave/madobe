@@ -17,13 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      # actions/checkout v7.0.0
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+      # actions/checkout v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           fetch-depth: 0
           persist-credentials: false
-      # cachix/install-nix-action v31.10.6
-      - uses: cachix/install-nix-action@8aa03977d8d733052d78f4e008a241fd1dbf36b3
+      # cachix/install-nix-action v31.11.1
+      - uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - run: nix flake check
@@ -37,13 +37,13 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 30
     steps:
-      # actions/checkout v7.0.0
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+      # actions/checkout v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           fetch-depth: 0
           persist-credentials: false
-      # jdx/mise-action v4.2.0
-      - uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d
+      # jdx/mise-action v4.3.0
+      - uses: jdx/mise-action@c2a87611a18de5b3828c5652fe268e992400cb5c
       - run: rustup component add rustfmt clippy
       - name: Remove hosted CI runner aws/tap
         run: |
