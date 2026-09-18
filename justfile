@@ -28,6 +28,7 @@ check: fmt
   just pr-template-check
   just workflow-contract-check
   just dependabot-contract-check
+  just checker-tests
   cargo check --workspace --all-targets --all-features
   cargo clippy --workspace --all-targets --all-features -- -D warnings
   if [ "$(uname -s)" = Darwin ] && ! command -v shellcheck >/dev/null 2>&1; then echo "shellcheck skipped outside Linux/Nix"; else just require-tool shellcheck; git ls-files -- '*.sh' | while IFS= read -r shell_file; do shellcheck "$shell_file"; done; fi
@@ -68,6 +69,9 @@ workflow-contract-check:
 
 dependabot-contract-check:
   bash scripts/dependabot-contract-check.sh
+
+checker-tests:
+  bash scripts/checker-tests.sh
 
 test:
   if command -v cargo-nextest >/dev/null 2>&1; then cargo nextest run --workspace --all-features; else cargo test --workspace --all-features; fi
