@@ -214,6 +214,60 @@ require_checkout_persist_credentials_false() {
   fi
 }
 
+require_action_version_annotations() {
+  local file=$1
+  local violations
+
+  violations=$(
+    awk '
+      function trim(value) {
+        sub(/^[[:space:]]+/, "", value)
+        sub(/[[:space:]]+$/, "", value)
+        return value
+      }
+      function strip_quotes(value) {
+        if (length(value) >= 2) {
+          first = substr(value, 1, 1)
+          last = substr(value, length(value), 1)
+          if (first == last && (first == "\"" || first == "'\''")) {
+            return substr(value, 2, length(value) - 2)
+          }
+        }
+        return value
+      }
+      {
+        line = $0
+        sub(/[[:space:]]+#.*/, "", line)
+        if (line ~ /^[[:space:]-]*uses:[[:space:]]*.+$/) {
+          uses_value = line
+          sub(/^[[:space:]-]*uses:[[:space:]]*/, "", uses_value)
+          uses_value = strip_quotes(trim(uses_value))
+          if (uses_value !~ /^\.?\.?\// && uses_value !~ /^docker:\/\// && uses_value ~ /@[0-9A-Fa-f]{40}$/) {
+            action_name = uses_value
+            sub(/@[0-9A-Fa-f]{40}$/, "", action_name)
+            if (annotation !~ "^# (" action_name " )?v[0-9]+\\.[0-9]+\\.[0-9]+$") {
+              print FILENAME ":" FNR ": " uses_value
+            }
+          }
+          annotation = ""
+          next
+        }
+        if ($0 ~ /^[[:space:]]*#/) {
+          annotation = trim($0)
+        } else if ($0 ~ /[^[:space:]]/) {
+          annotation = ""
+        }
+      }
+    ' "$file"
+  )
+
+  if [[ -n $violations ]]; then
+    while IFS= read -r location; do
+      report_error "$location" "external action pin must carry an adjacent '# <action> vX.Y.Z' version annotation comment"
+    done <<<"$violations"
+  fi
+}
+
 check_ci_workflow() {
   require_file "$ci_file" || return
 
@@ -231,6 +285,7 @@ check_ci_workflow() {
   require_all_jobs_have_timeout "$ci_file"
   require_external_actions_pinned_to_sha "$ci_file"
   require_checkout_persist_credentials_false "$ci_file"
+  require_action_version_annotations "$ci_file"
 
   require_text "$ci_file" "uses: actions/checkout@" "actions/checkout action"
   require_text "$ci_file" "fetch-depth: 0" "full-history checkout"
@@ -260,6 +315,7 @@ check_nightly_workflow() {
   require_all_jobs_have_timeout "$nightly_file"
   require_external_actions_pinned_to_sha "$nightly_file"
   require_checkout_persist_credentials_false "$nightly_file"
+  require_action_version_annotations "$nightly_file"
 
   require_text "$nightly_file" "run: nix develop -c just security" "just security command"
   require_text "$nightly_file" "run: nix develop -c just coverage" "just coverage command"
