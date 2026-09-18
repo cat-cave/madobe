@@ -69,8 +69,9 @@ deleted_line_copy() {
   local source_file=$1
   local pattern=$2
   local target_file=$3
+  local escaped_pattern=${pattern//\//\\/}
 
-  sed "/$pattern/d" "$source_file" >"$target_file"
+  sed "/$escaped_pattern/d" "$source_file" >"$target_file"
 }
 
 pin_hygiene_in() {
@@ -114,6 +115,29 @@ workflow_contract_cases() {
     "workflow contract rejects job without timeout-minutes" \
     "missing timeout-minutes in linux job" \
     bash "$checker" "$work_dir/ci-missing-timeout.yml" "$nightly_file"
+
+  deleted_line_copy "$ci_file" \
+    '# actions/checkout' \
+    "$work_dir/ci-missing-annotation.yml"
+  expect_fail_with_message \
+    "workflow contract rejects pin without version annotation comment" \
+    "external action pin must carry an adjacent '# <action> vX.Y.Z' version annotation comment" \
+    bash "$checker" "$work_dir/ci-missing-annotation.yml" "$nightly_file"
+
+  mutated_copy "$ci_file" \
+    's|# actions/checkout v|# v|' \
+    "$work_dir/ci-plain-annotation.yml"
+  expect_pass \
+    "workflow contract accepts dependabot-style plain version annotation" \
+    bash "$checker" "$work_dir/ci-plain-annotation.yml" "$nightly_file"
+
+  mutated_copy "$ci_file" \
+    's|# actions/checkout v|## misnamed-action v|' \
+    "$work_dir/ci-mismatched-annotation.yml"
+  expect_fail_with_message \
+    "workflow contract rejects version annotation naming a different action" \
+    "external action pin must carry an adjacent '# <action> vX.Y.Z' version annotation comment" \
+    bash "$checker" "$work_dir/ci-mismatched-annotation.yml" "$nightly_file"
 }
 
 pin_hygiene_cases() {
